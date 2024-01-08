@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\brandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/subcategory/delete/{id}','delete')->name('subcategory.delete');
     });
     //All Routes for Subcategory End
+
+        //All Routes for brand Start
+        Route::controller(brandController::class)->group(function(){
+            Route::get('/brand','index')->name('brand');
+            Route::post('/brand/store','store')->name('brand.store');
+            Route::get('/brand/view','show')->name('brand.view');
+            Route::get('/brand/edit/{id}','edit')->name('brand.edit');
+            // Route::post('/brand/update/{id}','update')->name('brand.update');
+            Route::get('/brand/delete/{id}','destroy')->name('brand.delete');
+        });
+        //All Routes for brand End
 });
 
 require __DIR__.'/auth.php';

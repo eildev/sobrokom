@@ -36,6 +36,19 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
                 </div>
+                <div class="menu-title">Brands</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('brand') }}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a>
+                </li>
+                <li> <a href="{{ route('brand.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Brand</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
                 <div class="menu-title">Subcategory</div>
             </a>
             <ul>
@@ -45,7 +58,7 @@
                 </li>
             </ul>
         </li>
-        
+
     </ul>
     <!--end navigation-->
 </div>
