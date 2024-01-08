@@ -14,6 +14,10 @@ class CategoryController extends Controller
     public function store(Request $request){
      
         if($request->image){
+            $request->validate([
+                'categoryName' => 'required|max:100',
+                'image' => 'required|100',
+            ]);
             $imageName = rand().'.'.$request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = new Category;
@@ -23,6 +27,10 @@ class CategoryController extends Controller
             $category->save();
             return back()->with('success','Category Successfully Saved');
         }
+    }
 
+    public function view(){
+        $categories = Category::all();
+        return view('backend.category.view', compact('categories'));
     }
 }

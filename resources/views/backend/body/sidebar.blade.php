@@ -28,7 +28,7 @@
             <ul>
                 <li> <a href="{{ route('category') }}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
                 </li>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Manage Category</a>
+                <li> <a href="{{ route('category.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Category</a>
                 </li>
             </ul>
         </li>
