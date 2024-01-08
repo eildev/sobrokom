@@ -19,17 +19,18 @@ class SubcategoryController extends Controller
      
         if($request->image){
             $request->validate([
+                'categoryId' => 'required',
                 'subcategoryName' => 'required|max:100',
                 'image' => 'required|max:100',
             ]);
             $imageName = rand().'.'.$request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $subcategory = new Subcategory;
-            $subcategory->categoryName = $request->subcategoryName;
+            $subcategory->subcategoryName = $request->subcategoryName;
             $subcategory->slug = Str::slug($request->subcategoryName);
             $subcategory->image = $imageName;
             $subcategory->save();
-            return back()->with('success','Category Successfully Saved');
+            return back()->with('success','Subcategory Successfully Saved');
         }
     }
 
