@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,17 @@ Route::middleware('auth')->group(function () {
         Route::get('/category/delete/{id}','delete')->name('category.delete');
     });
     //All Routes for Category End
+
+    //All Routes for Subcategory Start
+    Route::controller(SubcategoryController::class)->group(function(){
+        Route::get('/subcategory','index')->name('subcategory');
+        Route::post('/subcategory/store','store')->name('subcategory.store');
+        Route::get('/subcategory/view','view')->name('subcategory.view');
+        Route::get('/subcategory/edit/{id}','edit')->name('subcategory.edit');
+        Route::post('/subcategory/update/{id}','update')->name('subcategory.update');
+        Route::get('/subcategory/delete/{id}','delete')->name('subcategory.delete');
+    });
+    //All Routes for Subcategory End
 });
 
 require __DIR__.'/auth.php';
