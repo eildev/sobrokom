@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/category','index')->name('category');
         Route::post('/category/store','store')->name('category.store');
         Route::get('/category/view','view')->name('category.view');
+        Route::get('/category/edit/{id}','edit')->name('category.edit');
+        Route::post('/category/update/{id}','update')->name('category.update');
+        Route::get('/category/delete/{id}','delete')->name('category.delete');
     });
     //All Routes for Category End
 });

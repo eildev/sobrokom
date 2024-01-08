@@ -32,6 +32,19 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Subcategory</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add Subcategory</a>
+                </li>
+                <li> <a href="{{ route('subcategory.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Subcategory</a>
+                </li>
+            </ul>
+        </li>
         
     </ul>
     <!--end navigation-->
