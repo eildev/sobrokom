@@ -17,21 +17,23 @@ class SubcategoryController extends Controller
     // category store function 
     public function store(Request $request){
      
-        if($request->image){
-            $request->validate([
-                'categoryId' => 'required',
-                'subcategoryName' => 'required|max:100',
-                'image' => 'required|max:100',
-            ]);
-            $imageName = rand().'.'.$request->image->extension();
-            $request->image->move(public_path('uploads/category/'), $imageName);
-            $subcategory = new Subcategory;
-            $subcategory->subcategoryName = $request->subcategoryName;
-            $subcategory->slug = Str::slug($request->subcategoryName);
-            $subcategory->image = $imageName;
-            $subcategory->save();
-            return back()->with('success','Subcategory Successfully Saved');
-        }
+        @dd($request);
+
+        // if($request->image){
+        //     $request->validate([
+        //         'categoryId' => 'required',
+        //         'subcategoryName' => 'required|max:100',
+        //         'image' => 'required|max:100',
+        //     ]);
+        //     $imageName = rand().'.'.$request->image->extension();
+        //     $request->image->move(public_path('uploads/subcategory/'), $imageName);
+        //     $subcategory = new Subcategory;
+        //     $subcategory->subcategoryName = $request->subcategoryName;
+        //     $subcategory->slug = Str::slug($request->subcategoryName);
+        //     $subcategory->image = $imageName;
+        //     $subcategory->save();
+        //     return back()->with('success','Subcategory Successfully Saved');
+        // }
     }
 
     // category View function 
