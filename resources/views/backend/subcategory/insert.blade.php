@@ -5,7 +5,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card border-top border-0 border-4 border-info">
                 <form action="{{ Route('subcategory.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf    
+                    @csrf
                 <div class="card-body">
                         <div class="border p-4 rounded">
                             <div class="card-title d-flex align-items-center">
@@ -26,19 +26,19 @@
                             <div class="row mb-3">
                                 <label class="form-label col-12">Select Category</label>
                                 <div class="col-12">
-                                    <select class="form-select">
+                                    <select class="form-select" name="categoryId">
                                         <option value="">-----Select Category-----</option>
                                         @foreach ($categories as $category)
                                             <option value="{{$category->id}}">{{$category->categoryName}}</option>
-                                    
-                                            
+
+
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="image" class="col-12 form-label">Subcategory Thumbnail </label>
+                                <label for="" class="col-12 form-label">Subcategory Thumbnail </label>
                                 <div class="col-12">
                                     <input type="file" class="form-control" name="image">
                                 </div>

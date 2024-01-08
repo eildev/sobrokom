@@ -8,14 +8,19 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
-    // category index function 
+    // category index function
     public function index(){
         return view('backend.category.insert');
     }
 
-    // category store function 
+    // category store function
     public function store(Request $request){
-     
+
+        // @dd($request->all());
+
+        // $imageName = rand().'.'.$request->image->extension();
+        // $request->image->move(public_path('uploads/category/'), $imageName);
+
         if($request->image){
             $request->validate([
                 'categoryName' => 'required|max:100',
@@ -32,20 +37,20 @@ class CategoryController extends Controller
         }
     }
 
-    // category View function 
+    // category View function
     public function view(){
         $categories = Category::all();
         return view('backend.category.view', compact('categories'));
     }
 
-    // category Edit function 
+    // category Edit function
     public function edit($id){
         $category = Category::findOrFail($id);
         return view('backend.category.edit', compact('category'));
     }
 
 
-    // category update function 
+    // category update function
     public function update(Request $request, $id){
         // if($request->image){
         //     $imageName = rand().'.'.$request->image->extension();
@@ -67,7 +72,7 @@ class CategoryController extends Controller
     }
 
 
-    // category Delete function 
+    // category Delete function
     public function delete($id){
         $category = Category::findOrFail($id);
         $category->delete();
