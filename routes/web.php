@@ -31,49 +31,49 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //All Routes for Category Start
-    Route::controller(CategoryController::class)->group(function(){
-        Route::get('/category','index')->name('category');
-        Route::post('/category/store','store')->name('category.store');
-        Route::get('/category/view','view')->name('category.view');
-        Route::get('/category/edit/{id}','edit')->name('category.edit');
-        // Route::post('/category/update/{id}','update')->name('category.update');
-        Route::get('/category/delete/{id}','delete')->name('category.delete');
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category', 'index')->name('category');
+        Route::post('/category/store', 'store')->name('category.store');
+        Route::get('/category/view', 'view')->name('category.view');
+        Route::get('/category/edit/{id}', 'edit')->name('category.edit');
+        Route::post('/category/update/{id}', 'update')->name('category.update');
+        Route::get('/category/delete/{id}', 'delete')->name('category.delete');
     });
     //All Routes for Category End
 
     //All Routes for Subcategory Start
-    Route::controller(SubcategoryController::class)->group(function(){
-        Route::get('/subcategory','index')->name('subcategory');
-        Route::post('/subcategory/store','store')->name('subcategory.store');
-        Route::get('/subcategory/view','view')->name('subcategory.view');
-        Route::get('/subcategory/edit/{id}','edit')->name('subcategory.edit');
-        Route::post('/subcategory/update/{id}','update')->name('subcategory.update');
-        Route::get('/subcategory/delete/{id}','delete')->name('subcategory.delete');
+    Route::controller(SubcategoryController::class)->group(function () {
+        Route::get('/subcategory', 'index')->name('subcategory');
+        Route::post('/subcategory/store', 'store')->name('subcategory.store');
+        Route::get('/subcategory/view', 'view')->name('subcategory.view');
+        Route::get('/subcategory/edit/{id}', 'edit')->name('subcategory.edit');
+        Route::post('/subcategory/update/{id}', 'update')->name('subcategory.update');
+        Route::get('/subcategory/delete/{id}', 'delete')->name('subcategory.delete');
     });
     //All Routes for Subcategory End
 
     //All Routes for brand Start
-    Route::controller(brandController::class)->group(function(){
-        Route::get('/brand','index')->name('brand');
-        Route::post('/brand/store','store')->name('brand.store');
-        Route::get('/brand/view','show')->name('brand.view');
-        Route::get('/brand/edit/{id}','edit')->name('brand.edit');
+    Route::controller(brandController::class)->group(function () {
+        Route::get('/brand', 'index')->name('brand');
+        Route::post('/brand/store', 'store')->name('brand.store');
+        Route::get('/brand/view', 'show')->name('brand.view');
+        Route::get('/brand/edit/{id}', 'edit')->name('brand.edit');
         // Route::post('/brand/update/{id}','update')->name('brand.update');
-        Route::get('/brand/delete/{id}','destroy')->name('brand.delete');
+        Route::get('/brand/delete/{id}', 'destroy')->name('brand.delete');
     });
     //All Routes for brand End
 
 
     //All Routes for Popup Message Start
-    Route::controller(PopupMessageController::class)->group(function(){
-        Route::get('/popupMessage','index')->name('popupMessage');
-        Route::post('/popupMessage/store','store')->name('popupMessage.store');
-        Route::get('/popupMessage/view','view')->name('popupMessage.view');
-        Route::get('/popupMessage/edit/{id}','edit')->name('popupMessage.edit');
-        // Route::post('/popupMessage/update/{id}','update')->name('popupMessage.update');
-        Route::get('/popupMessage/delete/{id}','destroy')->name('popupMessage.delete');
+    Route::controller(PopupMessageController::class)->group(function () {
+        Route::get('/popupMessage', 'index')->name('popupMessage');
+        Route::post('/popupMessage/store', 'store')->name('popupMessage.store');
+        Route::get('/popupMessage/view', 'view')->name('popupMessage.view');
+        Route::get('/popupMessage/edit/{id}', 'edit')->name('popupMessage.edit');
+        Route::post('/popupMessage/update/{id}', 'update')->name('popupMessage.update');
+        Route::get('/popupMessage/delete/{id}', 'delete')->name('popupMessage.delete');
     });
     //All Routes for Popup Message End
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

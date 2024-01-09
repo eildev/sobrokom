@@ -58,9 +58,6 @@ class CategoryController extends Controller
     // category update function
     public function update(Request $request, $id)
     {
-
-        // @dd($request->all());
-
         if ($request->image) {
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
@@ -71,13 +68,6 @@ class CategoryController extends Controller
             $category->update();
             return redirect()->route('category.view')->with('success', 'Category Successfully updated');
         }
-
-        // $category = Category::findOrFail($id);
-        //     $category->categoryName = $request->categoryName;
-        //     $category->slug = Str::slug($request->categoryName);
-        //     $category->image = $request->image;
-        //     $category->update();
-        //     return redirect()->route('category.view')->with('success','Category Successfully updated');
     }
 
 

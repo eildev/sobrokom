@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card border-top border-0 border-4 border-info">
-                <form action="{{ Route('popupMessage.store') }}" method="POST" >
+                <form action="{{ Route('popupMessage.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf    
                     <div class="card-body">
                         <div class="border p-4 rounded">

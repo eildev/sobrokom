@@ -39,14 +39,46 @@ class PopupMessageController extends Controller
         }
     }
 
-
-
     // Popup Message View function
     public function view()
     {
         $popupMessages = PopupMessage::all();
         return view('backend.popupMessage.view', compact('popupMessages'));
     }
+
+
+    // popup edit function 
+    public function edit($id)
+    {
+        $popupMessage = PopupMessage::findOrFail($id);
+        return view('backend.popupMessage.edit', compact('popupMessage'));
+    }
+
+
+
+    // Popup Message View function
+    public function update(Request $request, $id)
+    {
+        if ($request->image) {
+            $request->validate([
+                'title' => 'required|max:100',
+                'description' => 'required|max:200',
+                'link' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/popupMessage/'), $imageName);
+            $popupMessage = PopupMessage::findOrFail($id);
+            $popupMessage->title = $request->title;
+            $popupMessage->description = $request->description;
+            $popupMessage->link = $request->link;
+            $popupMessage->image = $imageName;
+            $popupMessage->update();
+            return redirect()->route('popupMessage.view')->with('success', 'Popup message Successfully Updated');
+        }
+    }
+
+
 
     public function delete($id)
     {

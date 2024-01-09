@@ -4,8 +4,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card border-top border-0 border-4 border-info">
-                {{-- <form action="{{ Route('popupMessage.update', $popupMessage->id) }}" method="POST" > --}}
-                <form action="#" method="POST" >
+                <form action="{{ Route('popupMessage.update', $popupMessage->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf    
                     <div class="card-body">
                         <div class="border p-4 rounded">
@@ -26,16 +25,15 @@
                             <div class="row mb-3">
                                 <label for="inputEnterYourName" class="col-sm-3 col-form-label">Popup Link</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="link" class="form-control" id="inputEnterYourName"
-                                        placeholder="Enter Popup Link" value="{{$popupMessage->link}}">
+                                    <input type="url" name="link" class="form-control" id=""
+                                        placeholder="Enter Popup Link" value="{{$popupMessage->link}}" >
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="inputEnterYourName" class="col-sm-3 col-form-label">Popup Description</label>
-                                <div class="col-sm-9">
-                                    <textarea type="text" name="description" class="form-control" style="height: 100px;" id="inputEnterYourName"
-                                        placeholder="Enter Popup Description" value="{{$popupMessage->description}}">
+                                <div class="col-sm-9">    
+                                    <textarea class="form-control" name="description" placeholder="" style="resize: none; height: 150px; " value="{{$popupMessage->description}}"></textarea>
                                 </div>
                             </div>
 
