@@ -59,6 +59,21 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Popup Message</div>
+            </a>
+            <ul>
+               
+                <li> <a href="{{ route('popupMessage') }}"><i class="bx bx-right-arrow-alt"></i>Add Popup Message</a>
+                </li>
+                <li> <a href="{{ route('popupMessage.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Popup Message</a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>

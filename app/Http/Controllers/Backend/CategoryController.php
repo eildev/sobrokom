@@ -6,77 +6,86 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
+
 class CategoryController extends Controller
 {
     // category index function
-    public function index(){
+    public function index()
+    {
         return view('backend.category.insert');
     }
 
     // category store function
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         // @dd($request->all());
 
         // $imageName = rand().'.'.$request->image->extension();
         // $request->image->move(public_path('uploads/category/'), $imageName);
 
-        if($request->image){
+        if ($request->image) {
             $request->validate([
                 'categoryName' => 'required|max:100',
-                'image' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-            $imageName = rand().'.'.$request->image->extension();
+            $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = new Category;
             $category->categoryName = $request->categoryName;
             $category->slug = Str::slug($request->categoryName);
             $category->image = $imageName;
             $category->save();
-            return back()->with('success','Category Successfully Saved');
+            return back()->with('success', 'Category Successfully Saved');
         }
     }
 
     // category View function
-    public function view(){
+    public function view()
+    {
         $categories = Category::all();
         return view('backend.category.view', compact('categories'));
     }
 
     // category Edit function
-    public function edit($id){
+    public function edit($id)
+    {
         $category = Category::findOrFail($id);
         return view('backend.category.edit', compact('category'));
     }
 
 
     // category update function
-    public function update(Request $request, $id){
-        // if($request->image){
-        //     $imageName = rand().'.'.$request->image->extension();
-        //     $request->image->move(public_path('uploads/category/'), $imageName);
-        //     $category = Category::findOrFail($id);
-        //     $category->categoryName = $request->categoryName;
-        //     $category->slug = Str::slug($request->categoryName);
-        //     $category->image = $imageName;
-        //     $category->update();
-        //     return back()->with('success','Category Successfully updated');
-        // }
+    public function update(Request $request, $id)
+    {
 
-        $category = Category::findOrFail($id);
+        // @dd($request->all());
+
+        if ($request->image) {
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/category/'), $imageName);
+            $category = Category::findOrFail($id);
             $category->categoryName = $request->categoryName;
             $category->slug = Str::slug($request->categoryName);
-            $category->image = $request->image;
+            $category->image = $imageName;
             $category->update();
-            return redirect()->route('category.view')->with('success','Category Successfully updated');
+            return redirect()->route('category.view')->with('success', 'Category Successfully updated');
+        }
+
+        // $category = Category::findOrFail($id);
+        //     $category->categoryName = $request->categoryName;
+        //     $category->slug = Str::slug($request->categoryName);
+        //     $category->image = $request->image;
+        //     $category->update();
+        //     return redirect()->route('category.view')->with('success','Category Successfully updated');
     }
 
 
     // category Delete function
-    public function delete($id){
+    public function delete($id)
+    {
         $category = Category::findOrFail($id);
         $category->delete();
-        return back()->with('success','Category Successfully deleted');
+        return back()->with('success', 'Category Successfully deleted');
     }
-
 }

@@ -36,19 +36,19 @@ class BrandController extends Controller
         // $imageName = rand().'.'.$request->image->extension();
         // $request->image->move(public_path('uploads/Brands/'), $imageName);
 
-        if($request->image){
+        if ($request->image) {
             $request->validate([
                 'BrandName' => 'required|max:100',
-                'image' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-            $imageName = rand().'.'.$request->image->extension();
+            $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/brands/'), $imageName);
             $Brand = new Brand;
             $Brand->BrandName = $request->BrandName;
             $Brand->slug = Str::slug($request->BrandName);
             $Brand->image = $imageName;
             $Brand->save();
-            return back()->with('success','Brand Successfully Added');
+            return back()->with('success', 'Brand Successfully Added');
         }
     }
 
@@ -84,6 +84,6 @@ class BrandController extends Controller
     {
         $Brands = Brand::findOrFail($id);
         $Brands->delete();
-        return back()->with('success','Brands Successfully deleted');
+        return back()->with('success', 'Brands Successfully deleted');
     }
 }

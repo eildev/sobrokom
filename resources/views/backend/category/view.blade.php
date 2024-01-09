@@ -23,7 +23,7 @@
                                     <td>{{ $category->categoryName }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
-                                        <img src="{{ $category->image }}" class="img-fluid" alt="">
+                                        <img src="{{ asset('/uploads/category/' . $category->image) }}" style="height: 100px;" class="img-fluid" alt="Category Image">
                                     </td>
                                     <td>{{ $category->status }}</td>
                                     <td>

@@ -9,29 +9,26 @@
                         <thead>
                             <tr>
                                 <th>SI</th>
-                                <th>Category Name</th>
-                                <th>Subategory Name</th>
-                                <th>Slug</th>
+                                <th>Title</th>
+                                <th>Description</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($subcategories as $subcategory )
+                            @foreach ($popupMessages as $popupMessage )
                                 <tr>
-                                    <td>{{ $subcategory->id }}</td>
-                                    <td>{{ $subcategory->category->categoryName }}</td>
-                                    <td>{{ $subcategory->subcategoryName }}</td>
-                                    <td>{{ $subcategory->slug }}</td>
+                                    <td>{{ $popupMessage->id }}</td>
+                                    <td>{{ $popupMessage->title }}</td>
+                                    <td>{{ $popupMessage->description }}</td>
                                     <td>
-                                        {{-- <img src="{{ $subcategory->image }}" class="img-fluid" alt=""> --}}
-                                        <img src="{{ asset('/uploads/subcategory/' . $subcategory->image) }}" style="height: 100px;" class="img-fluid" alt="Subcategory Image">
+                                        <img src="{{ asset('/uploads/popupMessage/' . $popupMessage->image) }}" style="height: 100px;" class="img-fluid" alt="Popup message Image">
                                     </td>
-                                    <td>{{ $subcategory->status }}</td>
+                                    <td>{{ $popupMessage->status }}</td>
                                     <td>
                                         <a href="#" class="btn btn-info">Edit</a>
-                                        <a href="{{ route('subcategory.delete', $subcategory->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="#" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
