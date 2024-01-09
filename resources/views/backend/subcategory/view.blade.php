@@ -30,7 +30,7 @@
                                     </td>
                                     <td>{{ $subcategory->status }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-info">Edit</a>
+                                        <a href="{{ route('subcategory.edit', $subcategory->id) }}" class="btn btn-info">Edit</a>
                                         <a href="{{ route('subcategory.delete', $subcategory->id)}}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>

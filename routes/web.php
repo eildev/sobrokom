@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/brand/store', 'store')->name('brand.store');
         Route::get('/brand/view', 'show')->name('brand.view');
         Route::get('/brand/edit/{id}', 'edit')->name('brand.edit');
-        // Route::post('/brand/update/{id}','update')->name('brand.update');
+        Route::post('/brand/update/{id}','update')->name('brand.update');
         Route::get('/brand/delete/{id}', 'destroy')->name('brand.delete');
     });
     //All Routes for brand End

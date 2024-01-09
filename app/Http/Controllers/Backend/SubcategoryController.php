@@ -46,6 +46,34 @@ class SubcategoryController extends Controller
         return view('backend.subcategory.view', compact('subcategories'));
     }
 
+    // subcategory edit function 
+    public function edit($id)
+    {
+        $subcategory = Subcategory::findOrFail($id);
+        return view('backend.subcategory.edit', compact('subcategory'));
+    }
+
+    // subcategory update function 
+    public function update(Request $request, $id)
+    {
+        if ($request->image) {
+            $request->validate([
+                'categoryId' => 'required',
+                'subcategoryName' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/subcategory'), $imageName);
+            $subcategory = Subcategory::findOrFail($id);
+            $subcategory->subcategoryName = $request->subcategoryName;
+            $subcategory->categoryId = $request->categoryId;
+            $subcategory->slug = Str::slug($request->subcategoryName);
+            $subcategory->image = $imageName;
+            $subcategory->update();
+            return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Updated');
+        }
+    }
+
     // subcategory delete function 
     public function delete($id)
     {

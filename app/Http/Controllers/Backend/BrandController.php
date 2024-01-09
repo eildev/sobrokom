@@ -64,17 +64,31 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view('backend.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        if ($request->image) {
+            $request->validate([
+                'BrandName' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/brands/'), $imageName);
+            $brand = Brand::findOrFail($id);
+            $brand->BrandName = $request->BrandName;
+            $brand->slug = Str::slug($request->BrandName);
+            $brand->image = $imageName;
+            $brand->update();
+            return redirect()->route('brand.view')->with('success', 'Brand Successfully Added');
+        }
     }
 
     /**
