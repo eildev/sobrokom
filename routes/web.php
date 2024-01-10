@@ -21,9 +21,8 @@ use App\Http\Controllers\Backend\HomeBannerController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
+    return view('frontend.index');
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('backend.dashboard');
