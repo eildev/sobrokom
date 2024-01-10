@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/majid', function () {
-    return 'majid';
-});
+// Route::get('/majid', function () {
+//     return view('frontend.index');
+// });
