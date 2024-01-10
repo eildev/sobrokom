@@ -56,19 +56,19 @@
         <!-- topbar-end -->
 
         <!-- header-search -->
-                    @include('frontend.body.headerSearch')
+        @include('frontend.body.headerSearch')
         <!-- header-search-end -->
 
         <!-- header-cart-start -->
-                    @include('frontend.body.headerCart')
+        @include('frontend.body.headerCart')
         <!-- header-cart-end -->
 
         <!-- mobile-menu-area -->
-                    @include('frontend.body.mobileMenu')
+        @include('frontend.body.mobileMenu')
         <!-- mobile-menu-area-end -->
 
         <!-- sidebar-menu-area -->
-                    @include('frontend.body.sidebar')
+        @include('frontend.body.sidebar')
         <!-- sidebar-menu-area-end -->
     </header>
     <!-- header-area-end -->
