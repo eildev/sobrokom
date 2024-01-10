@@ -59,6 +59,10 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->image) {
+            $request->validate([
+                'categoryName' => 'required|max:100',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = Category::findOrFail($id);
