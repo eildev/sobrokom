@@ -3,7 +3,7 @@
     <div class="page-content">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <div class="card border-top border-0 border-4 border-info">
+                <div class="card border-top border-0 border-3 border-info">
                     <form action="{{ Route('subcategory.store') }}" method="POST">
                         @csrf
                         <div class="card-body">
