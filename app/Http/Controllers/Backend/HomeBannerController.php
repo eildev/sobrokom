@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\ImageGallery;
 use App\Models\HomeBanner;
 
 class HomeBannerController extends Controller
@@ -29,13 +29,27 @@ class HomeBannerController extends Controller
         if ($request->image) {
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/banner/'), $imageName);
-            $banner = new banner;
+            $banner = new HomeBanner;
             $banner->title = $request->title;
             $banner->short_description = $request->short_description;
             $banner->long_description = $request->long_description;
             $banner->link = $request->link;
             $banner->image = $imageName;
             $banner->save();
+            if($request->galleryimages){
+                $allImages = $request->galleryimages;
+                foreach($allImages as $galleryImage){
+                    $imageName = rand() . '.' . $galleryImage->extension();
+                    $galleryImage->move(public_path('uploads/banner/gallery/'), $imageName);
+                    $ImageGallery = new ImageGallery;
+                    $ImageGallery->banner_id = $banner->id;
+                    $ImageGallery->image = $imageName;
+                    $ImageGallery->save();
+                }
+            }
+
+
+
             return back()->with('success', 'banner Successfully Saved');
         }
        

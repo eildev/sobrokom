@@ -83,6 +83,14 @@
                                     </div>
 
                                 </div>
+                                <div class="row mb-3">
+                                    <label for="image" class="col-sm-3 col-form-label">Gallery Images </label>
+                                    <div class="col-sm-9">
+                                        <input type="file" id="image"
+                                            class="form-control" name="galleryimages[]" multiple>
+                                    </div>
+
+                                </div>
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
