@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\brandController;
 use App\Http\Controllers\Backend\PopupMessageController;
 use App\Http\Controllers\Backend\TagNameController;
+use App\Http\Controllers\Backend\HomeBannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/tagname/edit/{id}', 'edit')->name('tagname.edit');
         Route::post('/tagname/update/{id}', 'update')->name('tagname.update');
         Route::get('/tagname/delete/{id}', 'delete')->name('tagname.delete');
+    });
+    //All Routes for Tag name End
+
+
+    //All Routes for Tag name Start
+    Route::controller(HomeBannerController::class)->group(function () {
+        Route::get('/banner', 'index')->name('banner');
+        Route::post('/banner/store', 'store')->name('banner.store');
+        Route::get('/banner/view', 'view')->name('banner.view');
+        Route::get('/banner/edit/{id}', 'edit')->name('banner.edit');
+        Route::post('/banner/update/{id}', 'update')->name('banner.update');
+        Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
     });
     //All Routes for Tag name End
 });
