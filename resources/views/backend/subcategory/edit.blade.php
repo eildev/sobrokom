@@ -15,9 +15,12 @@
                                 <div class="row mb-3">
                                     <label for="inputEnterYourName" class="col-12 form-label">Subcategory Name</label>
                                     <div class="col-12">
-                                        <input type="text" name="subcategoryName" class="form-control"
+                                        <input type="text" name="subcategoryName" class="form-control @error('subcategoryName') is-invalid  @enderror"
                                             id="inputEnterYourName" placeholder="Enter Subcategory Name"
                                             value="{{ $subcategory->subcategoryName }}">
+                                            @error('subcategoryName')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -29,15 +32,18 @@
                                     <div class="col-12">
                                         <select class="form-select" name="categoryId">
                                             @foreach ($categories as $category)
-                                                <option
-                                                    value="{{ $category->id }} @php($category->id == $subcategory->category->id)
-                                                    ? 'selected' : '' ; @endphp">
-                                                    {{ $category->categoryName }}
-                                                </option>
+                                            <option value="{{ $category->id }}" {{ ($category->id == $subcategory->categoryId) ? 'selected' : '' }}>
+                                                {{ $category->categoryName }}
+                                            </option>
                                             @endforeach
                                         </select>
+                                        @error('categoryId')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+
+
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">

@@ -23,10 +23,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $serialNumber = 1;
+                                @endphp
                                 @if ($tagnames->count() > 0)
                                     @foreach ($tagnames as $tagname)
                                         <tr>
-                                            <td>{{ $tagname->id }}</td>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $tagname->tagName }}</td>
                                             <td>
                                                 <a href="{{ route('tagname.edit', $tagname->id) }}"

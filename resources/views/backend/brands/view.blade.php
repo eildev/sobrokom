@@ -24,18 +24,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $serialNumber = 1;
+                                @endphp
                                 @if ($Brands->count() > 0)
                                     @foreach ($Brands as $Brand)
-                                        @php
-                                            // echo"<pre>";print_r($Brand);echo"</pre>";
-                                            $serialNumber = 1;
-                                        @endphp
-
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $Brand->BrandName }}</td>
                                             <td>
-                                                <img src="{{ asset('/uploads/brands/' . $Brand->image) }}" class="w-25"
+                                                <img src="{{ asset('/uploads/brands/' . $Brand->image) }}" style="height: 100px;" class="img-fluid"
                                                     alt="">
                                             </td>
                                             <td>{{ $Brand->status }}</td>

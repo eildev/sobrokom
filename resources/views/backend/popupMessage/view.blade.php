@@ -25,10 +25,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $serialNumber = 1;
+                                @endphp
                                 @if ($popupMessages->count() > 0)
                                     @foreach ($popupMessages as $popupMessage)
                                         <tr>
-                                            <td>{{ $popupMessage->id }}</td>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $popupMessage->title }}</td>
                                             <td>{{ $popupMessage->description }}</td>
                                             <td>

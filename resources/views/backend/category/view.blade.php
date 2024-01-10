@@ -26,10 +26,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $serialNumber = 1;
+                                @endphp
                                 @if ($categories->count() > 0)
                                     @foreach ($categories as $category)
+                                        
                                         <tr>
-                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $category->categoryName }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>

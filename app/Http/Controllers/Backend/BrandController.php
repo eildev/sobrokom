@@ -31,16 +31,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        // @dd($request->all());
-
-        // $imageName = rand().'.'.$request->image->extension();
-        // $request->image->move(public_path('uploads/Brands/'), $imageName);
+        $request->validate([
+            'BrandName' => 'required|max:100',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
         if ($request->image) {
-            $request->validate([
-                'BrandName' => 'required|max:100',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/brands/'), $imageName);
             $Brand = new Brand;
@@ -75,6 +71,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         if ($request->image) {
             $request->validate([
                 'BrandName' => 'required|max:100',
@@ -83,11 +80,21 @@ class BrandController extends Controller
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/brands/'), $imageName);
             $brand = Brand::findOrFail($id);
+            unlink(public_path('uploads/brand/') . $brand->image);
             $brand->BrandName = $request->BrandName;
             $brand->slug = Str::slug($request->BrandName);
             $brand->image = $imageName;
             $brand->update();
-            return redirect()->route('brand.view')->with('success', 'Brand Successfully Added');
+            return redirect()->route('brand.view')->with('success', 'Brand Successfully updated');
+        } else {
+            $request->validate([
+                'BrandName' => 'required|max:100',
+            ]);
+            $brand = Brand::findOrFail($id);
+            $brand->BrandName = $request->BrandName;
+            $brand->slug = Str::slug($request->BrandName);
+            $brand->update();
+            return redirect()->route('brand.view')->with('success', 'Brand Successfully updated without image');
         }
     }
 

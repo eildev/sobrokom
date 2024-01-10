@@ -34,7 +34,7 @@
                                         @enderror
                                         <div class="mt-3">
                                             <img id="showImage" class="" height="150" width="200"
-                                                src="{{ asset('uploads/brand/' . $brand->image) }}" alt="Brand image">
+                                                src="{{ asset('uploads/brands/' . $brand->image) }}" alt="Brand image">
                                         </div>
                                     </div>
                                 </div>
