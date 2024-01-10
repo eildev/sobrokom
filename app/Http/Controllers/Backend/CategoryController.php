@@ -82,8 +82,6 @@ class CategoryController extends Controller
             return redirect()->route('category.view')->with('success', 'Category Successfully updated');
         }
     }
-
-
     // category Delete function
     public function delete($id)
     {
