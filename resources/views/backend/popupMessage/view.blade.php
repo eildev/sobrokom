@@ -28,7 +28,7 @@
                                     <td>{{ $popupMessage->status }}</td>
                                     <td>
                                         <a href="{{ route('popupMessage.edit', $popupMessage->id)}}" class="btn btn-info">Edit</a>
-                                        <a href="{{ route('popupMessage.delete', $popupMessage->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('popupMessage.delete', $popupMessage->id)}}" class="btn btn-danger" id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card border-top border-0 border-4 border-info">
-                <form action="{{ Route('subcategory.update', $subcategory->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ Route('subcategory.update', $subcategory->id) }}" method="POST" >
                     @csrf
                 <div class="card-body">
                         <div class="border p-4 rounded">
@@ -27,18 +27,10 @@
                                 <label class="form-label col-12">Select Category</label>
                                 <div class="col-12">
                                     <select class="form-select" name="categoryId">
-                                        <option value="{{$subcategory->category->id}}">{{$subcategory->category->categoryName}}</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                                            <option value="{{$category->id}}" @php ($category->id == $subcategory->category->id) ? "selected" : ""; @endphp>{{$category->categoryName}}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="" class="col-12 form-label">Subcategory Thumbnail </label>
-                                <div class="col-12">
-                                    <input type="file" class="form-control" name="image">
                                 </div>
                             </div>
                             <div class="row">

@@ -1,33 +1,4 @@
-{{-- <br><br><br><br>
-<table class="table mb-0">
-    <thead class="table-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-    </tbody>
-</table> --}}
+
 
 
 @extends('backend.master')
@@ -64,7 +35,7 @@
                                         <td>{{ $Brand->status }}</td>
                                         <td>
                                             <a href="{{ route('brand.edit', $Brand->id) }}" class="btn btn-info">Edit</a>
-                                            <a href="{{ route('brand.delete', $Brand->id) }}" class="btn btn-danger">Delete</a>
+                                            <a href="{{ route('brand.delete', $Brand->id) }}" class="btn btn-danger" id="delete">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

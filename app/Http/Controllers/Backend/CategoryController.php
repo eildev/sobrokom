@@ -18,17 +18,13 @@ class CategoryController extends Controller
     // category store function
     public function store(Request $request)
     {
-
-        // @dd($request->all());
-
-        // $imageName = rand().'.'.$request->image->extension();
-        // $request->image->move(public_path('uploads/category/'), $imageName);
+        $request->validate([
+            'categoryName' => 'required|max:100',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
         if ($request->image) {
-            $request->validate([
-                'categoryName' => 'required|max:100',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+            
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = new Category;
@@ -38,6 +34,8 @@ class CategoryController extends Controller
             $category->save();
             return back()->with('success', 'Category Successfully Saved');
         }
+       
+
     }
 
     // category View function
@@ -74,7 +72,14 @@ class CategoryController extends Controller
             return redirect()->route('category.view')->with('success', 'Category Successfully updated');
         }
         else {
-
+            $request->validate([
+                'categoryName' => 'required|max:100',
+            ]);
+            $category = Category::findOrFail($id);
+            $category->categoryName = $request->categoryName;
+            $category->slug = Str::slug($request->categoryName);
+            $category->update();
+            return redirect()->route('category.view')->with('success', 'Category Successfully updated');
         }
     }
 

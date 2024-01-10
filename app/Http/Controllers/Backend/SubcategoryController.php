@@ -18,25 +18,16 @@ class SubcategoryController extends Controller
     // subcategory store function
     public function store(Request $request)
     {
-
-        // @dd($request->all());
-
-        if ($request->image) {
-            $request->validate([
-                'categoryId' => 'required',
-                'subcategoryName' => 'required|max:100',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-            $imageName = rand() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/subcategory'), $imageName);
-            $subcategory = new Subcategory;
-            $subcategory->subcategoryName = $request->subcategoryName;
-            $subcategory->categoryId = $request->categoryId;
-            $subcategory->slug = Str::slug($request->subcategoryName);
-            $subcategory->image = $imageName;
-            $subcategory->save();
-            return back()->with('success', 'Subcategory Successfully Saved');
-        }
+        $request->validate([
+            'categoryId' => 'required',
+            'subcategoryName' => 'required|max:100',
+        ]);
+        $subcategory = new Subcategory;
+        $subcategory->subcategoryName = $request->subcategoryName;
+        $subcategory->categoryId = $request->categoryId;
+        $subcategory->slug = Str::slug($request->subcategoryName);
+        $subcategory->save();
+        return back()->with('success', 'Subcategory Successfully Saved');
     }
 
     // subcategory View function
@@ -56,22 +47,16 @@ class SubcategoryController extends Controller
     // subcategory update function 
     public function update(Request $request, $id)
     {
-        if ($request->image) {
-            $request->validate([
-                'categoryId' => 'required',
-                'subcategoryName' => 'required|max:100',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-            $imageName = rand() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/subcategory'), $imageName);
-            $subcategory = Subcategory::findOrFail($id);
-            $subcategory->subcategoryName = $request->subcategoryName;
-            $subcategory->categoryId = $request->categoryId;
-            $subcategory->slug = Str::slug($request->subcategoryName);
-            $subcategory->image = $imageName;
-            $subcategory->update();
-            return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Updated');
-        }
+        $request->validate([
+            'categoryId' => 'required',
+            'subcategoryName' => 'required|max:100',
+        ]);
+        $subcategory = Subcategory::findOrFail($id);
+        $subcategory->subcategoryName = $request->subcategoryName;
+        $subcategory->categoryId = $request->categoryId;
+        $subcategory->slug = Str::slug($request->subcategoryName);
+        $subcategory->update();
+        return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Updated');
     }
 
     // subcategory delete function 

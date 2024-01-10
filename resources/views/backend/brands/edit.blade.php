@@ -15,14 +15,23 @@
                             <div class="row mb-3">
                                 <label for="inputEnterYourName" class="col-sm-3 col-form-label">Brand Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="BrandName" class="form-control" id="inputEnterYourName"
+                                    <input type="text" name="BrandName" class="form-control  @error('BrandName') is-invalid  @enderror" id="inputEnterYourName"
                                         placeholder="Enter Brand Name" value="{{ $brand->BrandName }}">
+                                        @error('BrandName')
+                                        <span class="text-danger">{{ $message }}</span>
+                                     @enderror
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="image" class="col-sm-3 col-form-label">Brand Thumbnail </label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="image" value="{{ $brand->image }}">
+                                    <input type="file" class="form-control @error('BrandName') is-invalid  @enderror" id="image" name="image" value="{{ $brand->image }}">
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                     @enderror
+                                     <div class="mt-3">
+                                        <img id="showImage" class="" height="150" width="200" src="{{ asset('uploads/brand/'.$brand->image) }}" alt="Brand image">
+                                     </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -39,4 +48,8 @@
     </div>
     <!--end row-->
 </div>
+
+<script>
+   
+</script>
 @endsection

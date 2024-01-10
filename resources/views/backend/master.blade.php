@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
     <!-- //Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    {{-- main jquery file --}}
+    <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
 </head>
 
@@ -57,7 +59,7 @@
     <!-- Bootstrap JS -->
     <script src="{{ asset('backend') }}/assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
-    <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+   
     <script src="{{ asset('backend') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
@@ -95,6 +97,62 @@
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
+    
+
+
+{{-- image onload event  --}}
+<script>
+    $(document).ready(function() {
+           $('#image').change(function() {
+               const file = this.files[0];
+
+               if (file) {
+                   let reader = new FileReader();
+                   reader.onload = function(event) {
+                       $('#showImage').attr('src', event.target.result);
+                   }
+                   reader.readAsDataURL(file);
+               }
+           });
+
+           
+       });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+     $(document).ready(function () {
+    //    delete function
+    $(document).on('click', '#delete', function (e) {
+        e.preventDefault();
+
+        var link = $(this).attr("href");
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = link
+                Swal.fire(
+                    'Deleted!',
+                    'Your File has been deleted.',
+                    'success'
+                )
+            }
+        })
+
+    });
+});
+ 
+ 
+</script>
 </body>
 
 </html>

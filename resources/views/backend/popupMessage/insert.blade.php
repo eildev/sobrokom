@@ -15,8 +15,11 @@
                             <div class="row mb-3">
                                 <label for="" class="col-sm-3 col-form-label">Popup Title</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="title" class="form-control" id=""
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid  @enderror" id=""
                                         placeholder="Enter Popup Title" >
+                                        @error('title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                     @enderror
                                 </div>
                             </div>
 
@@ -25,22 +28,35 @@
                             <div class="row mb-3">
                                 <label for="" class="col-sm-3 col-form-label">Popup Link</label>
                                 <div class="col-sm-9">
-                                    <input type="url" name="link" class="form-control" id=""
+                                    <input type="url" name="link" class="form-control @error('link') is-invalid  @enderror" id=""
                                         placeholder="Enter Popup Link" >
+                                        @error('link')
+                                        <span class="text-danger">{{ $message }}</span>
+                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="" class="col-sm-3 col-form-label">Popup Description</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="description" placeholder="" style="resize: none; height: 150px;"></textarea>
+                                    <textarea class="form-control @error('description') is-invalid  @enderror" name="description" placeholder="" style="resize: none; height: 150px;"></textarea>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="image" class="col-sm-3 col-form-label">Popup Thumbnail </label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="image" >
+                                    <input type="file" id="image" class="form-control @error('image') is-invalid  @enderror" name="image" >
+                                    @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                 @enderror
+
+                                 <div class="mt-3">
+                                    <img id="showImage" class="" height="150" width="200" src="{{ asset('uploads/productempty.jpg') }}" alt="category image">
+                                 </div>
                                 </div>
                             </div>
 

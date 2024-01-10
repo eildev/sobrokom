@@ -14,19 +14,31 @@
             
                                 <a href="{{ route('category.view') }}" class="btn btn-info btn-sm text-light ">View Category</a>
                             </div>
+                            
                             <hr>
                             <div class="row mb-3">
                                 <label for="inputEnterYourName" class="col-sm-3 col-form-label">Category Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="categoryName" class="form-control" id="inputEnterYourName"
+                                    <input type="text" name="categoryName" class="form-control @error('categoryName') is-invalid  @enderror" id="inputEnterYourName" value="{{ old('categoryName') }}"
                                         placeholder="Enter Category Name">
+                                        @error('categoryName')
+                                   <span class="text-danger">{{ $message }}</span>
+                                @enderror
                                 </div>
+                                
                             </div>
                             <div class="row mb-3">
                                 <label for="image" class="col-sm-3 col-form-label">Category Thumbnail </label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="image">
+                                    <input type="file" id="image" class="form-control  @error('image') is-invalid  @enderror"   name="image">
+                                    @error('image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                 @enderror
+                                 <div class="mt-3">
+                                    <img id="showImage" class="" height="150" width="200" src="{{ asset('uploads/productempty.jpg') }}" alt="category image">
+                                 </div>
                                 </div>
+                               
                             </div>
                             <div class="row">
                                 <label class="col-sm-3 col-form-label"></label>
@@ -42,4 +54,6 @@
     </div>
     <!--end row-->
 </div>
+
+
 @endsection
