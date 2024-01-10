@@ -23,7 +23,7 @@
         {{-- category menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon"><i class='bx bx-category-alt'></i>
                 </div>
                 <div class="menu-title">Category</div>
             </a>
@@ -38,7 +38,8 @@
         {{-- brand menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-cube-alt'></i>
                 </div>
                 <div class="menu-title">Brands</div>
             </a>
@@ -53,7 +54,8 @@
         {{-- Subcategory menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-menu-alt-right'></i>
                 </div>
                 <div class="menu-title">Subcategory</div>
             </a>
@@ -69,7 +71,8 @@
         {{-- popup menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-message-rounded-dots'></i>
                 </div>
                 <div class="menu-title">Popup Message</div>
             </a>
@@ -86,7 +89,8 @@
         {{-- tag menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-purchase-tag-alt'></i>
                 </div>
                 <div class="menu-title">Product Tag</div>
             </a>
@@ -102,7 +106,8 @@
         {{-- banner menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-image-alt'></i>
                 </div>
                 <div class="menu-title">Home Banner</div>
             </a>
