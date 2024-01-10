@@ -59,7 +59,7 @@
     <!-- Bootstrap JS -->
     <script src="{{ asset('backend') }}/assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
-   
+
     <script src="{{ asset('backend') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
@@ -70,7 +70,7 @@
     <script src="{{ asset('backend') }}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
@@ -97,7 +97,7 @@
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
-    
+
 
 
 {{-- image onload event  --}}
@@ -115,7 +115,7 @@
                }
            });
 
-           
+
        });
 </script>
 
@@ -150,8 +150,8 @@
 
     });
 });
- 
- 
+
+
 </script>
 </body>
 
