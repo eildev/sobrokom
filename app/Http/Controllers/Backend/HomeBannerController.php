@@ -47,9 +47,6 @@ class HomeBannerController extends Controller
                     $ImageGallery->save();
                 }
             }
-
-
-
             return back()->with('success', 'banner Successfully Saved');
         }
        
@@ -58,14 +55,14 @@ class HomeBannerController extends Controller
     // banner View function
     public function view()
     {
-        $categories = banner::all();
-        return view('backend.home_banner.view', compact('categories'));
+        $all_banner = HomeBanner::all();
+        return view('backend.home_banner.view', compact('all_banner'));
     }
 
     // banner Edit function
     public function edit($id)
     {
-        $banner = banner::findOrFail($id);
+        $banner = HomeBanner::findOrFail($id);
         return view('backend.home_banner.edit', compact('banner'));
     }
 
@@ -73,6 +70,7 @@ class HomeBannerController extends Controller
     // banner update function
     public function update(Request $request, $id)
     {
+        
         if ($request->image) {
             $request->validate([
                 'title' => 'required|max:50',
@@ -85,27 +83,45 @@ class HomeBannerController extends Controller
             $request->image->move(public_path('uploads/banner/'), $imageName);
             $banner = HomeBanner::findOrFail($id);
             unlink(public_path('uploads/banner/').$banner->image);
-            $banner->bannerName = $request->bannerName;
-            $banner->slug = Str::slug($request->bannerName);
+            $banner->title = $request->title;
+            $banner->short_description = $request->short_description;
+            $banner->long_description = $request->long_description;
+            $banner->link = $request->link;
             $banner->image = $imageName;
             $banner->update();
-            return redirect()->route('banner.view')->with('success', 'banner Successfully updated');
+            if($request->galleryimages){
+                $allImages = $request->galleryimages;
+                foreach($allImages as $galleryImage){
+                    $imageName = rand() . '.' . $galleryImage->extension();
+                    $galleryImage->move(public_path('uploads/banner/gallery/'), $imageName);
+                    $ImageGallery = new ImageGallery;
+                    $ImageGallery->banner_id = $banner->id;
+                    $ImageGallery->image = $imageName;
+                    $ImageGallery->update();
+                }
+            }
+            return back()->with('success', 'banner Successfully Saved');
         }
         else {
             $request->validate([
-                'bannerName' => 'required|max:100',
+                'title' => 'required|max:50',
+                'short_description' => 'required|max:100',
+                'long_description' => 'required|max:200',
+                'link' => 'required|max:200',
             ]);
-            $banner = banner::findOrFail($id);
-            $banner->bannerName = $request->bannerName;
-            $banner->slug = Str::slug($request->bannerName);
+            $banner = HomeBanner::findOrFail($id);
+            $banner->title = $request->title;
+            $banner->short_description = $request->short_description;
+            $banner->long_description = $request->long_description;
+            $banner->link = $request->link;
             $banner->update();
-            return redirect()->route('banner.view')->with('success', 'banner Successfully updated');
+            return redirect()->route('banner.view')->with('success', 'banner Successfully updated without image');
         }
     }
     // banner Delete function
     public function delete($id)
     {
-        $banner = banner::findOrFail($id);
+        $banner = HomeBanner::findOrFail($id);
         unlink(public_path('uploads/banner/').$banner->image);
         $banner->delete();
         return back()->with('success', 'banner Successfully deleted');

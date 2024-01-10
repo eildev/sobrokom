@@ -24,7 +24,7 @@
                                         <input type="text" name="title"
                                             class="form-control @error('title') is-invalid  @enderror"
                                             id="inputEnterYourName" value="{{ old('title') }}"
-                                            placeholder="Enter Category Name">
+                                            placeholder="Enter Banner Title">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -57,15 +57,14 @@
                                 <div class="row mb-3">
                                     <label for="inputEnterYourName" class="col-sm-3 col-form-label">Banner Link</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="link"
+                                        <input type="url" name="link"
                                             class="form-control @error('link') is-invalid  @enderror"
                                             id="inputEnterYourName" value="{{ old('link') }}"
-                                            placeholder="Enter Category Name">
+                                            placeholder="Enter Banner Link">
                                         @error('link')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-
                                 </div>
 
                                 <div class="row mb-3">
@@ -86,15 +85,15 @@
                                 <div class="row mb-3">
                                     <label for="image" class="col-sm-3 col-form-label">Gallery Images </label>
                                     <div class="col-sm-9">
-                                        <input type="file" id="image"
-                                            class="form-control" name="galleryimages[]" multiple>
+                                        <input type="file" id="image" class="form-control" name="galleryimages[]"
+                                            multiple>
                                     </div>
 
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-info px-5">Add Category</button>
+                                        <button type="submit" class="btn btn-info px-5 text-white">Add Banner</button>
                                     </div>
                                 </div>
                             </div>

@@ -107,9 +107,9 @@
                 <div class="menu-title">Home Banner</div>
             </a>
             <ul>
-                <li> <a href="{{ route('banner') }}"><i class="bx bx-right-arrow-alt"></i>Add Tag</a>
+                <li> <a href="{{ route('banner') }}"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
                 </li>
-                <li> <a href="{{ route('banner.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Tags</a>
+                <li> <a href="{{ route('banner.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Banner</a>
                 </li>
             </ul>
         </li>
