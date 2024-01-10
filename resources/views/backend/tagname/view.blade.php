@@ -2,12 +2,13 @@
 @section('admin')
     <div class="page-content">
         <div class="row">
-            <div class="card border-top border-0 border-4 border-info col-md-8 offset-md-2">
+            <div class="card border-top border-0 border-4 border-info col-md-6 offset-md-3">
+
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-info">Manage Subcategory</h5>
+                        <h5 class="mb-0 text-info">Manage Tagname</h5>
 
-                        <a href="{{ route('subcategory') }}" class="btn btn-info btn-sm text-light ">
+                        <a href="{{ route('tagname') }}" class="btn-info btn-sm text-light ">
                             <i class='bx bx-plus'></i>
                         </a>
                     </div>
@@ -17,27 +18,21 @@
                             <thead>
                                 <tr>
                                     <th>SI</th>
-                                    <th>Category Name</th>
-                                    <th>Subategory Name</th>
-                                    <th>Slug</th>
-                                    <th>Status</th>
+                                    <th>Tagname</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($subcategories->count() > 0)
-                                    @foreach ($subcategories as $subcategory)
+                                @if ($tagnames->count() > 0)
+                                    @foreach ($tagnames as $tagname)
                                         <tr>
-                                            <td>{{ $subcategory->id }}</td>
-                                            <td>{{ $subcategory->category->categoryName }}</td>
-                                            <td>{{ $subcategory->subcategoryName }}</td>
-                                            <td>{{ $subcategory->slug }}</td>
-                                            <td>{{ $subcategory->status }}</td>
+                                            <td>{{ $tagname->id }}</td>
+                                            <td>{{ $tagname->tagName }}</td>
                                             <td>
-                                                <a href="{{ route('subcategory.edit', $subcategory->id) }}"
+                                                <a href="{{ route('tagname.edit', $tagname->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{ route('subcategory.delete', $subcategory->id) }}"
-                                                    class="btn btn-danger" id="delete">Delete</a>
+                                                <a href="{{ route('tagname.delete', $tagname->id) }}" class="btn btn-danger"
+                                                    id="delete">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach

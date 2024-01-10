@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\brandController;
 use App\Http\Controllers\Backend\PopupMessageController;
+use App\Http\Controllers\Backend\TagNameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/popupMessage/delete/{id}', 'delete')->name('popupMessage.delete');
     });
     //All Routes for Popup Message End
+
+
+    //All Routes for Tag name Start
+    Route::controller(TagNameController::class)->group(function () {
+        Route::get('/tagname', 'index')->name('tagname');
+        Route::post('/tagname/store', 'store')->name('tagname.store');
+        Route::get('/tagname/view', 'view')->name('tagname.view');
+        Route::get('/tagname/edit/{id}', 'edit')->name('tagname.edit');
+        Route::post('/tagname/update/{id}', 'update')->name('tagname.update');
+        Route::get('/tagname/delete/{id}', 'delete')->name('tagname.delete');
+    });
+    //All Routes for Tag name End
 });
 
 require __DIR__ . '/auth.php';

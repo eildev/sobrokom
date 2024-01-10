@@ -19,6 +19,8 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+
+        {{-- category menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -32,6 +34,8 @@
                 </li>
             </ul>
         </li>
+
+        {{-- brand menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -45,6 +49,8 @@
                 </li>
             </ul>
         </li>
+
+        {{-- Subcategory menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -59,6 +65,7 @@
             </ul>
         </li>
 
+        {{-- popup menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
@@ -70,6 +77,21 @@
                 <li> <a href="{{ route('popupMessage') }}"><i class="bx bx-right-arrow-alt"></i>Add Popup Message</a>
                 </li>
                 <li> <a href="{{ route('popupMessage.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Popup Message</a>
+                </li>
+            </ul>
+        </li>
+
+         {{-- tag menu  --}}
+         <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Product Tag</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('tagname') }}"><i class="bx bx-right-arrow-alt"></i>Add Tag</a>
+                </li>
+                <li> <a href="{{ route('tagname.view')}}"><i class="bx bx-right-arrow-alt"></i>Manage Tags</a>
                 </li>
             </ul>
         </li>
