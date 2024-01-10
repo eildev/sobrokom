@@ -23,7 +23,6 @@ Route::get('/', function () {
     return view('frontend.index');
 })->name('home');
 
-
 Route::get('/dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
