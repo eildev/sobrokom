@@ -18,6 +18,7 @@ class SubcategoryController extends Controller
     // subcategory store function
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'categoryId' => 'required',
             'subcategoryName' => 'required|max:100',

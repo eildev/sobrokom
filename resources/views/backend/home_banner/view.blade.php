@@ -28,10 +28,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $serialNumber = 1;
+                                @endphp
                                 @if ($all_banner->count() > 0)
                                     @foreach ($all_banner as $banner)
                                         <tr>
-                                            <td>{{ $banner->id }}</td>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $banner->title }}</td>
                                             <td>{{ $banner->short_description }}</td>
                                             <td>{{ $banner->long_description }}</td>

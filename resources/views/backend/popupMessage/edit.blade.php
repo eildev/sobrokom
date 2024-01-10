@@ -16,8 +16,11 @@
                                 <div class="row mb-3">
                                     <label for="inputEnterYourName" class="col-sm-3 col-form-label">Popup Title</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="title" class="form-control" id="inputEnterYourName"
+                                        <input type="text" name="title" class="form-control @error('title') is-invalid  @enderror" id="inputEnterYourName"
                                             placeholder="Enter Popup Title" value="{{ $popupMessage->title }}">
+                                            @error('title')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -26,8 +29,11 @@
                                 <div class="row mb-3">
                                     <label for="inputEnterYourName" class="col-sm-3 col-form-label">Popup Link</label>
                                     <div class="col-sm-9">
-                                        <input type="url" name="link" class="form-control" id=""
+                                        <input type="url" name="link" class="form-control @error('link') is-invalid  @enderror" id=""
                                             placeholder="Enter Popup Link" value="{{ $popupMessage->link }}">
+                                            @error('link')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -35,16 +41,25 @@
                                     <label for="inputEnterYourName" class="col-sm-3 col-form-label">Popup
                                         Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" name="description" placeholder="" style="resize: none; height: 150px; "
-                                            value="{{ $popupMessage->description }}"></textarea>
+                                        <textarea class="form-control @error('description') is-invalid  @enderror" name="description" placeholder="" style="resize: none; height: 150px;">{{ $popupMessage->description }}</textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="image" class="col-sm-3 col-form-label">Popup Thumbnail </label>
                                     <div class="col-sm-9">
-                                        <input type="file" class="form-control" name="image"
+                                        <input type="file" class="form-control @error('image') is-invalid  @enderror" name="image"
                                             value="{{ $popupMessage->image }}">
+                                            @error('image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        <div class="mt-3">
+                                            <img id="showImage" class="" height="150" width="200"
+                                                src="{{ asset('uploads/popupMessage/'.$popupMessage->image) }}" alt="category image">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
