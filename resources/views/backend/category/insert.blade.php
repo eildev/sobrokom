@@ -8,8 +8,11 @@
                     @csrf    
                 <div class="card-body">
                         <div class="border p-4 rounded">
-                            <div class="card-title d-flex align-items-center">
+                           
+                            <div class="card-title d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0 text-info">Add Category</h5>
+            
+                                <a href="{{ route('category.view') }}" class="btn btn-info btn-sm text-light ">View Category</a>
                             </div>
                             <hr>
                             <div class="row mb-3">

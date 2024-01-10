@@ -62,11 +62,15 @@ class CategoryController extends Controller
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = Category::findOrFail($id);
+            unlink(public_path('uploads/category/').$category->image);
             $category->categoryName = $request->categoryName;
             $category->slug = Str::slug($request->categoryName);
             $category->image = $imageName;
             $category->update();
             return redirect()->route('category.view')->with('success', 'Category Successfully updated');
+        }
+        else {
+
         }
     }
 
@@ -75,6 +79,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::findOrFail($id);
+        unlink(public_path('uploads/category/').$category->image);
         $category->delete();
         return back()->with('success', 'Category Successfully deleted');
     }

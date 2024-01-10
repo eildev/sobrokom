@@ -2,8 +2,15 @@
 @section('admin')
 <div class="page-content">
     <div class="row">
-        <div class="card">
+        <div class="card border-top border-0 border-4 border-info col-md-8 offset-md-2">
+
             <div class="card-body">
+                <div class="card-title d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-info">Manage Category</h5>
+
+                    <a href="{{ route('category') }}" class="btn btn-info btn-sm text-light ">Add Category</a>
+                </div>
+                <hr>
                 <div class="table-responsive">
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
