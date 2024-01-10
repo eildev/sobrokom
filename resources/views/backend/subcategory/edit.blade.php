@@ -29,8 +29,11 @@
                                     <div class="col-12">
                                         <select class="form-select" name="categoryId">
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" @php($category->id == $subcategory->category->id)
-                                                    ? "selected" : "" ; @endphp>{{ $category->categoryName }}</option>
+                                                <option
+                                                    value="{{ $category->id }} @php($category->id == $subcategory->category->id)
+                                                    ? 'selected' : '' ; @endphp">
+                                                    {{ $category->categoryName }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
