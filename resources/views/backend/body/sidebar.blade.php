@@ -22,9 +22,10 @@
         {{-- Product menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-category-alt'></i>
+                <div class="parent-icon">
+                    <i class='bx bx-package'></i>
                 </div>
-                <div class="menu-title">Category</div>
+                <div class="menu-title">Product</div>
             </a>
             <ul>
                 <li> <a href="{{ route('product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
