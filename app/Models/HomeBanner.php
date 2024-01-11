@@ -9,4 +9,8 @@ class HomeBanner extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function gallery(){
+        return $this->hasMany(ImageGallery::class,'banner_id','id');
+    }
 }
