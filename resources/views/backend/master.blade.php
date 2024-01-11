@@ -8,6 +8,7 @@
     <!--favicon-->
     <link rel="icon" href="{{ asset('backend') }}/assets/images/favicon-32x32.png" type="image/png" />
     <!--plugins-->
+    <link href="{{ asset('backend') }}/assets/plugins/input-tags/css/tagsinput.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
@@ -59,7 +60,6 @@
     <!-- Bootstrap JS -->
     <script src="{{ asset('backend') }}/assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
-
     <script src="{{ asset('backend') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
@@ -70,29 +70,31 @@
     <script src="{{ asset('backend') }}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/input-tags/js/tagsinput.js"></script>
 
+
+    <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
-
-    @if(Session::has('success'))
-  		toastr.success("{{ Session::get('success') }}");
-    @endif
-    @if(Session::has('info'))
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+        @if (Session::has('info'))
             toastr.info("{{ Session::get('info') }}");
-    @endif
-    @if(Session::has('warning'))
+        @endif
+        @if (Session::has('warning'))
             toastr.warning("{{ Session::get('warning') }}");
-    @endif
-    @if(Session::has('error'))
+        @endif
+        @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
-    @endif
+        @endif
 
 
 
-    $(function() {
-        $(".knob").knob();
-    });
+        $(function() {
+            $(".knob").knob();
+        });
     </script>
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
@@ -100,59 +102,57 @@
 
 
 
-{{-- image onload event  --}}
-<script>
-    $(document).ready(function() {
-           $('#image').change(function() {
-               const file = this.files[0];
+    {{-- image onload event  --}}
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function() {
+                const file = this.files[0];
 
-               if (file) {
-                   let reader = new FileReader();
-                   reader.onload = function(event) {
-                       $('#showImage').attr('src', event.target.result);
-                   }
-                   reader.readAsDataURL(file);
-               }
-           });
-
-
-       });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-     $(document).ready(function () {
-    //    delete function
-    $(document).on('click', '#delete', function (e) {
-        e.preventDefault();
-
-        var link = $(this).attr("href");
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = link
-                Swal.fire(
-                    'Deleted!',
-                    'Your File has been deleted.',
-                    'success'
-                )
-            }
-        })
-
-    });
-});
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        $('#showImage').attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
 
 
-</script>
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            //    delete function
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+
+                var link = $(this).attr("href");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                            'Deleted!',
+                            'Your File has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+
+            });
+        });
+    </script>
 </body>
 
 </html>

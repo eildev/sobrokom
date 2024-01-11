@@ -19,6 +19,22 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+        {{-- Product menu  --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-category-alt'></i>
+                </div>
+                <div class="menu-title">Category</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+                </li>
+                {{-- <li> <a href="{{ route('product.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Products</a>
+                </li> --}}
+                <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Manage Products</a>
+                </li>
+            </ul>
+        </li>
 
         {{-- category menu  --}}
         <li>

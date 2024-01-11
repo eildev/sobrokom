@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     //All Routes for Tag name End
 
 
-    //All Routes for Tag name Start
+    //All Routes for HomeBanner Start
     Route::controller(HomeBannerController::class)->group(function () {
         Route::get('/banner', 'index')->name('banner');
         Route::post('/banner/store', 'store')->name('banner.store');
@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/banner/update/{id}', 'update')->name('banner.update');
         Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
     });
-    //All Routes for Tag name End
+    //All Routes for HomeBanner End
 });
 
 require __DIR__ . '/auth.php';
