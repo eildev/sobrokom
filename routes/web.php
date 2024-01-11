@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\brandController;
 use App\Http\Controllers\Backend\PopupMessageController;
 use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/brand/store', 'store')->name('brand.store');
         Route::get('/brand/view', 'show')->name('brand.view');
         Route::get('/brand/edit/{id}', 'edit')->name('brand.edit');
-        Route::post('/brand/update/{id}','update')->name('brand.update');
+        Route::post('/brand/update/{id}', 'update')->name('brand.update');
         Route::get('/brand/delete/{id}', 'destroy')->name('brand.delete');
     });
     //All Routes for brand End
@@ -98,6 +99,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/banner/edit/{id}', 'edit')->name('banner.edit');
         Route::post('/banner/update/{id}', 'update')->name('banner.update');
         Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
+    });
+    //All Routes for Tag name End
+
+
+    //All Routes for Tag name Start
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/product', 'index')->name('product');
+        Route::post('/product/store', 'store')->name('product.store');
+        Route::get('/product/view', 'view')->name('product.view');
+        Route::get('/product/edit/{id}', 'edit')->name('product.edit');
+        Route::post('/product/update/{id}', 'update')->name('product.update');
+        Route::get('/product/delete/{id}', 'delete')->name('product.delete');
     });
     //All Routes for Tag name End
 });
