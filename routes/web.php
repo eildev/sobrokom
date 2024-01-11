@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     //All Routes for Tag name End
 
 
-    //All Routes for Tag name Start
+    //All Routes for Home Banner Start
     Route::controller(HomeBannerController::class)->group(function () {
         Route::get('/banner', 'index')->name('banner');
         Route::post('/banner/store', 'store')->name('banner.store');
@@ -101,7 +101,30 @@ Route::middleware('auth')->group(function () {
         Route::post('/banner/update/{id}', 'update')->name('banner.update');
         Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
     });
-    //All Routes for Tag name End
+    //All Routes for Home Banner End
+
+    //All Routes for Offer Banner Start
+    Route::controller(OfferBannerController::class)->group(function () {
+        Route::get('/offerbanner', 'index')->name('offerbanner');
+        Route::post('/offerbanner/store', 'store')->name('offerbanner.store');
+        Route::get('/offerbanner/view', 'view')->name('offerbanner.view');
+        Route::get('/offerbanner/edit/{id}', 'edit')->name('offerbanner.edit');
+        Route::post('/offerbanner/update/{id}', 'update')->name('offerbanner.update');
+        Route::get('/offerbanner/delete/{id}', 'delete')->name('offerbanner.delete');
+    });
+    //All Routes for Offer Banner End
+
+    //All Routes for Product Start
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/product', 'index')->name('product');
+        Route::post('/product/store', 'store')->name('product.store');
+        Route::get('/product/view', 'view')->name('product.view');
+        Route::get('/product/edit/{id}', 'edit')->name('product.edit');
+        Route::post('/product/update/{id}', 'update')->name('product.update');
+        Route::get('/product/delete/{id}', 'delete')->name('product.delete');
+    });
+    //All Routes for Product End
+
 });
 
 require __DIR__ . '/auth.php';
