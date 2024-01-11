@@ -2,9 +2,8 @@
 <section class="slider-area tpslider__home-3 tpslider-delay grey-bg slider-three">
     <div class="swiper-container slider-active">
         <div class="swiper-wrapper">
-            @php 
+            @php
                 $sliders = App\Models\HomeBanner::where('status',1)->get();
-                
             @endphp
             @if($sliders->count() > 0)
             @foreach ($sliders as $slider)
@@ -24,12 +23,12 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-5">
                                 <div class="tpslider__thumb p-relative">
-                                    
+
                                     <img class="tpslider__thumb-img tpslider__three"
                                         src="{{ asset('uploads/banner/'.$slider->image) }}"
                                         alt="slider-bg">
                                     <div class="tpslider__shape d-none d-lg-block">
-                                       
+
                                         <img class="tpslider__shape-three three-shap-one"
                                             src="{{ asset('uploads/banner/gallery/'.$slider->gallery[0]->image) }}"
                                             alt="shape">
@@ -38,7 +37,7 @@
                                             alt="shape">
 
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -75,7 +74,7 @@
                 </div>
             </div>
             @endif
-            
+
 
         </div>
         <div class="tpslider__arrow d-none  d-xxl-block">

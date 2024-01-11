@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\brandController;
 use App\Http\Controllers\Backend\PopupMessageController;
 use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
+use App\Http\Controllers\Backend\OfferBannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
     });
     //All Routes for Tag name End
+
+
+    //All Routes for Tag name Start
+    Route::controller(OfferBannerController::class)->group(function () {
+        Route::get('/offerbanner', 'index')->name('offerbanner');
+        Route::post('/offerbanner/store', 'store')->name('offerbanner.store');
+        Route::get('/offerbanner/view', 'view')->name('offerbanner.view');
+        Route::get('/offerbanner/edit/{id}', 'edit')->name('offerbanner.edit');
+        Route::post('/offerbanner/update/{id}', 'update')->name('offerbanner.update');
+        Route::get('/offerbanner/delete/{id}', 'delete')->name('offerbanner.delete');
+    });
+    //All Routes for Tag name End
+
+
 });
 
 require __DIR__ . '/auth.php';

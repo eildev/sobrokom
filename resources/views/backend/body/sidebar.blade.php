@@ -120,6 +120,21 @@
                 </li>
             </ul>
         </li>
+        {{-- banner menu  --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-image-alt'></i>
+                </div>
+                <div class="menu-title">Offer Banner </div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('offerbanner') }}"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
+                </li>
+                <li> <a href="{{ route('offerbanner.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Banner</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!--end navigation-->
