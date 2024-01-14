@@ -268,13 +268,9 @@
                                             @enderror
                                         </div>
                                         <div class="col-lg-3 col-md-6">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label class="form-label">Barcode Generator</label> <br>
-                                                    <input type="text" class="form-control" id="inputPrice"
-                                                        placeholder="00.00">
-                                                </div>
-                                            </div>
+                                            <label class="form-label">Barcode Generator</label> <br>
+                                            <input type="text" class="form-control" id="inputPrice"
+                                                placeholder="00.00">
                                         </div>
                                         <div class="col-md-3">
                                             <div class="d-flex justify-content-center align-items-center h-100">
