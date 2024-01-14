@@ -77,8 +77,9 @@
 
 
     <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
-    <!-- Toastr -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
     {{-- multi select tags  --}}
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
 
@@ -86,7 +87,8 @@
         new MultiSelectTag('multi_select');
     </script>
 
-
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}");

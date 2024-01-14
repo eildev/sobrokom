@@ -153,6 +153,19 @@
                 </li>
             </ul>
         </li>
+        {{-- Subscriber list  --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-image-alt'></i>
+                </div>
+                <div class="menu-title">Subscriber</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('subscribe.view') }}"><i class="bx bx-right-arrow-alt"></i>Subscriber list</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!--end navigation-->

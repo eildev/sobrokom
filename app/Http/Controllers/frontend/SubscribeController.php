@@ -22,4 +22,19 @@ class SubscribeController extends Controller
             'message'=>'Subscribed Successfully'
         ]);
     }
+    public function view(){
+        // @dd($rqst->all());
+        // return response()->json([
+        //     'Request' => $rqst->all()
+
+        // ]);
+        $subscribers = Subscribe::all();
+        return view('backend.subscribe.view', compact('subscribers'));
+    }
+    public function destroy($id){
+
+        $subscriber = Subscribe::findOrFail($id);
+        $subscriber->delete();
+        return back()->with('success', 'Category Successfully deleted');
+    }
 }
