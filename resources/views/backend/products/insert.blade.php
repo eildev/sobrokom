@@ -193,7 +193,8 @@
                             </div>
                         </form>
 
-                        <div class="row variant_section " style="display: none">
+                        {{-- style="display: none" --}}
+                        <div class="row variant_section ">
                             <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
@@ -201,8 +202,8 @@
                                         <div class="row g-3 mb-4">
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Regular Price</label>
-                                                <input type="number" class="form-control regular_price " id="inputPrice"
-                                                    placeholder="00.00" name="regular_price">
+                                                <input type="number" class="form-control regular_price "
+                                                    id="regular_price" placeholder="00.00" name="regular_price">
                                                 <input type="text" class="product_id" name="product_id">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -210,6 +211,7 @@
                                                 <select
                                                     class="form-select discount @error('discount') is-invalid  @enderror"
                                                     name="discount" disabled>
+                                                    <option value="">Discount</option>
                                                     <option value="00">00%</option>
                                                     <option value="05">05%</option>
                                                     <option value="10">10%</option>
@@ -226,11 +228,12 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Discount Price</label>
                                                 <input type="number" class="form-control discount_amount"
-                                                    id="inputPrice" placeholder="00.00" name="discount_amount" readonly>
+                                                    id="discount_price" placeholder="00.00" name="discount_amount"
+                                                    readonly>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
-                                                <input type="number" class="form-control" id="inputPrice"
+                                                <input type="number" class="form-control" id="stock"
                                                     placeholder="00.00" name="stock_quantity">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -245,20 +248,17 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Size</label>
-                                                <select class="form-select @error('size') is-invalid  @enderror"
-                                                    name="size">
+                                                <select class="form-select" name="size">
+                                                    <option value="">Size</option>
                                                     <option value="M">M</option>
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                                @error('size')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
-                                                <input type="text" class="form-control" id="inputPrice"
-                                                    placeholder="00.00" name="barcode">
+                                                <input type="text" class="form-control" id="barcode" placeholder=""
+                                                    name="barcode">
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
@@ -356,7 +356,10 @@
                 processData: false,
                 success: function(response) {
                     toastr.success(response.message);
-                    // form.reset();
+                    document.querySelector('#regular_price').value = '';
+                    document.querySelector('#discount_price').value = '';
+                    document.querySelector('#stock').value = '';
+                    document.querySelector('#barcode').value = '';
                     show();
                 }
             })
