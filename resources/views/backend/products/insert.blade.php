@@ -174,50 +174,6 @@
                             <div class="col-lg-4">
                                 <div class="border border-3 p-4 rounded">
                                     <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="" class="form-label">Coupon Code</label>
-                                            <input type="text"
-                                                class="form-control @error('coupon_code') is-invalid  @enderror"
-                                                id="" name="coupon_code" placeholder="A640G3">
-                                            @error('coupon_code')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label col-12">Discount</label>
-                                            <select class="form-select @error('discount') is-invalid  @enderror"
-                                                name="discount">
-                                                <option value="">Discount</option>
-                                                <option value="10%">
-                                                    10%
-                                                </option>
-                                                <option value="20%">
-                                                    20%
-                                                </option>
-                                            </select>
-                                            @error('discount')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputCompareatprice" class="form-label">Expiration Date</label>
-                                            <input type="date"
-                                                class="form-control @error('discount') is-invalid  @enderror"
-                                                id="inputCompareatprice" name="expiration" placeholder="">
-                                            @error('expiration')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="inputCompareatprice" class="form-label">SKU</label>
-                                            <label for="inputPrice" class="form-label">Coupon Code</label>
-                                            <input type="text"
-                                                class="form-control @error('sku') is-invalid  @enderror" id="inputPrice"
-                                                name="sku" placeholder="00.00">
-                                            @error('sku')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
                                         <div class="col-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Tags</label>
