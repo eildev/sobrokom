@@ -30,6 +30,7 @@
                                 @endphp
                                 @if ($subcategories->count() > 0)
                                     @foreach ($subcategories as $subcategory)
+                                        {{-- @dd($subcategory->category->categoryName); --}}
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $subcategory->category->categoryName }}</td>

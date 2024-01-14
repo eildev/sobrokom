@@ -21,6 +21,14 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'subcategory_id' => 'required',
+            'brand_id' => 'required',
+            'product_feature' => 'required',
+            'product_name' => 'required|max:100',
+            'short_desc' => 'required|max:150',
+            'long_desc' => 'required|max:200',
+            'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'sku' => 'required',
+            // 'tags' => 'required',
             ]);
 
             if ($validator->passes()) {
@@ -91,5 +99,11 @@ class ProductController extends Controller
             'message' => 'variant saved successfully',
             'variantData' => $variant,
         ]);
+    }
+
+
+    public function view (){
+        $products = Product::all();
+        return view('backend.products.view', compact('products'));
     }
 }

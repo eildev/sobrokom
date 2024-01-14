@@ -101,12 +101,9 @@
                                                         <label for="" class="form-label">Product Name</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="product_name"
-                                                            class="form-control @error('product_name') is-invalid  @enderror"
+                                                        <input type="text" name="product_name" class="form-control"
                                                             id="inputEnterYourName" placeholder="Enter Product Name">
-                                                        @error('product_name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span class="product_name_error text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,11 +115,8 @@
                                                         <label for="" class="form-label">Short Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control @error('short_desc') is-invalid  @enderror" name="short_desc" placeholder=""
-                                                            style="resize: none; height: 70px;"></textarea>
-                                                        @error('short_desc')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <textarea class="form-control" name="short_desc" placeholder="" style="resize: none; height: 70px;"></textarea>
+                                                        <span class="short_desc text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,11 +128,8 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control @error('long_desc') is-invalid  @enderror" name="long_desc" placeholder=""
-                                                            style="resize: none; height: 100px;"></textarea>
-                                                        @error('long_desc')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <textarea class="form-control" name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
+                                                        <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,12 +137,9 @@
                                         <div class="row mb-3 d-flex align-items-center">
                                             <div class="col-md-6">
                                                 <label for="image" class="form-label">Product Thumbnail</label>
-                                                <input type="file" id="image"
-                                                    class="form-control  @error('product_image') is-invalid  @enderror"
+                                                <input type="file" id="image" class="form-control "
                                                     name="product_image">
-                                                @error('product_image')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <span class="product_image text-danger"></span>
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class="" height="150" width="200"
@@ -169,6 +157,7 @@
                                                     <label class="form-label">SKU</label>
                                                     <input type="text" class="form-control" placeholder="ASD1202"
                                                         name="sku">
+                                                    <span class="sku_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -176,6 +165,7 @@
                                                     <label class="form-label">Tags</label>
                                                     <input type="text" class="form-control" data-role="tagsinput"
                                                         placeholder="jQuery,Net" name="tag">
+                                                    {{-- <span class="tag_error text-danger"></span> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -220,8 +210,12 @@
                                                 <select
                                                     class="form-select discount @error('discount') is-invalid  @enderror"
                                                     name="discount" disabled>
+                                                    <option value="00">00%</option>
+                                                    <option value="05">05%</option>
                                                     <option value="10">10%</option>
+                                                    <option value="15">15%</option>
                                                     <option value="20">20%</option>
+                                                    <option value="25">25%</option>
                                                     <option value="30">30%</option>
                                                     <option value="40">40%</option>
                                                 </select>
@@ -236,20 +230,18 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
-                                                <input type="email" class="form-control" id="inputPrice"
+                                                <input type="number" class="form-control" id="inputPrice"
                                                     placeholder="00.00" name="stock_quantity">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
-                                                <select class="form-select @error('color') is-invalid  @enderror"
-                                                    name="color">
+                                                <select class="form-select" name="color">
+                                                    <option value="">Color</option>
                                                     <option value="red">Red</option>
                                                     <option value="blue">Blue</option>
                                                     <option value="green">Green</option>
+                                                    <option value="yellow">Yellow</option>
                                                 </select>
-                                                @error('color')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Size</label>
@@ -334,6 +326,14 @@
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
+                        $('.brand_error').text(res.error.brand_id);
+                        $('.feature_error').text(res.error.product_feature);
+                        $('.product_name_error').text(res.error.product_name);
+                        $('.short_desc').text(res.error.short_desc);
+                        $('.long_desc').text(res.error.long_desc);
+                        $('.product_image').text(res.error.product_image);
+                        $('.sku_error').text(res.error.sku);
+                        // $('.tag_error').text(res.error.tags);
                     }
                 },
             });
