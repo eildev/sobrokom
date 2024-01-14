@@ -369,7 +369,17 @@
                 }
             })
         })
-
+        function show() {
+            const productId = document.querySelector('.product_id').value;
+            $.ajax({
+                url: '/product/variant/show/'+productId,
+                type: "GET",
+                dataType: 'JSON',
+                success: function(res) {
+                    console.log(res);
+                }
+            })
+        }
         const regular_price = document.querySelector('.regular_price');
         const discount = document.querySelector('.discount');
         discount.addEventListener('change', function() {
@@ -393,16 +403,16 @@
 
 
 
-        function show() {
-            const productId = $('product_id').val();
-            $.ajax([
-                url: `/product/variant/show/${productId}`,
-                type: "GET",
-                dataType: 'JSON',
-                success: function(res) {
-                    console.log(res);
-                }
-            ])
-        }
+        // function show() {
+        //     const productId = document.querySelector('.product_id').value;
+        //     $.ajax([
+        //         url: '/product/variant/show/'+productId,
+        //         type: "GET",
+        //         dataType: 'JSON',
+        //         success: function(res) {
+        //             console.log(res);
+        //         }
+        //     ])
+        // }
     </script>
 @endsection
