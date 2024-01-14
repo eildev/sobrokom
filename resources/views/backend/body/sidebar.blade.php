@@ -28,12 +28,13 @@
                 <div class="menu-title">Product</div>
             </a>
             <ul>
-                <li> <a href="{{ route('product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+                <li>
+                    <a href="{{ route('product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
                 </li>
-                {{-- <li> <a href="{{ route('product.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Products</a>
-                </li> --}}
-                <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Manage Products</a>
+                <li>
+                    <a href="{{ route('product.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Products</a>
                 </li>
+
             </ul>
         </li>
 
