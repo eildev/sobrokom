@@ -30,9 +30,8 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('category_id')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span class="category_error text-danger"></span>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,9 +52,8 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('subcategory_id')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span class="subcategory_id text-danger"></span>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,9 +338,15 @@
                 contentType: false,
                 processData: false,
                 success: function(res) {
+                  if(res.status == 200){
+                   
                     $('.variant_section').show();
                     $('.add_product').addClass('disabled');
                     $('.product_id').val(res.productId);
+                  }else{
+                    $(".category_error").text(res.error.category_id);
+                    $(".subcategory_id").text(res.error.subcategory_id);
+                  }
                 },
             });
         });
@@ -388,8 +392,6 @@
             discountAmount = regurlarPrice - discountAmount;
             document.querySelector('.discount_amount').value = discountAmount;
         })
-
-
         regular_price.addEventListener('keyup', function() {
             let regularPrice = this.value;
             // console.log(regularPrice);
@@ -399,10 +401,6 @@
                 discount.setAttribute('disabled', '');
             }
         })
-
-
-
-
         // function show() {
         //     const productId = document.querySelector('.product_id').value;
         //     $.ajax([
@@ -414,5 +412,6 @@
         //         }
         //     ])
         // }
+
     </script>
 @endsection
