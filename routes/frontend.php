@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\frontend\SubscribeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/majid', function () {
-//     return view('frontend.index');
-// });
+Route::controller(SubscribeController::class)->group(function () {
+    Route::post('/subscribe/store', 'store')->name('subscribe.store');
+    // Route::get('/subscribe/view', 'view')->name('subscribe.view');
+    // Route::get('/subscribe/edit/{id}', 'edit')->name('subscribe.edit');
+    // Route::post('/subscribe/update/{id}', 'update')->name('subscribe.update');
+    // Route::get('/subscribe/delete/{id}', 'delete')->name('subscribe.delete');
+});

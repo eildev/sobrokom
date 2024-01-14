@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
-    <!-- //Toastr -->
+    <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
@@ -74,6 +74,7 @@
 
 
     <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
+    <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>

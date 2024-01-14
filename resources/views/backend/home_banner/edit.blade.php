@@ -29,7 +29,7 @@
                                     <label for="" class="col-sm-3 col-form-label">Short Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('short_description') is-invalid  @enderror" name="short_description" placeholder=""
-                                            style="resize: none; height: 100px;" aria-valuetext="{{ $banner->short_description }}"></textarea>
+                                            style="resize: none; height: 100px;" >{{ $banner->short_description }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -40,7 +40,7 @@
                                     <label for="" class="col-sm-3 col-form-label">Long Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('long_description') is-invalid  @enderror" name="long_description" placeholder=""
-                                            style="resize: none; height: 150px;" aria-valuetext="{{ $banner->long_description }}"></textarea>
+                                            style="resize: none; height: 150px;" >{{ $banner->long_description }}</textarea>
                                         @error('long_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
