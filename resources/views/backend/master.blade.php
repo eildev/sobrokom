@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
-    <!-- //Toastr -->
+    <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     {{-- multi select tags  --}}
     <link rel="stylesheet"
@@ -77,6 +77,7 @@
 
 
     <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
+    <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     {{-- multi select tags  --}}
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
