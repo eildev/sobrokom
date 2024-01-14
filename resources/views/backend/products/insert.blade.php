@@ -271,11 +271,8 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <label class="form-label">Barcode Generator</label> <br>
-                                                    <button class="btn-sm btn-info">Generate</button>
-                                                </div>
-                                                <div class="col-6">
-                                                    <img src="{{ asset('backend/assets/images/barcode.png') }}"
-                                                        alt="barcode" class="img-fulid" style="height: 80px;">
+                                                    <input type="text" class="form-control" id="inputPrice"
+                                                        placeholder="00.00">
                                                 </div>
                                             </div>
                                         </div>
