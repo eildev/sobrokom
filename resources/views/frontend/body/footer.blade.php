@@ -35,13 +35,26 @@
                             <div class="tpfooter__widget footer-col-3 mb-50">
                                 <h4 class="tpfooter__widget-title">HOT CATEGORIES</h4>
                                 <div class="tpfooter__widget-links">
-                                    <ul>
-                                        <li><a href="#">Fruits & Vegetables</a></li>
-                                        <li><a href="#">Dairy Products</a></li>
-                                        <li><a href="#">Package Foods</a></li>
-                                        <li><a href="#">Beverage</a></li>
-                                        <li><a href="#">Health & Wellness</a></li>
-                                    </ul>
+                                    @php
+                                        $categories = App\Models\Category::all();
+                                    @endphp
+                                    @if ($categories->count() > 0)
+                                        <ul>
+
+                                            @foreach ($categories as $category)
+                                                <li><a href="#">{{ $category->categoryName }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <ul>
+                                            <li><a href="#">Fruits & Vegetables</a></li>
+                                            <li><a href="#">Dairy Products</a></li>
+                                            <li><a href="#">Package Foods</a></li>
+                                            <li><a href="#">Beverage</a></li>
+                                            <li><a href="#">Health & Wellness</a></li>
+                                        </ul>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -119,10 +132,15 @@
                 data: {
                     'email': email,
                 },
-                success: function(majid) {
+                success: function(success_response) {
+                    if (success_response.status == 200) {
+                        toastr.success(success_response.message);
+                        document.querySelector('#subscriber_mail').value = '';
+                    } else {
+                        toastr.warning(success_response.error.email);
+                    }
                     // console.log(majid.message);
-                    toastr.success(majid.message);
-                    document.querySelector('#subscriber_mail').value = '';
+
                 }
             });
         });

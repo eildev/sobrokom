@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subscribe;
+use Validator;
 
 class SubscribeController extends Controller
 {
@@ -14,20 +15,30 @@ class SubscribeController extends Controller
         //     'Request' => $rqst->all()
 
         // ]);
-        $Subscribe = new Subscribe;
-        $Subscribe->email = $request->email;
-        $Subscribe->save();
-        return response()->json([
-            'status' => 200,
-            'message'=>'Subscribed Successfully'
-        ]);
-    }
-    public function view(){
-        // @dd($rqst->all());
-        // return response()->json([
-        //     'Request' => $rqst->all()
 
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|lowercase|email|max:255|unique'
+            ]);
+            if ($validator->passes()) {
+                $Subscribe = new Subscribe;
+                $Subscribe->email = $request->email;
+                $Subscribe->save();
+
+                return response()->json([
+                    'status' => 200,
+                    'message'=>'Subscribed Successfully'
+                ]);
+
+            }
+            return response()->json([
+                'status' => '500',
+                'error'=>$validator->messages()
+            ]);
+
+    }
+
+    public function view(){
+
         $subscribers = Subscribe::all();
         return view('backend.subscribe.view', compact('subscribers'));
     }
