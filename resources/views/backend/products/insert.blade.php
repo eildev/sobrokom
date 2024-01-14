@@ -7,6 +7,8 @@
                     <h5 class="card-title">Add New Product</h5>
                     <hr />
                     <div class="form-body mt-4">
+                    <form action="" method="POST" id="productForm" enctype="multipart/form-data">
+                        @csrf 
                         <div class="row g-3 mb-3">
                             <div class="col-lg-8">
                                 <div class="border border-3 p-4 rounded">
@@ -135,8 +137,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="row mb-3">
                                         <div class="col-12">
                                             <div class="row">
@@ -176,17 +176,23 @@
                                     <div class="row g-3">
                                         <div class="col-12">
                                             <div class="mb-3">
+                                                <label class="form-label">SKU</label>
+                                                <input type="text" class="form-control" placeholder="ASD1202" name="sku">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-3">
                                                 <label class="form-label">Tags</label>
                                                 <input type="text" class="form-control" data-role="tagsinput"
-                                                    value="jQuery,Net">
+                                                    placeholder="jQuery,Net" name="tag">
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="image" class="form-label">Image Gallery </label>
-                                            <input type="file" id="image"
+                                            <input type="file" id="imageGallery"
                                                 class="form-control  @error('image') is-invalid  @enderror"
-                                                name="image">
-                                            @error('image')
+                                                name="imageGallery[]" multiple>
+                                            @error('imageGallery')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                             <div class="my-3">
@@ -196,14 +202,18 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="button" class="btn btn-primary">Save Product</button>
+                                                <button class="btn btn-primary add_product">Add Product</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                     </form>
+                     
+                        <div class="row variant_section " style="display:none">
+                            <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
+                            @csrf 
                             <div class="col-12">
                                 <div class="border border-3 p-4 rounded">
                                     <div class="row g-3 mb-4">
@@ -211,6 +221,7 @@
                                             <label for="inputPrice" class="form-label">Regular Price</label>
                                             <input type="email" class="form-control" id="inputPrice"
                                                 placeholder="00.00">
+                                                <input type="text" class="product_id" name="product_id" >
                                         </div>
                                         <div class="col-lg-3 col-md-6">
                                             <label class="form-label col-12">Discount</label>
@@ -306,8 +317,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div></form>
                         </div>
+                    
                         <!--end row-->
                     </div>
                 </div>
@@ -315,4 +327,22 @@
         </div>
         <!--end row-->
     </div>
+    <script>
+        const add_product = document.querySelector('.add_product');
+        add_product.addEventListener('click',function(e){
+        e.preventDefault();
+            let allData = new FormData(jQuery("#productForm")[0]);
+            $.ajax({
+                url: "/product/store/",
+                type: "POST",
+                data: allData,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    $('.variant_section').show();
+                    $('.product_id').val(res.productId);
+                },
+            });
+        });
+    </script>
 @endsection
