@@ -17,7 +17,7 @@
                                                 @php
                                                     $categories = App\Models\Category::all();
                                                 @endphp
-                                                <div class="row">
+                                                <div class="row mb-3">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
                                                         <select
@@ -31,7 +31,6 @@
                                                             @endforeach
                                                         </select>
                                                         <span class="category_error text-danger"></span>
-                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,13 +51,12 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <span class="subcategory_id text-danger"></span>
-                                                        
+                                                        <span class="subcategory_error text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-3">
                                             <div class="col-md-6">
                                                 @php
                                                     $brands = App\Models\Brand::all();
@@ -66,8 +64,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Brand</label>
                                                     <div class="col-12">
-                                                        <select class="form-select @error('brand_id') is-invalid  @enderror"
-                                                            name="brand_id">
+                                                        <select class="form-select " name="brand_id">
                                                             <option value="">Select Brand</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}">
@@ -75,9 +72,7 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        @error('brand_id')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span class="brand_error text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,10 +80,8 @@
                                                 <div class="row mb-3">
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
-                                                        <select
-                                                            class="form-select @error('product_feature') is-invalid  @enderror"
-                                                            name="product_feature">
-                                                            <option value="feature">Feature</option>
+                                                        <select id="multi_select" name="product_feature" multiple>
+                                                            <option value="">Feature</option>
                                                             <option value="new">New Arrival</option>
                                                             <option value="trending">Trending</option>
                                                             <option value="best">Best Rate</option>
@@ -96,9 +89,7 @@
                                                             <option value="seller">Top Seller</option>
                                                             <option value="offers">Top Offers</option>
                                                         </select>
-                                                        @error('product_feature')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span class="feature_error text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +203,7 @@
                             </div>
                         </form>
 
-                        <div class="row variant_section ">
+                        <div class="row variant_section " style="display: none">
                             <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
@@ -305,9 +296,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="varient_container">
-                                                <tr>
 
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -338,15 +327,14 @@
                 contentType: false,
                 processData: false,
                 success: function(res) {
-                  if(res.status == 200){
-                   
-                    $('.variant_section').show();
-                    $('.add_product').addClass('disabled');
-                    $('.product_id').val(res.productId);
-                  }else{
-                    $(".category_error").text(res.error.category_id);
-                    $(".subcategory_id").text(res.error.subcategory_id);
-                  }
+                    if (res.status == 200) {
+                        $('.variant_section').show();
+                        $('.add_product').addClass('disabled');
+                        $('.product_id').val(res.productId);
+                    } else {
+                        $('.category_error').text(res.error.category_id);
+                        $('.subcategory_error').text(res.error.subcategory_id);
+                    }
                 },
             });
         });
@@ -381,10 +369,24 @@
                 type: "GET",
                 dataType: 'JSON',
                 success: function(res) {
-                    console.log(res.variantData);
-                    // const varientData = ;
+                    // console.log(res);
                     const varient_container = document.querySelector('.varient_container');
+                    const allData = res.variantData;
+                    allData.forEach(function(data) {
+                        // console.log(data);
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${data.regular_price}</td>
+                            <td>${data.discount}</td>
+                            <td>${data.discount_amount}</td>
+                            <td>${data.stock_quantity}</td>
+                            <td>${data.color}</td>
+                            <td>${data.size}</td>
+                            <td>${data.barcode}</td>
+                    `;
+                        varient_container.appendChild(tr);
 
+                    })
                 }
             })
         }
@@ -396,6 +398,8 @@
             discountAmount = regurlarPrice - discountAmount;
             document.querySelector('.discount_amount').value = discountAmount;
         })
+
+
         regular_price.addEventListener('keyup', function() {
             let regularPrice = this.value;
             // console.log(regularPrice);
@@ -405,17 +409,5 @@
                 discount.setAttribute('disabled', '');
             }
         })
-        // function show() {
-        //     const productId = document.querySelector('.product_id').value;
-        //     $.ajax([
-        //         url: '/product/variant/show/'+productId,
-        //         type: "GET",
-        //         dataType: 'JSON',
-        //         success: function(res) {
-        //             console.log(res);
-        //         }
-        //     ])
-        // }
-
     </script>
 @endsection

@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
     <!-- //Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    {{-- multi select tags  --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
@@ -75,6 +78,13 @@
 
     <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- multi select tags  --}}
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+
+    <script>
+        new MultiSelectTag('multi_select');
+    </script>
+
 
     <script>
         @if (Session::has('success'))
@@ -121,6 +131,8 @@
         });
     </script>
 
+
+    {{-- swwetalert  --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
