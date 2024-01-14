@@ -118,6 +118,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::post('/product/store', 'store')->name('product.store');
+        Route::post('/product/variant/store', 'variantStore')->name('variant.store');
+        Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
         Route::post('/product/update/{id}', 'update')->name('product.update');

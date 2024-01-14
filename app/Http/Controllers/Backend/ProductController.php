@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductGallery;
+use App\Models\Variant;
 class ProductController extends Controller
 {
     // product index function
@@ -50,5 +51,33 @@ class ProductController extends Controller
         }
         
         
+    }
+
+    public function variantStore(Request $request){
+        $variant = new Variant;
+        $variant->regular_price	= $request->regular_price;
+        $variant->discount	= $request->discount;
+        $variant->discount_amount	= $request->discount_amount;
+        $variant->stock_quantity	= $request->stock_quantity;
+        $variant->barcode	= $request->barcode;
+        $variant->color	= $request->color;
+        $variant->size	= $request->size;
+        $variant->product_id	= $request->product_id;
+        $variant->save();
+        return response()->json([
+            'status' => '200',
+            'message' => 'variant saved successfully',
+            
+        ]);
+
+    }
+
+    public function variantShow ($id){
+        $variant = Variant::where('product_id', $id)->get();
+        return response()->json([
+            'status' => '200',
+            'message' => 'variant saved successfully',
+            'variantData' => $variant,
+        ]);
     }
 }
