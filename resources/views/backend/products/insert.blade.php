@@ -306,7 +306,7 @@
                                                     <th>Barcode</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="varient_container">
                                                 <tr>
 
                                                 </tr>
@@ -369,14 +369,18 @@
                 }
             })
         })
+
         function show() {
             const productId = document.querySelector('.product_id').value;
             $.ajax({
-                url: '/product/variant/show/'+productId,
+                url: '/product/variant/show/' + productId,
                 type: "GET",
                 dataType: 'JSON',
                 success: function(res) {
-                    console.log(res);
+                    console.log(res.variantData);
+                    // const varientData = ;
+                    const varient_container = document.querySelector('.varient_container');
+
                 }
             })
         }
