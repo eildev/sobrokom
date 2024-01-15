@@ -17,7 +17,7 @@
                                                 @php
                                                     $categories = App\Models\Category::all();
                                                 @endphp
-                                                <div class="row mb-3">
+                                                <div class="row">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
                                                         <select
@@ -31,6 +31,7 @@
                                                             @endforeach
                                                         </select>
                                                         <span class="category_error text-danger"></span>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -51,12 +52,13 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <span class="subcategory_error text-danger"></span>
+                                                        <span class="subcategory_id text-danger"></span>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 @php
                                                     $brands = App\Models\Brand::all();
@@ -64,7 +66,8 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Brand</label>
                                                     <div class="col-12">
-                                                        <select class="form-select " name="brand_id">
+                                                        <select class="form-select @error('brand_id') is-invalid  @enderror"
+                                                            name="brand_id">
                                                             <option value="">Select Brand</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}">
@@ -72,7 +75,9 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <span class="brand_error text-danger"></span>
+                                                        @error('brand_id')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +86,7 @@
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
                                                         <select id="multi_select" name="product_feature[]" multiple>
-                                                            <option value="feature">Feature</option>
+                                                            <option value="">Feature</option>
                                                             <option value="new-arrival">New Arrival</option>
                                                             <option value="trending">Trending</option>
                                                             <option value="best-rate">Best Rate</option>
@@ -89,7 +94,9 @@
                                                             <option value="top-seller">Top Seller</option>
                                                             <option value="top-offers">Top Offers</option>
                                                         </select>
-                                                        <span class="feature_error text-danger"></span>
+                                                        @error('product_feature')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,9 +108,12 @@
                                                         <label for="" class="form-label">Product Name</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="product_name" class="form-control"
+                                                        <input type="text" name="product_name"
+                                                            class="form-control @error('product_name') is-invalid  @enderror"
                                                             id="inputEnterYourName" placeholder="Enter Product Name">
-                                                        <span class="product_name_error text-danger"></span>
+                                                        @error('product_name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,8 +125,11 @@
                                                         <label for="" class="form-label">Short Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control" name="short_desc" placeholder="" style="resize: none; height: 70px;"></textarea>
-                                                        <span class="short_desc text-danger"></span>
+                                                        <textarea class="form-control @error('short_desc') is-invalid  @enderror" name="short_desc" placeholder=""
+                                                            style="resize: none; height: 70px;"></textarea>
+                                                        @error('short_desc')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,8 +141,11 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control" name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
-                                                        <span class="long_desc text-danger"></span>
+                                                        <textarea class="form-control @error('long_desc') is-invalid  @enderror" name="long_desc" placeholder=""
+                                                            style="resize: none; height: 100px;"></textarea>
+                                                        @error('long_desc')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,9 +153,12 @@
                                         <div class="row mb-3 d-flex align-items-center">
                                             <div class="col-md-6">
                                                 <label for="image" class="form-label">Product Thumbnail</label>
-                                                <input type="file" id="image" class="form-control "
+                                                <input type="file" id="image"
+                                                    class="form-control  @error('product_image') is-invalid  @enderror"
                                                     name="product_image">
-                                                <span class="product_image text-danger"></span>
+                                                @error('product_image')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class="" height="150" width="200"
@@ -157,7 +176,6 @@
                                                     <label class="form-label">SKU</label>
                                                     <input type="text" class="form-control" placeholder="ASD1202"
                                                         name="sku">
-                                                    <span class="sku_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -165,7 +183,6 @@
                                                     <label class="form-label">Tags</label>
                                                     <input type="text" class="form-control" data-role="tagsinput"
                                                         placeholder="jQuery,Net" name="tag">
-                                                    {{-- <span class="tag_error text-danger"></span> --}}
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -193,8 +210,8 @@
                             </div>
                         </form>
 
-
-                        <div class="row variant_section " style="display: none">
+                        {{-- style="display: none" --}}
+                        <div class="row variant_section ">
                             <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
@@ -202,8 +219,8 @@
                                         <div class="row g-3 mb-4">
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Regular Price</label>
-                                                <input type="number" class="form-control regular_price "
-                                                    id="regular_price" placeholder="00.00" name="regular_price">
+                                                <input type="number" class="form-control regular_price " id="inputPrice"
+                                                    placeholder="00.00" name="regular_price">
                                                 <input type="text" class="product_id" name="product_id">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -211,13 +228,8 @@
                                                 <select
                                                     class="form-select discount @error('discount') is-invalid  @enderror"
                                                     name="discount" disabled>
-                                                    <option value="">Discount</option>
-                                                    <option value="00">00%</option>
-                                                    <option value="05">05%</option>
                                                     <option value="10">10%</option>
-                                                    <option value="15">15%</option>
                                                     <option value="20">20%</option>
-                                                    <option value="25">25%</option>
                                                     <option value="30">30%</option>
                                                     <option value="40">40%</option>
                                                 </select>
@@ -228,12 +240,11 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Discount Price</label>
                                                 <input type="number" class="form-control discount_amount"
-                                                    id="discount_price" placeholder="00.00" name="discount_amount"
-                                                    readonly>
+                                                    id="inputPrice" placeholder="00.00" name="discount_amount" readonly>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
-                                                <input type="number" class="form-control" id="stock"
+                                                <input type="email" class="form-control" id="inputPrice"
                                                     placeholder="00.00" name="stock_quantity">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -249,27 +260,32 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
-                                                <select class="form-select" name="color">
-                                                    <option value="">Color</option>
+                                                <select class="form-select @error('color') is-invalid  @enderror"
+                                                    name="color">
                                                     <option value="red">Red</option>
                                                     <option value="blue">Blue</option>
                                                     <option value="green">Green</option>
-                                                    <option value="yellow">Yellow</option>
                                                 </select>
+                                                @error('color')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Size</label>
-                                                <select class="form-select" name="size">
-                                                    <option value="">Size</option>
+                                                <select class="form-select @error('size') is-invalid  @enderror"
+                                                    name="size">
                                                     <option value="M">M</option>
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
+                                                @error('size')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
-                                                <input type="text" class="form-control" id="barcode" placeholder=""
-                                                    name="barcode">
+                                                <input type="text" class="form-control" id="inputPrice"
+                                                    placeholder="00.00" name="barcode">
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
@@ -299,8 +315,10 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="varient_container">
+                                            <tbody>
+                                                <tr>
 
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -332,12 +350,9 @@
                 processData: false,
                 success: function(res) {
                     if (res.status == 200) {
-                        toastr.success(
-                            'Product Addeded Successfully. Please at lest select 1 or 2 varient');
                         $('.variant_section').show();
                         $('.add_product').addClass('disabled');
                         $('.product_id').val(res.productId);
-
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
@@ -348,7 +363,6 @@
                         $('.long_desc').text(res.error.long_desc);
                         $('.product_image').text(res.error.product_image);
                         $('.sku_error').text(res.error.sku);
-                        toastr.warning('please provide required field data');
                         // $('.tag_error').text(res.error.tags);
                     }
                 },
@@ -372,10 +386,7 @@
                 processData: false,
                 success: function(response) {
                     toastr.success(response.message);
-                    document.querySelector('#regular_price').value = '';
-                    document.querySelector('#discount_price').value = '';
-                    document.querySelector('#stock').value = '';
-                    document.querySelector('#barcode').value = '';
+                    // form.reset();
                     show();
                 }
             })
@@ -389,13 +400,12 @@
                 dataType: 'JSON',
                 success: function(res) {
                     // console.log(res);
-                    let varient_container = "";
+                    const varient_container = document.querySelector('.varient_container');
                     const allData = res.variantData;
                     allData.forEach(function(data) {
                         // console.log(data);
-                        // const tr = document.createElement('tr');
-                        varient_container += `
-                        <tr>
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
                             <td>${data.regular_price}</td>
                             <td>${data.discount}</td>
                             <td>${data.discount_amount}</td>
@@ -403,12 +413,8 @@
                             <td>${data.color}</td>
                             <td>${data.size}</td>
                             <td>${data.barcode}</td>
-                            <td>
-                                <button value="${data.id}" class="delete_variant">Delete</button>
-                            </td>
-                        </tr>
                     `;
-                        document.querySelector('.varient_container').innerHTML = varient_container;
+                        varient_container.appendChild(tr);
 
                     })
                 }
@@ -422,8 +428,6 @@
             discountAmount = regurlarPrice - discountAmount;
             document.querySelector('.discount_amount').value = discountAmount;
         })
-
-
         regular_price.addEventListener('keyup', function() {
             let regularPrice = this.value;
             // console.log(regularPrice);
@@ -442,38 +446,6 @@
             } else {
                 discount.setAttribute('disabled', '');
             }
-        })
-
-        const quantity = document.querySelector('#stock');
-        quantity.addEventListener('change', function() {
-            let stock_quantity = this.value;
-            if (stock_quantity < 0) {
-                toastr.warning('Please provide positive value');
-            }
-        })
-
-        quantity.addEventListener('keyup', function() {
-            let stock_quantity = this.value;
-            if (stock_quantity < 0) {
-                toastr.warning('Please provide positive value');
-            }
-        })
-
-        $(document).on('click', '.delete_variant', function(e) {
-
-            e.preventDefault();
-            let id = $(this).val();
-            // console.log(id);
-            // alert('delete');
-
-            $.ajax({
-                url: '/product/variant/delete/' + id,
-                type: "GET",
-                success: function(res) {
-                    toastr.success(res.success);
-                    show();
-                }
-            })
         })
     </script>
 @endsection
