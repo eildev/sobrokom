@@ -20,5 +20,11 @@ class Product extends Model
     function brand(){
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
+    function gallary(){
+        return $this->hasMany(ImageGallery::class);
+    }
+    function varient(){
+        return $this->hasMany(Variant::class);
+    }
 
 }

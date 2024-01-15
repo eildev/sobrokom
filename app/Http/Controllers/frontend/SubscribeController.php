@@ -17,7 +17,7 @@ class SubscribeController extends Controller
         // ]);
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|lowercase|email|max:255|unique'
+            'email' => 'required|string|lowercase|email|max:255'
             ]);
             if ($validator->passes()) {
                 $Subscribe = new Subscribe;
