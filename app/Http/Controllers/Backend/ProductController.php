@@ -76,24 +76,40 @@ class ProductController extends Controller
 
     public function variantStore(Request $request)
     {
-        $variant = new Variant;
-        $variant->regular_price    = $request->regular_price;
-        $variant->discount    = $request->discount;
-        $variant->discount_amount    = $request->discount_amount;
-        $variant->stock_quantity    = $request->stock_quantity;
-        $variant->barcode    = $request->barcode;
-        $variant->color    = $request->color;
-        $variant->size    = $request->size;
-        $variant->unit    = $request->unit;
-        $variant->expire_date    = $request->expire_date;
-        $variant->manufacture_date    = $request->manufacture_date;
-        $variant->product_id    = $request->product_id;
-        $variant->save();
-        return response()->json([
-            'status' => '200',
-            'message' => 'variant saved successfully',
-
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+            'regular_price' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'discount_amount' => 'required|numeric',
+            'stock_quantity' => 'required|numeric',
+            'unit' => 'required|max:50',
         ]);
+
+        if($validator->passes()){
+            $variant = new Variant;
+            $variant->regular_price    = $request->regular_price;
+            $variant->discount    = $request->discount;
+            $variant->discount_amount    = $request->discount_amount;
+            $variant->stock_quantity    = $request->stock_quantity;
+            $variant->barcode    = $request->barcode;
+            $variant->color    = $request->color;
+            $variant->size    = $request->size;
+            $variant->unit    = $request->unit;
+            $variant->expire_date    = $request->expire_date;
+            $variant->manufacture_date    = $request->manufacture_date;
+            $variant->product_id    = $request->product_id;
+            $variant->save();
+            return response()->json([
+                'status' => '200',
+                'message' => 'variant saved successfully',
+    
+            ]);
+        }
+        return response()->json([
+            'status' => '500',
+            'error' => $validator->messages()
+        ]);
+        
     }
 
     public function variantShow($id)

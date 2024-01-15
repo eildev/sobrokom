@@ -10,4 +10,5 @@ class Variant extends Model
     use HasFactory;
 
     protected $guarded = [];
+
 }

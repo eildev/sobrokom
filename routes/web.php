@@ -119,7 +119,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::post('/product/store', 'store')->name('product.store');
         Route::post('/product/variant/store', 'variantStore')->name('variant.store');
-        Route::get('/variant/show/{id}', 'variantShow')->name('variant.show');
+        Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
         Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');

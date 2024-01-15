@@ -40,10 +40,14 @@
                                             </td>
                                             <td>{{ $product->product_name }}</td>
                                             <td>
-                                                @php
+                                                {{-- @php
+                                                    @dd($product->varient[0]->regular_price)
+                                                @endphp --}}
+
+                                                {{-- @php
                                                     $variants = App\Models\Variant::where('', $product->id);
                                                     dd($variants);
-                                                @endphp
+                                                @endphp --}}
                                                 {{-- @if ($all_banner->count() > 0)
                                                     @foreach ($imageGalleries as $imageGallery)
                                                         <img src="{{ asset('/uploads/banner/gallery/' . $imageGallery->image) }}"
