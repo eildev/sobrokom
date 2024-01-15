@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('barcode')->nullable();
             $table->string('unit');
             $table->tinyInteger('status')->default(1);
+            $table->date('expire_date')->nullable();
+            $table->date('manufacture_date')->nullable();
 
 
             $table->foreign('product_id')

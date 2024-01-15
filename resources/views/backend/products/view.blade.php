@@ -39,7 +39,7 @@
                                                     style="height: 100px;" class="img-fluid" alt="Products Image">
                                             </td>
                                             <td>{{ $product->product_name }}</td>
-                                            <td>{{}}</td>
+                                            <td></td>
 
                                             <td>{{ $product->status }}</td>
                                             <td>

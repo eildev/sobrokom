@@ -4,7 +4,13 @@
         <div class="row">
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="card-title">Add New Product</h5>
+                    <div class="card-title d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 text-info">Add Product</h5>
+
+                        <a href="{{ route('product.view') }}" class=" btn-info btn-sm text-light ">
+                            <i class='bx bx-show'></i>
+                        </a>
+                    </div>
                     <hr />
                     <div class="form-body mt-4">
                         <form action="" method="POST" id="productForm" enctype="multipart/form-data">
