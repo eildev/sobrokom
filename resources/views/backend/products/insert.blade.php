@@ -80,14 +80,14 @@
                                                 <div class="row mb-3">
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
-                                                        <select id="multi_select" name="product_feature" multiple>
-                                                            <option value="">Feature</option>
-                                                            <option value="new">New Arrival</option>
+                                                        <select id="multi_select" name="product_feature[]" multiple>
+                                                            <option value="feature">Feature</option>
+                                                            <option value="new-arrival">New Arrival</option>
                                                             <option value="trending">Trending</option>
-                                                            <option value="best">Best Rate</option>
-                                                            <option value="weekly">Weekend Deals</option>
-                                                            <option value="seller">Top Seller</option>
-                                                            <option value="offers">Top Offers</option>
+                                                            <option value="best-rate">Best Rate</option>
+                                                            <option value="weekend-deals">Weekend Deals</option>
+                                                            <option value="top-seller">Top Seller</option>
+                                                            <option value="top-offers">Top Offers</option>
                                                         </select>
                                                         <span class="feature_error text-danger"></span>
                                                     </div>
@@ -193,8 +193,8 @@
                             </div>
                         </form>
 
-                        {{-- style="display: none" --}}
-                        <div class="row variant_section ">
+
+                        <div class="row variant_section " style="display: none">
                             <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
@@ -235,6 +235,17 @@
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
                                                 <input type="number" class="form-control" id="stock"
                                                     placeholder="00.00" name="stock_quantity">
+                                            </div>
+                                            <div class="col-lg-3 col-md-6">
+                                                <label class="form-label col-12">Unit</label>
+                                                <select class="form-select" name="unit">
+                                                    <option value="">Unit</option>
+                                                    <option value="kg">KG</option>
+                                                    <option value="liter">Liter</option>
+                                                    <option value="piece">Piece</option>
+                                                    <option value="dozon">Dozon</option>
+                                                    <option value="inch">Inch</option>
+                                                </select>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
@@ -285,6 +296,7 @@
                                                     <th>Color</th>
                                                     <th>Size</th>
                                                     <th>Barcode</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="varient_container">
@@ -320,9 +332,12 @@
                 processData: false,
                 success: function(res) {
                     if (res.status == 200) {
+                        toastr.success(
+                            'Product Addeded Successfully. Please at lest select 1 or 2 varient');
                         $('.variant_section').show();
                         $('.add_product').addClass('disabled');
                         $('.product_id').val(res.productId);
+
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
@@ -333,6 +348,7 @@
                         $('.long_desc').text(res.error.long_desc);
                         $('.product_image').text(res.error.product_image);
                         $('.sku_error').text(res.error.sku);
+                        toastr.warning('please provide required field data');
                         // $('.tag_error').text(res.error.tags);
                     }
                 },
@@ -373,12 +389,13 @@
                 dataType: 'JSON',
                 success: function(res) {
                     // console.log(res);
-                    const varient_container = document.querySelector('.varient_container');
+                    let varient_container = "";
                     const allData = res.variantData;
                     allData.forEach(function(data) {
                         // console.log(data);
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
+                        // const tr = document.createElement('tr');
+                        varient_container += `
+                        <tr>
                             <td>${data.regular_price}</td>
                             <td>${data.discount}</td>
                             <td>${data.discount_amount}</td>
@@ -386,8 +403,12 @@
                             <td>${data.color}</td>
                             <td>${data.size}</td>
                             <td>${data.barcode}</td>
+                            <td>
+                                <button value="${data.id}" class="delete_variant">Delete</button>
+                            </td>
+                        </tr>
                     `;
-                        varient_container.appendChild(tr);
+                        document.querySelector('.varient_container').innerHTML = varient_container;
 
                     })
                 }
@@ -406,11 +427,53 @@
         regular_price.addEventListener('keyup', function() {
             let regularPrice = this.value;
             // console.log(regularPrice);
-            if (regularPrice !== "") {
+            if (regularPrice !== "" && regularPrice > 0) {
                 discount.removeAttribute('disabled');
             } else {
                 discount.setAttribute('disabled', '');
             }
+        })
+
+        regular_price.addEventListener('change', function() {
+            let regularPrice = this.value;
+            // console.log(regularPrice);
+            if (regularPrice !== "" && regularPrice > 0) {
+                discount.removeAttribute('disabled');
+            } else {
+                discount.setAttribute('disabled', '');
+            }
+        })
+
+        const quantity = document.querySelector('#stock');
+        quantity.addEventListener('change', function() {
+            let stock_quantity = this.value;
+            if (stock_quantity < 0) {
+                toastr.warning('Please provide positive value');
+            }
+        })
+
+        quantity.addEventListener('keyup', function() {
+            let stock_quantity = this.value;
+            if (stock_quantity < 0) {
+                toastr.warning('Please provide positive value');
+            }
+        })
+
+        $(document).on('click', '.delete_variant', function(e) {
+
+            e.preventDefault();
+            let id = $(this).val();
+            // console.log(id);
+            // alert('delete');
+
+            $.ajax({
+                url: '/product/variant/delete/' + id,
+                type: "GET",
+                success: function(res) {
+                    toastr.success(res.success);
+                    show();
+                }
+            })
         })
     </script>
 @endsection

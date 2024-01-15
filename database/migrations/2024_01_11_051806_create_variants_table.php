@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->unsigned();
-            $table->string('color');
-            $table->string('size');
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->float('regular_price');
             $table->string('discount');
             $table->integer('discount_amount');
             $table->integer('stock_quantity');
-            $table->string('barcode');
+            $table->string('barcode')->nullable();
+            $table->string('unit');
             $table->tinyInteger('status')->default(1);
 
 
