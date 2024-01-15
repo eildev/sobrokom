@@ -86,7 +86,7 @@
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
                                                         <select id="multi_select" name="product_feature[]" multiple>
-                                                            <option value="">Feature</option>
+                                                            <option value="feature">Feature</option>
                                                             <option value="new-arrival">New Arrival</option>
                                                             <option value="trending">Trending</option>
                                                             <option value="best-rate">Best Rate</option>
