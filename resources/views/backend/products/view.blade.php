@@ -39,7 +39,21 @@
                                                     style="height: 100px;" class="img-fluid" alt="Products Image">
                                             </td>
                                             <td>{{ $product->product_name }}</td>
-                                            <td></td>
+                                            <td>
+                                                @php
+                                                    $variants = App\Models\Variant::where('', $product->id);
+                                                    dd($variants);
+                                                @endphp
+                                                {{-- @if ($all_banner->count() > 0)
+                                                    @foreach ($imageGalleries as $imageGallery)
+                                                        <img src="{{ asset('/uploads/banner/gallery/' . $imageGallery->image) }}"
+                                                            style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                    @endforeach
+                                                @else
+                                                    <span colspan="6" class="text-center text-warning">Data not
+                                                        Found</span>
+                                                @endif --}}
+                                            </td>
 
                                             <td>{{ $product->status }}</td>
                                             <td>
