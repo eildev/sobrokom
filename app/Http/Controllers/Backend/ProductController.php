@@ -84,6 +84,9 @@ class ProductController extends Controller
         $variant->barcode    = $request->barcode;
         $variant->color    = $request->color;
         $variant->size    = $request->size;
+        $variant->unit    = $request->unit;
+        $variant->expire_date    = $request->expire_date;
+        $variant->manufacture_date    = $request->manufacture_date;
         $variant->product_id    = $request->product_id;
         $variant->save();
         return response()->json([

@@ -291,14 +291,29 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
                                                 <input type="text" class="form-control" id="inputPrice"
-                                                    placeholder="00.00" name="barcode">
+                                                    placeholder="Barcode" name="barcode">
                                             </div>
+
+
+                                            <div class="col-lg-3 col-md-6">
+                                                <label class="form-label">Manufacture Date</label> <br>
+                                                <input type="date" class="form-control" id="inputPrice"
+                                                    placeholder="" name="manufacture_date">
+                                            </div>
+                                            <div class="col-lg-3 col-md-6">
+                                                <label class="form-label">Expire Date</label> <br>
+                                                <input type="date" class="form-control" id="inputPrice"
+                                                    placeholder="" name="expire_date">
+                                            </div>
+
+
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
                                                     <button type="button" class="btn btn-primary add_varient">Add
                                                         Varients</button>
                                                 </div>
                                             </div>
+
 
 
                                         </div>
@@ -317,7 +332,10 @@
                                                     <th>Stock Quantity</th>
                                                     <th>Color</th>
                                                     <th>Size</th>
+                                                    <th>Unit</th>
                                                     <th>Barcode</th>
+                                                    <th>Manufacture Date</th>
+                                                    <th>Expire Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -418,7 +436,10 @@
                             <td>${data.stock_quantity}</td>
                             <td>${data.color}</td>
                             <td>${data.size}</td>
+                            <td>${data.unit}</td>
                             <td>${data.barcode}</td>
+                            <td>${data.manufacture_date}</td>
+                            <td>${data.expire_date}</td>
                     `;
                         varient_container.appendChild(tr);
 
