@@ -1,10 +1,16 @@
 <!-- feature-area-start -->
+<style>
+    .mainfeature__item img{
+        height: 50px;
+        width: 50px;
+    }
+</style>
 <section class="feature-area whight-feature grey-bg feature-top">
     <div class="container">
         <div class="feature-bg-round white-bg pt-50 pb-15">
             <div class="tpfeature-border">
                 <div class="row row-cols-lg-5 row-cols-md-3 row-cols-1">
-                    <div class="col">
+                    <div class="col offset-1">
                         <div class="mainfeature__item text-center mb-45">
                             <div class="mainfeature__icon">
                                 <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-6.svg"
@@ -49,18 +55,6 @@
                             <div class="mainfeature__content">
                                 <h4 class="mainfeature__title">Help Center</h4>
                                 <p>Dedicated 24/7 Support </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-45">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-10.svg"
-                                    alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">Curated items</h4>
-                                <p>From Handpicked Sellers</p>
                             </div>
                         </div>
                     </div>

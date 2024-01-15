@@ -12,7 +12,7 @@
                                 <div class="card-title d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0 text-info">Add Subcategory</h5>
 
-                                    <a href="{{ route('subcategory.view') }}" class="btn btn-info btn-sm text-light ">
+                                    <a href="{{ route('subcategory.view') }}" class=" btn-info btn-sm text-light ">
                                         <i class='bx bx-show'></i>
                                     </a>
                                 </div>
