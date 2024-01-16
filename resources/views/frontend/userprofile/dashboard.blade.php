@@ -23,7 +23,7 @@
          <!-- breadcrumb-area-end -->
 <style>
 
-.tab__content{
+.tabContent{
     display: none;
 }
 .tab_active{
@@ -88,29 +88,7 @@
             </div>
          </section>
 
-         <script>
-            const tabmain = document.querySelectorAll('.tab__main ul li a');
-            tabmain.forEach((main)=>{
-                // console.log(main);
-                main.addEventListener('click',(e)=>{
-                    e.preventDefault();
-
-                    // alert('ok');
-
-
-                    let index = main.getAttribute('tabindex');
-                    document.querySelectorAll('.tab__content').forEach((content)=>{
-                        content.classList.remove('tab_active');
-                    })
-
-                    const tab__content = document.querySelector(".tab__content--"+index);
-
-                    tab__content.classList.add('tab_active');
-
-                })
-            })
-         </script>
-         <!-- track-area-end -->
+         
 
 
          <!-- feature-area-start -->
@@ -178,5 +156,28 @@
             </div>
          </section>
          <!-- feature-area-end -->
+         <script>
+            const tabmain = document.querySelectorAll('.tab__main ul li a');
+            tabmain.forEach((main)=>{
+                // console.log(main);
+                main.addEventListener('click',(e)=>{
+                    e.preventDefault();
 
+                    // alert('ok');
+
+
+                    let index = main.getAttribute('tabindex');
+                    // alert(index)
+                    document.querySelectorAll('.tabContent').forEach((content)=>{
+                        content.classList.remove('tab_active');
+                    });
+
+                    const tab__content = document.querySelector(".tab__content--"+index);
+                    // console.log(tab__content);
+                    tab__content.classList.add('tab_active');
+
+                })
+            })
+         </script>
+         <!-- track-area-end -->
          @endsection
