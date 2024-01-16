@@ -72,6 +72,12 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image"
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 654 X 713 size
+                                                image
+                                            </i>
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -87,6 +93,12 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image" class="form-control" name="galleryimages[]"
                                             multiple>
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 142 X 83 size
+                                                image
+                                            </i>
+                                        </div>
                                     </div>
 
                                 </div>

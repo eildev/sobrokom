@@ -24,7 +24,7 @@
                                         <input type="text" name="heading"
                                             class="form-control @error('title') is-invalid  @enderror"
                                             id="inputEnterYourName" value="{{ old('title') }}"
-                                        placeholder="Enter Banner Heading">
+                                            placeholder="Enter Banner Heading">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -75,6 +75,12 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image"
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 1310 X 220 size
+                                                image
+                                            </i>
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

@@ -19,7 +19,7 @@
                              <button class="tp-search-toggle"><i class="icon-search"></i></button>
                           </div>
                           <div class="header__info-user tpcolor__yellow ml-10">
-                             <a href="#"><i class="icon-user"></i></a>
+                             <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"><i class="icon-user"></i></a>
                           </div>
                           <div class="header__info-wishlist tpcolor__greenish ml-10">
                              <a href="#"><i class="icon-heart icons"></i></a>
@@ -29,6 +29,14 @@
                                 <span>5</span>
                              </button>
                           </div>
+                          @auth
+                          <div class="header__info-wishlist tpcolor__greenish ml-10">
+                           <form action="{{ route('logout') }}" method="POST">
+                           @csrf
+                             <button href="#"><i class="fas fa-power-off"></i></button>
+                            </form>
+                          </div>
+                          @endauth
                        </div>
                     </div>
                  </div>

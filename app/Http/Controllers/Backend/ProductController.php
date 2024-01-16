@@ -148,4 +148,13 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('backend.products.edit', compact('product'));
     }
+
+
+    public function delete($id)
+    {
+        $product = Product::findOrFail($id);
+        unlink(public_path('uploads/products/').$product->product_image);
+        $product->delete();
+        return redirect()->route('product.view')->with('success', 'Product deleted successfully');
+    }
 }

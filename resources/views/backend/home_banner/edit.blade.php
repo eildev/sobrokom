@@ -29,7 +29,7 @@
                                     <label for="" class="col-sm-3 col-form-label">Short Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('short_description') is-invalid  @enderror" name="short_description" placeholder=""
-                                            style="resize: none; height: 100px;" >{{ $banner->short_description }}</textarea>
+                                            style="resize: none; height: 100px;">{{ $banner->short_description }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -40,7 +40,7 @@
                                     <label for="" class="col-sm-3 col-form-label">Long Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('long_description') is-invalid  @enderror" name="long_description" placeholder=""
-                                            style="resize: none; height: 150px;" >{{ $banner->long_description }}</textarea>
+                                            style="resize: none; height: 150px;">{{ $banner->long_description }}</textarea>
                                         @error('long_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -65,6 +65,13 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image"
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 654 X 713 size
+                                                image
+                                            </i>
+                                        </div>
+
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -80,6 +87,12 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image" class="form-control" name="galleryimages[]"
                                             multiple>
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 142 X 83 size
+                                                image
+                                            </i>
+                                        </div>
                                     </div>
 
                                 </div>

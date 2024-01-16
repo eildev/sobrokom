@@ -26,9 +26,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
-                                                        <select
-                                                            class="form-select @error('category_id') is-invalid  @enderror"
-                                                            name="category_id">
+                                                        <select class="form-select" name="category_id">
                                                             <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}">
@@ -145,11 +143,13 @@
                                                 <label for="image" class="form-label">Product Thumbnail</label>
                                                 <input type="file" id="image" class="form-control  "
                                                     name="product_image">
+                                                <div class="my-1"><i><b>Note:</b> Please provide 600 X 600 size
+                                                        image</i></div>
                                                 <span class="product_image text-danger"></span>
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class="" height="150" width="200"
-                                                    src="{{ asset('uploads/productempty.jpg') }}" alt="category image">
+                                                    src="{{ asset('uploads/productempty.jpg') }}" alt="Product Image">
                                             </div>
 
                                         </div>
@@ -175,12 +175,11 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
-                                                <input type="file" id="imageGallery"
-                                                    class="form-control  @error('image') is-invalid  @enderror"
+                                                <input type="file" id="imageGallery" class="form-control "
                                                     name="imageGallery[]" multiple>
-                                                @error('imageGallery')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                                <div class="my-1"><i><b>Note:</b> Please provide 600 X 600 size
+                                                        image</i></div>
+
                                                 <div class="my-3">
                                                     <img id="showImage" class="img-fluid" height="150" width="150"
                                                         src="{{ asset('uploads/productempty.jpg') }}"
@@ -198,9 +197,12 @@
                             </div>
                         </form>
 
-                        {{-- style="display: none" --}}
-                        <div class="row variant_section ">
-                            <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
+
+                        <div class="row variant_section" style="display: none">
+                            <div class="card-title d-flex">
+                                <h5 class="mb-0 text-info">Add Variants</h5>
+                            </div>
+                            <form method="POST" id="productVariant">
                                 @csrf
                                 <div class="col-12">
                                     <div class="border border-3 p-4 rounded">
@@ -239,7 +241,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Unit</label>
-                                                <select class="form-select" name="unit">
+                                                <select class="form-select unit" name="unit">
                                                     <option value="">Unit</option>
                                                     <option value="kg">KG</option>
                                                     <option value="liter">Liter</option>
@@ -250,37 +252,27 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
-                                                <select class="form-select @error('color') is-invalid  @enderror"
-                                                    name="color">
+                                                <select class="form-select color" name="color">
                                                     <option value="">Color</option>
                                                     <option value="red">red</option>
                                                     <option value="blue">Blue</option>
                                                     <option value="green">Green</option>
                                                 </select>
-                                                @error('color')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Size</label>
-                                                <select class="form-select @error('size') is-invalid  @enderror"
-                                                    name="size">
+                                                <select class="form-select size" name="size">
                                                     <option value="">Size</option>
                                                     <option value="M">M</option>
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                                @error('size')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
-                                                <input type="text" class="form-control" id="inputPrice"
+                                                <input type="text" class="form-control barcode" id="inputPrice"
                                                     placeholder="Barcode" name="barcode">
                                             </div>
-
-
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Manufacture Date</label> <br>
                                                 <input type="date" class="form-control" id="inputPrice"
@@ -291,21 +283,17 @@
                                                 <input type="date" class="form-control" id="inputPrice"
                                                     placeholder="" name="expire_date">
                                             </div>
-
-
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
                                                     <button type="button" class="btn btn-primary add_varient">Add
                                                         Varients</button>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
-
+                                    </div>
+                                </div>
                             </form>
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="table-responsive">
                                         <table id="example" class="table table-striped table-bordered"
@@ -331,6 +319,12 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="my-3">
+                                <a href="{{ route('product') }}" class="btn btn-success">
+                                    <i class="fas fa-plus"></i>
+                                    Add New Product</a>
                             </div>
                         </div>
                     </div>
@@ -407,10 +401,15 @@
                         discount_amount >
                         0 && stock > 0) {
                         toastr.success(response.message);
-                        regular_price = '';
-                        discount = '';
-                        discount_amount = '';
-                        stock = '';
+                        document.querySelector('.discount_amount')
+                            .value = '';
+                        document.querySelector('.regular_price').value = '';
+                        document.querySelector('.discount').value = '';
+                        document.querySelector('#stock').value = '';
+                        document.querySelector('.unit').value = '';
+                        document.querySelector('.color').value = '';
+                        document.querySelector('.size').value = '';
+                        document.querySelector('.barcode').value = '';
                         show();
                     } else {
                         toastr.warning('please provide varient');
@@ -429,13 +428,13 @@
                 dataType: 'JSON',
                 success: function(res) {
                     if (res.status == 200) {
-                        console.log(res);
+                        // console.log(res);
                         let varient_container = document.querySelector('.varient_container');
+                        varient_container.innerHTML = "";
                         const allData = res.variantData;
                         allData.forEach(function(data) {
-
-                            varient_container.innerHTML += `
-                                        <tr>
+                            const tr = document.createElement('tr');
+                            tr.innerHTML += `
                                             <td>${data.regular_price}</td>
                                             <td>${data.discount}</td>
                                             <td>${data.discount_amount}</td>
@@ -447,11 +446,10 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <button value="${data.id}" class="btn-sm btn-danger delete_variant">Delete</button>    
+                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>    
                                             </td>
-                                        </tr>
                                     `;
-                            document.querySelector('.varient_container') = varient_container;
+                            varient_container.appendChild(tr);
                         })
                     } else {
                         toastr.warning(res.error);
@@ -495,12 +493,19 @@
 
 
         // delete varient data 
-        const delete_variant = document.querySelector('.delete_variant');
-        delete_variant.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('hello');
-            // const id = this.value;
+        const delete_variant = document.querySelectorAll('#delete_variant');
+        delete_variant.map(data => {
+            data.addEventListener('click', function(event) {
+                alert('delete');
 
+            })
         })
+
+        // delete_variant.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     const id = this.value;
+        //     alert('hello');
+        //     console.log(id);
+        // })
     </script>
 @endsection

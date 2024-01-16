@@ -40,7 +40,7 @@
                                             </td>
                                             <td>{{ $product->product_name }}</td>
                                             <td>
-                                                {{ $product->varient[0]->regular_price }}
+                                                {{ $product->varient[0]->regular_price ?? 0 }}
                                             </td>
 
                                             <td>{{ $product->status }}</td>

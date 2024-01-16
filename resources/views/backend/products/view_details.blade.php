@@ -45,28 +45,34 @@
                                 <div class="col-md-6">
                                     <dl class="row my-3">
                                         <dt class="col-sm-6">Regular Price</dt>
-                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->regular_price }}</dd>
+                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->regular_price ?? 0 }}</dd>
 
                                         <dt class="col-sm-6">Discount</dt>
-                                        <dd class="col-sm-6">{{ $product->varient[0]->discount }}%</dd>
+                                        <dd class="col-sm-6">{{ $product->varient[0]->discount ?? 0 }}%</dd>
 
                                         <dt class="col-sm-6">Discount Amount</dt>
-                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->discount_amount }}</dd>
+                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->discount_amount ?? 0 }}</dd>
 
                                         <dt class="col-sm-6">Stock Quantity</dt>
-                                        <dd class="col-sm-6">{{ $product->varient[0]->stock_quantity }}</dd>
+                                        <dd class="col-sm-6">{{ $product->varient[0]->stock_quantity ?? 0 }}</dd>
 
-                                        <dt class="col-sm-6">Unit</dt>
-                                        <dd class="col-sm-6">{{ $product->varient[0]->unit }}</dd>
+                                        @if (!empty($product->varient[0]->unit))
+                                            <dt class="col-sm-6">Unit</dt>
+                                            <dd class="col-sm-6">{{ $product->varient[0]->unit }}</dd>
+                                        @endif
+
 
                                         <dt class="col-sm-6">Category</dt>
-                                        <dd class="col-sm-6">{{ $product->subcategory->subcategoryName }}</dd>
+                                        <dd class="col-sm-6">{{ $product->category->categoryName }}</dd>
 
 
                                     </dl>
                                 </div>
                                 <div class="col-md-6">
                                     <dl class="row my-3">
+                                        <dt class="col-sm-6">Subcategory</dt>
+                                        <dd class="col-sm-6">{{ $product->subcategory->subcategoryName }}</dd>
+
                                         <dt class="col-sm-6">Brand</dt>
                                         <dd class="col-sm-6">{{ $product->brand->BrandName }}</dd>
 
@@ -103,9 +109,10 @@
                             <hr>
 
                             <div class="d-flex gap-3 mt-3">
-                                <a href="#" class="btn btn-primary"> <span class="text">Edit</span> <i
-                                        class='bx bx-edit'></i></a>
-                                <a href="#" class="btn btn-outline-danger"><span class="text">Delete</span>
+                                <a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary"> <span
+                                        class="text">Edit</span> <i class='bx bx-edit'></i></a>
+                                <a href="{{ route('product.delete', $product->id) }}" class="btn btn-outline-danger"
+                                    id="delete"><span class="text">Delete</span>
                                     <i class='bx bx-trash'></i></a>
                             </div>
                         </div>
