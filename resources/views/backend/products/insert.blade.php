@@ -198,8 +198,8 @@
                             </div>
                         </form>
 
-                        {{-- style="display: none" --}}
-                        <div class="row variant_section ">
+
+                        <div class="row variant_section " style="display: none">
                             <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
@@ -332,6 +332,14 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div>
+                                <button class="btn btn-success">
+                                    <i class="fas fa-rotate-right"></i>
+                                    Add next Product
+                                </button>
+                            </div>
+
                         </div>
                     </div>
 

@@ -22,12 +22,13 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
-                                                        <select
-                                                            class="form-select @error('category_id') is-invalid  @enderror"
-                                                            name="category_id">
-                                                            <option value="">Select Category</option>
+                                                        @php
+                                                            $categories = App\Models\Category::all();
+                                                        @endphp
+                                                        <select class="form-select" name="category_id">
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">
+                                                                <option value="{{ $category->id }}"
+                                                                    {{ $category->id == $product->category_id ? 'selected' : '' }}>
                                                                     {{ $category->categoryName }}
                                                                 </option>
                                                             @endforeach
@@ -45,9 +46,9 @@
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
                                                         <select class="form-select " name="subcategory_id">
-                                                            <option value="">Select Subcategory</option>
                                                             @foreach ($subcategories as $subcategory)
-                                                                <option value="{{ $subcategory->id }}">
+                                                                <option value="{{ $subcategory->id }}"
+                                                                    {{ $subcategory->id == $product->subcategory_id ? 'selected' : '' }}>
                                                                     {{ $subcategory->subcategoryName }}
                                                                 </option>
                                                             @endforeach
@@ -67,9 +68,9 @@
                                                     <label class="form-label col-12">Select Brand</label>
                                                     <div class="col-12">
                                                         <select class="form-select " name="brand_id">
-                                                            <option value="">Select Brand</option>
                                                             @foreach ($brands as $brand)
-                                                                <option value="{{ $brand->id }}">
+                                                                <option value="{{ $brand->id }}"
+                                                                    {{ $brand->id == $product->brand_id ? 'selected' : '' }}>
                                                                     {{ $brand->BrandName }}
                                                                 </option>
                                                             @endforeach
@@ -104,7 +105,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <input type="text" name="product_name" class="form-control "
-                                                            id="inputEnterYourName" placeholder="Enter Product Name">
+                                                            id="inputEnterYourName" value="{{ $product->product_name }}">
                                                         <span class="product_name_error text-danger"></span>
                                                     </div>
                                                 </div>
@@ -117,7 +118,9 @@
                                                         <label for="" class="form-label">Short Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="short_desc" placeholder="" style="resize: none; height: 70px;"></textarea>
+                                                        <textarea class="form-control " name="short_desc" placeholder="" style="resize: none; height: 70px;">
+                                                            {{ $product->short_desc }}
+                                                        </textarea>
                                                         <span class="short_desc text-danger"></span>
                                                     </div>
                                                 </div>
@@ -130,7 +133,9 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
+                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;">
+                                                            {{ $product->long_desc }}
+                                                        </textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>
@@ -145,7 +150,8 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class="" height="150" width="200"
-                                                    src="{{ asset('uploads/productempty.jpg') }}" alt="category image">
+                                                    src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                    alt="product image">
                                             </div>
 
                                         </div>
@@ -158,7 +164,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">SKU</label>
                                                     <input type="text" class="form-control" placeholder="ASD1202"
-                                                        name="sku">
+                                                        name="sku" value="{{ $product->sku }}">
                                                     <span class="sku_error text-danger"></span>
                                                 </div>
                                             </div>
@@ -166,7 +172,8 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Tags</label>
                                                     <input type="text" class="form-control" data-role="tagsinput"
-                                                        placeholder="jQuery,Net" name="tag">
+                                                        placeholder="jQuery,Net" name="tag"
+                                                        value="{{ $product->tags }}">
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -201,7 +208,7 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Regular Price</label>
                                                 <input type="number" class="form-control regular_price" id="inputPrice"
-                                                    placeholder="00.00" name="regular_price">
+                                                    placeholder="00.00" name="regular_price" value="">
                                                 <input type="text" class="product_id" name="product_id">
                                                 <span class="regular_price_error text-danger"></span>
                                             </div>
@@ -318,7 +325,39 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="varient_container">
+                                            <tbody>
+                                                @php
+                                                    $variants = $product->varient;
+                                                    $serialNumber = 1;
+                                                @endphp
+                                                @if ($variants->count() > 0)
+                                                    @foreach ($variants as $variant)
+                                                        <tr>
+                                                            <td>{{ $serialNumber++ }}</td>
+                                                            <td>{{ $variant->regular_price }}</td>
+                                                            <td>{{ $variant->discount }}</td>
+                                                            <td>{{ $variant->discount_amount }}</td>
+                                                            <td>{{ $variant->stock_quantity }}</td>
+                                                            <td>{{ $variant->color }}</td>
+                                                            <td>{{ $variant->size }}</td>
+                                                            <td>{{ $variant->unit }}</td>
+                                                            <td>{{ $variant->barcode }}</td>
+                                                            <td>{{ $variant->manufacture_date }}</td>
+                                                            <td>{{ $variant->expire_date }}</td>
+                                                            <td>
+                                                                <a href="{{ route('variant.delete', $variant->id) }}"
+                                                                    id="delete" class="btn-sm btn-danger">
+                                                                    Delete
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="12" class="text-center text-warning">Data not Found
+                                                        </td>
+                                                    </tr>
+                                                @endif
 
                                             </tbody>
                                         </table>
@@ -340,118 +379,119 @@
 
 
 
-    {{-- <script>
-        // !.. add product ajax Crud 
-        const add_product = document.querySelector('.add_product');
-        add_product.addEventListener('click', function(e) {
-            e.preventDefault();
-            // alert('ok');
-            let allData = new FormData(jQuery("#productForm")[0]);
-            $.ajax({
-                url: "/product/store/",
-                type: "POST",
-                data: allData,
-                contentType: false,
-                processData: false,
-                success: function(res) {
-                    if (res.status == 200) {
-                        $('.variant_section').show();
-                        $('.add_product').addClass('disabled');
-                        $('.product_id').val(res.productId);
-                        toastr.success(res.message);
-                    } else {
-                        $('.category_error').text(res.error.category_id);
-                        $('.subcategory_error').text(res.error.subcategory_id);
-                        $('.brand_error').text(res.error.brand_id);
-                        $('.feature_error').text(res.error.product_feature);
-                        $('.product_name_error').text(res.error.product_name);
-                        $('.short_desc').text(res.error.short_desc);
-                        $('.long_desc').text(res.error.long_desc);
-                        $('.product_image').text(res.error.product_image);
-                        $('.sku_error').text(res.error.sku);
-                        // $('.tag_error').text(res.error.tags);
-                        toastr.warning(response.error);
-                    }
-                },
-            });
-        });
+    <script>
+        // // !.. add product ajax Crud 
+        // const add_product = document.querySelector('.add_product');
+        // add_product.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     // alert('ok');
+        //     let allData = new FormData(jQuery("#productForm")[0]);
+        //     $.ajax({
+        //         url: "/product/store/",
+        //         type: "POST",
+        //         data: allData,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(res) {
+        //             if (res.status == 200) {
+        //                 $('.variant_section').show();
+        //                 $('.add_product').addClass('disabled');
+        //                 $('.product_id').val(res.productId);
+        //                 toastr.success(res.message);
+        //             } else {
+        //                 $('.category_error').text(res.error.category_id);
+        //                 $('.subcategory_error').text(res.error.subcategory_id);
+        //                 $('.brand_error').text(res.error.brand_id);
+        //                 $('.feature_error').text(res.error.product_feature);
+        //                 $('.product_name_error').text(res.error.product_name);
+        //                 $('.short_desc').text(res.error.short_desc);
+        //                 $('.long_desc').text(res.error.long_desc);
+        //                 $('.product_image').text(res.error.product_image);
+        //                 $('.sku_error').text(res.error.sku);
+        //                 // $('.tag_error').text(res.error.tags);
+        //                 toastr.warning(response.error);
+        //             }
+        //         },
+        //     });
+        // });
 
 
 
-        // !.. add variant ajax Crud 
-        const add_varient = document.querySelector('.add_varient');
-        add_varient.addEventListener('click', function(e) {
-            e.preventDefault();
-            let varientData = new FormData(jQuery("#productVariant")[0]);
-            $.ajax({
-                url: '/product/variant/store/',
-                type: "POST",
-                data: varientData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    let regular_price = parseFloat(document.querySelector('.regular_price').value);
-                    let discount = parseFloat(document.querySelector('.discount').value);
-                    let discount_amount = parseFloat(document.querySelector('.discount_amount')
-                        .value);
-                    let stock = parseFloat(document.querySelector('#stock').value);
+        // // !.. add variant ajax Crud 
+        // const add_varient = document.querySelector('.add_varient');
+        // add_varient.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     let varientData = new FormData(jQuery("#productVariant")[0]);
+        //     $.ajax({
+        //         url: '/product/variant/store/',
+        //         type: "POST",
+        //         data: varientData,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(response) {
+        //             let regular_price = parseFloat(document.querySelector('.regular_price').value);
+        //             let discount = parseFloat(document.querySelector('.discount').value);
+        //             let discount_amount = parseFloat(document.querySelector('.discount_amount')
+        //                 .value);
+        //             let stock = parseFloat(document.querySelector('#stock').value);
 
-                    if (response.status == 200 && regular_price > 0 && discount >= 0 &&
-                        discount_amount >
-                        0 && stock > 0) {
-                        toastr.success(response.message);
-                        regular_price = '';
-                        discount = '';
-                        discount_amount = '';
-                        stock = '';
-                        show();
-                    } else {
-                        toastr.warning('please provide varient');
-                    }
-                }
-            })
-        })
+        //             if (response.status == 200 && regular_price > 0 && discount >= 0 &&
+        //                 discount_amount >
+        //                 0 && stock > 0) {
+        //                 toastr.success(response.message);
+        //                 regular_price = '';
+        //                 discount = '';
+        //                 discount_amount = '';
+        //                 stock = '';
+        //                 show();
+        //             } else {
+        //                 toastr.warning('please provide varient');
+        //             }
+        //         }
+        //     })
+        // })
+
 
 
         // show variantData on Table
-        function show() {
-            const productId = document.querySelector('.product_id').value;
-            $.ajax({
-                url: '/product/variant/show/' + productId,
-                type: "GET",
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res.status == 200) {
-                        console.log(res);
-                        let varient_container = document.querySelector('.varient_container');
-                        const allData = res.variantData;
-                        allData.forEach(function(data) {
+        // function show() {
+        //     const productId = document.querySelector('.product_id').value;
+        //     $.ajax({
+        //         url: '/product/variant/show/' + productId,
+        //         type: "GET",
+        //         dataType: 'JSON',
+        //         success: function(res) {
+        //             if (res.status == 200) {
+        //                 console.log(res);
+        //                 let varient_container = document.querySelector('.varient_container');
+        //                 const allData = res.variantData;
+        //                 allData.forEach(function(data) {
 
-                            varient_container.innerHTML += `
-                                        <tr>
-                                            <td>${data.regular_price}</td>
-                                            <td>${data.discount}</td>
-                                            <td>${data.discount_amount}</td>
-                                            <td>${data.stock_quantity}</td>
-                                            <td>${data.color}</td>
-                                            <td>${data.size}</td>
-                                            <td>${data.unit}</td>
-                                            <td>${data.barcode}</td>
-                                            <td>${data.manufacture_date}</td>
-                                            <td>${data.expire_date}</td>
-                                            <td>
-                                                <button value="${data.id}" class="btn-sm btn-danger delete_variant">Delete</button>    
-                                            </td>
-                                        </tr>
-                                    `;
-                            document.querySelector('.varient_container') = varient_container;
-                        })
-                    } else {
-                        toastr.warning(res.error);
-                    }
-                }
-            })
-        }
+        //                     varient_container.innerHTML += `
+    //                                 <tr>
+    //                                     <td>${data.regular_price}</td>
+    //                                     <td>${data.discount}</td>
+    //                                     <td>${data.discount_amount}</td>
+    //                                     <td>${data.stock_quantity}</td>
+    //                                     <td>${data.color}</td>
+    //                                     <td>${data.size}</td>
+    //                                     <td>${data.unit}</td>
+    //                                     <td>${data.barcode}</td>
+    //                                     <td>${data.manufacture_date}</td>
+    //                                     <td>${data.expire_date}</td>
+    //                                     <td>
+    //                                         <button value="${data.id}" class="btn-sm btn-danger delete_variant">Delete</button>    
+    //                                     </td>
+    //                                 </tr>
+    //                             `;
+        //                     document.querySelector('.varient_container') = varient_container;
+        //                 })
+        //             } else {
+        //                 toastr.warning(res.error);
+        //             }
+        //         }
+        //     })
+        // }
 
 
 
@@ -495,5 +535,5 @@
             // const id = this.value;
 
         })
-    </script> --}}
+    </script>
 @endsection
