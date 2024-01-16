@@ -135,4 +135,11 @@ class ProductController extends Controller
         $variant->delete();
         return back()->with('success', 'Variant Delete Successfully');
     }
+
+
+    public function viewDetails($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('backend.products.view_details', compact('product'));
+    }
 }
