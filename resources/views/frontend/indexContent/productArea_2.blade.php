@@ -556,7 +556,6 @@
                             @endif
 
                             {{-- featured products  --}}
-
                             @php
                                 $featured_product = App\Models\Product::where('status', 1)
                                     ->where('product_feature', 'feature')
@@ -1067,12 +1066,7 @@
                                 </div>
                             @endif
 
-
-
                             {{-- Best Selling  --}}
-
-
-
                             @php
                                 $best_selling = App\Models\Product::where('status', 1)
                                     ->where('product_feature', 'top sell')
@@ -1584,11 +1578,6 @@
                                     </div>
                                 </div>
                             @endif
-
-
-
-
-
 
                         </div>
                     </div>
