@@ -5,11 +5,7 @@
             <div class="card">
                 <div class="card-body p-4">
                     <div class="card-title d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-info">Add Product</h5>
-
-                        <a href="{{ route('product.view') }}" class=" btn-info btn-sm text-light ">
-                            <i class='bx bx-show'></i>
-                        </a>
+                        <h5 class="mb-0 text-info">Update Product</h5>
                     </div>
                     <hr />
                     <div class="form-body mt-4">
@@ -178,9 +174,6 @@
                                                 <input type="file" id="imageGallery"
                                                     class="form-control  @error('image') is-invalid  @enderror"
                                                     name="imageGallery[]" multiple>
-                                                @error('imageGallery')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                                 <div class="my-3">
                                                     <img id="showImage" class="img-fluid" height="150" width="150"
                                                         src="{{ asset('uploads/productempty.jpg') }}"
@@ -189,7 +182,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary add_product">Add Product</button>
+                                                    <button class="btn btn-primary add_product">Update Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -347,7 +340,7 @@
 
 
 
-    <script>
+    {{-- <script>
         // !.. add product ajax Crud 
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
@@ -502,5 +495,5 @@
             // const id = this.value;
 
         })
-    </script>
+    </script> --}}
 @endsection

@@ -21,7 +21,7 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
     function gallary(){
-        return $this->hasMany(ImageGallery::class);
+        return $this->hasMany(ProductGallery::class);
     }
     function varient(){
         return $this->hasMany(Variant::class);

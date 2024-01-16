@@ -4,182 +4,174 @@
         <div class="row">
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-4 border-end">
+                    <div class="col-md-5 border-end">
                         <img src="{{ asset('/uploads/products/' . $product->product_image) }}" class="img-fluid"
                             alt="product-image">
                         <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
-                            @dd($product->gallery);
-                            <div class="col"><img src="{{ asset('backend') }}/assets/images/products/12.png"
-                                    width="70" class="border rounded cursor-pointer" alt=""></div>
+                            @foreach ($product->gallary as $gallery)
+                                <div class="col"><img src="{{ asset('uploads/products/gallery/' . $gallery->image) }}"
+                                        width="70" class="border rounded cursor-pointer" alt=""></div>
+                            @endforeach
+
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="card-body">
                             <h4 class="card-title">{{ $product->product_name }}</h4>
-                            <div class="d-flex gap-3 py-3">
+                            @php
+                                $features = explode(',', $product->product_feature);
+                            @endphp
+                            @foreach ($features as $feature)
+                                <span class="badge bg-info text-capitalize">{{ $feature }}</span>
+                            @endforeach
+
+                            {{-- <div class="d-flex gap-3 py-3">
                                 <div class="cursor-pointer">
                                     <i class='bx bxs-star text-warning'></i>
                                     <i class='bx bxs-star text-warning'></i>
                                     <i class='bx bxs-star text-warning'></i>
                                     <i class='bx bxs-star text-warning'></i>
-                                    <i class='bx bxs-star text-secondary'></i>
+                                    <i class='bx bxs-star col-sm-6text-secondary'></i>
                                 </div>
                                 <div>142 reviews</div>
                                 <div class="text-success"><i class='bx bxs-cart-alt align-middle'></i> 134 orders</div>
-                            </div>
-                            <div class="mb-3">
-                                <span class="price h4">$149.00</span>
-                                <span class="text-muted">/per kg</span>
-                            </div>
-                            <p class="card-text fs-6">Virgil Abloh’s Off-White is a streetwear-inspired collection that
-                                continues to
-                                break away from the conventions of mainstream fashion. Made in Italy, these black and brown
-                                Odsy-1000 low-top sneakers.</p>
-                            <dl class="row">
-                                <dt class="col-sm-3">Model#</dt>
-                                <dd class="col-sm-9">Odsy-1000</dd>
+                            </div> --}}
+                            {{-- <div class="mb-3">
+                                <span class="price h4">${{ $product->varient[0]->discount_amount }}</span>
+                                <span class="text-muted">/per {{ $product->varient[0]->unit }}</span>
+                            </div> --}}
 
-                                <dt class="col-sm-3">Color</dt>
-                                <dd class="col-sm-9">Brown</dd>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <dl class="row my-3">
+                                        <dt class="col-sm-6">Regular Price</dt>
+                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->regular_price }}</dd>
 
-                                <dt class="col-sm-3">Delivery</dt>
-                                <dd class="col-sm-9">Russia, USA, and Europe </dd>
-                            </dl>
+                                        <dt class="col-sm-6">Discount</dt>
+                                        <dd class="col-sm-6">{{ $product->varient[0]->discount }}%</dd>
+
+                                        <dt class="col-sm-6">Discount Amount</dt>
+                                        <dd class="col-sm-6">৳ {{ $product->varient[0]->discount_amount }}</dd>
+
+                                        <dt class="col-sm-6">Stock Quantity</dt>
+                                        <dd class="col-sm-6">{{ $product->varient[0]->stock_quantity }}</dd>
+
+                                        <dt class="col-sm-6">Unit</dt>
+                                        <dd class="col-sm-6">{{ $product->varient[0]->unit }}</dd>
+
+                                        <dt class="col-sm-6">Category</dt>
+                                        <dd class="col-sm-6">{{ $product->subcategory->subcategoryName }}</dd>
+
+
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="row my-3">
+                                        <dt class="col-sm-6">Brand</dt>
+                                        <dd class="col-sm-6">{{ $product->brand->BrandName }}</dd>
+
+                                        <dt class="col-sm-6">Model/SKU</dt>
+                                        <dd class="col-sm-6">{{ $product->sku }}</dd>
+
+                                        @if (!empty($product->varient[0]->color))
+                                            <dt class="col-sm-6">Color</dt>
+                                            <dd class="col-sm-6">{{ $product->varient[0]->color }}</dd>
+                                        @endif
+
+                                        @if (!empty($product->varient[0]->size))
+                                            <dt class="col-sm-6">Size</dt>
+                                            <dd class="col-sm-6">{{ $product->varient[0]->size }}</dd>
+                                        @endif
+
+                                        @php
+                                            $tags = explode(',', $product->tags);
+                                        @endphp
+                                        <dt class="col-sm-6">Tags#</dt>
+                                        <dd class="col-sm-6">
+                                            @foreach ($tags as $tag)
+                                                <span class="badge bg-warning">#{{ $tag }}</span>
+                                            @endforeach
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <p class="card-text fs-6 mb-3"><b>Short Description:
+                                </b>{{ $product->short_desc }}</p>
+                            <p class="card-text fs-6"><b>Long Description:
+                                </b>{{ $product->long_desc }}</p>
                             <hr>
-                            <div class="row row-cols-auto row-cols-1 row-cols-md-3 align-items-center">
-                                <div class="col">
-                                    <label class="form-label">Quantity</label>
-                                    <div class="input-group input-spinner">
-                                        <button class="btn btn-white" type="button" id="button-plus"> + </button>
-                                        <input type="text" class="form-control" value="1">
-                                        <button class="btn btn-white" type="button" id="button-minus"> − </button>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Select size</label>
-                                    <div class="">
-                                        <label class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="select_size" checked=""
-                                                class="custom-control-input">
-                                            <div class="form-check-label">Small</div>
-                                        </label>
-                                        <label class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="select_size" checked=""
-                                                class="custom-control-input">
-                                            <div class="form-check-label">Medium</div>
-                                        </label>
 
-                                        <label class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="select_size" checked=""
-                                                class="custom-control-input">
-                                            <div class="form-check-label">Large</div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Select Color</label>
-                                    <div class="color-indigators d-flex align-items-center gap-2">
-                                        <div class="color-indigator-item bg-primary"></div>
-                                        <div class="color-indigator-item bg-danger"></div>
-                                        <div class="color-indigator-item bg-success"></div>
-                                        <div class="color-indigator-item bg-warning"></div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="d-flex gap-3 mt-3">
-                                <a href="#" class="btn btn-primary">Buy Now</a>
-                                <a href="#" class="btn btn-outline-primary"><span class="text">Add to cart</span>
-                                    <i class='bx bxs-cart-alt'></i></a>
+                                <a href="#" class="btn btn-primary"> <span class="text">Edit</span> <i
+                                        class='bx bx-edit'></i></a>
+                                <a href="#" class="btn btn-outline-danger"><span class="text">Delete</span>
+                                    <i class='bx bx-trash'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row align-items-center my-5">
+                    <div class="col-12">
+                        <div class="card px-2 py-5 rounded-md">
+                            <div class="card-title">
+                                <h5 class="mb-0 text-info text-center">Manage Variants</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>SI</td>
+                                                <th>Regular Price</th>
+                                                <th>Discount</th>
+                                                <th>Discount Price</th>
+                                                <th>Stock Quantity</th>
+                                                <th>Color</th>
+                                                <th>Size</th>
+                                                <th>Unit</th>
+                                                <th>Barcode</th>
+                                                <th>Manufacture Date</th>
+                                                <th>Expire Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $variants = $product->varient;
+                                                $serialNumber = 1;
+                                            @endphp
+                                            @foreach ($variants as $variant)
+                                                <tr>
+                                                    <td>{{ $serialNumber++ }}</td>
+                                                    <td>{{ $variant->regular_price }}</td>
+                                                    <td>{{ $variant->discount }}</td>
+                                                    <td>{{ $variant->discount_amount }}</td>
+                                                    <td>{{ $variant->stock_quantity }}</td>
+                                                    <td>{{ $variant->color }}</td>
+                                                    <td>{{ $variant->size }}</td>
+                                                    <td>{{ $variant->unit }}</td>
+                                                    <td>{{ $variant->barcode }}</td>
+                                                    <td>{{ $variant->manufacture_date }}</td>
+                                                    <td>{{ $variant->expire_date }}</td>
+                                                    <td>
+                                                        <a href="{{ route('variant.delete', $variant->id) }}"
+                                                            id="delete" class="btn-sm btn-danger">
+                                                            Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr />
-                <div class="card-body">
-                    <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
-                                aria-selected="true">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class='bx bx-comment-detail font-18 me-1'></i>
-                                    </div>
-                                    <div class="tab-title"> Product Description </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab"
-                                aria-selected="false">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class='bx bx-bookmark-alt font-18 me-1'></i>
-                                    </div>
-                                    <div class="tab-title">Tags</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-bs-toggle="tab" href="#primarycontact" role="tab"
-                                aria-selected="false">
-                                <div class="d-flex align-items-center">
-                                    <div class="tab-icon"><i class='bx bx-star font-18 me-1'></i>
-                                    </div>
-                                    <div class="tab-title">Reviews</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content pt-3">
-                        <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown
-                                aliqua,
-                                retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                terry
-                                richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
-                                american
-                                apparel, butcher voluptate nisi.</p>
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown
-                                aliqua,
-                                retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                terry
-                                richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan
-                                american
-                                apparel, butcher voluptate nisi.</p>
-                        </div>
-                        <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                                Exercitation
-                                +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-                                farm-to-table
-                                craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean
-                                shorts
-                                ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
-                                mollit.
-                                Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                                odio
-                                cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry
-                                richardson
-                                biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus
-                                tattooed
-                                echo park.</p>
-                        </div>
-                        <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic
-                                lomo retro
-                                fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft
-                                beer,
-                                iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy
-                                irony.
-                                Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free,
-                                carles
-                                pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't
-                                heard of
-                                them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
         <!--end row-->
