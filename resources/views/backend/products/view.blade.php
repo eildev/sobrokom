@@ -40,28 +40,14 @@
                                             </td>
                                             <td>{{ $product->product_name }}</td>
                                             <td>
-                                                {{-- @php
-                                                    @dd($product->varient[0]->regular_price)
-                                                @endphp --}}
-
-                                                {{-- @php
-                                                    $variants = App\Models\Variant::where('', $product->id);
-                                                    dd($variants);
-                                                @endphp --}}
-                                                {{-- @if ($all_banner->count() > 0)
-                                                    @foreach ($imageGalleries as $imageGallery)
-                                                        <img src="{{ asset('/uploads/banner/gallery/' . $imageGallery->image) }}"
-                                                            style="height: 100px;" class="img-fluid" alt="banner Image">
-                                                    @endforeach
-                                                @else
-                                                    <span colspan="6" class="text-center text-warning">Data not
-                                                        Found</span>
-                                                @endif --}}
+                                                {{ $product->varient[0]->regular_price }}
                                             </td>
 
                                             <td>{{ $product->status }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-info">View Details</a>
+                                                <a href="{{ route('product.view.details', $product->id) }}"
+                                                    class="btn btn-info">View
+                                                    Details</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -122,6 +122,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
         Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
+        Route::get('/product/view/{id}', 'viewDetails')->name('product.view.details');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
         Route::post('/product/update/{id}', 'update')->name('product.update');
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
