@@ -30,6 +30,12 @@
                                         <input type="file" id="image"
                                             class="form-control @error('image') is-invalid  @enderror" name="image"
                                             value="{{ $category->image }}">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 300 X 180 size
+                                                image
+                                            </i>
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

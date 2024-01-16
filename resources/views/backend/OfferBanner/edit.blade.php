@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card border-top border-0 border-3 border-info">
-                    <form action="{{ Route('offerbanner.update', $bannerContent->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('offerbanner.update', $bannerContent->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="border p-4 rounded">
@@ -37,10 +38,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="" class="col-sm-3 col-form-label">Short dffDescription</label>
+                                    <label for="" class="col-sm-3 col-form-label">Short Description</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('short_description') is-invalid  @enderror" name="short_description" placeholder=""
-                                            style="resize: none; height: 100px;" >{{ $bannerContent->short_description }}</textarea>
+                                            style="resize: none; height: 100px;">{{ $bannerContent->short_description }}</textarea>
                                         @error('short_description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -66,23 +67,22 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image"
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 1310 X 220 size
+                                                image
+                                            </i>
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                         <div class="mt-3">
                                             <img id="showImage" class="" height="150" width="200"
-                                                src="{{ asset('uploads/banner/' . $bannerContent->image) }}" alt="banner image">
+                                                src="{{ asset('uploads/offer_banner/' . $bannerContent->image) }}"
+                                                alt="banner image">
+
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="image" class="col-sm-3 col-form-label">Gallery Images </label>
-                                    <div class="col-sm-9">
-                                        <input type="file" id="image" class="form-control" name="galleryimages[]"
-                                            multiple>
-                                    </div>
-
                                 </div>
 
                                 <div class="row">

@@ -146,6 +146,12 @@
                                                 <label for="image" class="form-label">Product Thumbnail</label>
                                                 <input type="file" id="image" class="form-control  "
                                                     name="product_image">
+                                                <div class="my-1">
+                                                    <i>
+                                                        <b>Note:</b> Please provide 600 X 600 size
+                                                        image
+                                                    </i>
+                                                </div>
                                                 <span class="product_image text-danger"></span>
                                             </div>
                                             <div class="col-md-6">
@@ -178,9 +184,14 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
-                                                <input type="file" id="imageGallery"
-                                                    class="form-control  @error('image') is-invalid  @enderror"
+                                                <input type="file" id="imageGallery" class="form-control  "
                                                     name="imageGallery[]" multiple>
+                                                <div class="my-1">
+                                                    <i>
+                                                        <b>Note:</b> Please provide 600 X 600 size
+                                                        image
+                                                    </i>
+                                                </div>
                                                 <div class="my-3">
                                                     <img id="showImage" class="img-fluid" height="150" width="150"
                                                         src="{{ asset('uploads/productempty.jpg') }}"
