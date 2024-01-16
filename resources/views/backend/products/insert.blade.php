@@ -447,7 +447,7 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <button class="btn-sm btn-danger">Delete</button>    
+                                                <button value="${data.id}" class="btn-sm btn-danger delete_variant">Delete</button>    
                                             </td>
                                         </tr>
                                     `;
@@ -491,6 +491,16 @@
             } else {
                 discount.setAttribute('disabled', '');
             }
+        })
+
+
+        // delete varient data 
+        const delete_variant = document.querySelector('.delete_variant');
+        delete_variant.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('hello');
+            // const id = this.value;
+
         })
     </script>
 @endsection
