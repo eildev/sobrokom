@@ -74,7 +74,7 @@
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
                                                                     <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}</span>
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}</span>
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
@@ -111,8 +111,8 @@
                                                                 </div>
                                                                 <div class="tpproduct__price">
 
-                                                                    <span>{{ $product->varient[0]->discount_amount }}</span>
-                                                                    <del>{{ $product->varient[0]->regular_price }}</del>
+                                                                    <span>{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                                    <del>{{ $product->varient[0]->regular_price  ?? ''}}</del>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__hover-text">

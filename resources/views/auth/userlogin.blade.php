@@ -35,17 +35,19 @@
                                  <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
                               </div>
                            </div>
+                           <form  method="POST" action="{{ route('login') }}">
+                           @csrf
                            <div class="tptrack__id mb-10">
-                              <form action="#">
+                              
                                  <span><i class="fal fa-user"></i></span>
-                                 <input type="email" placeholder="Username / email address">
-                              </form>
+                                 <input name="email" type="email" placeholder="Email address">
+                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                              
                            </div>
                            <div class="tptrack__email mb-10">
-                              <form action="#">
                                  <span><i class="fal fa-key"></i></span>
-                                 <input type="text" placeholder="Password">
-                              </form>
+                                 <input name="password" type="password" placeholder="Password">
+                                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
                            </div>
                            <div class="tpsign__remember d-flex align-items-center justify-content-between mb-15">
                               <div class="form-check">
@@ -59,6 +61,7 @@
                            <div class="tptrack__btn">
                               <button class="tptrack__submition active">Login Now<i class="fal fa-long-arrow-right"></i></button>
                            </div>
+                        </form>
                         </div>
                      </div>
                   </div>
@@ -74,24 +77,36 @@
                                  <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
                               </div>
                            </div>
-                           <div class="tptrack__id mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-envelope"></i></span>
-                                 <input type="email" placeholder="Email address">
-                              </form>
-                           </div>
-                           <div class="tptrack__email mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-key"></i></span>
-                                 <input type="text" placeholder="Password">
-                              </form>
-                           </div>
-                           <div class="tpsign__account mb-15">
-                              <a href="#">Already Have Account?</a>
-                           </div>
-                           <div class="tptrack__btn">
-                              <button class="tptrack__submition tpsign__reg">Register Now<i class="fal fa-long-arrow-right"></i></button>
-                           </div>
+                           <form class="signUp" action="{{ route('register') }}" method="POST">
+                           @csrf
+                                <div class="tptrack__id mb-10">
+                                        <span><i class="fa fa-user"></i></span>
+                                        <input name="userName" type="text" placeholder="User Name" required>
+                                        <x-input-error :messages="$errors->get('userName')" class="mt-2" />
+                                </div>
+                                <div class="tptrack__id mb-10">
+                                        <span><i class="fa fa-envelope"></i></span>
+                                        <input name="email" type="email" placeholder="Enter Email" required>
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                </div>
+                                <div class="tptrack__email mb-10">
+                                        <span><i class="fa fa-key"></i></span>
+                                        <input name="password" type="password" placeholder="Password" required>
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                </div>
+                                <div class="tptrack__email mb-10">
+                                        <span><i class="fa fa-key"></i></span>
+                                        <input type="password" name="password_confirmation" placeholder="Confirmation Password" required>
+                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                </div>
+                                <div class="form-check">
+                                 <input class="form-check-input" type="checkbox" value="" id="termandcondition" checked>
+                                 <label class="form-check-label" for="termandcondition"><a href="#" target="_blank">I accept term & condition</a></label>
+                              </div>
+                                <div class="tptrack__btn">
+                                    <button class="tptrack__submition tpsign__reg">Register Now<i class="fal fa-long-arrow-right"></i></button>
+                                </div>
+                        </form>
                         </div>
                      </div>
                   </div>
