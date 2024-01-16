@@ -14,7 +14,9 @@
                         <ul class="sub-menu home-menu-style">
 
                             @php
-                                $brands = App\Models\brand::all();
+                                $brands = App\Models\brand::where('status', 1)
+                                    ->take(6)
+                                    ->get();
                                 // dd($brands);
                             @endphp
                             @foreach ($brands as $brand)
