@@ -10,97 +10,109 @@
                         <div class="tp-breadcrumb__list">
                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
                            <span class="dvdr">/</span>
-                           <span>Sign in</span>
+                           <span>User</span>
+                           <span class="dvdr">/</span>
+                           <span>Dashboard</span>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         <!-- breadcrumb-area-end -->
 
+         <!-- breadcrumb-area-end -->
+<style>
+
+.tab__content{
+    display: none;
+}
+.tab_active{
+    display: block !important;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+</style>
          <!-- track-area-start -->
          <section class="track-area pb-40">
             <div class="container">
-               <div class="row justify-content-center">
-                  <div class="col-lg-6 col-sm-12">
-                     <div class="tptrack__product mb-40">
-                        <div class="tptrack__content grey-bg">
-                           <div class="tptrack__item d-flex mb-20">
-                              <div class="tptrack__item-icon">
-                                 <i class="fal fa-user-unlock"></i>
-                              </div>
-                              <div class="tptrack__item-content">
-                                 <h4 class="tptrack__item-title">Login Here</h4>
-                                 <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
-                              </div>
-                           </div>
-                           <div class="tptrack__id mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-user"></i></span>
-                                 <input type="email" placeholder="Username / email address">
-                              </form>
-                           </div>
-                           <div class="tptrack__email mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-key"></i></span>
-                                 <input type="text" placeholder="Password">
-                              </form>
-                           </div>
-                           <div class="tpsign__remember d-flex align-items-center justify-content-between mb-15">
-                              <div class="form-check">
-                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                 <label class="form-check-label" for="flexCheckDefault2">Remember me</label>
-                              </div>
-                              <div class="tpsign__pass">
-                                 <a href="#">Forget Password</a>
-                              </div>
-                           </div>
-                           <div class="tptrack__btn">
-                              <button class="tptrack__submition active">Login Now<i class="fal fa-long-arrow-right"></i></button>
-                           </div>
+               <div class="row justify-content-center my-5">
+                  <div class="col-12 tab__container">
+                    <div class="row">
+                        <div class="col-md-3 tab__main">
+
+                            <ul class="nav flex-column border border-primary">
+                                <li class="nav-item">
+                                  <a class="nav-link active" href="#" tabindex="1">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" tabindex="2">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" tabindex="3">Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#" tabindex="4">Dashboard</a>
+                                </li>
+                              </ul>
                         </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-6 col-sm-12">
-                     <div class="tptrack__product mb-40">
-                        <div class="tptrack__content grey-bg">
-                           <div class="tptrack__item d-flex mb-20">
-                              <div class="tptrack__item-icon">
-                                 <i class="fal fa-lock"></i>
-                              </div>
-                              <div class="tptrack__item-content">
-                                 <h4 class="tptrack__item-title">Sign Up</h4>
-                                 <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
-                              </div>
-                           </div>
-                           <div class="tptrack__id mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-envelope"></i></span>
-                                 <input type="email" placeholder="Email address">
-                              </form>
-                           </div>
-                           <div class="tptrack__email mb-10">
-                              <form action="#">
-                                 <span><i class="fal fa-key"></i></span>
-                                 <input type="text" placeholder="Password">
-                              </form>
-                           </div>
-                           <div class="tpsign__account mb-15">
-                              <a href="#">Already Have Account?</a>
-                           </div>
-                           <div class="tptrack__btn">
-                              <button class="tptrack__submition tpsign__reg">Register Now<i class="fal fa-long-arrow-right"></i></button>
-                           </div>
+                        <div class="col-md-9 tab__content">
+                            <div class="tab__content--1 tabContent ">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                      <a class="nav-link active" href="#">Active</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="#">Link</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="#">Link</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                    </li>
+                                  </ul>
+                                this is dashboard</div>
+                            <div class="tab__content--2 tabContent">this is Profile</div>
+                            <div class="tab__content--3 tabContent">this is Orders</div>
+                            <div class="tab__content--4 tabContent">this is dashboard</div>
                         </div>
-                     </div>
+                    </div>
                   </div>
                </div>
             </div>
          </section>
+
+         <script>
+            const tabmain = document.querySelectorAll('.tab__main ul li a');
+            tabmain.forEach((main)=>{
+                // console.log(main);
+                main.addEventListener('click',(e)=>{
+                    e.preventDefault();
+
+                    // alert('ok');
+
+
+                    let index = main.getAttribute('tabindex');
+                    document.querySelectorAll('.tab__content').forEach((content)=>{
+                        content.classList.remove('tab_active');
+                    })
+
+                    const tab__content = document.querySelector(".tab__content--"+index);
+
+                    tab__content.classList.add('tab_active');
+
+                })
+            })
+         </script>
          <!-- track-area-end -->
 
-         
+
          <!-- feature-area-start -->
          <section class="feature-area mainfeature__bg pt-50 pb-40" data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
             <div class="container">
@@ -168,4 +180,3 @@
          <!-- feature-area-end -->
 
          @endsection
-      

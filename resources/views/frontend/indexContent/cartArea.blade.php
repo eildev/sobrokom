@@ -7,7 +7,7 @@
 
 
                 @php
-                    $Categories = App\Models\Category::where('status', 1)
+                    $Categories = App\Models\Product::where('status', 1)
                         ->take(6)
                         ->orderBy('id', 'ASC')
                         ->get();
