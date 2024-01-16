@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\frontend\SubscribeController;
-
+use App\Http\Controllers\Frontend\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +22,8 @@ Route::controller(SubscribeController::class)->group(function () {
     // Route::post('/subscribe/update/{id}', 'update')->name('subscribe.update');
     Route::get('/subscribe/delete/{id}', 'destroy')->name('subscribe.delete');
 });
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user/dashboard', 'userDashboard')->name('user.dashboard');
+});
+
+
