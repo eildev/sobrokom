@@ -79,13 +79,18 @@
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
+                                                                    <a class="tpproduct__shopping-wishlist add_whishlist"
+                                                                        href="#" value="{{ $product->id }}">
+                                                                        <i class="icon-heart icons"></i>
+                                                                        {{-- <i class="fas fa-heart icons"></i> --}}
+                                                                    </a>
                                                                     <a class="tpproduct__shopping-wishlist"
-                                                                        href="wishlist.html"><i
-                                                                            class="icon-heart icons"></i></a>
-                                                                    <a class="tpproduct__shopping-wishlist"
-                                                                        href="#"><i class="icon-layers"></i></a>
-                                                                    <a class="tpproduct__shopping-cart"
-                                                                        href="#"><i class="icon-eye"></i></a>
+                                                                        href="#">
+                                                                        <i class="icon-layers"></i>
+                                                                    </a>
+                                                                    <a class="tpproduct__shopping-cart" href="#">
+                                                                        <i class="icon-eye"></i>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__content">
@@ -1585,4 +1590,42 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const add_whishlist = document.querySelectorAll('.add_whishlist');
+    // console.log(add_whishlist);
+    add_whishlist.forEach(element => {
+        // console.log(element)
+
+
+        element.addEventListener('click', function(e) {
+
+
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let product_id = this.getAttribute('value');
+            // alert(product_id);
+
+            $.ajax({
+                url: '/wishlist/add',
+                type: 'POST',
+                data: {
+                    'product_id': product_id,
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        toastr.success(response.message);
+                    } else {
+                        // toastr.warning(response);
+                    }
+                }
+            });
+        })
+    });
+</script>
 <!-- product-area-end -->
