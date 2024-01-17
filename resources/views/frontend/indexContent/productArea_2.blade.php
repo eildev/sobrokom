@@ -66,11 +66,11 @@
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
                                                                 <a href="#"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="shop-details.html"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
                                                                     <span
@@ -112,7 +112,7 @@
                                                                 <div class="tpproduct__price">
 
                                                                     <span>{{ $product->varient[0]->discount_amount ?? '' }}</span>
-                                                                    <del>{{ $product->varient[0]->regular_price  ?? ''}}</del>
+                                                                    <del>{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__hover-text">
@@ -1082,76 +1082,75 @@
                                             class="swiper-container tpproduct-active-2 tpslider-bottom p-relative tpproduct-priority">
                                             <div class="swiper-wrapper">
                                                 @foreach ($best_selling as $product)
+                                                    <div class="swiper-slide">
+                                                        <div class="tpproduct p-relative">
+                                                            <div class="tpproduct__thumb p-relative text-center">
+                                                                <a href="#"><img
+                                                                        src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
+                                                                        alt=""></a>
+                                                                <a class="tpproduct__thumb-img"
+                                                                    href="shop-details.html"><img
+                                                                        src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
+                                                                        alt=""></a>
+                                                                <div class="tpproduct__info bage">
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}</span>
+                                                                    <span
+                                                                        class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                </div>
+                                                                <div class="tpproduct__shopping">
+                                                                    <a class="tpproduct__shopping-wishlist"
+                                                                        href="wishlist.html"><i
+                                                                            class="icon-heart icons"></i></a>
+                                                                    <a class="tpproduct__shopping-wishlist"
+                                                                        href="#"><i class="icon-layers"></i></a>
+                                                                    <a class="tpproduct__shopping-cart"
+                                                                        href="#"><i class="icon-eye"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tpproduct__content">
+                                                                <span class="tpproduct__content-weight">
+                                                                    <a
+                                                                        href="shop-details.html">{{ $product->category->categoryName }}</a>
+                                                                </span>
+                                                                <h4 class="tpproduct__title">
+                                                                    <a
+                                                                        href="shop-details-top-.html">{{ $product->product_name }}</a>
+                                                                </h4>
+                                                                <div class="tpproduct__rating mb-5">
+                                                                    <a href="#"><i
+                                                                            class="icon-star_outline1"></i></a>
+                                                                    <a href="#"><i
+                                                                            class="icon-star_outline1"></i></a>
+                                                                    <a href="#"><i
+                                                                            class="icon-star_outline1"></i></a>
+                                                                    <a href="#"><i
+                                                                            class="icon-star_outline1"></i></a>
+                                                                    <a href="#"><i
+                                                                            class="icon-star_outline1"></i></a>
+                                                                </div>
+                                                                <div class="tpproduct__price">
 
-                                                <div class="swiper-slide">
-                                                    <div class="tpproduct p-relative">
-                                                        <div class="tpproduct__thumb p-relative text-center">
-                                                            <a href="#"><img
-                                                                    src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
-                                                                    alt=""></a>
-                                                            <a class="tpproduct__thumb-img"
-                                                                href="shop-details.html"><img
-                                                                    src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
-                                                                    alt=""></a>
-                                                            <div class="tpproduct__info bage">
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}</span>
-                                                                <span
-                                                                    class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                    <span>{{ $product->varient[0]->discount_amount }}</span>
+                                                                    <del>{{ $product->varient[0]->regular_price }}</del>
+                                                                </div>
                                                             </div>
-                                                            <div class="tpproduct__shopping">
-                                                                <a class="tpproduct__shopping-wishlist"
-                                                                    href="wishlist.html"><i
-                                                                        class="icon-heart icons"></i></a>
-                                                                <a class="tpproduct__shopping-wishlist"
-                                                                    href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tpproduct__content">
-                                                            <span class="tpproduct__content-weight">
-                                                                <a
-                                                                    href="shop-details.html">{{ $product->category->categoryName }}</a>
-                                                            </span>
-                                                            <h4 class="tpproduct__title">
-                                                                <a
-                                                                    href="shop-details-top-.html">{{ $product->product_name }}</a>
-                                                            </h4>
-                                                            <div class="tpproduct__rating mb-5">
-                                                                <a href="#"><i
-                                                                        class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i
-                                                                        class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i
-                                                                        class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i
-                                                                        class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i
-                                                                        class="icon-star_outline1"></i></a>
-                                                            </div>
-                                                            <div class="tpproduct__price">
-
-                                                                <span>{{ $product->varient[0]->discount_amount }}</span>
-                                                                <del>{{ $product->varient[0]->regular_price }}</del>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tpproduct__hover-text">
-                                                            <div
-                                                                class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                                <a class="tp-btn-2" href="cart.html">Add to
-                                                                    cart</a>
-                                                            </div>
-                                                            <div class="tpproduct__descrip">
-                                                                <ul>
-                                                                    <li>Type: Organic</li>
-                                                                    <li>MFG: August 4.2021</li>
-                                                                    <li>LIFE: 60 days</li>
-                                                                </ul>
+                                                            <div class="tpproduct__hover-text">
+                                                                <div
+                                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                                    <a class="tp-btn-2" href="cart.html">Add to
+                                                                        cart</a>
+                                                                </div>
+                                                                <div class="tpproduct__descrip">
+                                                                    <ul>
+                                                                        <li>Type: Organic</li>
+                                                                        <li>MFG: August 4.2021</li>
+                                                                        <li>LIFE: 60 days</li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -1192,8 +1191,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart" href="#"><i
+                                                                        class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">
@@ -1258,8 +1257,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart" href="#"><i
+                                                                        class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">
@@ -1323,8 +1322,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart" href="#"><i
+                                                                        class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">
@@ -1389,8 +1388,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart" href="#"><i
+                                                                        class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">
@@ -1454,8 +1453,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart"
-                                                                    href="#"><i class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart" href="#"><i
+                                                                        class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">
