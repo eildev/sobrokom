@@ -348,6 +348,7 @@
             e.preventDefault();
             // alert('ok');
             let allData = new FormData(jQuery("#productForm")[0]);
+            console.log(allData);
             $.ajax({
                 url: "/product/store/",
                 type: "POST",

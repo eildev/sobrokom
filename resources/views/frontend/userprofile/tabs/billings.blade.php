@@ -2,23 +2,21 @@
     <div class="product__filter-content mb-40">
         <div class="row align-items-center">
             <div class="col-12">
-                <div
-                    class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
+                <div class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-all" type="button" role="tab"
-                                aria-controls="nav-all" aria-selected="false">tab 1
+                            <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all"
+                                type="button" role="tab" aria-controls="nav-all" aria-selected="false">tab 1
 
                             </button>
                             <button class="nav-link active" id="nav-popular-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-popular" type="button" role="tab"
-                                aria-controls="nav-popular" aria-selected="true">
+                                data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular"
+                                aria-selected="true">
                                 tab 2
                             </button>
                             <button class="nav-link" id="nav-product-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-product" type="button" role="tab"
-                                aria-controls="nav-product" aria-selected="false">
+                                data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product"
+                                aria-selected="false">
                                 tab 3
                             </button>
                         </div>
@@ -41,7 +39,128 @@
             aria-labelledby="nav-popular-tab">
             <div class="row">
                 <div class="tab_card d-flex align-items-center justify-content-between mb-20">
-                    this is sub tab 2
+                    <div class="col-lg-12">
+                        <div class="your-order mb-30 ">
+                            <h3>Your order</h3>
+                            <div class="your-order-table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-total">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                Vestibulum suscipit <strong class="product-quantity"> ×
+                                                    1</strong>
+                                            </td>
+                                            <td class="product-total">
+                                                <span class="amount">$165.00</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                Vestibulum dictum magna <strong class="product-quantity"> ×
+                                                    1</strong>
+                                            </td>
+                                            <td class="product-total">
+                                                <span class="amount">$50.00</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="cart-subtotal">
+                                            <th>Cart Subtotal</th>
+                                            <td><span class="amount">$215.00</span></td>
+                                        </tr>
+                                        <tr class="shipping">
+                                            <th>Shipping</th>
+                                            <td>
+                                                <ul>
+                                                    <li>
+                                                        <input type="radio" name="shipping">
+                                                        <label>
+                                                            Flat Rate: <span class="amount">$7.00</span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" name="shipping">
+                                                        <label>Free Shipping:</label>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Order Total</th>
+                                            <td><strong><span class="amount">$215.00</span></strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment-method">
+                                <div class="accordion" id="checkoutAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="checkoutOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
+                                                Direct Bank Transfer
+                                            </button>
+                                        </h2>
+                                        <div id="bankOne" class="accordion-collapse collapse show"
+                                            aria-labelledby="checkoutOne" data-bs-parent="#checkoutAccordion">
+                                            <div class="accordion-body">
+                                                Make your payment directly into our bank account. Please use
+                                                your Order ID as the payment reference. Your order won’t be
+                                                shipped until the funds have cleared in our account.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="paymentTwo">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#payment"
+                                                aria-expanded="false" aria-controls="payment">
+                                                Cheque Payment
+                                            </button>
+                                        </h2>
+                                        <div id="payment" class="accordion-collapse collapse"
+                                            aria-labelledby="paymentTwo" data-bs-parent="#checkoutAccordion">
+                                            <div class="accordion-body">
+                                                Please send your cheque to Store Name, Store Street, Store
+                                                Town, Store
+                                                State / County, Store
+                                                Postcode.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="paypalThree">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#paypal"
+                                                aria-expanded="false" aria-controls="paypal">
+                                                PayPal
+                                            </button>
+                                        </h2>
+                                        <div id="paypal" class="accordion-collapse collapse"
+                                            aria-labelledby="paypalThree" data-bs-parent="#checkoutAccordion">
+                                            <div class="accordion-body">
+                                                Pay via PayPal; you can pay with your credit card if you
+                                                don’t have a
+                                                PayPal account.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-button-payment mt-20">
+                                    <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation">Place
+                                        order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,10 +169,265 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tab_card d-flex align-items-center justify-content-between mb-20">
-                        this is sub tab 3
+                        {{-- <form action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkbox-form">
+                                        <h3>Update Billing Details</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>First Name <span class="required">*</span></label>
+                                                    <input type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Last Name <span class="required">*</span></label>
+                                                    <input type="text" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Email Address <span class="required">*</span></label>
+                                                    <input type="email" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Phone <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Address 1<span class="required">*</span></label>
+                                                    <input type="text" placeholder="Address 1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>City/Town<span class="required">*</span></label>
+                                                    <input type="text" placeholder="City/Town">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Division <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Division">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Postcode / Zip <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Postcode / Zip">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="country-select">
+                                                    <label>Country <span class="required">*</span></label>
+                                                    <select>
+                                                        <option value="volvo">United States</option>
+                                                        <option value="saab">Algeria</option>
+                                                        <option value="mercedes">Canada</option>
+                                                        <option value="audi">Germany</option>
+                                                        <option value="audi2">England</option>
+                                                        <option value="audi3">Qatar</option>
+                                                        <option value="audi5">Dominican Republic</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="order-notes">
+                                                <div class="checkout-form-list">
+                                                    <label>Order Notes</label>
+                                                    <textarea id="checkout-mess" cols="30" rows="10"
+                                                        placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="order-button-payment mt-20 w-50 mx-auto">
+                                                <button type="submit"
+                                                    class="tp-btn tp-color-btn w-100 banner-animation">Update Billing
+                                                    Details</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form> --}}
+
+
+                        <form id="add__billing__form" method="POST" action="">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkbox-form">
+                                        <h3>Add Billing Details</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>First Name <span class="required">*</span></label>
+                                                    <input type="text" placeholder="First Name" name="first_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Last Name <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Last Name" name="last_name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Email Address</label>
+                                                    <input type="email" placeholder="Email" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Phone <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Phone" name="phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Address 1<span class="required">*</span></label>
+                                                    <input type="text" placeholder="Address 1" name="address_1">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Address 2</label>
+                                                    <input type="text" placeholder="Address 2" name="address_2">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>City/Town<span class="required">*</span></label>
+                                                    <input type="text" placeholder="City/Town" name="city">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Division <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Division" name="division">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="checkout-form-list">
+                                                    <label>Postcode / Zip <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Postcode / Zip"
+                                                        name="post_code">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="country-select">
+                                                    <label>Country <span class="required">*</span></label>
+                                                    <select name="country">
+                                                        <option value="united-states">United States</option>
+                                                        <option value="algeria">Algeria</option>
+                                                        <option value="bangladesh">Bangladesh</option>
+                                                        <option value="canada">Canada</option>
+                                                        <option value="germany">Germany</option>
+                                                        <option value="england">England</option>
+                                                        <option value="qatar">Qatar</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="order-notes">
+                                                <div class="checkout-form-list">
+                                                    <label>Order Notes</label>
+                                                    <textarea id="checkout-mess" cols="30" rows="10" name="order_notes"
+                                                        placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="order-button-payment mt-20 w-50 mx-auto">
+                                                <button type="submit"
+                                                    class="tp-btn tp-color-btn w-100 banner-animation add_billing_details">Add
+                                                    Billing
+                                                    Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+<script>
+    // Add Billing Details 
+    const add_billing_details = document.querySelector('.add_billing_details');
+    // console.log(add_billing_details);
+    add_billing_details.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const form = e.target.form;
+        const first_name = form.first_name.value;
+        const last_name = form.last_name.value;
+        const email = form.last_name.email;
+        const phone = form.last_name.phone;
+        const address_1 = form.last_name.address_1;
+        const address_2 = form.last_name.address_2;
+        const city = form.last_name.city;
+        const division = form.last_name.division;
+        const post_code = form.last_name.post_code;
+        const country = form.last_name.country;
+        const order_notes = form.last_name.order_notes;
+
+        const allData = {
+            first_name,
+            last_name,
+            email,
+            phone,
+            address_1,
+            address_2,
+            city,
+            division,
+            post_code,
+            country,
+            order_notes
+        }
+        console.log(allData);
+
+
+        $.ajax({
+            url: "",
+            type: "POST",
+            data: allData,
+            contentType: false,
+            processData: false,
+            success: function(res) {
+                if (res.status == 200) {
+
+                } else {
+
+                }
+            },
+        });
+
+    });
+
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     document.getElementById('addBillingForm').addEventListener('submit', function(e) {
+    //         e.preventDefault();
+
+    //         let formData = new FormData(this);
+    //         console.log(formData);
+
+
+    //     });
+    // });
+</script>
