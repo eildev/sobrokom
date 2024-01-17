@@ -2,6 +2,7 @@
 <section class="brand-product grey-bg pb-60">
     <div class="container">
         <div class="sections__wrapper white-bg pl-50 pr-50 pb-40 brand-product">
+
             <div class="row align-items-center">
                 <div class="col-md-6 text-center">
                     <div class="tpsection mb-15">
@@ -15,12 +16,30 @@
                     </div>
                 </div>
             </div>
+
+            @php
+                $products = App\Models\Product::where('status', 1)
+                    // ->where('product_feature', 'feature')
+                    ->take(5)
+                    ->orderBy('id', 'ASC')
+                    ->get();
+            @endphp
+
+            @if ($products->count() > 0)
+                @foreach ($products as $product)
+
+
+                <h1> {{$product->product_name}} </h1>
+                <h1> {{$product->brand->BrandName}} </h1>
+                @endforeach
+            @else
+            @endif
+
             <div class="row gx-3">
                 <div class="col-lg-3">
                     <div class="tpbrandproduct__main text-center">
                         <div class="tpbrandproduct__main-thumb mb-20">
-                            <img src="{{ asset('frontend') }}/assets/img/brand/brand-thumb-1.png"
-                                alt="">
+                            <img src="{{ asset('frontend') }}/assets/img/brand/brand-thumb-1.png" alt="">
                         </div>
                         <div class="tpbrandproduct__main-contetn">
                             <h4 class="tpbrandproduct__title">Super Market</h4>
@@ -41,8 +60,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">Lettuce Fresh Produce
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Lettuce
+                                            Fresh Produce
                                             Vegetables</a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -68,8 +87,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">Cheap and delicious fresh
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Cheap and
+                                            delicious fresh
                                             chicken</a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -95,8 +114,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">Fresh Milk Chocolate Quaker Popped Rice
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Fresh Milk
+                                            Chocolate Quaker Popped Rice
                                             Crisps</a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -122,8 +141,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">1kg purple onion/ onion/ dried onion Kinh
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">1kg purple
+                                            onion/ onion/ dried onion Kinh
                                             men </a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -149,8 +168,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">1st Quality Fresh Meat From USA
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">1st
+                                            Quality Fresh Meat From USA
                                             500g</a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -176,8 +195,8 @@
                                     </div>
                                 </div>
                                 <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a
-                                            href="shop-details.html">Fresh Organic Grape Tomatoes
+                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Fresh
+                                            Organic Grape Tomatoes
                                             100g</a></span>
                                     <div class="tpproduct__rating mb-5">
                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -196,6 +215,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

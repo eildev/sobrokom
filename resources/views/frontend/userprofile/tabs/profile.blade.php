@@ -46,6 +46,8 @@
                             <div class="col-sm-9 text-secondary">
                                 <input type="text" name="username" class="form-control"
                                     value="{{ $user->userName ?? 'Data not found' }}" />
+                                <input type="text" name="user_id" class="form-control"
+                                    value="{{ $user->id ?? 'Data not found' }}" />
                             </div>
                         </div>
                         <div class="row mb-3">

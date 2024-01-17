@@ -4,10 +4,10 @@
             <div class="tpfooter__top pb-15">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                             <div class="tpfooter__widget footer-col-1 mb-50">
                                 <h4 class="tpfooter__widget-title">Let Us Help You</h4>
-                                <p>For any questions regarding these Terms and Conditions, please contact us at 
+                                <p>For any questions regarding these Terms and Conditions, please contact us at
                                     <a href="mailto:www.sobrokom.store@gmail.com">www.sobrokom.store@gmail.com</a>
                                     <a href="mailto:info@sobrokom.store">info@sobrokom.store</a>
                                 </p>
@@ -21,14 +21,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6">
                             <div class="tpfooter__widget footer-col-2 mb-50">
-                                <h4 class="tpfooter__widget-title">hot category</h4>
-                                <p>68 St. Vicent Place, Glasgow, Greater <br> Newyork NH2012, UK.</p>
-                                <div class="tpfooter__widget-time-info mt-35">
-                                    <span>Monday – Friday: <b>8:10 AM – 6:10 PM</b></span>
-                                    <span>Saturday: <b>10:10 AM – 06:10 PM</b></span>
-                                    <span>Sunday: <b>Close</b></span>
+                                <h4 class="tpfooter__widget-title">HOT CATEGORIES</h4>
+                                <div class="tpfooter__widget-links">
+                                    @php
+                                        $categories = App\Models\Category::all();
+                                    @endphp
+                                    @if ($categories->count() > 0)
+                                        <ul>
+
+                                            @foreach ($categories as $category)
+                                                <li><a href="#">{{ $category->categoryName }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <ul>
+                                            <li><a href="#">Fruits & Vegetables</a></li>
+                                            <li><a href="#">Dairy Products</a></li>
+                                            <li><a href="#">Package Foods</a></li>
+                                            <li><a href="#">Beverage</a></li>
+                                            <li><a href="#">Health & Wellness</a></li>
+                                        </ul>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
