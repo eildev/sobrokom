@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('fullName',100)->nullable();
             $table->string('pic',100)->nullable();
             $table->string('phone',16)->nullable();
+            $table->string('present_address', 100)->nullable();
+            $table->string('permanent_address', 100)->nullable();
             $table->enum('role',['superadmin','admin','user'])->default('user');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
