@@ -403,14 +403,14 @@
 
 
         $.ajax({
-            url: "",
+            url: "/billing/insert",
             type: "POST",
             data: allData,
             contentType: false,
             processData: false,
             success: function(res) {
                 if (res.status == 200) {
-
+                    toastr.success(res.message);
                 } else {
 
                 }

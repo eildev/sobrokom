@@ -6,6 +6,7 @@ use App\Http\Controllers\frontend\SubscribeController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\BillingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,7 @@ Route::controller(SubscribeController::class)->group(function () {
     Route::get('/subscribe/delete/{id}', 'destroy')->name('subscribe.delete');
 });
 
-Route::middleware('auth','role:user')->group(function () {
+Route::middleware('auth', 'role:user')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/user/dashboard', 'userDashboard')->name('user.dashboard');
     });
@@ -51,4 +52,8 @@ Route::middleware('auth','role:user')->group(function () {
     });
 
 
+    // Billing related route
+    Route::controller(BillingController::class)->group(function () {
+        Route::post('/billing/insert', 'insert')->name('billing.insert');
+    });
 });
