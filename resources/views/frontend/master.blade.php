@@ -28,6 +28,8 @@
 
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    {{-- main jquery file --}}
+    <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,8 +43,8 @@
     <!-- header-area-start -->
     <header>
 
-    @include('frontend.body.topheader')
-    @include('frontend.body.mainnav')
+        @include('frontend.body.topheader')
+        @include('frontend.body.mainnav')
     </header>
     <!-- header-area-end -->
 

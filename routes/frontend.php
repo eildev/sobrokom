@@ -17,6 +17,14 @@ use App\Http\Controllers\Frontend\ProfileController;
 |
 */
 
+// Genarel Pages routes
+Route::get('/about-us', function () {
+    return view('frontend/pages/about-us');
+})->name('aboutus');
+Route::get('/terms-and-condition', function () {
+    return view('frontend/pages/termsandcondition');
+})->name('termsandcondition');
+
 Route::controller(SubscribeController::class)->group(function () {
     Route::post('/subscribe/store', 'store')->name('subscribe.store');
     Route::get('/subscribe/view', 'view')->name('subscribe.view');

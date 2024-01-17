@@ -79,11 +79,23 @@
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
+                                                                    @auth
                                                                     <a class="tpproduct__shopping-wishlist add_whishlist"
                                                                         href="#" value="{{ $product->id }}">
-                                                                        <i class="icon-heart icons"></i>
-                                                                        {{-- <i class="fas fa-heart icons"></i> --}}
+                                                                        <!-- <i class="icon-heart icons"></i> -->
+                                                                        @auth
+                                                                         @php 
+                                                                           $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
+                                                                         @endphp
+                                                                        @endauth
+                                                                        <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}" class="fas fa-heart icons"></i>
                                                                     </a>
+                                                                    @else
+                                                                    <a class="tpproduct__shopping-wishlist"
+                                                                        href="{{ route('login') }}">
+                                                                        <i class="fas fa-heart icons"></i>
+                                                                    </a>
+                                                                    @endauth
                                                                     <a class="tpproduct__shopping-wishlist"
                                                                         href="#">
                                                                         <i class="icon-layers"></i>
@@ -1601,7 +1613,7 @@
 
         element.addEventListener('click', function(e) {
 
-
+            
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -1620,6 +1632,8 @@
                 success: function(response) {
                     if (response.status == 200) {
                         toastr.success(response.message);
+                        element.querySelector('i').setAttribute('style','color:red');
+                        // console.log(element.querySelector('i'));
                     } else {
                         // toastr.warning(response);
                     }

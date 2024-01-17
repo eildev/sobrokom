@@ -12,7 +12,7 @@
                            <nav id="mobile-menu">
                               <ul>
                                  <li class="has-dropdown has-homemenu">
-                                    <a href="index.html">Home</a>
+                                    <a href="index.html">Brands</a>
                                     <ul class="sub-menu home-menu-style">
                                        <li>
                                           <a href="index.html"><img src="{{ asset('frontend') }}/assets/img//header/home1-1.jpg" alt=""> Home Page V1</a>
