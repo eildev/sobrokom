@@ -157,7 +157,7 @@
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
-                    <i class='bx bx-image-alt'></i>
+                    <i class="fas fa-bell"></i>
                 </div>
                 <div class="menu-title">Subscriber</div>
             </a>

@@ -34,6 +34,12 @@
                                     <div class="col-sm-9">
                                         <input type="file" id="image"
                                             class="form-control @error('image') is-invalid  @enderror" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 200 X 200 size
+                                                image
+                                            </i>
+                                        </div>
                                         @error('image')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
