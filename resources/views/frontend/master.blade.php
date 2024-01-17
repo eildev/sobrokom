@@ -40,41 +40,9 @@
 
     <!-- header-area-start -->
     <header>
-        <!-- topbar-start -->
-        @include('frontend.body.topbar')
-        <!-- topbar-end -->
-        <!-- topbar-start -->
-        <div class="header__main-area secondary-header d-none d-xl-block">
-            <div class="container">
-                <div class="header__for-megamenu p-relative">
 
-                    <!-- search-menu-start -->
-                    @include('frontend.body.searchmenu')
-                    <!-- search-menu-end -->
-                    <!-- main-menu-start -->
-                    @include('frontend.body.navbar')
-                    <!-- main-menu-end -->
-
-                </div>
-            </div>
-        </div>
-        <!-- topbar-end -->
-
-        <!-- header-search -->
-        @include('frontend.body.headerSearch')
-        <!-- header-search-end -->
-
-        <!-- header-cart-start -->
-        @include('frontend.body.headerCart')
-        <!-- header-cart-end -->
-
-        <!-- mobile-menu-area -->
-        @include('frontend.body.mobileMenu')
-        <!-- mobile-menu-area-end -->
-
-        <!-- sidebar-menu-area -->
-        @include('frontend.body.sidebar')
-        <!-- sidebar-menu-area-end -->
+    @include('frontend.body.topheader')
+    @include('frontend.body.mainnav')
     </header>
     <!-- header-area-end -->
 
