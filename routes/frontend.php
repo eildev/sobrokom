@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\frontend\SubscribeController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\WishListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +28,10 @@ Route::middleware('auth','role:user')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/user/dashboard', 'userDashboard')->name('user.dashboard');
     });
+
+
+    // Wishlist related route 
+    Route::controller(WishListController::class)->group(function () {
+        Route::post('/wishlist/add', 'wishlistAdd')->name('wishlist.add');
+    });
 });
-
-
