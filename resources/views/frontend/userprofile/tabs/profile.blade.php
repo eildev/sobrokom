@@ -36,68 +36,71 @@
         <div class="col-lg-8 ps-2">
             <div class="card mb-2">
                 <div class="card-title text-center fw-semibold my-4 fs-4">User Information</div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">User Name</p>
+                <form action="{{ Route('user.profile.update') }}" method="POST">
+                    @csrf
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">User Name</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="username" class="form-control"
+                                    value="{{ $user->userName ?? 'Data not found' }}" />
+                            </div>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->userName ?? 'Data not found' }}" />
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="fullname" class="form-control"
+                                    value="{{ $user->fullName ?? 'Data not found' }}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="email" class="form-control"
+                                    value="{{ $user->email ?? 'Data not found' }}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Mobile</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="phone" class="form-control"
+                                    value="{{ $user->phone ?? 'Data not found' }}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Present Address</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="present_address" class="form-control"
+                                    value="{{ $user->present_address ?? 'Data not found' }}" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Permanent Address</p>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" name="permanent_address" class="form-control"
+                                    value="{{ $user->permanent_address ?? 'Data not found' }}" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="submit" class="btn btn-primary px-4" value="Save Changes" />
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Full Name</p>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->fullName ?? 'Data not found' }}" />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Email</p>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->email ?? 'Data not found' }}" />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Mobile</p>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->phone ?? 'Data not found' }}" />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Present Address</p>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->present_address ?? 'Data not found' }}" />
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Permanent Address</p>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="text" class="form-control"
-                                value="{{ $user->permanent_address ?? 'Data not found' }}" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-9 text-secondary">
-                            <input type="button" class="btn btn-primary px-4" value="Save Changes" />
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -135,7 +138,5 @@
             </div>
         </div>
     </div>
-    <div class="tab_card">
-        this is profile page
-    </div>
+
 </div>

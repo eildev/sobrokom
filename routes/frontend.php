@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\SubscribeController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WishListController;
+use App\Http\Controllers\Frontend\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +31,16 @@ Route::middleware('auth','role:user')->group(function () {
     });
 
 
-    // Wishlist related route 
+    // Wishlist related route
     Route::controller(WishListController::class)->group(function () {
         Route::post('/wishlist/add', 'wishlistAdd')->name('wishlist.add');
     });
+
+
+    // Profile related route
+    Route::controller(ProfileController::class)->group(function () {
+        Route::post('/user/profile/update', 'UpdateProfile')->name('user.profile.update');
+    });
+
+
 });
