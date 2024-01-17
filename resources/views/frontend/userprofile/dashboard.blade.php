@@ -47,7 +47,7 @@
                 <div class="col-xl-3 col-lg-12 col-md-12">
                     <div class="tpshop__leftbar">
                         {{-- sidebar search --}}
-                        <div class="sidebar__widget mb-30">
+                        <div class="sidebar__widget mb-20">
                             <div class="sidebar__widget-content">
                                 <div class="sidebar__search">
                                     <form action="#">
@@ -105,7 +105,12 @@
                 {{-- User Dashboard Body --}}
                 <div class="col-xl-9 col-lg-12 col-md-12">
                     {{-- profile body --}}
-                    <div class="tab__content--1 tabContent">
+                    @php
+                        $user = App\Models\User::findOrFail(Auth::user()->id);
+                        // dd($user);
+
+                    @endphp
+                    <div class="tab__content--1 tabContent tab_active">
                         @include('frontend.userprofile.tabs.profile')
                     </div>
                     {{-- Billings body --}}
