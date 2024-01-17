@@ -16,8 +16,9 @@ class RouteServiceProvider extends ServiceProvider
      * Typically, users are redirected here after authentication.
      *
      * @var string
-     */
-    public const HOME = '/dashboard';
+     */ 
+    public const HOME = '/admin/dashboard';
+    public const HOME1 = '/user/dashboard';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

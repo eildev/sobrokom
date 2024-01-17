@@ -65,31 +65,31 @@
                             <div class="sidebar__widget-content tab__main">
                                 <ul>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="fas fa-user pe-2"></i>
                                             <a href="#" tabindex="1" class="active">Profile</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="fas fa-envelope-open-dollar pe-2"></i>
                                             <a href="#" tabindex="2">Billings</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="fas fa-heart-circle pe-2"></i>
                                             <a href="#" tabindex="3">Wishlist</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="far fa-home pe-2"></i>
                                             <a href="#" tabindex="4">Orders</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="far fa-home pe-2"></i>
                                             <a href="#" tabindex="5">Order Tracking</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="fas fa-money-check-alt pe-2"></i>
                                             <a href="#" tabindex="6">Refunds</a>
                                     </li>
                                     <li>
-                                        <span><i class="far fa-home"></i>
+                                        <span><i class="fas fa-user-cog pe-2"></i>
                                             <a href="#" tabindex="7">Settings</a>
                                     </li>
                                 </ul>

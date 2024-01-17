@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('fullName',100)->nullable();
             $table->string('pic',100)->nullable();
             $table->string('phone',16)->nullable();
-            $table->enum('role',['superadmin','admin','user'])->nullable();
+            $table->enum('role',['superadmin','admin','user'])->default('user');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status',['Active','Inactive'])->default('Active');
             $table->rememberToken();
             $table->timestamps();
         });
