@@ -378,7 +378,6 @@
 <script>
     // Add Billing Details 
     const add_billing_details = document.querySelector('.add_billing_details');
-    // console.log(add_billing_details);
     add_billing_details.addEventListener('click', function(e) {
         e.preventDefault();
         $.ajaxSetup({
@@ -386,10 +385,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // let allBillingData = new FormData(jQuery("#addBillinForm")[0]);
-        // console.log(allBillingData);
-
-        // const form = e.target.form;
         const user_id = "{{ Auth::user()->id }}";
         const first_name = document.querySelector('.first_name').value;
         const last_name = document.querySelector('.last_name').value;
@@ -402,44 +397,17 @@
         const post_code = document.querySelector('.post_code').value;
         const country = document.querySelector('.country').value;
         const order_notes = document.querySelector('.order_notes').value;
-        alert(first_name);
-        // let allData = {
-        //     "user_id": user_id,
-        //     "first_name": first_name,
-        //     "last_name": last_name,
-        //     "email": email,
-        //     "phone": phone,
-        //     "address_1": address_1,
-        //     "address_2": address_2,
-        //     "city": city,
-        //     "division": division,
-        //     "post_code": post_code,
-        //     "country": country,
-        //     "order_notes": order_notes
-        // }
-
-
+        alert(user_id);
 
         $.ajax({
             url: "/billing/insert",
             type: "POST",
             data: {
                 "user_id": user_id,
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "phone": phone,
-                "address_1": address_1,
-                "address_2": address_2,
-                "city": city,
-                "division": division,
-                "post_code": post_code,
-                "country": country,
-                "order_notes": order_notes
+                'first_name':first_name
             },
-            contentType: false,
-            processData: false,
             success: function(res) {
+            console.log(res);
                 if (res.status == 200) {
                     toastr.success(res.message);
                 } else {
