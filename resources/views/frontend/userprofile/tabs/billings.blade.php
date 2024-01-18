@@ -402,7 +402,7 @@
         const post_code = document.querySelector('.post_code').value;
         const country = document.querySelector('.country').value;
         const order_notes = document.querySelector('.order_notes').value;
-        alert(first_name);
+        // alert(first_name);
         // let allData = {
         //     "user_id": user_id,
         //     "first_name": first_name,
@@ -425,17 +425,7 @@
             type: "POST",
             data: {
                 "user_id": user_id,
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "phone": phone,
-                "address_1": address_1,
-                "address_2": address_2,
-                "city": city,
-                "division": division,
-                "post_code": post_code,
-                "country": country,
-                "order_notes": order_notes
+                "first_name": first_name
             },
             contentType: false,
             processData: false,
