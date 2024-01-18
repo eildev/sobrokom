@@ -35,6 +35,10 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
+Route::get('/product-details', function () {
+    return view('frontend/e-com/product_details');
+})->name('product.details');
+
 
 Route::controller(SubscribeController::class)->group(function () {
     Route::post('/subscribe/store', 'store')->name('subscribe.store');
