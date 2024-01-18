@@ -19,7 +19,7 @@
 
             @php
                 $products = App\Models\Product::where('status', 1)
-                    // ->where('product_feature', 'feature')
+                     ->where('product_feature', 'feature')
                     ->take(5)
                     ->orderBy('id', 'ASC')
                     ->get();

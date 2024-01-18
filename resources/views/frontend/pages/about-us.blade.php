@@ -25,7 +25,7 @@
                   <div class="col-lg-6">
                      <div class="tpcontact-inner text-center mt-20 mb-40">
                         <div class="tpcontact-inner-text">
-                           <h5 class="tpcontact-inner-sub-title">about us</h5>
+                           <h5 class="tpcontact-inner-sub-title"  style="font-size:16px">about us</h5>
                            <h5 class="tpcontact-inner-title mb-20">Welcome to <a style="color:#9e54a1" href="{{ route('home') }}"> sobrokom.store </a> !</h5>
                            <p style="text-align: justify;">At <a style="color:#9e54a1" href="{{ route('home') }}"> sobrokom.store,</a>  we believe in more than just providing products; we are committed to delivering an unparalleled shopping experience. Founded in 2024, we have evolved into a one-stop destination for all your needs, offering a diverse range of high-quality products that blend style, functionality, and affordability</p>
                         </div>
@@ -113,5 +113,8 @@
             </div>
          </section>
          <!-- contact-area-end -->
+         <!-- feature-area-start -->
+         @include('frontend.body.servicesfooter')
+         <!-- feature-area-end -->
 
 @endsection

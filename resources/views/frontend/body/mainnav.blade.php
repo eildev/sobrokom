@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-xl-3">
                     <div class="header__logo">
-                        <a href="index.html"><img src="{{ asset('frontend') }}/assets/img/logo/logo.png"
+                        <a href="{{ route('home') }}"><img src="{{ asset('frontend') }}/assets/img/logo/logo.png"
                                 alt="logo"></a>
                     </div>
                 </div>
@@ -141,31 +141,11 @@
                                     @endif
 
                                 </li>
-                                <li class="has-dropdown">
+                                <li class="">
                                     <a href="blog.html">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Big image</a></li>
-                                        <li><a href="blog-right-sidebar.html">Right sidebar</a></li>
-                                        <li><a href="blog-left-sidebar.html">Left sidebar</a></li>
-                                        <li><a href="blog-details.html">Single Post</a></li>
-                                    </ul>
                                 </li>
-                                <li class="has-dropdown">
-                                    <a href="about.html">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-location.html">Shop Location One</a></li>
-                                        <li><a href="shop-location-2.html">Shop Location Two</a></li>
-                                        <li><a href="faq.html">FAQs</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="log-in.html">Sign In</a></li>
-                                        <li><a href="comming-soon.html">Coming soon</a></li>
-                                        <li><a href="404.html">Page 404</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="{{ route('aboutus') }}">About Us</a></li>
+                                <li><a href="{{ route('contactus') }}">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>

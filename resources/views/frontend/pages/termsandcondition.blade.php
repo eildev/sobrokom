@@ -25,7 +25,7 @@
                   <div class="col-lg-6">
                      <div class="tpcontact-inner text-center mt-20 mb-40">
                         <div class="tpcontact-inner-text">
-                           <h5 class="tpcontact-inner-sub-title">Terms & conditions</h5>
+                           <h5 class="tpcontact-inner-sub-title" style="font-size:16px">Terms & conditions</h5>
                          </div>
                      </div>
                   </div>
@@ -183,5 +183,7 @@
             </div>
          </section>
          <!-- contact-area-end -->
-
+         <!-- feature-area-start -->
+            @include('frontend.body.servicesfooter')
+         <!-- feature-area-end -->
 @endsection
