@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 09:21 AM
+-- Generation Time: Jan 18, 2024 at 11:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `sobrokom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing_infos`
+--
+
+CREATE TABLE `billing_infos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(16) NOT NULL,
+  `address_1` varchar(255) NOT NULL,
+  `address_2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `division` varchar(255) NOT NULL,
+  `post_code` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `order_notes` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `billing_infos`
+--
+
+INSERT INTO `billing_infos` (`id`, `user_id`, `first_name`, `last_name`, `email`, `phone`, `address_1`, `address_2`, `city`, `division`, `post_code`, `country`, `order_notes`, `created_at`, `updated_at`) VALUES
+(6, 2, 'Md. Ehaoteshamul Islam', 'Kisor', 'dev.kishor138@gmail.com', '32423423423', 'dsfdsf', 'sdfsdf', 'asdasd', 'sdf', 'asdasd', 'bangladesh', 'wqeqweqweqwe', '2024-01-18 01:58:40', '2024-01-18 01:58:40');
 
 -- --------------------------------------------------------
 
@@ -184,7 +215,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2024_01_11_053124_create_coupons_table', 5),
 (16, '2024_01_11_085029_create_offer_banners_table', 5),
 (17, '2024_01_14_070739_create_subscribes_table', 6),
-(19, '2024_01_17_065344_create_wish_lists_table', 7);
+(19, '2024_01_17_065344_create_wish_lists_table', 7),
+(21, '2024_01_17_180208_create_billing_infos_table', 9);
 
 -- --------------------------------------------------------
 
@@ -471,8 +503,25 @@ CREATE TABLE `wish_lists` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `wish_lists`
+--
+
+INSERT INTO `wish_lists` (`id`, `user_id`, `product_id`, `loved`, `created_at`, `updated_at`) VALUES
+(1, 2, 46, 1, '2024-01-18 02:03:35', '2024-01-18 02:03:35'),
+(2, 2, 45, 1, '2024-01-18 02:03:37', '2024-01-18 02:03:37'),
+(3, 2, 44, 1, '2024-01-18 02:03:40', '2024-01-18 02:03:40'),
+(4, 2, 47, 1, '2024-01-18 03:14:39', '2024-01-18 03:14:39');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `billing_infos`
+--
+ALTER TABLE `billing_infos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `billing_infos_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `brands`
@@ -609,6 +658,12 @@ ALTER TABLE `wish_lists`
 --
 
 --
+-- AUTO_INCREMENT for table `billing_infos`
+--
+ALTER TABLE `billing_infos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
@@ -648,7 +703,7 @@ ALTER TABLE `image_galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `offer_banners`
@@ -714,11 +769,17 @@ ALTER TABLE `variants`
 -- AUTO_INCREMENT for table `wish_lists`
 --
 ALTER TABLE `wish_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `billing_infos`
+--
+ALTER TABLE `billing_infos`
+  ADD CONSTRAINT `billing_infos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `coupons`
