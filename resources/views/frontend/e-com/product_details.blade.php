@@ -21,8 +21,8 @@
     <!-- breadcrumb-area-end -->
 
     @php
-        $product = App\Models\Product::where('product_id', $id);
-        
+        // $product = App\Models\Product::where('product_id', $product->id)->first();
+        // dd($product);
     @endphp
 
 
