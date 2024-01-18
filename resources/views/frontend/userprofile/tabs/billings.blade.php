@@ -26,6 +26,8 @@
         </div>
     </div>
     <div class="tab-content" id="nav-tabContent">
+
+        {{-- tab1 details --}}
         <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
             <div class="row">
                 <div class="col-lg-12">
@@ -35,137 +37,114 @@
                 </div>
             </div>
         </div>
+
+
+        @php
+            $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
+        @endphp
+        {{-- tab 2 details  --}}
         <div class="tab-pane fade show active whight-product" id="nav-popular" role="tabpanel"
             aria-labelledby="nav-popular-tab">
             <div class="row">
                 <div class="tab_card d-flex align-items-center justify-content-between mb-20">
-                    <div class="col-lg-12">
-                        <div class="your-order mb-30 ">
-                            <h3>Your order</h3>
-                            <div class="your-order-table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-total">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum suscipit <strong class="product-quantity"> ×
-                                                    1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$165.00</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum dictum magna <strong class="product-quantity"> ×
-                                                    1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$50.00</span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount">$215.00</span></td>
-                                        </tr>
-                                        <tr class="shipping">
-                                            <th>Shipping</th>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <input type="radio" name="shipping">
-                                                        <label>
-                                                            Flat Rate: <span class="amount">$7.00</span>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" name="shipping">
-                                                        <label>Free Shipping:</label>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">$215.00</span></strong>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="payment-method">
-                                <div class="accordion" id="checkoutAccordion">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="checkoutOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
-                                                Direct Bank Transfer
-                                            </button>
-                                        </h2>
-                                        <div id="bankOne" class="accordion-collapse collapse show"
-                                            aria-labelledby="checkoutOne" data-bs-parent="#checkoutAccordion">
-                                            <div class="accordion-body">
-                                                Make your payment directly into our bank account. Please use
-                                                your Order ID as the payment reference. Your order won’t be
-                                                shipped until the funds have cleared in our account.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="paymentTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#payment"
-                                                aria-expanded="false" aria-controls="payment">
-                                                Cheque Payment
-                                            </button>
-                                        </h2>
-                                        <div id="payment" class="accordion-collapse collapse"
-                                            aria-labelledby="paymentTwo" data-bs-parent="#checkoutAccordion">
-                                            <div class="accordion-body">
-                                                Please send your cheque to Store Name, Store Street, Store
-                                                Town, Store
-                                                State / County, Store
-                                                Postcode.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="paypalThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#paypal"
-                                                aria-expanded="false" aria-controls="paypal">
-                                                PayPal
-                                            </button>
-                                        </h2>
-                                        <div id="paypal" class="accordion-collapse collapse"
-                                            aria-labelledby="paypalThree" data-bs-parent="#checkoutAccordion">
-                                            <div class="accordion-body">
-                                                Pay via PayPal; you can pay with your credit card if you
-                                                don’t have a
-                                                PayPal account.
-                                            </div>
-                                        </div>
-                                    </div>
+                    @if ($billingInfo)
+                        <div class="col-lg-12">
+                            <div class="your-order mb-30 ">
+                                <h3>Your Details</h3>
+                                <div class="your-order-table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">First Name</th>
+                                                <th class="product-total">{{ $billingInfo->first_name ?? '' }}</th>
+                                                <th class="product-name">Last Name</th>
+                                                <th class="product-total">{{ $billingInfo->last_name ?? '' }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    Email
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->email ?? '' }}</span>
+                                                </td>
+                                                <td class="product-name">
+                                                    Phone
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->phone ?? '' }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    Address 1
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->address_1 ?? '' }}</span>
+                                                </td>
+                                                <td class="product-name">
+                                                    Address 2
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->address_2 ?? '' }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    City
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->city ?? '' }}</span>
+                                                </td>
+                                                <td class="product-name">
+                                                    Division
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->division ?? '' }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    Post Code
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->post_code ?? '' }}</span>
+                                                </td>
+                                                <td class="product-name">
+                                                    Country
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{ $billingInfo->country ?? '' }}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
                                 </div>
-                                <div class="order-button-payment mt-20">
-                                    <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation">Place
-                                        order</button>
+                                <div class="payment-method">
+                                    <div class="order-button-payment mt-20 mx-auto">
+                                        {{-- <button type="submit"
+                                            class="tp-btn tp-color-btn w-50 mx-auto banner-animation">Update Billing
+                                            Information</button> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-lg-12">
+                            <div class="order-button-payment mt-20 mx-auto">
+                                <button type="submit" class="tp-btn tp-color-btn w-50 mx-auto banner-animation">Add
+                                    Billing Information</button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade whight-product" id="nav-product" role="tabpanel"
-            aria-labelledby="nav-product-tab">
+
+        {{-- tab-3 details  --}}
+        <div class="tab-pane fade whight-product" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tab_card d-flex align-items-center justify-content-between mb-20">
@@ -180,6 +159,7 @@
                                                 <div class="checkout-form-list">
                                                     <label>First Name <span class="required">*</span></label>
                                                     <input type="text" placeholder="First Name" class="first_name"
+                                                        value="{{ $billingInfo->first_name ?? '' }}"
                                                         name="first_name">
                                                     <span class="first_name_error text-danger"></span>
                                                 </div>
@@ -189,21 +169,23 @@
                                                 <div class="checkout-form-list">
                                                     <label>Last Name <span class="required">*</span></label>
                                                     <input type="text" placeholder="Last Name" class="last_name"
-                                                        name="last_name">
+                                                        value="{{ $billingInfo->last_name ?? '' }}" name="last_name">
                                                     <span class="last_name_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Email Address</label>
-                                                    <input type="email" placeholder="Email" class="email"
+                                                    <input type="email" placeholder="Email"
+                                                        value="{{ $billingInfo->email ?? '' }}" class="email"
                                                         name="email">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Phone <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Phone" class="phone"
+                                                    <input type="text" placeholder="Phone"
+                                                        value="{{ $billingInfo->phone ?? '' }}" class="phone"
                                                         name="phone">
                                                     <span class="phone_error text-danger"></span>
                                                 </div>
@@ -211,7 +193,8 @@
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Address 1<span class="required">*</span></label>
-                                                    <input type="text" placeholder="Address 1" class="address_1"
+                                                    <input type="text" placeholder="Address 1"
+                                                        value="{{ $billingInfo->address_1 ?? '' }}" class="address_1"
                                                         name="address_1">
                                                     <span class="address_1_error text-danger"></span>
                                                 </div>
@@ -219,14 +202,16 @@
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Address 2</label>
-                                                    <input type="text" placeholder="Address 2" class="address_2"
+                                                    <input type="text" placeholder="Address 2"
+                                                        value="{{ $billingInfo->address_2 ?? '' }}" class="address_2"
                                                         name="address_2">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>City/Town<span class="required">*</span></label>
-                                                    <input type="text" placeholder="City/Town" class="city"
+                                                    <input type="text" placeholder="City/Town"
+                                                        value="{{ $billingInfo->city ?? '' }}" class="city"
                                                         name="city">
                                                     <span class="city_error text-danger"></span>
                                                 </div>
@@ -234,7 +219,8 @@
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Division <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Division" class="division"
+                                                    <input type="text" placeholder="Division"
+                                                        value="{{ $billingInfo->division ?? '' }}" class="division"
                                                         name="division">
                                                     <span class="division_error text-danger"></span>
                                                 </div>
@@ -244,14 +230,16 @@
                                                 <div class="checkout-form-list">
                                                     <label>Postcode / Zip <span class="required">*</span></label>
                                                     <input type="text" placeholder="Postcode / Zip"
-                                                        class="post_code" name="post_code">
+                                                        value="{{ $billingInfo->post_code ?? '' }}" class="post_code"
+                                                        name="post_code">
                                                     <span class="post_code_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="country-select">
                                                     <label>Country <span class="required">*</span></label>
-                                                    <select name="country" class="country">
+                                                    <select name="country" class="country"
+                                                        value="{{ $billingInfo->country ?? '' }}">
                                                         <option value="">Select Country</option>
                                                         <option value="united-states">United States</option>
                                                         <option value="algeria">Algeria</option>
@@ -268,7 +256,7 @@
                                                 <div class="checkout-form-list">
                                                     <label>Order Notes</label>
                                                     <textarea id="checkout-mess" cols="30" rows="10" class="order_notes" name="order_notes"
-                                                        placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                                        placeholder="Notes about your order, e.g. special notes for delivery.">{{ $billingInfo->order_notes ?? '' }}</textarea>
                                                 </div>
                                             </div>
 
@@ -287,6 +275,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 
