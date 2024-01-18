@@ -35,9 +35,10 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
-Route::get('/product-details', function () {
+Route::get('/product-details/{id}', function () {
     return view('frontend/e-com/product_details');
 })->name('product.details');
+
 
 
 Route::controller(SubscribeController::class)->group(function () {

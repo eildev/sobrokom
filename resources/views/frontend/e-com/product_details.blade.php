@@ -20,6 +20,12 @@
     </div>
     <!-- breadcrumb-area-end -->
 
+    @php
+        $product = App\Models\Product::where('product_id', $id);
+        
+    @endphp
+
+
     <!-- shop-details-area-start -->
     <section class="shopdetails-area grey-bg pb-50">
         <div class="container">

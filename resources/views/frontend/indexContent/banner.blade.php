@@ -7,7 +7,7 @@
                     <div class="tpbanner__item mb-30">
                         <a href="shop-2.html">
                             <div class="tpbanner__text tpbanner__bg"
-                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-4.jpg">
+                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-4.png">
                                 <span class="tpbanner__sub-title mb-20">Top offers</span>
                                 <h4 class="tpbanner__title mb-20">seafood <br> Fresh & Tasty</h4>
                                 <p>Natural, Rich in Nutrition</p>
@@ -19,7 +19,7 @@
                     <div class="tpbanner__item mb-30">
                         <a href="shop-2.html">
                             <div class="tpbanner__text tpbanner__bg"
-                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-5.jpg">
+                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-5.png">
                                 <span class="tpbanner__sub-title mb-20">Weekend Deals</span>
                                 <h4 class="tpbanner__title mb-20">vegetable <br> Best For Family</h4>
                                 <p>Top Quality Products</p>
@@ -31,7 +31,7 @@
                     <div class="tpbanner__item mb-30">
                         <a href="shop-2.html">
                             <div class="tpbanner__text tpbanner__bg"
-                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-6.jpg">
+                                data-background="{{ asset('frontend') }}/assets/img/banner/banner-6.png">
                                 <span class="tpbanner__sub-title mb-20">Top seller</span>
                                 <h4 class="tpbanner__title mb-20">fresh Meat <br> Fresh & Tasty</h4>
                                 <p>Limited Time: Online Only!</p>
