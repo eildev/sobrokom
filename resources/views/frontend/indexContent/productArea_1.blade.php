@@ -30,7 +30,7 @@ $featured_product = App\Models\Product::where('status', 1)
     ->take(5)
     ->orderBy('id', 'ASC')
     ->get();
-    @dd($featured_product);
+    // @dd($featured_product);
 @endphp
 
 
