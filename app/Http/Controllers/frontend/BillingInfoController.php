@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Billing;
+use App\Models\BillingInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BillingController extends Controller
+class BillingInfoController extends Controller
 {
     public function insert(Request $request)
     {
-        $billing = new Billing;
+        $billing = new BillingInfo;
         $billing->user_id = Auth::user()->id;
         $billing->first_name = $request->first_name;
         $billing->last_name = $request->last_name;

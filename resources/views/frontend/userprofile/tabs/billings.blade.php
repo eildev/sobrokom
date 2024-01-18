@@ -270,8 +270,14 @@
                                                 <div class="checkout-form-list">
                                                     <label>First Name <span class="required">*</span></label>
                                                     <input type="text" placeholder="First Name" name="first_name">
+                                                    @php
+                                                        $user_id = Auth::user()->id;
+                                                    @endphp
+                                                    <input type="text" placeholder="" name="user_id"
+                                                        value="{{ $user_id }}">
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Last Name <span class="required">*</span></label>
@@ -374,6 +380,7 @@
         e.preventDefault();
 
         const form = e.target.form;
+        const user_id = form.user_id.value;
         const first_name = form.first_name.value;
         const last_name = form.last_name.value;
         const email = form.last_name.email;
@@ -387,17 +394,18 @@
         const order_notes = form.last_name.order_notes;
 
         const allData = {
-            first_name,
-            last_name,
-            email,
-            phone,
-            address_1,
-            address_2,
-            city,
-            division,
-            post_code,
-            country,
-            order_notes
+            "user_id": user_id,
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "phone": phone,
+            "address_1": address_1,
+            "address_2": address_2,
+            "city": city,
+            "division": division,
+            "post_code": post_code,
+            "country": country,
+            "order_notes": order_notes
         }
         console.log(allData);
 
