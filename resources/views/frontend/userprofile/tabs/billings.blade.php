@@ -169,108 +169,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tab_card d-flex align-items-center justify-content-between mb-20">
-                        {{-- <form action="#">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="checkbox-form">
-                                        <h3>Update Billing Details</h3>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>First Name <span class="required">*</span></label>
-                                                    <input type="text" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>Last Name <span class="required">*</span></label>
-                                                    <input type="text" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>Email Address <span class="required">*</span></label>
-                                                    <input type="email" placeholder="Email">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>Phone <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Phone">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="checkout-form-list">
-                                                    <label>Address 1<span class="required">*</span></label>
-                                                    <input type="text" placeholder="Address 1">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>City/Town<span class="required">*</span></label>
-                                                    <input type="text" placeholder="City/Town">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>Division <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Division">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="checkout-form-list">
-                                                    <label>Postcode / Zip <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Postcode / Zip">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="country-select">
-                                                    <label>Country <span class="required">*</span></label>
-                                                    <select>
-                                                        <option value="volvo">United States</option>
-                                                        <option value="saab">Algeria</option>
-                                                        <option value="mercedes">Canada</option>
-                                                        <option value="audi">Germany</option>
-                                                        <option value="audi2">England</option>
-                                                        <option value="audi3">Qatar</option>
-                                                        <option value="audi5">Dominican Republic</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="order-notes">
-                                                <div class="checkout-form-list">
-                                                    <label>Order Notes</label>
-                                                    <textarea id="checkout-mess" cols="30" rows="10"
-                                                        placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="order-button-payment mt-20 w-50 mx-auto">
-                                                <button type="submit"
-                                                    class="tp-btn tp-color-btn w-100 banner-animation">Update Billing
-                                                    Details</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form> --}}
-
-
                         <form id="addBillinForm" method="POST" action="">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="checkbox-form">
-                                        <h3>Add Billing Details</h3>
+                                        <h3>Your Information</h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>First Name <span class="required">*</span></label>
                                                     <input type="text" placeholder="First Name" class="first_name"
                                                         name="first_name">
+                                                    <span class="first_name_error text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -279,6 +190,7 @@
                                                     <label>Last Name <span class="required">*</span></label>
                                                     <input type="text" placeholder="Last Name" class="last_name"
                                                         name="last_name">
+                                                    <span class="last_name_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -293,6 +205,7 @@
                                                     <label>Phone <span class="required">*</span></label>
                                                     <input type="text" placeholder="Phone" class="phone"
                                                         name="phone">
+                                                    <span class="phone_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -300,6 +213,7 @@
                                                     <label>Address 1<span class="required">*</span></label>
                                                     <input type="text" placeholder="Address 1" class="address_1"
                                                         name="address_1">
+                                                    <span class="address_1_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -314,6 +228,7 @@
                                                     <label>City/Town<span class="required">*</span></label>
                                                     <input type="text" placeholder="City/Town" class="city"
                                                         name="city">
+                                                    <span class="city_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -321,6 +236,7 @@
                                                     <label>Division <span class="required">*</span></label>
                                                     <input type="text" placeholder="Division" class="division"
                                                         name="division">
+                                                    <span class="division_error text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -329,12 +245,14 @@
                                                     <label>Postcode / Zip <span class="required">*</span></label>
                                                     <input type="text" placeholder="Postcode / Zip"
                                                         class="post_code" name="post_code">
+                                                    <span class="post_code_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="country-select">
                                                     <label>Country <span class="required">*</span></label>
                                                     <select name="country" class="country">
+                                                        <option value="">Select Country</option>
                                                         <option value="united-states">United States</option>
                                                         <option value="algeria">Algeria</option>
                                                         <option value="bangladesh">Bangladesh</option>
@@ -343,6 +261,7 @@
                                                         <option value="england">England</option>
                                                         <option value="qatar">Qatar</option>
                                                     </select>
+                                                    <span class="country_error text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="order-notes">
@@ -392,21 +311,49 @@
         const post_code = document.querySelector('.post_code').value;
         const country = document.querySelector('.country').value;
         const order_notes = document.querySelector('.order_notes').value;
-        alert(user_id);
 
         $.ajax({
             url: "/billing/insert",
             type: "POST",
             data: {
                 "user_id": user_id,
-                'first_name':first_name
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "phone": phone,
+                "address_1": address_1,
+                "address_2": address_2,
+                "city": city,
+                "division": division,
+                "post_code": post_code,
+                "country": country,
+                "order_notes": order_notes
             },
             success: function(res) {
-            console.log(res);
+                // console.log(res);
                 if (res.status == 200) {
                     toastr.success(res.message);
+                    console.log(res.billing);
+                    document.querySelector('.first_name').value = res.billing.first_name;
+                    document.querySelector('.last_name').value = res.billing.last_name;
+                    document.querySelector('.email').value = res.billing.email;
+                    document.querySelector('.phone').value = res.billing.phone;
+                    document.querySelector('.address_1').value = res.billing.address_1;
+                    document.querySelector('.address_2').value = res.billing.address_2;
+                    document.querySelector('.city').value = res.billing.city;
+                    document.querySelector('.division').value = res.billing.division;
+                    document.querySelector('.post_code').value = res.billing.post_code;
+                    document.querySelector('.country').value = res.billing.country;
+                    document.querySelector('.order_notes').value = res.billing.order_notes;
                 } else {
-
+                    document.querySelector('.first_name_error').innerText = res.error.last_name;
+                    document.querySelector('.last_name_error').innerText = res.error.first_name;
+                    document.querySelector('.phone_error').innerText = res.error.phone;
+                    document.querySelector('.address_1_error').innerText = res.error.address_1;
+                    document.querySelector('.city_error').innerText = res.error.city;
+                    document.querySelector('.division_error').innerText = res.error.division;
+                    document.querySelector('.post_code_error').innerText = res.error.post_code;
+                    document.querySelector('.country_error').innerText = res.error.country;
                 }
             },
         });

@@ -18,11 +18,8 @@
             </div>
 
             @php
-                $products = App\Models\Product::where('status', 1)
-                     ->where('product_feature', 'feature')
-                    ->take(5)
-                    ->orderBy('id', 'ASC')
-                    ->get();
+                $brands = App\Models\Brand::where('status', 1)
+                    ->where('BrandName', 'Local')->first();
             @endphp
 
             @if ($products->count() > 0)

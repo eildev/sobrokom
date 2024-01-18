@@ -21,4 +21,12 @@ class WishListController extends Controller
             'message' => "successfully Added to your WishList",
         ]);
     }
+
+
+    // WishList Delete function
+    public function wishlistDelete($id) {
+        $wishlist = WishList::findOrFail($id);
+        $wishlist->delete();
+        return back()->with('danger', 'Wishlist Successfully deleted');
+    }
 }

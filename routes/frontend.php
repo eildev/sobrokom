@@ -53,6 +53,7 @@ Route::middleware('auth', 'role:user')->group(function () {
     // Wishlist related route
     Route::controller(WishListController::class)->group(function () {
         Route::post('/wishlist/add', 'wishlistAdd')->name('wishlist.add');
+        Route::get('/wishlist/delete/{id}', 'wishlistDelete')->name('wishlist.delete');
     });
 
 
