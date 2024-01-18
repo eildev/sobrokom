@@ -259,7 +259,7 @@
                         </form> --}}
 
 
-                        <form id="add__billing__form" method="POST" action="">
+                        <form id="addBillinForm" method="POST" action="">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
@@ -269,55 +269,58 @@
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>First Name <span class="required">*</span></label>
-                                                    <input type="text" placeholder="First Name" name="first_name">
-                                                    @php
-                                                        $user_id = Auth::user()->id;
-                                                    @endphp
-                                                    <input type="text" placeholder="" name="user_id"
-                                                        value="{{ $user_id }}">
+                                                    <input type="text" placeholder="First Name" class="first_name"
+                                                        name="first_name">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Last Name <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Last Name" name="last_name">
+                                                    <input type="text" placeholder="Last Name" class="last_name"
+                                                        name="last_name">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Email Address</label>
-                                                    <input type="email" placeholder="Email" name="email">
+                                                    <input type="email" placeholder="Email" class="email"
+                                                        name="email">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Phone <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Phone" name="phone">
+                                                    <input type="text" placeholder="Phone" class="phone"
+                                                        name="phone">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Address 1<span class="required">*</span></label>
-                                                    <input type="text" placeholder="Address 1" name="address_1">
+                                                    <input type="text" placeholder="Address 1" class="address_1"
+                                                        name="address_1">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Address 2</label>
-                                                    <input type="text" placeholder="Address 2" name="address_2">
+                                                    <input type="text" placeholder="Address 2" class="address_2"
+                                                        name="address_2">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>City/Town<span class="required">*</span></label>
-                                                    <input type="text" placeholder="City/Town" name="city">
+                                                    <input type="text" placeholder="City/Town" class="city"
+                                                        name="city">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Division <span class="required">*</span></label>
-                                                    <input type="text" placeholder="Division" name="division">
+                                                    <input type="text" placeholder="Division" class="division"
+                                                        name="division">
                                                 </div>
                                             </div>
 
@@ -325,13 +328,13 @@
                                                 <div class="checkout-form-list">
                                                     <label>Postcode / Zip <span class="required">*</span></label>
                                                     <input type="text" placeholder="Postcode / Zip"
-                                                        name="post_code">
+                                                        class="post_code" name="post_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="country-select">
                                                     <label>Country <span class="required">*</span></label>
-                                                    <select name="country">
+                                                    <select name="country" class="country">
                                                         <option value="united-states">United States</option>
                                                         <option value="algeria">Algeria</option>
                                                         <option value="bangladesh">Bangladesh</option>
@@ -345,7 +348,7 @@
                                             <div class="order-notes">
                                                 <div class="checkout-form-list">
                                                     <label>Order Notes</label>
-                                                    <textarea id="checkout-mess" cols="30" rows="10" name="order_notes"
+                                                    <textarea id="checkout-mess" cols="30" rows="10" class="order_notes" name="order_notes"
                                                         placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                                 </div>
                                             </div>
@@ -378,42 +381,62 @@
     // console.log(add_billing_details);
     add_billing_details.addEventListener('click', function(e) {
         e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // let allBillingData = new FormData(jQuery("#addBillinForm")[0]);
+        // console.log(allBillingData);
 
-        const form = e.target.form;
-        const user_id = form.user_id.value;
-        const first_name = form.first_name.value;
-        const last_name = form.last_name.value;
-        const email = form.last_name.email;
-        const phone = form.last_name.phone;
-        const address_1 = form.last_name.address_1;
-        const address_2 = form.last_name.address_2;
-        const city = form.last_name.city;
-        const division = form.last_name.division;
-        const post_code = form.last_name.post_code;
-        const country = form.last_name.country;
-        const order_notes = form.last_name.order_notes;
+        // const form = e.target.form;
+        const user_id = "{{ Auth::user()->id }}";
+        const first_name = document.querySelector('.first_name').value;
+        const last_name = document.querySelector('.last_name').value;
+        const email = document.querySelector('.email').value;
+        const phone = document.querySelector('.phone').value;
+        const address_1 = document.querySelector('.address_1').value;
+        const address_2 = document.querySelector('.address_2').value;
+        const city = document.querySelector('.city').value;
+        const division = document.querySelector('.division').value;
+        const post_code = document.querySelector('.post_code').value;
+        const country = document.querySelector('.country').value;
+        const order_notes = document.querySelector('.order_notes').value;
+        alert(first_name);
+        // let allData = {
+        //     "user_id": user_id,
+        //     "first_name": first_name,
+        //     "last_name": last_name,
+        //     "email": email,
+        //     "phone": phone,
+        //     "address_1": address_1,
+        //     "address_2": address_2,
+        //     "city": city,
+        //     "division": division,
+        //     "post_code": post_code,
+        //     "country": country,
+        //     "order_notes": order_notes
+        // }
 
-        const allData = {
-            "user_id": user_id,
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email,
-            "phone": phone,
-            "address_1": address_1,
-            "address_2": address_2,
-            "city": city,
-            "division": division,
-            "post_code": post_code,
-            "country": country,
-            "order_notes": order_notes
-        }
-        console.log(allData);
 
 
         $.ajax({
             url: "/billing/insert",
             type: "POST",
-            data: allData,
+            data: {
+                "user_id": user_id,
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "phone": phone,
+                "address_1": address_1,
+                "address_2": address_2,
+                "city": city,
+                "division": division,
+                "post_code": post_code,
+                "country": country,
+                "order_notes": order_notes
+            },
             contentType: false,
             processData: false,
             success: function(res) {

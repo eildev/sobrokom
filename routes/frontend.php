@@ -6,7 +6,8 @@ use App\Http\Controllers\frontend\SubscribeController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
-use App\Http\Controllers\Frontend\BillingController;
+use App\Http\Controllers\frontend\BillingInfoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,7 +54,7 @@ Route::middleware('auth', 'role:user')->group(function () {
 
 
     // Billing related route
-    Route::controller(BillingController::class)->group(function () {
+    Route::controller(BillingInfoController::class)->group(function () {
         Route::post('/billing/insert', 'insert')->name('billing.insert');
     });
 });
