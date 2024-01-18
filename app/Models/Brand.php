@@ -9,4 +9,8 @@ class Brand extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    function brandProduct(){
+        return $this->hasMany(Product::class);
+    }
 }

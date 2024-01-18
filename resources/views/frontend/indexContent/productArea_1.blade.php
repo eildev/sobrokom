@@ -1,4 +1,12 @@
 <!-- product-area-start -->
+
+
+{{-- @if ($flash_sale->count() > 0)
+
+    @foreach ($flash_sale as $product)
+    @endforeach
+@else
+@endif --}}
 <section class="weekly-product-area grey-bg whight-product">
     <div class="container">
         <div class="sections__wrapper white-bg pr-50 pl-50">
@@ -14,6 +22,29 @@
                     </div>
                 </div>
             </div>
+
+
+@php
+$featured_product = App\Models\Product::where('status', 1)
+    ->where('product_feature', 'feature')
+    ->take(5)
+    ->orderBy('id', 'ASC')
+    ->get();
+
+
+    @dd($featured_product);
+
+
+$flash_sale = App\Models\Product::where('status', 1)
+    ->where('product_feature', 'like', '% flash-sale %')
+    ->take(5)
+    ->orderBy('id', 'ASC')
+    ->get();
+@endphp
+
+@dd($flash_sale);
+
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tpnavtab__area pb-40">
@@ -30,13 +61,11 @@
                                                         src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
                                                         alt=""></a>
                                                 <div class="tpproduct__info bage">
-                                                    <span
-                                                        class="tpproduct__info-discount bage__discount">-50%</span>
+                                                    <span class="tpproduct__info-discount bage__discount">-50%</span>
                                                     <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                 </div>
                                                 <div class="tpproduct__shopping">
-                                                    <a class="tpproduct__shopping-wishlist"
-                                                        href="wishlist.html"><i
+                                                    <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
                                                             class="icon-heart icons"></i></a>
                                                     <a class="tpproduct__shopping-wishlist" href="#"><i
                                                             class="icon-layers"></i></a>
@@ -73,8 +102,7 @@
                                                 </div>
                                             </div>
                                             <div class="tpproduct__hover-text">
-                                                <div
-                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                     <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                 </div>
                                                 <div class="tpproduct__descrip">
@@ -97,12 +125,10 @@
                                                         src="{{ asset('frontend') }}/assets/img/product/products10-min.jpg"
                                                         alt=""></a>
                                                 <div class="tpproduct__info bage">
-                                                    <span
-                                                        class="tpproduct__info-discount bage__discount">-40%</span>
+                                                    <span class="tpproduct__info-discount bage__discount">-40%</span>
                                                 </div>
                                                 <div class="tpproduct__shopping">
-                                                    <a class="tpproduct__shopping-wishlist"
-                                                        href="wishlist.html"><i
+                                                    <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
                                                             class="icon-heart icons"></i></a>
                                                     <a class="tpproduct__shopping-wishlist" href="#"><i
                                                             class="icon-layers"></i></a>
@@ -139,8 +165,7 @@
                                                 </div>
                                             </div>
                                             <div class="tpproduct__hover-text">
-                                                <div
-                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                     <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                 </div>
                                                 <div class="tpproduct__descrip">
@@ -163,12 +188,10 @@
                                                         src="{{ asset('frontend') }}/assets/img/product/products35-min.jpg"
                                                         alt=""></a>
                                                 <div class="tpproduct__info bage">
-                                                    <span
-                                                        class="tpproduct__info-discount bage__discount">-10%</span>
+                                                    <span class="tpproduct__info-discount bage__discount">-10%</span>
                                                 </div>
                                                 <div class="tpproduct__shopping">
-                                                    <a class="tpproduct__shopping-wishlist"
-                                                        href="wishlist.html"><i
+                                                    <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
                                                             class="icon-heart icons"></i></a>
                                                     <a class="tpproduct__shopping-wishlist" href="#"><i
                                                             class="icon-layers"></i></a>
@@ -205,8 +228,7 @@
                                                 </div>
                                             </div>
                                             <div class="tpproduct__hover-text">
-                                                <div
-                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                     <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                 </div>
                                                 <div class="tpproduct__descrip">
@@ -229,13 +251,11 @@
                                                         src="{{ asset('frontend') }}/assets/img/product/products14-min.jpg"
                                                         alt=""></a>
                                                 <div class="tpproduct__info bage">
-                                                    <span
-                                                        class="tpproduct__info-discount bage__discount">-90%</span>
+                                                    <span class="tpproduct__info-discount bage__discount">-90%</span>
                                                     <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                 </div>
                                                 <div class="tpproduct__shopping">
-                                                    <a class="tpproduct__shopping-wishlist"
-                                                        href="wishlist.html"><i
+                                                    <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
                                                             class="icon-heart icons"></i></a>
                                                     <a class="tpproduct__shopping-wishlist" href="#"><i
                                                             class="icon-layers"></i></a>
@@ -272,8 +292,7 @@
                                                 </div>
                                             </div>
                                             <div class="tpproduct__hover-text">
-                                                <div
-                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                     <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                 </div>
                                                 <div class="tpproduct__descrip">
@@ -296,12 +315,10 @@
                                                         src="{{ asset('frontend') }}/assets/img/product/products32-min.jpg"
                                                         alt=""></a>
                                                 <div class="tpproduct__info bage">
-                                                    <span
-                                                        class="tpproduct__info-discount bage__discount">-50%</span>
+                                                    <span class="tpproduct__info-discount bage__discount">-50%</span>
                                                 </div>
                                                 <div class="tpproduct__shopping">
-                                                    <a class="tpproduct__shopping-wishlist"
-                                                        href="wishlist.html"><i
+                                                    <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
                                                             class="icon-heart icons"></i></a>
                                                     <a class="tpproduct__shopping-wishlist" href="#"><i
                                                             class="icon-layers"></i></a>
@@ -338,8 +355,7 @@
                                                 </div>
                                             </div>
                                             <div class="tpproduct__hover-text">
-                                                <div
-                                                    class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                     <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                 </div>
                                                 <div class="tpproduct__descrip">

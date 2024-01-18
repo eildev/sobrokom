@@ -108,7 +108,6 @@
                     @php
                         $user = App\Models\User::findOrFail(Auth::user()->id);
                         // dd($user);
-
                     @endphp
                     <div class="tab__content--1 tabContent tab_active">
                         @include('frontend.userprofile.tabs.profile')
@@ -118,7 +117,13 @@
                         @include('frontend.userprofile.tabs.billings')
                     </div>
                     {{-- Wishlist body --}}
+                    @php
+                        $wishlists = App\Models\WishList::where('user_id', $user->id)
+                            ->where('loved', 1)
+                            ->get();
+                    @endphp
                     <div class="tab__content--3 tabContent">
+
                         @include('frontend.userprofile.tabs.wishlist')
                     </div>
                     {{-- Orders body --}}
