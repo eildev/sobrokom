@@ -26,6 +26,15 @@ Route::get('/about-us', function () {
 Route::get('/terms-and-condition', function () {
     return view('frontend/pages/termsandcondition');
 })->name('termsandcondition');
+Route::get('/contact-us', function () {
+    return view('frontend/pages/contact-us');
+})->name('contactus');
+Route::get('/privacy-policy', function () {
+    return view('frontend/pages/privacy-policy');
+})->name('privacypolicy');
+Route::get('/faqs', function () {
+    return view('frontend/pages/faqs');
+})->name('faqs');
 
 Route::controller(SubscribeController::class)->group(function () {
     Route::post('/subscribe/store', 'store')->name('subscribe.store');

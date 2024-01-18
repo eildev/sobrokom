@@ -54,10 +54,11 @@
                                 <div class="tpfooter__widget-links">
                                     <ul>
                                         <li><a href="{{ route('aboutus') }}">About Us</a></li>
-                                        <li><a href="{{ route('aboutus') }}">Contact Us</a></li>
+                                        <li><a href="{{ route('contactus') }}">Contact Us</a></li>
                                         <li><a href="{{ route('termsandcondition') }}">Terms & Conditions</a></li>
-                                        <li><a href="{{ route('aboutus') }}">Privacy Policy</a></li>
+                                        <li><a href="{{ route('privacypolicy') }}">Privacy Policy</a></li>
                                         <li><a href="{{ route('aboutus') }}">Returns & Refunds</a></li>
+                                        <li><a href="{{ route('faqs') }}">Faq's</a></li>
                                     </ul>
                                 </div>
                             </div>

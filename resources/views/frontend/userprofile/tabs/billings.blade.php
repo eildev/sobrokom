@@ -279,11 +279,6 @@
 
     </div>
 </div>
-
-
-
-
-
 <script>
     // Add Billing Details 
     const add_billing_details = document.querySelector('.add_billing_details');

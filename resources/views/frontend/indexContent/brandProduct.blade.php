@@ -22,37 +22,27 @@
                     ->where('BrandName', 'Local')->first();
             @endphp
 
-            @if ($brands->count() > 0)
+            @if ($products->count() > 0)
+                @foreach ($products as $product)
 
-                {{-- @dd($brands->BrandName); --}}
-                {{-- @dd($brands->brandProduct); --}}
-                <h1> {{$brands->BrandName}} </h1>
 
-                @foreach ($brands->brandProduct as $product)
-
-                    {{-- @dd($product); --}}
-
-                    <h1> {{$product->product_name}} </h1>
-                    <p> {{$product->short_desc}} </p>
-
+                <h1> {{$product->product_name}} </h1>
+                <h1> {{$product->brand->BrandName}} </h1>
                 @endforeach
             @else
             @endif
 
             <div class="row gx-3">
-
                 <div class="col-lg-3">
                     <div class="tpbrandproduct__main text-center">
                         <div class="tpbrandproduct__main-thumb mb-20">
                             <img src="{{ asset('frontend') }}/assets/img/brand/brand-thumb-1.png" alt="">
                         </div>
-
                         <div class="tpbrandproduct__main-contetn">
                             <h4 class="tpbrandproduct__title">Super Market</h4>
                             <p>Nam liber tempor cum soluta nobis eleifend congue doming quod mazim placerat
                                 facer possim assum typi.</p>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-lg-9">

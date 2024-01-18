@@ -26,23 +26,13 @@
 
 @php
 $featured_product = App\Models\Product::where('status', 1)
-    ->where('product_feature', 'feature')
+    ->where('product_feature', 'like', '%'.'flash-sale'.'%')
     ->take(5)
     ->orderBy('id', 'ASC')
     ->get();
-
-
     @dd($featured_product);
-
-
-$flash_sale = App\Models\Product::where('status', 1)
-    ->where('product_feature', 'like', '% flash-sale %')
-    ->take(5)
-    ->orderBy('id', 'ASC')
-    ->get();
 @endphp
 
-@dd($flash_sale);
 
 
             <div class="row">
