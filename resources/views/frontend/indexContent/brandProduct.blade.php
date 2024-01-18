@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            @php
+            {{-- @php
                 $brands = App\Models\Brand::where('status', 1)
                     ->where('BrandName', 'Local')->first();
             @endphp
@@ -30,7 +30,7 @@
                 <h1> {{$product->brand->BrandName}} </h1>
                 @endforeach
             @else
-            @endif
+            @endif --}}
 
             <div class="row gx-3">
                 <div class="col-lg-3">
