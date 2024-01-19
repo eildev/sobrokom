@@ -7,7 +7,7 @@
 
 
                 @php
-                    $Categories = App\Models\Product::where('status', 1)
+                    $Categories = App\Models\Category::where('status', 1)
                         ->take(6)
                         ->orderBy('id', 'ASC')
                         ->get();
@@ -30,6 +30,8 @@
                                     <ul>
                                         @php
                                             $subcategories = App\Models\Subcategory::where('status', 1)
+
+                                                ->where('categoryId', $Category->id)
                                                 ->take(4)
                                                 ->orderBy('id', 'ASC')
                                                 ->get();
