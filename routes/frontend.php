@@ -40,7 +40,7 @@ Route::get('/faqs', function () {
 
 
 Route::controller(ProductDetailsController::class)->group(function () {
-    Route::get('/product-details/{id}', 'productDetails')->name('product.details');
+    Route::get('/product-details/{slug}', 'productDetails')->name('product.details');
     Route::get('/category/{category}', 'categoryWiseProduct')->name('category.wise.product');
 });
 

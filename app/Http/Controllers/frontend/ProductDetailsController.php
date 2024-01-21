@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 class ProductDetailsController extends Controller
 {
-    public function productDetails($id){
-        $product = Product::findOrFail($id);
+    public function productDetails($slug){
+        $product = Product::findOrFail($slug);
         return view('frontend/e-com/product_details', compact('product'));
     }
     public function categoryWiseProduct($category){
