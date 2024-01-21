@@ -19,13 +19,6 @@
         </div>
     </div>
     <!-- breadcrumb-area-end -->
-
-    {{-- @php
-        $product = App\Models\Product::where('slug', $product->slug);
-        dd($product);
-    @endphp --}}
-
-
     <!-- shop-details-area-start -->
     <section class="shopdetails-area grey-bg pb-50">
         <div class="container">
@@ -58,32 +51,35 @@
 
                                                 @php
                                                     $galleries = App\Models\ProductGallery::where('product_id', $product->id);
-                                                    dd($galleries);
+                                                   
                                                 @endphp
+                                                @foreach($product->gallary as $key=> $gallery)
                                                 
-                                                
+                                                <div class="tab-pane fade w-img show {{ ($key == 0) ?? 'active' }}" id="nav-home{{ $gallery->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                    <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}" alt="">
+                                                    <div class="tpproduct__info bage">
+                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                    </div>
+                                                </div>
+                                                @endforeach
                                             </div>
                                             <nav>
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
-                                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                                    <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
                                                         data-bs-target="#nav-home" type="button" role="tab"
                                                         aria-controls="nav-home" aria-selected="true">
-                                                        <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item1.png"
+                                                        <img src="{{ asset('/uploads/products/'.$product->product_image) }}"
+                                                            alt="">
+                                                    </button> -->
+                                                    @foreach($product->gallary as $gallery)
+                                                    <button class="nav-link {{ ($key == 0) ?? 'active' }}" id="nav-home-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#nav-home{{ $gallery->id }}" type="button" role="tab"
+                                                        aria-controls="nav-home" aria-selected="true">
+                                                        <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}"
                                                             alt="">
                                                     </button>
-                                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-profile" type="button" role="tab"
-                                                        aria-controls="nav-profile" aria-selected="false">
-                                                        <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item2.png"
-                                                            alt="">
-                                                    </button>
-                                                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-contact" type="button" role="tab"
-                                                        aria-controls="nav-contact" aria-selected="false">
-                                                        <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item3.png"
-                                                            alt="">
-                                                    </button>
+                                                    @endforeach
                                                 </div>
                                             </nav>
                                         </div>
