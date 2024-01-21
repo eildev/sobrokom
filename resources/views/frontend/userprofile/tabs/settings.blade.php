@@ -12,30 +12,34 @@
                             <i class="fal fa-lock"></i>
                         </div>
                         <div class="tptrack__item-content">
-                            <h4 class="tptrack__item-title">Sign Up</h4>
-                            <p>Your personal data will be used to support your experience throughout this website, to
-                                manage access to your account.</p>
+                            <h4 class="tptrack__item-title">Change Password</h4>
+                            <p>You can change your password from here. Please enter your Old password and new password here to change.</p>
                         </div>
                     </div>
-                    <div class="tptrack__id mb-10">
-                        <form action="#">
-                            <span><i class="fal fa-envelope"></i></span>
-                            <input type="email" placeholder="Email address">
-                        </form>
-                    </div>
-                    <div class="tptrack__email mb-10">
-                        <form action="#">
+                    <form action="#">
+                        <div class="tptrack__email mb-10">
+
                             <span><i class="fal fa-key"></i></span>
-                            <input type="text" placeholder="Password">
-                        </form>
-                    </div>
-                    <div class="tpsign__account mb-15">
-                        <a href="#">Already Have Account?</a>
-                    </div>
-                    <div class="tptrack__btn">
-                        <button class="tptrack__submition tpsign__reg">Register Now<i
-                                class="fal fa-long-arrow-right"></i></button>
-                    </div>
+                            <input type="text" placeholder="Old Password">
+
+                        </div>
+                        <div class="tptrack__email mb-10">
+
+                            <span><i class="fal fa-key"></i></span>
+                            <input type="text" placeholder="New Password">
+
+                        </div>
+                        <div class="tptrack__email mb-10">
+
+                            <span><i class="fal fa-key"></i></span>
+                            <input type="text" placeholder="Confirm New Password">
+
+                        </div>
+                        <div class="tptrack__btn">
+                            <button class="tptrack__submition tpsign__reg">Change Password<i
+                                    class="fal fa-long-arrow-right"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
