@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id')->unsigned();
             $table->string('product_feature');
             $table->string('product_name');
+            $table->string('slug', 200);
             $table->string('short_desc');
             $table->string('long_desc');
             $table->string('product_image');

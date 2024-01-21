@@ -56,11 +56,11 @@
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
-                                                                <a href="#"><img
+                                                                <a href="{{route('product.details', $product->id)}}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
-                                                                    href="shop-details.html"><img
+                                                                    href="{{route('product.details', $product->id)}}"><img
                                                                         src="{{ asset('frontend' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
@@ -78,7 +78,7 @@
                                                                     <a class="tpproduct__shopping-wishlist"
                                                                         href="#"><i class="icon-layers"></i></a>
                                                                     <a class="tpproduct__shopping-cart"
-                                                                        href="#"><i class="icon-eye"></i></a>
+                                                                        href="{{route('product.details', $product->id)}}"><i class="icon-eye"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__content">
@@ -166,11 +166,11 @@
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
-                                                                <a href="#"><img
+                                                                <a href="{{route('product.details', $product->id)}}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
-                                                                    href="shop-details.html"><img
+                                                                    href="{{route('product.details', $product->id)}}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
@@ -186,7 +186,7 @@
                                                                     <a class="tpproduct__shopping-wishlist"
                                                                         href="#"><i class="icon-layers"></i></a>
                                                                     <a class="tpproduct__shopping-cart"
-                                                                        href="#"><i class="icon-eye"></i></a>
+                                                                        href="{{route('product.details', $product->id)}}"><i class="icon-eye"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__content">

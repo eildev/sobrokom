@@ -20,10 +20,10 @@
     </div>
     <!-- breadcrumb-area-end -->
 
-    @php
+    {{-- @php
         $product = App\Models\Product::where('product_id', $id);
         
-    @endphp
+    @endphp --}}
 
 
     <!-- shop-details-area-start -->
