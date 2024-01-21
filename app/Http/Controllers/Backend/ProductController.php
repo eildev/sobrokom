@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductGallery;
 use App\Models\Variant;
 use Validator;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -26,6 +27,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'product_feature' => 'required',
             'product_name' => 'required|max:100',
+            'slug' => 'required|max:200',
             'short_desc' => 'required|max:150',
             'long_desc' => 'required|max:200',
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -44,6 +46,7 @@ class ProductController extends Controller
                 $product->brand_id = $request->brand_id;
                 $product->product_feature = implode(',', $request->product_feature);
                 $product->product_name = $request->product_name;
+                $product->slug = Str::slug($request->product_name);
                 $product->short_desc = $request->short_desc;
                 $product->long_desc = $request->long_desc;
                 $product->product_image = $productImage;
