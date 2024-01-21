@@ -41,6 +41,7 @@ Route::get('/faqs', function () {
 
 Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/product-details/{id}', 'productDetails')->name('product.details');
+    Route::get('/category/{category}', 'categoryWiseProduct')->name('category.wise.product');
 });
 
 
@@ -56,7 +57,6 @@ Route::middleware('auth', 'role:user')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/user/dashboard', 'userDashboard')->name('user.dashboard');
     });
-
 
     // Wishlist related route
     Route::controller(WishListController::class)->group(function () {
