@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2024 at 11:44 AM
+-- Generation Time: Jan 21, 2024 at 07:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,7 +75,9 @@ CREATE TABLE `brands` (
 INSERT INTO `brands` (`id`, `BrandName`, `slug`, `image`, `status`, `created_at`, `updated_at`) VALUES
 (6, 'Samsung', 'samsung', '2028975608.jpg', 1, '2024-01-16 22:04:37', '2024-01-16 22:04:37'),
 (7, 'Walton', 'walton', '1015301124.png', 1, '2024-01-16 22:04:50', '2024-01-16 22:04:50'),
-(8, 'Local', 'local', '1989400679.jpg', 1, '2024-01-16 22:05:34', '2024-01-16 22:05:34');
+(8, 'Local', 'local', '1989400679.jpg', 1, '2024-01-16 22:05:34', '2024-01-16 22:05:34'),
+(9, 'Adidas', 'adidas', '1788416567.png', 1, '2024-01-20 23:48:58', '2024-01-20 23:48:58'),
+(10, 'Hatil', 'hatil', '1222471110.png', 1, '2024-01-21 00:26:50', '2024-01-21 00:26:50');
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,11 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `categoryName`, `slug`, `image`, `status`, `created_at`, `updated_at`) VALUES
 (11, 'Electronics', 'electronics', '1930190774.jpg', 1, '2024-01-16 21:50:52', '2024-01-16 21:50:52'),
-(12, 'Grocery', 'grocery', '200522260.jpg', 1, '2024-01-16 21:52:07', '2024-01-16 21:52:07');
+(12, 'Grocery', 'grocery', '200522260.jpg', 1, '2024-01-16 21:52:07', '2024-01-16 21:52:07'),
+(13, 'Fashion', 'fashion', '991972089.jpg', 1, '2024-01-20 23:04:42', '2024-01-20 23:04:42'),
+(14, 'Furniture', 'furniture', '1011762404.jpg', 1, '2024-01-20 23:05:08', '2024-01-20 23:05:08'),
+(15, 'Beauty and care', 'beauty-and-care', '514402865.jpg', 1, '2024-01-20 23:05:35', '2024-01-20 23:05:35'),
+(16, 'Home & Appliances', 'home-appliances', '544948726.jpg', 1, '2024-01-20 23:07:45', '2024-01-20 23:07:45');
 
 -- --------------------------------------------------------
 
@@ -311,6 +317,7 @@ CREATE TABLE `products` (
   `brand_id` bigint(20) UNSIGNED NOT NULL,
   `product_feature` varchar(255) NOT NULL,
   `product_name` varchar(255) NOT NULL,
+  `slug` varchar(200) NOT NULL,
   `short_desc` varchar(255) NOT NULL,
   `long_desc` varchar(255) NOT NULL,
   `product_image` varchar(255) NOT NULL,
@@ -325,13 +332,17 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `product_feature`, `product_name`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `status`, `created_at`, `updated_at`) VALUES
-(43, 12, 15, 8, 'new-arrival,best-rate', 'Beef', 'Discover the epitome of quality with our premium beef selection. Sourced from the finest cuts, our beef guarantees exceptional tenderness and flavor.', 'Whether you\'re grilling for a feast or preparing a cozy family dinner, our beef elevates every meal. Indulge in the rich taste and versatility of our prime beef - your passport to culinary excellence.', '1347795958.jpg', 'BEEF-RIB-EU-001', 'beef,premium beef,meat,gourmet meat', 1, '2024-01-16 22:31:03', '2024-01-16 22:31:03'),
-(44, 12, 15, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Chicken Meat', 'A savory delight for your culinary adventures! Our chickens are sourced from trusted farms, ensuring top-notch quality and flavor in every bite', 'Tender and succulent, these birds are raised with care to guarantee a juicy texture and rich taste. Whether you\'re grilling, roasting, or creating a delectable stew.', '2118686443.jpg', 'CHICKEN-RIB-EU-001', 'chicken,meat,food,frozen food,chicken meat', 1, '2024-01-16 22:52:25', '2024-01-16 22:52:25'),
-(45, 12, 16, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Ginger', 'Elevate your culinary creations with our premium Ginger, a versatile and aromatic spice that adds a burst of flavor to your dishes.', 'Sourced from the finest ginger farms, our product boasts a zesty and warm profile, perfect for both sweet and savory recipes.', '1917535380.jpg', 'GINGER-RIB-EU-001', 'ginger,masala', 1, '2024-01-16 23:00:45', '2024-01-16 23:00:45'),
-(46, 12, 16, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Onion', 'Please note that this is just a randomly generated example, and in practice, you would need to obtain a unique and valid barcode', 'channels or a barcode provider. If your business doesn\'t already have a barcode system in place, you can consider obtaining a set of unique barcodes through a', '1429399769.jpg', 'ONION-RIB-EU-001', 'onion,vegetable,natural,food', 1, '2024-01-16 23:08:59', '2024-01-16 23:08:59'),
-(47, 12, 16, 8, 'new-arrival,trending,weekend-deals', 'Potato', 'Discover the epitome of quality with our premium beef selection. Sourced from the finest cuts, our beef guarantees exceptional tenderness and flavor.', 'Whether you\'re grilling for a feast or preparing a cozy family dinner, our beef elevates every meal. Indulge in the rich taste and versatility of our prime beef', '1779718956.jpg', 'POTATO-RIB-EU-001', 'potato,food', 1, '2024-01-16 23:11:45', '2024-01-16 23:11:45'),
-(48, 12, 15, 8, 'new-arrival', 'Fish', 'sdfsfsfsdfs', 'sdfsdfsdf', '2048727268.jpg', '324234', 'fisg', 1, '2024-01-16 23:31:51', '2024-01-16 23:31:51');
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `product_feature`, `product_name`, `slug`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `status`, `created_at`, `updated_at`) VALUES
+(43, 12, 15, 8, 'new-arrival,best-rate', 'Beef', 'beef', 'Discover the epitome of quality with our premium beef selection. Sourced from the finest cuts, our beef guarantees exceptional tenderness and flavor.', 'Whether you\'re grilling for a feast or preparing a cozy family dinner, our beef elevates every meal. Indulge in the rich taste and versatility of our prime beef - your passport to culinary excellence.', '1347795958.jpg', 'BEEF-RIB-EU-001', 'beef,premium beef,meat,gourmet meat', 1, '2024-01-16 22:31:03', '2024-01-16 22:31:03'),
+(44, 12, 15, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Chicken Meat', 'chicken-meat', 'A savory delight for your culinary adventures! Our chickens are sourced from trusted farms, ensuring top-notch quality and flavor in every bite', 'Tender and succulent, these birds are raised with care to guarantee a juicy texture and rich taste. Whether you\'re grilling, roasting, or creating a delectable stew.', '2118686443.jpg', 'CHICKEN-RIB-EU-001', 'chicken,meat,food,frozen food,chicken meat', 1, '2024-01-16 22:52:25', '2024-01-16 22:52:25'),
+(45, 12, 16, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Ginger', 'ginger', 'Elevate your culinary creations with our premium Ginger, a versatile and aromatic spice that adds a burst of flavor to your dishes.', 'Sourced from the finest ginger farms, our product boasts a zesty and warm profile, perfect for both sweet and savory recipes.', '1917535380.jpg', 'GINGER-RIB-EU-001', 'ginger,masala', 1, '2024-01-16 23:00:45', '2024-01-16 23:00:45'),
+(46, 12, 16, 8, 'feature,new-arrival,trending,best-rate,weekend-deals,top-seller,top-offers', 'Onion', 'onion', 'Please note that this is just a randomly generated example, and in practice, you would need to obtain a unique and valid barcode', 'channels or a barcode provider. If your business doesn\'t already have a barcode system in place, you can consider obtaining a set of unique barcodes through a', '1429399769.jpg', 'ONION-RIB-EU-001', 'onion,vegetable,natural,food', 1, '2024-01-16 23:08:59', '2024-01-16 23:08:59'),
+(47, 12, 16, 8, 'new-arrival,trending,weekend-deals', 'Potato', 'potato', 'Discover the epitome of quality with our premium beef selection. Sourced from the finest cuts, our beef guarantees exceptional tenderness and flavor.', 'Whether you\'re grilling for a feast or preparing a cozy family dinner, our beef elevates every meal. Indulge in the rich taste and versatility of our prime beef', '1779718956.jpg', 'POTATO-RIB-EU-001', 'potato,food', 1, '2024-01-16 23:11:45', '2024-01-16 23:11:45'),
+(48, 12, 15, 8, 'new-arrival', 'Fish', 'fish', 'sdfsfsfsdfs', 'sdfsdfsdf', '2048727268.jpg', '324234', 'fisg', 1, '2024-01-16 23:31:51', '2024-01-16 23:31:51'),
+(49, 11, 14, 6, 'feature,new-arrival', 'Samsung A20', 'samsung-a20', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', '998480154.jpg', 'SAMSUNG-A20', 'samsung,pone', 1, '2024-01-21 00:14:47', '2024-01-21 00:14:47'),
+(50, 11, 17, 7, 'new-arrival,best-rate', 'Walton Primo X 4K Smart TV', 'walton-primo-x-4k-smart-tv', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', '127989108.jpg', 'WALTON-4K-TV', 'walton,tv,monitor,4k', 1, '2024-01-21 00:22:34', '2024-01-21 00:22:34'),
+(51, 13, 19, 9, 'feature,new-arrival,top-seller', 'Smart T-shirt for Man', 'smart-t-shirt-for-man', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', '1996647914.jpg', 'T-SHIRT', 'tshirt', 1, '2024-01-21 00:25:02', '2024-01-21 00:25:02'),
+(52, 14, 20, 10, 'feature,best-rate', 'Hatil Best Furniture sofa for dyning Room', 'hatil-best-furniture-sofa-for-dyning-room', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '671653460.jpg', 'SOFA', 'sofa,furniture', 1, '2024-01-21 00:28:46', '2024-01-21 00:28:46');
 
 -- --------------------------------------------------------
 
@@ -363,7 +374,12 @@ INSERT INTO `product_galleries` (`id`, `product_id`, `image`, `created_at`, `upd
 (82, 47, '68739322.jpg', '2024-01-16 23:11:45', '2024-01-16 23:11:45'),
 (83, 47, '292282650.jpg', '2024-01-16 23:11:45', '2024-01-16 23:11:45'),
 (84, 48, '1895384242.jpg', '2024-01-16 23:31:51', '2024-01-16 23:31:51'),
-(85, 48, '137041860.jpg', '2024-01-16 23:31:51', '2024-01-16 23:31:51');
+(85, 48, '137041860.jpg', '2024-01-16 23:31:51', '2024-01-16 23:31:51'),
+(86, 49, '578399848.jpg', '2024-01-21 00:14:47', '2024-01-21 00:14:47'),
+(87, 50, '68579192.jpg', '2024-01-21 00:22:34', '2024-01-21 00:22:34'),
+(88, 50, '657386686.jpg', '2024-01-21 00:22:34', '2024-01-21 00:22:34'),
+(89, 51, '1512131923.jpg', '2024-01-21 00:25:02', '2024-01-21 00:25:02'),
+(90, 52, '1660903196.jpg', '2024-01-21 00:28:46', '2024-01-21 00:28:46');
 
 -- --------------------------------------------------------
 
@@ -389,7 +405,15 @@ INSERT INTO `subcategories` (`id`, `categoryId`, `subcategoryName`, `slug`, `sta
 (14, 11, 'Mobile', 'mobile', 1, '2024-01-16 21:52:25', '2024-01-16 21:52:25'),
 (15, 12, 'Frozen Food', 'frozen-food', 1, '2024-01-16 21:52:37', '2024-01-16 21:52:37'),
 (16, 12, 'Vegetable', 'vegetable', 1, '2024-01-16 21:52:46', '2024-01-16 21:52:46'),
-(17, 11, 'TV', 'tv', 1, '2024-01-16 21:53:35', '2024-01-16 21:53:35');
+(17, 11, 'TV', 'tv', 1, '2024-01-16 21:53:35', '2024-01-16 21:53:35'),
+(18, 13, 'Jackets', 'jackets', 1, '2024-01-20 23:08:13', '2024-01-20 23:08:13'),
+(19, 13, 'T-shirt', 't-shirt', 1, '2024-01-20 23:08:23', '2024-01-20 23:08:23'),
+(20, 14, 'Sofa', 'sofa', 1, '2024-01-20 23:08:44', '2024-01-20 23:08:44'),
+(21, 15, 'Fair and Lovely', 'fair-and-lovely', 1, '2024-01-20 23:08:53', '2024-01-20 23:08:53'),
+(22, 16, 'Blender', 'blender', 1, '2024-01-20 23:09:12', '2024-01-20 23:09:12'),
+(23, 14, 'Almary', 'almary', 1, '2024-01-21 00:30:51', '2024-01-21 00:30:51'),
+(24, 15, 'Make-up Box', 'make-up-box', 1, '2024-01-21 00:31:12', '2024-01-21 00:31:12'),
+(25, 16, 'Rice Cooker', 'rice-cooker', 1, '2024-01-21 00:31:35', '2024-01-21 00:31:35');
 
 -- --------------------------------------------------------
 
@@ -485,7 +509,12 @@ INSERT INTO `variants` (`id`, `product_id`, `color`, `size`, `regular_price`, `d
 (92, 45, NULL, NULL, 300.00, '0', 300, 30, '123456789014', 'kg', 1, NULL, NULL, '2024-01-16 23:03:23', '2024-01-16 23:03:23'),
 (93, 46, NULL, NULL, 150.00, '20', 120, 100, '2113123', 'kg', 1, NULL, NULL, '2024-01-16 23:09:25', '2024-01-16 23:09:25'),
 (94, 47, NULL, NULL, 80.00, '10', 72, 2330, '23424234', 'liter', 1, NULL, NULL, '2024-01-16 23:12:11', '2024-01-16 23:12:11'),
-(95, 48, NULL, NULL, 700.00, '10', 630, 100, '56465', 'kg', 1, NULL, NULL, '2024-01-16 23:34:01', '2024-01-16 23:34:01');
+(95, 48, NULL, NULL, 700.00, '10', 630, 100, '56465', 'kg', 1, NULL, NULL, '2024-01-16 23:34:01', '2024-01-16 23:34:01'),
+(96, 43, NULL, NULL, 200.00, '0', 200, 200, NULL, 'liter', 1, NULL, NULL, '2024-01-20 23:58:37', '2024-01-20 23:58:37'),
+(97, 49, NULL, NULL, 12000.00, '0', 12000, 100, NULL, 'piece', 1, NULL, NULL, '2024-01-21 00:15:11', '2024-01-21 00:15:11'),
+(98, 50, NULL, NULL, 42000.00, '10', 37800, 100, NULL, 'piece', 1, NULL, NULL, '2024-01-21 00:23:08', '2024-01-21 00:23:08'),
+(99, 51, NULL, NULL, 200.00, '0', 200, 100, NULL, 'piece', 1, NULL, NULL, '2024-01-21 00:25:15', '2024-01-21 00:25:15'),
+(100, 52, NULL, NULL, 24000.00, '10', 21600, 100, NULL, 'piece', 1, NULL, NULL, '2024-01-21 00:29:07', '2024-01-21 00:29:07');
 
 -- --------------------------------------------------------
 
@@ -510,7 +539,10 @@ INSERT INTO `wish_lists` (`id`, `user_id`, `product_id`, `loved`, `created_at`, 
 (1, 2, 46, 1, '2024-01-18 02:03:35', '2024-01-18 02:03:35'),
 (2, 2, 45, 1, '2024-01-18 02:03:37', '2024-01-18 02:03:37'),
 (3, 2, 44, 1, '2024-01-18 02:03:40', '2024-01-18 02:03:40'),
-(4, 2, 47, 1, '2024-01-18 03:14:39', '2024-01-18 03:14:39');
+(5, 2, 47, 1, '2024-01-20 22:15:58', '2024-01-20 22:15:58'),
+(6, 2, 43, 1, '2024-01-20 22:16:05', '2024-01-20 22:16:05'),
+(7, 2, 43, 1, '2024-01-20 22:16:31', '2024-01-20 22:16:31'),
+(8, 2, 48, 1, '2024-01-20 22:16:35', '2024-01-20 22:16:35');
 
 --
 -- Indexes for dumped tables
@@ -667,13 +699,13 @@ ALTER TABLE `billing_infos`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -727,19 +759,19 @@ ALTER TABLE `popup_messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `subscribes`
@@ -763,13 +795,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `variants`
 --
 ALTER TABLE `variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `wish_lists`
 --
 ALTER TABLE `wish_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
