@@ -36,7 +36,6 @@
 
                             @php
                                 $categoris = App\Models\Category::take(4)->get();
-                                // dd($categoris);
                             @endphp
 
                             @foreach ($categoris as $category)
@@ -44,9 +43,8 @@
 
                                     <a class="mega-menu-title">{{ $category->categoryName }}</a>
                                     <ul>
-                                        {{-- @dd($category->subcategory) --}}
                                         @foreach ($category->subcategories as $subcategory)
-                                        <li><a href="shop-left-sidebar.html">{{$subcategory->subcategoryName}}</a></li>
+                                        <li><a href="{{ route('category.wise.product',$category->slug) }}">{{$subcategory->subcategoryName}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>

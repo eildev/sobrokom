@@ -6,7 +6,7 @@
                 class="testimonial__shape-one">
             <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-5.svg" alt=""
                 class="testimonial__shape-two">
-            <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-6.png" alt=""
+            <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-4.png" alt=""
                 class="testimonial__shape-three">
         </div>
         <div class="swiper-container tptestimonial-active p-relative">
@@ -16,7 +16,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">
@@ -44,7 +44,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-2.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">
@@ -72,7 +72,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-3.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">

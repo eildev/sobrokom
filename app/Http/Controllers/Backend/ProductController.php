@@ -27,7 +27,6 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'product_feature' => 'required',
             'product_name' => 'required|max:100',
-            'slug' => 'required|max:200',
             'short_desc' => 'required|max:150',
             'long_desc' => 'required|max:200',
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',

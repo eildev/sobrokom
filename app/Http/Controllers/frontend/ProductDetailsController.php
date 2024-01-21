@@ -9,7 +9,7 @@ use App\Models\Category;
 class ProductDetailsController extends Controller
 {
     public function productDetails($slug){
-        $product = Product::findOrFail($slug);
+        $product = Product::where('slug', $slug)->first();
         return view('frontend/e-com/product_details', compact('product'));
     }
     public function categoryWiseProduct($category){

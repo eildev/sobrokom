@@ -21,8 +21,8 @@
     <!-- breadcrumb-area-end -->
 
     {{-- @php
-        $product = App\Models\Product::where('product_id', $id);
-        
+        $product = App\Models\Product::where('slug', $product->slug);
+        dd($product);
     @endphp --}}
 
 
@@ -55,28 +55,13 @@
                                     <div class="col-lg-6">
                                         <div class="tpproduct-details__nab">
                                             <div class="tab-content" id="nav-tabContents">
-                                                <div class="tab-pane fade show active w-img" id="nav-home" role="tabpanel"
-                                                    aria-labelledby="nav-home-tab" tabindex="0">
-                                                    <img src="{{ asset('uploads/products/' . $product->product_image) }}" alt="Product Image">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade w-img" id="nav-profile" role="tabpanel"
-                                                    aria-labelledby="nav-profile-tab" tabindex="0">
-                                                    <img src="{{ asset('frontend') }}/assets/img/product/product-details-3.png" alt="">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-discount bage__discount">{{$product->varient[0]->discount}}</span>
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade w-img" id="nav-contact" role="tabpanel"
-                                                    aria-labelledby="nav-contact-tab" tabindex="0">
-                                                    <img src="{{ asset('frontend') }}/assets/img/product/product-details-3.png" alt="">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                    </div>
-                                                </div>
+
+                                                @php
+                                                    $galleries = App\Models\ProductGallery::where('product_id', $product->id);
+                                                    dd($galleries);
+                                                @endphp
+                                                
+                                                
                                             </div>
                                             <nav>
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"

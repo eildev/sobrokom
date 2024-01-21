@@ -197,8 +197,8 @@
                             </div>
                         </form>
 
-
-                        <div class="row variant_section" style="display: none">
+                        
+                        <div class="row variant_section"  style="display: none">
                             <div class="card-title d-flex">
                                 <h5 class="mb-0 text-info">Add Variants</h5>
                             </div>
@@ -346,9 +346,7 @@
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
-            // alert('ok');
             let allData = new FormData(jQuery("#productForm")[0]);
-            console.log(allData);
             $.ajax({
                 url: "/product/store/",
                 type: "POST",
@@ -372,7 +370,7 @@
                         $('.product_image').text(res.error.product_image);
                         $('.sku_error').text(res.error.sku);
                         // $('.tag_error').text(res.error.tags);
-                        toastr.warning(response.error);
+                        toastr.warning(res.error);
                     }
                 },
             });
@@ -493,14 +491,14 @@
         })
 
 
-        // delete varient data 
-        const delete_variant = document.querySelectorAll('#delete_variant');
-        delete_variant.map(data => {
-            data.addEventListener('click', function(event) {
-                alert('delete');
+        // // delete varient data 
+        // const delete_variant = document.querySelectorAll('#delete_variant');
+        // delete_variant.map(data => {
+        //     data.addEventListener('click', function(event) {
+        //         alert('delete');
 
-            })
-        })
+        //     })
+        // })
 
         // delete_variant.addEventListener('click', function(e) {
         //     e.preventDefault();
