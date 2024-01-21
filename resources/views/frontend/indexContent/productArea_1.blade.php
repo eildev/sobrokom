@@ -35,10 +35,10 @@
                                             <div class="swiper-slide">
                                                 <div class="tpproduct p-relative tpprogress__hover">
                                                     <div class="tpproduct__thumb p-relative text-center">
-                                                        <a href="{{route('product.details', $product->id)}}"><img
+                                                        <a href="{{route('product.details', $product->slug)}}"><img
                                                                 src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                 alt=""></a>
-                                                        <a class="tpproduct__thumb-img" href="{{route('product.details', $product->id)}}"><img
+                                                        <a class="tpproduct__thumb-img" href="{{route('product.details', $product->slug)}}"><img
                                                                 src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                 alt=""></a>
                                                         <div class="tpproduct__info bage">
@@ -49,12 +49,26 @@
                                                             <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                         </div>
                                                         <div class="tpproduct__shopping">
+                                                            @auth
+                                                            <a class="tpproduct__shopping-wishlist add_whishlist"
+                                                                href="#" value="{{ $product->id }}">
+                                                                <!-- <i class="icon-heart icons"></i> -->
+                                                                @auth
+                                                                 @php
+                                                                   $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
+                                                                 @endphp
+                                                                @endauth
+                                                                <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}" class="fas fa-heart icons"></i>
+                                                            </a>
+                                                            @else
                                                             <a class="tpproduct__shopping-wishlist"
-                                                                href="wishlist.html"><i
-                                                                    class="icon-heart icons"></i></a>
+                                                                href="{{ route('login') }}">
+                                                                <i class="fas fa-heart icons"></i>
+                                                            </a>
+                                                            @endauth
                                                             <a class="tpproduct__shopping-wishlist" href="#"><i
                                                                     class="icon-layers"></i></a>
-                                                            <a class="tpproduct__shopping-cart" href="{{route('product.details', $product->id)}}"><i
+                                                            <a class="tpproduct__shopping-cart" href="{{route('product.details', $product->slug)}}"><i
                                                                     class="icon-eye"></i></a>
                                                         </div>
                                                     </div>

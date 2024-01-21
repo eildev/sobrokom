@@ -93,6 +93,46 @@
             toastr.error("{{ Session::get('error') }}");
         @endif
     </script>
+
+    {{-- add wishlist  --}}
+    <script>
+        const add_whishlist = document.querySelectorAll('.add_whishlist');
+        // console.log(add_whishlist);
+        add_whishlist.forEach(element => {
+            // console.log(element)
+
+
+            element.addEventListener('click', function(e) {
+
+
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                let product_id = this.getAttribute('value');
+                // alert(product_id);
+
+                $.ajax({
+                    url: '/wishlist/add',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            element.querySelector('i').setAttribute('style', 'color:red');
+                            // console.log(element.querySelector('i'));
+                        } else {
+                            // toastr.warning(response);
+                        }
+                    }
+                });
+            })
+        });
+    </script>
 </body>
 
 </html>
