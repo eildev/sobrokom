@@ -18,7 +18,6 @@
                                         $brands = App\Models\brand::where('status', 1)
                                             ->take(6)
                                             ->get();
-                                        // dd($brands);
                                     @endphp
                                     @if ($brands->count() > 0)
                                         <ul class="sub-menu home-menu-style">
@@ -71,7 +70,6 @@
                                     <a href="course-grid.html">Shop</a>
                                     @php
                                         $categoris = App\Models\Category::take(4)->get();
-                                        // dd($categoris);
                                     @endphp
                                     @if ($categoris->count() > 0)
                                         <ul class="sub-menu mega-menu"
@@ -79,7 +77,7 @@
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a class="mega-menu-title">{{ $category->categoryName }}</a>
+                                                    <a class="{{ route('category.wise.product',$category->slug) }}">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)

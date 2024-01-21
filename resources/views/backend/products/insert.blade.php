@@ -346,9 +346,7 @@
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
-            alert('ok');
             let allData = new FormData(jQuery("#productForm")[0]);
-            console.log(allData);
             $.ajax({
                 url: "/product/store/",
                 type: "POST",
