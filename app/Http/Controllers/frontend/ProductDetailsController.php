@@ -13,7 +13,7 @@ class ProductDetailsController extends Controller
         return view('frontend/e-com/product_details', compact('product'));
     }
     public function categoryWiseProduct($category){
-        $product = Category::where('slug', $category);
-        return view('frontend/e-com/product_details', compact('product'));
+        $category = Category::where('slug', $category)->first();
+        return view('frontend/e-com/category-wise-product', compact('category'));
     }
 }

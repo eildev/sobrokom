@@ -9,7 +9,7 @@
                         <div class="tp-breadcrumb__list">
                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
                            <span class="dvdr">/</span>
-                           <span>Shop</span>
+                           <span>{{ $category->categoryName }}</span>
                         </div>
                      </div>
                   </div>
@@ -27,96 +27,21 @@
                         <div class="tpshop__category">
                            <div class="swiper-container inner-category-two">
                               <div class="swiper-wrapper">
+                                @php 
+                                $categories = App\Models\Category::all();
+                                @endphp
+                                @foreach ($categories as $category)
                                  <div class="swiper-slide">
                                     <div class="category__item mb-30">
                                        <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-9.jpg" alt="category-thumb"></a>
+                                          <a href="{{ route('category.wise.product',$category->slug) }}"><img src="{{ asset('uploads/category/'.$category->image) }}" alt="category-thumb"></a>
                                        </div>
                                        <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Vegetables</a></h5>
+                                          <h5 class="category__title"><a href="{{ route('category.wise.product',$category->slug) }}">{{ $category->categoryName }}</a></h5>
                                        </div>
                                     </div>
                                  </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-10.jpg" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-3.html">Fresh Fruits</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-11.jpg" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Fruit Drink</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-12.jpg" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Fresh Bakery</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-13.jpg" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Biscuits Snack</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-14.png" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details.html">Fresh Meat</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-15.png" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Fresh Milk</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-16.png" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Fresh Milk</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="swiper-slide">
-                                    <div class="category__item mb-30">
-                                       <div class="category__thumb fix mb-15">
-                                          <a href="shop-details-4.html"><img src="assets/img/catagory/category-17.png" alt="category-thumb"></a>
-                                       </div>
-                                       <div class="category__content">
-                                          <h5 class="category__title"><a href="shop-details-4.html">Fresh Milk</a></h5>
-                                       </div>
-                                    </div>
-                                 </div>
+                                 @endforeach
                               </div>
                            </div>
                         </div>

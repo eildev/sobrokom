@@ -32,7 +32,7 @@
                                         <ul>
 
                                             @foreach ($categories as $category)
-                                                <li><a href="#">{{ $category->categoryName }}</a></li>
+                                                <li><a href="{{ route('category.wise.product',$category->slug) }}">{{ $category->categoryName }}</a></li>
                                             @endforeach
                                         </ul>
                                     @else
