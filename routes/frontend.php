@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\frontend\SubscribeController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\frontend\BillingInfoController;
+use App\Http\Controllers\frontend\ProductDetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +37,11 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
-Route::get('/product-details/{id}', function () {
-    return view('frontend/e-com/product_details');
-})->name('product.details');
 
+
+Route::controller(ProductDetailsController::class)->group(function () {
+    Route::get('/product-details/{id}', 'productDetails')->name('product.details');
+});
 
 
 Route::controller(SubscribeController::class)->group(function () {
