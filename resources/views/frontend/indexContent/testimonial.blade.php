@@ -16,7 +16,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/pic-1.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">
@@ -25,11 +25,11 @@
                                         idea to reduce plastic and also more convenient. "
                                     </p>
                                     <div class="tptestimonial__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="far fa-star"></i></a>
                                     </div>
                                     <h4 class="tptestimonial__title">Algistino Lionel</h4>
                                     <span class="tptestimonial__avata-position">Web Designer at
@@ -44,7 +44,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/pic-2.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">
@@ -53,11 +53,11 @@
                                         idea to reduce plastic and also more convenient. "
                                     </p>
                                     <div class="tptestimonial__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
                                     </div>
                                     <h4 class="tptestimonial__title">Jackson Roben</h4>
                                     <span class="tptestimonial__avata-position">Web Designer at
@@ -72,7 +72,7 @@
                         <div class="col-md-8">
                             <div class="tptestimonial__item text-center ">
                                 <div class="tptestimonial__avata mb-25">
-                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/profile.png"
+                                    <img src="{{ asset('frontend') }}/assets/img/testimonial/pic-3.png"
                                         alt="">
                                 </div>
                                 <div class="tptestimonial__content">
@@ -81,11 +81,11 @@
                                         idea to reduce plastic and also more convenient. "
                                     </p>
                                     <div class="tptestimonial__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="fas fa-star"></i></a>
+                                        <a href="#" class="me-1"><i class="far fa-star"></i></a>
                                     </div>
                                     <h4 class="tptestimonial__title">Lionel</h4>
                                     <span class="tptestimonial__avata-position">Web Designer at
