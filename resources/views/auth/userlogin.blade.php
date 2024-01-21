@@ -38,11 +38,11 @@
                            <form  method="POST" action="{{ route('login') }}">
                            @csrf
                            <div class="tptrack__id mb-10">
-                              
+
                                  <span><i class="fal fa-user"></i></span>
                                  <input name="email" type="email" placeholder="Email address">
                                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                              
+
                            </div>
                            <div class="tptrack__email mb-10">
                                  <span><i class="fal fa-key"></i></span>
@@ -55,7 +55,7 @@
                                  <label class="form-check-label" for="flexCheckDefault2">Remember me</label>
                               </div>
                               <div class="tpsign__pass">
-                                 <a href="#">Forget Password</a>
+                                 <a href="{{route('password.request')}}">Forget Password</a>
                               </div>
                            </div>
                            <div class="tptrack__btn">
@@ -115,7 +115,7 @@
          </section>
          <!-- track-area-end -->
 
-         
+
          <!-- feature-area-start -->
          <section class="feature-area mainfeature__bg pt-50 pb-40" data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
             <div class="container">
@@ -183,4 +183,3 @@
          <!-- feature-area-end -->
 
          @endsection
-      
