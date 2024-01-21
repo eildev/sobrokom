@@ -25,7 +25,7 @@
 
                                             @foreach ($brands as $brand)
                                                 <li>
-                                                    <a href="index.html"><img
+                                                    <a href="{{ route('brand.wise.product',$brand->slug) }}"><img
                                                             src="{{ asset('uploads/brands/' . $brand->image) }} "
                                                             alt=""> {{ $brand->BrandName }}</a>
                                                 </li>
@@ -72,17 +72,16 @@
                                         $categoris = App\Models\Category::take(4)->get();
                                     @endphp
                                     @if ($categoris->count() > 0)
-                                        <ul class="sub-menu mega-menu"
-                                            data-background="{{ asset('frontend') }}/assets/img/banner/mega-menu-shop-1.jpg">
+                                        <ul class="sub-menu mega-menu" >
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a class="{{ route('category.wise.product',$category->slug) }}">{{ $category->categoryName }}</a>
+                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="shop-left-sidebar.html">{{ $subcategory->subcategoryName }}</a>
+                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> > {{ $subcategory->subcategoryName }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>

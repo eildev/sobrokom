@@ -16,7 +16,10 @@
                                     data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
                                     aria-selected="true">All</button>
                                 @php
-                                    $cats = App\Models\Category::all();
+                                    $cats = App\Models\Category::where('status', 1)
+                                    ->take(4)
+                                    ->orderBy('id', 'ASC')
+                                    ->get();
                                 @endphp
                                 @foreach ($cats as $cat)
                                     <button class="nav-link" id="nav-meat-tab" data-bs-toggle="tab"
