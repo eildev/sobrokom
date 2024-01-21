@@ -17,200 +17,73 @@
                 </div>
             </div>
 
-            {{-- @php
+            @php
                 $brands = App\Models\Brand::where('status', 1)
-                    ->where('BrandName', 'Local')->first();
+                    ->where('BrandName', 'Local')
+                    ->first();
             @endphp
 
-            @if ($products->count() > 0)
-                @foreach ($products as $product)
 
-
-                <h1> {{$product->product_name}} </h1>
-                <h1> {{$product->brand->BrandName}} </h1>
-                @endforeach
-            @else
-            @endif --}}
 
             <div class="row gx-3">
                 <div class="col-lg-3">
                     <div class="tpbrandproduct__main text-center">
                         <div class="tpbrandproduct__main-thumb mb-20">
-                            <img src="{{ asset('frontend') }}/assets/img/brand/brand-thumb-1.png" alt="">
+                            <img src="{{ asset('uploads/Brands/' . $brands->image) }} " alt="">
                         </div>
                         <div class="tpbrandproduct__main-contetn">
-                            <h4 class="tpbrandproduct__title">Super Market</h4>
+                            <h4 class="tpbrandproduct__title">{{ $brands->BrandName }}</h4>
                             <p>Nam liber tempor cum soluta nobis eleifend congue doming quod mazim placerat
                                 facer possim assum typi.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                    <div class="row gx-3">
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products15-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
+
+                @php
+                    $products = App\Models\Product::where('status', 1)
+                        ->where('brand_id', $brands->id)
+                        ->take(6)
+                        ->orderBy('id', 'ASC')
+                        ->get();
+                    // dd($brand);
+                @endphp
+                @if ($products->count() > 0)
+
+                    <div class="col-lg-9">
+                        <div class="row gx-3">
+                            @foreach ($products as $product)
+                                {{-- @dd($product); --}}
+                                <div class="col-xl-4 col-lg-6">
+                                    <div class="tpbrandproduct__item d-flex mb-20">
+                                        <div class="tpbrandproduct__img p-relative">
+                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                alt="">
+                                            <div class="tpproduct__info bage tpbrandproduct__bage">
+                                                <span class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                            </div>
+                                        </div>
+                                        <div class="tpbrandproduct__contact">
+                                            <span class="tpbrandproduct__product-title"><a
+                                                    href="shop-details.html">{{ $product->product_name }}</a></span>
+                                            <div class="tpproduct__rating mb-5">
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                            </div>
+                                            <div class="tpproduct__price">
+                                                <span>{{ $product->varient[0]->discount_amount }}</span>
+                                                <del>{{ $product->varient[0]->regular_price }}</del>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Lettuce
-                                            Fresh Produce
-                                            Vegetables</a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Cheap and
-                                            delicious fresh
-                                            chicken</a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products2-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Fresh Milk
-                                            Chocolate Quaker Popped Rice
-                                            Crisps</a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products33-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">1kg purple
-                                            onion/ onion/ dried onion Kinh
-                                            men </a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products38-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">1st
-                                            Quality Fresh Meat From USA
-                                            500g</a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                            <div class="tpbrandproduct__item d-flex mb-20">
-                                <div class="tpbrandproduct__img p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/products7-min.jpg"
-                                        alt="">
-                                    <div class="tpproduct__info bage tpbrandproduct__bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                </div>
-                                <div class="tpbrandproduct__contact">
-                                    <span class="tpbrandproduct__product-title"><a href="shop-details.html">Fresh
-                                            Organic Grape Tomatoes
-                                            100g</a></span>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
 
         </div>

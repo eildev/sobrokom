@@ -7,7 +7,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                             <div class="tpfooter__widget footer-col-1 mb-50">
                                 <h4 class="tpfooter__widget-title">Let Us Help You</h4>
-                                <p>For any questions regarding these Terms and Conditions, please contact us at
+                                <p>For any questions fill free to contact with us at
                                     <a href="mailto:www.sobrokom.store@gmail.com">www.sobrokom.store@gmail.com</a>
                                     <a href="mailto:info@sobrokom.store">info@sobrokom.store</a>
                                 </p>

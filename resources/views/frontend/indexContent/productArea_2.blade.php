@@ -73,8 +73,11 @@
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
+                                                                    @if ( $product->varient[0]->discount)
                                                                     <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}</span>
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @endif
+
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
@@ -84,7 +87,7 @@
                                                                         href="#" value="{{ $product->id }}">
                                                                         <!-- <i class="icon-heart icons"></i> -->
                                                                         @auth
-                                                                         @php 
+                                                                         @php
                                                                            $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
                                                                          @endphp
                                                                         @endauth
@@ -575,7 +578,7 @@
                             {{-- featured products  --}}
                             @php
                                 $featured_product = App\Models\Product::where('status', 1)
-                                    ->where('product_feature', 'feature')
+                                    ->where('product_feature', 'like', '%' . 'feature' . '%')
                                     ->take(5)
                                     ->orderBy('id', 'ASC')
                                     ->get();
@@ -594,15 +597,17 @@
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
                                                                 <a href="#"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
+                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="shop-details.html"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
+                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
+                                                                    @if ( $product->varient[0]->discount)
                                                                     <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}</span>
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @endif
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
@@ -1086,7 +1091,7 @@
                             {{-- Best Selling  --}}
                             @php
                                 $best_selling = App\Models\Product::where('status', 1)
-                                    ->where('product_feature', 'top sell')
+                                    ->where('product_feature', 'like', '%' . 'best-rate' . '%')
                                     ->take(5)
                                     ->orderBy('id', 'ASC')
                                     ->get();
@@ -1103,15 +1108,17 @@
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
                                                                 <a href="#"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
+                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="shop-details.html"><img
-                                                                        src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
+                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
+                                                                    @if ( $product->varient[0]->discount)
                                                                     <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}</span>
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @endif
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
@@ -1613,7 +1620,7 @@
 
         element.addEventListener('click', function(e) {
 
-            
+
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
