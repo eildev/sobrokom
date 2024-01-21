@@ -34,9 +34,9 @@
                     <div class="tpdetails__area mr-60 pb-30">
                         <div class="tpdetails__product mb-30">
                             <div class="tpdetails__title-box">
-                                <h3 class="tpdetails__title">{{$product->product_name}}</h3>
+                                <h3 class="tpdetails__title">{{ $product->product_name }}</h3>
                                 <ul class="tpdetails__brand">
-                                    <li> Brands: <a href="#">{{$product->brand->BrandName}}</a> </li>
+                                    <li> Brands: <a href="#">{{ $product->brand->BrandName }}</a> </li>
                                     <li>
                                         <i class="icon-star_outline1"></i>
                                         <i class="icon-star_outline1"></i>
@@ -46,7 +46,7 @@
                                         <b>02 Reviews</b>
                                     </li>
                                     <li>
-                                        SKU: <span>{{$product->sku}}</span>
+                                        SKU: <span>{{ $product->sku }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -55,50 +55,35 @@
                                     <div class="col-lg-6">
                                         <div class="tpproduct-details__nab">
                                             <div class="tab-content" id="nav-tabContents">
-                                                <div class="tab-pane fade show active w-img" id="nav-home" role="tabpanel"
-                                                    aria-labelledby="nav-home-tab" tabindex="0">
-                                                    <img src="{{ asset('uploads/products/' . $product->product_image) }}" alt="Product Image">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+
+                                                @php
+                                                    $galleries = App\Models\ProductGallery::where('product_id', $product->id)->get();
+                                                    // dd($galleries);
+                                                @endphp
+                                                @foreach ($galleries as $gallery)
+                                                    <div class="tab-pane fade show active w-img" id="nav-home-{{$gallery->id}}"
+                                                        role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                        <img src="{{ asset('uploads/products/gallery/' . $gallery->image) }}"
+                                                            alt="Product Image">
+                                                        <div class="tpproduct__info bage">
+                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="tab-pane fade w-img" id="nav-profile" role="tabpanel"
-                                                    aria-labelledby="nav-profile-tab" tabindex="0">
-                                                    <img src="{{ asset('frontend') }}/assets/img/product/product-details-3.png" alt="">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-discount bage__discount">{{$product->varient[0]->discount}}</span>
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade w-img" id="nav-contact" role="tabpanel"
-                                                    aria-labelledby="nav-contact-tab" tabindex="0">
-                                                    <img src="{{ asset('frontend') }}/assets/img/product/product-details-3.png" alt="">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                    </div>
-                                                </div>
+                                                @endforeach
+
                                             </div>
                                             <nav>
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
-                                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-home" type="button" role="tab"
+                                                   @foreach ($galleries as $gallery )
+                                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#nav-home-{{$gallery->id}}" type="button" role="tab"
                                                         aria-controls="nav-home" aria-selected="true">
                                                         <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item1.png"
                                                             alt="">
                                                     </button>
-                                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-profile" type="button" role="tab"
-                                                        aria-controls="nav-profile" aria-selected="false">
-                                                        <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item2.png"
-                                                            alt="">
-                                                    </button>
-                                                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-contact" type="button" role="tab"
-                                                        aria-controls="nav-contact" aria-selected="false">
-                                                        <img src="{{ asset('frontend') }}/assets/img/product/product-detaisl-item3.png"
-                                                            alt="">
-                                                    </button>
+                                                    
+                                                   @endforeach
                                                 </div>
                                             </nav>
                                         </div>
@@ -106,9 +91,10 @@
                                     <div class="col-lg-6">
                                         <div class="product__details">
                                             <div class="product__details-price-box">
-                                                <h5 class="product__details-price">৳{{$product->varient[0]->discount_amount}}</h5>
+                                                <h5 class="product__details-price">
+                                                    ৳{{ $product->varient[0]->discount_amount }}</h5>
                                                 <ul class="product__details-info-list">
-                                                    <li>{{$product->short_desc}}</li>
+                                                    <li>{{ $product->short_desc }}</li>
                                                     <li>Vegan & Allergy friendly</li>
                                                     <li>Smooth, velvety dairy free cheese sauce</li>
                                                 </ul>
@@ -140,13 +126,16 @@
                                             </div>
                                             <div class="product__details-stock mb-25">
                                                 <ul>
-                                                    <li>Availability: <i>{{$product->varient[0]->stock ?? 0}} Instock</i></li>
-                                                    <li>Categories: <span>{{$product->category->categoryName}} </span></li>
-                                                    <li class="text-capitalize">Tags: {{$product->tags}}</li>
+                                                    <li>Availability: <i>{{ $product->varient[0]->stock ?? 0 }} Instock</i>
+                                                    </li>
+                                                    <li>Categories: <span>{{ $product->category->categoryName }} </span>
+                                                    </li>
+                                                    <li class="text-capitalize">Tags: {{ $product->tags }}</li>
                                                 </ul>
                                             </div>
                                             <div class="product__details-payment text-center">
-                                                <img src="{{ asset('frontend') }}/assets/img/shape/payment-2.png" alt="">
+                                                <img src="{{ asset('frontend') }}/assets/img/shape/footer-payment.png"
+                                                    alt="">
                                                 <span>Guarantee safe & Secure checkout</span>
                                             </div>
                                         </div>
@@ -200,7 +189,8 @@
                                                 sequi nesciunt.</p>
                                         </div>
                                         <div class="tpdescription__product-thumb">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png" alt="">
+                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                alt="">
                                         </div>
                                     </div>
                                     <div class="tpdescription__video">
@@ -213,7 +203,8 @@
                                             originally designed for the Restaurant Gronbech. Est eum itaque maiores qui
                                             blanditiis architecto. Eligendi saepe rem ut. Cumque quia earum eligendi. </p>
                                         <div class="tpdescription__video-wrapper p-relative mt-30 mb-35 w-img">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-video1.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/assets/img/product/product-video1.jpg"
+                                                alt="">
                                             <div class="tpvideo__video-btn">
                                                 <a class="tpvideo__video-icon popup-video"
                                                     href="https://www.youtube.com/watch?v=rLrV5Tel7zw">
@@ -271,7 +262,8 @@
                                                 sequi nesciunt.</p>
                                         </div>
                                         <div class="tpdescription__product-thumb">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png" alt="">
+                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png"
+                                                alt="">
                                         </div>
                                     </div>
                                     <div class="tpdescription__video">
@@ -296,7 +288,8 @@
                                         </h4>
                                         <div class="tpreview__comment">
                                             <div class="tpreview__comment-img mr-20">
-                                                <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png" alt="">
+                                                <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"
+                                                    alt="">
                                             </div>
                                             <div class="tpreview__comment-text">
                                                 <div
@@ -400,7 +393,8 @@
                             <h4 class="tpsidebar__title mb-15">Recent Products</h4>
                             <div class="tpsidebar__product-item">
                                 <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-1.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-1.jpg"
+                                        alt="">
                                     <div class="tpsidebar__info bage">
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
                                     </div>
@@ -427,7 +421,8 @@
                             </div>
                             <div class="tpsidebar__product-item">
                                 <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-2.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-2.jpg"
+                                        alt="">
                                     <div class="tpsidebar__info bage">
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
                                     </div>
@@ -454,7 +449,8 @@
                             </div>
                             <div class="tpsidebar__product-item">
                                 <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-3.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-3.jpg"
+                                        alt="">
                                     <div class="tpsidebar__info bage">
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
                                     </div>
@@ -501,10 +497,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
                                             alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-50%</span>
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
@@ -553,9 +551,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products9-min.jpg" alt=""></a>
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products9-min.jpg"
+                                            alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products10-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products10-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-40%</span>
                                     </div>
@@ -603,10 +604,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products13-min.jpg"
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products13-min.jpg"
                                             alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products35-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products35-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-10%</span>
                                     </div>
@@ -654,10 +657,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products27-min.jpg"
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products27-min.jpg"
                                             alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products14-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products14-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-90%</span>
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
@@ -707,10 +712,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products15-min.jpg"
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products15-min.jpg"
                                             alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products32-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products32-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-50%</span>
                                     </div>
@@ -758,10 +765,12 @@
                         <div class="swiper-slide">
                             <div class="tpproduct p-relative">
                                 <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products12-min.jpg"
+                                    <a href="#"><img
+                                            src="{{ asset('frontend') }}/assets/img/product/products12-min.jpg"
                                             alt=""></a>
                                     <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products28-min.jpg" alt=""></a>
+                                            src="{{ asset('frontend') }}/assets/img/product/products28-min.jpg"
+                                            alt=""></a>
                                     <div class="tpproduct__info bage">
                                         <span class="tpproduct__info-discount bage__discount">-40%</span>
                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
@@ -815,7 +824,8 @@
     <!-- product-area-end -->
 
     <!-- feature-area-start -->
-    <section class="feature-area mainfeature__bg pt-50 pb-40" data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
+    <section class="feature-area mainfeature__bg pt-50 pb-40"
+        data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
         <div class="container">
             <div class="mainfeature__border pb-15">
                 <div class="row row-cols-lg-5 row-cols-md-3 row-cols-2">
