@@ -24,6 +24,7 @@
             <div class="row row-reverse">
                 <div class="col-xl-2 col-lg-12 col-md-12 order-2">
                     <div class="tpshop__leftbar tpshop__leftbar-area">
+                        {{-- filter by Categories  --}}
                         <div class="tpshop__widget mb-30 pb-25">
 
                             @php
@@ -96,6 +97,8 @@
                             @endif
 
                         </div>
+
+                        {{-- filter by Price  --}}
                         <div class="tpshop__widget mb-30 pb-25">
 
                             <h4 class="tpshop__widget-title mb-20">FILTER BY PRICE</h4>
@@ -113,6 +116,7 @@
                             </div>
                         </div>
 
+                        {{-- filter by Brand  --}}
                         <div class="tpshop__widget mb-30 pb-25">
                             @php
                                 $brands = App\Models\Brand::where('status', 1)->get();
@@ -179,6 +183,8 @@
                             @endif
 
                         </div>
+
+                        {{-- filter by Best Ratings  --}}
                         <div class="tpshop__widget">
                             <h4 class="tpshop__widget-title">FILTER BY RATING</h4>
                             <div class="form-check">
