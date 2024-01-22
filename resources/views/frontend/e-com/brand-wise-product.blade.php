@@ -396,7 +396,79 @@
                             <div class="tab-pane fade whight-product" id="nav-product" role="tabpanel"
                                 aria-labelledby="nav-product-tab">
                                 @foreach ($allProducts as $product)
-                                    <!-- ///////////////// -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div
+                                                class="tplist__product d-flex align-items-center justify-content-between mb-20">
+                                                <div class="tplist__product-img">
+                                                    <a href="{{ route('product.details', $product->slug) }}"
+                                                        class="tplist__product-img-one">
+                                                        <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                            alt="Product Image" style="height: 200px">
+                                                    </a>
+                                                    <a class="tplist__product-img-two"
+                                                        href="{{ route('product.details', $product->slug) }}">
+                                                        <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                            alt="Product Image" style="height: 200px">
+                                                    </a>
+                                                    <div class="tpproduct__info bage">
+                                                        @if ($product->varient[0]->discount)
+                                                            <span
+                                                                class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                        @endif
+                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                    </div>
+                                                </div>
+                                                <div class="tplist__content">
+                                                    <span>1 {{ $product->varient[0]->unit }}</span>
+                                                    <h4 class="tplist__content-title"><a
+                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
+                                                    </h4>
+                                                    <div class="tplist__rating mb-5">
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    </div>
+                                                    <ul class="tplist__content-info">
+                                                        <li>Delicous Non-Dairy cheese sauce</li>
+                                                        <li>Vegan & Allergy Friendly</li>
+                                                        <li>{{ $product->short_desc }}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tplist__price justify-content-end">
+                                                    <h4 class="tplist__instock">Availability:
+                                                        <span>{{ $product->varient[0]->stock }} in stock</span>
+                                                    </h4>
+                                                    <h3 class="tplist__count mb-15">
+                                                        ৳{{ $product->varient[0]->discount_amount }}</h3>
+                                                    <button class="tp-btn-2 mb-10">Add to cart</button>
+                                                    <div class="tplist__shopping">
+                                                        @auth
+                                                            <a class="" href="#" value="{{ $product->id }}">
+                                                                <!-- <i class="icon-heart icons"></i> -->
+                                                                @auth
+                                                                    @php
+                                                                        $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                            ->where('product_id', $product->id)
+                                                                            ->first();
+                                                                    @endphp
+                                                                @endauth
+                                                                <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                    class="fas fa-heart icons"></i>wishlist
+                                                            </a>
+                                                        @else
+                                                            <a class="" href="{{ route('login') }}">
+                                                                <i class="fas fa-heart icons"></i> wishlist
+                                                            </a>
+                                                        @endauth
+                                                        <a href="#"><i class="icon-layers"></i>Compare</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
