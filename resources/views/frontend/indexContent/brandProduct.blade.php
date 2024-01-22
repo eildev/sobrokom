@@ -73,8 +73,8 @@
                                                 <a href="#"><i class="icon-star_outline1"></i></a>
                                             </div>
                                             <div class="tpproduct__price">
-                                                <span>{{ $product->varient[0]->discount_amount }}</span>
-                                                <del>{{ $product->varient[0]->regular_price }}</del>
+                                                <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
                                             </div>
                                         </div>
                                     </div>

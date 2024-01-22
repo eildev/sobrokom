@@ -258,9 +258,7 @@
                                                                 href="{{ route('login') }}">
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
-                                                        @endauth
-                                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                                class="icon-layers"></i></a>
+                                                        @endauth                                                       
                                                         <a class="tpproduct__shopping-cart"
                                                             href="{{ route('product.details', $product->slug) }}"><i
                                                                 class="icon-eye"></i></a>
@@ -290,13 +288,6 @@
                                                 <div class="tpproduct__hover-text">
                                                     <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                         <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                                    </div>
-                                                    <div class="tpproduct__descrip">
-                                                        <ul>
-                                                            <li>Type: Organic</li>
-                                                            <li>MFG: August 4.2021</li>
-                                                            <li>LIFE: 60 days</li>
-                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -348,8 +339,7 @@
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
                                                         @endauth
-                                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                                class="icon-layers"></i></a>
+                                                        
                                                         <a class="tpproduct__shopping-cart"
                                                             href="{{ route('product.details', $product->slug) }}"><i
                                                                 class="icon-eye"></i></a>
@@ -379,13 +369,6 @@
                                                 <div class="tpproduct__hover-text">
                                                     <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                         <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                                    </div>
-                                                    <div class="tpproduct__descrip">
-                                                        <ul>
-                                                            <li>Type: Organic</li>
-                                                            <li>MFG: August 4.2021</li>
-                                                            <li>LIFE: 60 days</li>
-                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -463,7 +446,7 @@
                                                             <i class="fas fa-heart icons"></i> wishlist
                                                         </a>
                                                     @endauth
-                                                    <a href="#"><i class="icon-layers"></i>Compare</a>
+                                                    <a href="#"><i class="icon-eye"></i>View Details</a>
                                                 </div>
                                             </div>
                                         </div>
