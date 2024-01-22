@@ -18,6 +18,11 @@ class ProductDetailsController extends Controller
         $category = Category::where('slug', $categoryslug)->first();
         return view('frontend/e-com/category-wise-product', compact('category'));
     }
+    public function SearchbyProduct(Request $request){
+        $searchTag = $request->search;
+        $products = Product::where('product_name', 'like', '%'.$request->search.'%')->orWhere('short_desc', 'like', '%'.$request->search.'%')->orWhere('tags', 'like', '%'.$request->search.'%')->paginate(10);
+        return view('frontend/e-com/product-search', compact('products','searchTag'));
+    }
     public function subcategoryWiseProduct($subcategoryslug){
         $subcategory = Subcategory::where('slug', $subcategoryslug)->first();
         return view('frontend/e-com/subcategory-wise-product', compact('subcategory'));

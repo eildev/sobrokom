@@ -7,7 +7,8 @@
                         <div class="col-6 pt-100 pb-100">
                             <h2 class="tpsearchbar__title">What Are You Looking For?</h2>
                             <div class="tpsearchbar__form">
-                                <form action="#">
+                                <form action="{{ route('search.product') }}" method="POST">
+                                    @csrf
                                     <input type="text" name="search" placeholder="Search Product...">
                                     <button class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
                                 </form>
