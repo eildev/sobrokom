@@ -66,8 +66,6 @@
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
                                                             @endauth
-                                                            <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                                    class="icon-layers"></i></a>
                                                             <a class="tpproduct__shopping-cart" href="{{route('product.details', $product->slug)}}"><i
                                                                     class="icon-eye"></i></a>
                                                         </div>
