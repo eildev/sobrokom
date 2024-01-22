@@ -43,11 +43,24 @@
                                                 {{ $product->varient[0]->regular_price ?? 0 }}
                                             </td>
 
-                                            <td>{{ $product->status }}</td>
+                                            <td>
+                                                @if ($product->status == 1)
+                                                <a href="#" class="btn btn-warning">Active</a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ route('product.view.details', $product->id) }}"
-                                                    class="btn btn-info">View
-                                                    Details</a>
+                                                    class="btn btn-info text-white">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('product.edit', $product->id) }}"
+                                                    class="btn btn-success text-white">
+                                                    <i class='bx bx-edit'></i>
+                                                </a>
+                                                <a href="{{ route('product.delete', $product->id) }}"
+                                                    class="btn btn-danger text-white" id="delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -76,12 +76,12 @@
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="">{{ $category->categoryName }}</a>
+                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="mega-menu-title">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> > {{ $subcategory->subcategoryName }}</a>
+                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> {{ $subcategory->subcategoryName }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
