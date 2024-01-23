@@ -37,11 +37,11 @@
                                                 ->get();
                                         @endphp
                                         @foreach ($subcategories as $subcategory)
-                                            <li><a href="shop-details-4.html">{{ $subcategory->subcategoryName }}</a>
+                                            <li><a href="{{ route('subcategory.wise.product',$subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <span class="tpcartitem__all"><a href="shop-3.html">See All <i
+                                    <span class="tpcartitem__all"><a href="{{ route('category.wise.product',$Category->slug) }}">See All <i
                                                 class="icon-chevron-right"></i></a>
                                     </span>
                                 </div>

@@ -5,19 +5,15 @@
                 <div class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all"
-                                type="button" role="tab" aria-controls="nav-all" aria-selected="false">tab 1
-
-                            </button>
                             <button class="nav-link active" id="nav-popular-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular"
                                 aria-selected="true">
-                                tab 2
+                                <i class="icon-eye"></i> Billing Details 
                             </button>
                             <button class="nav-link" id="nav-product-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product"
                                 aria-selected="false">
-                                tab 3
+                                <i class="fas fa-gear"></i> Manage Information
                             </button>
                         </div>
                     </nav>
@@ -26,17 +22,6 @@
         </div>
     </div>
     <div class="tab-content" id="nav-tabContent">
-
-        {{-- tab1 details --}}
-        <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab_card d-flex align-items-center justify-content-between mb-20">
-                        this is sub tab 1
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         @php

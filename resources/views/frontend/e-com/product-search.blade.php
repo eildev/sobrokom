@@ -253,7 +253,7 @@
                 <div class="col-xl-10 col-lg-12 col-md-12">
                     <div class="tpshop__top tpshop__sidebar-area mr-60 ">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <div class="product__filter-content mb-40">
                                     <div class="row align-items-center py-3 text-center">
                                         <div class="">
@@ -264,14 +264,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <div class="product__filter-content mb-40">
                                     <div class="row align-items-center py-2 text-center">
                                         <form action="{{ route('search.product') }}" method="POST">
                                             @csrf
                                             <div class="w-75 mx-auto d-flex">
                                                 <input type="text" name="search" placeholder="Search Here"  class="form-control rounded-0 rounded-start">
-                                                <button class="btn btn-info text-white rounded-0 rounded-end">Search</button>
+                                                <button class="tp-btn  rounded-0 rounded-end">Search</button>
                                             </div>
                                         </form>
                                     </div>
