@@ -55,7 +55,7 @@
                                                 @endphp
                                                 @foreach($product->gallary as $key=> $gallery)
                                                 
-                                                <div class="tab-pane fade w-img show {{ ($key == 0) ?? 'active' }}" id="nav-home{{ $gallery->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                                <div class="tab-pane fade w-img show {{ ($key == 0) ? 'active' : '' }}" id="nav-home{{ $gallery->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                                     <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}" alt="">
                                                     <div class="tpproduct__info bage">
                                                         <span class="tpproduct__info-hot bage__hot">HOT</span>
@@ -73,7 +73,7 @@
                                                             alt="">
                                                     </button> -->
                                                     @foreach($product->gallary as $gallery)
-                                                    <button class="nav-link {{ ($key == 0) ?? 'active' }}" id="nav-home-tab" data-bs-toggle="tab"
+                                                    <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                         data-bs-target="#nav-home{{ $gallery->id }}" type="button" role="tab"
                                                         aria-controls="nav-home" aria-selected="true">
                                                         <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}"
