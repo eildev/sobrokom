@@ -28,7 +28,7 @@ class CartController extends Controller
             'cartData' => Cart::content()
         ]);
 
-        
+
 
         // $validator = Validator::make($request->all(), [
         //     'email' => 'required|string|lowercase|email|max:255'
@@ -50,4 +50,31 @@ class CartController extends Controller
         //     ]);
 
     }
+
+
+
+    // public function showCart()
+    // {
+    //     $products = Cart::content();
+    //     return response()->json([
+    //         'status' => '200',
+    //         'cartData' => $products,
+    //     ]);
+    // }
+
+    public function showCartProducts()
+    {
+        $products = Cart::content();
+        return view('frontend.e-com.cart', compact('products'));
+    }
+
+    // public function removeCartProduct(Request $request, $id)
+    // {
+    //     $rowId = $id;
+    //     $products = Cart::remove($rowId);
+    //     return response()->json([
+    //         'status' => '200',
+    //         'message' => 'Product Remove successfully',
+    //     ]);
+    // }
 }

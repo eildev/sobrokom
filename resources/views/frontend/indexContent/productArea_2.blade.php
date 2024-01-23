@@ -141,10 +141,10 @@
                                                                     class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                                     <form method="POST" id="add_to_cart_form">
                                                                         @csrf
-                                                                        <input type="text" value="{{ $product->id }}" name="product_id">
-                                                                        <input type="text" value="{{ $product->varient[0]->id }}" name="variant_id">
-                                                                        <input type="text" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
-                                                                        <button class="tp-btn-2 btn_add_to_cart">Add to
+                                                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                                        <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
+                                                                        <input type="hidden" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
+                                                                        <button class="tp-btn-2">Add to
                                                                             cart</button>
                                                                     </form>
                                                                 </div>

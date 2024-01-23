@@ -33,7 +33,18 @@
 </head>
 
 <body>
+    @php
+        $cartData = Cart::content();
+        // @dd(Cart::total());
+    @endphp
 
+    @if ($cartData->count() > 0)
+        @foreach ($cartData as $cart)
+        {{-- @dd($cart->options->image); --}}
+            {{-- @dd($cart->name); --}}
+            {{-- <p>{{$cart->name}}</p> --}}
+        @endforeach
+    @endif
     <!-- Scroll-top -->
     <button class="scroll-top scroll-to-target" data-target="html">
         <i class="icon-chevrons-up"></i>
@@ -136,48 +147,6 @@
 
     {{-- add To Cart  --}}
     <script>
-        // const add_to_cart = document.querySelectorAll('.btn_add_to_cart');
-        // // console.log(add_whishlist);
-        // add_to_cart.forEach(element => {
-        //     // console.log(element)
-
-
-        //     element.addEventListener('click', function(e) {
-
-
-        //         e.preventDefault();
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             }
-        //         });
-        //         let product_id = this.getAttribute('value');
-        //         // alert(product_id);
-
-        //         $.ajax({
-        //             url: '/',
-        //             type: 'POST',
-        //             data: {
-        //                 'product_id': product_id,
-        //                 'variant_id': product_id,
-        //                 'selling_price': product_id,
-        //             },
-        //             success: function(response) {
-        //                 if (response.status == 200) {
-        //                     toastr.success(response.message);
-        //                     element.querySelector('i').setAttribute('style', 'color:red');
-        //                     // console.log(element.querySelector('i'));
-        //                 } else {
-        //                     // toastr.warning(response);
-        //                 }
-        //             }
-        //         });
-        //     })
-        // });
-
-
-
-
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
@@ -205,19 +174,66 @@
                         'selling_price': selling_price,
                     },
                     success: function(response) {
-                        console.log(response.cartData);
-                        // if (response.status == 200) {
-                        //     toastr.success(response.message);
-                        //     element.querySelector('i').setAttribute('style', 'color:red');
-                        //     // console.log(element.querySelector('i'));
-                        // } else {
-                        //     // toastr.warning(response);
-                        // }
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            // showCart();
+                        } else {
+
+                        }
                     }
                 });
 
             });
         })
+
+
+
+        // show data on cart
+        // function showCart() {
+
+        //     $.ajax({
+        //         url: '/product/show_cart',
+        //         type: "GET",
+        //         dataType: 'JSON',
+        //         success: function(res) {
+        //             if (res.status == 200) {
+        //                 // console.log(res);
+        //                 const cart_container = document.querySelector('.cart_container');
+        //                 cart_container.innerHTML = "";
+        //                 const allData = res.cartData;
+        //                 allData.forEach((data) => {
+        //                     console.log(data);
+        //                     // const li = document.createElement('li');
+        //                     // li.innerHTML += `
+        //                     //         <div class="tpcart__item">
+        //                     //                 <div class="tpcart__img">
+        //                     //                     <img src=""
+        //                     //                         alt="">
+        //                     //                     <div class="tpcart__del">
+        //                     //                         <a href="#"><i class="icon-x-circle"></i></a>
+        //                     //                     </div>
+        //                     //                 </div>
+        //                     //                 <div class="tpcart__content">
+        //                     //                     <span class="tpcart__content-title"><a
+        //                     //                             href="shop-details.html">{{ $cart->name }}</a>
+        //                     //                     </span>
+        //                     //                     <div class="tpcart__cart-price">
+        //                     //                         <span class="quantity">{{ $cart->qty }}</span> x
+        //                     //                         <span class="new-price">৳{{ $cart->price }}</span>
+        //                     //                     </div>
+        //                     //                 </div>
+        //                     //             </div>
+        //                     //         `;
+        //                     // varient_container.appendChild(tr);
+        //                 })
+        //             } else {
+        //                 toastr.warning(res.error);
+        //             }
+        //         }
+        //     })
+        // }
+
+
     </script>
 </body>
 

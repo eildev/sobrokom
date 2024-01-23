@@ -5,6 +5,7 @@
             <div class="row">
                 <div class="col-12">
 
+                
                     @php
                         $offerBanner = App\Models\OfferBanner::where('status', 1)
                             ->orderBy('id', 'DESC')
