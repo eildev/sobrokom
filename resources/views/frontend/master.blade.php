@@ -178,14 +178,12 @@
 
 
 
-        const addForm = document.getElementById('add_to_cart_form');
+        const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
                 e.preventDefault();
-
-                let formData = new FormData(this);
-                console.log(formData);
-
+                let product_id = this.elements.product_id.value
+                
             });
         })
     </script>
