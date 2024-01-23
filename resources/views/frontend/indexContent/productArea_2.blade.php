@@ -139,7 +139,7 @@
                                                             <div class="tpproduct__hover-text">
                                                                 <div
                                                                     class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                                    <form action="{{route('product.add_to_cart')}}" method="POST" id="add_to_cart_form">
+                                                                    <form method="POST" id="add_to_cart_form">
                                                                         @csrf
                                                                         <input type="text" value="{{ $product->id }}" name="product_id">
                                                                         <input type="text" value="{{ $product->varient[0]->id }}" name="variant_id">

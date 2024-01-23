@@ -48,7 +48,7 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::post('/product', 'SearchbyProduct')->name('search.product');
 });
 Route::controller(CartController::class)->group(function () {
-    Route::post('/product/add_to_cart', 'addToCart')->name('product.add_to_cart');
+    Route::post('/product/add_to_cart', '')->name('product.add_to_cart');
 
 });
 

@@ -136,44 +136,44 @@
 
     {{-- add To Cart  --}}
     <script>
-        // const add_to_cart = document.querySelectorAll('.btn_add_to_cart');
-        // // console.log(add_whishlist);
-        // add_to_cart.forEach(element => {
-        //     // console.log(element)
+        const add_to_cart = document.querySelectorAll('.btn_add_to_cart');
+        // console.log(add_whishlist);
+        add_to_cart.forEach(element => {
+            // console.log(element)
 
 
-        //     element.addEventListener('click', function(e) {
+            element.addEventListener('click', function(e) {
 
 
-        //         e.preventDefault();
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             }
-        //         });
-        //         let product_id = this.getAttribute('value');
-        //         // alert(product_id);
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                let product_id = this.getAttribute('value');
+                // alert(product_id);
 
-        //         $.ajax({
-        //             url: '/',
-        //             type: 'POST',
-        //             data: {
-        //                 'product_id': product_id,
-        //                 'variant_id': product_id,
-        //                 'selling_price': product_id,
-        //             },
-        //             success: function(response) {
-        //                 if (response.status == 200) {
-        //                     toastr.success(response.message);
-        //                     element.querySelector('i').setAttribute('style', 'color:red');
-        //                     // console.log(element.querySelector('i'));
-        //                 } else {
-        //                     // toastr.warning(response);
-        //                 }
-        //             }
-        //         });
-        //     })
-        // });
+                $.ajax({
+                    url: '/',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                        'variant_id': product_id,
+                        'selling_price': product_id,
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            element.querySelector('i').setAttribute('style', 'color:red');
+                            // console.log(element.querySelector('i'));
+                        } else {
+                            // toastr.warning(response);
+                        }
+                    }
+                });
+            })
+        });
 
 
 
@@ -182,8 +182,39 @@
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
                 e.preventDefault();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+
                 let product_id = this.elements.product_id.value
-                
+                let variant_id = this.elements.variant_id.value
+                let selling_price = this.elements.selling_price.value
+
+                // console.log(product_id, variant_id,selling_price);
+
+                $.ajax({
+                    url: '/product/add_to_cart',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                        'variant_id': variant_id,
+                        'selling_price': selling_price,
+                    },
+                    success: function(response) {
+                        // if (response.status == 200) {
+                        //     toastr.success(response.message);
+                        //     element.querySelector('i').setAttribute('style', 'color:red');
+                        //     // console.log(element.querySelector('i'));
+                        // } else {
+                        //     // toastr.warning(response);
+                        // }
+                    }
+                });
+
             });
         })
     </script>

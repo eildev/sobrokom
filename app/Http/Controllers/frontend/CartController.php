@@ -10,7 +10,7 @@ class CartController extends Controller
 {
 
     public function addToCart(Request $request){
-        @dd($rqst->all());
+        @dd($request->all());
         // return response()->json([
         //     'Request' => $rqst->all()
 
