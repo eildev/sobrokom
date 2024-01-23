@@ -30,7 +30,6 @@
                                     <ul>
                                         @php
                                             $subcategories = App\Models\Subcategory::where('status', 1)
-
                                                 ->where('categoryId', $Category->id)
                                                 ->take(4)
                                                 ->orderBy('id', 'ASC')
