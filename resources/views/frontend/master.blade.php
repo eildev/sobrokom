@@ -40,7 +40,7 @@
 
     @if ($cartData->count() > 0)
         @foreach ($cartData as $cart)
-        {{-- @dd($cart->options->image); --}}
+            {{-- @dd($cart->options->image); --}}
             {{-- @dd($cart->name); --}}
             {{-- <p>{{$cart->name}}</p> --}}
         @endforeach
@@ -145,6 +145,8 @@
         });
     </script>
 
+
+
     {{-- add To Cart  --}}
     <script>
         const addForm = document.querySelectorAll('#add_to_cart_form');
@@ -176,7 +178,7 @@
                     success: function(response) {
                         if (response.status == 200) {
                             toastr.success(response.message);
-                            // showCart();
+                            showCart();
                         } else {
 
                         }
@@ -185,55 +187,84 @@
 
             });
         })
+    </script>
 
 
 
-        // show data on cart
-        // function showCart() {
 
-        //     $.ajax({
-        //         url: '/product/show_cart',
-        //         type: "GET",
-        //         dataType: 'JSON',
-        //         success: function(res) {
-        //             if (res.status == 200) {
-        //                 // console.log(res);
-        //                 const cart_container = document.querySelector('.cart_container');
-        //                 cart_container.innerHTML = "";
-        //                 const allData = res.cartData;
-        //                 allData.forEach((data) => {
-        //                     console.log(data);
-        //                     // const li = document.createElement('li');
-        //                     // li.innerHTML += `
-        //                     //         <div class="tpcart__item">
-        //                     //                 <div class="tpcart__img">
-        //                     //                     <img src=""
-        //                     //                         alt="">
-        //                     //                     <div class="tpcart__del">
-        //                     //                         <a href="#"><i class="icon-x-circle"></i></a>
-        //                     //                     </div>
-        //                     //                 </div>
-        //                     //                 <div class="tpcart__content">
-        //                     //                     <span class="tpcart__content-title"><a
-        //                     //                             href="shop-details.html">{{ $cart->name }}</a>
-        //                     //                     </span>
-        //                     //                     <div class="tpcart__cart-price">
-        //                     //                         <span class="quantity">{{ $cart->qty }}</span> x
-        //                     //                         <span class="new-price">৳{{ $cart->price }}</span>
-        //                     //                     </div>
-        //                     //                 </div>
-        //                     //             </div>
-        //                     //         `;
-        //                     // varient_container.appendChild(tr);
-        //                 })
-        //             } else {
-        //                 toastr.warning(res.error);
-        //             }
-        //         }
-        //     })
-        // }
+    <script>
+        // Function to update the cart display
+        function updateCartDisplay(cartData) {
+
+            $('.cart_container').empty();
+
+            // console.log(cartData);
+
+            if (Object.keys(cartData).length > 0) {
+                var itemsToDisplay = 3;
+                // console.log(itemsToDisplay);
+
+                for (var i = 0; i < itemsToDisplay; i++) {
+                    var key = Object.keys(cartData)[i];
+                    var item = cartData[key];
+
+                    $('.cart_container').append(
+                        '<li>' +
+                        '<div class="tpcart__item">' +
+                        '<div class="tpcart__img">' +
+                        '<img src="{{ asset('uploads/products/') }}/' + item.options.image + '" alt="product Image">' +
+                        '<div class="tpcart__del">' +
+                        '<a href="#"><i class="icon-x-circle"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="tpcart__content">' +
+                        '<span class="tpcart__content-title"><a href="#">' + item.name + '</a></span>' +
+                        '<div class="tpcart__cart-price">' +
+                        '<span class="quantity">' + item.qty + '</span> x ' +
+                        '<span class="new-price">৳' + item.price + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>'
+                    );
+                }
+
+                if (Object.keys(cartData).length > 3) {
+                    var remainingItems = Object.keys(cartData).length - itemsToDisplay;
+                    $('.cart_container').append('<li>and ' + remainingItems + ' more item(s)</li>');
+                }
+                // Update the cart quantity span
+                $('.cart_quantity').text(Object.keys(cartData).length);
+                $('.mobile_show_quantity').text(Object.keys(cartData).length);
+            } else {
+                // Display a message when the cart is empty
+                $('.cart_container').append('<p>Your cart is empty</p>');
+
+                // Update the cart quantity span to 0 when the cart is empty
+                $('.cart_quantity').hidden();
+                $('.mobile_show_quantity').hidden();
+            }
+        }
+
+        $(document).ready(function() {
+            showCart();
+        });
 
 
+
+        // Function to show data on cart
+        function showCart() {
+            $.ajax({
+                url: '/product/show_cart',
+                type: "GET",
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res.status == 200) {
+                        updateCartDisplay(res.cartData);
+                    }
+                }
+            });
+        }
     </script>
 </body>
 

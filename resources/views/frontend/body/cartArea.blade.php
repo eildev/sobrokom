@@ -7,32 +7,8 @@
                     <div class="tpcart__product-list">
                         @if ($cartData->count() > 0)
                             <ul class="cart_container">
-                                @foreach ($cartData->take(3) as $cart)
-                                    <li>
-                                        <div class="tpcart__item">
-                                            <div class="tpcart__img">
-                                                <img src="{{ asset('uploads/products/' . $cart->options->image) }}"
-                                                    alt="">
-                                                <div class="tpcart__del">
-                                                    <a href="#"><i class="icon-x-circle"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="tpcart__content">
-                                                <span class="tpcart__content-title"><a
-                                                        href="shop-details.html">{{ $cart->name }}</a>
-                                                </span>
-                                                <div class="tpcart__cart-price">
-                                                    <span class="quantity">{{ $cart->qty }}</span> x
-                                                    <span class="new-price">৳{{ $cart->price }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
+                                
                             </ul>
-                            @if ($cartData->count() > 3)
-                                <p>And {{ $cartData->count() - 3 }} more item(s)</p>
-                            @endif
                         @endif
                     </div>
                     <div class="tpcart__checkout">

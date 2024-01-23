@@ -25,7 +25,7 @@
 
                                             @foreach ($brands as $brand)
                                                 <li>
-                                                    <a href="{{ route('brand.wise.product',$brand->slug) }}"><img
+                                                    <a href="{{ route('brand.wise.product', $brand->slug) }}"><img
                                                             src="{{ asset('uploads/brands/' . $brand->image) }} "
                                                             alt=""> {{ $brand->BrandName }}</a>
                                                 </li>
@@ -72,16 +72,18 @@
                                         $categoris = App\Models\Category::take(4)->get();
                                     @endphp
                                     @if ($categoris->count() > 0)
-                                        <ul class="sub-menu mega-menu" >
+                                        <ul class="sub-menu mega-menu">
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="mega-menu-title">{{ $category->categoryName }}</a>
+                                                    <a href="{{ route('category.wise.product', $category->slug) }}"
+                                                        class="mega-menu-title">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> {{ $subcategory->subcategoryName }}</a>
+                                                                    href="{{ route('subcategory.wise.product', $subcategory->slug) }}">
+                                                                    {{ $subcategory->subcategoryName }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -160,9 +162,11 @@
                         </div>
 
                         <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
-                            <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg"
-                                        alt=""></i>
-                                <span>5</span>
+                            <button>
+                                <i>
+                                    <img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt="">
+                                </i>
+                                <span class="cart_quantity"></span>
                             </button>
                         </div>
                         @auth
@@ -189,7 +193,7 @@
                 <div class="col-6 pt-100 pb-100">
                     <h2 class="tpsearchbar__title">What Are You Looking For?</h2>
                     <div class="tpsearchbar__form">
-                        <form  action="{{ route('search.product') }}" method="POST">
+                        <form action="{{ route('search.product') }}" method="POST">
                             @csrf
                             <input type="text" name="search" placeholder="Search Product...">
                             <button class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
@@ -235,7 +239,7 @@
                     </div>
                     <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
                         <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt=""></i>
-                            <span>5</span>
+                            <span class="mobile_show_quantity"></span>
                         </button>
                     </div>
                 </div>

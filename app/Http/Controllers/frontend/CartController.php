@@ -28,39 +28,18 @@ class CartController extends Controller
             'cartData' => Cart::content()
         ]);
 
-
-
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|string|lowercase|email|max:255'
-        //     ]);
-        //     if ($validator->passes()) {
-        //         $Subscribe = new Subscribe;
-        //         $Subscribe->email = $request->email;
-        //         $Subscribe->save();
-
-        //         return response()->json([
-        //             'status' => 200,
-        //             'message'=>'Subscribed Successfully'
-        //         ]);
-
-        //     }
-        //     return response()->json([
-        //         'status' => '500',
-        //         'error'=>$validator->messages()
-        //     ]);
-
     }
 
 
 
-    // public function showCart()
-    // {
-    //     $products = Cart::content();
-    //     return response()->json([
-    //         'status' => '200',
-    //         'cartData' => $products,
-    //     ]);
-    // }
+    public function showCart()
+    {
+        $products = Cart::content();
+        return response()->json([
+            'status' => '200',
+            'cartData' => $products,
+        ]);
+    }
 
     public function showCartProducts()
     {

@@ -110,35 +110,35 @@
 
     <script>
         // remove Item from Cart
-        const removeItem = document.querySelectorAll('.remove_item');
-        removeItem.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
+        // const removeItem = document.querySelectorAll('.remove_item');
+        // removeItem.forEach(item => {
+        //     item.addEventListener('click', (e) => {
+        //         e.preventDefault();
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                const id = item.getAttribute('data-id');
-                $.ajax({
-                    url: '/product/remove_cart_product/' + id,
-                    type: 'GET',
-                    data: {
-                        'id': id,
-                    },
-                    success: function(response) {
-                        if (response.status == 200) {
-                            toastr.success(response.message);
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+        //         const id = item.getAttribute('data-id');
+        //         $.ajax({
+        //             url: '/product/remove_cart_product/' + id,
+        //             type: 'GET',
+        //             data: {
+        //                 'id': id,
+        //             },
+        //             success: function(response) {
+        //                 if (response.status == 200) {
+        //                     toastr.success(response.message);
 
-                        } else {
+        //                 } else {
 
-                        }
-                    }
-                });
+        //                 }
+        //             }
+        //         });
 
-            })
-        });
+        //     })
+        // });
 
 
         // $('.cart-plus').on('click', function() {
