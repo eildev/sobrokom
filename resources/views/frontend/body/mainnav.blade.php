@@ -76,12 +76,12 @@
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="">{{ $category->categoryName }}</a>
+                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="mega-menu-title">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> > {{ $subcategory->subcategoryName }}</a>
+                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> {{ $subcategory->subcategoryName }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -189,7 +189,8 @@
                 <div class="col-6 pt-100 pb-100">
                     <h2 class="tpsearchbar__title">What Are You Looking For?</h2>
                     <div class="tpsearchbar__form">
-                        <form action="#">
+                        <form  action="{{ route('search.product') }}" method="POST">
+                            @csrf
                             <input type="text" name="search" placeholder="Search Product...">
                             <button class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
                         </form>

@@ -66,8 +66,6 @@
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
                                                             @endauth
-                                                            <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                                    class="icon-layers"></i></a>
                                                             <a class="tpproduct__shopping-cart" href="{{route('product.details', $product->slug)}}"><i
                                                                     class="icon-eye"></i></a>
                                                         </div>
@@ -88,8 +86,8 @@
                                                             <a href="#"><i class="icon-star_outline1"></i></a>
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
-                                                            <span>{{ $product->varient[0]->discount_amount }}</span>
-                                                                    <del>{{ $product->varient[0]->regular_price }}</del>
+                                                            <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                                    <del>৳{{ $product->varient[0]->regular_price }}</del>
                                                         </div>
                                                         <div class="tpproduct__progress">
                                                             <div class="progress mb-5">
@@ -102,16 +100,10 @@
                                                     </div>
                                                     <div class="tpproduct__hover-text">
                                                         <div
-                                                            class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                            class="tpproduct__hover-btn d-flex justify-content-center mb-0">
                                                             <a class="tp-btn-2" href="cart.html">Add to cart</a>
                                                         </div>
-                                                        <div class="tpproduct__descrip">
-                                                            <ul>
-                                                                <li>Type: Organic</li>
-                                                                <li>MFG: August 4.2021</li>
-                                                                <li>LIFE: 60 days</li>
-                                                            </ul>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
