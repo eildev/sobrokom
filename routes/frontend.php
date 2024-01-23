@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\frontend\BillingInfoController;
 use App\Http\Controllers\frontend\ProductDetailsController;
+use App\Http\Controllers\frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/subcategory/{subcategoryslug}', 'subcategoryWiseProduct')->name('subcategory.wise.product');
     Route::get('/brand/{brandslug}', 'brandWiseProduct')->name('brand.wise.product');
     Route::post('/product', 'SearchbyProduct')->name('search.product');
+});
+Route::controller(CartController::class)->group(function () {
+    Route::post('/product/add_to_cart', 'addToCart')->name('product.add_to_cart');
+
 });
 
 

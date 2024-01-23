@@ -65,17 +65,18 @@
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
-                                                                <a href="{{route('product.details', $product->slug)}}"><img
+                                                                <a
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
-                                                                    href="{{route('product.details', $product->slug)}}"><img
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
-                                                                    @if ( $product->varient[0]->discount)
-                                                                    <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @if ($product->varient[0]->discount)
+                                                                        <span
+                                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @endif
 
                                                                     <span
@@ -83,23 +84,27 @@
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
                                                                     @auth
-                                                                    <a class="tpproduct__shopping-wishlist add_whishlist"
-                                                                        href="#" value="{{ $product->id }}">
-                                                                        <!-- <i class="icon-heart icons"></i> -->
-                                                                        @auth
-                                                                         @php
-                                                                           $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
-                                                                         @endphp
-                                                                        @endauth
-                                                                        <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}" class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist add_whishlist"
+                                                                            href="#" value="{{ $product->id }}">
+                                                                            <!-- <i class="icon-heart icons"></i> -->
+                                                                            @auth
+                                                                                @php
+                                                                                    $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                                        ->where('product_id', $product->id)
+                                                                                        ->first();
+                                                                                @endphp
+                                                                            @endauth
+                                                                            <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                                class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @else
-                                                                    <a class="tpproduct__shopping-wishlist"
-                                                                        href="{{ route('login') }}">
-                                                                        <i class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist"
+                                                                            href="{{ route('login') }}">
+                                                                            <i class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @endauth
-                                                                    <a class="tpproduct__shopping-cart" href="{{route('product.details', $product->slug)}}">
+                                                                    <a class="tpproduct__shopping-cart"
+                                                                        href="{{ route('product.details', $product->slug) }}">
                                                                         <i class="icon-eye"></i>
                                                                     </a>
                                                                 </div>
@@ -134,8 +139,14 @@
                                                             <div class="tpproduct__hover-text">
                                                                 <div
                                                                     class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                                    <a class="tp-btn-2" href="cart.html">Add to
-                                                                        cart</a>
+                                                                    <form action="{{route('product.add_to_cart')}}" method="POST" id="add_to_cart_form">
+                                                                        @csrf
+                                                                        <input type="text" value="{{ $product->id }}" name="product_id">
+                                                                        <input type="text" value="{{ $product->varient[0]->id }}" name="variant_id">
+                                                                        <input type="text" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
+                                                                        <button class="tp-btn-2 btn_add_to_cart">Add to
+                                                                            cart</button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -585,41 +596,46 @@
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
-                                                                <a href="{{route('product.details', $product->slug)}}"><img
-                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
+                                                                <a
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
-                                                                    href="{{route('product.details', $product->slug)}}"><img
-                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
-                                                                    @if ( $product->varient[0]->discount)
-                                                                    <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @if ($product->varient[0]->discount)
+                                                                        <span
+                                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @endif
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
                                                                     @auth
-                                                                    <a class="tpproduct__shopping-wishlist add_whishlist"
-                                                                        href="#" value="{{ $product->id }}">
-                                                                        <!-- <i class="icon-heart icons"></i> -->
-                                                                        @auth
-                                                                         @php
-                                                                           $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
-                                                                         @endphp
-                                                                        @endauth
-                                                                        <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}" class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist add_whishlist"
+                                                                            href="#" value="{{ $product->id }}">
+                                                                            <!-- <i class="icon-heart icons"></i> -->
+                                                                            @auth
+                                                                                @php
+                                                                                    $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                                        ->where('product_id', $product->id)
+                                                                                        ->first();
+                                                                                @endphp
+                                                                            @endauth
+                                                                            <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                                class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @else
-                                                                    <a class="tpproduct__shopping-wishlist"
-                                                                        href="{{ route('login') }}">
-                                                                        <i class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist"
+                                                                            href="{{ route('login') }}">
+                                                                            <i class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @endauth
                                                                     <a class="tpproduct__shopping-cart"
-                                                                        href="{{route('product.details', $product->slug)}}"><i class="icon-eye"></i></a>
+                                                                        href="{{ route('product.details', $product->slug) }}"><i
+                                                                            class="icon-eye"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__content">
@@ -1101,41 +1117,46 @@
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
-                                                                <a href="{{route('product.details', $product->slug)}}"><img
-                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
+                                                                <a
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <a class="tpproduct__thumb-img"
-                                                                    href="{{route('product.details', $product->slug)}}"><img
-                                                                        src="{{ asset('uploads/products/'.$product->product_image) }}"
+                                                                    href="{{ route('product.details', $product->slug) }}"><img
+                                                                        src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
-                                                                    @if ( $product->varient[0]->discount)
-                                                                    <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount}}%</span>
+                                                                    @if ($product->varient[0]->discount)
+                                                                        <span
+                                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @endif
                                                                     <span
                                                                         class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
                                                                     @auth
-                                                                    <a class="tpproduct__shopping-wishlist add_whishlist"
-                                                                        href="#" value="{{ $product->id }}">
-                                                                        <!-- <i class="icon-heart icons"></i> -->
-                                                                        @auth
-                                                                         @php
-                                                                           $loved = App\Models\WishList::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
-                                                                         @endphp
-                                                                        @endauth
-                                                                        <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}" class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist add_whishlist"
+                                                                            href="#" value="{{ $product->id }}">
+                                                                            <!-- <i class="icon-heart icons"></i> -->
+                                                                            @auth
+                                                                                @php
+                                                                                    $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                                        ->where('product_id', $product->id)
+                                                                                        ->first();
+                                                                                @endphp
+                                                                            @endauth
+                                                                            <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                                class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @else
-                                                                    <a class="tpproduct__shopping-wishlist"
-                                                                        href="{{ route('login') }}">
-                                                                        <i class="fas fa-heart icons"></i>
-                                                                    </a>
+                                                                        <a class="tpproduct__shopping-wishlist"
+                                                                            href="{{ route('login') }}">
+                                                                            <i class="fas fa-heart icons"></i>
+                                                                        </a>
                                                                     @endauth
                                                                     <a class="tpproduct__shopping-cart"
-                                                                        href="{{route('product.details', $product->slug)}}"><i class="icon-eye"></i></a>
+                                                                        href="{{ route('product.details', $product->slug) }}"><i
+                                                                            class="icon-eye"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__content">

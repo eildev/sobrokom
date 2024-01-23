@@ -133,6 +133,62 @@
             })
         });
     </script>
+
+    {{-- add To Cart  --}}
+    <script>
+        // const add_to_cart = document.querySelectorAll('.btn_add_to_cart');
+        // // console.log(add_whishlist);
+        // add_to_cart.forEach(element => {
+        //     // console.log(element)
+
+
+        //     element.addEventListener('click', function(e) {
+
+
+        //         e.preventDefault();
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+        //         let product_id = this.getAttribute('value');
+        //         // alert(product_id);
+
+        //         $.ajax({
+        //             url: '/',
+        //             type: 'POST',
+        //             data: {
+        //                 'product_id': product_id,
+        //                 'variant_id': product_id,
+        //                 'selling_price': product_id,
+        //             },
+        //             success: function(response) {
+        //                 if (response.status == 200) {
+        //                     toastr.success(response.message);
+        //                     element.querySelector('i').setAttribute('style', 'color:red');
+        //                     // console.log(element.querySelector('i'));
+        //                 } else {
+        //                     // toastr.warning(response);
+        //                 }
+        //             }
+        //         });
+        //     })
+        // });
+
+
+
+
+        const addForm = document.getElementById('add_to_cart_form');
+        addForm.forEach(element => {
+            element.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                console.log(formData);
+
+            });
+        })
+    </script>
 </body>
 
 </html>
