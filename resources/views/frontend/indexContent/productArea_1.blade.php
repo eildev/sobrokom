@@ -46,7 +46,7 @@
                                                                 <span
                                                                     class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                             @endif
-                                                            @if ($product->varient[0]->discount > 10)
+                                                            @if ($product->varient[0]->discount >= 10)
                                                                 <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                             @endif
 
@@ -79,11 +79,11 @@
                                                     </div>
                                                     <div class="tpproduct__content">
                                                         <span class="tpproduct__content-weight">
-                                                            <a href="shop-details.html">{{ $product->category->categoryName }}
+                                                            <a href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}
                                                             </a>
                                                         </span>
                                                         <h4 class="tpproduct__title">
-                                                            <a href="shop-details-top-.html">{{ $product->product_name }}
+                                                            <a href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}
                                                             </a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
@@ -113,7 +113,14 @@
                                                     <div class="tpproduct__hover-text">
                                                         <div
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-0">
-                                                            <a class="tp-btn-2" href="cart.html">Add to cart</a>
+                                                            <form method="POST" id="add_to_cart_form">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                                <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
+                                                                <input type="hidden" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
+                                                                <button class="tp-btn-2">Add to
+                                                                    cart</button>
+                                                            </form>
                                                         </div>
 
                                                     </div>

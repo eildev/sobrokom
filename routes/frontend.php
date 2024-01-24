@@ -9,7 +9,7 @@ use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\frontend\BillingInfoController;
 use App\Http\Controllers\frontend\ProductDetailsController;
-use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
 
-
+// product related routes
 Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/product-details/{slug}', 'productDetails')->name('product.details');
     Route::get('/category/{categoryslug}', 'categoryWiseProduct')->name('category.wise.product');
@@ -47,9 +47,14 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/brand/{brandslug}', 'brandWiseProduct')->name('brand.wise.product');
     Route::post('/product', 'SearchbyProduct')->name('search.product');
 });
-Route::controller(CartController::class)->group(function () {
-    Route::post('/product/add_to_cart', '')->name('product.add_to_cart');
 
+// Cart related routes
+Route::controller(CartController::class)->group(function () {
+    Route::post('/product/add_to_cart', 'addToCart')->name('product.add_to_cart');
+    Route::get('/product/show_cart', 'showCart')->name('product.show_cart');
+    Route::get('/product/show_cart_products', 'showCartProducts')->name('product.show_cart_products');
+    Route::get('/product/remove_cart_product/{id}', 'removeCartProduct')->name('product.remove_cart');
+    Route::get('/cart/remove-cart-product/{id}', 'cartPageRemoveItem')->name('product.cartpage');
 });
 
 

@@ -13,7 +13,7 @@
                         <nav id="mobile-menu">
                             <ul>
                                 <li class="has-dropdown has-homemenu">
-                                    <a href="index.html">Brands</a>
+                                    <a href="#">Brands</a>
                                     @php
                                         $brands = App\Models\brand::where('status', 1)
                                             ->take(6)
@@ -25,7 +25,7 @@
 
                                             @foreach ($brands as $brand)
                                                 <li>
-                                                    <a href="{{ route('brand.wise.product',$brand->slug) }}"><img
+                                                    <a href="{{ route('brand.wise.product', $brand->slug) }}"><img
                                                             src="{{ asset('uploads/brands/' . $brand->image) }} "
                                                             alt=""> {{ $brand->BrandName }}</a>
                                                 </li>
@@ -67,21 +67,23 @@
                                     @endif
                                 </li>
                                 <li class="has-dropdown has-megamenu">
-                                    <a href="course-grid.html">Shop</a>
+                                    <a href="#">Shop</a>
                                     @php
                                         $categoris = App\Models\Category::take(4)->get();
                                     @endphp
                                     @if ($categoris->count() > 0)
-                                        <ul class="sub-menu mega-menu" >
+                                        <ul class="sub-menu mega-menu">
                                             @foreach ($categoris as $category)
                                                 <li>
 
-                                                    <a href="{{ route('category.wise.product',$category->slug) }}" class="mega-menu-title">{{ $category->categoryName }}</a>
+                                                    <a href="{{ route('category.wise.product', $category->slug) }}"
+                                                        class="mega-menu-title">{{ $category->categoryName }}</a>
                                                     <ul>
                                                         {{-- @dd($category->subcategory) --}}
                                                         @foreach ($category->subcategories as $subcategory)
                                                             <li><a
-                                                                    href="{{ route('subcategory.wise.product',$subcategory->slug) }}"> {{ $subcategory->subcategoryName }}</a>
+                                                                    href="{{ route('subcategory.wise.product', $subcategory->slug) }}">
+                                                                    {{ $subcategory->subcategoryName }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -160,9 +162,11 @@
                         </div>
 
                         <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
-                            <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg"
-                                        alt=""></i>
-                                <span>5</span>
+                            <button>
+                                <i>
+                                    <img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt="">
+                                </i>
+                                <span class="cart_quantity"></span>
                             </button>
                         </div>
                         @auth
@@ -189,7 +193,7 @@
                 <div class="col-6 pt-100 pb-100">
                     <h2 class="tpsearchbar__title">What Are You Looking For?</h2>
                     <div class="tpsearchbar__form">
-                        <form  action="{{ route('search.product') }}" method="POST">
+                        <form action="{{ route('search.product') }}" method="POST">
                             @csrf
                             <input type="text" name="search" placeholder="Search Product...">
                             <button class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
@@ -204,92 +208,7 @@
 <!-- header-search-end -->
 
 <!-- header-cart-start -->
-<div class="tpcartinfo tp-cart-info-area p-relative">
-    <button class="tpcart__close"><i class="icon-x"></i></button>
-    <div class="tpcart">
-        <h4 class="tpcart__title">Your Cart</h4>
-        <div class="tpcart__product">
-            <div class="tpcart__product-list">
-                <ul>
-                    <li>
-                        <div class="tpcart__item">
-                            <div class="tpcart__img">
-                                <img src="{{ asset('frontend') }}/assets/img/product/products1-min.jpg"
-                                    alt="">
-                                <div class="tpcart__del">
-                                    <a href="#"><i class="icon-x-circle"></i></a>
-                                </div>
-                            </div>
-                            <div class="tpcart__content">
-                                <span class="tpcart__content-title"><a href="shop-details.html">Stacy's Pita Chips
-                                        Parmesan Garlic & Herb From Nature</a>
-                                </span>
-                                <div class="tpcart__cart-price">
-                                    <span class="quantity">1 x</span>
-                                    <span class="new-price">$162.80</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tpcart__item">
-                            <div class="tpcart__img">
-                                <img src="{{ asset('frontend') }}/assets/img/product/products12-min.jpg"
-                                    alt="">
-                                <div class="tpcart__del">
-                                    <a href="#"><i class="icon-x-circle"></i></a>
-                                </div>
-                            </div>
-                            <div class="tpcart__content">
-                                <span class="tpcart__content-title"><a href="shop-details.html">Banana, Beautiful
-                                        Skin, Good For Health 1Kg</a>
-                                </span>
-                                <div class="tpcart__cart-price">
-                                    <span class="quantity">1 x</span>
-                                    <span class="new-price">$138.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="tpcart__item">
-                            <div class="tpcart__img">
-                                <img src="{{ asset('frontend') }}/assets/img/product/products3-min.jpg"
-                                    alt="">
-                                <div class="tpcart__del">
-                                    <a href="#"><i class="icon-x-circle"></i></a>
-                                </div>
-                            </div>
-                            <div class="tpcart__content">
-                                <span class="tpcart__content-title"><a href="shop-details.html">Quaker Popped Rice
-                                        Crisps Snacks Chocolate</a>
-                                </span>
-                                <div class="tpcart__cart-price">
-                                    <span class="quantity">1 x</span>
-                                    <span class="new-price">$162.8</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="tpcart__checkout">
-                <div class="tpcart__total-price d-flex justify-content-between align-items-center">
-                    <span> Subtotal:</span>
-                    <span class="heilight-price"> $300.00</span>
-                </div>
-                <div class="tpcart__checkout-btn">
-                    <a class="tpcart-btn mb-10" href="cart.html">View Cart</a>
-                    <a class="tpcheck-btn" href="checkout.html">Checkout</a>
-                </div>
-            </div>
-        </div>
-        <div class="tpcart__free-shipping text-center">
-            <span>Free shipping for orders <b>under 10km</b></span>
-        </div>
-    </div>
-</div>
-<div class="cartbody-overlay"></div>
+@include('frontend.body.cartArea')
 <!-- header-cart-end -->
 
 <!-- mobile-menu-area -->
@@ -320,7 +239,7 @@
                     </div>
                     <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
                         <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt=""></i>
-                            <span>5</span>
+                            <span class="mobile_show_quantity"></span>
                         </button>
                     </div>
                 </div>

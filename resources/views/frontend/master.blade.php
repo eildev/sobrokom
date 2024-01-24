@@ -33,7 +33,18 @@
 </head>
 
 <body>
+    @php
+        $cartData = Cart::content();
+        // @dd(Cart::total());
+    @endphp
 
+    @if ($cartData->count() > 0)
+        @foreach ($cartData as $cart)
+            {{-- @dd($cart->options->image); --}}
+            {{-- @dd($cart->name); --}}
+            {{-- <p>{{$cart->name}}</p> --}}
+        @endforeach
+    @endif
     <!-- Scroll-top -->
     <button class="scroll-top scroll-to-target" data-target="html">
         <i class="icon-chevrons-up"></i>
@@ -134,50 +145,10 @@
         });
     </script>
 
+
+
     {{-- add To Cart  --}}
     <script>
-        // const add_to_cart = document.querySelectorAll('.btn_add_to_cart');
-        // // console.log(add_whishlist);
-        // add_to_cart.forEach(element => {
-        //     // console.log(element)
-
-
-        //     element.addEventListener('click', function(e) {
-
-
-        //         e.preventDefault();
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             }
-        //         });
-        //         let product_id = this.getAttribute('value');
-        //         // alert(product_id);
-
-        //         $.ajax({
-        //             url: '/',
-        //             type: 'POST',
-        //             data: {
-        //                 'product_id': product_id,
-        //                 'variant_id': product_id,
-        //                 'selling_price': product_id,
-        //             },
-        //             success: function(response) {
-        //                 if (response.status == 200) {
-        //                     toastr.success(response.message);
-        //                     element.querySelector('i').setAttribute('style', 'color:red');
-        //                     // console.log(element.querySelector('i'));
-        //                 } else {
-        //                     // toastr.warning(response);
-        //                 }
-        //             }
-        //         });
-        //     })
-        // });
-
-
-
-
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
@@ -205,18 +176,152 @@
                         'selling_price': selling_price,
                     },
                     success: function(response) {
-                        // if (response.status == 200) {
-                        //     toastr.success(response.message);
-                        //     element.querySelector('i').setAttribute('style', 'color:red');
-                        //     // console.log(element.querySelector('i'));
-                        // } else {
-                        //     // toastr.warning(response);
-                        // }
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            showCart();
+                        } else {
+
+                        }
                     }
                 });
 
             });
         })
+    </script>
+
+
+
+
+    <script>
+        // Function to update the cart display
+        function updateCartDisplay(cartData) {
+
+            $('.cart_container').empty();
+
+            // console.log(cartData);
+
+            if (Object.keys(cartData).length > 0) {
+                var itemsToDisplay = 3;
+                // console.log(itemsToDisplay);
+
+                for (var i = 0; i < itemsToDisplay; i++) {
+                    var key = Object.keys(cartData)[i];
+                    var item = cartData[key];
+
+                    $('.cart_container').append(
+                        '<li>' +
+                        '<div class="tpcart__item">' +
+                        '<div class="tpcart__img">' +
+                        '<img src="{{ asset('uploads/products/') }}/' + item.options.image + '" alt="product Image">' +
+                        '<div class="tpcart__del">' +
+                        '<a href="#" class="item_remove" value="' + item.rowId + '"><i class="icon-x-circle"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="tpcart__content">' +
+                        '<span class="tpcart__content-title"><a href="#">' + item.name + '</a></span>' +
+                        '<div class="tpcart__cart-price">' +
+                        '<span class="quantity">' + item.qty + '</span> x ' +
+                        '<span class="new-price">৳' + item.price + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>'
+                    );
+                }
+
+                if (Object.keys(cartData).length > 3) {
+                    var remainingItems = Object.keys(cartData).length - itemsToDisplay;
+                    $('.cart_container').append('<li>and ' + remainingItems + ' more item(s)</li>');
+                }
+                // Update the cart quantity span
+                $('.cart_quantity').text(Object.keys(cartData).length);
+                $('.mobile_show_quantity').text(Object.keys(cartData).length);
+            } else {
+                // Display a message when the cart is empty
+                $('.cart_container').append('<p>Your cart is empty</p>');
+
+                // Update the cart quantity span to 0 when the cart is empty
+                $('.cart_quantity').text('0');
+                $('.mobile_show_quantity').text('0');
+            }
+        }
+
+        $(document).ready(function() {
+            showCart();
+        });
+
+
+
+        // Function to show data on cart
+        function showCart() {
+            $.ajax({
+                url: '/product/show_cart',
+                type: "GET",
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res.status == 200) {
+                        updateCartDisplay(res.cartData);
+                    }
+                }
+            });
+        }
+
+
+        // item remove from cart
+        $(document).ready(function() {
+            $(document).on('click', '.item_remove', function(e) {
+                e.preventDefault();
+                // alert('ok')
+                let itemValue = this.getAttribute('value');
+                // alert(itemValue);
+                $.ajax({
+                    url: '/product/remove_cart_product/' + itemValue,
+                    type: "GET",
+                    success: function(res) {
+                        toastr.success(res.message);
+                        showCart();
+                    }
+                })
+            })
+        });
+    </script>
+
+
+
+
+
+    {{-- swwetalert  --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            //    delete function
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+
+                var link = $(this).attr("href");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                            'Deleted!',
+                            'Your File has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+
+            });
+        });
     </script>
 </body>
 

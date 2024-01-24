@@ -27,7 +27,7 @@
                             <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
                                 <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg"
                                             alt=""></i>
-                                    <span>5</span>
+                                    <span class="mobile_show_quantity">5</span>
                                 </button>
                             </div>
                         </div>
