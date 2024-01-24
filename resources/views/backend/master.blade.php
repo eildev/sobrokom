@@ -169,6 +169,10 @@
 
             });
         });
+        tinymce.init({
+		  selector: '#product_descriptions'
+		});
+
     </script>
 </body>
 
