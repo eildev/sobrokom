@@ -9,9 +9,10 @@
                         <div class="tp-breadcrumb__list">
                             <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
                             <span class="dvdr">/</span>
-                            <span class="tp-breadcrumb__active"><a href="index.html">Breakfast & Dairy</a></span>
+                            <span class="tp-breadcrumb__active"><a href="index.html">{{$product->category->categoryName}}</a></span>
                             <span class="dvdr">/</span>
-                            <span>Fresh Mangosteen 100% Organic From VietNamese</span>
+                            <span>{{$product->product_name}}</span>
+                            {{-- <span>{{dd($product->varient);}}</span> --}}
                         </div>
                     </div>
                 </div>
@@ -51,10 +52,10 @@
 
                                                 @php
                                                     $galleries = App\Models\ProductGallery::where('product_id', $product->id);
-                                                   
+
                                                 @endphp
                                                 @foreach($product->gallary as $key=> $gallery)
-                                                
+
                                                 <div class="tab-pane fade w-img show {{ ($key == 0) ? 'active' : '' }}" id="nav-home{{ $gallery->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                                     <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}" alt="">
                                                     <div class="tpproduct__info bage">
