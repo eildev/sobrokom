@@ -57,4 +57,15 @@ class CartController extends Controller
             'message' => 'Product Remove successfully',
         ]);
     }
+    public function cartPageRemoveItem($id)
+    {
+        // dd($id);
+        $rowId = $id;
+        Cart::remove($rowId);
+        return back()->with('success', 'Product Remove successfully');
+
+        
+    }
+
+
 }

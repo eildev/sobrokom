@@ -284,14 +284,6 @@
                 })
             })
         });
-        // const item_remove = document.querySelectorAll('.item_remove');
-        // console.log(item_remove);
-        //         item_remove.forEach(item => {
-        //     item.addEventListener('click', function() {
-        //         e.preventDefault();
-        //         alert('delete');
-        //     })
-        // })
     </script>
 
 

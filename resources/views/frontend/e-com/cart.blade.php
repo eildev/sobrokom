@@ -65,7 +65,7 @@
                                                     <span class="amount">$130.00</span>
                                                 </td>
                                                 <td class="product-remove">
-                                                    <a href="#" value="{{ $product->rowId }}" class="item_remove"><i
+                                                    <a href="{{route('product.cartpage', $product->rowId)}}" value="{{ $product->rowId }}" class=""><i
                                                             class="fa fa-times"></i></a>
                                                 </td>
                                             </tr>
@@ -141,55 +141,11 @@
 
 
 
-        // // remove Item from Cart
-        // $(document).on('click', '.item_remove', function(e) {
-        //         e.preventDefault();
-        //         // alert('ok')
-        //         let itemValue = this.getAttribute('value');
-        //         // alert(itemValue);
-        //         $.ajax({
-        //             url: '/product/remove_cart_product/' + itemValue,
-        //             type: "GET",
-        //             success: function(res){
-        //                 toastr.success(res.message);
-        //                 showCart();
-        //             }
-        //         })
-        //     })
+       
 
 
 
-        // remove Item from Cart
-        // const removeItem = document.querySelectorAll('.remove_item');
-        // removeItem.forEach(item => {
-        //     item.addEventListener('click', (e) => {
-        //         e.preventDefault();
-
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             }
-        //         });
-        //         const id = item.getAttribute('data-id');
-        //         $.ajax({
-        //             url: '/product/remove_cart_product/' + id,
-        //             type: 'GET',
-        //             data: {
-        //                 'id': id,
-        //             },
-        //             success: function(response) {
-        //                 if (response.status == 200) {
-        //                     toastr.success(response.message);
-
-        //                 } else {
-
-        //                 }
-        //             }
-        //         });
-
-        //     })
-        // });
-
+        
 
         // $('.cart-plus').on('click', function() {
         //     var $input = $(this).parent().find('input');
@@ -210,20 +166,7 @@
         // });
 
 
-        // $(document).on('click', '.cart-plus', function(e) {
-        //         e.preventDefault();
-        //         alert('ok')
-        //         let itemValue = this.getAttribute('value');
-        //         alert(itemValue);
-        //         $.ajax({
-        //             url: '/product/remove_cart_product/' + itemValue,
-        //             type: "GET",
-        //             success: function(res){
-        //                 toastr.success(res.message);
-        //                 showCart();
-        //             }
-        //         })
-        //     })
+      
     </script>
 
 
