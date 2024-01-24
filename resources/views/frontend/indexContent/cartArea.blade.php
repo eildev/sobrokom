@@ -20,12 +20,12 @@
                         <div class="swiper-slide">
                             <div class="tpcartitem">
                                 <div class="tpcartitem__thumb mb-15">
-                                    <a href="#"><img src="{{ asset('uploads/category/' . $Category->image) }}"
+                                    <a href="{{ route('category.wise.product',$Category->slug) }}"><img src="{{ asset('uploads/category/' . $Category->image) }}"
                                             alt="" class="img-fluid"></a>
                                 </div>
                                 <div class="tpcartitem__content">
                                     <h3 class="tpcartitem__title mb-15"><a
-                                            href="shop-3.html">{{ $Category->categoryName }}</a>
+                                            href="{{ route('category.wise.product',$Category->slug) }}">{{ $Category->categoryName }}</a>
                                     </h3>
                                     <ul>
                                         @php

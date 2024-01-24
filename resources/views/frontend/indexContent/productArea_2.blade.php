@@ -74,13 +74,14 @@
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
                                                                 <div class="tpproduct__info bage">
-                                                                    @if ($product->varient[0]->discount)
+                                                                    @if ($product->varient[0]->discount > 0)
                                                                         <span
                                                                             class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @endif
-
-                                                                    <span
-                                                                        class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                    @if ($product->varient[0]->discount > 10)
+                                                                        <span
+                                                                            class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="tpproduct__shopping">
                                                                     @auth
@@ -112,11 +113,11 @@
                                                             <div class="tpproduct__content">
                                                                 <span class="tpproduct__content-weight">
                                                                     <a
-                                                                        href="shop-details.html">{{ $product->category->categoryName }}</a>
+                                                                        href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>
                                                                 </span>
                                                                 <h4 class="tpproduct__title">
                                                                     <a
-                                                                        href="shop-details-top-.html">{{ $product->product_name }}</a>
+                                                                        href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                                 </h4>
                                                                 <div class="tpproduct__rating mb-5">
                                                                     <a href="#"><i
@@ -141,9 +142,15 @@
                                                                     class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                                     <form method="POST" id="add_to_cart_form">
                                                                         @csrf
-                                                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                                                        <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
-                                                                        <input type="hidden" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->id }}"
+                                                                            name="product_id">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->id }}"
+                                                                            name="variant_id">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->discount_amount }}"
+                                                                            name="selling_price">
                                                                         <button class="tp-btn-2">Add to
                                                                             cart</button>
                                                                     </form>
@@ -1497,8 +1504,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart" href="#"><i
-                                                                        class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart"
+                                                                    href="#"><i class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">

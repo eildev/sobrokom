@@ -53,7 +53,7 @@ Route::controller(CartController::class)->group(function () {
     Route::post('/product/add_to_cart', 'addToCart')->name('product.add_to_cart');
     Route::get('/product/show_cart', 'showCart')->name('product.show_cart');
     Route::get('/product/show_cart_products', 'showCartProducts')->name('product.show_cart_products');
-    Route::post('/product/remove_cart_product/{id}', 'removeCartProduct')->name('product.remove_cart');
+    Route::get('/product/remove_cart_product/{id}', 'removeCartProduct')->name('product.remove_cart');
 });
 
 

@@ -51,18 +51,21 @@
                                                     <a href="shop-details.html">{{ $product->name }}</a>
                                                 </td>
                                                 <td class="product-price">
-                                                    <span class="amount">৳{{ $product->price }}</span>
+                                                    <span class="amount unit_price" data-value="{{ $product->price }}">
+                                                        ৳{{ $product->price }}
+                                                    </span>
                                                 </td>
                                                 <td class="product-quantity">
                                                     <span class="cart-minus">-</span>
-                                                    <input class="cart-input" type="text" value="{{ $product->qty }}">
-                                                    <span class="cart-plus">+</span>
+                                                    <input class="cart-input product_input" type="text"
+                                                        value="{{ $product->qty }}">
+                                                    <span class="cart-plus cart_plus" value="{{ $product->rowId }}">+</span>
                                                 </td>
                                                 <td class="product-subtotal">
                                                     <span class="amount">$130.00</span>
                                                 </td>
                                                 <td class="product-remove">
-                                                    <a href="#" data-id="{{ $product->rowId }}" class="remove_item"><i
+                                                    <a href="#" value="{{ $product->rowId }}" class="item_remove"><i
                                                             class="fa fa-times"></i></a>
                                                 </td>
                                             </tr>
@@ -93,7 +96,11 @@
                                 <div class="cart-page-total">
                                     <h2>Cart totals</h2>
                                     <ul class="mb-20">
-                                        <li>Subtotal <span>$250.00</span></li>
+                                        <li>Subtotal 
+                                            <span>
+                                                &#2547 {{ Cart::subtotal() }}
+                                            </span>
+                                        </li>
                                         <li>Total <span>$250.00</span></li>
                                     </ul>
                                     <a href="checkout.html" class="tp-btn tp-color-btn banner-animation">Proceed to
@@ -109,6 +116,54 @@
     <!-- cart area end-->
 
     <script>
+        $(document).ready(function() {
+            $('.cart-minus').on('click', function() {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+                return false;
+            });
+        });
+
+        $(document).ready(function() {
+            $('.cart-plus').on('click', function() {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+                // Find the parent <td> and then find the .unit_price within it
+                let unit_price_element = $(this).closest('td').find('.unit_price');
+                let unit_price = unit_price_element.getAttribute('data-value');
+
+                // Log for debugging
+                console.log("unit_price_element: ", unit_price_element);
+                console.log("unit_price: ", unit_price);
+                // let unit_price = $(this).parent().find('.unit_price').attr('unitPrice');
+                return false;
+            });
+        });
+
+
+
+        // // remove Item from Cart
+        // $(document).on('click', '.item_remove', function(e) {
+        //         e.preventDefault();
+        //         // alert('ok')
+        //         let itemValue = this.getAttribute('value');
+        //         // alert(itemValue);
+        //         $.ajax({
+        //             url: '/product/remove_cart_product/' + itemValue,
+        //             type: "GET",
+        //             success: function(res){
+        //                 toastr.success(res.message);
+        //                 showCart();
+        //             }
+        //         })
+        //     })
+
+
+
         // remove Item from Cart
         // const removeItem = document.querySelectorAll('.remove_item');
         // removeItem.forEach(item => {
@@ -158,6 +213,22 @@
         //         })
         //     });
         // });
+
+
+        // $(document).on('click', '.cart-plus', function(e) {
+        //         e.preventDefault();
+        //         alert('ok')
+        //         let itemValue = this.getAttribute('value');
+        //         alert(itemValue);
+        //         $.ajax({
+        //             url: '/product/remove_cart_product/' + itemValue,
+        //             type: "GET",
+        //             success: function(res){
+        //                 toastr.success(res.message);
+        //                 showCart();
+        //             }
+        //         })
+        //     })
     </script>
 
 

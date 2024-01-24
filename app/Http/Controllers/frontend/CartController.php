@@ -47,13 +47,14 @@ class CartController extends Controller
         return view('frontend.e-com.cart', compact('products'));
     }
 
-    // public function removeCartProduct(Request $request, $id)
-    // {
-    //     $rowId = $id;
-    //     $products = Cart::remove($rowId);
-    //     return response()->json([
-    //         'status' => '200',
-    //         'message' => 'Product Remove successfully',
-    //     ]);
-    // }
+    public function removeCartProduct($id)
+    {
+        // dd($id);
+        $rowId = $id;
+        Cart::remove($rowId);
+        return response()->json([
+            'status' => '200',
+            'message' => 'Product Remove successfully',
+        ]);
+    }
 }

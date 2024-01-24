@@ -13,7 +13,7 @@
                         <nav id="mobile-menu">
                             <ul>
                                 <li class="has-dropdown has-homemenu">
-                                    <a href="index.html">Brands</a>
+                                    <a href="#">Brands</a>
                                     @php
                                         $brands = App\Models\brand::where('status', 1)
                                             ->take(6)
@@ -67,7 +67,7 @@
                                     @endif
                                 </li>
                                 <li class="has-dropdown has-megamenu">
-                                    <a href="course-grid.html">Shop</a>
+                                    <a href="#">Shop</a>
                                     @php
                                         $categoris = App\Models\Category::take(4)->get();
                                     @endphp

@@ -214,7 +214,7 @@
                         '<div class="tpcart__img">' +
                         '<img src="{{ asset('uploads/products/') }}/' + item.options.image + '" alt="product Image">' +
                         '<div class="tpcart__del">' +
-                        '<a href="#"><i class="icon-x-circle"></i></a>' +
+                        '<a href="#" class="item_remove" value="' + item.rowId + '"><i class="icon-x-circle"></i></a>' +
                         '</div>' +
                         '</div>' +
                         '<div class="tpcart__content">' +
@@ -241,8 +241,8 @@
                 $('.cart_container').append('<p>Your cart is empty</p>');
 
                 // Update the cart quantity span to 0 when the cart is empty
-                $('.cart_quantity').hidden();
-                $('.mobile_show_quantity').hidden();
+                $('.cart_quantity').text('0');
+                $('.mobile_show_quantity').text('0');
             }
         }
 
@@ -265,6 +265,71 @@
                 }
             });
         }
+
+
+        // item remove from cart 
+        $(document).ready(function() {
+            $(document).on('click', '.item_remove', function(e) {
+                e.preventDefault();
+                // alert('ok')
+                let itemValue = this.getAttribute('value');
+                // alert(itemValue);
+                $.ajax({
+                    url: '/product/remove_cart_product/' + itemValue,
+                    type: "GET",
+                    success: function(res) {
+                        toastr.success(res.message);
+                        showCart();
+                    }
+                })
+            })
+        });
+        // const item_remove = document.querySelectorAll('.item_remove');
+        // console.log(item_remove);
+        //         item_remove.forEach(item => {
+        //     item.addEventListener('click', function() {
+        //         e.preventDefault();
+        //         alert('delete');
+        //     })
+        // })
+    </script>
+
+
+
+
+
+    {{-- swwetalert  --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            //    delete function
+            $(document).on('click', '#delete', function(e) {
+                e.preventDefault();
+
+                var link = $(this).attr("href");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                            'Deleted!',
+                            'Your File has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+
+            });
+        });
     </script>
 </body>
 
