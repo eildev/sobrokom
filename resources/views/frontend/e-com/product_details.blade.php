@@ -7,11 +7,15 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
-                            <span class="tp-breadcrumb__active"><a href="index.html">{{$product->category->categoryName}}</a></span>
+                            <span class="tp-breadcrumb__active"><a
+                                    href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a></span>
                             <span class="dvdr">/</span>
-                            <span>{{$product->product_name}}</span>
+                            <span class="tp-breadcrumb__active"><a
+                                    href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a></span>
+                            <span class="dvdr">/</span>
+                            <span>{{ $product->product_name }}</span>
                             {{-- <span>{{dd($product->varient);}}</span> --}}
                         </div>
                     </div>
@@ -28,9 +32,11 @@
                     <div class="tpdetails__area mr-60 pb-30">
                         <div class="tpdetails__product mb-30">
                             <div class="tpdetails__title-box">
-                                <h3 class="tpdetails__title">{{$product->product_name}}</h3>
+                                <h3 class="tpdetails__title">{{ $product->product_name }}</h3>
                                 <ul class="tpdetails__brand">
-                                    <li> Brands: <a href="#">{{$product->brand->BrandName}}</a> </li>
+                                    <li> Brands: <a
+                                            href="{{ route('brand.wise.product', $product->brand->slug) }}">{{ $product->brand->BrandName }}</a>
+                                    </li>
                                     <li>
                                         <i class="icon-star_outline1"></i>
                                         <i class="icon-star_outline1"></i>
@@ -40,7 +46,7 @@
                                         <b>02 Reviews</b>
                                     </li>
                                     <li>
-                                        SKU: <span>{{$product->sku}}</span>
+                                        SKU: <span>{{ $product->sku }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -54,32 +60,37 @@
                                                     $galleries = App\Models\ProductGallery::where('product_id', $product->id);
 
                                                 @endphp
-                                                @foreach($product->gallary as $key=> $gallery)
+                                                @foreach ($product->gallary as $key => $gallery)
+                                                    <div class="tab-pane fade w-img show {{ $key == 0 ? 'active' : '' }}"
+                                                        id="nav-home{{ $gallery->id }}" role="tabpanel"
+                                                        aria-labelledby="nav-home-tab" tabindex="0">
+                                                        <img src="{{ asset('/uploads/products/gallery/' . $gallery->image) }}"
+                                                            alt="">
+                                                        <div class="tpproduct__info bage">
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @endif
 
-                                                <div class="tab-pane fade w-img show {{ ($key == 0) ? 'active' : '' }}" id="nav-home{{ $gallery->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                                    <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}" alt="">
-                                                    <div class="tpproduct__info bage">
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 @endforeach
                                             </div>
                                             <nav>
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-home" type="button" role="tab"
-                                                        aria-controls="nav-home" aria-selected="true">
-                                                        <img src="{{ asset('/uploads/products/'.$product->product_image) }}"
-                                                            alt="">
-                                                    </button> -->
-                                                    @foreach($product->gallary as $gallery)
-                                                    <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#nav-home{{ $gallery->id }}" type="button" role="tab"
-                                                        aria-controls="nav-home" aria-selected="true">
-                                                        <img src="{{ asset('/uploads/products/gallery/'.$gallery->image) }}"
-                                                            alt="">
-                                                    </button>
+                                                                                                                            data-bs-target="#nav-home" type="button" role="tab"
+                                                                                                                            aria-controls="nav-home" aria-selected="true">
+                                                                                                                            <img src="{{ asset('/uploads/products/' . $product->product_image) }}"
+                                                                                                                                alt="">
+                                                                                                                        </button> -->
+                                                    @foreach ($product->gallary as $gallery)
+                                                        <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#nav-home{{ $gallery->id }}" type="button"
+                                                            role="tab" aria-controls="nav-home" aria-selected="true">
+                                                            <img src="{{ asset('/uploads/products/gallery/' . $gallery->image) }}"
+                                                                alt="">
+                                                        </button>
                                                     @endforeach
                                                 </div>
                                             </nav>
@@ -88,9 +99,10 @@
                                     <div class="col-lg-6">
                                         <div class="product__details">
                                             <div class="product__details-price-box">
-                                                <h5 class="product__details-price">৳{{$product->varient[0]->discount_amount}}</h5>
+                                                <h5 class="product__details-price">
+                                                    ৳{{ $product->varient[0]->discount_amount }}</h5>
                                                 <ul class="product__details-info-list">
-                                                    <li>{{$product->short_desc}}</li>
+                                                    <li>{{ $product->short_desc }}</li>
                                                     <li>Vegan & Allergy friendly</li>
                                                     <li>Smooth, velvety dairy free cheese sauce</li>
                                                 </ul>
@@ -104,17 +116,45 @@
                                                         <span class="cart-plus"><i class="far fa-plus"></i></span>
                                                     </div>
                                                     <div class="product__details-btn">
-                                                        <a href="cart.html">add to cart</a>
+                                                        <form method="POST" id="add_to_cart_form">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $product->id }}"
+                                                                name="product_id">
+                                                            <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                                name="variant_id">
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->discount_amount }}"
+                                                                name="selling_price">
+                                                            <button class="tp-btn-2 px-5 py-1">Add to
+                                                                cart</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <ul class="product__details-check">
-                                                    <li>
-                                                        <a href="#"><i class="icon-heart icons"></i> add to
-                                                            wishlist</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><i class="icon-layers"></i> Add to Compare</a>
-                                                    </li>
+                                                    @auth
+                                                        <li>
+                                                            <a class="" href="#" value="{{ $product->id }}">
+                                                                <!-- <i class="icon-heart icons"></i> -->
+                                                                @auth
+                                                                    @php
+                                                                        $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                            ->where('product_id', $product->id)
+                                                                            ->first();
+                                                                    @endphp
+                                                                @endauth
+                                                                <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                    class="icon-heart icons"></i> add to
+                                                                wishlist
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li>
+                                                            <a class="" href="{{ route('login') }}">
+                                                                <i class="icon-heart icons"></i> add to
+                                                                wishlist
+                                                            </a>
+                                                        </li>
+                                                    @endauth
                                                     <li>
                                                         <a href="#"><i class="icon-share-2"></i> Share</a>
                                                     </li>
@@ -122,13 +162,18 @@
                                             </div>
                                             <div class="product__details-stock mb-25">
                                                 <ul>
-                                                    <li>Availability: <i>{{$product->varient[0]->stock ?? 0}} Instock</i></li>
-                                                    <li>Categories: <span>{{$product->category->categoryName}} </span></li>
-                                                    <li class="text-capitalize">Tags: {{$product->tags}}</li>
+                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }} Instock</i>
+                                                    </li>
+                                                    <li>Category: <span>{{ $product->category->categoryName }} </span>
+                                                    </li>
+                                                    <li>Subcategory: <span>{{ $product->subcategory->subcategoryName }} </span>
+                                                    </li>
+                                                    <li class="text-capitalize">Tags: {{ $product->tags }}</li>
                                                 </ul>
                                             </div>
                                             <div class="product__details-payment text-center">
-                                                <img src="{{ asset('frontend') }}/assets/img/shape/payment-2.png" alt="">
+                                                <img src="{{ asset('frontend') }}/assets/img/shape/footer-payment.png "
+                                                    alt="">
                                                 <span>Guarantee safe & Secure checkout</span>
                                             </div>
                                         </div>
@@ -144,29 +189,21 @@
                                             data-bs-target="#nav-description" type="button" role="tab"
                                             aria-controls="nav-description" aria-selected="true">Product
                                             Description</button>
-                                        <button class="nav-link" id="nav-info-tab" data-bs-toggle="tab"
-                                            data-bs-target="#nav-information" type="button" role="tab"
-                                            aria-controls="nav-information" aria-selected="false">ADDITIONAL
-                                            INFORMATION</button>
+                                       
                                         <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab"
                                             data-bs-target="#nav-review" type="button" role="tab"
-                                            aria-controls="nav-review" aria-selected="false">Reviews (1)</button>
+                                            aria-controls="nav-review" aria-selected="false">Reviews (0)</button>
                                     </div>
                                 </nav>
                             </div>
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
                                     aria-labelledby="nav-description-tab" tabindex="0">
+
                                     <div class="tpdescription__content">
-                                        <p>Designed by Puik in 1949 as one of the first models created especially for Carl
-                                            Hansen & Son, and produced since 1950. The last of a series of chairs wegner
-                                            designed based on inspiration from antique chinese armchairs. Excepteur sint
-                                            occaecat cupidatat non proident, sunt in culpa qui officia eserunt mollit anim
-                                            id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                            accusantium doloremque laudantium, totam rem aperiam, aque ipsa quae ab illo
-                                            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
+                                        <p> {{$product->long_desc}}</p>
                                     </div>
-                                    <div
+                                    {{-- <div
                                         class="tpdescription__product-wrapper mt-30 mb-30 d-flex justify-content-between align-items-center">
                                         <div class="tpdescription__product-info">
                                             <h5 class="tpdescription__product-title">PRODUCT DETAILS</h5>
@@ -182,7 +219,8 @@
                                                 sequi nesciunt.</p>
                                         </div>
                                         <div class="tpdescription__product-thumb">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png" alt="">
+                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png"
+                                                alt="">
                                         </div>
                                     </div>
                                     <div class="tpdescription__video">
@@ -195,7 +233,8 @@
                                             originally designed for the Restaurant Gronbech. Est eum itaque maiores qui
                                             blanditiis architecto. Eligendi saepe rem ut. Cumque quia earum eligendi. </p>
                                         <div class="tpdescription__video-wrapper p-relative mt-30 mb-35 w-img">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-video1.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/assets/img/product/product-video1.jpg"
+                                                alt="">
                                             <div class="tpvideo__video-btn">
                                                 <a class="tpvideo__video-icon popup-video"
                                                     href="https://www.youtube.com/watch?v=rLrV5Tel7zw">
@@ -224,49 +263,9 @@
                                             velit ex, aliquet vel ornare vel, dignissim a tortor. Ut enim ad minim veniam,
                                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                             consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <div class="tab-pane fade" id="nav-information" role="tabpanel"
-                                    aria-labelledby="nav-info-tab" tabindex="0">
-                                    <div class="tpdescription__content">
-                                        <p>Designed by Puik in 1949 as one of the first models created especially for Carl
-                                            Hansen & Son, and produced since 1950. The last of a series of chairs wegner
-                                            designed based on inspiration from antique chinese armchairs. Excepteur sint
-                                            occaecat cupidatat non proident, sunt in culpa qui officia eserunt mollit anim
-                                            id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                            accusantium doloremque laudantium, totam rem aperiam, aque ipsa quae ab illo
-                                            inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
-                                    </div>
-                                    <div
-                                        class="tpdescription__product-wrapper mt-30 mb-30 d-flex justify-content-between align-items-center">
-                                        <div class="tpdescription__product-info">
-                                            <h5 class="tpdescription__product-title">PRODUCT DETAILS</h5>
-                                            <ul class="tpdescription__product-info">
-                                                <li>Material: Plastic, Wood</li>
-                                                <li>Legs: Lacquered oak and black painted oak</li>
-                                                <li>Dimensions and Weight: Height: 80 cm, Weight: 5.3 kg</li>
-                                                <li>Length: 48cm</li>
-                                                <li>Depth: 52 cm</li>
-                                            </ul>
-                                            <p>Lemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut <br>
-                                                fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem <br>
-                                                sequi nesciunt.</p>
-                                        </div>
-                                        <div class="tpdescription__product-thumb">
-                                            <img src="{{ asset('frontend') }}/assets/img/product/product-single-1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="tpdescription__video">
-                                        <h5 class="tpdescription__product-title">PRODUCT DETAILS</h5>
-                                        <p>Form is an armless modern chair with a minimalistic expression. With a simple and
-                                            contemporary design Form Chair has a soft and welcoming ilhouette and a
-                                            distinctly residential look. The legs appear almost as if they are growing out
-                                            of the shell. This gives the design flexibility and makes it possible to vary
-                                            the frame. Unika is a mouth blown series of small, glass pendant lamps,
-                                            originally designed for the Restaurant Gronbech. Est eum itaque maiores qui
-                                            blanditiis architecto. Eligendi saepe rem ut. Cumque quia earum eligendi. </p>
-                                    </div>
-                                </div>
+                               
 
 
 
@@ -274,11 +273,12 @@
                                 <div class="tab-pane fade" id="nav-review" role="tabpanel"
                                     aria-labelledby="nav-review-tab" tabindex="0">
                                     <div class="tpreview__wrapper">
-                                        <h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken
+                                        {{-- <h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken
                                         </h4>
                                         <div class="tpreview__comment">
                                             <div class="tpreview__comment-img mr-20">
-                                                <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png" alt="">
+                                                <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"
+                                                    alt="">
                                             </div>
                                             <div class="tpreview__comment-text">
                                                 <div
@@ -297,7 +297,7 @@
                                                 <span class="date mb-20">--April 9, 2022: </span>
                                                 <p>very good</p>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="tpreview__form">
                                             <h4 class="tpreview__form-title mb-25">Add a review </h4>
                                             <form action="#">
@@ -339,128 +339,148 @@
                         </div>
                     </div>
                 </div>
+
+                @php
+                    $featureProducts = App\Models\Product::where('product_feature', 'like', '%' . 'new-arrival' . '%')
+                        ->take(4)
+                        ->orderBy('id', 'ASC')
+                        ->get();
+                    // dd($featureProducts);
+                @endphp
                 <div class="col-lg-2 col-md-12">
                     <div class="tpsidebar pb-30">
-                        <div class="tpsidebar__warning mb-30">
-                            <ul>
-                                <li>
-                                    <div class="tpsidebar__warning-item">
-                                        <div class="tpsidebar__warning-icon">
-                                            <i class="icon-package"></i>
-                                        </div>
-                                        <div class="tpsidebar__warning-text">
-                                            <p>Free shipping apply to all <br> orders over $90</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="tpsidebar__warning-item">
-                                        <div class="tpsidebar__warning-icon">
-                                            <i class="icon-shield"></i>
-                                        </div>
-                                        <div class="tpsidebar__warning-text">
-                                            <p>Guaranteed 100% Organic <br> from nature farms</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="tpsidebar__warning-item">
-                                        <div class="tpsidebar__warning-icon">
-                                            <i class="icon-package"></i>
-                                        </div>
-                                        <div class="tpsidebar__warning-text">
-                                            <p>60 days returns if you change <br> your mind</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tpsidebar__banner mb-30">
-                            <img src="{{ asset('frontend') }}/assets/img/shape/sidebar-product-1.png" alt="">
-                        </div>
                         <div class="tpsidebar__product">
                             <h4 class="tpsidebar__title mb-15">Recent Products</h4>
-                            <div class="tpsidebar__product-item">
-                                <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-1.jpg" alt="">
-                                    <div class="tpsidebar__info bage">
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+                            @if ($featureProducts->count() > 0)
+                                @foreach ($featureProducts as $product)
+                                    <div class="tpsidebar__product-item">
+                                        <div class="tpsidebar__product-thumb p-relative">
+                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                alt="Product Image">
+                                            <div class="tpsidebar__info bage">
+                                                @if ($product->varient[0]->discount > 0)
+                                                    <span
+                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                @endif
+                                                @if ($product->varient[0]->discount > 0)
+                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="tpsidebar__product-content">
+                                            <span class="tpproduct__product-category">
+                                                <a
+                                                    href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>
+                                            </span>
+                                            <h4 class="tpsidebar__product-title">
+                                                <a
+                                                    href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
+                                            </h4>
+                                            <div class="tpproduct__rating mb-5">
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                            </div>
+                                            <div class="tpproduct__price">
+                                                <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                @if ($product->varient[0]->discount > 0)
+                                                    <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="tpsidebar__product-item">
+                                    <div class="tpsidebar__product-thumb p-relative">
+                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-1.jpg"
+                                            alt="">
+                                        <div class="tpsidebar__info bage">
+                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                        </div>
+                                    </div>
+                                    <div class="tpsidebar__product-content">
+                                        <span class="tpproduct__product-category">
+                                            <a href="shop-details-3.html">Fresh Fruits</a>
+                                        </span>
+                                        <h4 class="tpsidebar__product-title">
+                                            <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
+                                        </h4>
+                                        <div class="tpproduct__rating mb-5">
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                        </div>
+                                        <div class="tpproduct__price">
+                                            <span>$56.00</span>
+                                            <del>$19.00</del>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tpsidebar__product-content">
-                                    <span class="tpproduct__product-category">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpsidebar__product-title">
-                                        <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                <div class="tpsidebar__product-item">
+                                    <div class="tpsidebar__product-thumb p-relative">
+                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-2.jpg"
+                                            alt="">
+                                        <div class="tpsidebar__info bage">
+                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                        </div>
                                     </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tpsidebar__product-item">
-                                <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-2.jpg" alt="">
-                                    <div class="tpsidebar__info bage">
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                    </div>
-                                </div>
-                                <div class="tpsidebar__product-content">
-                                    <span class="tpproduct__product-category">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpsidebar__product-title">
-                                        <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
+                                    <div class="tpsidebar__product-content">
+                                        <span class="tpproduct__product-category">
+                                            <a href="shop-details-3.html">Fresh Fruits</a>
+                                        </span>
+                                        <h4 class="tpsidebar__product-title">
+                                            <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
+                                        </h4>
+                                        <div class="tpproduct__rating mb-5">
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                        </div>
+                                        <div class="tpproduct__price">
+                                            <span>$56.00</span>
+                                            <del>$19.00</del>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tpsidebar__product-item">
-                                <div class="tpsidebar__product-thumb p-relative">
-                                    <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-3.jpg" alt="">
-                                    <div class="tpsidebar__info bage">
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                <div class="tpsidebar__product-item">
+                                    <div class="tpsidebar__product-thumb p-relative">
+                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-3.jpg"
+                                            alt="">
+                                        <div class="tpsidebar__info bage">
+                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                        </div>
+                                    </div>
+                                    <div class="tpsidebar__product-content">
+                                        <span class="tpproduct__product-category">
+                                            <a href="shop-details-3.html">Fresh Fruits</a>
+                                        </span>
+                                        <h4 class="tpsidebar__product-title">
+                                            <a href="shop-details-grid.html">Fresh Mangosteen 100% Organic From
+                                                VietNamese</a>
+                                        </h4>
+                                        <div class="tpproduct__rating mb-5">
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                        </div>
+                                        <div class="tpproduct__price">
+                                            <span>$56.00</span>
+                                            <del>$19.00</del>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="tpsidebar__product-content">
-                                    <span class="tpproduct__product-category">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpsidebar__product-title">
-                                        <a href="shop-details-grid.html">Fresh Mangosteen 100% Organic From VietNamese</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
+
+
                         </div>
                     </div>
                 </div>
@@ -469,335 +489,13 @@
     </section>
     <!-- shop-details-area-end -->
 
-    <!-- product-area-start -->
-    <section class="product-area whight-product pt-75 pb-80">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h5 class="tpdescription__product-title mb-20">Related Products</h5>
-                </div>
-            </div>
-            <div class="tpproduct__arrow double-product p-relative">
-                <div class="swiper-container tpproduct-active tpslider-bottom p-relative">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products29-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products30-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details.html">Fresh Meat</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-top-.html">Mangosteen Organic From VietNamese</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products9-min.jpg" alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products10-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-40%</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details.html">Fresh Meat</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-top.html">Soda Sparkling Water Maker (Rose Gold)</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products13-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products35-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-10%</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details.html">HOT - Lettuce Fresh Produce Fruit Vegetables</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products27-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products14-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-90%</span>
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-grid.html">Pure Irish Organic Beef Quarter Pounder
-                                            Burgers</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products15-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products32-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details-3.html">Vagetables</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-3.html">Ginger Fresh, Whole, Organic - 250gram</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="{{ asset('frontend') }}/assets/img/product/products12-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="{{ asset('frontend') }}/assets/img/product/products28-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-40%</span>
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details-3.html">Fresh Fruits</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-grid.html">Laffy Taffy Laff Bites Gone Bananas - 4 Packs</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- product-area-end -->
+    <!-- Recommended product-area-start -->
+    @include('frontend.pageContent.recommendedProduct')
+    <!-- Recommended product-area-end -->
 
     <!-- feature-area-start -->
-    <section class="feature-area mainfeature__bg pt-50 pb-40" data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
+    <section class="feature-area mainfeature__bg pt-50 pb-40"
+        data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
         <div class="container">
             <div class="mainfeature__border pb-15">
                 <div class="row row-cols-lg-5 row-cols-md-3 row-cols-2">

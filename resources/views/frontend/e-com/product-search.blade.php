@@ -133,7 +133,7 @@
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="flexCheckDefault18">
                                         <label class="form-check-label" for="flexCheckDefault18">
-                                            {{$brand->BrandName}} ({{$brandProducts->count()}})
+                                            {{ $brand->BrandName }} ({{ $brandProducts->count() }})
                                         </label>
                                     </div>
                                 @endforeach
@@ -255,7 +255,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="product__filter-content mb-40">
-                                    <div class="row align-items-center py-3 text-center">
+                                    <div class="row align-items-center py-4 text-center">
                                         <div class="">
                                             <div class="product__item-count">
                                                 <span class="pt-2 pb-2">Search By: {{ $searchTag }}</span>
@@ -269,9 +269,10 @@
                                     <div class="row align-items-center py-2 text-center">
                                         <form action="{{ route('search.product') }}" method="POST">
                                             @csrf
-                                            <div class="w-75 mx-auto d-flex">
-                                                <input type="text" name="search" placeholder="Search Here"  class="form-control rounded-0 rounded-start">
-                                                <button class="tp-btn  rounded-0 rounded-end">Search</button>
+                                            <div class="d-flex">
+                                                <input type="text" name="search" placeholder="Search Here"
+                                                    class="form-control rounded-0 rounded-start">
+                                                <button class="tp-btn rounded-0 rounded-end">Search</button>
                                             </div>
                                         </form>
                                     </div>
@@ -296,11 +297,15 @@
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                 alt="Products Image"></a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount)
+                                                            @if ($product->varient[0]->discount > 0)
                                                                 <span
                                                                     class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                             @endif
-                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @endif
+
                                                         </div>
                                                         <div class="tpproduct__shopping">
                                                             @auth
@@ -331,12 +336,13 @@
                                                     <div class="tpproduct__content">
                                                         <span class="tpproduct__content-weight">
                                                             <a
-                                                                href="shop-details-3.html">{{ $product->category->categoryName }}</a>,
-                                                            <a href="shop-details-3.html">Vagetables</a>
+                                                                href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
+                                                            <a
+                                                                href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
                                                         </span>
                                                         <h4 class="tpproduct__title">
                                                             <a
-                                                                href="shop-details-top-.html">{{ $product->product_name }}</a>
+                                                                href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
                                                             <a href="#"><i class="icon-star_outline1"></i></a>
@@ -347,15 +353,29 @@
                                                         </div>
                                                         <div class="tpproduct__price">
                                                             <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                            <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="tpproduct__hover-text">
                                                         <div
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                            <a class="tp-btn-2" href="cart.html">Add to cart</a>
+                                                            <form method="POST" id="add_to_cart_form">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                    name="product_id">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->id }}"
+                                                                    name="variant_id">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->discount_amount }}"
+                                                                    name="selling_price">
+                                                                <button class="tp-btn-2">Add to
+                                                                    cart</button>
+                                                            </form>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>

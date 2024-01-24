@@ -54,30 +54,37 @@
                             @foreach ($products as $product)
                                 {{-- @dd($product); --}}
                                 <div class="col-xl-4 col-lg-6">
-                                    <div class="tpbrandproduct__item d-flex mb-20">
-                                        <div class="tpbrandproduct__img p-relative">
-                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                alt="">
-                                            <div class="tpproduct__info bage tpbrandproduct__bage">
-                                                <span class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                    <a href="{{ route('product.details', $product->slug) }}">
+                                        <div class="tpbrandproduct__item d-flex mb-20">
+                                            <div class="tpbrandproduct__img p-relative">
+                                                <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                    alt="Product Image">
+                                                <div class="tpproduct__info bage tpbrandproduct__bage">
+                                                    @if ($product->varient[0]->discount > 0)
+                                                        <span
+                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="tpbrandproduct__contact">
+                                                <span class="tpbrandproduct__product-title"><a
+                                                        href="shop-details.html">{{ $product->product_name }}</a></span>
+                                                <div class="tpproduct__rating mb-5">
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                </div>
+                                                <div class="tpproduct__price">
+                                                    <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                    @if ($product->varient[0]->discount > 0)
+                                                        <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="tpbrandproduct__contact">
-                                            <span class="tpbrandproduct__product-title"><a
-                                                    href="shop-details.html">{{ $product->product_name }}</a></span>
-                                            <div class="tpproduct__rating mb-5">
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                            </div>
-                                            <div class="tpproduct__price">
-                                                <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             @endforeach
 

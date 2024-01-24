@@ -232,11 +232,15 @@
                                                             src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                             alt="Products Image"></a>
                                                     <div class="tpproduct__info bage">
-                                                        @if ($product->varient[0]->discount)
+                                                        @if ($product->varient[0]->discount > 0)
                                                             <span
                                                                 class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                         @endif
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                        @endif
+
                                                     </div>
                                                     <div class="tpproduct__shopping">
                                                         @auth
@@ -258,7 +262,7 @@
                                                                 href="{{ route('login') }}">
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
-                                                        @endauth                                                       
+                                                        @endauth
                                                         <a class="tpproduct__shopping-cart"
                                                             href="{{ route('product.details', $product->slug) }}"><i
                                                                 class="icon-eye"></i></a>
@@ -267,11 +271,13 @@
                                                 <div class="tpproduct__content">
                                                     <span class="tpproduct__content-weight">
                                                         <a
-                                                            href="shop-details-3.html">{{ $product->category->categoryName }}</a>,
-                                                        <a href="shop-details-3.html">Vagetables</a>
+                                                            href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
+                                                        <a
+                                                            href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
                                                     </span>
                                                     <h4 class="tpproduct__title">
-                                                        <a href="shop-details-top-.html">{{ $product->product_name }}</a>
+                                                        <a
+                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                     </h4>
                                                     <div class="tpproduct__rating mb-5">
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -282,13 +288,27 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                        <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="tpproduct__hover-text">
                                                     <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
+                                                        <form method="POST" id="add_to_cart_form">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $product->id }}"
+                                                                name="product_id">
+                                                            <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                                name="variant_id">
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->discount_amount }}"
+                                                                name="selling_price">
+                                                            <button class="tp-btn-2">Add to
+                                                                cart</button>
+                                                        </form>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -312,11 +332,15 @@
                                                             src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                             alt="Products Image"></a>
                                                     <div class="tpproduct__info bage">
-                                                        @if ($product->varient[0]->discount)
+                                                        @if ($product->varient[0]->discount > 0)
                                                             <span
                                                                 class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                         @endif
-                                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
+
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                        @endif
+
                                                     </div>
                                                     <div class="tpproduct__shopping">
                                                         @auth
@@ -339,7 +363,6 @@
                                                                 <i class="fas fa-heart icons"></i>
                                                             </a>
                                                         @endauth
-                                                        
                                                         <a class="tpproduct__shopping-cart"
                                                             href="{{ route('product.details', $product->slug) }}"><i
                                                                 class="icon-eye"></i></a>
@@ -348,11 +371,13 @@
                                                 <div class="tpproduct__content">
                                                     <span class="tpproduct__content-weight">
                                                         <a
-                                                            href="shop-details-3.html">{{ $product->category->categoryName }}</a>,
-                                                        <a href="shop-details-3.html">Vagetables</a>
+                                                            href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
+                                                        <a
+                                                            href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
                                                     </span>
                                                     <h4 class="tpproduct__title">
-                                                        <a href="shop-details-top-.html">{{ $product->product_name }}</a>
+                                                        <a
+                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                     </h4>
                                                     <div class="tpproduct__rating mb-5">
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -363,13 +388,27 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                        <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="tpproduct__hover-text">
                                                     <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
+                                                        <form method="POST" id="add_to_cart_form">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $product->id }}"
+                                                                name="product_id">
+                                                            <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                                name="variant_id">
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->discount_amount }}"
+                                                                name="selling_price">
+                                                            <button class="tp-btn-2">Add to
+                                                                cart</button>
+                                                        </form>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -379,79 +418,93 @@
                             <div class="tab-pane fade whight-product" id="nav-product" role="tabpanel"
                                 aria-labelledby="nav-product-tab">
                                 @foreach ($allProducts as $product)
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div
-                                            class="tplist__product d-flex align-items-center justify-content-between mb-20">
-                                            <div class="tplist__product-img">
-                                                <a href="{{ route('product.details', $product->slug) }}"
-                                                    class="tplist__product-img-one">
-                                                    <img src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                        alt="Product Image" style="height: 200px">
-                                                </a>
-                                                <a class="tplist__product-img-two"
-                                                    href="{{ route('product.details', $product->slug) }}">
-                                                    <img src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                        alt="Product Image" style="height: 200px">
-                                                </a>
-                                                <div class="tpproduct__info bage">
-                                                    @if ($product->varient[0]->discount)
-                                                        <span
-                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                    @endif
-                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div
+                                                class="tplist__product d-flex align-items-center justify-content-between mb-20">
+                                                <div class="tplist__product-img">
+                                                    <a href="{{ route('product.details', $product->slug) }}"
+                                                        class="tplist__product-img-one">
+                                                        <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                            alt="Product Image" style="height: 200px">
+                                                    </a>
+                                                    <a class="tplist__product-img-two"
+                                                        href="{{ route('product.details', $product->slug) }}">
+                                                        <img src="{{ asset('uploads/products/' . $product->product_image) }}"
+                                                            alt="Product Image" style="height: 200px">
+                                                    </a>
+                                                    <div class="tpproduct__info bage">
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <span
+                                                                class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                        @endif
+                                                        @if ($product->varient[0]->discount > 0)
+                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="tplist__content">
-                                                <span>1 {{ $product->varient[0]->unit }}</span>
-                                                <h4 class="tplist__content-title"><a
-                                                        href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
-                                                </h4>
-                                                <div class="tplist__rating mb-5">
-                                                    <a href="#"><i class="icon-star_outline1"></i></a>
-                                                    <a href="#"><i class="icon-star_outline1"></i></a>
-                                                    <a href="#"><i class="icon-star_outline1"></i></a>
-                                                    <a href="#"><i class="icon-star_outline1"></i></a>
-                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                <div class="tplist__content">
+                                                    <span>1 {{ $product->varient[0]->unit }}</span>
+                                                    <h4 class="tplist__content-title"><a
+                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
+                                                    </h4>
+                                                    <div class="tplist__rating mb-5">
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    </div>
+                                                    <ul class="tplist__content-info">
+                                                        <li>Delicous Non-Dairy cheese sauce</li>
+                                                        <li>Vegan & Allergy Friendly</li>
+                                                        <li>{{ $product->short_desc }}</li>
+                                                    </ul>
                                                 </div>
-                                                <ul class="tplist__content-info">
-                                                    <li>Delicous Non-Dairy cheese sauce</li>
-                                                    <li>Vegan & Allergy Friendly</li>
-                                                    <li>{{ $product->short_desc }}</li>
-                                                </ul>
-                                            </div>
-                                            <div class="tplist__price justify-content-end">
-                                                <h4 class="tplist__instock">Availability:
-                                                    <span>{{ $product->varient[0]->stock }} in stock</span>
-                                                </h4>
-                                                <h3 class="tplist__count mb-15">
-                                                    ৳{{ $product->varient[0]->discount_amount }}</h3>
-                                                <button class="tp-btn-2 mb-10">Add to cart</button>
-                                                <div class="tplist__shopping">
-                                                    @auth
-                                                        <a class="" href="#" value="{{ $product->id }}">
-                                                            <!-- <i class="icon-heart icons"></i> -->
-                                                            @auth
-                                                                @php
-                                                                    $loved = App\Models\WishList::where('user_id', Auth::user()->id)
-                                                                        ->where('product_id', $product->id)
-                                                                        ->first();
-                                                                @endphp
-                                                            @endauth
-                                                            <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
-                                                                class="fas fa-heart icons"></i>wishlist
-                                                        </a>
-                                                    @else
-                                                        <a class="" href="{{ route('login') }}">
-                                                            <i class="fas fa-heart icons"></i> wishlist
-                                                        </a>
-                                                    @endauth
-                                                    <a href="#"><i class="icon-eye"></i>View Details</a>
+                                                <div class="tplist__price justify-content-end">
+                                                    <h4 class="tplist__instock">Availability:
+                                                        <span>{{ $product->varient[0]->stock_quantity }} in stock</span>
+                                                    </h4>
+                                                    <h3 class="tplist__count mb-15">
+                                                        ৳{{ $product->varient[0]->discount_amount }}</h3>
+                                                    <form method="POST" id="add_to_cart_form">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $product->id }}"
+                                                            name="product_id">
+                                                        <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                            name="variant_id">
+                                                        <input type="hidden"
+                                                            value="{{ $product->varient[0]->discount_amount }}"
+                                                            name="selling_price">
+                                                        <button class="tp-btn-2 mb-10">Add to
+                                                            cart</button>
+                                                    </form>
+                                                    <div class="tplist__shopping">
+                                                        @auth
+                                                            <a class="" href="#" value="{{ $product->id }}">
+                                                                <!-- <i class="icon-heart icons"></i> -->
+                                                                @auth
+                                                                    @php
+                                                                        $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                            ->where('product_id', $product->id)
+                                                                            ->first();
+                                                                    @endphp
+                                                                @endauth
+                                                                <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
+                                                                    class="fas fa-heart icons"></i>wishlist
+                                                            </a>
+                                                        @else
+                                                            <a class="" href="{{ route('login') }}">
+                                                                <i class="fas fa-heart icons"></i> wishlist
+                                                            </a>
+                                                        @endauth
+                                                        <a href="{{ route('product.details', $product->slug) }}"><i
+                                                                class="icon-eye"></i>View Details</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
