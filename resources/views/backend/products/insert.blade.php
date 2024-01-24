@@ -132,7 +132,7 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
+                                                        <textarea class="form-control" id="product_descriptions" name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>
@@ -197,7 +197,7 @@
                             </div>
                         </form>
 
-                        
+
                         <div class="row variant_section"  style="display: none">
                             <div class="card-title d-flex">
                                 <h5 class="mb-0 text-info">Add Variants</h5>
@@ -342,7 +342,7 @@
 
 
     <script>
-        // !.. add product ajax Crud 
+        // !.. add product ajax Crud
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
@@ -378,7 +378,7 @@
 
 
 
-        // !.. add variant ajax Crud 
+        // !.. add variant ajax Crud
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
@@ -445,7 +445,7 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>    
+                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
                                             </td>
                                     `;
                             varient_container.appendChild(tr);
@@ -459,7 +459,7 @@
 
 
 
-        // price and discount calculation 
+        // price and discount calculation
         const regular_price = document.querySelector('.regular_price');
         const discount = document.querySelector('.discount');
         discount.addEventListener('change', function() {
@@ -488,10 +488,11 @@
             } else {
                 discount.setAttribute('disabled', '');
             }
-        })
+        });
 
 
-        // // delete varient data 
+
+        // // delete varient data
         // const delete_variant = document.querySelectorAll('#delete_variant');
         // delete_variant.map(data => {
         //     data.addEventListener('click', function(event) {
