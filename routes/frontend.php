@@ -54,7 +54,9 @@ Route::controller(CartController::class)->group(function () {
     Route::get('/product/show_cart', 'showCart')->name('product.show_cart');
     Route::get('/product/show_cart_products', 'showCartProducts')->name('product.show_cart_products');
     Route::get('/product/remove_cart_product/{id}', 'removeCartProduct')->name('product.remove_cart');
-    Route::get('/cart/remove-cart-product/{id}', 'cartPageRemoveItem')->name('product.cartpage');
+    Route::get('/cart/remove-cart-product/{id}', 'cartPageRemoveItem')->name('product.cartpage.remove');
+    Route::post('/cart/update-cart-product/{id}', 'cartPageUpdateItem')->name('product.cartpage.update');
+    Route::get('/checkout', 'checkout')->name('checkout');
 });
 
 

@@ -7,6 +7,7 @@ use App\Models\BillingInfo;
 use Illuminate\Http\Request;
 use Validator;
 
+
 class BillingInfoController extends Controller
 {
     public function insert(Request $request)
@@ -52,4 +53,7 @@ class BillingInfoController extends Controller
             'error' => $validator->messages()
         ]);
     }
+
+
+   
 }
