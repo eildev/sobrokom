@@ -30,9 +30,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+
+    <!-- tinymce js here -->
+    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        document
+            .querySelector(".pageLoader")
+            .style.setProperty("display", "none", "important");
+    });
+
+    </script>
 </head>
 
 <body>
+    <style>
+        .pageLoader{
+            position:fixed;
+            left:0;
+            top:0;
+            bottom:0;
+            right:0;
+            display:flex;
+             //display:none;
+            justify-content: center;
+            align-items:center;
+            background:rgba(0,0,0,.7);
+            z-index:9999999999999999999999;
+        }
+    </style>
+    <div class="pageLoader">
+        <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;" >
+    </div>
+
     @php
         $cartData = Cart::content();
         // @dd(Cart::total());
@@ -267,7 +298,7 @@
         }
 
 
-        // item remove from cart 
+        // item remove from cart
         $(document).ready(function() {
             $(document).on('click', '.item_remove', function(e) {
                 e.preventDefault();
@@ -292,8 +323,10 @@
 
     {{-- swwetalert  --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
+
+
+
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {
@@ -322,7 +355,10 @@
 
             });
         });
+
+
     </script>
+
 </body>
 
 </html>
