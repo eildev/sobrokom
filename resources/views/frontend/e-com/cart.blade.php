@@ -40,7 +40,7 @@
                                     {{-- @dd($products); --}}
                                     @if ($products->count() > 0)
                                         @foreach ($products as $product)
-                                            <tr>
+                                            <tr class="cart_row">
                                                 <td class="product-thumbnail">
                                                     <a href="shop-details.html">
                                                         <img src="{{ asset('uploads/products/' . $product->options->image) }}"
@@ -96,7 +96,7 @@
                                 <div class="cart-page-total">
                                     <h2>Cart totals</h2>
                                     <ul class="mb-20">
-                                        <li>Subtotal 
+                                        <li>Subtotal
                                             <span>
                                                 &#2547 {{ Cart::subtotal() }}
                                             </span>
@@ -133,14 +133,9 @@
                 $input.val(parseInt($input.val()) + 1);
                 $input.change();
                 // Find the parent <td> and then find the .unit_price within it
-                let unit_price_element = $(this).closest('td').find('.unit_price');
-                let unit_price = unit_price_element.getAttribute('data-value');
+                    let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr('data-value');
 
-                // Log for debugging
-                console.log("unit_price_element: ", unit_price_element);
-                console.log("unit_price: ", unit_price);
-                // let unit_price = $(this).parent().find('.unit_price').attr('unitPrice');
-                return false;
+
             });
         });
 
