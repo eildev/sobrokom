@@ -46,7 +46,7 @@
                                                                 <span
                                                                     class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                             @endif
-                                                            @if ($product->varient[0]->discount >= 10)
+                                                            @if ($product->varient[0]->discount > 0)
                                                                 <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                             @endif
 

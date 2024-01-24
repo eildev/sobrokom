@@ -265,27 +265,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$165.00</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum dictum magna <strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$50.00</span>
-                                            </td>
-                                        </tr>
+                                        @php
+                                            $cartProducts = Cart::content();
+                                            // dd($cartProducts);
+                                        @endphp
+                                        @if ($cartProducts->count() > 0)
+                                            @foreach ($cartProducts as $product)
+                                                <tr class="cart_item">
+                                                    <td class="product-name">
+                                                        {{ $product->name }} <strong class="product-quantity"> ×
+                                                            {{ $product->qty }}</strong>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">&#2547 {{ $product->price }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">$215.00</span></td>
+                                            <td><span class="amount">&#2547 {{Cart::total()}}</span></td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>Shipping</th>
@@ -294,19 +296,22 @@
                                                     <li>
                                                         <input type="radio" name="shipping">
                                                         <label>
-                                                            Flat Rate: <span class="amount">$7.00</span>
+                                                            Into Dhaka City: <span class="amount">&#2547 100</span>
                                                         </label>
                                                     </li>
                                                     <li>
                                                         <input type="radio" name="shipping">
-                                                        <label>Free Shipping:</label>
+                                                        <label>
+                                                            Out Of Dhaka: <span class="amount">&#2547 200</span>
+
+                                                        </label>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">$215.00</span></strong>
+                                            <td><strong><span class="amount">&#2547 {{Cart::total()}}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -318,7 +323,7 @@
                                         <h2 class="accordion-header" id="checkoutOne">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
-                                                Direct Bank Transfer
+                                                Cash On Delivery
                                             </button>
                                         </h2>
                                         <div id="bankOne" class="accordion-collapse collapse show"
@@ -362,6 +367,19 @@
                                                 PayPal account.
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="coupon-info">
+                                        <form action="#">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-6 checkout-coupon">
+                                                    <input type="text" placeholder="Coupon Code" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 checkout-coupon">
+                                                    <button class="tp-btn tp-color-btn" 
+                                                        type="submit">Apply Coupon</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="order-button-payment mt-20">
