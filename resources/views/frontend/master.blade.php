@@ -30,8 +30,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+
+    <!-- tinymce js here -->
     <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
         document
@@ -320,7 +322,7 @@
 
 
     {{-- swwetalert  --}}
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
 
