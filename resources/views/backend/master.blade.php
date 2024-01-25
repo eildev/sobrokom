@@ -169,9 +169,9 @@
 
             });
         });
-        tinymce.init({
-		  selector: '#product_descriptions'
-		});
+        // tinymce.init({
+		//   selector: '#product_descriptions'
+		// });
 
     </script>
 </body>

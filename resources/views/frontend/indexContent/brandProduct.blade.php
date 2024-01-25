@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="tpbrandproduct__contact">
                                                 <span class="tpbrandproduct__product-title"><a
-                                                        href="shop-details.html">{{ $product->product_name }}</a></span>
+                                                        href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a></span>
                                                 <div class="tpproduct__rating mb-5">
                                                     <a href="#"><i class="icon-star_outline1"></i></a>
                                                     <a href="#"><i class="icon-star_outline1"></i></a>

@@ -79,11 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                            data-bs-target="#nav-home" type="button" role="tab"
-                                                                                                                            aria-controls="nav-home" aria-selected="true">
-                                                                                                                            <img src="{{ asset('/uploads/products/' . $product->product_image) }}"
-                                                                                                                                alt="">
-                                                                                                                        </button> -->
+                                                                                          </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -99,13 +95,73 @@
                                     <div class="col-lg-6">
                                         <div class="product__details">
                                             <div class="product__details-price-box">
-                                                <h5 class="product__details-price">
-                                                    ৳{{ $product->varient[0]->discount_amount }}</h5>
-                                                <ul class="product__details-info-list">
-                                                    <li>{{ $product->short_desc }}</li>
-                                                    <li>Vegan & Allergy friendly</li>
-                                                    <li>Smooth, velvety dairy free cheese sauce</li>
-                                                </ul>
+                                                @if ($product->varient->count() > 1)
+                                                    @php
+                                                        $variants = $product->varient;
+                                                        // @dd($variants);
+                                                    @endphp
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="tpnavtab__area pb-40">
+                                                                <nav>
+                                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                                    @foreach ($variants as $variant)
+                                                                        <button class="nav-link active text-capitalize" id="nav-all-tab"
+                                                                            data-bs-toggle="tab" data-bs-target="#nav-all-{{$variant->id}}"
+                                                                            type="button" role="tab"
+                                                                            aria-controls="nav-all" aria-selected="true">{{$variant->color}}</button>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </nav>
+
+                                                                {{-- <div>
+                                                                    @foreach ($variants as $variant)
+                                                                    <h1>{{$variant->discount_amount}}</h1>
+                                                                    <div><p class="border-1">{{$variant->size}}</p></div>
+                                                                    @endforeach
+                                                                </div> --}}
+
+                                                                <div class="tab-content" id="nav-tabContent">
+                                                                    @foreach ($product->varient as $key => $variant)
+                                                                    <div class="tab-pane fade show {{ $key == 0 ? 'active' : '' }}" id="nav-all-{{$variant->id}}"
+                                                                        role="tabpanel" aria-labelledby="nav-all-tab"
+                                                                        tabindex="0">
+
+                                                                        
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Price</th>
+                                                                                    <th>Discount</th>
+                                                                                    <th>Sale Price</th>
+                                                                                    <th>Size</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>{{$variant->regular_price}}</td>
+                                                                                    <td>{{$variant->discount}}</td>
+                                                                                    <td>{{$variant->discount_amount}}</td>
+                                                                                    <td>{{$variant->size}}</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                @else
+                                                    <h5 class="product__details-price">
+                                                        ৳{{ $product->varient[0]->discount_amount }}</h5>
+                                                    <ul class="product__details-info-list">
+                                                        <li>{{ $product->short_desc }}</li>
+                                                    </ul>
+                                                @endif
+
                                             </div>
                                             <div class="product__details-cart">
                                                 <div class="product__details-quantity d-flex align-items-center mb-15">
@@ -162,11 +218,13 @@
                                             </div>
                                             <div class="product__details-stock mb-25">
                                                 <ul>
-                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }} Instock</i>
+                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }}
+                                                            Instock</i>
                                                     </li>
                                                     <li>Category: <span>{{ $product->category->categoryName }} </span>
                                                     </li>
-                                                    <li>Subcategory: <span>{{ $product->subcategory->subcategoryName }} </span>
+                                                    <li>Subcategory: <span>{{ $product->subcategory->subcategoryName }}
+                                                        </span>
                                                     </li>
                                                     <li class="text-capitalize">Tags: {{ $product->tags }}</li>
                                                 </ul>
@@ -189,7 +247,7 @@
                                             data-bs-target="#nav-description" type="button" role="tab"
                                             aria-controls="nav-description" aria-selected="true">Product
                                             Description</button>
-                                       
+
                                         <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab"
                                             data-bs-target="#nav-review" type="button" role="tab"
                                             aria-controls="nav-review" aria-selected="false">Reviews (0)</button>
@@ -201,7 +259,7 @@
                                     aria-labelledby="nav-description-tab" tabindex="0">
 
                                     <div class="tpdescription__content">
-                                        <p> {{$product->long_desc}}</p>
+                                        <p> {{ $product->long_desc }}</p>
                                     </div>
                                     {{-- <div
                                         class="tpdescription__product-wrapper mt-30 mb-30 d-flex justify-content-between align-items-center">
@@ -265,7 +323,7 @@
                                             consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
                                     </div> --}}
                                 </div>
-                               
+
 
 
 
@@ -342,7 +400,7 @@
 
                 @php
                     $featureProducts = App\Models\Product::where('product_feature', 'like', '%' . 'new-arrival' . '%')
-                        ->take(4)
+                        ->take(3)
                         ->orderBy('id', 'ASC')
                         ->get();
                     // dd($featureProducts);

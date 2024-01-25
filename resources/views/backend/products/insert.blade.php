@@ -132,7 +132,7 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control" id="product_descriptions" name="long_desc" placeholder="" style="resize: none; height: 100px;"></textarea>
+                                                        <textarea class="form-control" name="long_desc" placeholder="Enter Long Description" style="resize: none; height: 100px;"></textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>
