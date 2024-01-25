@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\brandController;
+use App\Http\Controllers\Backend\GlobalCouponController;
 use App\Http\Controllers\Backend\PopupMessageController;
 use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
@@ -128,6 +129,13 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
     });
     //All Routes for Product End
+
+
+    //All Routes for Global Coupons Start
+    Route::controller(GlobalCouponController::class)->group(function () {
+        Route::get('/global-coupon', 'index')->name('global.coupon');
+    });
+    //All Routes for Global Coupons End
 
 });
 

@@ -23,7 +23,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" name="tagname"
                                             class="form-control @error('tagname') is-invalid  @enderror"
-                                            id="inputEnterYourName" value="{{ old('categoryName') }}"
+                                            id="inputEnterYourName" value="{{ old('tagname') }}"
                                             placeholder="Enter Tag Name">
                                         @error('tagname')
                                             <span class="text-danger">{{ $message }}</span>

@@ -123,7 +123,7 @@
         </li>
 
 
-        {{-- banner menu  --}}
+        {{-- Home Banner menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
@@ -138,7 +138,7 @@
                 </li>
             </ul>
         </li>
-        {{-- banner menu  --}}
+        {{-- Offer Banner menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
@@ -163,6 +163,18 @@
             </a>
             <ul>
                 <li> <a href="{{ route('subscribe.view') }}"><i class="bx bx-right-arrow-alt"></i>Subscriber list</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Global Coupon</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('global.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Add Global Coupon</a>
                 </li>
             </ul>
         </li>
