@@ -98,10 +98,12 @@
 
                                             <div class="product__details-price-box">
                                                 <h5 class="product__details-price">
-                                                    ৳{{ $product->varient[0]->discount_amount }}</h5>
+                                                    ৳{{ $product->varient[0]->discount_amount }}<span>/{{ ($product->varient[0]->unit) }}</span></h5>
+
                                                 <ul class="product__details-info-list">
                                                     <li>{{ $product->short_desc }}</li>
                                                 </ul>
+
 
                                                 {{-- variant price --}}
                                                 {{-- @if ($product->varient->count() > 1)
@@ -455,6 +457,7 @@
                                                 @if ($product->varient[0]->discount > 0)
                                                     <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                 @endif
+                                                <span>/{{ ($product->varient[0]->unit) }}</span>
                                             </div>
                                         </div>
                                     </div>
