@@ -29,7 +29,7 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
 
@@ -121,7 +121,7 @@
     <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
 
     <!-- Toastr -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}");
@@ -236,7 +236,7 @@
             if (Object.keys(cartData).length > 0) {
                 var itemsToDisplay = 3;
 
-                console.log(Object.keys(cartData).length);
+                // console.log(Object.keys(cartData).length);
                 $('.cart_quantity').text(Object.keys(cartData).length);
                 $('.mobile_show_quantity').text(Object.keys(cartData).length);
 
@@ -267,7 +267,7 @@
                 }
 
                 // Update the cart quantity span
-               
+
 
                 if (Object.keys(cartData).length > 3) {
                     var remainingItems = Object.keys(cartData).length - itemsToDisplay;

@@ -44,13 +44,13 @@
                                                 @csrf
                                                 <tr class="cart_row">
                                                     <td class="product-thumbnail">
-                                                        <a href="shop-details.html">
+                                                        <a href="#">
                                                             <img src="{{ asset('uploads/products/' . $product->options->image) }}"
                                                                 alt="Product Image">
                                                         </a>
                                                     </td>
                                                     <td class="product-name">
-                                                        <a href="shop-details.html">{{ $product->name }}</a>
+                                                        <a href="#">{{ $product->name }}</a>
                                                     </td>
                                                     <td class="product-price">
                                                         <span class="amount unit_price" data-value="{{ $product->price }}">
