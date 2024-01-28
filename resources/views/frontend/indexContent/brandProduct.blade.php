@@ -81,6 +81,8 @@
                                                     @if ($product->varient[0]->discount > 0)
                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                     @endif
+                                                    <span>/{{ ($product->varient[0]->unit) }}</span>
+                                                    {{-- @dd($product->varient[0]->unit); --}}
                                                 </div>
                                             </div>
                                         </div>
