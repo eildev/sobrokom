@@ -19,7 +19,7 @@ class CartController extends Controller
         Cart::add([
             'id' => $request->product_id,
             'name' => $product->product_name,
-            'qty' => 1,
+            'qty' => $request->pr_quantity,
             'price' => $request->selling_price,
             'weight' =>0,
             'options' => [
@@ -84,7 +84,7 @@ class CartController extends Controller
         // dd(Auth::user());
         // $billingInfo = BillingInfo::where('user_id', Auth::user()->id)->first();
         // if (!$billingInfo) {
-        //  return view('frontend.e-com.checkout', compact('billingInfo'));  
+        //  return view('frontend.e-com.checkout', compact('billingInfo'));
         // }
         return view('frontend.e-com.checkout');
     }
