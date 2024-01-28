@@ -66,7 +66,7 @@
                                                             value="{{ $product->rowId }}">+</span>
                                                     </td>
                                                     <td class="product-subtotal">
-                                                        <span class="amount subTotal_price">৳{{ $product->price }}</span>
+                                                        <span class="amount subTotal_price">৳{{ $product->price*$product->qty }}</span>
                                                     </td>
                                                     <td class="product-remove">
 
