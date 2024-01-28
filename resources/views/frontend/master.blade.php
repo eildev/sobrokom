@@ -28,40 +28,42 @@
 
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
 
     <!-- tinymce js here -->
-    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js'
+        referrerpolicy="origin"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        document
-            .querySelector(".pageLoader")
-            .style.setProperty("display", "none", "important");
-    });
-
+        document.addEventListener("DOMContentLoaded", function() {
+            document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
+        });
     </script>
 </head>
 
 <body>
     <style>
-        .pageLoader{
-            position:fixed;
-            left:0;
-            top:0;
-            bottom:0;
-            right:0;
-            display:flex;
-             //display:none;
+        .pageLoader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            //display:none;
             justify-content: center;
-            align-items:center;
-            background:rgba(0,0,0,.7);
-            z-index:9999999999999999999999;
+            align-items: center;
+            background: rgba(0, 0, 0, .7);
+            z-index: 9999999999999999999999;
         }
     </style>
     <div class="pageLoader">
-        <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;" >
+        <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">
     </div>
 
     @php
@@ -119,7 +121,6 @@
     <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
 
     <!-- Toastr -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         @if (Session::has('success'))
@@ -234,8 +235,12 @@
 
             if (Object.keys(cartData).length > 0) {
                 var itemsToDisplay = 3;
-                // console.log(itemsToDisplay);
 
+                console.log(Object.keys(cartData).length);
+                $('.cart_quantity').text(Object.keys(cartData).length);
+                $('.mobile_show_quantity').text(Object.keys(cartData).length);
+
+                // console.log(itemsToDisplay);
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];
                     var item = cartData[key];
@@ -261,13 +266,13 @@
                     );
                 }
 
+                // Update the cart quantity span
+               
+
                 if (Object.keys(cartData).length > 3) {
                     var remainingItems = Object.keys(cartData).length - itemsToDisplay;
                     $('.cart_container').append('<li>and ' + remainingItems + ' more item(s)</li>');
                 }
-                // Update the cart quantity span
-                $('.cart_quantity').text(Object.keys(cartData).length);
-                $('.mobile_show_quantity').text(Object.keys(cartData).length);
             } else {
                 // Display a message when the cart is empty
                 $('.cart_container').append('<p>Your cart is empty</p>');
@@ -325,9 +330,6 @@
     {{-- swwetalert  --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
-
-
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {
@@ -356,8 +358,6 @@
 
             });
         });
-
-
     </script>
 
 </body>

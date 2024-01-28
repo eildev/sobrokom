@@ -653,13 +653,10 @@
                     'pr_quantity': Quantity,
                 },
                 success: function(success_response) {
-                    console.log(success_response);
-                    // if (success_response.status == 200) {
-                    //     toastr.success(success_response.message);
-                    //     document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
-                    // } else {
-                    //     toastr.warning(success_response.error.email);
-                    // }
+                    if (success_response.status == 200) {
+                        toastr.success(success_response.message);
+                        document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
+                    }
                     // console.log(success_response);
 
                 }
@@ -668,49 +665,5 @@
 
 
 
-
-
-
-        // const addForm = document.querySelectorAll('#details_cart');
-        // addForm.forEach(element => {
-        //     element.addEventListener('submit', function(e) {
-        //         e.preventDefault();
-
-        //         $.ajaxSetup({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             }
-        //         });
-
-
-        //         let product_id = this.elements.product_id.value
-        //         let variant_id = this.elements.variant_id.value
-        //         let selling_price = this.elements.selling_price.value
-        //         let quantity = this.elements.pr_quantity.value
-
-
-        //         // console.log(product_id, variant_id,selling_price);
-
-        //         $.ajax({
-        //             url: '/product/add_to_cart',
-        //             type: 'POST',
-        //             data: {
-        //                 'product_id': product_id,
-        //                 'variant_id': variant_id,
-        //                 'selling_price': selling_price,
-        //                 'pr_quantity': pr_quantity,
-        //             },
-        //             success: function(response) {
-        //                 if (response.status == 200) {
-        //                     toastr.success(response.message);
-        //                     showCart();
-        //                 } else {
-
-        //                 }
-        //             }
-        //         });
-
-        //     });
-        // })
     </script>
 @endsection
