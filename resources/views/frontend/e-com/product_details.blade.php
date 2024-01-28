@@ -653,20 +653,35 @@
                     'pr_quantity': Quantity,
                 },
                 success: function(success_response) {
-                    console.log(success_response);
-                    // if (success_response.status == 200) {
-                    //     toastr.success(success_response.message);
-                    //     document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
-                    // } else {
-                    //     toastr.warning(success_response.error.email);
-                    // }
-                    // console.log(success_response);
+                    if(success_response.status == 200){
+                        toastr.success(success_response.message);
+                        document.querySelector('.pr_quantity').value = 1;
+                    }
+                    
 
                 }
             });
         });
 
 
+
+        $(document).ready(function() {
+            $('.cart-minus').on('click', function() {
+                var $input = $(this).parent().find('input');
+                var count = parseInt($input.val()) - 1;
+                count = count < 1 ? 1 : count;
+                $input.val(count);
+                $input.change();
+            });
+        });
+
+        $(document).ready(function() {
+            $('.cart-plus').on('click', function() {
+                var $input = $(this).parent().find('input');
+                $input.val(parseInt($input.val()) + 1);
+                $input.change();
+            });
+        });
 
 
 
