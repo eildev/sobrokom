@@ -40,7 +40,7 @@
                                     {{-- @dd($products); --}}
                                     @if ($products->count() > 0)
                                         @foreach ($products as $product)
-                                            <form action="{{ route('product.cartpage.update', $product->rowId) }}"
+                                            <form action="{{ route('product.cartpage.update',  $product->rowId) }}"
                                                 method="POST">
                                                 @csrf
                                                 <tr class="cart_row">
@@ -66,11 +66,12 @@
                                                             value="{{ $product->rowId }}">+</span>
                                                     </td>
                                                     <td class="product-subtotal">
-                                                        <span class="amount subTotal_price">৳{{ $product->price*$product->qty }}</span>
+                                                        <span class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
                                                     </td>
                                                     <td class="product-remove">
 
-                                                        <button class="me-2 edit_cart">
+                                                        <button
+                                                            class="me-2 edit_cart">
                                                             <i class="fa fa-pen"></i>
                                                         </button>
                                                         <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
@@ -95,10 +96,9 @@
                                                 &#2547 {{ Cart::subtotal() }}
                                             </span>
                                         </li>
-
+                                        
                                     </ul>
-                                    <a href="{{ route('checkout') }}" class="tp-btn tp-color-btn banner-animation">Proceed
-                                        to
+                                    <a href="{{route('checkout')}}" class="tp-btn tp-color-btn banner-animation">Proceed to
                                         Checkout</a>
                                 </div>
                             </div>
@@ -121,9 +121,10 @@
                 let productQty = parseFloat($input.val());
                 let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr(
                     'data-value');
-                unit_price_element = unit_price_element - unit_price_element;
+                unit_price_element = parseFloat(unit_price_element);
+                let subTotalPrice = unit_price_element * productQty;
+                // console.log(subTotalPrice);
                 $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
-
             });
         });
 
@@ -146,7 +147,7 @@
 
 
         // cart quantity update
-
+       
 
 
 
