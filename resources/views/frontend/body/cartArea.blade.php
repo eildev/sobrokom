@@ -5,11 +5,9 @@
                 <h4 class="tpcart__title">Your Cart</h4>
                 <div class="tpcart__product">
                     <div class="tpcart__product-list">
-                        @if ($cartData->count() > 0)
                             <ul class="cart_container">
 
                             </ul>
-                        @endif
                     </div>
                     <div class="tpcart__checkout">
                         <div class="tpcart__total-price d-flex justify-content-between align-items-center">

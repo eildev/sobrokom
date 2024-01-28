@@ -232,11 +232,11 @@
                                 <div id="cbox_info" class="checkout-form-list create-account">
                                     <form action="#">
                                         <p class="form-row-first">
-                                            <label>Username or email <span class="required">*</span></label>
+                                            <label>Email<span class="required">*</span></label>
                                             <input type="text">
                                         </p>
                                         <p class="form-row-last">
-                                            <label>Password <span class="required">*</span></label>
+                                            <label>Password<span class="required">*</span></label>
                                             <input type="text">
                                         </p>
                                         <p class="form-row d-flex align-items-center">
@@ -256,6 +256,9 @@
                     </div>
 
                     {{-- your Order  --}}
+                    @php
+                        $cartProducts = Cart::content();
+                    @endphp
                     <div class="col-lg-6 col-md-12">
                         <div class="your-order mb-30 ">
                             <h3>Your order</h3>
@@ -268,27 +271,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$165.00</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_item">
-                                            <td class="product-name">
-                                                Vestibulum dictum magna <strong class="product-quantity"> × 1</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">$50.00</span>
-                                            </td>
-                                        </tr>
+                                        @if ($cartProducts->count() > 0)
+                                            @foreach ($cartProducts as $product)
+                                                <tr class="cart_item">
+                                                    <td class="product-name">
+                                                        {{ $product->name }} <strong class="product-quantity"> ×
+                                                            {{ $product->qty }}</strong>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">৳{{ $product->price * $product->qty }}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">$215.00</span></td>
+                                            <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>Shipping</th>
@@ -297,19 +297,20 @@
                                                     <li>
                                                         <input type="radio" name="shipping">
                                                         <label>
-                                                            Flat Rate: <span class="amount">$7.00</span>
+                                                            In Dhaka: <span class="amount">Free Delivery</span>
                                                         </label>
                                                     </li>
                                                     <li>
                                                         <input type="radio" name="shipping">
-                                                        <label>Free Shipping:</label>
+                                                        <label>Out Side Of Dhaka: <span
+                                                                class="amount">৳100.00</span></label>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">$215.00</span></strong>
+                                            <td><strong><span class="amount">৳{{ Cart::total() }}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -321,7 +322,7 @@
                                         <h2 class="accordion-header" id="checkoutOne">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
-                                                Direct Bank Transfer
+                                                Cash On Delivery
                                             </button>
                                         </h2>
                                         <div id="bankOne" class="accordion-collapse collapse show"
@@ -333,7 +334,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
+                                    {{-- <div class="accordion-item">
                                         <h2 class="accordion-header" id="paymentTwo">
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#payment" aria-expanded="false"
@@ -365,7 +366,7 @@
                                                 PayPal account.
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="order-button-payment mt-20">
                                     <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation">Place
