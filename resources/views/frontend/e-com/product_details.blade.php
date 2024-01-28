@@ -180,24 +180,21 @@
                                                     <b>Qty:</b>
                                                     <div class="product__details-count mr-10">
                                                         <span class="cart-minus"><i class="far fa-minus"></i></span>
-                                                        <input class="tp-cart-input" id="pr_quantity" type="text"
+                                                        <input class="tp-cart-input pr_quantity" id="" type="text"
                                                             value="1">
                                                         <span class="cart-plus"><i class="far fa-plus"></i></span>
                                                     </div>
                                                     <div class="product__details-btn">
-                                                        <form id="">
-
                                                             <input type="hidden" value="{{ $product->id }}"
-                                                                name="product_id" id="product_id">
+                                                                name="product_id" class="product_id">
                                                             <input type="hidden" value="{{ $product->varient[0]->id }}"
-                                                                name="variant_id" id="variant_id">
+                                                                name="variant_id" class="variant_id">
                                                             <input type="hidden"
                                                                 value="{{ $product->varient[0]->discount_amount }}"
-                                                                name="selling_price" id="selling_price">
+                                                                name="selling_price" class="selling_price">
                                                             <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
                                                                 to
                                                                 cart</button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                                 <ul class="product__details-check">
@@ -372,7 +369,6 @@
                                         </div> --}}
                                         <div class="tpreview__form">
                                             <h4 class="tpreview__form-title mb-25">Add a review </h4>
-                                            <form action="#">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="tpreview__input mb-30">
@@ -403,7 +399,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -638,25 +633,16 @@
         details_cart_btn.addEventListener('click', function(e) {
             e.preventDefault();
 
-            // alert('add to cart');
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            let product_id = document.querySelector('#product_id').value;
-            let variant_id = document.querySelector('#variant_id').value;
-            let selling_price = document.querySelector('#selling_price').value;
-            let Quantity = document.querySelector('#pr_quantity').value;
-
-            // alert(product_id);
-            // alert(variant_id);
-            // alert(selling_price);
-            // alert(Quantity);
-
-
+            let product_id = document.querySelector('.product_id').value;
+            let variant_id = document.querySelector('.variant_id').value;
+            let selling_price = document.querySelector('.selling_price').value;
+            let Quantity = document.querySelector('.pr_quantity').value;
             $.ajax({
                 url: '/product/add_to_cart',
                 type: 'POST',
@@ -664,17 +650,17 @@
                     'product_id': product_id,
                     'variant_id': variant_id,
                     'selling_price': selling_price,
-                    'pr_quantity': pr_quantity,
+                    'pr_quantity': Quantity,
                 },
                 success: function(success_response) {
                     console.log(success_response);
-                    if (success_response.status == 200) {
-                        toastr.success(success_response.message);
-                        document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
-                    } else {
-                        toastr.warning(success_response.error.email);
-                    }
-                    console.log(success_response);
+                    // if (success_response.status == 200) {
+                    //     toastr.success(success_response.message);
+                    //     document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
+                    // } else {
+                    //     toastr.warning(success_response.error.email);
+                    // }
+                    // console.log(success_response);
 
                 }
             });
