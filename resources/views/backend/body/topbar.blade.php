@@ -377,8 +377,8 @@
                     <li><a class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-cog"></i><span>Settings</span></a>
                     </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
-                                class='bx bx-home-circle'></i><span>Dashboard</span></a>
+                    <li><a class="dropdown-item" href="{{route('home')}}" target="_blank"><i
+                                class='bx bx-home-circle'></i><span>Home Page</span></a>
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i
                                 class='bx bx-dollar-circle'></i><span>Earnings</span></a>

@@ -44,6 +44,10 @@
                         </div>
 
                         @if (session('status') === 'password-updated')
+
+                        <script>
+                            toastr.success({{'password updated'}})
+                        </script>
                         <p
                             x-data="{ show: true }"
                             x-show="show"
