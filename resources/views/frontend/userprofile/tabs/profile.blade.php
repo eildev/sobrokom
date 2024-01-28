@@ -1,7 +1,7 @@
 <div class="tpshop__top ml-60">
     <div class="row">
         <div class="col-lg-4 pe-0">
-            <div class="card">
+            <div class="card" style="min-height: 483px;">
 
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
