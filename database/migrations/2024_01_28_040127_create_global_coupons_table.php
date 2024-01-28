@@ -13,15 +13,11 @@ return new class extends Migration
     {
         Schema::create('global_coupons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unsigned();
             $table->string('coupon_code');
             $table->string('discount');
+            $table->string('startDate');
             $table->string('expiration');
             $table->tinyInteger('status')->default(1);
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }
