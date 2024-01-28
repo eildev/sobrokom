@@ -7,7 +7,7 @@
                     <div class="tpcart__product-list">
                         @if ($cartData->count() > 0)
                             <ul class="cart_container">
-                                
+
                             </ul>
                         @endif
                     </div>
