@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                              </button> -->
+                                                                                                      </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -180,21 +180,21 @@
                                                     <b>Qty:</b>
                                                     <div class="product__details-count mr-10">
                                                         <span class="cart-minus"><i class="far fa-minus"></i></span>
-                                                        <input class="tp-cart-input pr_quantity" id="" type="text"
-                                                            value="1">
+                                                        <input class="tp-cart-input pr_quantity" id=""
+                                                            type="text" value="1">
                                                         <span class="cart-plus"><i class="far fa-plus"></i></span>
                                                     </div>
                                                     <div class="product__details-btn">
-                                                            <input type="hidden" value="{{ $product->id }}"
-                                                                name="product_id" class="product_id">
-                                                            <input type="hidden" value="{{ $product->varient[0]->id }}"
-                                                                name="variant_id" class="variant_id">
-                                                            <input type="hidden"
-                                                                value="{{ $product->varient[0]->discount_amount }}"
-                                                                name="selling_price" class="selling_price">
-                                                            <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
-                                                                to
-                                                                cart</button>
+                                                        <input type="hidden" value="{{ $product->id }}" name="product_id"
+                                                            class="product_id">
+                                                        <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                            name="variant_id" class="variant_id">
+                                                        <input type="hidden"
+                                                            value="{{ $product->varient[0]->discount_amount }}"
+                                                            name="selling_price" class="selling_price">
+                                                        <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
+                                                            to
+                                                            cart</button>
                                                     </div>
                                                 </div>
                                                 <ul class="product__details-check">
@@ -369,36 +369,36 @@
                                         </div> --}}
                                         <div class="tpreview__form">
                                             <h4 class="tpreview__form-title mb-25">Add a review </h4>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="tpreview__input mb-30">
-                                                            <input type="text" placeholder="Name">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="tpreview__input mb-30">
+                                                        <input type="text" placeholder="Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="tpreview__input mb-30">
+                                                        <input type="email" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="tpreview__star mb-20">
+                                                        <h4 class="title">Your Rating</h4>
+                                                        <div class="tpreview__star-icon">
+                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            <a href="#"><i class="icon-star_outline1"></i></a>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="tpreview__input mb-30">
-                                                            <input type="email" placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="tpreview__star mb-20">
-                                                            <h4 class="title">Your Rating</h4>
-                                                            <div class="tpreview__star-icon">
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tpreview__input mb-30">
-                                                            <textarea name="text" placeholder="Message"></textarea>
-                                                            <div class="tpreview__submit mt-30">
-                                                                <button class="tp-btn">Submit</button>
-                                                            </div>
+                                                    <div class="tpreview__input mb-30">
+                                                        <textarea name="text" placeholder="Message"></textarea>
+                                                        <div class="tpreview__submit mt-30">
+                                                            <button class="tp-btn">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -628,7 +628,6 @@
     <!-- feature-area-end -->
 
     <script>
-
         const details_cart_btn = document.querySelector('#details_cart');
         details_cart_btn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -654,12 +653,12 @@
                 },
                 success: function(success_response) {
                     console.log(success_response);
-                    // if (success_response.status == 200) {
-                    //     toastr.success(success_response.message);
-                    //     document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
-                    // } else {
-                    //     toastr.warning(success_response.error.email);
-                    // }
+                    if (success_response.status == 200) {
+                        toastr.success(success_response.message);
+                        showCart();
+                    } else {
+                        toastr.warning(success_response.error.email);
+                    }
                     // console.log(success_response);
 
                 }
@@ -678,6 +677,7 @@
             });
         });
 
+
         $(document).ready(function() {
             $('.cart-plus').on('click', function() {
                 var $input = $(this).parent().find('input');
@@ -686,5 +686,14 @@
             });
         });
 
+        $(document).ready(function() {
+            var pr_quantity = document.querySelector('.pr_quantity');
+            pr_quantity.addEventListener('keyup', function() {
+                let quantity = parseInt(this.value);
+                if (quantity < 1 || isNaN(quantity)) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
+            })
+        });
     </script>
 @endsection

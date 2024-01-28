@@ -21,7 +21,9 @@
 
 
 
-
+    @php
+        $billingInfo = Auth::check() ? App\Models\BillingInfo::where('user_id', Auth::user()->id)->first() : null;
+    @endphp
     <!-- checkout-area start -->
     <section class="checkout-area pb-50">
         <div class="container">
@@ -29,20 +31,22 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <div class="checkbox-form">
-                            <h3>Billing Details</h3>
-                            {{-- @php
-                                $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
-                            @endphp --}}
-                            @php
-                                $billingInfo = Auth::check() ? App\Models\BillingInfo::where('user_id', Auth::user()->id)->first() : null;
-                            @endphp
-
+                            <div class="d-flex">
+                                <h3 class="border-0 d-inline-flex">Billing Details</h3>
+                                @if ($billingInfo)
+                                    <div class="d-flex">
+                                        <input type="checkbox" name="" id="isUsingAddress">
+                                        <label for="">Using your Default Address</label>
+                                    </div>
+                                @endif
+                            </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>First Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="First Name" class="first_name"
-                                            value="{{ $billingInfo->first_name ?? '' }}" name="first_name">
+                                        <input type="text" placeholder="First Name" class="first_name" value=""
+                                            name="first_name">
                                         <span class="first_name_error text-danger"></span>
                                     </div>
                                 </div>
@@ -51,21 +55,21 @@
                                     <div class="checkout-form-list">
                                         <label>Last Name <span class="required">*</span></label>
                                         <input type="text" placeholder="Last Name" class="last_name"
-                                            value="{{ $billingInfo->last_name ?? '' }}" name="last_name">
+                                            value="" name="last_name">
                                         <span class="last_name_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email Address</label>
-                                        <input type="email" placeholder="Email" value="{{ $billingInfo->email ?? '' }}"
+                                        <input type="email" placeholder="Email" value=""
                                             class="email" name="email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Phone" value="{{ $billingInfo->phone ?? '' }}"
+                                        <input type="text" placeholder="Phone" value=""
                                             class="phone" name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
@@ -74,7 +78,7 @@
                                     <div class="checkout-form-list">
                                         <label>Address 1<span class="required">*</span></label>
                                         <input type="text" placeholder="Address 1"
-                                            value="{{ $billingInfo->address_1 ?? '' }}" class="address_1" name="address_1">
+                                            value="" class="address_1" name="address_1">
                                         <span class="address_1_error text-danger"></span>
                                     </div>
                                 </div>
@@ -82,13 +86,13 @@
                                     <div class="checkout-form-list">
                                         <label>Address 2</label>
                                         <input type="text" placeholder="Address 2"
-                                            value="{{ $billingInfo->address_2 ?? '' }}" class="address_2" name="address_2">
+                                            value="" class="address_2" name="address_2">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>City/Town<span class="required">*</span></label>
-                                        <input type="text" placeholder="City/Town" value="{{ $billingInfo->city ?? '' }}"
+                                        <input type="text" placeholder="City/Town" value=""
                                             class="city" name="city">
                                         <span class="city_error text-danger"></span>
                                     </div>
@@ -97,7 +101,7 @@
                                     <div class="checkout-form-list">
                                         <label>Division <span class="required">*</span></label>
                                         <input type="text" placeholder="Division"
-                                            value="{{ $billingInfo->division ?? '' }}" class="division" name="division">
+                                            value="" class="division" name="division">
                                         <span class="division_error text-danger"></span>
                                     </div>
                                 </div>
@@ -106,14 +110,14 @@
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
                                         <input type="text" placeholder="Postcode / Zip"
-                                            value="{{ $billingInfo->post_code ?? '' }}" class="post_code" name="post_code">
+                                            value="" class="post_code" name="post_code">
                                         <span class="post_code_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="country-select">
                                         <label>Country <span class="required">*</span></label>
-                                        <select name="country" class="country" value="{{ $billingInfo->country ?? '' }}">
+                                        <select name="country" class="country" value="">
                                             <option value="">Select Country</option>
                                             <option value="united-states">United States</option>
                                             <option value="algeria">Algeria</option>
@@ -130,7 +134,7 @@
                                     <div class="checkout-form-list">
                                         <label>Order Notes</label>
                                         <textarea id="checkout-mess" cols="30" rows="10" class="order_notes" name="order_notes"
-                                            placeholder="Notes about your order, e.g. special notes for delivery.">{{ optional($billingInfo)->order_notes ?? '' }}</textarea>
+                                            placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -224,34 +228,27 @@
                           </div> --}}
 
                             {{-- creat account --}}
-                            <div class="col-md-12">
-                                <div class="checkout-form-list create-acc">
-                                    <input id="cbox" type="checkbox">
-                                    <label>Create an account?</label>
+                            @if (!$billingInfo)
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list create-acc">
+                                        <input id="cbox" type="checkbox">
+                                        <label>Create an account?</label>
+                                    </div>
+                                    <div id="cbox_info" class="checkout-form-list create-account">
+                                        <form action="#">
+                                            <p class="form-row-first">
+                                                <label>Email<span class="required">*</span></label>
+                                                <input type="text">
+                                            </p>
+                                            <p class="form-row-last">
+                                                <label>Password<span class="required">*</span></label>
+                                                <input type="text">
+                                            </p>
+
+                                        </form>
+                                    </div>
                                 </div>
-                                <div id="cbox_info" class="checkout-form-list create-account">
-                                    <form action="#">
-                                        <p class="form-row-first">
-                                            <label>Email<span class="required">*</span></label>
-                                            <input type="text">
-                                        </p>
-                                        <p class="form-row-last">
-                                            <label>Password<span class="required">*</span></label>
-                                            <input type="text">
-                                        </p>
-                                        <p class="form-row d-flex align-items-center">
-                                            <button class="tp-btn tp-color-btn me-3" type="submit">Login</button>
-                                            <label>
-                                                <input type="checkbox">
-                                                Remember me
-                                            </label>
-                                        </p>
-                                        <p class="lost-password">
-                                            <a href="#">Lost your password?</a>
-                                        </p>
-                                    </form>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
 
@@ -383,7 +380,42 @@
 
 
 
-    <script></script>
+    @if ($billingInfo)
+        <script>
+            const isUsingAddress = document.querySelector('#isUsingAddress');
+            isUsingAddress.addEventListener('change', function() {
+                // Check if the checkbox is checked
+                if (isUsingAddress.checked) {
+                    // If checked, show Data on input
+                    $('.first_name').val('{{ $billingInfo->first_name }}');
+                    $('.last_name').val('{{ $billingInfo->last_name }}');
+                    $('.email').val('{{ $billingInfo->email }}');
+                    $('.phone').val('{{ $billingInfo->phone }}');
+                    $('.address_1').val('{{ $billingInfo->address_1 }}');
+                    $('.address_2').val('{{ $billingInfo->address_2 }}');
+                    $('.address_2').val('{{ $billingInfo->address_2 }}');
+                    $('.city').val('{{ $billingInfo->city }}');
+                    $('.division').val('{{ $billingInfo->division }}');
+                    $('.post_code').val('{{ $billingInfo->post_code }}');
+                    $('.country').val('{{ $billingInfo->country }}');
+                    $('.order_notes').text('{{ $billingInfo->order_notes }}');
+                } else {
+                    // If not checked, 
+                    $('.first_name').val('');
+                    $('.last_name').val('');
+                    $('.email').val('');
+                    $('.phone').val('');
+                    $('.address_1').val('');
+                    $('.address_2').val('');
+                    $('.city').val('');
+                    $('.division').val('');
+                    $('.post_code').val('');
+                    $('.country').val('');
+                    $('.order_notes').text('');
+                }
+            });
+        </script>
+    @endif
 
 
 
