@@ -72,6 +72,7 @@ class CartController extends Controller
 
     public function cartPageUpdateItem(Request $request, $id)
     {
+        // dd($request->all());
         $rowId = $id;
         $quantity = $request->quantity;
         Cart::update($rowId, $quantity);

@@ -23,7 +23,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="#">
                         <div class="table-content table-responsive">
                             <table class="table">
                                 <thead>
@@ -66,14 +65,10 @@
                                                             value="{{ $product->rowId }}">+</span>
                                                     </td>
                                                     <td class="product-subtotal">
-                                                        <span class="amount subTotal_price">৳{{ $product->price }}</span>
+                                                        <span class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
                                                     </td>
                                                     <td class="product-remove">
-
-                                                        <button
-                                                            class="me-2 edit_cart">
-                                                            <i class="fa fa-pen"></i>
-                                                        </button>
+                                                        <button type="submit">Edit</button>
                                                         <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
                                                             value="{{ $product->rowId }}" class="">
                                                             <i class="fa fa-times"></i>
@@ -96,14 +91,13 @@
                                                 &#2547 {{ Cart::subtotal() }}
                                             </span>
                                         </li>
-                                        
+
                                     </ul>
                                     <a href="{{route('checkout')}}" class="tp-btn tp-color-btn banner-animation">Proceed to
                                         Checkout</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -118,7 +112,13 @@
                 count = count < 1 ? 1 : count;
                 $input.val(count);
                 $input.change();
-                return false;
+                let productQty = parseFloat($input.val());
+                let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr(
+                    'data-value');
+                unit_price_element = parseFloat(unit_price_element);
+                let subTotalPrice = unit_price_element * productQty;
+                // console.log(subTotalPrice);
+                $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
             });
         });
 
@@ -141,7 +141,7 @@
 
 
         // cart quantity update
-       
+
 
 
 

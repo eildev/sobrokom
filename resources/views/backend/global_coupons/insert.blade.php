@@ -4,9 +4,8 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card border-top border-0 border-3 border-info">
-                    {{-- <form action="{{ Route('tagname.store') }}" method="POST">
-                        @csrf --}}
-                        <form action="">
+                    <form action="{{ Route('global.store') }}" method="POST">
+                        @csrf
                         <div class="card-body">
                             <div class="border p-4 rounded">
 
@@ -25,7 +24,7 @@
                                         <input type="text" name="coupon_code"
                                             class="form-control @error('coupon_code') is-invalid  @enderror"
                                             id="inputEnterYourName" value="{{ old('coupon_code') }}"
-                                            placeholder="Enter Tag Name">
+                                            placeholder="Enter Global Coupon">
                                         @error('coupon_code')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -47,6 +46,16 @@
                                             <option value="50">50%</option>
                                         </select>
                                         @error('coupon_code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">          
+                                    <label for="inputEnterYourName" class="col-sm-3 col-form-label">Start Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control @error('startDate') is-invalid  @enderror" id="expiration"
+                                                    placeholder="" name="startDate" value="{{ old('startDate') }}">
+                                        @error('startDate')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

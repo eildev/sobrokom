@@ -134,6 +134,7 @@ Route::middleware('auth','role:admin')->group(function () {
     //All Routes for Global Coupons Start
     Route::controller(GlobalCouponController::class)->group(function () {
         Route::get('/global-coupon', 'index')->name('global.coupon');
+        Route::post('/global-coupon/store', 'store')->name('global.store');
     });
     //All Routes for Global Coupons End
 
