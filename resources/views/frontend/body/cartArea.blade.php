@@ -6,7 +6,7 @@
                 <div class="tpcart__product">
                     <div class="tpcart__product-list">
                             <ul class="cart_container">
-                                
+
                             </ul>
                     </div>
                     <div class="tpcart__checkout">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="tpcart__checkout-btn">
                             <a class="tpcart-btn mb-10" href="{{route('product.show_cart_products')}}">View Cart</a>
-                            <a class="tpcheck-btn" href="checkout.html">Checkout</a>
+                            <a class="tpcheck-btn" href="{{route('checkout')}}">Checkout</a>
                         </div>
                     </div>
                 </div>
