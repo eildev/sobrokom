@@ -42,21 +42,6 @@
                             <button class="tptrack__submition tpsign__reg">Change Password<i
                                     class="fal fa-long-arrow-right"></i></button>
                         </div>
-
-                        @if (session('status') === 'password-updated')
-
-                        <script>
-                            toastr.success({{'password updated'}})
-                        </script>
-                        <p
-                            x-data="{ show: true }"
-                            x-show="show"
-                            x-transition
-                            x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600"
-                        >{{ __('Password updated].') }}</p>
-                    @endif
-
                     </form>
                 </div>
             </div>
