@@ -66,7 +66,7 @@
                                                             value="{{ $product->rowId }}">+</span>
                                                     </td>
                                                     <td class="product-subtotal">
-                                                        <span class="amount subTotal_price">৳{{ $product->price }}</span>
+                                                        <span class="amount subTotal_price">৳{{ $product->price*$product->qty }}</span>
                                                     </td>
                                                     <td class="product-remove">
 
@@ -96,7 +96,7 @@
                                                 &#2547 {{ Cart::subtotal() }}
                                             </span>
                                         </li>
-                                        
+
                                     </ul>
                                     <a href="{{route('checkout')}}" class="tp-btn tp-color-btn banner-animation">Proceed to
                                         Checkout</a>
@@ -141,7 +141,7 @@
 
 
         // cart quantity update
-       
+
 
 
 
