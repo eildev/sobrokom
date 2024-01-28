@@ -236,7 +236,7 @@
             if (Object.keys(cartData).length > 0) {
                 var itemsToDisplay = 3;
 
-                console.log(Object.keys(cartData).length);
+                // console.log(Object.keys(cartData).length);
                 $('.cart_quantity').text(Object.keys(cartData).length);
                 $('.mobile_show_quantity').text(Object.keys(cartData).length);
 
