@@ -205,6 +205,7 @@
                         'product_id': product_id,
                         'variant_id': variant_id,
                         'selling_price': selling_price,
+                        'pr_quantity': '1',
                     },
                     success: function(response) {
                         if (response.status == 200) {

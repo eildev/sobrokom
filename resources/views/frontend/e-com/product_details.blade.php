@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                          </button> -->
+                                                                                              </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -94,11 +94,19 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="product__details">
+
+
                                             <div class="product__details-price-box">
-                                                @if ($product->varient->count() > 1)
+                                                <h5 class="product__details-price">
+                                                    ৳{{ $product->varient[0]->discount_amount }}</h5>
+                                                <ul class="product__details-info-list">
+                                                    <li>{{ $product->short_desc }}</li>
+                                                </ul>
+
+                                                {{-- variant price --}}
+                                                {{-- @if ($product->varient->count() > 1)
                                                     @php
                                                         $variants = $product->varient;
-                                                        // @dd($variants);
                                                     @endphp
 
                                                     <div class="row">
@@ -115,12 +123,12 @@
                                                                     </div>
                                                                 </nav>
 
-                                                                {{-- <div>
+                                                                <div>
                                                                     @foreach ($variants as $variant)
-                                                                    <h1>{{$variant->discount_amount}}</h1>
+                                                                    <h1 class="product__details-price">{{$variant->discount_amount}}</h1>
                                                                     <div><p class="border-1">{{$variant->size}}</p></div>
                                                                     @endforeach
-                                                                </div> --}}
+                                                                </div>
 
                                                                 <div class="tab-content" id="nav-tabContent">
                                                                     @foreach ($product->varient as $key => $variant)
@@ -128,7 +136,7 @@
                                                                         role="tabpanel" aria-labelledby="nav-all-tab"
                                                                         tabindex="0">
 
-                                                                        
+
                                                                         <table class="table">
                                                                             <thead>
                                                                                 <tr>
@@ -150,40 +158,43 @@
                                                                     </div>
                                                                     @endforeach
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 @else
                                                     <h5 class="product__details-price">
                                                         ৳{{ $product->varient[0]->discount_amount }}</h5>
                                                     <ul class="product__details-info-list">
                                                         <li>{{ $product->short_desc }}</li>
                                                     </ul>
-                                                @endif
+                                                @endif --}}
+
+
 
                                             </div>
+
                                             <div class="product__details-cart">
                                                 <div class="product__details-quantity d-flex align-items-center mb-15">
                                                     <b>Qty:</b>
                                                     <div class="product__details-count mr-10">
                                                         <span class="cart-minus"><i class="far fa-minus"></i></span>
-                                                        <input class="tp-cart-input" type="text" value="1">
+                                                        <input class="tp-cart-input pr_quantity" id="" type="text"
+                                                            value="1">
                                                         <span class="cart-plus"><i class="far fa-plus"></i></span>
                                                     </div>
                                                     <div class="product__details-btn">
-                                                        <form method="POST" id="add_to_cart_form">
-                                                            @csrf
                                                             <input type="hidden" value="{{ $product->id }}"
-                                                                name="product_id">
+                                                                name="product_id" class="product_id">
                                                             <input type="hidden" value="{{ $product->varient[0]->id }}"
-                                                                name="variant_id">
+                                                                name="variant_id" class="variant_id">
                                                             <input type="hidden"
                                                                 value="{{ $product->varient[0]->discount_amount }}"
-                                                                name="selling_price">
-                                                            <button class="tp-btn-2 px-5 py-1">Add to
+                                                                name="selling_price" class="selling_price">
+                                                            <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
+                                                                to
                                                                 cart</button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                                 <ul class="product__details-check">
@@ -358,7 +369,6 @@
                                         </div> --}}
                                         <div class="tpreview__form">
                                             <h4 class="tpreview__form-title mb-25">Add a review </h4>
-                                            <form action="#">
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="tpreview__input mb-30">
@@ -389,7 +399,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -617,4 +626,91 @@
         </div>
     </section>
     <!-- feature-area-end -->
+
+    <script>
+
+        const details_cart_btn = document.querySelector('#details_cart');
+        details_cart_btn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            let product_id = document.querySelector('.product_id').value;
+            let variant_id = document.querySelector('.variant_id').value;
+            let selling_price = document.querySelector('.selling_price').value;
+            let Quantity = document.querySelector('.pr_quantity').value;
+            $.ajax({
+                url: '/product/add_to_cart',
+                type: 'POST',
+                data: {
+                    'product_id': product_id,
+                    'variant_id': variant_id,
+                    'selling_price': selling_price,
+                    'pr_quantity': Quantity,
+                },
+                success: function(success_response) {
+                    console.log(success_response);
+                    // if (success_response.status == 200) {
+                    //     toastr.success(success_response.message);
+                    //     document.querySelector('#pr_quantity').value = (success_response.cartData.qty);
+                    // } else {
+                    //     toastr.warning(success_response.error.email);
+                    // }
+                    // console.log(success_response);
+
+                }
+            });
+        });
+
+
+
+
+
+
+        // const addForm = document.querySelectorAll('#details_cart');
+        // addForm.forEach(element => {
+        //     element.addEventListener('submit', function(e) {
+        //         e.preventDefault();
+
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+
+
+        //         let product_id = this.elements.product_id.value
+        //         let variant_id = this.elements.variant_id.value
+        //         let selling_price = this.elements.selling_price.value
+        //         let quantity = this.elements.pr_quantity.value
+
+
+        //         // console.log(product_id, variant_id,selling_price);
+
+        //         $.ajax({
+        //             url: '/product/add_to_cart',
+        //             type: 'POST',
+        //             data: {
+        //                 'product_id': product_id,
+        //                 'variant_id': variant_id,
+        //                 'selling_price': selling_price,
+        //                 'pr_quantity': pr_quantity,
+        //             },
+        //             success: function(response) {
+        //                 if (response.status == 200) {
+        //                     toastr.success(response.message);
+        //                     showCart();
+        //                 } else {
+
+        //                 }
+        //             }
+        //         });
+
+        //     });
+        // })
+    </script>
 @endsection
