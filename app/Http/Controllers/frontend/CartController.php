@@ -72,7 +72,7 @@ class CartController extends Controller
 
     public function cartPageUpdateItem(Request $request, $id)
     {
-        dd($request);
+        // dd($request->all());
         $rowId = $id;
         $quantity = $request->quantity;
         Cart::update($rowId, $quantity);
@@ -85,7 +85,7 @@ class CartController extends Controller
         // dd(Auth::user());
         // $billingInfo = BillingInfo::where('user_id', Auth::user()->id)->first();
         // if (!$billingInfo) {
-        //  return view('frontend.e-com.checkout', compact('billingInfo'));  
+        //  return view('frontend.e-com.checkout', compact('billingInfo'));
         // }
         return view('frontend.e-com.checkout');
     }

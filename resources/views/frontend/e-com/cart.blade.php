@@ -23,7 +23,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="#">
                         <div class="table-content table-responsive">
                             <table class="table">
                                 <thead>
@@ -69,11 +68,7 @@
                                                         <span class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
                                                     </td>
                                                     <td class="product-remove">
-
-                                                        <button
-                                                            class="me-2 edit_cart">
-                                                            <i class="fa fa-pen"></i>
-                                                        </button>
+                                                        <button type="submit">Edit</button>
                                                         <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
                                                             value="{{ $product->rowId }}" class="">
                                                             <i class="fa fa-times"></i>
@@ -96,14 +91,13 @@
                                                 &#2547 {{ Cart::subtotal() }}
                                             </span>
                                         </li>
-                                        
+
                                     </ul>
                                     <a href="{{route('checkout')}}" class="tp-btn tp-color-btn banner-animation">Proceed to
                                         Checkout</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -147,7 +141,7 @@
 
 
         // cart quantity update
-       
+
 
 
 
