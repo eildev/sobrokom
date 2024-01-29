@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('product_image');
             $table->string('sku');
             $table->text('tags');
+            $table->float('shipping');
             $table->tinyInteger('status')->default(1);
 
 
