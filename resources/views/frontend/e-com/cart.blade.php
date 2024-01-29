@@ -140,6 +140,18 @@
         });
 
 
+        $(document).ready(function() {
+            // console.log($('.cart-input'));
+            $('.cart-input').on('keyup', function(){
+                $quantity = parseInt($(this).val());
+                // console.log($quantity);
+                if ($quantity < 1 || isNaN($quantity)) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
+            });
+        });
+
+
         // cart quantity update
 
 
