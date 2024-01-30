@@ -10,7 +10,7 @@ use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\frontend\BillingInfoController;
 use App\Http\Controllers\frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\CartController;
-
+use App\Http\Controllers\Frontend\OTPController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,4 +92,11 @@ Route::middleware('auth', 'role:user')->group(function () {
     Route::controller(BillingInfoController::class)->group(function () {
         Route::post('/billing/insert', 'insert')->name('billing.insert');
     });
+    // Billing related route
+});
+
+// WithOut Auth All Routes
+Route::controller(OTPController::class)->group(function () {
+    Route::post('/otp/store', 'storeOTP');
+    Route::post('/otp/check', 'checkOTP');
 });

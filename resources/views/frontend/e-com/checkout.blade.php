@@ -71,7 +71,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Phone" value="" class="phone"
+                                        <input type="text" placeholder="Phone" value="" class="phone user_phone"
                                             name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
@@ -374,7 +374,7 @@
                                     </div> --}}
                                 </div>
                                 <div class="order-button-payment mt-20">
-                                    <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation">Place
+                                    <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation place_order">Place
                                         order</button>
                                 </div>
                             </div>
@@ -386,7 +386,27 @@
     </section>
     <!-- checkout-area end -->
 
-
+<!-- OPT Checker Modal -->
+<div class="modal fade" id="otpCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 99999999999999">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">OPT Check</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Enter OTP</label>
+              <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary otp_send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     @if ($billingInfo)
         <script>
@@ -408,7 +428,7 @@
                     $('.country').val('{{ $billingInfo->country }}');
                     $('.order_notes').text('{{ $billingInfo->order_notes }}');
                 } else {
-                    // If not checked, 
+                    // If not checked,
                     $('.first_name').val('');
                     $('.last_name').val('');
                     $('.email').val('');
@@ -463,6 +483,57 @@
                 }
             })
         });
+
+        const place_order  = document.querySelector('.place_order');
+        place_order.addEventListener('click', function(e) {
+            e.preventDefault();
+            let user_phone =document.querySelector('.user_phone').value;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'/otp/store',
+                type:'post',
+                data:{
+                    'phone':user_phone
+                },
+                success:function(res){
+                    // console.log(res);
+                    if(res.status == 200){
+                        $('#otpCheck').modal('show');
+                    }
+                }
+            })
+        });
+
+        document.querySelector('.otp_send').addEventListener('click',function(e){
+            e.preventDefault();
+            let user_phone =document.querySelector('.user_phone').value;
+            let otp_code =document.querySelector('.otp_code').value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url:'/otp/check',
+                type:'post',
+                data:{
+                    'phone':user_phone,
+                    'otp':otp_code
+                },
+                success:function(res){
+                    console.log(res);
+                    if(res.status == 200){
+                        $('#otpCheck').modal('hide');
+                    }
+                }
+            })
+        });
+
     </script>
 
 
