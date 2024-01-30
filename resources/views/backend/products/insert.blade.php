@@ -502,14 +502,31 @@
         // Input field Validation 
         function inputFieldValidation(inputFieldName) {
             var inputField = document.querySelector(inputFieldName);
+            // console.log(inputField);
             inputField.addEventListener('keyup', function() {
-                let quantity = parseInt(this.value);
-                if (quantity < 1 || isNaN(quantity)) {
+                let inputValue = parseInt(this.value);
+                // console.log(quantity);
+                if (inputValue < 1 || isNaN(inputValue)) {
                     toastr.warning('Please provide a valid number greater than or equal to 1.');
                 }
             })
         }
-        inputFieldValidation('shipping');
+
+        function inputFieldValidation2(inputFieldName) {
+            var inputField = document.querySelector(inputFieldName);
+            // console.log(inputField);
+            inputField.addEventListener('change', function() {
+                let inputValue = parseInt(this.value);
+                // console.log(quantity);
+                if (inputValue < 1) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
+            })
+        }
+
+
+        inputFieldValidation('.shipping');
+        inputFieldValidation2('.shipping');
 
 
 

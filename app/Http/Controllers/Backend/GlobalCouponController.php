@@ -32,4 +32,20 @@ class GlobalCouponController extends Controller
         $coupon->save();
         return back()->with('success', 'Global Coupons Successfully Saved');
    }
+
+   public function applyCoupon($coupon){
+        $couponDiscount = GlobalCoupon::where('coupon_code', $coupon)->first();
+
+        if($couponDiscount){
+            return response()->json([
+                'status' => '200',
+                'couponData' => $couponDiscount
+            ]);
+        } else{
+            return response()->json([
+                'status' => '500',
+                'message' => "coupon dose not match"
+            ]);
+        }
+   }
 }

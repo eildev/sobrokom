@@ -140,5 +140,11 @@ Route::middleware('auth','role:admin')->group(function () {
 
 });
 
+ //All Routes for Global Coupons Start
+ Route::controller(GlobalCouponController::class)->group(function () {
+    Route::get('/apply-coupon/{code}', 'applyCoupon')->name('apply.coupon');
+});
+//All Routes for Global Coupons End
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';

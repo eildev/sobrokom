@@ -31,10 +31,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <div class="checkbox-form">
-                            <div class="d-flex">
-                                <h3 class="border-0 d-inline-flex">Billing Details</h3>
+                            <div class=""
+                                styyle="display: grid;
+                            grid-template-columns: 1fr 1fr;">
+                                <h3 class="border-0 d-inline">Billing Details</h3>
                                 @if ($billingInfo)
-                                    <div class="d-flex">
+                                    <div class="pt-2">
                                         <input type="checkbox" name="" id="isUsingAddress">
                                         <label for="">Using your Default Address</label>
                                     </div>
@@ -54,54 +56,54 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Last Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="last_name"
-                                            value="" name="last_name">
+                                        <input type="text" placeholder="Last Name" class="last_name" value=""
+                                            name="last_name">
                                         <span class="last_name_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Email Address</label>
-                                        <input type="email" placeholder="Email" value=""
-                                            class="email" name="email">
+                                        <input type="email" placeholder="Email" value="" class="email"
+                                            name="email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Phone" value=""
-                                            class="phone" name="phone">
+                                        <input type="text" placeholder="Phone" value="" class="phone"
+                                            name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address 1<span class="required">*</span></label>
-                                        <input type="text" placeholder="Address 1"
-                                            value="" class="address_1" name="address_1">
+                                        <input type="text" placeholder="Address 1" value="" class="address_1"
+                                            name="address_1">
                                         <span class="address_1_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address 2</label>
-                                        <input type="text" placeholder="Address 2"
-                                            value="" class="address_2" name="address_2">
+                                        <input type="text" placeholder="Address 2" value="" class="address_2"
+                                            name="address_2">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>City/Town<span class="required">*</span></label>
-                                        <input type="text" placeholder="City/Town" value=""
-                                            class="city" name="city">
+                                        <input type="text" placeholder="City/Town" value="" class="city"
+                                            name="city">
                                         <span class="city_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Division <span class="required">*</span></label>
-                                        <input type="text" placeholder="Division"
-                                            value="" class="division" name="division">
+                                        <input type="text" placeholder="Division" value="" class="division"
+                                            name="division">
                                         <span class="division_error text-danger"></span>
                                     </div>
                                 </div>
@@ -109,8 +111,8 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip"
-                                            value="" class="post_code" name="post_code">
+                                        <input type="text" placeholder="Postcode / Zip" value="" class="post_code"
+                                            name="post_code">
                                         <span class="post_code_error text-danger"></span>
                                     </div>
                                 </div>
@@ -256,7 +258,7 @@
                     @php
                         $cartProducts = Cart::content();
                     @endphp
-                    <div class="col-lg-6 col-md-12">
+                    <div style="margin-top: 70px" class="col-lg-6 col-md-12">
                         <div class="your-order mb-30 ">
                             <h3>Your order</h3>
                             <div class="your-order-table table-responsive">
@@ -281,8 +283,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-                                    </tbody>
-                                    <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
                                             <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
@@ -305,15 +305,23 @@
                                                 </ul>
                                             </td>
                                         </tr>
-                                        <tr class="order-total">
+                                        <tr class="cart-subtotal">
                                             <th>Order Total</th>
                                             <td><strong><span class="amount">৳{{ Cart::total() }}</span></strong>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                    <tfoot class="coupon_section">
+
                                     </tfoot>
                                 </table>
                             </div>
                             <div class="payment-method">
+                                <div class="d-flex align-items-center">
+                                    <input type="text" class="form-control me-2 coupon_code"
+                                        placeholder="Have you any Coupon Code">
+                                    <button class="tp-btn tp-color-btn rounded-3 py-2 apply_coupon">Apply</button>
+                                </div>
                                 <div class="accordion" id="checkoutAccordion">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="checkoutOne">
@@ -416,6 +424,46 @@
             });
         </script>
     @endif
+
+
+    <script>
+        const applyCoupon = document.querySelector('.apply_coupon');
+        applyCoupon.addEventListener('click', function(e) {
+            e.preventDefault();
+            const coupon_code = document.querySelector('.coupon_code').value;
+            // alert(coupon_code);
+
+            $.ajax({
+                url: "/apply-coupon/" + coupon_code,
+                type: "GET",
+                success: function(res) {
+                    if (res.status == 500) {
+                        toastr.warning(res.message);
+                    } else if (res.status == 200) {
+                        let couponDiscount = parseInt(res.couponData.discount);
+                        // console.log(couponDiscount);
+                        let cartSubtotal = parseFloat("{{ Cart::subtotal() }}");
+                        let grandTotal = ((cartSubtotal * couponDiscount) / 100)
+                        // console.log(cartSubtotal);
+
+                        grandTotal = cartSubtotal - grandTotal;
+                        const data = `
+                        <tr class="cart-subtotal">
+                                            <th>Coupon Discount</th>
+                                            <td><span class="amount">${res.couponData.discount}%</span></td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Grand Total</th>
+                                            <td><strong><span class="amount">৳${grandTotal}</span></strong>
+                                            </td>
+                                        </tr>
+                        `;
+                        $('.coupon_section').html(data);
+                    }
+                }
+            })
+        });
+    </script>
 
 
 
