@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="tpproduct__all-item">
-                            <a href="{{ route('feature.wise.product') }}">View All <i class="icon-chevron-right"></i></a>
+                            <a href="#">View All <i class="icon-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
