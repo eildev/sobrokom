@@ -132,7 +132,8 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control" name="long_desc" placeholder="Enter Long Description" style="resize: none; height: 100px;"></textarea>
+                                                        <textarea class="form-control" name="long_desc" placeholder="Enter Long Description"
+                                                            style="resize: none; height: 100px;"></textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>
@@ -174,6 +175,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Shipping Charge</label>
+                                                    <input type="number" class="form-control shipping" placeholder=""
+                                                        name="shipping">
+                                                    <span class="shipping_error text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
                                                 <input type="file" id="imageGallery" class="form-control "
                                                     name="imageGallery[]" multiple>
@@ -198,7 +207,7 @@
                         </form>
 
 
-                        <div class="row variant_section"  style="display: none">
+                        <div class="row variant_section" style="display: none">
                             <div class="card-title d-flex">
                                 <h5 class="mb-0 text-info">Add Variants</h5>
                             </div>
@@ -369,6 +378,7 @@
                         $('.long_desc').text(res.error.long_desc);
                         $('.product_image').text(res.error.product_image);
                         $('.sku_error').text(res.error.sku);
+                        $('.shipping_error').text(res.error.shipping);
                         // $('.tag_error').text(res.error.tags);
                         toastr.warning(res.error);
                     }
@@ -472,23 +482,53 @@
 
         regular_price.addEventListener('keyup', function() {
             let regularPrice = this.value;
-            // console.log(regularPrice);
-            if (regularPrice !== "" && regularPrice > 0) {
-                discount.removeAttribute('disabled');
-            } else {
-                discount.setAttribute('disabled', '');
-            }
+            update(regularPrice, discount);
         })
 
         regular_price.addEventListener('change', function() {
             let regularPrice = this.value;
-            // console.log(regularPrice);
+            update(regularPrice, discount);
+        });
+
+        function update(regularPrice, discount) {
             if (regularPrice !== "" && regularPrice > 0) {
                 discount.removeAttribute('disabled');
             } else {
                 discount.setAttribute('disabled', '');
             }
-        });
+        }
+
+
+        // Input field Validation 
+        function inputFieldValidation(inputFieldName) {
+            var inputField = document.querySelector(inputFieldName);
+            // console.log(inputField);
+            inputField.addEventListener('keyup', function() {
+                let inputValue = parseInt(this.value);
+                // console.log(quantity);
+                if (inputValue < 1 || isNaN(inputValue)) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
+            })
+        }
+
+        function inputFieldValidation2(inputFieldName) {
+            var inputField = document.querySelector(inputFieldName);
+            // console.log(inputField);
+            inputField.addEventListener('change', function() {
+                let inputValue = parseInt(this.value);
+                // console.log(quantity);
+                if (inputValue < 1) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
+            })
+        }
+
+
+        inputFieldValidation('.shipping');
+        inputFieldValidation2('.shipping');
+
+
 
 
 

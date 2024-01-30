@@ -23,81 +23,81 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                        <div class="table-content table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="product-thumbnail">Images</th>
-                                        <th class="cart-product-name">Courses</th>
-                                        <th class="product-price">Unit Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- @dd($products); --}}
-                                    @if ($products->count() > 0)
-                                        @foreach ($products as $product)
-                                            <form action="{{ route('product.cartpage.update',  $product->rowId) }}"
-                                                method="POST">
-                                                @csrf
-                                                <tr class="cart_row">
-                                                    <td class="product-thumbnail">
-                                                        <a href="#">
-                                                            <img src="{{ asset('uploads/products/' . $product->options->image) }}"
-                                                                alt="Product Image">
-                                                        </a>
-                                                    </td>
-                                                    <td class="product-name">
-                                                        <a href="#">{{ $product->name }}</a>
-                                                    </td>
-                                                    <td class="product-price">
-                                                        <span class="amount unit_price" data-value="{{ $product->price }}">
-                                                            ৳{{ $product->price }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="product-quantity">
-                                                        <span class="cart-minus">-</span>
-                                                        <input class="cart-input product_input" type="text"
-                                                            value="{{ $product->qty }}" name="quantity">
-                                                        <span class="cart-plus cart_plus"
-                                                            value="{{ $product->rowId }}">+</span>
-                                                    </td>
-                                                    <td class="product-subtotal">
-                                                        <span class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
-                                                    </td>
-                                                    <td class="product-remove">
-                                                        <button type="submit">Edit</button>
-                                                        <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
-                                                            value="{{ $product->rowId }}" class="">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </form>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-md-5 ">
-                                <div class="cart-page-total">
-                                    <h2>Cart totals</h2>
-                                    <ul class="mb-20">
-                                        <li>Subtotal
-                                            <span>
-                                                &#2547 {{ Cart::subtotal() }}
-                                            </span>
-                                        </li>
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Images</th>
+                                    <th class="cart-product-name">Courses</th>
+                                    <th class="product-price">Unit Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- @dd($products); --}}
+                                @if ($products->count() > 0)
+                                    @foreach ($products as $product)
+                                        <form action="{{ route('product.cartpage.update', $product->rowId) }}"
+                                            method="POST">
+                                            @csrf
+                                            <tr class="cart_row">
+                                                <td class="product-thumbnail">
+                                                    <a href="#">
+                                                        <img src="{{ asset('uploads/products/' . $product->options->image) }}"
+                                                            alt="Product Image">
+                                                    </a>
+                                                </td>
+                                                <td class="product-name">
+                                                    <a href="#">{{ $product->name }}</a>
+                                                </td>
+                                                <td class="product-price">
+                                                    <span class="amount unit_price" data-value="{{ $product->price }}">
+                                                        ৳{{ $product->price }}
+                                                    </span>
+                                                </td>
+                                                <td class="product-quantity">
+                                                    <span class="cart-minus">-</span>
+                                                    <input class="cart-input product_input" type="text"
+                                                        value="{{ $product->qty }}" name="quantity">
+                                                    <span class="cart-plus cart_plus" value="{{ $product->rowId }}">+</span>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <span
+                                                        class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
+                                                </td>
+                                                <td class="product-remove">
+                                                    <button type="submit" class="me-2">Edit</button>
+                                                    <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
+                                                        value="{{ $product->rowId }}" class="">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </form>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-5 ">
+                            <div class="cart-page-total">
+                                <h2>Cart totals</h2>
+                                <ul class="mb-20">
+                                    <li>Subtotal
+                                        <span>
+                                            &#2547 {{ Cart::subtotal() }}
+                                        </span>
+                                    </li>
 
-                                    </ul>
-                                    <a href="{{route('checkout')}}" class="tp-btn tp-color-btn banner-animation">Proceed to
-                                        Checkout</a>
-                                </div>
+                                </ul>
+                                <a href="{{ route('checkout') }}" class="tp-btn tp-color-btn banner-animation">Proceed to
+                                    Checkout</a>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,6 +136,18 @@
                 let subTotalPrice = unit_price_element * productQty;
                 // console.log(subTotalPrice);
                 $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
+            });
+        });
+
+
+        $(document).ready(function() {
+            // console.log($('.cart-input'));
+            $('.cart-input').on('keyup', function() {
+                $quantity = parseInt($(this).val());
+                // console.log($quantity);
+                if ($quantity < 1 || isNaN($quantity)) {
+                    toastr.warning('Please provide a valid number greater than or equal to 1.');
+                }
             });
         });
 

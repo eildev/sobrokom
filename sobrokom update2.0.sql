@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 06:10 AM
+-- Generation Time: Jan 29, 2024 at 04:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -146,6 +146,30 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `global_coupons`
+--
+
+CREATE TABLE `global_coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `coupon_code` varchar(255) NOT NULL,
+  `discount` varchar(255) NOT NULL,
+  `startDate` varchar(255) NOT NULL,
+  `expiration` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `global_coupons`
+--
+
+INSERT INTO `global_coupons` (`id`, `coupon_code`, `discount`, `startDate`, `expiration`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'khkhk', '05', '2024-01-01', '2024-01-31', 1, '2024-01-27 22:12:13', '2024-01-27 22:12:13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `home_banners`
 --
 
@@ -225,7 +249,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2024_01_11_085029_create_offer_banners_table', 5),
 (17, '2024_01_14_070739_create_subscribes_table', 6),
 (19, '2024_01_17_065344_create_wish_lists_table', 7),
-(21, '2024_01_17_180208_create_billing_infos_table', 9);
+(21, '2024_01_17_180208_create_billing_infos_table', 9),
+(23, '2024_01_28_040127_create_global_coupons_table', 10);
 
 -- --------------------------------------------------------
 
@@ -364,7 +389,8 @@ INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `prod
 (78, 12, 15, 18, 'feature,new-arrival', 'Chicken Meat', 'chicken-meat', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1497507513.jpg', 'CHICKEN', 'chicken', 1, '2024-01-21 23:05:48', '2024-01-21 23:05:48'),
 (79, 12, 16, 18, 'feature,new-arrival', 'Ginger', 'ginger', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '48256348.jpg', 'GINGER', 'ginger', 1, '2024-01-21 23:07:10', '2024-01-21 23:07:10'),
 (80, 12, 16, 18, 'feature,new-arrival', 'Onion', 'onion', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1470355509.jpg', 'ONION', 'onion', 1, '2024-01-21 23:08:30', '2024-01-21 23:08:30'),
-(81, 12, 16, 18, 'feature,new-arrival', 'Potato', 'potato', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '636362809.jpg', 'POTATO', 'potato', 1, '2024-01-21 23:09:42', '2024-01-21 23:09:42');
+(81, 12, 16, 18, 'feature,new-arrival', 'Potato', 'potato', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '636362809.jpg', 'POTATO', 'potato', 1, '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
+(83, 13, 19, 16, 'feature,new-arrival,weekend-deals', 'T-Shirt for Smart Man', 't-shirt-for-smart-man', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic', '1742277523.png', 'T-SHIRT-005', 't-shirt', 1, '2024-01-24 11:46:09', '2024-01-24 11:46:09');
 
 -- --------------------------------------------------------
 
@@ -417,7 +443,11 @@ INSERT INTO `product_galleries` (`id`, `product_id`, `image`, `created_at`, `upd
 (120, 79, '923043248.jpg', '2024-01-21 23:07:10', '2024-01-21 23:07:10'),
 (121, 80, '332651783.jpg', '2024-01-21 23:08:30', '2024-01-21 23:08:30'),
 (122, 81, '498882434.jpg', '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
-(123, 81, '334820377.jpg', '2024-01-21 23:09:42', '2024-01-21 23:09:42');
+(123, 81, '334820377.jpg', '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
+(124, 83, '396682478.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
+(125, 83, '1995834960.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
+(126, 83, '1079137942.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
+(127, 83, '1550289961.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09');
 
 -- --------------------------------------------------------
 
@@ -573,7 +603,10 @@ INSERT INTO `variants` (`id`, `product_id`, `color`, `size`, `regular_price`, `d
 (126, 78, NULL, NULL, 200.00, '0', 200, 20, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:06:04', '2024-01-21 23:06:04'),
 (127, 79, NULL, NULL, 200.00, '0', 200, 200, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:07:24', '2024-01-21 23:07:24'),
 (128, 80, NULL, NULL, 100.00, '0', 100, 100, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:08:44', '2024-01-21 23:08:44'),
-(129, 81, NULL, NULL, 70.00, '0', 70, 100, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:09:56', '2024-01-21 23:09:56');
+(129, 81, NULL, NULL, 70.00, '0', 70, 100, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:09:56', '2024-01-21 23:09:56'),
+(130, 83, 'red', 'M', 200.00, '0', 200, 50, '5000', 'piece', 1, NULL, NULL, '2024-01-24 11:46:46', '2024-01-24 11:46:46'),
+(131, 83, 'blue', 'L', 250.00, '0', 250, 67, '68897', 'piece', 1, NULL, NULL, '2024-01-24 11:47:15', '2024-01-24 11:47:15'),
+(132, 83, 'green', 'XL', 300.00, '10', 270, 67, '786969', 'piece', 1, NULL, NULL, '2024-01-24 11:47:39', '2024-01-24 11:47:39');
 
 -- --------------------------------------------------------
 
@@ -589,6 +622,16 @@ CREATE TABLE `wish_lists` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wish_lists`
+--
+
+INSERT INTO `wish_lists` (`id`, `user_id`, `product_id`, `loved`, `created_at`, `updated_at`) VALUES
+(9, 2, 80, 1, '2024-01-22 05:38:45', '2024-01-22 05:38:45'),
+(10, 2, 78, 1, '2024-01-22 22:39:14', '2024-01-22 22:39:14'),
+(11, 2, 77, 1, '2024-01-23 00:03:50', '2024-01-23 00:03:50'),
+(12, 2, 64, 1, '2024-01-23 00:03:53', '2024-01-23 00:03:53');
 
 --
 -- Indexes for dumped tables
@@ -627,6 +670,12 @@ ALTER TABLE `coupons`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `global_coupons`
+--
+ALTER TABLE `global_coupons`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `home_banners`
@@ -766,6 +815,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `global_coupons`
+--
+ALTER TABLE `global_coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `home_banners`
 --
 ALTER TABLE `home_banners`
@@ -781,7 +836,7 @@ ALTER TABLE `image_galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `offer_banners`
@@ -805,13 +860,13 @@ ALTER TABLE `popup_messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -841,13 +896,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `variants`
 --
 ALTER TABLE `variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT for table `wish_lists`
 --
 ALTER TABLE `wish_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
