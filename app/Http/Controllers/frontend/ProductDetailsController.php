@@ -31,4 +31,11 @@ class ProductDetailsController extends Controller
         $brand = Brand::where('slug', $brandslug)->first();
         return view('frontend/e-com/brand-wise-product', compact('brand'));
     }
+    public function featureWiseProduct(){
+        $features = Product::where('status', 1)
+        ->where('product_feature', 'like', '%' . 'weekend-deals' . '%')
+        ->orderBy('id', 'ASC')
+        ->get();
+        return view('frontend/e-com/feature-wise-product', compact('features'));
+    }
 }

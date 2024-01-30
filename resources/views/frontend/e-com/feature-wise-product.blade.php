@@ -1,15 +1,22 @@
 @extends('frontend.master')
 @section('maincontent')
     <!-- breadcrumb-area-start -->
+    @php
+        $products = App\Models\Product::where('status', 1)
+            ->where('product_feature', 'like', '%' . 'weekend-deals' . '%')
+            ->take(10)
+            ->orderBy('id', 'ASC')
+            ->get();
+    @endphp
     <div class="breadcrumb__area grey-bg pt-5 pb-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
-                            <span>{{ $category->categoryName }}</span>
+                            <span>Weekend Deals</span>
                         </div>
                     </div>
                 </div>
@@ -28,10 +35,10 @@
                             <div class="swiper-container inner-category-two">
                                 <div class="swiper-wrapper">
                                     @php
-                                        $categories = App\Models\Category::all();
-                                        $allProducts = App\Models\Product::where('category_id', $category->id)->paginate(10);
+                                        // $categories = App\Models\Category::all();
+                                        // $allProducts = App\Models\Product::where('category_id', $category->id)->paginate(10);
                                     @endphp
-                                    @foreach ($categories as $category)
+                                    {{-- @foreach ($categories as $category)
                                         <div class="swiper-slide">
                                             <div class="category__item mb-30">
                                                 <div class="category__thumb fix mb-15">
@@ -46,7 +53,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
                         </div>
@@ -216,7 +223,7 @@
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                            {{-- <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
 
                                 <div
                                     class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
@@ -507,12 +514,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
                             <ul class="pagination">
                                 {{-- Previous Page Link --}}
-                                @if ($allProducts->onFirstPage())
+                                {{-- @if ($allProducts->onFirstPage())
                                     <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                                         <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
                                     </li>
@@ -521,10 +528,10 @@
                                         <a class="page-link pt-0" href="{{ $allProducts->previousPageUrl() }}"
                                             rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
                                     </li>
-                                @endif
+                                @endif --}}
 
                                 {{-- Pagination Elements --}}
-                                @foreach ($allProducts->getUrlRange(1, $allProducts->lastPage()) as $page => $url)
+                                {{-- @foreach ($allProducts->getUrlRange(1, $allProducts->lastPage()) as $page => $url)
                                     @if ($page == $allProducts->currentPage())
                                         <li class="page-item active" aria-current="page"><span
                                                 class="page-link pt-0">{{ $page }}</span></li>
@@ -532,10 +539,10 @@
                                         <li class="page-item"><a class="page-link pt-0"
                                                 href="{{ $url }}">{{ $page }}</a></li>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
 
                                 {{-- Next Page Link --}}
-                                @if ($allProducts->hasMorePages())
+                                {{-- @if ($allProducts->hasMorePages())
                                     <li class="page-item">
                                         <a class="page-link pt-0" href="{{ $allProducts->nextPageUrl() }}"
                                             rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
@@ -544,7 +551,7 @@
                                     <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
                                         <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
                                     </li>
-                                @endif
+                                @endif --}}
                             </ul>
                         </div>
                     </div>

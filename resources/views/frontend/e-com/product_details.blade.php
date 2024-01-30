@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                      </button> -->
+                                                                                                              </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -98,7 +98,10 @@
 
                                             <div class="product__details-price-box">
                                                 <h5 class="product__details-price">
-                                                    ৳{{ $product->varient[0]->discount_amount }}<span>/{{ ($product->varient[0]->unit) }}</span></h5>
+                                                    ৳{{ $product->varient[0]->discount_amount }} <span
+                                                        class="text-secondary"
+                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                </h5>
 
                                                 <ul class="product__details-info-list">
                                                     <li>{{ $product->short_desc }}</li>
@@ -457,7 +460,7 @@
                                                 @if ($product->varient[0]->discount > 0)
                                                     <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                 @endif
-                                                <span>/{{ ($product->varient[0]->unit) }}</span>
+                                                <span>/{{ $product->varient[0]->unit }}</span>
                                             </div>
                                         </div>
                                     </div>
