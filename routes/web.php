@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\OfferBannerController;
+use App\Http\Controllers\Backend\OrderManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,12 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/global-coupon/store', 'store')->name('global.store');
     });
     //All Routes for Global Coupons End
+
+    //All Routes for Order  Start
+    Route::controller(OrderManageController::class)->group(function () {
+        Route::get('/new-order', 'index')->name('new.order');
+    });
+    //All Routes for Order End
 
 });
 

@@ -38,6 +38,9 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
+Route::get('/order-tracking', function () {
+    return view('frontend/e-com/tracking-product');
+})->name('order.tracking');
 
 // product related routes
 Route::controller(ProductDetailsController::class)->group(function () {
