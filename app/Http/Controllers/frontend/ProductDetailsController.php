@@ -44,7 +44,7 @@ class ProductDetailsController extends Controller
         ->orWhere('product_feature', 'like', '%top-seller%')
         ->orWhere('product_feature', 'like', '%top-offers%')
         ->orderBy('id', 'ASC')
-        ->paginate(10);
+        ->paginate(12);
         return view('frontend/e-com/all-feature-product', compact('features'));
     }
 }
