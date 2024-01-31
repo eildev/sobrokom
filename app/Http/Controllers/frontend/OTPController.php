@@ -129,10 +129,6 @@ class OTPController extends Controller
                     $order_billing_details->order_notes = $request->order_notes;
                     $order_billing_details->save();
                 }
-                return response()->json([
-                    'status' => '500',
-                    'error' => $validator->messages()
-                ]);
 
             // Product oRDER Details
                 $products = Cart::content();
@@ -145,10 +141,10 @@ class OTPController extends Controller
                     $OrderDetails->save();
                 }
 
-            return response()->json([
-            'status' => 200,
-            'message' => 'Congratulation Your OTP Correct',
-            ]);
+                return response()->json([
+                'status' => 200,
+                'message' => 'Congratulation Your OTP Correct',
+                ]);
         // }
 
     }
