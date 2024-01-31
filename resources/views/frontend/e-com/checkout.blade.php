@@ -618,7 +618,7 @@
                     if (res.status == 200) {
                         $('#otpCheck').modal('hide');
                         toastr.success(res.message);
-                        // window.location.href = "/order-tracking";
+                        window.location.href = "/";
                     }
                     else{
                         toastr.success(res.message);
