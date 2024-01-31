@@ -143,6 +143,8 @@ Route::middleware('auth','role:admin')->group(function () {
     //All Routes for Order  Start
     Route::controller(OrderManageController::class)->group(function () {
         Route::get('/new-order', 'index')->name('new.order');
+        Route::get('/admin-approve-order/{invoiceNumber}', 'adminApprove')->name('admin.approve.order');
+
     });
     //All Routes for Order End
 
