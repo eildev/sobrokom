@@ -23,7 +23,7 @@ class ProductDetailsController extends Controller
         $products = Product::where('product_name', 'like', '%'.$request->search.'%')
         ->orWhere('short_desc', 'like', '%'.$request->search.'%')
         ->orWhere('tags', 'like', '%'.$request->search.'%')
-        ->paginate(10);
+        ->paginate(12);
         return view('frontend/e-com/product-search', compact('products','searchTag'));
     }
     public function subcategoryWiseProduct($subcategoryslug){

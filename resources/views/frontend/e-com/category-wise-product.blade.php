@@ -514,44 +514,49 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
-                            <ul class="pagination">
-                                {{-- Previous Page Link --}}
-                                @if ($allProducts->onFirstPage())
-                                    <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                                        <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
-                                    </li>
-                                @else
-                                    <li class="page-item">
-                                        <a class="page-link pt-0" href="{{ $allProducts->previousPageUrl() }}"
-                                            rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                                    </li>
-                                @endif
 
-                                {{-- Pagination Elements --}}
-                                @foreach ($allProducts->getUrlRange(1, $allProducts->lastPage()) as $page => $url)
-                                    @if ($page == $allProducts->currentPage())
-                                        <li class="page-item active" aria-current="page"><span
-                                                class="page-link pt-0">{{ $page }}</span></li>
+                        @if ($allProducts->count() > 9)
+                            <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
+                                <ul class="pagination">
+                                    {{-- Previous Page Link --}}
+                                    @if ($allProducts->onFirstPage())
+                                        <li class="page-item disabled" aria-disabled="true"
+                                            aria-label="@lang('pagination.previous')">
+                                            <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
+                                        </li>
                                     @else
-                                        <li class="page-item"><a class="page-link pt-0"
-                                                href="{{ $url }}">{{ $page }}</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link pt-0" href="{{ $allProducts->previousPageUrl() }}"
+                                                rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                        </li>
                                     @endif
-                                @endforeach
 
-                                {{-- Next Page Link --}}
-                                @if ($allProducts->hasMorePages())
-                                    <li class="page-item">
-                                        <a class="page-link pt-0" href="{{ $allProducts->nextPageUrl() }}"
-                                            rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
-                                    </li>
-                                @else
-                                    <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                                        <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
+                                    {{-- Pagination Elements --}}
+                                    @foreach ($allProducts->getUrlRange(1, $allProducts->lastPage()) as $page => $url)
+                                        @if ($page == $allProducts->currentPage())
+                                            <li class="page-item active" aria-current="page"><span
+                                                    class="page-link pt-0">{{ $page }}</span></li>
+                                        @else
+                                            <li class="page-item"><a class="page-link pt-0"
+                                                    href="{{ $url }}">{{ $page }}</a></li>
+                                        @endif
+                                    @endforeach
+
+                                    {{-- Next Page Link --}}
+                                    @if ($allProducts->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link pt-0" href="{{ $allProducts->nextPageUrl() }}"
+                                                rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled" aria-disabled="true"
+                                            aria-label="@lang('pagination.next')">
+                                            <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

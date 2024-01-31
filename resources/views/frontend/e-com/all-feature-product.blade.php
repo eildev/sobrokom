@@ -130,16 +130,22 @@
                                 <div class="productsidebar__head">
                                 </div>
                                 <div class="productsidebar__range">
-                                    <div id="slider-range"></div>
-                                    <div class="price-filter mt-10"><input type="text" id="amount">
-                                    </div>
+
+                                    <label for="customRange2" class="form-label">Price range</label>
+                                    <input type="range" class="form-range" min="0" max="5"
+                                        id="customRange2">
+
+                                    {{-- <div id="slider-range"></div>
+                                    <div class="price-filter mt-10">
+                                        <input type="text" id="amount">
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="productsidebar__btn mt-15 mb-15">
                                 <a href="#">FILTER</a>
                             </div>
                         </div>
-                        <div class="tpshop__widget mb-30 pb-25">
+                        {{-- <div class="tpshop__widget mb-30 pb-25">
                             <h4 class="tpshop__widget-title mb-20">Filter by Color</h4>
                             <div class="tpshop__widget-color-box">
                                 <div class="form-check">
@@ -192,7 +198,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="tpshop__widget mb-30 pb-25">
                             <h4 class="tpshop__widget-title">FILTER BY BRAND</h4>
                             <div class="form-check">
@@ -231,66 +237,6 @@
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault23">
                                 <label class="form-check-label" for="flexCheckDefault23">
                                     Paul Gaultier (15)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="tpshop__widget">
-                            <h4 class="tpshop__widget-title">FILTER BY RATING</h4>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault24">
-                                <label class="form-check-label" for="flexCheckDefault24">
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    (45)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" checked
-                                    id="flexCheckDefault25">
-                                <label class="form-check-label" for="flexCheckDefault25">
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    (10)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" checked
-                                    id="flexCheckDefault26">
-                                <label class="form-check-label" for="flexCheckDefault26">
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    (05)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault27">
-                                <label class="form-check-label" for="flexCheckDefault27">
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    (02)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault28">
-                                <label class="form-check-label" for="flexCheckDefault28">
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    <i class="icon-star_rate"></i>
-                                    (02)
                                 </label>
                             </div>
                         </div>

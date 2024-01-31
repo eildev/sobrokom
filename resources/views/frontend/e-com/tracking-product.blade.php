@@ -40,7 +40,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    @if (count($orderTacking) > 0)
+                    @if ($orderTracking->count() > 0)
                         <div class="table-content table-responsive">
                             <table class="table">
                                 <thead>

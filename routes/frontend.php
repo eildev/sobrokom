@@ -104,10 +104,9 @@ Route::controller(OTPController::class)->group(function () {
 });
 
 //All Routes for Order Tracking  Start
-Route::get('/order-tracking', function () {
-    return view('frontend/e-com/tracking-product');
-})->name('order.tracking');
+
 Route::controller(OrderManageController::class)->group(function () {
-    Route::post('/order-tracking/invoice', 'orderTracking')->name('order.tracking.invoice');
+    Route::get('/order-tracking', 'orderTracking')->name('order.tracking');
+    Route::post('/order-tracking/invoice', 'orderTrackingInvoice')->name('order.tracking.invoice');
 });
 //All Routes for Order Tracking End

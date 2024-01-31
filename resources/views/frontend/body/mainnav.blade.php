@@ -140,12 +140,26 @@
                                     @endif
 
                                 </li>
-                                <li class="">
-                                    <a href="blog.html">Blog</a>
+
+                                <li class="has-dropdown">
+                                    <a href="#">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li class="">
+                                            <a href="#">Blog</a>
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="{{ route('aboutus') }}">About</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('contactus') }}">Contact Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('order.tracking') }}">Tracking</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li><a href="{{ route('aboutus') }}">About</a></li>
-                                <li><a href="{{ route('contactus') }}">Contact Us</a></li>
-                                <li><a href="{{ route('order.tracking') }}">Tracking</a></li>
+
+
                             </ul>
                         </nav>
                     </div>
