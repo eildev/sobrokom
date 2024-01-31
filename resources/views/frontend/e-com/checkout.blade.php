@@ -47,8 +47,8 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>First Name <span class="required">*</span></label>
-                                        <input type="text" required placeholder="First Name" class="first_name" value=""
-                                            name="first_name">
+                                        <input type="text" required placeholder="First Name" class="first_name"
+                                            value="" name="first_name">
                                         <span class="first_name_error text-danger"></span>
                                     </div>
                                 </div>
@@ -492,31 +492,58 @@
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-            let firstName = document.querySelector('.first_name').value;
-            if( firstName === ""){
+
+            const first_name = $('.first_name').val();
+            const phone = $('.phone').val();
+            const address_1 = $('.address_1').val();
+            const city = $('.city').val();
+            const division = $('.division').val();
+            const post_code = $('.post_code').val();
+            const country = $('.country').val();
+
+            if (first_name === "") {
                 document.querySelector('.first_name_error').textContent = 'First Name is Required';
+            }
+            if (phone === "") {
+                document.querySelector('.phone_error').textContent = 'Phone number is Required';
+            }
+            if (address_1 === "") {
+                document.querySelector('.address_1_error').textContent = 'Address is Required';
+            }
+            if (city === "") {
+                document.querySelector('.city_error').textContent = 'City is Required';
+            }
+            if (division === "") {
+                document.querySelector('.division_error').textContent = 'Division Name is Required';
+            }
+            if (post_code === "") {
+                document.querySelector('.post_code_error').textContent = 'post code is Required';
+            }
+            if (country === "") {
+                document.querySelector('.country_error').textContent = 'country is Required';
+            } else {
+                let user_phone = document.querySelector('.user_phone').value;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/otp/store',
+                    type: 'post',
+                    data: {
+                        'phone': user_phone
+                    },
+                    success: function(res) {
+                        // console.log(res);
+                        if (res.status == 200) {
+                            $('#otpCheck').modal('show');
+                        }
+                    }
+                })
             }
 
 
-            let user_phone = document.querySelector('.user_phone').value;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: '/otp/store',
-                type: 'post',
-                data: {
-                    'phone': user_phone
-                },
-                success: function(res) {
-                    // console.log(res);
-                    if (res.status == 200) {
-                        $('#otpCheck').modal('show');
-                    }
-                }
-            })
         });
 
         document.querySelector('.otp_send').addEventListener('click', function(e) {

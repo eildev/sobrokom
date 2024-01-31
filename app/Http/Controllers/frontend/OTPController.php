@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderBillingDetails;
 use App\Models\OrderDetails;
 use Illuminate\Support\Carbon;
+use Validator;
 use Cart;
 class OTPController extends Controller
 {
@@ -104,20 +105,31 @@ class OTPController extends Controller
                 $order->payment_method = 'Cash on Delivery';
                 $order->save();
             // store billing details
-                $order_billing_details = new OrderBillingDetails;
-                $order_billing_details->phone = $request->phone;
-                $order_billing_details->order_id = $order->id;
-                $order_billing_details->first_name = $request->first_name;
-                $order_billing_details->last_name = $request->last_name;
-                $order_billing_details->email = $request->email;
-                $order_billing_details->address_1 = $request->address_1;
-                $order_billing_details->address_2 = $request->address_2;
-                $order_billing_details->city = $request->city;
-                $order_billing_details->division = $request->division;
-                $order_billing_details->post_code = $request->post_code;
-                $order_billing_details->country = 'Bangladesh';
-                $order_billing_details->order_notes = $request->order_notes;
-                $order_billing_details->save();
+                $validator = Validator::make($request->all(), [
+                    'phone' => 'required|max:50',
+                    'first_name' => 'required|max:15',
+                    'address_1' => 'required|max:5',
+                    'city' => 'required||max:100',
+                    'division' => 'required|max:5',
+                    'post_code' => 'required'
+                ]);
+                if ($validator->passes()) {
+                    $order_billing_details = new OrderBillingDetails;
+                    $order_billing_details->phone = $request->phone;
+                    $order_billing_details->order_id = $order->id;
+                    $order_billing_details->first_name = $request->first_name;
+                    $order_billing_details->last_name = $request->last_name;
+                    $order_billing_details->email = $request->email;
+                    $order_billing_details->address_1 = $request->address_1;
+                    $order_billing_details->address_2 = $request->address_2;
+                    $order_billing_details->city = $request->city;
+                    $order_billing_details->division = $request->division;
+                    $order_billing_details->post_code = $request->post_code;
+                    $order_billing_details->country = 'Bangladesh';
+                    $order_billing_details->order_notes = $request->order_notes;
+                    $order_billing_details->save();
+                }
+
             // Product oRDER Details
                 $products = Cart::content();
                 foreach($products as $product) {
@@ -129,33 +141,14 @@ class OTPController extends Controller
                     $OrderDetails->save();
                 }
 
-            return response()->json([
-            'status' => 200,
-            'message' => 'Congratulation Your OTP Correct',
-            ]);
+                return response()->json([
+                'status' => 200,
+                'message' => 'Congratulation Your OTP Correct',
+                ]);
         // }
 
     }
 }
 
 
-            // $validator = Validator::make($request->all(), [
-            //     'invoice_number' => 'required|max:50',
-            //     'user_identity' => 'required|max:15',
-            //     'product_quantity' => 'required|max:5',
-            //     'product_total' => 'required||max:100',
-            //     'sub_total' => 'required|max:5',
-            //     'grand_total' => 'required'
 
-            //     'first_name'
-            //     'last_name'
-            //     'email'
-            //     'phone'
-            //     'address_1'
-            //     'address_2'
-            //     'city'
-            //     'division'
-            //     'post_code'
-            //     'country'
-            //     'order_notes'
-            // ]);
