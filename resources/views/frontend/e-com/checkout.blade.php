@@ -498,25 +498,25 @@
             }
 
 
-            // let user_phone = document.querySelector('.user_phone').value;
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            // $.ajax({
-            //     url: '/otp/store',
-            //     type: 'post',
-            //     data: {
-            //         'phone': user_phone
-            //     },
-            //     success: function(res) {
-            //         // console.log(res);
-            //         if (res.status == 200) {
-            //             $('#otpCheck').modal('show');
-            //         }
-            //     }
-            // })
+            let user_phone = document.querySelector('.user_phone').value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/otp/store',
+                type: 'post',
+                data: {
+                    'phone': user_phone
+                },
+                success: function(res) {
+                    // console.log(res);
+                    if (res.status == 200) {
+                        $('#otpCheck').modal('show');
+                    }
+                }
+            })
         });
 
         document.querySelector('.otp_send').addEventListener('click', function(e) {
