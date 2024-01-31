@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="tpbanner__item mb-30">
-                        <a href="shop-2.html">
+                        <a href="{{ route('all.feature.product') }}">
                             <div class="tpbanner__text tpbanner__bg"
                                 data-background="{{ asset('frontend') }}/assets/img/banner/banner-4.png">
                                 <span class="tpbanner__sub-title mb-20">Top offers</span>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="tpbanner__item mb-30">
-                        <a href="shop-2.html">
+                        <a href="{{ route('all.feature.product') }}">
                             <div class="tpbanner__text tpbanner__bg"
                                 data-background="{{ asset('frontend') }}/assets/img/banner/banner-5.png">
                                 <span class="tpbanner__sub-title mb-20">Weekend Deals</span>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="tpbanner__item mb-30">
-                        <a href="shop-2.html">
+                        <a href="{{ route('all.feature.product') }}">
                             <div class="tpbanner__text tpbanner__bg"
                                 data-background="{{ asset('frontend') }}/assets/img/banner/banner-6.png">
                                 <span class="tpbanner__sub-title mb-20">Top seller</span>
