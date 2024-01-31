@@ -248,11 +248,12 @@
 
                 // console.log(itemsToDisplay);
 
-                Object.keys(cartData).forEach(item => {
-                    console.log(item.subtotal);
+                for (var i = 0; i < Object.keys(cartData).length; i++) {
+                    var key = Object.keys(cartData)[i];
+                    var item = cartData[key];
                     totalPrice += item.subtotal;
-                });
-
+                }
+            document.querySelector(".heilight-price").textContent = totalPrice;
 
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];
@@ -300,7 +301,7 @@
                 $('.cart_quantity').text('0');
                 $('.mobile_show_quantity').text('0');
             }
-            document.querySelector(".heilight-price").textContent = totalPrice;
+
         }
 
         $(document).ready(function() {
