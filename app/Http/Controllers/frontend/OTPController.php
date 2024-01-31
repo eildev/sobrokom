@@ -7,44 +7,54 @@ use Illuminate\Http\Request;
 use App\Models\OTPData;
 use App\Models\Order;
 use App\Models\OrderBillingDetails;
+use App\Models\OrderDetails;
 use Illuminate\Support\Carbon;
+use Cart;
 class OTPController extends Controller
 {
     public function storeOTP(Request $request){
-        $otp = $this->otpGenarate($request->phone);
 
-        $number = $otp->phone;
-        $api_key = "0yRu5BkB8tK927YQBA8u";
-        $senderid = "8809617615171";
-        $message = "Your One Time Password (OPT) for Verification : ".$otp->otp.". This OPT is valid for 5 minutes. Please do not share OTP with anyone";
-        $url = "http://bulksmsbd.net/api/smsapi";
-        $data = [
-            "api_key" => $api_key,
-            'number' =>$number,
-            'senderid' => $senderid,
-            'message' => $message
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $response = json_decode($response, true);
-        if($response['response_code'] == 202){
+
             return response()->json([
             'status' => 200,
             'message' =>'OTP has been Successfully Sent'
             ]);
-        }
-        else{
-          return response()->json([
-            'status' => 404,
-            'message' => 'Bad Request',
-            ]);
-        }
+
+
+
+        // $otp = $this->otpGenarate($request->phone);
+        // $number = $otp->phone;
+        // $api_key = "0yRu5BkB8tK927YQBA8u";
+        // $senderid = "8809617615171";
+        // $message = "Your One Time Password (OPT) for Verification : ".$otp->otp.". This OPT is valid for 5 minutes. Please do not share OTP with anyone";
+        // $url = "http://bulksmsbd.net/api/smsapi";
+        // $data = [
+        //     "api_key" => $api_key,
+        //     'number' =>$number,
+        //     'senderid' => $senderid,
+        //     'message' => $message
+        // ];
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_POST, 1);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // $response = curl_exec($ch);
+        // curl_close($ch);
+        // $response = json_decode($response, true);
+        // if($response['response_code'] == 202){
+        //     return response()->json([
+        //     'status' => 200,
+        //     'message' =>'OTP has been Successfully Sent'
+        //     ]);
+        // }
+        // else{
+        //   return response()->json([
+        //     'status' => 404,
+        //     'message' => 'Bad Request',
+        //     ]);
+        // }
 
     }
     public function otpGenarate($phone){
@@ -62,43 +72,41 @@ class OTPController extends Controller
     }
 
     public function checkOTP(Request $request){
-        $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
-        $now = Carbon::now();
-        if(!$verificationCode){
-            return response()->json([
-            'success' => false,
-            'message' => 'Invalid OTP'
-            ]);
-        }
-        else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
-            return response()->json([
-            'success' => false,
-            'message' => 'OTP has been Expire'
-            ]);
-        }else{
-            // @dd($request);
+        // $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
+        // $now = Carbon::now();
+        // if(!$verificationCode){
+        //     return response()->json([
+        //     'success' => false,
+        //     'message' => 'Invalid OTP'
+        //     ]);
+        // }
+        // else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
+        //     return response()->json([
+        //     'success' => false,
+        //     'message' => 'OTP has been Expire'
+        //     ]);
+        // }else{
 
+            // dd(Cart::content());
 
             // store order details
                 $order = new Order;
                 $order->user_identity = $request->phone;
-                $order->invoice_number = $request->invoice_number;
-                $order->product_quantity = $request->product_quantity;
-                $order->product_total = $request->product_total;
+                $order->invoice_number = rand(123456,999999);
+                $order->product_quantity = Cart::count();
+                $order->product_total = Cart::total();
                 $order->coupon_id = $request->coupon_id;
                 $order->discount = $request->discount;
                 $order->sub_total = $request->sub_total;
-                $order->shipping_method = $request->shipping_method;
-                $order->shipping_amount = $request->shipping_amount;
-                $order->grand_total = $request->grand_total;
-                $order->payment_method = $request->payment_method;
-                $order->payment_id = $request->payment_id;
+                $order->shipping_method = 'In Dhaka';
+                $order->shipping_amount = 0;
+                $order->grand_total = $request->sub_total;
+                $order->payment_method = 'Cash on Delivery';
                 $order->save();
-
-
             // store billing details
                 $order_billing_details = new OrderBillingDetails;
                 $order_billing_details->phone = $request->phone;
+                $order_billing_details->order_id = $order->id;
                 $order_billing_details->first_name = $request->first_name;
                 $order_billing_details->last_name = $request->last_name;
                 $order_billing_details->email = $request->email;
@@ -107,17 +115,25 @@ class OTPController extends Controller
                 $order_billing_details->city = $request->city;
                 $order_billing_details->division = $request->division;
                 $order_billing_details->post_code = $request->post_code;
-                $order_billing_details->country = $request->country;
+                $order_billing_details->country = 'Bangladesh';
                 $order_billing_details->order_notes = $request->order_notes;
                 $order_billing_details->save();
+            // Product oRDER Details
+                $products = Cart::content();
+                foreach($products as $product) {
+                    $OrderDetails = new OrderDetails;
+                    $OrderDetails->order_id = $order->id;
+                    $OrderDetails->product_id = $product->id;
+                    $OrderDetails->total_price = $product->price;
+                    $OrderDetails->product_quantity = $product->qty;
+                    $OrderDetails->save();
+                }
 
             return response()->json([
             'status' => 200,
             'message' => 'Congratulation Your OTP Correct',
-            'user' => $verificationCode
             ]);
-
-        }
+        // }
 
     }
 }
