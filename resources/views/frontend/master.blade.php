@@ -253,7 +253,7 @@
                     var item = cartData[key];
                     totalPrice += item.subtotal;
                 }
-            document.querySelector(".heilight-price").textContent = totalPrice;
+                document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
 
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];

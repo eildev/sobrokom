@@ -5,18 +5,18 @@
                 <h4 class="tpcart__title">Your Cart</h4>
                 <div class="tpcart__product">
                     <div class="tpcart__product-list">
-                            <ul class="cart_container">
+                        <ul class="cart_container">
 
-                            </ul>
+                        </ul>
                     </div>
                     <div class="tpcart__checkout">
                         <div class="tpcart__total-price d-flex justify-content-between align-items-center">
                             <span> Subtotal: </span>
-                            <span class="heilight-price">৳{{Cart::total()}}</span>
+                            <span class="heilight-price"></span>
                         </div>
                         <div class="tpcart__checkout-btn">
-                            <a class="tpcart-btn mb-10" href="{{route('product.show_cart_products')}}">View Cart</a>
-                            <a class="tpcheck-btn" href="{{route('checkout')}}">Checkout</a>
+                            <a class="tpcart-btn mb-10" href="{{ route('product.show_cart_products') }}">View Cart</a>
+                            <a class="tpcheck-btn" href="{{ route('checkout') }}">Checkout</a>
                         </div>
                     </div>
                 </div>
