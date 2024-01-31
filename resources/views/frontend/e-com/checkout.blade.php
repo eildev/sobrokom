@@ -47,7 +47,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>First Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="First Name" class="first_name" value=""
+                                        <input type="text" required placeholder="First Name" class="first_name" value=""
                                             name="first_name">
                                         <span class="first_name_error text-danger"></span>
                                     </div>
@@ -492,26 +492,31 @@
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-            let user_phone = document.querySelector('.user_phone').value;
+            let firstName = document.querySelector('.first_name').value;
+            if( firstName === ""){
+                document.querySelector('.first_name_error').textContent = 'First Name is Required';
+            }
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: '/otp/store',
-                type: 'post',
-                data: {
-                    'phone': user_phone
-                },
-                success: function(res) {
-                    // console.log(res);
-                    if (res.status == 200) {
-                        $('#otpCheck').modal('show');
-                    }
-                }
-            })
+
+            // let user_phone = document.querySelector('.user_phone').value;
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            // $.ajax({
+            //     url: '/otp/store',
+            //     type: 'post',
+            //     data: {
+            //         'phone': user_phone
+            //     },
+            //     success: function(res) {
+            //         // console.log(res);
+            //         if (res.status == 200) {
+            //             $('#otpCheck').modal('show');
+            //         }
+            //     }
+            // })
         });
 
         document.querySelector('.otp_send').addEventListener('click', function(e) {
