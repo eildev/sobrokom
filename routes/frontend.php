@@ -11,6 +11,7 @@ use App\Http\Controllers\frontend\BillingInfoController;
 use App\Http\Controllers\frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
+use App\Http\Controllers\Backend\OrderManageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,3 +104,9 @@ Route::controller(OTPController::class)->group(function () {
     Route::post('/otp/store', 'storeOTP');
     Route::post('/otp/check', 'checkOTP');
 });
+
+//All Routes for Order  Start
+Route::controller(OrderManageController::class)->group(function () {
+    Route::post('/order-tracking/invoice', 'orderTracking')->name('order.tracking.invoice');
+});
+//All Routes for Order End

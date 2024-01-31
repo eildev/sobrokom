@@ -153,5 +153,7 @@ Route::middleware('auth','role:admin')->group(function () {
 });
 //All Routes for Global Coupons End
 
+
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
