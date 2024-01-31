@@ -186,26 +186,7 @@
 </div>
 
 <!-- header-search -->
-<div class="tpsearchbar tp-sidebar-area">
-    <button class="tpsearchbar__close"><i class="icon-x"></i></button>
-    <div class="search-wrap text-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-6 pt-100 pb-100">
-                    <h2 class="tpsearchbar__title">What Are You Looking For?</h2>
-                    <div class="tpsearchbar__form">
-                        <form action="{{ route('search.product') }}" method="POST">
-                            @csrf
-                            <input type="text" name="search" placeholder="Search Product...">
-                            <button class="tpsearchbar__search-btn"><i class="icon-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="search-body-overlay"></div>
+@include('frontend.body.headerSearch')
 <!-- header-search-end -->
 
 <!-- header-cart-start -->
@@ -213,42 +194,7 @@
 <!-- header-cart-end -->
 
 <!-- mobile-menu-area -->
-<div id="header-sticky-2" class="tpmobile-menu d-xl-none">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-lg-4 col-md-4 col-3 col-sm-3">
-                <div class="mobile-menu-icon">
-                    <button class="tp-menu-toggle"><i class="icon-menu1"></i></button>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-6 col-sm-4">
-                <div class="header__logo text-center">
-                    <a href="index.html"><img src="{{ asset('frontend') }}/assets/img/logo/logo.png"
-                            alt="logo"></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-3 col-sm-5">
-                <div class="header__info d-flex align-items-center">
-                    <div class="header__info-search tpcolor__purple ml-10 d-none d-sm-block">
-                        <button class="tp-search-toggle"><i class="icon-search"></i></button>
-                    </div>
-                    <div class="header__info-user tpcolor__yellow ml-10 d-none d-sm-block">
-                        <a href="log-in.html"><i class="icon-user"></i></a>
-                    </div>
-                    <div class="header__info-wishlist tpcolor__greenish ml-10 d-none d-sm-block">
-                        <a href="wishlist.html"><i class="icon-heart icons"></i></a>
-                    </div>
-                    <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
-                        <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt=""></i>
-                            <span class="mobile_show_quantity"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="body-overlay"></div>
+@include('frontend.body.mobileMenu')
 <!-- mobile-menu-area-end -->
 
 <!-- sidebar-menu-area -->

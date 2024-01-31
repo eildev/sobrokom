@@ -4,15 +4,10 @@
         <div id="header-sticky" class="header__menu main-menu mainmenu-three text-center">
             <nav id="mobile-menu">
                 <ul>
-
                     {{-- <h2 value="">{{ $brand->image }}</h2> --}}
-
-
-
                     <li class="has-dropdown has-homemenu">
                         <a href="index.html">Brand</a>
                         <ul class="sub-menu home-menu-style">
-
                             @php
                                 $brands = App\Models\brand::where('status', 1)
                                     ->take(6)
@@ -27,24 +22,21 @@
                             @endforeach
                         </ul>
                     </li>
-
-
                     <li class="has-dropdown has-megamenu">
                         <a href="course-grid.html">Shop</a>
                         <ul class="sub-menu mega-menu"
                             data-background="{{ asset('frontend') }}/assets/img/banner/mega-menu-shop-1.jpg">
-
                             @php
                                 $categoris = App\Models\Category::take(4)->get();
                             @endphp
-
                             @foreach ($categoris as $category)
                                 <li>
-
                                     <a class="mega-menu-title">{{ $category->categoryName }}</a>
                                     <ul>
                                         @foreach ($category->subcategories as $subcategory)
-                                        <li><a href="{{ route('category.wise.product',$category->slug) }}">{{$subcategory->subcategoryName}}</a></li>
+                                            <li><a
+                                                    href="{{ route('category.wise.product', $category->slug) }}">{{ $subcategory->subcategoryName }}</a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </li>
