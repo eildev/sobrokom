@@ -106,14 +106,14 @@ class ProductController extends Controller
             return response()->json([
                 'status' => '200',
                 'message' => 'variant saved successfully',
-    
+
             ]);
         }
         return response()->json([
             'status' => '500',
             'error' => $validator->messages()
         ]);
-        
+
     }
 
     public function variantShow($id)
