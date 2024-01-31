@@ -15,47 +15,39 @@ class OTPController extends Controller
 {
     public function storeOTP(Request $request){
 
-
+        $otp = $this->otpGenarate($request->phone);
+        $number = $otp->phone;
+        $api_key = "0yRu5BkB8tK927YQBA8u";
+        $senderid = "8809617615171";
+        $message = "Your One Time Password (OPT) for Verification : ".$otp->otp.". This OPT is valid for 5 minutes. Please do not share OTP with anyone";
+        $url = "http://bulksmsbd.net/api/smsapi";
+        $data = [
+            "api_key" => $api_key,
+            'number' =>$number,
+            'senderid' => $senderid,
+            'message' => $message
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response = json_decode($response, true);
+        if($response['response_code'] == 202){
             return response()->json([
             'status' => 200,
             'message' =>'OTP has been Successfully Sent'
             ]);
-
-
-
-        // $otp = $this->otpGenarate($request->phone);
-        // $number = $otp->phone;
-        // $api_key = "0yRu5BkB8tK927YQBA8u";
-        // $senderid = "8809617615171";
-        // $message = "Your One Time Password (OPT) for Verification : ".$otp->otp.". This OPT is valid for 5 minutes. Please do not share OTP with anyone";
-        // $url = "http://bulksmsbd.net/api/smsapi";
-        // $data = [
-        //     "api_key" => $api_key,
-        //     'number' =>$number,
-        //     'senderid' => $senderid,
-        //     'message' => $message
-        // ];
-        // $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, $url);
-        // curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        // $response = curl_exec($ch);
-        // curl_close($ch);
-        // $response = json_decode($response, true);
-        // if($response['response_code'] == 202){
-        //     return response()->json([
-        //     'status' => 200,
-        //     'message' =>'OTP has been Successfully Sent'
-        //     ]);
-        // }
-        // else{
-        //   return response()->json([
-        //     'status' => 404,
-        //     'message' => 'Bad Request',
-        //     ]);
-        // }
+        }
+        else{
+          return response()->json([
+            'status' => 404,
+            'message' => 'Bad Request',
+            ]);
+        }
 
     }
     public function otpGenarate($phone){
@@ -73,27 +65,26 @@ class OTPController extends Controller
     }
 
     public function checkOTP(Request $request){
-        // $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
-        // $now = Carbon::now();
-        // if(!$verificationCode){
-        //     return response()->json([
-        //     'success' => false,
-        //     'message' => 'Invalid OTP'
-        //     ]);
-        // }
-        // else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
-        //     return response()->json([
-        //     'success' => false,
-        //     'message' => 'OTP has been Expire'
-        //     ]);
-        // }else{
-
+        $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
+        $now = Carbon::now();
+        if(!$verificationCode){
+            return response()->json([
+            'success' => false,
+            'message' => 'Invalid OTP'
+            ]);
+        }
+        else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
+            return response()->json([
+            'success' => false,
+            'message' => 'OTP has been Expire'
+            ]);
+        }else{
             // dd(Cart::content());
-
+            $invoiceNumber = rand(123456,999999);
             // store order details
                 $order = new Order;
                 $order->user_identity = $request->phone;
-                $order->invoice_number = rand(123456,999999);
+                $order->invoice_number = $invoiceNumber;
                 $order->product_quantity = Cart::count();
                 $order->product_total = Cart::total();
                 $order->coupon_id = $request->coupon_id;
@@ -140,12 +131,41 @@ class OTPController extends Controller
                     $OrderDetails->product_quantity = $product->qty;
                     $OrderDetails->save();
                 }
-
-                return response()->json([
-                'status' => 200,
-                'message' => 'Congratulation Your OTP Correct',
-                ]);
-        // }
+                $trackingUrl = 'http://127.0.0.1:8000/order-tracking';
+                $number = $request->phone;
+                $api_key = "0yRu5BkB8tK927YQBA8u";
+                $senderid = "8809617615171";
+                $message = "Your order has been confirmed. your invoice number is : ".$invoiceNumber." you find your product using this invoice Number in here: ".$trackingUrl;
+                $url = "http://bulksmsbd.net/api/smsapi";
+                $data = [
+                    "api_key" => $api_key,
+                    'number' =>$number,
+                    'senderid' => $senderid,
+                    'message' => $message
+                ];
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $response = json_decode($response, true);
+                if($response['response_code'] == 202){
+                    Cart::empty();
+                    return response()->json([
+                    'status' => 200,
+                    'message' =>'Your order has been confirmed'
+                    ]);
+                }
+                else{
+                  return response()->json([
+                    'status' => 404,
+                    'message' => 'Something went wrong',
+                    ]);
+                }
+        }
 
     }
 }

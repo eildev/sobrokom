@@ -617,6 +617,11 @@
                     console.log(res);
                     if (res.status == 200) {
                         $('#otpCheck').modal('hide');
+                        toastr.success(res.message);
+                        // window.location.href = "/order-tracking";
+                    }
+                    else{
+                        toastr.success(res.message);
                     }
                 }
             })

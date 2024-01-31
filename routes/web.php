@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\OfferBannerController;
 use App\Http\Controllers\Backend\OrderManageController;
+use App\Http\Controllers\Backend\StockManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,6 +145,13 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/new-order', 'index')->name('new.order');
     });
     //All Routes for Order End
+
+
+    //All Routes for Stock Management System
+    Route::controller(StockManageController::class)->group(function () {
+        Route::get('/stock/view', 'index')->name('stock.view');
+    });
+    //All Routes for Stock Management End
 
 });
 

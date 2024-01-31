@@ -11,6 +11,6 @@ class Order extends Model
     protected $guarded = [];
 
     public function orderBillingDetails(){
-        return $this->belongsTo(OrderBillingDetails::class, 'id', 'order_id');
+        return $this->belongsTo(OrderBillingDetails::class, 'order_id', 'id');
     }
 }

@@ -190,6 +190,19 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Stock Management</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('stock.view') }}"><i class="bx bx-right-arrow-alt"></i>View Stock</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!--end navigation-->
