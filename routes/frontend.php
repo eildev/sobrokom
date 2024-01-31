@@ -39,9 +39,7 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
-Route::get('/order-tracking', function () {
-    return view('frontend/e-com/tracking-product');
-})->name('order.tracking');
+
 
 // product related routes
 Route::controller(ProductDetailsController::class)->group(function () {
@@ -105,8 +103,11 @@ Route::controller(OTPController::class)->group(function () {
     Route::post('/otp/check', 'checkOTP');
 });
 
-//All Routes for Order  Start
+//All Routes for Order Tracking  Start
+Route::get('/order-tracking', function () {
+    return view('frontend/e-com/tracking-product');
+})->name('order.tracking');
 Route::controller(OrderManageController::class)->group(function () {
     Route::post('/order-tracking/invoice', 'orderTracking')->name('order.tracking.invoice');
 });
-//All Routes for Order End
+//All Routes for Order Tracking End
