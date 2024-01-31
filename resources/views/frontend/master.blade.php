@@ -233,7 +233,7 @@
             $('.cart_container').empty();
 
             // console.log(cartData);
-            let totalPrice = 0;
+
 
 
             if (Object.keys(cartData).length > 0) {
@@ -247,7 +247,7 @@
                 // console.log();
 
                 // console.log(itemsToDisplay);
-
+                let totalPrice = 0;
                 for (var i = 0; i < Object.keys(cartData).length; i++) {
                     var key = Object.keys(cartData)[i];
                     var item = cartData[key];
