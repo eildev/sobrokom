@@ -183,6 +183,18 @@
                 <div class="parent-icon">
                     <i class="fas fa-bell"></i>
                 </div>
+                <div class="menu-title">Order</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('new.order') }}"><i class="bx bx-right-arrow-alt"></i>New Order</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
                 <div class="menu-title">Stock Management</div>
             </a>
             <ul>

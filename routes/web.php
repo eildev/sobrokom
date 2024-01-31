@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\OfferBannerController;
+use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\Backend\StockManageController;
 
 /*
@@ -139,6 +140,12 @@ Route::middleware('auth','role:admin')->group(function () {
     });
     //All Routes for Global Coupons End
 
+    //All Routes for Order  Start
+    Route::controller(OrderManageController::class)->group(function () {
+        Route::get('/new-order', 'index')->name('new.order');
+    });
+    //All Routes for Order End
+
 
     //All Routes for Stock Management System
     Route::controller(StockManageController::class)->group(function () {
@@ -153,6 +160,8 @@ Route::middleware('auth','role:admin')->group(function () {
     Route::get('/apply-coupon/{code}', 'applyCoupon')->name('apply.coupon');
 });
 //All Routes for Global Coupons End
+
+
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';

@@ -143,8 +143,9 @@
                                 <li class="">
                                     <a href="blog.html">Blog</a>
                                 </li>
-                                <li><a href="{{ route('aboutus') }}">About Us</a></li>
+                                <li><a href="{{ route('aboutus') }}">About</a></li>
                                 <li><a href="{{ route('contactus') }}">Contact Us</a></li>
+                                <li><a href="{{ route('order.tracking') }}">Tracking</a></li>
                             </ul>
                         </nav>
                     </div>
