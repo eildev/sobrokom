@@ -226,12 +226,15 @@
 
 
     <script>
+        // document.querySelector(".heilight-price").textContent = "200";
         // Function to update the cart display
         function updateCartDisplay(cartData) {
 
             $('.cart_container').empty();
 
             // console.log(cartData);
+            let totalPrice = 0;
+
 
             if (Object.keys(cartData).length > 0) {
                 var itemsToDisplay = 3;
@@ -240,10 +243,23 @@
                 $('.cart_quantity').text(Object.keys(cartData).length);
                 $('.mobile_show_quantity').text(Object.keys(cartData).length);
 
+
+                // console.log();
+
                 // console.log(itemsToDisplay);
+
+                Object.keys(cartData).forEach(item => {
+                    console.log(item.subtotal);
+                    totalPrice += item.subtotal;
+                });
+
+
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];
                     var item = cartData[key];
+
+                    // console.log(item.subtotal);
+                    // totalPrice += item.subtotal;
 
                     $('.cart_container').append(
                         '<li>' +
@@ -266,6 +282,9 @@
                     );
                 }
 
+
+
+
                 // Update the cart quantity span
 
 
@@ -281,10 +300,12 @@
                 $('.cart_quantity').text('0');
                 $('.mobile_show_quantity').text('0');
             }
+            document.querySelector(".heilight-price").textContent = totalPrice;
         }
 
         $(document).ready(function() {
             showCart();
+            // document.querySelector(".heilight-price").textContent = "200";
         });
 
 
