@@ -325,8 +325,9 @@
                                 <div class="accordion" id="checkoutAccordion">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="checkoutOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
+                                            <button class="accordion-button shipping_method" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true"
+                                                aria-controls="bankOne">
                                                 Cash On Delivery
                                             </button>
                                         </h2>
@@ -374,7 +375,8 @@
                                     </div> --}}
                                 </div>
                                 <div class="order-button-payment mt-20">
-                                    <button type="submit" class="tp-btn tp-color-btn w-100 banner-animation place_order">Place
+                                    <button type="submit"
+                                        class="tp-btn tp-color-btn w-100 banner-animation place_order">Place
                                         order</button>
                                 </div>
                             </div>
@@ -386,27 +388,29 @@
     </section>
     <!-- checkout-area end -->
 
-<!-- OPT Checker Modal -->
-<div class="modal fade" id="otpCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 99999999999999">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">OPT Check</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter OTP</label>
-              <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <!-- OPT Checker Modal -->
+    <div class="modal fade" id="otpCheck" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="z-index: 99999999999999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">OPT Check</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Enter OTP</label>
+                        <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary otp_send">Send</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary otp_send">Send</button>
-        </div>
-      </div>
     </div>
-  </div>
 
     @if ($billingInfo)
         <script>
@@ -447,6 +451,7 @@
 
 
     <script>
+        // console.log("{{ Cart::count() }}");
         const applyCoupon = document.querySelector('.apply_coupon');
         applyCoupon.addEventListener('click', function(e) {
             e.preventDefault();
@@ -484,10 +489,10 @@
             })
         });
 
-        const place_order  = document.querySelector('.place_order');
+        const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-            let user_phone =document.querySelector('.user_phone').value;
+            let user_phone = document.querySelector('.user_phone').value;
 
             $.ajaxSetup({
                 headers: {
@@ -495,45 +500,95 @@
                 }
             });
             $.ajax({
-                url:'/otp/store',
-                type:'post',
-                data:{
-                    'phone':user_phone
+                url: '/otp/store',
+                type: 'post',
+                data: {
+                    'phone': user_phone
                 },
-                success:function(res){
+                success: function(res) {
                     // console.log(res);
-                    if(res.status == 200){
+                    if (res.status == 200) {
                         $('#otpCheck').modal('show');
                     }
                 }
             })
         });
 
-        document.querySelector('.otp_send').addEventListener('click',function(e){
+        document.querySelector('.otp_send').addEventListener('click', function(e) {
             e.preventDefault();
-            let user_phone =document.querySelector('.user_phone').value;
-            let otp_code =document.querySelector('.otp_code').value;
+            let user_phone = document.querySelector('.user_phone').value;
+            let otp_code = document.querySelector('.otp_code').value;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            // get order billing details
+            const first_name = $('.first_name').val();
+            const last_name = $('.last_name').val();
+            const email = $('.email').val();
+            const phone = $('.phone').val();
+            const address_1 = $('.address_1').val();
+            const address_2 = $('.address_2').val();
+            const city = $('.city').val();
+            const division = $('.division').val();
+            const post_code = $('.post_code').val();
+            const country = $('.country').val();
+            const order_notes = $('.order_notes').text();
+
+            // get order details
+            const invoice_number = "1";
+            const product_quantity = "{{ Cart::count() }}";
+            const product_total = "{{ Cart::total() }}";
+            const coupon_id = "";
+            const discount = "";
+            const sub_total = "{{ Cart::total() }}";
+            const shipping_method = $('.shipping_method').text();
+            const shipping_amount = "";
+            const grand_total = "{{ Cart::total() }}";
+            const payment_method = "";
+            const payment_id = "";
+
             $.ajax({
-                url:'/otp/check',
-                type:'post',
-                data:{
-                    'phone':user_phone,
-                    'otp':otp_code
+                url: '/otp/check',
+                type: 'post',
+                data: {
+                    'phone': user_phone,
+                    'otp': otp_code,
+
+                    first_name,
+                    last_name,
+                    email,
+                    phone,
+                    address_1,
+                    address_2,
+                    city,
+                    division,
+                    post_code,
+                    country,
+                    order_notes,
+
+                    invoice_number,
+                    "product_quantity": product_quantity,
+                    product_total,
+                    coupon_id,
+                    discount,
+                    sub_total,
+                    shipping_method,
+                    shipping_amount,
+                    grand_total,
+                    payment_method,
+                    payment_id,
                 },
-                success:function(res){
+                success: function(res) {
                     console.log(res);
-                    if(res.status == 200){
+                    if (res.status == 200) {
                         $('#otpCheck').modal('hide');
                     }
                 }
             })
         });
-
     </script>
 
 

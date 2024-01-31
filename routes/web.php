@@ -28,7 +28,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('admin/dashboard', function () {
-    return view('backend.dashboard'); 
+    return view('backend.dashboard');
 })->middleware(['auth','role:admin'])->name('admin.dashboard');
 
 Route::middleware('auth','role:admin')->group(function () {
