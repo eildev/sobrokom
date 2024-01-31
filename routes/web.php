@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\TagNameController;
 use App\Http\Controllers\Backend\HomeBannerController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\OfferBannerController;
+use App\Http\Controllers\Backend\StockManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -137,6 +138,13 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/global-coupon/store', 'store')->name('global.store');
     });
     //All Routes for Global Coupons End
+
+
+    //All Routes for Stock Management System
+    Route::controller(StockManageController::class)->group(function () {
+        Route::get('/stock/view', 'index')->name('stock.view');
+    });
+    //All Routes for Stock Management End
 
 });
 
