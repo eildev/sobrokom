@@ -247,13 +247,7 @@
                 // console.log();
 
                 // console.log(itemsToDisplay);
-                let totalPrice = 0;
-                for (var i = 0; i < Object.keys(cartData).length; i++) {
-                    var key = Object.keys(cartData)[i];
-                    var item = cartData[key];
-                    totalPrice += item.subtotal;
-                }
-                document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
+
 
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];
@@ -319,7 +313,14 @@
                 dataType: 'JSON',
                 success: function(res) {
                     if (res.status == 200) {
+                        let totalPrice = 0;
+                        $.each(res.cartData, function(key, val) {
+                            totalPrice += val.subtotal;
+                        });
+                        document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
                         updateCartDisplay(res.cartData);
+
+
                     }
                 }
             });
