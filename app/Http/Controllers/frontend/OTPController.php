@@ -131,40 +131,11 @@ class OTPController extends Controller
                     $OrderDetails->product_quantity = $product->qty;
                     $OrderDetails->save();
                 }
-                $trackingUrl = 'http://127.0.0.1:8000/order-tracking';
-                $number = $request->phone;
-                $api_key = "0yRu5BkB8tK927YQBA8u";
-                $senderid = "8809617615171";
-                $message = "Your order has been confirmed. your invoice number is : ".$invoiceNumber." you find your product using this invoice Number in here: ".$trackingUrl;
-                $url = "http://bulksmsbd.net/api/smsapi";
-                $data = [
-                    "api_key" => $api_key,
-                    'number' =>$number,
-                    'senderid' => $senderid,
-                    'message' => $message
-                ];
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                $response = curl_exec($ch);
-                curl_close($ch);
-                $response = json_decode($response, true);
-                if($response['response_code'] == 202){
-                    Cart::empty();
-                    return response()->json([
-                    'status' => 200,
-                    'message' =>'Your order has been confirmed'
-                    ]);
-                }
-                else{
-                  return response()->json([
-                    'status' => 404,
-                    'message' => 'Something went wrong',
-                    ]);
-                }
+                Cart::destroy();
+                return response()->json([
+                'status' => 200,
+                'message' =>'Your order has been Submited successfully'
+                ]);
         }
 
     }

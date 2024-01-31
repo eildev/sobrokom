@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class StockManageController extends Controller
 {
@@ -12,7 +13,8 @@ class StockManageController extends Controller
      */
     public function index()
     {
-        return view('backend.stock_manage.view');
+        $products = Product::all();
+        return view('backend.stock_manage.view', compact('products'));
     }
 
     /**
