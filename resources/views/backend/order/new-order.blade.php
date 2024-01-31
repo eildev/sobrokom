@@ -52,7 +52,7 @@
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info" id="delete">Approve</a>
+                                                <a href="{{ route('admin.approve.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Approve</a>
                                                 <a href="#" class="btn btn-sm btn-success" id="delete">View</a>
                                                 <a href="#" class="btn btn-sm btn-danger" id="delete">Denied</a>
                                             </td>
