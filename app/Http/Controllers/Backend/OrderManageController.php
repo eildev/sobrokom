@@ -50,9 +50,8 @@ class OrderManageController extends Controller
 
     public function orderTracking(Request $request){
         $searchTag = $request->search;
-        $orderTacking = Order::where('invoice_number', 'like', '%'.$request->search.'%')
-        ->orWhere('user_identity', 'like', '%'.$request->search.'%')
-        ->first();
+        $orderTacking = Order::where('invoice_number', $request->search)->where('status', 'approve')
+        ->get();
         return view('frontend/e-com/tracking-product', compact('orderTacking','searchTag'));
     }
 }
