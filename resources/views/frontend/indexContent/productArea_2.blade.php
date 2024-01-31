@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="tpproduct__all-item">
-                        <a href="shop-3.html">See All <i class="icon-chevron-right"></i></a>
+                        <a href="{{ route('all.feature.product') }}">See All <i class="icon-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -134,10 +134,12 @@
                                                                 <div class="tpproduct__price">
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                                    <span class="text-secondary"
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
-                                                                    <span>/{{ ($product->varient[0]->unit) }}</span>
+
                                                                 </div>
                                                             </div>
                                                             <div class="tpproduct__hover-text">
@@ -674,6 +676,8 @@
                                                                 </div>
                                                                 <div class="tpproduct__price">
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                                    <span class="text-secondary"
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -1212,6 +1216,8 @@
                                                                 <div class="tpproduct__price">
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                                    <span class="text-secondary"
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif

@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
                             <span>{{ $category->categoryName }}</span>
                         </div>
@@ -288,10 +288,11 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                        <span class="text-secondary"
+                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                         @if ($product->varient[0]->discount > 0)
                                                             <del>৳{{ $product->varient[0]->regular_price }}</del>
                                                         @endif
-                                                        <span>/{{ ($product->varient[0]->unit) }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="tpproduct__hover-text">
@@ -389,6 +390,8 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                        <span class="text-secondary"
+                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                         @if ($product->varient[0]->discount > 0)
                                                             <del>৳{{ $product->varient[0]->regular_price }}</del>
                                                         @endif
@@ -445,7 +448,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="tplist__content">
-                                                    <span>1 {{ $product->varient[0]->unit }}</span>
                                                     <h4 class="tplist__content-title"><a
                                                             href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                     </h4>
@@ -467,7 +469,10 @@
                                                         <span>{{ $product->varient[0]->stock_quantity }} in stock</span>
                                                     </h4>
                                                     <h3 class="tplist__count mb-15">
-                                                        ৳{{ $product->varient[0]->discount_amount }}</h3>
+                                                        ৳{{ $product->varient[0]->discount_amount }} <span
+                                                            class="text-secondary"
+                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                    </h3>
                                                     <form method="POST" id="add_to_cart_form">
                                                         @csrf
                                                         <input type="hidden" value="{{ $product->id }}"

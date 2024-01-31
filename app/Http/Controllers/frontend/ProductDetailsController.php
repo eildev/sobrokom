@@ -20,7 +20,10 @@ class ProductDetailsController extends Controller
     }
     public function SearchbyProduct(Request $request){
         $searchTag = $request->search;
-        $products = Product::where('product_name', 'like', '%'.$request->search.'%')->orWhere('short_desc', 'like', '%'.$request->search.'%')->orWhere('tags', 'like', '%'.$request->search.'%')->paginate(10);
+        $products = Product::where('product_name', 'like', '%'.$request->search.'%')
+        ->orWhere('short_desc', 'like', '%'.$request->search.'%')
+        ->orWhere('tags', 'like', '%'.$request->search.'%')
+        ->paginate(10);
         return view('frontend/e-com/product-search', compact('products','searchTag'));
     }
     public function subcategoryWiseProduct($subcategoryslug){
@@ -30,5 +33,18 @@ class ProductDetailsController extends Controller
     public function brandWiseProduct($brandslug){
         $brand = Brand::where('slug', $brandslug)->first();
         return view('frontend/e-com/brand-wise-product', compact('brand'));
+    }
+    public function allFeatureProduct(){
+        $features = Product::where('status', 1)
+        ->where('product_feature', 'like', '%weekend-deals%')
+        ->orWhere('product_feature', 'like', '%feature%')
+        ->orWhere('product_feature', 'like', '%new-arrival%')
+        ->orWhere('product_feature', 'like', '%trending%')
+        ->orWhere('product_feature', 'like', '%best-rate%')
+        ->orWhere('product_feature', 'like', '%top-seller%')
+        ->orWhere('product_feature', 'like', '%top-offers%')
+        ->orderBy('id', 'ASC')
+        ->paginate(10);
+        return view('frontend/e-com/all-feature-product', compact('features'));
     }
 }

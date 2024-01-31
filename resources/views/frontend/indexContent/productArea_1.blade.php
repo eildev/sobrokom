@@ -79,7 +79,8 @@
                                                     </div>
                                                     <div class="tpproduct__content">
                                                         <span class="tpproduct__content-weight">
-                                                            <a href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}
+                                                            <a
+                                                                href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}
                                                             </a>
                                                         </span>
                                                         <h4 class="tpproduct__title">
@@ -95,10 +96,12 @@
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
                                                             <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                            <span class="text-secondary"
+                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
                                                             @if ($product->varient[0]->discount > 0)
                                                                 <del>৳{{ $product->varient[0]->regular_price }}</del>
                                                             @endif
-                                                            <span>/{{ ($product->varient[0]->unit) }}</span>
+
                                                         </div>
                                                         <div class="tpproduct__progress">
                                                             <div class="progress mb-5">
@@ -115,9 +118,14 @@
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-0">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
-                                                                <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                                                <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
-                                                                <input type="hidden" value="{{ $product->varient[0]->discount_amount }}" name="selling_price">
+                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                    name="product_id">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->id }}"
+                                                                    name="variant_id">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->discount_amount }}"
+                                                                    name="selling_price">
                                                                 <button class="tp-btn-2">Add to
                                                                     cart</button>
                                                             </form>
