@@ -18,12 +18,12 @@
                                 <tr>
                                     <th>SI</th>
                                     <th>Date</th>
-                                    <th>Invoice Number</th>
+                                    <th>Invoice no</th>
                                     <th>User Phone Number</th>
-                                    <th>Product Quantity</th>
-                                    <th>Grand Total</th>
-                                    <th>Payment Method</th>
-                                    <th>Order Address</th>
+                                    <th>Product Qty</th>
+                                    <th>Amount</th>
+                                    <th>Pay to</th>
+                                    <th>Address</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -34,20 +34,27 @@
                                 @endphp
                                 @if ($newOrders->count() > 0)
                                     @foreach ($newOrders as $order)
+                                    @php
+                                    $originalDateString = $order->created_at;
+                                    $dateTime = new DateTime($originalDateString);
+                                    $formattedDate = $dateTime->format('Y-m-d');
+                                    @endphp
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ $formattedDate }}</td>
                                             <td>{{ $order->invoice_number }}</td>
                                             <td>{{ $order->user_identity }}</td>
                                             <td>{{ $order->product_quantity }}</td>
                                             <td>{{ $order->grand_total }}</td>
                                             <td>{{ $order->payment_method }}</td>
-                                            <td>{{ $order->orderBillingDetails->address_1 }}</td>
+                                            <td>{{ $order->orderBillingDetails->address_1 ?? '' }}</td>
                                             <td>
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-danger" id="delete">Delete</a>
+                                                <a href="#" class="btn btn-sm btn-info" id="delete">Approve</a>
+                                                <a href="#" class="btn btn-sm btn-success" id="delete">View</a>
+                                                <a href="#" class="btn btn-sm btn-danger" id="delete">Denied</a>
                                             </td>
                                         </tr>
                                     @endforeach
