@@ -1,11 +1,11 @@
 <!-- banner-area-start -->
 <section class="tpbanner-area grey-bg">
     <div class="container">
-        <div class="sections__wrapper white-bg pl-50 pr-50 pt-30">
+        <div class="sections__wrapper white-bg pb-30 pl-50 pr-50 pt-30">
             <div class="row">
                 <div class="col-12">
 
-                
+
                     @php
                         $offerBanner = App\Models\OfferBanner::where('status', 1)
                             ->orderBy('id', 'DESC')

@@ -20,6 +20,10 @@
     @include('frontend.indexContent.productArea_2')
     <!-- product-area-end -->
 
+    <!--hot-contact-area-start -->
+    @include('frontend.indexContent.hot-contact')
+    <!-- hot-contact-area-end -->
+
     <!-- product-area-start -->
     @include('frontend.indexContent.productArea_3')
     <!-- product-area-end -->

@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="z-index: 1 !inportant;">
                     <div class="tpnavtab__area pb-40">
                         <div class="tab-content" id="nav-tabContent-tp">
 

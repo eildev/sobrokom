@@ -3,13 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2024 at 05:21 AM
+-- Generation Time: Feb 01, 2024 at 10:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -191,9 +192,9 @@ CREATE TABLE `home_banners` (
 --
 
 INSERT INTO `home_banners` (`id`, `title`, `short_description`, `long_description`, `link`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'Special Offer', 'Vegetable  Good For Health', 'Presentation matters. Our fresh Vietnamese vegetable rolls  look good and taste even better', 'https://web.whatsapp.com/', '1815384294.png', 1, '2024-01-16 21:46:17', '2024-01-16 21:47:10'),
-(4, 'Special Offer', 'Smarter Products for Everyday Needs', 'Simplify your world. Smarter electronics for effortless living.', 'https://web.whatsapp.com/', '645186147.jpg', 1, '2024-01-29 22:03:28', '2024-01-29 22:03:28'),
-(5, '30% Discount', 'Shop styles that flatter your unique figure.', 'Beyond trends, find your signature silhouette.', 'https://web.whatsapp.com/', '287853323.jpg', 1, '2024-01-29 22:06:36', '2024-01-29 22:06:36');
+(3, 'Special Offer', 'Vegetable  Good For Health', 'Presentation matters. Our fresh Vietnamese vegetable rolls  look good and taste even better', 'http://127.0.0.1:8000/category/grocery', '1815384294.png', 1, '2024-01-16 21:46:17', '2024-02-01 02:34:39'),
+(4, 'Special Offer', 'Smarter Products for Everyday Needs', 'Simplify your world. Smarter electronics for effortless living.', 'http://127.0.0.1:8000/category/electronics', '393168706.png', 1, '2024-01-29 22:03:28', '2024-02-01 02:35:49'),
+(5, '30% Discount', 'Shop styles that flatter your unique figure.', 'Beyond trends, find your signature silhouette.', 'http://127.0.0.1:8000/category/fashion', '433200321.png', 1, '2024-01-29 22:06:36', '2024-02-01 02:35:24');
 
 -- --------------------------------------------------------
 
@@ -254,7 +255,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2024_01_17_065344_create_wish_lists_table', 7),
 (21, '2024_01_17_180208_create_billing_infos_table', 9),
 (23, '2024_01_28_040127_create_global_coupons_table', 10),
-(24, '2024_01_30_080121_create_o_t_p_data_table', 11);
+(24, '2024_01_30_080121_create_o_t_p_data_table', 11),
+(25, '2024_01_30_050042_create_orders_table', 12),
+(26, '2024_01_30_052443_create_order_details_table', 12),
+(27, '2024_01_30_053011_create_order_billing_details_table', 12);
 
 -- --------------------------------------------------------
 
@@ -280,6 +284,95 @@ CREATE TABLE `offer_banners` (
 
 INSERT INTO `offer_banners` (`id`, `head`, `title`, `short_description`, `link`, `image`, `status`, `created_at`, `updated_at`) VALUES
 (3, 'THE SALAD', 'Fresh & Natural Healthy Food Special Offer', 'Do not miss the current offers of us!', 'https://portfolio-2-0-seven-gamma.vercel.app/', '1152204769.jpg', 1, '2024-01-21 01:03:24', '2024-01-21 01:03:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_number` bigint(20) NOT NULL,
+  `user_identity` varchar(255) NOT NULL,
+  `product_quantity` varchar(255) NOT NULL,
+  `product_total` double(8,2) NOT NULL,
+  `coupon_id` varchar(255) DEFAULT NULL,
+  `discount` varchar(255) DEFAULT NULL,
+  `sub_total` double(8,2) NOT NULL,
+  `shipping_method` varchar(255) DEFAULT NULL,
+  `shipping_amount` double(8,2) DEFAULT NULL,
+  `grand_total` double(8,2) NOT NULL,
+  `payment_method` varchar(255) DEFAULT NULL,
+  `payment_id` varchar(255) DEFAULT NULL,
+  `payment_status` varchar(255) DEFAULT NULL,
+  `order_note` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `invoice_number`, `user_identity`, `product_quantity`, `product_total`, `coupon_id`, `discount`, `sub_total`, `shipping_method`, `shipping_amount`, `grand_total`, `payment_method`, `payment_id`, `payment_status`, `order_note`, `status`, `created_at`, `updated_at`) VALUES
+(1, 178430, '01723343865', '2', 24200.00, NULL, NULL, 24200.00, 'In Dhaka', 0.00, 24200.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-01-31 00:47:44', '2024-01-31 00:47:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_billing_details`
+--
+
+CREATE TABLE `order_billing_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(16) NOT NULL,
+  `address_1` varchar(255) NOT NULL,
+  `address_2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `division` varchar(255) NOT NULL,
+  `post_code` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `order_notes` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_billing_details`
+--
+
+INSERT INTO `order_billing_details` (`id`, `order_id`, `first_name`, `last_name`, `email`, `phone`, `address_1`, `address_2`, `city`, `division`, `post_code`, `country`, `order_notes`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Kishor', 'Mahmud', 'user@gmail.com', '01723343865', 'Banasree, Rampura, Dhaka', NULL, 'Dhaka', 'Dhaka', '1219', 'Bangladesh', NULL, '2024-01-31 00:47:44', '2024-01-31 00:47:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `product_quantity` varchar(255) NOT NULL,
+  `total_price` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_quantity`, `total_price`, `created_at`, `updated_at`) VALUES
+(1, 1, '83', '1', 200.00, '2024-01-31 00:47:44', '2024-01-31 00:47:44'),
+(2, 1, '54', '1', 24000.00, '2024-01-31 00:47:44', '2024-01-31 00:47:44');
 
 -- --------------------------------------------------------
 
@@ -511,7 +604,25 @@ INSERT INTO `subcategories` (`id`, `categoryId`, `subcategoryName`, `slug`, `sta
 (25, 16, 'Rice Cooker', 'rice-cooker', 1, '2024-01-21 00:31:35', '2024-01-21 00:31:35'),
 (26, 13, 'Shoe', 'shoe', 1, '2024-01-21 22:06:41', '2024-01-21 22:06:41'),
 (27, 14, 'Table', 'table', 1, '2024-01-21 22:27:02', '2024-01-21 22:27:02'),
-(28, 11, 'Refrigaretor', 'refrigaretor', 1, '2024-01-21 22:38:37', '2024-01-21 22:38:37');
+(28, 11, 'Refrigaretor', 'refrigaretor', 1, '2024-01-21 22:38:37', '2024-01-21 22:38:37'),
+(29, 12, 'Dry Food', 'dry-food', 1, '2024-02-01 00:30:16', '2024-02-01 00:30:16'),
+(30, 12, 'Noodles', 'noodles', 1, '2024-02-01 00:30:38', '2024-02-01 00:30:38'),
+(31, 12, 'Sauce', 'sauce', 1, '2024-02-01 00:31:01', '2024-02-01 00:31:01'),
+(32, 12, 'Cheese', 'cheese', 1, '2024-02-01 00:31:14', '2024-02-01 00:31:14'),
+(33, 12, 'Butter', 'butter', 1, '2024-02-01 00:31:33', '2024-02-01 00:31:33'),
+(34, 12, 'Mushroom', 'mushroom', 1, '2024-02-01 00:32:15', '2024-02-01 00:32:15'),
+(35, 12, 'Sheets', 'sheets', 1, '2024-02-01 00:33:21', '2024-02-01 00:33:21'),
+(36, 12, 'Cookies', 'cookies', 1, '2024-02-01 00:34:23', '2024-02-01 00:34:23'),
+(37, 12, 'Oil', 'oil', 1, '2024-02-01 00:34:39', '2024-02-01 00:34:39'),
+(38, 12, 'Chocolate', 'chocolate', 1, '2024-02-01 00:34:48', '2024-02-01 00:34:48'),
+(39, 12, 'Coffee', 'coffee', 1, '2024-02-01 00:34:59', '2024-02-01 00:34:59'),
+(40, 12, 'Honey', 'honey', 1, '2024-02-01 00:37:01', '2024-02-01 00:37:01'),
+(41, 12, 'Nuts', 'nuts', 1, '2024-02-01 00:37:07', '2024-02-01 00:37:07'),
+(42, 12, 'Jelly', 'jelly', 1, '2024-02-01 00:37:53', '2024-02-01 00:37:53'),
+(43, 12, 'Sea Food', 'sea-food', 1, '2024-02-01 00:38:28', '2024-02-01 00:38:28'),
+(44, 12, 'Nut', 'nut', 1, '2024-02-01 00:38:56', '2024-02-01 00:38:56'),
+(45, 12, 'Sweets', 'sweets', 1, '2024-02-01 00:40:31', '2024-02-01 00:40:31'),
+(46, 12, 'Spice', 'spice', 1, '2024-02-01 00:42:24', '2024-02-01 00:42:24');
 
 -- --------------------------------------------------------
 
@@ -730,6 +841,26 @@ ALTER TABLE `offer_banners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_billing_details`
+--
+ALTER TABLE `order_billing_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_billing_details_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_details_order_id_foreign` (`order_id`);
+
+--
 -- Indexes for table `o_t_p_data`
 --
 ALTER TABLE `o_t_p_data`
@@ -869,13 +1000,31 @@ ALTER TABLE `image_galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `offer_banners`
 --
 ALTER TABLE `offer_banners`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_billing_details`
+--
+ALTER TABLE `order_billing_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `o_t_p_data`
@@ -911,7 +1060,7 @@ ALTER TABLE `product_galleries`
 -- AUTO_INCREMENT for table `subcategories`
 --
 ALTER TABLE `subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `subscribes`
@@ -964,6 +1113,18 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `image_galleries`
   ADD CONSTRAINT `image_galleries_banner_id_foreign` FOREIGN KEY (`banner_id`) REFERENCES `home_banners` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_billing_details`
+--
+ALTER TABLE `order_billing_details`
+  ADD CONSTRAINT `order_billing_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `order_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`
