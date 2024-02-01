@@ -48,7 +48,9 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/subcategory/{subcategoryslug}', 'subcategoryWiseProduct')->name('subcategory.wise.product');
     Route::get('/brand/{brandslug}', 'brandWiseProduct')->name('brand.wise.product');
     Route::get('/features', 'allFeatureProduct')->name('all.feature.product');
-    Route::post('/product', 'SearchbyProduct')->name('search.product');
+    Route::get('/product/search', 'SearchbyProduct')->name('search.product');
+    Route::get('/product/filterby-brand', 'filterbyBrand')->name('product.filterByBrand');
+    Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
 
 });
 

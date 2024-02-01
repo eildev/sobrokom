@@ -20,11 +20,29 @@ class ProductDetailsController extends Controller
     }
     public function SearchbyProduct(Request $request){
         $searchTag = $request->search;
-        $products = Product::where('product_name', 'like', '%'.$request->search.'%')
-        ->orWhere('short_desc', 'like', '%'.$request->search.'%')
-        ->orWhere('tags', 'like', '%'.$request->search.'%')
-        ->paginate(12);
+        $products = Product::where('product_name', 'like', '%'.$searchTag.'%')
+                            ->orWhere('short_desc', 'like', '%'.$searchTag.'%')
+                            ->orWhere('tags', 'like', '%'.$searchTag.'%')
+                            ->paginate(12);
         return view('frontend/e-com/product-search', compact('products','searchTag'));
+    }
+    public function filterbyBrand(Request $request){
+
+        $brandId = $request->input('brandName');
+        $searchTag = '';
+        $products = Product::when($brandId, function ($query) use ($brandId) {
+            $query->whereIn('brand_id', $brandId);
+        })->paginate(12);
+        return view('frontend/e-com/product-search', compact('products','searchTag','brandId'));
+    }
+    public function filterbyCategory(Request $request){
+
+        $categoryId = $request->input('categoryId');
+        $searchTag = '';
+        $products = Product::when($categoryId, function ($query) use ($categoryId) {
+            $query->whereIn('category_id', $categoryId);
+        })->paginate(12);
+        return view('frontend/e-com/product-search', compact('products','searchTag','categoryId'));
     }
     public function subcategoryWiseProduct($subcategoryslug){
         $subcategory = Subcategory::where('slug', $subcategoryslug)->first();
