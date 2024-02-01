@@ -2,8 +2,8 @@
 <section class="testimonial-area pt-60 pb-60">
     <div class="container">
         <div class="testimonial__shape p-relative">
-            <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-4.svg" alt=""
-                class="testimonial__shape-one">
+            {{-- <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-4.svg" alt=""
+                class="testimonial__shape-one"> --}}
             <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-5.svg" alt=""
                 class="testimonial__shape-two">
             <img src="{{ asset('frontend') }}/assets/img/shape/tree-leaf-4.png" alt=""

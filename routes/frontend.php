@@ -3,12 +3,12 @@
 use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\frontend\SubscribeController;
+use App\Http\Controllers\Frontend\SubscribeController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\ProfileController;
-use App\Http\Controllers\frontend\BillingInfoController;
-use App\Http\Controllers\frontend\ProductDetailsController;
+use App\Http\Controllers\Frontend\BillingInfoController;
+use App\Http\Controllers\Frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
 use App\Http\Controllers\Backend\OrderManageController;
