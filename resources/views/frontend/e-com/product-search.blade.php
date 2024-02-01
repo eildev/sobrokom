@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
                             <span>Search Page</span>
                         </div>
@@ -253,24 +253,14 @@
                 <div class="col-xl-10 col-lg-12 col-md-12">
                     <div class="tpshop__top tpshop__sidebar-area mr-60 ">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="product__filter-content mb-40">
-                                    <div class="row align-items-center py-4 text-center">
-                                        <div class="">
-                                            <div class="product__item-count">
-                                                <span class="pt-2 pb-2">Search By: {{ $searchTag }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="product__filter-content mb-40">
                                     <div class="row align-items-center py-2 text-center">
                                         <form action="{{ route('search.product') }}" method="POST">
                                             @csrf
                                             <div class="d-flex">
-                                                <input type="text" name="search" placeholder="Search Here"
+                                                <input value="{{ $searchTag }}" type="text" name="search"
+                                                    placeholder="Search Here"
                                                     class="form-control rounded-0 rounded-start">
                                                 <button class="tp-btn rounded-0 rounded-end">Search</button>
                                             </div>
@@ -395,47 +385,45 @@
                             </div>
 
                             @if ($products->count() > 11)
-                                <div class="basic-pagination text-center mt-35">
-                                    <nav>
-                                        <ul>
-                                            {{-- Previous Page Link --}}
-                                            @if ($products->onFirstPage())
-                                                <li class="page-item disabled" aria-disabled="true"
-                                                    aria-label="@lang('pagination.previous')">
-                                                    <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
-                                                </li>
-                                            @else
-                                                <li class="page-item">
-                                                    <a class="page-link pt-0" href="{{ $products->previousPageUrl() }}"
-                                                        rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                                                </li>
-                                            @endif
+                                <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($products->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link pt-0" href="{{ $products->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
+                                        @endif
 
-                                            {{-- Pagination Elements --}}
-                                            @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                                                @if ($page == $products->currentPage())
-                                                    <li class="page-item active" aria-current="page"><span
-                                                            class="page-link pt-0">{{ $page }}</span></li>
-                                                @else
-                                                    <li class="page-item"><a class="page-link pt-0"
-                                                            href="{{ $url }}">{{ $page }}</a></li>
-                                                @endif
-                                            @endforeach
-
-                                            {{-- Next Page Link --}}
-                                            @if ($products->hasMorePages())
-                                                <li class="page-item">
-                                                    <a class="page-link pt-0" href="{{ $products->nextPageUrl() }}"
-                                                        rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
-                                                </li>
+                                        {{-- Pagination Elements --}}
+                                        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                            @if ($page == $products->currentPage())
+                                                <li class="page-item active" aria-current="page"><span
+                                                        class="page-link pt-0">{{ $page }}</span></li>
                                             @else
-                                                <li class="page-item disabled" aria-disabled="true"
-                                                    aria-label="@lang('pagination.next')">
-                                                    <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
-                                                </li>
+                                                <li class="page-item"><a class="page-link pt-0"
+                                                        href="{{ $url }}">{{ $page }}</a></li>
                                             @endif
-                                        </ul>
-                                    </nav>
+                                        @endforeach
+
+                                        {{-- Next Page Link --}}
+                                        @if ($products->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link pt-0" href="{{ $products->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
                                 </div>
                             @endif
                         </div>

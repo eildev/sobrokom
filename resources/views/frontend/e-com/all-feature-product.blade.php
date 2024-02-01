@@ -22,6 +22,49 @@
     <!-- shop-area-start -->
     <section class="shop-area-start grey-bg pb-200">
         <div class="container">
+            <div class="product__filter-content mb-40">
+                <div class="row align-items-center gy-2 ">
+                    <div class="col-md-4">
+                        <div class="product__item-count">
+                            <span>Showing 1 - 18 of 40 Products</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div
+                            class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
+                            <form action="{{ route('search.product') }}" method="POST">
+                                @csrf
+                                <div class="d-flex">
+                                    <input type="text" name="search" placeholder="Search Here"
+                                        class="form-control rounded-0 py-1 rounded-start">
+                                    <button class="tp-btn rounded-0 py-1 px-3 rounded-end">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product__navtabs d-flex justify-content-end align-items-center">
+                            <div class="tp-shop-selector">
+                                <select style="display: none;">
+                                    <option>Default sorting</option>
+                                    <option>Show 14</option>
+                                    <option>Show 08</option>
+                                    <option>Show 20</option>
+                                </select>
+                                <div class="nice-select" tabindex="0">
+                                    <span class="current">Default sorting</span>
+                                    <ul class="list">
+                                        <li data-value="Show 12" class="option selected">Default sorting</li>
+                                        <li data-value="Show 14" class="option">Short popularity</li>
+                                        <li data-value="Show 08" class="option">Show 08</li>
+                                        <li data-value="Show 20" class="option">Show 20</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xl-2 col-lg-12 col-md-12">
                     <div class="tpshop__leftbar">
