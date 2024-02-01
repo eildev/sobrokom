@@ -109,6 +109,6 @@ Route::controller(OTPController::class)->group(function () {
 
 Route::controller(OrderManageController::class)->group(function () {
     Route::get('/order-tracking', 'orderTracking')->name('order.tracking');
-    Route::post('/order-tracking/invoice', 'orderTrackingInvoice')->name('order.tracking.invoice');
+    Route::get('/order-tracking/invoice', 'orderTrackingInvoice')->name('order.tracking.invoice');
 });
 //All Routes for Order Tracking End
