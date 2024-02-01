@@ -28,7 +28,7 @@
                             <form action="{{ route('order.tracking.invoice') }}" method="GET">
                                 <div class="d-flex">
                                     <input type="text" name="search" placeholder="Search your Invoice Number"
-                                        class="form-control rounded-0 rounded-start" value="{{ $searchTag }}">
+                                        class="form-control rounded-0 rounded-start" value="{{ !empty($searchTag)? $searchTag : '' }}">
                                     <button type="submit" class="tp-btn rounded-0 rounded-end">Search</button>
                                 </div>
                             </form>
