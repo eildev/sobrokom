@@ -30,5 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+    'client_id' => '923893620318-qrado498k8h084ve9bpu7i66v8e8be3e.apps.googleusercontent.com',
+    'client_secret' => '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',
+    'redirect' => 'https://sobrokom.store/socialLogin',
+    ],
 
 ];

@@ -53,8 +53,8 @@ class OrderManageController extends Controller
     }
     public function orderTrackingInvoice(Request $request){
         $searchTag = $request->search;
-        $orderTracking = Order::where('invoice_number', $request->search)->where('status', 'approve')
+        $trackes = Order::where('invoice_number', $request->search)->where('status', 'approve')
         ->get();
-        return view('frontend/e-com/tracking-product', compact('orderTracking','searchTag'));
+        return view('frontend/e-com/tracking-product', compact('trackes','searchTag'));
     }
 }

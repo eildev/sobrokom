@@ -1,4 +1,4 @@
-<!-- mobile-menu-area -->
+<!-- tablet-menu-area -->
 <div id="header-sticky-2" class="tpmobile-menu d-xl-none">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -20,11 +20,13 @@
                         <button class="tp-search-toggle"><i class="icon-search"></i></button>
                     </div>
                     <div class="header__info-user tpcolor__yellow ml-10 d-none d-sm-block">
-                        <a href="log-in.html"><i class="icon-user"></i></a>
+                        <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"><i class="icon-user"></i></a>
                     </div>
+                    @auth
                     <div class="header__info-wishlist tpcolor__greenish ml-10 d-none d-sm-block">
-                        <a href="wishlist.html"><i class="icon-heart icons"></i></a>
+                        <a href="{{route('user.dashboard')}}"><i class="icon-heart icons"></i></a>
                     </div>
+                    @endauth
                     <div class="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
                         <button><i><img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt=""></i>
                             <span class="mobile_show_quantity"></span>
@@ -36,4 +38,4 @@
     </div>
 </div>
 <div class="body-overlay"></div>
-<!-- mobile-menu-area-end -->
+<!-- tablet-menu-area-end -->
