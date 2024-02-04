@@ -299,7 +299,7 @@
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
                                             <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
-                                            <td><span class="total_weight"></span></td>
+                                            <td><span class="total_weight"></span>KG</td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>Shipping</th>
@@ -324,7 +324,8 @@
                                         <tr class="cart-subtotal">
                                             <th colspan="2">Order Total</th>
                                             <td>
-                                                <strong><span class="amount">৳{{ Cart::total() }}</span></strong>
+                                                <strong><span class="amount">৳<span
+                                                            class="sub_total_with_shiping_amaount">{{ Cart::total() }}</span></span></strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -656,10 +657,7 @@
                 totalWeight += product_weight * product_qty;
             });
             // console.log(total_weight);
-            total_weight.innerText = totalWeight + " KG";
-
-
-
+            total_weight.innerText = totalWeight;
         }
 
 
@@ -674,17 +672,38 @@
         function handleShippingChange() {
             let inSideShippingAmount = document.querySelector('.in_side_shipping_amount');
             let outSideShippingAmount = document.querySelector('.out_side_shipping_amount');
-
+            let subTotalWithShipingAmaount = document.querySelector('.sub_total_with_shiping_amaount');
+            let totalWeight = document.querySelector('.total_weight').textContent;
+            totalWeight = totalWeight * 1000;
             if (inSideShipping.checked) {
-                let amount = inSideShippingAmount.textContent;
-                console.log(amount);
+                let shippingAmount = parseInt(inSideShippingAmount.textContent);
+                let orderTotal = parseFloat("{{ Cart::subtotal() }}");
+                if (totalWeight <= 1200) {
+                    orderTotal = orderTotal + shippingAmount;
+                } else {
+                    let totalWeightConvertToKG = totalWeight / 1000;
+                    // console.log(typeof totalWeightConvertToKG);
+                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                        shippingAmount += 20;
+                    }
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                }
+
             } else if (outSideShipping.checked) {
-                let amount = outSideShippingAmount.textContent;
-                console.log(amount);
+                let shippingAmount = parseInt(outSideShippingAmount.textContent);
+                let orderTotal = parseFloat("{{ Cart::subtotal() }}");
+                if (totalWeight <= 1200) {
+                    orderTotal = orderTotal + shippingAmount;
+                } else {
+                    let totalWeightConvertToKG = totalWeight / 1000;
+                    // console.log(typeof totalWeightConvertToKG);
+                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                        shippingAmount += 20;
+                    }
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                }
             }
         }
-
-        handleShippingChange()
         totalWeight();
     </script>
 
