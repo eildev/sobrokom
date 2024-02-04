@@ -31,7 +31,7 @@ class ProductController extends Controller
             'long_desc' => 'required|max:200',
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sku' => 'required',
-            'shipping' => 'required',
+            // 'shipping' => 'required',
             // 'tags' => 'required',
         ]);
 
@@ -52,7 +52,7 @@ class ProductController extends Controller
                 $product->product_image = $productImage;
                 $product->sku = $request->sku;
                 $product->tags = $request->tag;
-                $product->shipping = $request->shipping;
+                // $product->shipping = $request->shipping;
                 $product->save();
                 if ($request->imageGallery) {
                     $imagesGallery = $request->imageGallery;
