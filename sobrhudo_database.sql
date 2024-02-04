@@ -2,15 +2,14 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 01, 2024 at 10:56 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Feb 04, 2024 at 01:01 AM
+-- Server version: 10.5.20-MariaDB-cll-lve-log
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sobrokom`
+-- Database: `sobrhudo_database`
 --
 
 -- --------------------------------------------------------
@@ -192,9 +191,9 @@ CREATE TABLE `home_banners` (
 --
 
 INSERT INTO `home_banners` (`id`, `title`, `short_description`, `long_description`, `link`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'Special Offer', 'Vegetable  Good For Health', 'Presentation matters. Our fresh Vietnamese vegetable rolls  look good and taste even better', 'http://127.0.0.1:8000/category/grocery', '1815384294.png', 1, '2024-01-16 21:46:17', '2024-02-01 02:34:39'),
-(4, 'Special Offer', 'Smarter Products for Everyday Needs', 'Simplify your world. Smarter electronics for effortless living.', 'http://127.0.0.1:8000/category/electronics', '393168706.png', 1, '2024-01-29 22:03:28', '2024-02-01 02:35:49'),
-(5, '30% Discount', 'Shop styles that flatter your unique figure.', 'Beyond trends, find your signature silhouette.', 'http://127.0.0.1:8000/category/fashion', '433200321.png', 1, '2024-01-29 22:06:36', '2024-02-01 02:35:24');
+(3, 'Special Offer', 'Vegetable  Good For Health', 'Presentation matters. Our fresh Vietnamese vegetable rolls  look good and taste even better', 'http://sobrokom.store/category/grocery', '1815384294.png', 1, '2024-01-16 21:46:17', '2024-02-01 16:39:21'),
+(4, 'Special Offer', 'Smarter Products for Everyday Needs', 'Simplify your world. Smarter electronics for effortless living.', 'http://sobrokom.store/category/electronics', '393168706.png', 1, '2024-01-29 22:03:28', '2024-02-01 16:39:31'),
+(5, '30% Discount', 'Shop styles that flatter your unique figure.', 'Beyond trends, find your signature silhouette.', 'http://sobrokom.store/category/fashion', '433200321.png', 1, '2024-01-29 22:06:36', '2024-02-01 16:39:45');
 
 -- --------------------------------------------------------
 
@@ -317,7 +316,15 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `invoice_number`, `user_identity`, `product_quantity`, `product_total`, `coupon_id`, `discount`, `sub_total`, `shipping_method`, `shipping_amount`, `grand_total`, `payment_method`, `payment_id`, `payment_status`, `order_note`, `status`, `created_at`, `updated_at`) VALUES
-(1, 178430, '01723343865', '2', 24200.00, NULL, NULL, 24200.00, 'In Dhaka', 0.00, 24200.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-01-31 00:47:44', '2024-01-31 00:47:44');
+(1, 178430, '01723343865', '2', 24200.00, NULL, NULL, 24200.00, 'In Dhaka', 0.00, 24200.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-01-31 00:47:44', '2024-01-31 00:47:44'),
+(2, 285795, '01917344267', '1', 1350.00, NULL, NULL, 1350.00, 'In Dhaka', 0.00, 1350.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-01 15:40:57', '2024-02-01 15:41:50'),
+(3, 394792, '01723343865', '2', 24200.00, NULL, NULL, 24200.00, 'In Dhaka', 0.00, 24200.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-01 15:54:14', '2024-02-01 15:56:29'),
+(4, 787459, '01742735416', '4', 5650.00, NULL, NULL, 5650.00, 'In Dhaka', 0.00, 5650.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-01 16:25:23', '2024-02-01 16:26:42'),
+(5, 826474, '01580581992', '10', 87510.00, NULL, NULL, 87510.00, 'In Dhaka', 0.00, 87510.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-01 16:41:43', '2024-02-04 08:35:22'),
+(6, 220180, '01917344267', '5', 24800.00, NULL, NULL, 24800.00, 'In Dhaka', 0.00, 24800.00, 'Cash on Delivery', NULL, NULL, NULL, 'pending', '2024-02-02 18:46:21', '2024-02-02 18:46:21'),
+(7, 543338, '01742735416', '2', 24200.00, NULL, NULL, 24200.00, 'In Dhaka', 0.00, 24200.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-03 10:42:19', '2024-02-03 10:43:03'),
+(8, 434505, '01712115004', '7', 6500.00, NULL, NULL, 6500.00, 'In Dhaka', 0.00, 6500.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-03 11:18:04', '2024-02-03 11:21:20'),
+(9, 859092, '01723343865', '3', 3670.00, NULL, NULL, 3670.00, 'In Dhaka', 0.00, 3670.00, 'Cash on Delivery', NULL, NULL, NULL, 'approve', '2024-02-04 08:34:10', '2024-02-04 08:36:24');
 
 -- --------------------------------------------------------
 
@@ -372,7 +379,34 @@ CREATE TABLE `order_details` (
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_quantity`, `total_price`, `created_at`, `updated_at`) VALUES
 (1, 1, '83', '1', 200.00, '2024-01-31 00:47:44', '2024-01-31 00:47:44'),
-(2, 1, '54', '1', 24000.00, '2024-01-31 00:47:44', '2024-01-31 00:47:44');
+(2, 1, '54', '1', 24000.00, '2024-01-31 00:47:44', '2024-01-31 00:47:44'),
+(3, 2, '58', '1', 1350.00, '2024-02-01 15:40:57', '2024-02-01 15:40:57'),
+(4, 3, '83', '1', 200.00, '2024-02-01 15:54:14', '2024-02-01 15:54:14'),
+(5, 3, '54', '1', 24000.00, '2024-02-01 15:54:14', '2024-02-01 15:54:14'),
+(6, 4, '77', '1', 700.00, '2024-02-01 16:25:23', '2024-02-01 16:25:23'),
+(7, 4, '58', '1', 1350.00, '2024-02-01 16:25:23', '2024-02-01 16:25:23'),
+(8, 4, '62', '1', 3400.00, '2024-02-01 16:25:23', '2024-02-01 16:25:23'),
+(9, 4, '83', '1', 200.00, '2024-02-01 16:25:23', '2024-02-01 16:25:23'),
+(10, 5, '83', '2', 200.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(11, 5, '81', '1', 70.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(12, 5, '80', '1', 100.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(13, 5, '79', '1', 200.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(14, 5, '57', '1', 200.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(15, 5, '56', '1', 1350.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(16, 5, '75', '1', 890.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(17, 5, '76', '1', 60300.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(18, 5, '54', '1', 24000.00, '2024-02-01 16:41:43', '2024-02-01 16:41:43'),
+(19, 6, '54', '1', 24000.00, '2024-02-02 18:46:21', '2024-02-02 18:46:21'),
+(20, 6, '83', '4', 200.00, '2024-02-02 18:46:21', '2024-02-02 18:46:21'),
+(21, 7, '83', '1', 200.00, '2024-02-03 10:42:19', '2024-02-03 10:42:19'),
+(22, 7, '54', '1', 24000.00, '2024-02-03 10:42:19', '2024-02-03 10:42:19'),
+(23, 8, '57', '1', 200.00, '2024-02-03 11:18:04', '2024-02-03 11:18:04'),
+(24, 8, '58', '4', 1350.00, '2024-02-03 11:18:04', '2024-02-03 11:18:04'),
+(25, 8, '83', '1', 200.00, '2024-02-03 11:18:04', '2024-02-03 11:18:04'),
+(26, 8, '77', '1', 700.00, '2024-02-03 11:18:04', '2024-02-03 11:18:04'),
+(27, 9, '59', '1', 250.00, '2024-02-04 08:34:10', '2024-02-04 08:34:10'),
+(28, 9, '60', '1', 2070.00, '2024-02-04 08:34:10', '2024-02-04 08:34:10'),
+(29, 9, '56', '1', 1350.00, '2024-02-04 08:34:10', '2024-02-04 08:34:10');
 
 -- --------------------------------------------------------
 
@@ -394,7 +428,16 @@ CREATE TABLE `o_t_p_data` (
 --
 
 INSERT INTO `o_t_p_data` (`id`, `phone`, `otp`, `expire_at`, `created_at`, `updated_at`) VALUES
-(1, '01723343865', '115725', '2024-01-30 11:47:51', '2024-01-30 05:42:51', '2024-01-30 05:42:51');
+(1, '01723343865', '115725', '2024-01-30 11:47:51', '2024-01-30 05:42:51', '2024-01-30 05:42:51'),
+(2, '01917344267', '103274', '2024-02-01 10:45:36', '2024-02-01 15:40:36', '2024-02-01 15:40:36'),
+(3, '01723343865', '100751', '2024-02-01 10:58:50', '2024-02-01 15:53:50', '2024-02-01 15:53:50'),
+(4, '01742735416', '113799', '2024-02-01 11:29:53', '2024-02-01 16:24:53', '2024-02-01 16:24:53'),
+(5, '01580581992', '120968', '2024-02-01 11:46:18', '2024-02-01 16:41:18', '2024-02-01 16:41:18'),
+(6, '01742735416', '114258', '2024-02-01 11:51:57', '2024-02-01 16:46:57', '2024-02-01 16:46:57'),
+(7, '01917344267', '105185', '2024-02-02 13:50:55', '2024-02-02 18:45:55', '2024-02-02 18:45:55'),
+(8, '01742735416', '105315', '2024-02-03 05:46:51', '2024-02-03 10:41:51', '2024-02-03 10:41:51'),
+(9, '01712115004', '101685', '2024-02-03 06:22:28', '2024-02-03 11:17:28', '2024-02-03 11:17:28'),
+(10, '01723343865', '119589', '2024-02-04 03:38:39', '2024-02-04 08:33:39', '2024-02-04 08:33:39');
 
 -- --------------------------------------------------------
 
@@ -659,10 +702,10 @@ CREATE TABLE `tag_names` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `userName` varchar(255) NOT NULL,
+  `userName` varchar(255) DEFAULT NULL,
   `socialId` text DEFAULT NULL,
   `fullName` varchar(100) DEFAULT NULL,
-  `pic` varchar(100) DEFAULT NULL,
+  `pic` text DEFAULT NULL,
   `phone` varchar(16) DEFAULT NULL,
   `present_address` varchar(100) DEFAULT NULL,
   `permanent_address` varchar(100) DEFAULT NULL,
@@ -681,8 +724,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `userName`, `socialId`, `fullName`, `pic`, `phone`, `present_address`, `permanent_address`, `role`, `email`, `email_verified_at`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'kishor', NULL, NULL, NULL, NULL, '', '', 'admin', 'mahmudkishor9@gmail.com', NULL, '$2y$12$JxbC/nE84dU/fwR2D81xaO6ItfhxidWJfPD0/m8vq5KV5XQrAzkKS', 'Active', NULL, '2024-01-09 21:29:13', '2024-01-09 21:29:13'),
-(2, 'user1', NULL, NULL, NULL, NULL, NULL, NULL, 'user', 'user@gmail.com', NULL, '$2y$12$CvxDN9nI1Dkx2bhPPzyF0uJb7M.Wrf7bvErfIylmqbnyRfokLQ0Ya', 'Active', NULL, '2024-01-17 00:49:23', '2024-01-17 00:49:23');
+(1, 'kishor', NULL, NULL, NULL, NULL, '', '', 'admin', 'majid.bd905@gmail.com', NULL, '$2y$12$izBb/gTAf//kq6RBUvG1IOGz/rtcm3yoIOA1IxgzKusv75VIdlpqS', 'Active', NULL, '2024-01-09 21:29:13', '2024-02-04 10:28:27'),
+(2, 'user1', NULL, NULL, NULL, NULL, NULL, NULL, 'user', 'user@gmail.com', NULL, '$2y$12$CvxDN9nI1Dkx2bhPPzyF0uJb7M.Wrf7bvErfIylmqbnyRfokLQ0Ya', 'Active', NULL, '2024-01-17 00:49:23', '2024-01-17 00:49:23'),
+(13, 'abm Programming', '113769219383336868763', 'abm Programming', 'https://lh3.googleusercontent.com/a/ACg8ocLQYAR3ZvDlNQ-Uq7epx1KuLdX9tzb2AuUBtTi0pvMDFNc=s96-c', NULL, NULL, NULL, 'user', 'abm.bd905@gmail.com', NULL, '$2y$12$ZKbsUywt2AGh.1J3gMMVseuoliaOfw.27oBtnRqSPH4vJ0Qk5aUxG', 'Active', NULL, '2024-02-04 10:56:51', '2024-02-04 10:56:51');
 
 -- --------------------------------------------------------
 
@@ -964,7 +1008,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -1012,7 +1056,7 @@ ALTER TABLE `offer_banners`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_billing_details`
@@ -1024,13 +1068,13 @@ ALTER TABLE `order_billing_details`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `o_t_p_data`
 --
 ALTER TABLE `o_t_p_data`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1078,7 +1122,7 @@ ALTER TABLE `tag_names`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `variants`

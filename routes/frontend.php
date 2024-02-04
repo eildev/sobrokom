@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\BillingInfoController;
 use App\Http\Controllers\Frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
+use App\Http\Controllers\Frontend\SocialLoginController;
 use App\Http\Controllers\Backend\OrderManageController;
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,12 @@ Route::controller(ProductDetailsController::class)->group(function () {
 
 });
 
+// product related routes
+Route::controller(SocialLoginController::class)->group(function () {
+    Route::get('/google/auth/redirect', 'googleRedirect')->name('google.redirect');
+    Route::get('/socialLogin', 'googleLogin')->name('google.login');
+
+});
 // Cart related routes
 Route::controller(CartController::class)->group(function () {
     Route::post('/product/add_to_cart', 'addToCart')->name('product.add_to_cart');
