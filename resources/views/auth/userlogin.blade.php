@@ -33,6 +33,7 @@
                               <div class="tptrack__item-content">
                                  <h4 class="tptrack__item-title">Login Here</h4>
                                  <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
+                                 <a href="{{route('google.redirect')}}">Google</a>
                               </div>
                            </div>
                            <form  method="POST" action="{{ route('login') }}">
@@ -75,6 +76,7 @@
                               <div class="tptrack__item-content">
                                  <h4 class="tptrack__item-title">Sign Up</h4>
                                  <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
+                                 <a href="{{route('google.redirect')}}">Google</a>
                               </div>
                            </div>
                            <form class="signUp" action="{{ route('register') }}" method="POST">

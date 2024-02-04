@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
-use App\Http\Controllers\Backend\brandController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\GlobalCouponController;
 use App\Http\Controllers\Backend\PopupMessageController;
 use App\Http\Controllers\Backend\TagNameController;
@@ -60,7 +60,7 @@ Route::middleware('auth','role:admin')->group(function () {
     //All Routes for Subcategory End
 
     //All Routes for brand Start
-    Route::controller(brandController::class)->group(function () {
+    Route::controller(BrandController::class)->group(function () {
         Route::get('/brand', 'index')->name('brand');
         Route::post('/brand/store', 'store')->name('brand.store');
         Route::get('/brand/view', 'show')->name('brand.view');
