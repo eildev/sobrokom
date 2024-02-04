@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
                             <span>Checkout</span>
                         </div>
@@ -257,6 +257,7 @@
                     {{-- your Order  --}}
                     @php
                         $cartProducts = Cart::content();
+                        // dd($cartProducts);
                     @endphp
                     <div style="margin-top: 70px" class="col-lg-6 col-md-12">
                         <div class="your-order mb-30 ">
@@ -267,6 +268,7 @@
                                         <tr>
                                             <th class="product-name">Product</th>
                                             <th class="product-total">Total</th>
+                                            <th class="product-total">Weight</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,10 +277,21 @@
                                                 <tr class="cart_item">
                                                     <td class="product-name">
                                                         {{ $product->name }} <strong class="product-quantity"> ×
-                                                            {{ $product->qty }}</strong>
+                                                            <span class="product_qty">{{ $product->qty }}</span>
+                                                        </strong>
                                                     </td>
                                                     <td class="product-total">
                                                         <span class="amount">৳{{ $product->price * $product->qty }}</span>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">
+                                                            <span class="product_weight">
+                                                                {{ $product->weight }}
+                                                            </span>
+                                                            <span class="product_unit">
+                                                                {{ $product->options->unit }}
+                                                            </span>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -286,28 +299,32 @@
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
                                             <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
+                                            <td><span class="total_weight"></span></td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>Shipping</th>
-                                            <td>
+                                            <td colspan="2">
                                                 <ul>
                                                     <li>
-                                                        <input type="radio" name="shipping">
+                                                        <input type="radio" name="shipping" id="in_side_shipping">
                                                         <label>
-                                                            In Dhaka: <span class="amount">Free Delivery</span>
+                                                            In Side Dhaka: <span class="amount">৳<span
+                                                                    class="in_side_shipping_amount">80</span></span>
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input type="radio" name="shipping">
-                                                        <label>Out Side Of Dhaka: <span
-                                                                class="amount">৳100.00</span></label>
+                                                        <input type="radio" name="shipping" id="out_side_shipping">
+                                                        <label>Out Side Of Dhaka: <span class="amount">৳
+                                                                <span class="out_side_shipping_amount">140</span>.00</>
+                                                            </span></label>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr class="cart-subtotal">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">৳{{ Cart::total() }}</span></strong>
+                                            <th colspan="2">Order Total</th>
+                                            <td>
+                                                <strong><span class="amount">৳{{ Cart::total() }}</span></strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -517,10 +534,10 @@
                 document.querySelector('.division_error').textContent = 'Division Name is Required';
             }
             if (post_code === "") {
-                document.querySelector('.post_code_error').textContent = 'post code is Required';
+                document.querySelector('.post_code_error').textContent = 'Post code is Required';
             }
             if (country === "") {
-                document.querySelector('.country_error').textContent = 'country is Required';
+                document.querySelector('.country_error').textContent = 'Country is Required';
             } else {
                 let user_phone = document.querySelector('.user_phone').value;
                 $.ajaxSetup({
@@ -570,7 +587,6 @@
             const order_notes = $('.order_notes').text();
 
             // get order details
-            const invoice_number = "1";
             const product_quantity = "{{ Cart::count() }}";
             const product_total = "{{ Cart::total() }}";
             const coupon_id = "";
@@ -619,13 +635,57 @@
                         $('#otpCheck').modal('hide');
                         toastr.success(res.message);
                         window.location.href = "/";
-                    }
-                    else{
+                    } else {
                         toastr.success(res.message);
                     }
                 }
             })
         });
+
+        function totalWeight() {
+            let cartItem = document.querySelectorAll('.cart_item');
+            let total_weight = document.querySelector('.total_weight');
+            let totalWeight = 0;
+            cartItem.forEach(item => {
+                let product_qty = item.querySelector('.product_qty').innerText;
+                let product_weight = item.querySelector('.product_weight').innerText;
+                let product_unit = item.querySelector('.product_unit').innerText;
+                if (product_unit == 'gm') {
+                    product_weight = parseFloat(product_weight / 1000).toFixed(2);
+                }
+                totalWeight += product_weight * product_qty;
+            });
+            // console.log(total_weight);
+            total_weight.innerText = totalWeight + " KG";
+
+
+
+        }
+
+
+        //  shipping Charge Calculate
+        let inSideShipping = document.querySelector('#in_side_shipping');
+        let outSideShipping = document.querySelector('#out_side_shipping');
+        // Add event listeners to radio buttons
+        inSideShipping.addEventListener('change', handleShippingChange);
+        outSideShipping.addEventListener('change', handleShippingChange);
+
+        // Function to handle radio button change
+        function handleShippingChange() {
+            let inSideShippingAmount = document.querySelector('.in_side_shipping_amount');
+            let outSideShippingAmount = document.querySelector('.out_side_shipping_amount');
+
+            if (inSideShipping.checked) {
+                let amount = inSideShippingAmount.textContent;
+                console.log(amount);
+            } else if (outSideShipping.checked) {
+                let amount = outSideShippingAmount.textContent;
+                console.log(amount);
+            }
+        }
+
+        handleShippingChange()
+        totalWeight();
     </script>
 
 

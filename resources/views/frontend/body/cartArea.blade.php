@@ -20,9 +20,9 @@
                 </div>
             </div>
         </div>
-        <div class="tpcart__free-shipping text-center">
+        {{-- <div class="tpcart__free-shipping text-center">
             <span>Free shipping for orders <b>under 10km</b></span>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="cartbody-overlay"></div>

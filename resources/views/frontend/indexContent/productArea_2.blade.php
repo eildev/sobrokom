@@ -135,7 +135,11 @@
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary"
-                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                                        style="font-size: 14px">
+                                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                    </span>
+                                                                    <br>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -156,6 +160,12 @@
                                                                         <input type="hidden"
                                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                                             name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->weight }}"
+                                                                            name="weight">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->unit }}"
+                                                                            name="unit">
                                                                         <button class="tp-btn-2">Add to
                                                                             cart</button>
                                                                     </form>
@@ -677,7 +687,11 @@
                                                                 <div class="tpproduct__price">
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary"
-                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                                        style="font-size: 14px">
+                                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                    </span>
+                                                                    <br>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -697,6 +711,12 @@
                                                                         <input type="hidden"
                                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                                             name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->weight }}"
+                                                                            name="weight">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->unit }}"
+                                                                            name="unit">
                                                                         <button class="tp-btn-2">Add to
                                                                             cart</button>
                                                                     </form>
@@ -1217,7 +1237,11 @@
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary"
-                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                                        style="font-size: 14px">
+                                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                    </span>
+                                                                    <br>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -1237,8 +1261,14 @@
                                                                         <input type="hidden"
                                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                                             name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->weight }}"
+                                                                            name="weight">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->unit }}"
+                                                                            name="unit">
                                                                         <button class="tp-btn-2">Add to
-                                                                            cart</button>
+                                                                            Cart</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -1481,8 +1511,8 @@
                                                                         class="icon-heart icons"></i></a>
                                                                 <a class="tpproduct__shopping-wishlist"
                                                                     href="#"><i class="icon-layers"></i></a>
-                                                                <a class="tpproduct__shopping-cart" href="#"><i
-                                                                        class="icon-eye"></i></a>
+                                                                <a class="tpproduct__shopping-cart"
+                                                                    href="#"><i class="icon-eye"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="tpproduct__content">

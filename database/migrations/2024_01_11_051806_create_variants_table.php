@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('stock_quantity');
             $table->string('barcode')->nullable();
             $table->string('unit');
+            $table->string('weight')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->date('expire_date')->nullable();
             $table->date('manufacture_date')->nullable();
