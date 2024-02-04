@@ -643,6 +643,7 @@
             })
         });
 
+        
         function totalWeight() {
             let cartItem = document.querySelectorAll('.cart_item');
             let total_weight = document.querySelector('.total_weight');
