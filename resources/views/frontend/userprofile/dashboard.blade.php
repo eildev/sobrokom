@@ -128,8 +128,10 @@
                     </div>
                     {{-- Orders body --}}
                     @php
-                        $orders = App\Models\Order::where('user_identity', $user->phone)->get();
-                        //  dd($orders);
+                        $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
+
+                        $orders = App\Models\Order::where('user_identity', $billingInfo->phone)->get();
+                        //  dd($billingInfo);
                     @endphp
 
                     <div class="tab__content--4 tabContent">
@@ -196,6 +198,9 @@
                     </div>
                 </div>
             </div> --}}
+
+
+
             <div class="card">
                 <div class="card-body">
                     <div id="invoice">
@@ -258,7 +263,8 @@
                                             <tr>
                                                 <td class="no">01</td>
                                                 <td class="text-left">
-                                                    <h3>Website Design</h3>Creating a recognizable design solution based on the
+                                                    <h3>Website Design</h3>Creating a recognizable design solution based on
+                                                    the
                                                     company's existing visual identity
                                                 </td>
                                                 <td class="">30</td>
@@ -288,11 +294,13 @@
                                     <div class="thanks">Thank you!</div>
                                     <div class="notices">
                                         <div>NOTICE:</div>
-                                        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30
+                                        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after
+                                            30
                                             days.</div>
                                     </div>
                                 </main>
-                                <footer>Invoice was created on a computer and is valid without the signature and seal.</footer>
+                                <footer>Invoice was created on a computer and is valid without the signature and seal.
+                                </footer>
                             </div>
                             <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
                             <div></div>
