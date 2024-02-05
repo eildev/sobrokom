@@ -99,6 +99,7 @@ class ProductController extends Controller
             $variant->color    = $request->color;
             $variant->size    = $request->size;
             $variant->unit    = $request->unit;
+            $variant->weight    = $request->weight;
             $variant->expire_date    = $request->expire_date;
             $variant->manufacture_date    = $request->manufacture_date;
             $variant->product_id    = $request->product_id;

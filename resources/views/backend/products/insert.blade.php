@@ -175,14 +175,6 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Shipping Charge</label>
-                                                    <input type="number" class="form-control shipping" placeholder=""
-                                                        name="shipping">
-                                                    <span class="shipping_error text-danger"></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
                                                 <input type="file" id="imageGallery" class="form-control "
                                                     name="imageGallery[]" multiple>
@@ -206,8 +198,8 @@
                             </div>
                         </form>
 
-
-                        <div class="row variant_section" style="display: none">
+                        {{-- style="display: none" --}}
+                        <div class="row variant_section">
                             <div class="card-title d-flex">
                                 <h5 class="mb-0 text-info">Add Variants</h5>
                             </div>
@@ -220,7 +212,7 @@
                                                 <label for="inputPrice" class="form-label">Regular Price</label>
                                                 <input type="number" class="form-control regular_price" id="inputPrice"
                                                     placeholder="00.00" name="regular_price">
-                                                <input type="text" class="product_id" name="product_id">
+                                                <input type="hidden" class="product_id" name="product_id">
                                                 <span class="regular_price_error text-danger"></span>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -257,9 +249,16 @@
                                                     <option value="piece">Piece</option>
                                                     <option value="dozon">Dozon</option>
                                                     <option value="inch">Inch</option>
+                                                    <option value="gm">GM</option>
+                                                    <option value="ml">ML</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
+                                                <label class="form-label">Weight</label> <br>
+                                                <input type="text" class="form-control weight" id="inputPrice"
+                                                    placeholder="Weight" name="weight">
+                                            </div>
+                                            {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
                                                 <select class="form-select color" name="color">
                                                     <option value="">Color</option>
@@ -276,12 +275,12 @@
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
+                                            </div> --}}
+                                            {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
                                                 <input type="text" class="form-control barcode" id="inputPrice"
                                                     placeholder="Barcode" name="barcode">
-                                            </div>
+                                            </div> --}}
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Manufacture Date</label> <br>
                                                 <input type="date" class="form-control" id="inputPrice"
@@ -313,10 +312,8 @@
                                                     <th>Discount</th>
                                                     <th>Discount Price</th>
                                                     <th>Stock Quantity</th>
-                                                    <th>Color</th>
-                                                    <th>Size</th>
                                                     <th>Unit</th>
-                                                    <th>Barcode</th>
+                                                    <th>Weight</th>
                                                     <th>Manufacture Date</th>
                                                     <th>Expire Date</th>
                                                     <th>Action</th>
@@ -416,9 +413,7 @@
                         document.querySelector('.discount').value = '';
                         document.querySelector('#stock').value = '';
                         document.querySelector('.unit').value = '';
-                        document.querySelector('.color').value = '';
-                        document.querySelector('.size').value = '';
-                        document.querySelector('.barcode').value = '';
+                        document.querySelector('.weight').value = '';
                         show();
                     } else {
                         toastr.warning('please provide varient');
@@ -448,10 +443,8 @@
                                             <td>${data.discount}</td>
                                             <td>${data.discount_amount}</td>
                                             <td>${data.stock_quantity}</td>
-                                            <td>${data.color}</td>
-                                            <td>${data.size}</td>
                                             <td>${data.unit}</td>
-                                            <td>${data.barcode}</td>
+                                            <td>${data.weight}</td>
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>

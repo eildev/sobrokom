@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
                             <span>Checkout</span>
                         </div>
@@ -38,7 +38,7 @@
                                 @if ($billingInfo)
                                     <div class="pt-2">
                                         <input type="checkbox" name="" id="isUsingAddress">
-                                        <label for="">Using your Default Address</label>
+                                        <label for="isUsingAddress">Using your Default Address</label>
                                     </div>
                                 @endif
                             </div>
@@ -119,11 +119,10 @@
                                 <div class="col-md-6">
                                     <div class="country-select">
                                         <label>Country <span class="required">*</span></label>
-                                        <select name="country" class="country" value="">
-                                            <option value="">Select Country</option>
+                                        <select name="country" class="country" readonly>
+                                            <option value="bangladesh">Bangladesh</option>
                                             <option value="united-states">United States</option>
                                             <option value="algeria">Algeria</option>
-                                            <option value="bangladesh">Bangladesh</option>
                                             <option value="canada">Canada</option>
                                             <option value="germany">Germany</option>
                                             <option value="england">England</option>
@@ -257,6 +256,7 @@
                     {{-- your Order  --}}
                     @php
                         $cartProducts = Cart::content();
+                        // dd($cartProducts);
                     @endphp
                     <div style="margin-top: 70px" class="col-lg-6 col-md-12">
                         <div class="your-order mb-30 ">
@@ -267,6 +267,7 @@
                                         <tr>
                                             <th class="product-name">Product</th>
                                             <th class="product-total">Total</th>
+                                            <th class="product-total">Weight</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,39 +276,59 @@
                                                 <tr class="cart_item">
                                                     <td class="product-name">
                                                         {{ $product->name }} <strong class="product-quantity"> ×
-                                                            {{ $product->qty }}</strong>
+                                                            <span class="product_qty">{{ $product->qty }}</span>
+                                                        </strong>
                                                     </td>
                                                     <td class="product-total">
                                                         <span class="amount">৳{{ $product->price * $product->qty }}</span>
+                                                    </td>
+                                                    <td class="product-total">
+                                                        <span class="amount">
+                                                            <span class="product_weight">
+                                                                {{ $product->weight }}
+                                                            </span>
+                                                            <span class="product_unit">
+                                                                {{ $product->options->unit }}
+                                                            </span>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         @endif
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
+                                            <td><span class="amount">৳ <span
+                                                        class="cart_total">{{ Cart::subtotal() }}</span></span></td>
+                                            <td><span class="total_weight"></span>KG</td>
                                         </tr>
                                         <tr class="shipping">
                                             <th>Shipping</th>
-                                            <td>
+                                            <td colspan="2">
                                                 <ul>
                                                     <li>
-                                                        <input type="radio" name="shipping">
-                                                        <label>
-                                                            In Dhaka: <span class="amount">Free Delivery</span>
+                                                        <input type="radio" class="shipping_checked" name="shipping"
+                                                            id="in_side_shipping">
+                                                        <label for="in_side_shipping">
+                                                            In Side Dhaka: <span class="amount">৳<span
+                                                                    class="in_side_shipping_amount">80</span></span>
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input type="radio" name="shipping">
-                                                        <label>Out Side Of Dhaka: <span
-                                                                class="amount">৳100.00</span></label>
+                                                        <input type="radio" class="shipping_checked" name="shipping"
+                                                            id="out_side_shipping">
+                                                        <label for="out_side_shipping">Out Side Of Dhaka: <span
+                                                                class="amount">৳
+                                                                <span class="out_side_shipping_amount">140</span>.00</>
+                                                            </span></label>
                                                     </li>
                                                 </ul>
                                             </td>
                                         </tr>
                                         <tr class="cart-subtotal">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">৳{{ Cart::total() }}</span></strong>
+                                            <th colspan="2">Order Total</th>
+                                            <td>
+                                                <strong><span class="amount">৳<span
+                                                            class="sub_total_with_shiping_amaount">{{ Cart::total() }}</span></span></strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -379,6 +400,11 @@
                                         class="tp-btn tp-color-btn w-100 banner-animation place_order">Place
                                         order</button>
                                 </div>
+                                <input type="hidden" name="coupon_id" class="coupon_id" value="0" />
+                                <input type="hidden" name="coupon_discount_amount" class="coupon_discount_amount"
+                                    value="0" />
+                                <input type="hidden" name="grand_total_amount" class="grand_total_amount"
+                                    value="0" />
                             </div>
                         </div>
                     </div>
@@ -466,29 +492,34 @@
                         toastr.warning(res.message);
                     } else if (res.status == 200) {
                         let couponDiscount = parseInt(res.couponData.discount);
-                        // console.log(couponDiscount);
-                        let cartSubtotal = parseFloat("{{ Cart::subtotal() }}");
-                        let grandTotal = ((cartSubtotal * couponDiscount) / 100)
-                        // console.log(cartSubtotal);
+                        let subTotalWithShipingAmaount = parseFloat(document.querySelector(
+                            '.sub_total_with_shiping_amaount').textContent).toFixed(2);
+                        let grandTotal = ((subTotalWithShipingAmaount * couponDiscount) / 100);
 
-                        grandTotal = cartSubtotal - grandTotal;
+                        grandTotal = subTotalWithShipingAmaount - grandTotal;
                         const data = `
                         <tr class="cart-subtotal">
                                             <th>Coupon Discount</th>
-                                            <td><span class="amount">${res.couponData.discount}%</span></td>
+                                            <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Grand Total</th>
-                                            <td><strong><span class="amount">৳${grandTotal}</span></strong>
+                                            <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
                                             </td>
                                         </tr>
+                                       
                         `;
                         $('.coupon_section').html(data);
+                        $(".coupon_id").val(res.couponData.id);
+                        $(".coupon_discount_amount").val(res.couponData.discount);
+                        $(".grand_total_amount").val(grandTotal);
                     }
                 }
             })
         });
 
+
+        // place order otp checked 
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
@@ -517,10 +548,10 @@
                 document.querySelector('.division_error').textContent = 'Division Name is Required';
             }
             if (post_code === "") {
-                document.querySelector('.post_code_error').textContent = 'post code is Required';
+                document.querySelector('.post_code_error').textContent = 'Post code is Required';
             }
             if (country === "") {
-                document.querySelector('.country_error').textContent = 'country is Required';
+                document.querySelector('.country_error').textContent = 'Country is Required';
             } else {
                 let user_phone = document.querySelector('.user_phone').value;
                 $.ajaxSetup({
@@ -528,24 +559,31 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                $.ajax({
-                    url: '/otp/store',
-                    type: 'post',
-                    data: {
-                        'phone': user_phone
-                    },
-                    success: function(res) {
-                        // console.log(res);
-                        if (res.status == 200) {
-                            $('#otpCheck').modal('show');
+                const shipingMethodChecked = document.querySelectorAll(".shipping_checked:checked");
+                if (shipingMethodChecked.length > 0) {
+                    $.ajax({
+                        url: '/otp/store',
+                        type: 'post',
+                        data: {
+                            'phone': phone
+                        },
+                        success: function(res) {
+                            // console.log(res);
+                            if (res.status == 200) {
+                                $('#otpCheck').modal('show');
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    toastr.warning("plese select shiping method");
+                }
             }
 
 
         });
 
+
+        // otp send order place Data 
         document.querySelector('.otp_send').addEventListener('click', function(e) {
             e.preventDefault();
             let user_phone = document.querySelector('.user_phone').value;
@@ -570,18 +608,25 @@
             const order_notes = $('.order_notes').text();
 
             // get order details
-            const invoice_number = "1";
             const product_quantity = "{{ Cart::count() }}";
-            const product_total = "{{ Cart::total() }}";
-            const coupon_id = "";
-            const discount = "";
-            const sub_total = "{{ Cart::total() }}";
+            const coupon_id = document.querySelector('.coupon_id').value;
+            const cartTotal = parseFloat('{{ Cart::total() }}');
+            let couponDiscount = parseInt(document.querySelector(".coupon_discount_amount").value);
+            const orderTotal = parseFloat(document.querySelector(".sub_total_with_shiping_amaount").textContent)
+                .toFixed(2);
+            // console.log(orderTotal);
+            // console.log(document.querySelector(".sub_total_with_shiping_amaount").textContent);
             const shipping_method = $('.shipping_method').text();
-            const shipping_amount = "";
-            const grand_total = "{{ Cart::total() }}";
-            const payment_method = "";
+            const shipping_amount = orderTotal - cartTotal;
+            let orderGrandTotal = 0;
+            const grand_total = parseFloat(document.querySelector(".grand_total_amount").textContent).toFixed(2);
+            if (grand_total > 0) {
+                orderGrandTotal = grand_total;
+            } else {
+                orderGrandTotal = orderTotal;
+            }
+            const payment_method = "Cash On Delivery";
             const payment_id = "";
-
             $.ajax({
                 url: '/otp/check',
                 type: 'post',
@@ -601,15 +646,13 @@
                     country,
                     order_notes,
 
-                    invoice_number,
                     "product_quantity": product_quantity,
-                    product_total,
                     coupon_id,
-                    discount,
-                    sub_total,
+                    discount: couponDiscount,
+                    "sub_total": orderTotal,
                     shipping_method,
                     shipping_amount,
-                    grand_total,
+                    "grand_total": orderGrandTotal,
                     payment_method,
                     payment_id,
                 },
@@ -619,13 +662,80 @@
                         $('#otpCheck').modal('hide');
                         toastr.success(res.message);
                         window.location.href = "/";
-                    }
-                    else{
+                    } else {
                         toastr.success(res.message);
                     }
                 }
             })
+
+
         });
+
+        // total weight calculate 
+        function totalWeight() {
+            let cartItem = document.querySelectorAll('.cart_item');
+            let total_weight = document.querySelector('.total_weight');
+            let totalWeight = 0;
+            cartItem.forEach(item => {
+                let product_qty = item.querySelector('.product_qty').innerText;
+                let product_weight = item.querySelector('.product_weight').innerText;
+                let product_unit = item.querySelector('.product_unit').innerText;
+                if (product_unit == 'gm') {
+                    product_weight = parseFloat(product_weight / 1000).toFixed(2);
+                } else if (product_unit == 'ml') {
+                    product_weight = parseFloat(product_weight / 1000).toFixed(2);
+                }
+                totalWeight += product_weight * product_qty;
+            });
+            // console.log(total_weight);
+            total_weight.innerText = totalWeight;
+        }
+
+
+        //  shipping Charge Calculate
+        let inSideShipping = document.querySelector('#in_side_shipping');
+        let outSideShipping = document.querySelector('#out_side_shipping');
+        // Add event listeners to radio buttons
+        inSideShipping.addEventListener('change', handleShippingChange);
+        outSideShipping.addEventListener('change', handleShippingChange);
+
+        // Function to handle radio button change
+        function handleShippingChange() {
+            let inSideShippingAmount = document.querySelector('.in_side_shipping_amount');
+            let outSideShippingAmount = document.querySelector('.out_side_shipping_amount');
+            let subTotalWithShipingAmaount = document.querySelector('.sub_total_with_shiping_amaount');
+            let totalWeight = document.querySelector('.total_weight').textContent;
+            totalWeight = totalWeight * 1000;
+            if (inSideShipping.checked) {
+                let shippingAmount = parseInt(inSideShippingAmount.textContent);
+                let orderTotal = parseFloat("{{ Cart::subtotal() }}");
+                if (totalWeight <= 1200) {
+                    orderTotal = orderTotal + shippingAmount;
+                } else {
+                    let totalWeightConvertToKG = totalWeight / 1000;
+                    // console.log(typeof totalWeightConvertToKG);
+                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                        shippingAmount += 20;
+                    }
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                }
+
+            } else if (outSideShipping.checked) {
+                let shippingAmount = parseInt(outSideShippingAmount.textContent);
+                let orderTotal = parseFloat("{{ Cart::subtotal() }}");
+                if (totalWeight <= 1200) {
+                    orderTotal = orderTotal + shippingAmount;
+                } else {
+                    let totalWeightConvertToKG = totalWeight / 1000;
+                    // console.log(typeof totalWeightConvertToKG);
+                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                        shippingAmount += 20;
+                    }
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                }
+            }
+        }
+        totalWeight();
     </script>
 
 

@@ -8,7 +8,7 @@
                         <div class="tpfooter__widget footer-col-1 mb-50">
                             <h4 class="tpfooter__widget-title">Let Us Help You</h4>
                             <p>For any questions fill free to contact with us at
-                                <a href="mailto:www.sobrokom.store@gmail.com">www.sobrokom.store@gmail.com</a>
+                                <a href="mailto:www.sobrokom.store@gmail.com">sobrokom.store@gmail.com</a> <br>
                                 <a href="mailto:info@sobrokom.store">info@sobrokom.store</a>
                             </p>
                             <div class="tpfooter__widget-social mt-45">

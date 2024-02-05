@@ -128,7 +128,11 @@
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary"
-                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                                        style="font-size: 14px">
+                                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                    </span>
+                                                                    <br>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -149,8 +153,14 @@
                                                                         <input type="hidden"
                                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                                             name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->weight }}"
+                                                                            name="weight">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->unit }}"
+                                                                            name="unit">
                                                                         <button class="tp-btn-2">Add to
-                                                                            cart</button>
+                                                                            Cart</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -269,7 +279,11 @@
 
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary"
-                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                                        style="font-size: 14px">
+                                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                    </span>
+                                                                    <br>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                                                     @endif
@@ -289,8 +303,14 @@
                                                                         <input type="hidden"
                                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                                             name="selling_price">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->weight }}"
+                                                                            name="weight">
+                                                                        <input type="hidden"
+                                                                            value="{{ $product->varient[0]->unit }}"
+                                                                            name="unit">
                                                                         <button class="tp-btn-2">Add to
-                                                                            cart</button>
+                                                                            Cart</button>
                                                                     </form>
                                                                 </div>
                                                             </div>

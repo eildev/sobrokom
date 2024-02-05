@@ -5,9 +5,8 @@
 
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-
-                            <img src="{{ !empty($user->pic) ? asset('uploads/user/'.$user->pic) : asset('uploads/user.jpg')}}" alt="Admin"
-                                class="rounded-circle p-1 bg-primary" width="110">
+                        <img src="{{ !empty($user->pic) ? asset('uploads/user/' . $user->pic) : asset('uploads/user.jpg') }}"
+                            alt="User Image" class="rounded-circle p-1 bg-primary" width="110">
                         <div class="mt-3">
                             <p>{{ $user->userName ?? 'Your User Name' }}</p>
                             <p class="text-secondary mb-1">{{ $user->fullName ?? 'Your Full Name' }}</p>

@@ -21,9 +21,10 @@ class CartController extends Controller
             'name' => $product->product_name,
             'qty' => $request->pr_quantity,
             'price' => $request->selling_price,
-            'weight' =>0,
+            'weight' => $request->weight,
             'options' => [
                 'image' => $product->product_image,
+                'unit' => $request->unit
             ]
         ]);
         return response()->json([

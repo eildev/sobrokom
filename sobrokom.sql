@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 04, 2024 at 01:01 AM
--- Server version: 10.5.20-MariaDB-cll-lve-log
--- PHP Version: 7.4.27
+-- Host: 127.0.0.1
+-- Generation Time: Feb 05, 2024 at 04:50 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sobrhudo_database`
+-- Database: `sobrokom`
 --
 
 -- --------------------------------------------------------
@@ -513,7 +513,6 @@ CREATE TABLE `products` (
   `product_image` varchar(255) NOT NULL,
   `sku` varchar(255) NOT NULL,
   `tags` text NOT NULL,
-  `shipping` float NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -523,37 +522,9 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `product_feature`, `product_name`, `slug`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `shipping`, `status`, `created_at`, `updated_at`) VALUES
-(53, 11, 14, 11, 'feature,new-arrival,best-rate', 'Samsung A20', 'samsung-a20', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1245530657.png', 'SAMSUNG-A20', 'samsung,mobile', 100, 1, '2024-01-21 21:47:28', '2024-01-21 21:47:28'),
-(54, 11, 17, 17, 'new-arrival,weekend-deals', 'Walton 4k Monitor', 'walton-4k-monitor', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '217606482.png', 'WALTON-4K-MONITOR', 'walton,tv,monitor', 100, 1, '2024-01-21 21:50:18', '2024-01-21 21:50:18'),
-(55, 13, 19, 16, 'new-arrival,trending', 'Black T-shirt for men', 'black-t-shirt-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '904029533.png', 'BLACK-T-SHIRT', 'black,t-shirt,men', 70, 1, '2024-01-21 22:01:13', '2024-01-21 22:01:13'),
-(56, 13, 18, 16, 'feature,new-arrival,best-rate', 'Yellow Jacket\'s for Women', 'yellow-jackets-for-women', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1891538933.png', 'YELLOW-JACKET', 'yellow,jacket', 70, 1, '2024-01-21 22:03:58', '2024-01-21 22:03:58'),
-(57, 13, 19, 16, 'feature,new-arrival,trending', 'Smart T-shirt for men', 'smart-t-shirt-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '523162002.png', 'SMART-T-SHIRT', 'smart,t-shirt', 70, 1, '2024-01-21 22:05:57', '2024-01-21 22:05:57'),
-(58, 13, 26, 12, 'feature,new-arrival,trending', 'White Shoe for men', 'white-shoe-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '537174501.png', 'WHITE-SHOE', 'white,shoe', 70, 1, '2024-01-21 22:08:29', '2024-01-21 22:08:29'),
-(59, 13, 19, 16, 'feature,new-arrival,trending', 'Trendy T-shirt for Men', 'trendy-t-shirt-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '9762969.png', 'TRENDY-T-SHIRT', 'trendy,t-shirt', 70, 1, '2024-01-21 22:19:53', '2024-01-21 22:19:53'),
-(60, 13, 26, 13, 'feature,new-arrival', 'Black Shoe for Men', 'black-shoe-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '265388077.png', 'BLACK-T-SHIRT', 'black,t-shirt', 70, 1, '2024-01-21 22:21:41', '2024-01-21 22:21:41'),
-(61, 11, 17, 15, 'feature,new-arrival,trending', 'LG 4k Smart TV', 'lg-4k-smart-tv', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1878363478.png', 'SMART-MONITOR', 'lg,smart,monitor,tv', 70, 1, '2024-01-21 22:24:07', '2024-01-21 22:24:07'),
-(62, 13, 18, 16, 'feature,new-arrival', 'Black Jacket for Men', 'black-jacket-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1394030665.png', 'BLACK-JACKET', 'black,jacket', 70, 1, '2024-01-21 22:26:10', '2024-01-21 22:26:10'),
-(63, 14, 27, 18, 'feature,new-arrival', 'Reading Table', 'reading-table', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '742649424.png', 'READING-TABLE', 'table,reading', 70, 1, '2024-01-21 22:28:24', '2024-01-21 22:28:24'),
-(64, 13, 19, 18, 'feature,new-arrival', 'Blue T-shirt', 'blue-t-shirt', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '344436337.png', 'BLUE-T_SHIRT', 'blue,t-shirt', 70, 1, '2024-01-21 22:30:47', '2024-01-21 22:30:47'),
-(65, 13, 19, 16, 'feature,new-arrival,trending', 'Navy-blue T-shirt', 'navy-blue-t-shirt', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '714258298.png', 'NAVY-BLUE-T-SHIRT', 'navy,blue,t-shirt', 70, 1, '2024-01-21 22:32:57', '2024-01-21 22:32:57'),
-(66, 13, 18, 16, 'feature,new-arrival,trending', 'Smart Jackets for Men', 'smart-jackets-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '719303581.png', 'SMART-JACKET', 'smart,jacket', 70, 1, '2024-01-21 22:35:15', '2024-01-21 22:35:15'),
-(67, 13, 18, 16, 'feature,new-arrival', 'Blue Denim for Men and women', 'blue-denim-for-men-and-women', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1773929998.png', 'BLUE-DENIM', 'blue,denim', 100, 1, '2024-01-21 22:37:39', '2024-01-21 22:37:39'),
-(68, 11, 28, 15, 'feature,new-arrival,trending', 'LG Regriaretor', 'lg-regriaretor', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '731980308.png', 'LG-FRIDGE', 'lg,fridge', 200, 1, '2024-01-21 22:40:20', '2024-01-21 22:40:20'),
-(69, 14, 27, 14, 'feature,new-arrival', 'Dyning Table', 'dyning-table', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2049187024.png', 'DYNING-TABLE', 'dyning,table', 100, 1, '2024-01-21 22:42:01', '2024-01-21 22:42:01'),
-(70, 11, 14, 11, 'new-arrival,trending', 'Samsung A21', 'samsung-a21', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1830461508.png', 'SAMSUNG-A21', 'samsung,a21', 100, 1, '2024-01-21 22:44:00', '2024-01-21 22:44:00'),
-(71, 14, 27, 14, 'new-arrival,trending', 'Round Table', 'round-table', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '193805906.png', 'ROUND-TABLE', 'round,table', 100, 1, '2024-01-21 22:45:55', '2024-01-21 22:45:55'),
-(72, 11, 28, 17, 'new-arrival', 'Walton Regrigaretor', 'walton-regrigaretor', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '622902008.png', 'WALTON-FRIDGE', 'walton fridge', 200, 1, '2024-01-21 22:48:15', '2024-01-21 22:48:15'),
-(73, 13, 18, 16, 'feature,new-arrival', 'Jackets for Men', 'jackets-for-men', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2023767703.png', 'JACKTS', 'jackets', 70, 1, '2024-01-21 22:50:34', '2024-01-21 22:50:34'),
-(74, 11, 14, 11, 'feature,new-arrival', 'Samsung Galaxy A04e', 'samsung-galaxy-a04e', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '828715119.png', 'SAMSUNG-GALAXY', 'samsung,galaxy', 100, 1, '2024-01-21 22:52:44', '2024-01-21 22:52:44'),
-(75, 14, 27, 14, 'feature', 'Folding Round Table', 'folding-round-table', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1687746825.png', 'FOLDING-TABLE', 'folding,table', 100, 1, '2024-01-21 22:54:33', '2024-01-21 22:54:33'),
-(76, 14, 20, 14, 'feature', 'Room Sofa', 'room-sofa', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1265160550.png', 'FURNITURE-SOFA', 'sofa', 100, 1, '2024-01-21 22:58:35', '2024-01-21 22:58:35'),
-(77, 12, 15, 18, 'feature,new-arrival', 'Beef', 'beef', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1637460874.jpg', 'BEEF', 'beef', 70, 1, '2024-01-21 23:03:55', '2024-01-21 23:03:55'),
-(78, 12, 15, 18, 'feature,new-arrival', 'Chicken Meat', 'chicken-meat', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1497507513.jpg', 'CHICKEN', 'chicken', 70, 1, '2024-01-21 23:05:48', '2024-01-21 23:05:48'),
-(79, 12, 16, 18, 'feature,new-arrival', 'Ginger', 'ginger', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '48256348.jpg', 'GINGER', 'ginger', 70, 1, '2024-01-21 23:07:10', '2024-01-21 23:07:10'),
-(80, 12, 16, 18, 'feature,new-arrival', 'Onion', 'onion', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1470355509.jpg', 'ONION', 'onion', 70, 1, '2024-01-21 23:08:30', '2024-01-21 23:08:30'),
-(81, 12, 16, 18, 'feature,new-arrival', 'Potato', 'potato', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '636362809.jpg', 'POTATO', 'potato', 70, 1, '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
-(83, 13, 19, 16, 'feature,new-arrival,weekend-deals', 'T-Shirt for Smart Man', 't-shirt-for-smart-man', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic', '1742277523.png', 'T-SHIRT-005', 't-shirt', 70, 1, '2024-01-24 11:46:09', '2024-01-24 11:46:09');
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `product_feature`, `product_name`, `slug`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `status`, `created_at`, `updated_at`) VALUES
+(87, 12, 15, 18, 'feature,new-arrival', 'Chicken wings', 'chicken-wings', 'Chicken wings', 'Chicken wings', '219177739.png', 'asdfasd', 'asdsad', 1, '2024-02-04 01:22:44', '2024-02-04 01:22:44'),
+(88, 12, 15, 18, 'feature,new-arrival,trending', 'Chicken drumstick', 'chicken-drumstick', 'Chicken drumstick', 'Chicken drumstick', '562678631.jpg', 'sdfsaf', 'sdfsdf', 1, '2024-02-04 04:09:21', '2024-02-04 04:09:21');
 
 -- --------------------------------------------------------
 
@@ -574,43 +545,10 @@ CREATE TABLE `product_galleries` (
 --
 
 INSERT INTO `product_galleries` (`id`, `product_id`, `image`, `created_at`, `updated_at`) VALUES
-(91, 53, '2097634736.png', '2024-01-21 21:47:28', '2024-01-21 21:47:28'),
-(92, 54, '1264175915.png', '2024-01-21 21:50:18', '2024-01-21 21:50:18'),
-(93, 55, '451033152.png', '2024-01-21 22:01:13', '2024-01-21 22:01:13'),
-(94, 56, '1718437178.png', '2024-01-21 22:03:58', '2024-01-21 22:03:58'),
-(95, 57, '2118198515.png', '2024-01-21 22:05:57', '2024-01-21 22:05:57'),
-(96, 58, '1117334339.png', '2024-01-21 22:08:29', '2024-01-21 22:08:29'),
-(97, 59, '1062439628.png', '2024-01-21 22:19:53', '2024-01-21 22:19:53'),
-(98, 60, '1832984797.png', '2024-01-21 22:21:41', '2024-01-21 22:21:41'),
-(99, 61, '1824352617.png', '2024-01-21 22:24:07', '2024-01-21 22:24:07'),
-(100, 62, '1600956799.png', '2024-01-21 22:26:10', '2024-01-21 22:26:10'),
-(101, 63, '871839792.png', '2024-01-21 22:28:24', '2024-01-21 22:28:24'),
-(102, 64, '825316947.png', '2024-01-21 22:30:47', '2024-01-21 22:30:47'),
-(103, 65, '1504666335.png', '2024-01-21 22:32:57', '2024-01-21 22:32:57'),
-(104, 66, '79607514.png', '2024-01-21 22:35:15', '2024-01-21 22:35:15'),
-(105, 67, '2015477010.png', '2024-01-21 22:37:39', '2024-01-21 22:37:39'),
-(106, 68, '938156495.png', '2024-01-21 22:40:20', '2024-01-21 22:40:20'),
-(107, 69, '2063710477.png', '2024-01-21 22:42:01', '2024-01-21 22:42:01'),
-(108, 70, '1218028694.png', '2024-01-21 22:44:00', '2024-01-21 22:44:00'),
-(109, 71, '285063595.png', '2024-01-21 22:45:55', '2024-01-21 22:45:55'),
-(110, 72, '1614563978.png', '2024-01-21 22:48:15', '2024-01-21 22:48:15'),
-(111, 73, '13908149.png', '2024-01-21 22:50:34', '2024-01-21 22:50:34'),
-(112, 74, '727086364.png', '2024-01-21 22:52:44', '2024-01-21 22:52:44'),
-(113, 75, '1672089193.png', '2024-01-21 22:54:33', '2024-01-21 22:54:33'),
-(114, 76, '734036678.png', '2024-01-21 22:58:35', '2024-01-21 22:58:35'),
-(115, 77, '439363737.jpg', '2024-01-21 23:03:55', '2024-01-21 23:03:55'),
-(116, 77, '428856423.jpg', '2024-01-21 23:03:55', '2024-01-21 23:03:55'),
-(117, 78, '1535439662.jpg', '2024-01-21 23:05:48', '2024-01-21 23:05:48'),
-(118, 78, '394592933.jpg', '2024-01-21 23:05:48', '2024-01-21 23:05:48'),
-(119, 79, '1488319798.jpg', '2024-01-21 23:07:10', '2024-01-21 23:07:10'),
-(120, 79, '923043248.jpg', '2024-01-21 23:07:10', '2024-01-21 23:07:10'),
-(121, 80, '332651783.jpg', '2024-01-21 23:08:30', '2024-01-21 23:08:30'),
-(122, 81, '498882434.jpg', '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
-(123, 81, '334820377.jpg', '2024-01-21 23:09:42', '2024-01-21 23:09:42'),
-(124, 83, '396682478.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
-(125, 83, '1995834960.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
-(126, 83, '1079137942.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09'),
-(127, 83, '1550289961.png', '2024-01-24 11:46:09', '2024-01-24 11:46:09');
+(134, 87, '239186593.png', '2024-02-04 01:22:44', '2024-02-04 01:22:44'),
+(135, 87, '1127651391.png', '2024-02-04 01:22:44', '2024-02-04 01:22:44'),
+(136, 88, '882423874.png', '2024-02-04 04:09:21', '2024-02-04 04:09:21'),
+(137, 88, '119490433.jpg', '2024-02-04 04:09:21', '2024-02-04 04:09:21');
 
 -- --------------------------------------------------------
 
@@ -726,7 +664,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `userName`, `socialId`, `fullName`, `pic`, `phone`, `present_address`, `permanent_address`, `role`, `email`, `email_verified_at`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'kishor', NULL, NULL, NULL, NULL, '', '', 'admin', 'majid.bd905@gmail.com', NULL, '$2y$12$izBb/gTAf//kq6RBUvG1IOGz/rtcm3yoIOA1IxgzKusv75VIdlpqS', 'Active', NULL, '2024-01-09 21:29:13', '2024-02-04 10:28:27'),
 (2, 'user1', NULL, NULL, NULL, NULL, NULL, NULL, 'user', 'user@gmail.com', NULL, '$2y$12$CvxDN9nI1Dkx2bhPPzyF0uJb7M.Wrf7bvErfIylmqbnyRfokLQ0Ya', 'Active', NULL, '2024-01-17 00:49:23', '2024-01-17 00:49:23'),
-(13, 'abm Programming', '113769219383336868763', 'abm Programming', 'https://lh3.googleusercontent.com/a/ACg8ocLQYAR3ZvDlNQ-Uq7epx1KuLdX9tzb2AuUBtTi0pvMDFNc=s96-c', NULL, NULL, NULL, 'user', 'abm.bd905@gmail.com', NULL, '$2y$12$ZKbsUywt2AGh.1J3gMMVseuoliaOfw.27oBtnRqSPH4vJ0Qk5aUxG', 'Active', NULL, '2024-02-04 10:56:51', '2024-02-04 10:56:51');
+(13, 'abm Programming', '113769219383336868763', 'abm Programming', 'https://lh3.googleusercontent.com/a/ACg8ocLQYAR3ZvDlNQ-Uq7epx1KuLdX9tzb2AuUBtTi0pvMDFNc=s96-c', NULL, NULL, NULL, 'admin', 'abm.bd905@gmail.com', NULL, '$2y$12$ZKbsUywt2AGh.1J3gMMVseuoliaOfw.27oBtnRqSPH4vJ0Qk5aUxG', 'Active', NULL, '2024-02-04 10:56:51', '2024-02-04 10:56:51');
 
 -- --------------------------------------------------------
 
@@ -745,6 +683,7 @@ CREATE TABLE `variants` (
   `stock_quantity` int(11) NOT NULL,
   `barcode` varchar(255) DEFAULT NULL,
   `unit` varchar(50) NOT NULL,
+  `weight` varchar(20) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `expire_date` date DEFAULT NULL,
   `manufacture_date` date DEFAULT NULL,
@@ -756,39 +695,9 @@ CREATE TABLE `variants` (
 -- Dumping data for table `variants`
 --
 
-INSERT INTO `variants` (`id`, `product_id`, `color`, `size`, `regular_price`, `discount`, `discount_amount`, `stock_quantity`, `barcode`, `unit`, `status`, `expire_date`, `manufacture_date`, `created_at`, `updated_at`) VALUES
-(101, 53, NULL, NULL, 12000.00, '0', 12000, 56, NULL, 'piece', 1, NULL, NULL, '2024-01-21 21:47:57', '2024-01-21 21:47:57'),
-(102, 54, NULL, NULL, 24000.00, '0', 24000, 67, NULL, 'piece', 1, NULL, NULL, '2024-01-21 21:50:45', '2024-01-21 21:50:45'),
-(103, 55, NULL, NULL, 200.00, '0', 200, 200, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:01:29', '2024-01-21 22:01:29'),
-(104, 56, NULL, NULL, 1500.00, '10', 1350, 670, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:04:22', '2024-01-21 22:04:22'),
-(105, 57, NULL, NULL, 200.00, '0', 200, 56, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:06:12', '2024-01-21 22:06:12'),
-(106, 58, NULL, NULL, 1350.00, '0', 1350, 635, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:08:54', '2024-01-21 22:08:54'),
-(107, 59, NULL, NULL, 250.00, '0', 250, 200, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:20:09', '2024-01-21 22:20:09'),
-(108, 60, NULL, NULL, 2300.00, '10', 2070, 290, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:22:15', '2024-01-21 22:22:15'),
-(109, 61, NULL, NULL, 45000.00, '0', 45000, 78, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:24:29', '2024-01-21 22:24:29'),
-(110, 62, NULL, NULL, 3400.00, '0', 3400, 46, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:26:29', '2024-01-21 22:26:29'),
-(111, 63, NULL, NULL, 700.00, '0', 700, 23, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:28:47', '2024-01-21 22:28:47'),
-(112, 64, NULL, NULL, 200.00, '0', 200, 200, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:31:02', '2024-01-21 22:31:02'),
-(113, 65, NULL, NULL, 250.00, '0', 250, 27, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:33:12', '2024-01-21 22:33:12'),
-(114, 66, NULL, NULL, 3100.00, '10', 2790, 27, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:35:32', '2024-01-21 22:35:32'),
-(115, 67, NULL, NULL, 2200.00, '20', 1760, 340, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:38:05', '2024-01-21 22:38:05'),
-(116, 68, NULL, NULL, 34000.00, '0', 34000, 34, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:40:36', '2024-01-21 22:40:36'),
-(117, 69, NULL, NULL, 1500.00, '0', 1500, 67, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:42:20', '2024-01-21 22:42:20'),
-(118, 70, NULL, NULL, 14999.00, '0', 14999, 15, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:44:21', '2024-01-21 22:44:21'),
-(119, 71, NULL, NULL, 670.00, '0', 670, 56, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:46:24', '2024-01-21 22:46:24'),
-(120, 72, NULL, NULL, 25000.00, '0', 25000, 24, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:48:34', '2024-01-21 22:48:34'),
-(121, 73, NULL, NULL, 2100.00, '0', 2100, 87, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:50:48', '2024-01-21 22:50:48'),
-(122, 74, NULL, NULL, 19000.00, '0', 19000, 63, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:53:04', '2024-01-21 22:53:04'),
-(123, 75, NULL, NULL, 890.00, '0', 890, 28, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:54:54', '2024-01-21 22:54:54'),
-(124, 76, NULL, NULL, 67000.00, '10', 60300, 78, NULL, 'piece', 1, NULL, NULL, '2024-01-21 22:58:53', '2024-01-21 22:58:53'),
-(125, 77, NULL, NULL, 700.00, '0', 700, 20, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:04:16', '2024-01-21 23:04:16'),
-(126, 78, NULL, NULL, 200.00, '0', 200, 20, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:06:04', '2024-01-21 23:06:04'),
-(127, 79, NULL, NULL, 200.00, '0', 200, 200, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:07:24', '2024-01-21 23:07:24'),
-(128, 80, NULL, NULL, 100.00, '0', 100, 100, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:08:44', '2024-01-21 23:08:44'),
-(129, 81, NULL, NULL, 70.00, '0', 70, 100, NULL, 'kg', 1, NULL, NULL, '2024-01-21 23:09:56', '2024-01-21 23:09:56'),
-(130, 83, 'red', 'M', 200.00, '0', 200, 50, '5000', 'piece', 1, NULL, NULL, '2024-01-24 11:46:46', '2024-01-24 11:46:46'),
-(131, 83, 'blue', 'L', 250.00, '0', 250, 67, '68897', 'piece', 1, NULL, NULL, '2024-01-24 11:47:15', '2024-01-24 11:47:15'),
-(132, 83, 'green', 'XL', 300.00, '10', 270, 67, '786969', 'piece', 1, NULL, NULL, '2024-01-24 11:47:39', '2024-01-24 11:47:39');
+INSERT INTO `variants` (`id`, `product_id`, `color`, `size`, `regular_price`, `discount`, `discount_amount`, `stock_quantity`, `barcode`, `unit`, `weight`, `status`, `expire_date`, `manufacture_date`, `created_at`, `updated_at`) VALUES
+(134, 87, NULL, NULL, 250.00, '10', 225, 100, NULL, 'gm', '500', 1, NULL, NULL, '2024-02-04 01:24:04', '2024-02-04 01:24:04'),
+(135, 88, NULL, NULL, 400.00, '0', 400, 100, NULL, 'kg', '1', 1, NULL, NULL, '2024-02-04 04:09:44', '2024-02-04 04:09:44');
 
 -- --------------------------------------------------------
 
@@ -804,16 +713,6 @@ CREATE TABLE `wish_lists` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `wish_lists`
---
-
-INSERT INTO `wish_lists` (`id`, `user_id`, `product_id`, `loved`, `created_at`, `updated_at`) VALUES
-(9, 2, 80, 1, '2024-01-22 05:38:45', '2024-01-22 05:38:45'),
-(10, 2, 78, 1, '2024-01-22 22:39:14', '2024-01-22 22:39:14'),
-(11, 2, 77, 1, '2024-01-23 00:03:50', '2024-01-23 00:03:50'),
-(12, 2, 64, 1, '2024-01-23 00:03:53', '2024-01-23 00:03:53');
 
 --
 -- Indexes for dumped tables
@@ -1092,13 +991,13 @@ ALTER TABLE `popup_messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -1128,7 +1027,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `variants`
 --
 ALTER TABLE `variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT for table `wish_lists`

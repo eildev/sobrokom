@@ -193,9 +193,11 @@
                 });
 
 
-                let product_id = this.elements.product_id.value
-                let variant_id = this.elements.variant_id.value
-                let selling_price = this.elements.selling_price.value
+                let product_id = this.elements.product_id.value;
+                let variant_id = this.elements.variant_id.value;
+                let selling_price = this.elements.selling_price.value;
+                let weight = this.elements.weight.value;
+                let unit = this.elements.unit.value;
 
                 // console.log(product_id, variant_id,selling_price);
 
@@ -207,6 +209,8 @@
                         'variant_id': variant_id,
                         'selling_price': selling_price,
                         'pr_quantity': '1',
+                        'weight': weight,
+                        'unit': unit
                     },
                     success: function(response) {
                         if (response.status == 200) {
