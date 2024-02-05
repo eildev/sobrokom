@@ -66,6 +66,7 @@ class OTPController extends Controller
     }
 
     public function checkOTP(Request $request){
+        // dd($request);
         $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
         $now = Carbon::now();
         if(!$verificationCode){
@@ -92,7 +93,7 @@ class OTPController extends Controller
                 $order->discount = $request->discount;
                 $order->sub_total = $request->sub_total;
                 $order->shipping_method = 'In Dhaka';
-                $order->shipping_amount = 0;
+                $order->shipping_amount = $request->shipping_amount;
                 $order->grand_total = $request->sub_total;
                 $order->payment_method = 'Cash on Delivery';
                 $order->save();

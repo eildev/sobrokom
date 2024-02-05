@@ -611,15 +611,13 @@
             const product_quantity = "{{ Cart::count() }}";
             const coupon_id = document.querySelector('.coupon_id').value;
             const cartTotal = parseFloat('{{ Cart::total() }}');
-            const discount = parseInt(document.querySelector(".coupon_discount_amount").textContent);
-            console.log(discount);
+            let couponDiscount = parseInt(document.querySelector(".coupon_discount_amount").value);
             const orderTotal = parseFloat(document.querySelector(".sub_total_with_shiping_amaount").textContent)
                 .toFixed(2);
             // console.log(orderTotal);
             // console.log(document.querySelector(".sub_total_with_shiping_amaount").textContent);
             const shipping_method = $('.shipping_method').text();
             const shipping_amount = orderTotal - cartTotal;
-            console.log(shipping_amount);
             let orderGrandTotal = 0;
             const grand_total = parseFloat(document.querySelector(".grand_total_amount").textContent).toFixed(2);
             if (grand_total > 0) {
@@ -650,7 +648,7 @@
 
                     "product_quantity": product_quantity,
                     coupon_id,
-                    discount,
+                    discount: couponDiscount,
                     "sub_total": orderTotal,
                     shipping_method,
                     shipping_amount,
