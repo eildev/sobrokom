@@ -11,6 +11,8 @@ use App\Models\OrderDetails;
 use Illuminate\Support\Carbon;
 use Validator;
 use Cart;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Mail;
 class OTPController extends Controller
 {
     public function storeOTP(Request $request){
@@ -131,6 +133,10 @@ class OTPController extends Controller
                     $OrderDetails->save();
                 }
                 Cart::destroy();
+                $url = url('/order-tracking/invoice');
+                $data = ['name' => $request->first_name,'trackingNumber' => $invoiceNumber,'trackingURL'=> $url]; // Replace with your actual data
+                Mail::to($request->email)->send(new OrderMail($data));
+
                 return response()->json([
                 'status' => 200,
                 'message' =>'Your order has been Submited successfully'
