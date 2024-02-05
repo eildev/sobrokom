@@ -701,30 +701,36 @@
 
         // Function to handle radio button change
         function handleShippingChange() {
-            let inSideShippingAmount = document.querySelector('.in_side_shipping_amount');
+
+            let inSideShippingAmount = document.querySelector('.in_side_shipping_amount').textContent;
             let outSideShippingAmount = document.querySelector('.out_side_shipping_amount');
             let subTotalWithShipingAmaount = document.querySelector('.sub_total_with_shiping_amaount');
             let totalWeight = document.querySelector('.total_weight').textContent;
             totalWeight = totalWeight * 1000;
             if (inSideShipping.checked) {
-                let shippingAmount = parseInt(inSideShippingAmount.textContent);
+                let shippingAmount = parseInt(inSideShippingAmount);
+
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
+                // console.log(orderTotal);
                 if (totalWeight <= 1200) {
                     orderTotal = orderTotal + shippingAmount;
+                    // console.log(orderTotal);
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // console.log(typeof totalWeightConvertToKG);
                     for (let i = 1; i < totalWeightConvertToKG; i++) {
                         shippingAmount += 20;
                     }
+
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
                 }
-
             } else if (outSideShipping.checked) {
                 let shippingAmount = parseInt(outSideShippingAmount.textContent);
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
                 if (totalWeight <= 1200) {
                     orderTotal = orderTotal + shippingAmount;
+                    subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // console.log(typeof totalWeightConvertToKG);
