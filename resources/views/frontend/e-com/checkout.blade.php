@@ -298,7 +298,8 @@
                                         @endif
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">৳{{ Cart::subtotal() }}</span></td>
+                                            <td><span class="amount">৳ <span
+                                                        class="">{{ Cart::subtotal() }}</span></span></td>
                                             <td><span class="total_weight"></span>KG</td>
                                         </tr>
                                         <tr class="shipping">
@@ -484,12 +485,11 @@
                         toastr.warning(res.message);
                     } else if (res.status == 200) {
                         let couponDiscount = parseInt(res.couponData.discount);
-                        // console.log(couponDiscount);
-                        let cartSubtotal = parseFloat("{{ Cart::subtotal() }}");
-                        let grandTotal = ((cartSubtotal * couponDiscount) / 100)
-                        // console.log(cartSubtotal);
+                        let subTotalWithShipingAmaount = parseFloat(document.querySelector(
+                            '.sub_total_with_shiping_amaount').textContent).toFixed(2);
+                        let grandTotal = ((subTotalWithShipingAmaount * couponDiscount) / 100);
 
-                        grandTotal = cartSubtotal - grandTotal;
+                        grandTotal = subTotalWithShipingAmaount - grandTotal;
                         const data = `
                         <tr class="cart-subtotal">
                                             <th>Coupon Discount</th>
@@ -507,6 +507,8 @@
             })
         });
 
+
+        // place order otp checked 
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
@@ -564,6 +566,8 @@
 
         });
 
+
+        // otp send order place Data 
         document.querySelector('.otp_send').addEventListener('click', function(e) {
             e.preventDefault();
             let user_phone = document.querySelector('.user_phone').value;
@@ -589,7 +593,7 @@
 
             // get order details
             const product_quantity = "{{ Cart::count() }}";
-            const product_total = "{{ Cart::total() }}";
+            const product_total = parseFloat(document.querySelector(".product_total")).toFixed(2);
             const coupon_id = "";
             const discount = "";
             const sub_total = "{{ Cart::total() }}";
@@ -643,6 +647,7 @@
             })
         });
 
+        // total weight calculate 
         function totalWeight() {
             let cartItem = document.querySelectorAll('.cart_item');
             let total_weight = document.querySelector('.total_weight');
