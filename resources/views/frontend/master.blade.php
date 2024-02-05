@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/assets/img/logo/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/assets/img/logo/sobrokom_fav_icon.svg">
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/bootstrap.min.css">
@@ -143,11 +143,7 @@
         // console.log(add_whishlist);
         add_whishlist.forEach(element => {
             // console.log(element)
-
-
             element.addEventListener('click', function(e) {
-
-
                 e.preventDefault();
                 $.ajaxSetup({
                     headers: {
@@ -156,7 +152,6 @@
                 });
                 let product_id = this.getAttribute('value');
                 // alert(product_id);
-
                 $.ajax({
                     url: '/wishlist/add',
                     type: 'POST',
@@ -185,22 +180,17 @@
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
                 e.preventDefault();
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
-
                 let product_id = this.elements.product_id.value;
                 let variant_id = this.elements.variant_id.value;
                 let selling_price = this.elements.selling_price.value;
                 let weight = this.elements.weight.value;
                 let unit = this.elements.unit.value;
-
                 // console.log(product_id, variant_id,selling_price);
-
                 $.ajax({
                     url: '/product/add_to_cart',
                     type: 'POST',
@@ -233,32 +223,17 @@
         // document.querySelector(".heilight-price").textContent = "200";
         // Function to update the cart display
         function updateCartDisplay(cartData) {
-
             $('.cart_container').empty();
-
             // console.log(cartData);
-
-
-
             if (Object.keys(cartData).length > 0) {
                 var itemsToDisplay = 3;
-
                 // console.log(Object.keys(cartData).length);
                 $('.cart_quantity').text(Object.keys(cartData).length);
                 $('.mobile_show_quantity').text(Object.keys(cartData).length);
 
-
-                // console.log();
-
-                // console.log(itemsToDisplay);
-
-
                 for (var i = 0; i < itemsToDisplay; i++) {
                     var key = Object.keys(cartData)[i];
                     var item = cartData[key];
-
-                    // console.log(item.subtotal);
-                    // totalPrice += item.subtotal;
 
                     $('.cart_container').append(
                         '<li>' +
@@ -280,11 +255,6 @@
                         '</li>'
                     );
                 }
-
-
-
-
-                // Update the cart quantity span
 
 
                 if (Object.keys(cartData).length > 3) {
@@ -323,8 +293,7 @@
                         });
                         document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
                         updateCartDisplay(res.cartData);
-
-
+                        console.log(res.cartData);
                     }
                 }
             });

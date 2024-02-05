@@ -3,10 +3,6 @@
     <button class="tpsideinfo__close">Close<i class="fal fa-times ml-10"></i></button>
     <div class="tpsideinfo__search text-center pt-35">
         <span class="tpsideinfo__search-title mb-20">What Are You Looking For?</span>
-<<<<<<< HEAD
-
-=======
->>>>>>> d601a730ed33523bb995d2f45b982ebdb5e334f4
         <form action="{{ route('search.product') }}" method="get">
             @csrf
             <input type="text" name="search" placeholder="Search Products...">
@@ -25,8 +21,11 @@
         </div>
     </div>
     <div class="tpsideinfo__account-link">
-        <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"><i
-                class="icon-user icons"></i> Login / Register</a>
+        @if (!empty(Auth::user()->id))
+            <a href="{{ route('login') }}"><i class="icon-home icons"></i> Profile</a>
+        @else
+            <a href="{{ route('user.dashboard') }}"><i class="icon-user icons"></i> Login / Register</a>
+        @endif
     </div>
 
     @auth

@@ -499,11 +499,11 @@
                         grandTotal = subTotalWithShipingAmaount - grandTotal;
                         const data = `
                         <tr class="cart-subtotal">
-                                            <th>Coupon Discount</th>
+                                            <th colspan="2">Coupon Discount</th>
                                             <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
                                         </tr>
                                         <tr class="order-total">
-                                            <th>Grand Total</th>
+                                            <th colspan="2" >Grand Total</th>
                                             <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
                                             </td>
                                         </tr>
@@ -712,14 +712,15 @@
 
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
                 // console.log(orderTotal);
-                if (totalWeight <= 1200) {
+                if (totalWeight <= 2000) {
                     orderTotal = orderTotal + shippingAmount;
                     // console.log(orderTotal);
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
+                    // totalWeightConvertToKG = totalWeightConvertToKG - 2;
                     // console.log(typeof totalWeightConvertToKG);
-                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                    for (let i = 2; i < totalWeightConvertToKG; i++) {
                         shippingAmount += 20;
                     }
 
@@ -728,13 +729,14 @@
             } else if (outSideShipping.checked) {
                 let shippingAmount = parseInt(outSideShippingAmount.textContent);
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
-                if (totalWeight <= 1200) {
+                if (totalWeight <= 2000) {
                     orderTotal = orderTotal + shippingAmount;
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // console.log(typeof totalWeightConvertToKG);
-                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                    // totalWeightConvertToKG = totalWeightConvertToKG - 2;
+                    for (let i = 2; i < totalWeightConvertToKG; i++) {
                         shippingAmount += 20;
                     }
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);

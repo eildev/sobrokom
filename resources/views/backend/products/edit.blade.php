@@ -9,6 +9,7 @@
                     </div>
                     <hr />
                     <div class="form-body mt-4">
+                        {{-- update product section  --}}
                         <form action="" method="POST" id="productForm" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3 mb-3">
@@ -209,9 +210,9 @@
                             </div>
                         </form>
 
-                        {{-- style="display: none" --}}
                         <div class="row variant_section ">
-                            <form action="" method="POST" id="productVariant" enctype="multipart/form-data">
+                            {{-- update variants section  --}}
+                            <form method="POST" id="productVariant">
                                 @csrf
                                 <div class="col-12">
                                     <div class="border border-3 p-4 rounded">
@@ -219,8 +220,9 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Regular Price</label>
                                                 <input type="number" class="form-control regular_price" id="inputPrice"
-                                                    placeholder="00.00" name="regular_price" value="">
-                                                <input type="text" class="product_id" name="product_id">
+                                                    placeholder="00.00" name="regular_price">
+                                                <input type="hidden" class="product_id" name="product_id"
+                                                    value="{{ $product->id }}">
                                                 <span class="regular_price_error text-danger"></span>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -250,48 +252,45 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Unit</label>
-                                                <select class="form-select" name="unit">
+                                                <select class="form-select unit" name="unit">
                                                     <option value="">Unit</option>
                                                     <option value="kg">KG</option>
                                                     <option value="liter">Liter</option>
                                                     <option value="piece">Piece</option>
                                                     <option value="dozon">Dozon</option>
                                                     <option value="inch">Inch</option>
+                                                    <option value="gm">GM</option>
+                                                    <option value="ml">ML</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
+                                                <label class="form-label">Weight</label> <br>
+                                                <input type="text" class="form-control weight" id="inputPrice"
+                                                    placeholder="Weight" name="weight">
+                                            </div>
+                                            {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
-                                                <select class="form-select @error('color') is-invalid  @enderror"
-                                                    name="color">
+                                                <select class="form-select color" name="color">
                                                     <option value="">Color</option>
                                                     <option value="red">red</option>
                                                     <option value="blue">Blue</option>
                                                     <option value="green">Green</option>
                                                 </select>
-                                                @error('color')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Size</label>
-                                                <select class="form-select @error('size') is-invalid  @enderror"
-                                                    name="size">
+                                                <select class="form-select size" name="size">
                                                     <option value="">Size</option>
                                                     <option value="M">M</option>
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                                @error('size')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-lg-3 col-md-6">
+                                            </div> --}}
+                                            {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
-                                                <input type="text" class="form-control" id="inputPrice"
+                                                <input type="text" class="form-control barcode" id="inputPrice"
                                                     placeholder="Barcode" name="barcode">
-                                            </div>
-
-
+                                            </div> --}}
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Manufacture Date</label> <br>
                                                 <input type="date" class="form-control" id="inputPrice"
@@ -302,20 +301,18 @@
                                                 <input type="date" class="form-control" id="inputPrice"
                                                     placeholder="" name="expire_date">
                                             </div>
-
-
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
                                                     <button type="button" class="btn btn-primary add_varient">Add
                                                         Varients</button>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
-
+                                    </div>
+                                </div>
                             </form>
+
+                            {{-- variant table  --}}
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -327,32 +324,26 @@
                                                     <th>Discount</th>
                                                     <th>Discount Price</th>
                                                     <th>Stock Quantity</th>
-                                                    <th>Color</th>
-                                                    <th>Size</th>
                                                     <th>Unit</th>
-                                                    <th>Barcode</th>
+                                                    <th>Weight</th>
                                                     <th>Manufacture Date</th>
                                                     <th>Expire Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="varient_container">
                                                 @php
                                                     $variants = $product->varient;
-                                                    $serialNumber = 1;
                                                 @endphp
                                                 @if ($variants->count() > 0)
                                                     @foreach ($variants as $variant)
                                                         <tr>
-                                                            <td>{{ $serialNumber++ }}</td>
                                                             <td>{{ $variant->regular_price }}</td>
                                                             <td>{{ $variant->discount }}</td>
                                                             <td>{{ $variant->discount_amount }}</td>
                                                             <td>{{ $variant->stock_quantity }}</td>
-                                                            <td>{{ $variant->color }}</td>
-                                                            <td>{{ $variant->size }}</td>
                                                             <td>{{ $variant->unit }}</td>
-                                                            <td>{{ $variant->barcode }}</td>
+                                                            <td>{{ $variant->weight }}</td>
                                                             <td>{{ $variant->manufacture_date }}</td>
                                                             <td>{{ $variant->expire_date }}</td>
                                                             <td>
@@ -428,81 +419,81 @@
 
 
 
-        // // !.. add variant ajax Crud 
-        // const add_varient = document.querySelector('.add_varient');
-        // add_varient.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     let varientData = new FormData(jQuery("#productVariant")[0]);
-        //     $.ajax({
-        //         url: '/product/variant/store/',
-        //         type: "POST",
-        //         data: varientData,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             let regular_price = parseFloat(document.querySelector('.regular_price').value);
-        //             let discount = parseFloat(document.querySelector('.discount').value);
-        //             let discount_amount = parseFloat(document.querySelector('.discount_amount')
-        //                 .value);
-        //             let stock = parseFloat(document.querySelector('#stock').value);
+        // !.. add variant ajax Crud
+        const add_varient = document.querySelector('.add_varient');
+        add_varient.addEventListener('click', function(e) {
+            e.preventDefault();
+            let varientData = new FormData(jQuery("#productVariant")[0]);
+            $.ajax({
+                url: '/product/variant/store/',
+                type: "POST",
+                data: varientData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    let regular_price = parseFloat(document.querySelector('.regular_price').value);
+                    let discount = parseFloat(document.querySelector('.discount').value);
+                    let discount_amount = parseFloat(document.querySelector('.discount_amount')
+                        .value);
+                    let stock = parseFloat(document.querySelector('#stock').value);
 
-        //             if (response.status == 200 && regular_price > 0 && discount >= 0 &&
-        //                 discount_amount >
-        //                 0 && stock > 0) {
-        //                 toastr.success(response.message);
-        //                 regular_price = '';
-        //                 discount = '';
-        //                 discount_amount = '';
-        //                 stock = '';
-        //                 show();
-        //             } else {
-        //                 toastr.warning('please provide varient');
-        //             }
-        //         }
-        //     })
-        // })
-
+                    if (response.status == 200 && regular_price > 0 && discount >= 0 &&
+                        discount_amount >
+                        0 && stock > 0) {
+                        toastr.success(response.message);
+                        document.querySelector('.discount_amount')
+                            .value = '';
+                        document.querySelector('.regular_price').value = '';
+                        document.querySelector('.discount').value = '';
+                        document.querySelector('#stock').value = '';
+                        document.querySelector('.unit').value = '';
+                        document.querySelector('.weight').value = '';
+                        show();
+                    } else {
+                        toastr.warning('please provide varient');
+                    }
+                }
+            })
+        })
 
 
         // show variantData on Table
-        // function show() {
-        //     const productId = document.querySelector('.product_id').value;
-        //     $.ajax({
-        //         url: '/product/variant/show/' + productId,
-        //         type: "GET",
-        //         dataType: 'JSON',
-        //         success: function(res) {
-        //             if (res.status == 200) {
-        //                 console.log(res);
-        //                 let varient_container = document.querySelector('.varient_container');
-        //                 const allData = res.variantData;
-        //                 allData.forEach(function(data) {
+        function show() {
+            const productId = document.querySelector('.product_id').value;
+            $.ajax({
+                url: '/product/variant/show/' + productId,
+                type: "GET",
+                dataType: 'JSON',
+                success: function(res) {
+                    if (res.status == 200) {
+                        // console.log(res);
+                        let varient_container = document.querySelector('.varient_container');
+                        varient_container.innerHTML = "";
+                        const allData = res.variantData;
+                        allData.forEach(function(data) {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML += `
+                                            <td>${data.regular_price}</td>
+                                            <td>${data.discount}</td>
+                                            <td>${data.discount_amount}</td>
+                                            <td>${data.stock_quantity}</td>
+                                            <td>${data.unit}</td>
+                                            <td>${data.weight}</td>
+                                            <td>${data.manufacture_date}</td>
+                                            <td>${data.expire_date}</td>
+                                            <td>
+                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
+                                            </td>
+                                    `;
+                            varient_container.appendChild(tr);
+                        })
+                    } else {
+                        toastr.warning(res.error);
+                    }
+                }
+            })
+        }
 
-        //                     varient_container.innerHTML += `
-    //                                 <tr>
-    //                                     <td>${data.regular_price}</td>
-    //                                     <td>${data.discount}</td>
-    //                                     <td>${data.discount_amount}</td>
-    //                                     <td>${data.stock_quantity}</td>
-    //                                     <td>${data.color}</td>
-    //                                     <td>${data.size}</td>
-    //                                     <td>${data.unit}</td>
-    //                                     <td>${data.barcode}</td>
-    //                                     <td>${data.manufacture_date}</td>
-    //                                     <td>${data.expire_date}</td>
-    //                                     <td>
-    //                                         <button value="${data.id}" class="btn-sm btn-danger delete_variant">Delete</button>    
-    //                                     </td>
-    //                                 </tr>
-    //                             `;
-        //                     document.querySelector('.varient_container') = varient_container;
-        //                 })
-        //             } else {
-        //                 toastr.warning(res.error);
-        //             }
-        //         }
-        //     })
-        // }
 
 
 
@@ -538,13 +529,13 @@
         })
 
 
-        // delete varient data 
-        const delete_variant = document.querySelector('.delete_variant');
-        delete_variant.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('hello');
-            // const id = this.value;
+        // // delete varient data 
+        // const delete_variant = document.querySelector('.delete_variant');
+        // delete_variant.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     alert('hello');
+        //     // const id = this.value;
 
-        })
+        // })
     </script>
 @endsection
