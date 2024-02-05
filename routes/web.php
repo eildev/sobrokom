@@ -159,6 +159,7 @@ Route::middleware('auth','role:admin')->group(function () {
     //All Routes for Contact us
     Route::controller(ContactUsController::class)->group(function () {
         Route::get('/contact-message/show', 'show')->name('contact-message.show');
+        Route::get('/contact-message/delete', 'destroy')->name('contact-message.delete');
     });
     //All Routes for Contact us
 

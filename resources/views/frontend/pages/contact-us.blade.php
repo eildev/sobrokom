@@ -157,13 +157,20 @@
                 success: function(success_response) {
 
 
-                    // if (success_response.status == 200) {
-                    //     toastr.success(success_response.message);
-                    //     document.querySelector('#subscriber_mail').value = '';
-                    // } else {
-                    //     toastr.warning(success_response.error.email);
-                    // }
-                    // console.log(majid.message);
+                    if (success_response.status == 200) {
+                        toastr.success(success_response.message);
+                        document.querySelector('#name').value = '';
+                        document.querySelector('#email').value = '';
+                        document.querySelector('#subject').value = '';
+                        document.querySelector('#phone').value = '';
+                        document.querySelector('#message').value = '';
+                    } else {
+                        toastr.warning(success_response.error.name);
+                        toastr.warning(success_response.error.email);
+                        toastr.warning(success_response.error.subject);
+                        toastr.warning(success_response.error.message);
+                    }
+                    // console.log(success_response.message);
 
                 }
             });

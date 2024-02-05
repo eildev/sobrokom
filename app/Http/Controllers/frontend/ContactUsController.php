@@ -53,7 +53,7 @@ class ContactUsController extends Controller
 
                 return response()->json([
                     'status' => 200,
-                    'message'=>'Subscribed Successfully'
+                    'message'=>'Your message sent Successfully'
                 ]);
 
             }

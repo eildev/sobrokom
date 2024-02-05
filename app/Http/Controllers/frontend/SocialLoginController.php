@@ -16,7 +16,7 @@ class SocialLoginController extends Controller
     public function googleLogin(){
         $user = Socialite::driver('google')->user();
         $checkUser = User::where('socialId',$user->id)->first();
-        
+
         if(!$checkUser){
             $newUser = new User;
             $newUser->userName = $user->name;

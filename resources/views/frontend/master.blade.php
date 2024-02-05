@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/icon-dukamarket.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/invoice.css">
 
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />

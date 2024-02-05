@@ -212,7 +212,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New contacts</a>
+                    <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New Message</a>
                 </li>
             </ul>
         </li>
