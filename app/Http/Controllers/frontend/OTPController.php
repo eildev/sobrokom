@@ -134,10 +134,6 @@ class OTPController extends Controller
                     $OrderDetails->save();
                 }
                 Cart::destroy();
-                $url = url('/order-tracking/invoice');
-                $data = ['name' => $request->first_name,'trackingNumber' => $invoiceNumber,'trackingURL'=> $url]; // Replace with your actual data
-                Mail::to($request->email)->send(new OrderMail($data));
-
                 return response()->json([
                 'status' => 200,
                 'message' =>'Your order has been Submited successfully'

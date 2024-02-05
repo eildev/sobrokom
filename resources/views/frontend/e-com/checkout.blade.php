@@ -507,7 +507,7 @@
                                             <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
                                             </td>
                                         </tr>
-                                       
+
                         `;
                         $('.coupon_section').html(data);
                         $(".coupon_id").val(res.couponData.id);
@@ -519,7 +519,7 @@
         });
 
 
-        // place order otp checked 
+        // place order otp checked
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
@@ -583,7 +583,7 @@
         });
 
 
-        // otp send order place Data 
+        // otp send order place Data
         document.querySelector('.otp_send').addEventListener('click', function(e) {
             e.preventDefault();
             let user_phone = document.querySelector('.user_phone').value;
@@ -671,7 +671,7 @@
 
         });
 
-        // total weight calculate 
+        // total weight calculate
         function totalWeight() {
             let cartItem = document.querySelectorAll('.cart_item');
             let total_weight = document.querySelector('.total_weight');
