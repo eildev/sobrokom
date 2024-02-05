@@ -499,15 +499,15 @@
                         grandTotal = subTotalWithShipingAmaount - grandTotal;
                         const data = `
                         <tr class="cart-subtotal">
-                                            <th>Coupon Discount</th>
+                                            <th colspan="2">Coupon Discount</th>
                                             <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
                                         </tr>
                                         <tr class="order-total">
-                                            <th>Grand Total</th>
+                                            <th colspan="2" >Grand Total</th>
                                             <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
                                             </td>
                                         </tr>
-                                       
+
                         `;
                         $('.coupon_section').html(data);
                         $(".coupon_id").val(res.couponData.id);
@@ -519,7 +519,7 @@
         });
 
 
-        // place order otp checked 
+        // place order otp checked
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
@@ -583,7 +583,7 @@
         });
 
 
-        // otp send order place Data 
+        // otp send order place Data
         document.querySelector('.otp_send').addEventListener('click', function(e) {
             e.preventDefault();
             let user_phone = document.querySelector('.user_phone').value;
@@ -671,7 +671,7 @@
 
         });
 
-        // total weight calculate 
+        // total weight calculate
         function totalWeight() {
             let cartItem = document.querySelectorAll('.cart_item');
             let total_weight = document.querySelector('.total_weight');
@@ -712,14 +712,15 @@
 
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
                 // console.log(orderTotal);
-                if (totalWeight <= 1200) {
+                if (totalWeight <= 2000) {
                     orderTotal = orderTotal + shippingAmount;
                     // console.log(orderTotal);
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
+                    // totalWeightConvertToKG = totalWeightConvertToKG - 2;
                     // console.log(typeof totalWeightConvertToKG);
-                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                    for (let i = 2; i < totalWeightConvertToKG; i++) {
                         shippingAmount += 20;
                     }
 
@@ -728,13 +729,14 @@
             } else if (outSideShipping.checked) {
                 let shippingAmount = parseInt(outSideShippingAmount.textContent);
                 let orderTotal = parseFloat("{{ Cart::subtotal() }}");
-                if (totalWeight <= 1200) {
+                if (totalWeight <= 2000) {
                     orderTotal = orderTotal + shippingAmount;
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // console.log(typeof totalWeightConvertToKG);
-                    for (let i = 1; i < totalWeightConvertToKG; i++) {
+                    // totalWeightConvertToKG = totalWeightConvertToKG - 2;
+                    for (let i = 2; i < totalWeightConvertToKG; i++) {
                         shippingAmount += 20;
                     }
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);

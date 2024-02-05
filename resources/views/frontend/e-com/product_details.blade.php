@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                              </button> -->
+                                                                                                                                  </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -251,11 +251,11 @@
                                                     <li class="text-capitalize">Tags: {{ $product->tags }}</li>
                                                 </ul>
                                             </div>
-                                            <div class="product__details-payment text-center">
+                                            {{-- <div class="product__details-payment text-center">
                                                 <img src="{{ asset('frontend') }}/assets/img/shape/footer-payment.png "
                                                     alt="">
                                                 <span>Guarantee safe & Secure checkout</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

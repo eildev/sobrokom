@@ -21,8 +21,11 @@
         </div>
     </div>
     <div class="tpsideinfo__account-link">
-        <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"><i
-                class="icon-user icons"></i> Login / Register</a>
+        @if (!empty(Auth::user()->id))
+            <a href="{{ route('login') }}"><i class="icon-home icons"></i> Profile</a>
+        @else
+            <a href="{{ route('user.dashboard') }}"><i class="icon-user icons"></i> Login / Register</a>
+        @endif
     </div>
 
     @auth

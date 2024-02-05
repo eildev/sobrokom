@@ -105,8 +105,9 @@
                                                         <label for="" class="form-label">Product Name</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="text" name="product_name" class="form-control "
-                                                            id="inputEnterYourName" placeholder="Enter Product Name">
+                                                        <input type="text" name="product_name"
+                                                            class="form-control product_name" id="inputEnterYourName"
+                                                            placeholder="Enter Product Name">
                                                         <span class="product_name_error text-danger"></span>
                                                     </div>
                                                 </div>
@@ -162,8 +163,8 @@
                                             <div class="col-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">SKU</label>
-                                                    <input type="text" class="form-control" placeholder="ASD1202"
-                                                        name="sku">
+                                                    <input type="text" class="form-control sku_generate"
+                                                        placeholder="ASD1202" name="sku">
                                                     <span class="sku_error text-danger"></span>
                                                 </div>
                                             </div>
@@ -301,6 +302,8 @@
                                     </div>
                                 </div>
                             </form>
+
+
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -348,6 +351,37 @@
 
 
     <script>
+        // sku Generator 
+        function generateProductSKU(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let sku = '';
+
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                sku += characters.charAt(randomIndex);
+            }
+
+            return sku;
+        }
+        document.querySelector(".product_name").addEventListener('blur', function() {
+            const skuGenerate = document.querySelector(".sku_generate");
+            const productNameValue = this.value;
+            console.log(productNameValue);
+
+            if (productNameValue.trim() !== '') {
+                skuGenerate.value = generateProductSKU(10);
+            }
+        })
+        // document.querySelector(".product_name").addEventListener('change', function() {
+        //     document.querySelector(".sku_generate").value = generateProductSKU(10);
+        // })
+        // product_name.addEventListener('change', function() {
+        //     const skuGenerate = document.querySelector(".sku_generate");
+        //     let value = this.value;
+        //     const skuGenatrator = value.toUpperCase();
+        //     // console.log(randomNumber);
+        //     skuGenerate.value = skuGenatrator;
+        // })
         // !.. add product ajax Crud
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
