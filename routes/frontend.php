@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\ProductDetailsController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
 use App\Http\Controllers\Frontend\SocialLoginController;
+use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\OrderManageController;
 /*
 |--------------------------------------------------------------------------
@@ -107,15 +108,23 @@ Route::middleware('auth', 'role:user')->group(function () {
 });
 
 // WithOut Auth All Routes
-Route::controller(OTPController::class)->group(function () {
-    Route::post('/otp/store', 'storeOTP');
-    Route::post('/otp/check', 'checkOTP');
-});
+    Route::controller(OTPController::class)->group(function () {
+        Route::post('/otp/store', 'storeOTP');
+        Route::post('/otp/check', 'checkOTP');
+    });
 
-//All Routes for Order Tracking  Start
+    //All Routes for Order Tracking  Start
 
-Route::controller(OrderManageController::class)->group(function () {
-    Route::get('/order-tracking', 'orderTracking')->name('order.tracking');
-    Route::get('/order-tracking/invoice', 'orderTrackingInvoice')->name('order.tracking.invoice');
-});
-//All Routes for Order Tracking End
+    Route::controller(OrderManageController::class)->group(function () {
+        Route::get('/order-tracking', 'orderTracking')->name('order.tracking');
+        Route::get('/order-tracking/invoice', 'orderTrackingInvoice')->name('order.tracking.invoice');
+    });
+
+    //All Routes for Order Tracking End
+
+    //All Routes for Contact us
+    Route::controller(ContactUsController::class)->group(function () {
+        Route::post('/contact-message/save', 'store');
+    });
+
+    //All Routes for Contact us

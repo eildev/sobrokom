@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\OfferBannerController;
 use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\Backend\StockManageController;
+use App\Http\Controllers\Frontend\ContactUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -155,9 +156,15 @@ Route::middleware('auth','role:admin')->group(function () {
     });
     //All Routes for Stock Management End
 
+    //All Routes for Contact us
+    Route::controller(ContactUsController::class)->group(function () {
+        Route::get('/contact-message/show', 'show')->name('contact-message.show');
+    });
+    //All Routes for Contact us
+
 });
 
- //All Routes for Global Coupons Start
+//All Routes for Global Coupons Start
  Route::controller(GlobalCouponController::class)->group(function () {
     Route::get('/apply-coupon/{code}', 'applyCoupon')->name('apply.coupon');
 });
