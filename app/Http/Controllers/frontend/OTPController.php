@@ -14,7 +14,6 @@ use Cart;
 class OTPController extends Controller
 {
     public function storeOTP(Request $request){
-
         $otp = $this->otpGenarate($request->phone);
         $number = $otp->phone;
         $api_key = "0yRu5BkB8tK927YQBA8u";
@@ -140,6 +139,3 @@ class OTPController extends Controller
 
     }
 }
-
-
-

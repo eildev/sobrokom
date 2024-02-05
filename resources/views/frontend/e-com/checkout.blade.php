@@ -38,7 +38,7 @@
                                 @if ($billingInfo)
                                     <div class="pt-2">
                                         <input type="checkbox" name="" id="isUsingAddress">
-                                        <label for="">Using your Default Address</label>
+                                        <label for="isUsingAddress">Using your Default Address</label>
                                     </div>
                                 @endif
                             </div>
@@ -119,11 +119,10 @@
                                 <div class="col-md-6">
                                     <div class="country-select">
                                         <label>Country <span class="required">*</span></label>
-                                        <select name="country" class="country" value="">
-                                            <option value="">Select Country</option>
+                                        <select name="country" class="country" readonly>
+                                            <option value="bangladesh">Bangladesh</option>
                                             <option value="united-states">United States</option>
                                             <option value="algeria">Algeria</option>
-                                            <option value="bangladesh">Bangladesh</option>
                                             <option value="canada">Canada</option>
                                             <option value="germany">Germany</option>
                                             <option value="england">England</option>
@@ -299,7 +298,7 @@
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
                                             <td><span class="amount">৳ <span
-                                                        class="">{{ Cart::subtotal() }}</span></span></td>
+                                                        class="cart_total">{{ Cart::subtotal() }}</span></span></td>
                                             <td><span class="total_weight"></span>KG</td>
                                         </tr>
                                         <tr class="shipping">
@@ -307,15 +306,18 @@
                                             <td colspan="2">
                                                 <ul>
                                                     <li>
-                                                        <input type="radio" name="shipping" id="in_side_shipping">
-                                                        <label>
+                                                        <input type="radio" class="shipping_checked" name="shipping"
+                                                            id="in_side_shipping">
+                                                        <label for="in_side_shipping">
                                                             In Side Dhaka: <span class="amount">৳<span
                                                                     class="in_side_shipping_amount">80</span></span>
                                                         </label>
                                                     </li>
                                                     <li>
-                                                        <input type="radio" name="shipping" id="out_side_shipping">
-                                                        <label>Out Side Of Dhaka: <span class="amount">৳
+                                                        <input type="radio" class="shipping_checked" name="shipping"
+                                                            id="out_side_shipping">
+                                                        <label for="out_side_shipping">Out Side Of Dhaka: <span
+                                                                class="amount">৳
                                                                 <span class="out_side_shipping_amount">140</span>.00</>
                                                             </span></label>
                                                     </li>
@@ -398,6 +400,11 @@
                                         class="tp-btn tp-color-btn w-100 banner-animation place_order">Place
                                         order</button>
                                 </div>
+                                <input type="hidden" name="coupon_id" class="coupon_id" value="0" />
+                                <input type="hidden" name="coupon_discount_amount" class="coupon_discount_amount"
+                                    value="0" />
+                                <input type="hidden" name="grand_total_amount" class="grand_total_amount"
+                                    value="0" />
                             </div>
                         </div>
                     </div>
@@ -493,15 +500,19 @@
                         const data = `
                         <tr class="cart-subtotal">
                                             <th>Coupon Discount</th>
-                                            <td><span class="amount">${res.couponData.discount}%</span></td>
+                                            <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Grand Total</th>
-                                            <td><strong><span class="amount">৳${grandTotal}</span></strong>
+                                            <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
                                             </td>
                                         </tr>
+                                       
                         `;
                         $('.coupon_section').html(data);
+                        $(".coupon_id").val(res.couponData.id);
+                        $(".coupon_discount_amount").val(res.couponData.discount);
+                        $(".grand_total_amount").val(grandTotal);
                     }
                 }
             })
@@ -548,19 +559,24 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                $.ajax({
-                    url: '/otp/store',
-                    type: 'post',
-                    data: {
-                        'phone': user_phone
-                    },
-                    success: function(res) {
-                        // console.log(res);
-                        if (res.status == 200) {
-                            $('#otpCheck').modal('show');
+                const shipingMethodChecked = document.querySelectorAll(".shipping_checked:checked");
+                if (shipingMethodChecked.length > 0) {
+                    $.ajax({
+                        url: '/otp/store',
+                        type: 'post',
+                        data: {
+                            'phone': phone
+                        },
+                        success: function(res) {
+                            // console.log(res);
+                            if (res.status == 200) {
+                                $('#otpCheck').modal('show');
+                            }
                         }
-                    }
-                })
+                    })
+                } else {
+                    toastr.warning("plese select shiping method");
+                }
             }
 
 
@@ -593,16 +609,26 @@
 
             // get order details
             const product_quantity = "{{ Cart::count() }}";
-            const product_total = parseFloat(document.querySelector(".product_total")).toFixed(2);
-            const coupon_id = "";
-            const discount = "";
-            const sub_total = "{{ Cart::total() }}";
+            const coupon_id = document.querySelector('.coupon_id').value;
+            const cartTotal = parseFloat('{{ Cart::total() }}');
+            const discount = parseInt(document.querySelector(".coupon_discount_amount").textContent);
+            console.log(discount);
+            const orderTotal = parseFloat(document.querySelector(".sub_total_with_shiping_amaount").textContent)
+                .toFixed(2);
+            // console.log(orderTotal);
+            // console.log(document.querySelector(".sub_total_with_shiping_amaount").textContent);
             const shipping_method = $('.shipping_method').text();
-            const shipping_amount = "";
-            const grand_total = "{{ Cart::total() }}";
-            const payment_method = "";
+            const shipping_amount = orderTotal - cartTotal;
+            console.log(shipping_amount);
+            let orderGrandTotal = 0;
+            const grand_total = parseFloat(document.querySelector(".grand_total_amount").textContent).toFixed(2);
+            if (grand_total > 0) {
+                orderGrandTotal = grand_total;
+            } else {
+                orderGrandTotal = orderTotal;
+            }
+            const payment_method = "Cash On Delivery";
             const payment_id = "";
-
             $.ajax({
                 url: '/otp/check',
                 type: 'post',
@@ -622,15 +648,13 @@
                     country,
                     order_notes,
 
-                    invoice_number,
                     "product_quantity": product_quantity,
-                    product_total,
                     coupon_id,
                     discount,
-                    sub_total,
+                    "sub_total": orderTotal,
                     shipping_method,
                     shipping_amount,
-                    grand_total,
+                    "grand_total": orderGrandTotal,
                     payment_method,
                     payment_id,
                 },
@@ -645,10 +669,11 @@
                     }
                 }
             })
+
+
         });
 
         // total weight calculate 
-
         function totalWeight() {
             let cartItem = document.querySelectorAll('.cart_item');
             let total_weight = document.querySelector('.total_weight');
@@ -658,6 +683,8 @@
                 let product_weight = item.querySelector('.product_weight').innerText;
                 let product_unit = item.querySelector('.product_unit').innerText;
                 if (product_unit == 'gm') {
+                    product_weight = parseFloat(product_weight / 1000).toFixed(2);
+                } else if (product_unit == 'ml') {
                     product_weight = parseFloat(product_weight / 1000).toFixed(2);
                 }
                 totalWeight += product_weight * product_qty;
