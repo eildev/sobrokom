@@ -32,21 +32,22 @@
                             @endphp
                             <h4 class="tpshop__widget-title">Product Categories</h4>
                             @if ($categories->count() > 0)
-                            <form method="get" action="{{route('product.filterByCategory')}}">
-                                @foreach ($categories as $category)
-                                    @php
-                                        $categoryProducts = App\Models\Product::where('category_id', $category->id)->count();
-                                    @endphp
-                                    <div class="form-check">
-                                        <input class="form-check-input checkbox_category{{ $category->id }}" type="checkbox" value="{{ $category->id }}"
-                                            id="{{ $category->categoryName }}"  name="categoryId[]">
-                                        <label class="form-check-label" for="{{ $category->categoryName }}">
-                                            {{ $category->categoryName }} ({{ $categoryProducts }})
-                                        </label>
-                                    </div>
-                                @endforeach
-                                <button class="tp-btn py-1" type="submit">Filter</button>
-                            </form>
+                                <form method="get" action="{{ route('product.filterByCategory') }}">
+                                    @foreach ($categories as $category)
+                                        @php
+                                            $categoryProducts = App\Models\Product::where('category_id', $category->id)->count();
+                                        @endphp
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox_category{{ $category->id }}"
+                                                type="checkbox" value="{{ $category->id }}"
+                                                id="{{ $category->categoryName }}" name="categoryId[]">
+                                            <label class="form-check-label" for="{{ $category->categoryName }}">
+                                                {{ $category->categoryName }} ({{ $categoryProducts }})
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    <button class="tp-btn py-1" type="submit">Filter</button>
+                                </form>
                             @else
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" checked
@@ -127,22 +128,23 @@
                             <h4 class="tpshop__widget-title">FILTER BY BRAND</h4>
 
                             @if ($brands->count() > 0)
-                            <form method="get" action="{{route('product.filterByBrand')}}">
-                                @foreach ($brands as $brand)
-                                    @php
-                                        $brandProducts = App\Models\Product::where('brand_id', $brand->id)->get();
-                                    @endphp
+                                <form method="get" action="{{ route('product.filterByBrand') }}">
+                                    @foreach ($brands as $brand)
+                                        @php
+                                            $brandProducts = App\Models\Product::where('brand_id', $brand->id)->get();
+                                        @endphp
 
-                                    <div class="form-check">
-                                        <input class="form-check-input checkbox_brand{{ $brand->id }}" type="checkbox" value="{{ $brand->id }}"
-                                            id="{{ $brand->BrandName }}" name="brandName[]">
-                                        <label class="form-check-label" for="{{ $brand->BrandName }}">
-                                            {{ $brand->BrandName }} ({{ $brandProducts->count() }})
-                                        </label>
-                                    </div>
-                                @endforeach
-                                <button class="tp-btn py-1" type="submit">Filter</button>
-                            </form>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox_brand{{ $brand->id }}"
+                                                type="checkbox" value="{{ $brand->id }}" id="{{ $brand->BrandName }}"
+                                                name="brandName[]">
+                                            <label class="form-check-label" for="{{ $brand->BrandName }}">
+                                                {{ $brand->BrandName }} ({{ $brandProducts->count() }})
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                    <button class="tp-btn py-1" type="submit">Filter</button>
+                                </form>
                             @else
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value=""
@@ -359,7 +361,7 @@
                                                     <div class="tpproduct__hover-text">
                                                         <div
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                                            <form id="add_to_cart_form">
+                                                            <form method="POST" id="add_to_cart_form">
                                                                 @csrf
                                                                 <input type="hidden" value="{{ $product->id }}"
                                                                     name="product_id">
@@ -369,6 +371,12 @@
                                                                 <input type="hidden"
                                                                     value="{{ $product->varient[0]->discount_amount }}"
                                                                     name="selling_price">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->weight }}"
+                                                                    name="weight">
+                                                                <input type="hidden"
+                                                                    value="{{ $product->varient[0]->unit }}"
+                                                                    name="unit">
                                                                 <button class="tp-btn-2">Add to
                                                                     cart</button>
                                                             </form>
@@ -391,47 +399,47 @@
                             </div>
 
                             @if ($products->count() > 9)
-                            <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
-                                <ul class="pagination">
-                                    {{-- Previous Page Link --}}
-                                    @if ($products->onFirstPage())
-                                        <li class="page-item disabled" aria-disabled="true"
-                                            aria-label="@lang('pagination.previous')">
-                                            <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
-                                        </li>
-                                    @else
-                                        <li class="page-item">
-                                            <a class="page-link pt-0" href="{{ $products->previousPageUrl() }}"
-                                                rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                                        </li>
-                                    @endif
-
-                                    {{-- Pagination Elements --}}
-                                    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
-                                        @if ($page == $products->currentPage())
-                                            <li class="page-item active" aria-current="page"><span
-                                                    class="page-link pt-0">{{ $page }}</span></li>
+                                <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
+                                    <ul class="pagination">
+                                        {{-- Previous Page Link --}}
+                                        @if ($products->onFirstPage())
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.previous')">
+                                                <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
+                                            </li>
                                         @else
-                                            <li class="page-item"><a class="page-link pt-0"
-                                                    href="{{ $url }}">{{ $page }}</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link pt-0" href="{{ $products->previousPageUrl() }}"
+                                                    rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                                            </li>
                                         @endif
-                                    @endforeach
 
-                                    {{-- Next Page Link --}}
-                                    @if ($products->hasMorePages())
-                                        <li class="page-item">
-                                            <a class="page-link pt-0" href="{{ $products->nextPageUrl() }}"
-                                                rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
-                                        </li>
-                                    @else
-                                        <li class="page-item disabled" aria-disabled="true"
-                                            aria-label="@lang('pagination.next')">
-                                            <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-                        @endif
+                                        {{-- Pagination Elements --}}
+                                        @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                            @if ($page == $products->currentPage())
+                                                <li class="page-item active" aria-current="page"><span
+                                                        class="page-link pt-0">{{ $page }}</span></li>
+                                            @else
+                                                <li class="page-item"><a class="page-link pt-0"
+                                                        href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                        @endforeach
+
+                                        {{-- Next Page Link --}}
+                                        @if ($products->hasMorePages())
+                                            <li class="page-item">
+                                                <a class="page-link pt-0" href="{{ $products->nextPageUrl() }}"
+                                                    rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                                            </li>
+                                        @else
+                                            <li class="page-item disabled" aria-disabled="true"
+                                                aria-label="@lang('pagination.next')">
+                                                <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -445,24 +453,24 @@
     <!-- feature-area-end -->
 
     <script>
-        @if(!empty($brandId))
-        let brandid;
-        let chechBox
-        @foreach ($brandId as $brandId)
-            brandid = '{{$brandId}}';
-            chechBox = document.querySelector('.checkbox_brand'+brandid);
-            chechBox.setAttribute('checked','true');
-        @endforeach
+        @if (!empty($brandId))
+            let brandid;
+            let chechBox
+            @foreach ($brandId as $brandId)
+                brandid = '{{ $brandId }}';
+                chechBox = document.querySelector('.checkbox_brand' + brandid);
+                chechBox.setAttribute('checked', 'true');
+            @endforeach
         @endif
 
-        @if(!empty($categoryId))
-        let brandid;
-        let chechBox
-        @foreach ($categoryId as $categoryId)
-            brandid = '{{$categoryId}}';
-            chechBox = document.querySelector('.checkbox_category'+brandid);
-            chechBox.setAttribute('checked','true');
-        @endforeach
+        @if (!empty($categoryId))
+            let brandid;
+            let chechBox
+            @foreach ($categoryId as $categoryId)
+                brandid = '{{ $categoryId }}';
+                chechBox = document.querySelector('.checkbox_category' + brandid);
+                chechBox.setAttribute('checked', 'true');
+            @endforeach
         @endif
     </script>
 @endsection

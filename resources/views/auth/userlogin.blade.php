@@ -36,12 +36,14 @@
 
                                 </div>
                             </div>
-                            <div class="tptrack__item d-flex mb-20">
-                                <a href="{{ route('google.redirect') }}" class="btn bg-white rounded-2 py-2 px-4 me-2">
-                                    Login With <img class="img-fluid " style="max-height: 16px; hover:background: #2d2a6e;"
-                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt=""></a>
+                            <div class="d-block mb-20">
+                                <a href="{{ route('google.redirect') }}"
+                                    class="btn bg-white w-100 text-dark rounded-2 py-2 px-4 border-0">
+                                    <img class="img-fluid" style="max-height: 16px;"
+                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt=""> Log In
+                                    With Google </a>
                                 {{-- <a href="{{ route('google.redirect') }}" class="tp-btn"> Login With <i
-                                        class="fab fa-facebook-f"></i></a> --}}
+                                    class="fab fa-facebook-f"></i></a> --}}
                             </div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
@@ -89,10 +91,12 @@
 
                                 </div>
                             </div>
-                            <div class="tptrack__item d-flex mb-20">
-                                <a href="{{ route('google.redirect') }}" class="tp-btn text-white rounded-2 py-2 px-4 me-2">
-                                    Login With <img class="img-fluid" style="max-height: 16px;"
-                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt=""></a>
+                            <div class="d-block mb-20">
+                                <a href="{{ route('google.redirect') }}"
+                                    class="btn bg-white w-100 text-dark rounded-2 py-2 px-4 border-0">
+                                    <img class="img-fluid" style="max-height: 16px;"
+                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt=""> Sign Up
+                                    With Google </a>
                                 {{-- <a href="{{ route('google.redirect') }}" class="tp-btn"> Login With <i
                                       class="fab fa-facebook-f"></i></a> --}}
                             </div>

@@ -383,6 +383,11 @@
                                                             <input type="hidden"
                                                                 value="{{ $product->varient[0]->discount_amount }}"
                                                                 name="selling_price">
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->weight }}"
+                                                                name="weight">
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->unit }}" name="unit">
                                                             <button class="tp-btn-2">Add to
                                                                 cart</button>
                                                         </form>
