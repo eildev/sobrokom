@@ -144,13 +144,15 @@
                            <h4 class="tpreview__form-title mb-10 text-danger">At first, you need to login to your account | <a class="btn btn-sm bg-light" href="{{route('login')}}">Login</a> |</h4
                             @else
                             <p>Your email address will not be published. Required fields are marked *</p>
-                            <form action="" method="POST">
+                            <form action="{{route('blog.comment')}}" method="POST">
                                 @csrf
+                                <input type="hidden" name="subcriber_id" id="subcriber_id" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="blog_id" id="blog_id" value="{{$singleBlog->id}}">
                                   <div class="row">
 
                                      <div class="col-lg-12">
                                         <div class="tpreview__input mb-5">
-                                           <textarea name="text" name="message" required placeholder="Message"></textarea>
+                                           <textarea  name="message" required placeholder="Message"></textarea>
                                         </div>
                                      </div>
                                      <div class="col-lg-12">

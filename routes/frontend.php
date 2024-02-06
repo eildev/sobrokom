@@ -137,8 +137,8 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::get('/blog/post/all', 'AllBlogPost')->name('all.blog.post');
     });
    //Blog Post Route End
-   //Blog Comment Route
-    // Route::controller(BlogCommentController::class)->group(function () {
-    //     Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
-    // });
+  // Blog Comment Route
+    Route::controller(BlogCommentController::class)->group(function () {
+        Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+    });
    //Blog Comment Route End
