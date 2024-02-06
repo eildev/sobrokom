@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\OTPController;
 use App\Http\Controllers\Frontend\SocialLoginController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\OrderManageController;
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,11 @@ Route::controller(ProductDetailsController::class)->group(function () {
 
     Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
     Route::get('/product/global/search/{value}', 'globalSearch');
+});
+
+// Invoice Genarate Product
+Route::controller(PDFController::class)->group(function () {
+    Route::get('/pdf/genarate/{orderId}/{invoice}', 'generateIvoicePDF')->name('invoice.genarate');
 });
 
 // product related routes
