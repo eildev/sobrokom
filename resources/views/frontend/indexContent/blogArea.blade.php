@@ -1,6 +1,6 @@
 <!-- blog-area-start -->
 @php
-$home_blog = App\Models\BlogPost::latest()->limit(8)->get()
+$home_blog = App\Models\BlogPost::latest()->limit(6)->get()
 
 @endphp
 <section class="blog-area pb-20 pt-50">
@@ -13,7 +13,7 @@ $home_blog = App\Models\BlogPost::latest()->limit(8)->get()
             </div>
             <div class="col-md-6">
                 <div class="tpproduct__all-item">
-                    <a href="blog.html">View All <i class="icon-chevron-right"></i></a>
+                    <a href="{{route('all.blog.post')}}">View All <i class="icon-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -23,21 +23,18 @@ $home_blog = App\Models\BlogPost::latest()->limit(8)->get()
                 <div class="swiper-slide">
                     <div class="tpblog__item">
                         <div class="tpblog__thumb fix">
-                            <a href="blog-details.html"><img
-                                    src="{{ asset('uploads/blog/blog_post/'.$blog->image)}}"
+                            <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{ asset('uploads/blog/blog_post/'.$blog->image)}}" style="height:157px; width:245px"
                                     alt=""></a>
                         </div>
                         <div class="tpblog__wrapper">
                             <div class="tpblog__entry-wap">
                                 <span class="cat-links"><a href="shop-details.html">{{$blog['category']['cat_name']}}</a></span>
-                                @if($blog->status == 0)
-                                <span class="author-by"><a href="#">Admin</a></span>
-                                @else
-                                <span class="author-by"><a href="#">{{$blog['user']['userName']}}</a></span>
-                                @endif
+
+                                <span class="author-by"><a href=#"">Admin</a></span>
+
                                 <span class="post-data"><a href="#">{{Carbon\Carbon::parse($blog->created_at)->diffForHumans()}}</a></span>
                             </div>
-                            <h4 class="tpblog__title"><a href="blog-details.html">{{$blog->title}}</a></h4>
+                            <h4 class="tpblog__title"><a href="{{route('blog.post.details',$blog->id)}}">{{$blog->title}}</a></h4>
                         </div>
                     </div>
                 </div>

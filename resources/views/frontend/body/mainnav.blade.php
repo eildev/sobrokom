@@ -116,7 +116,7 @@
                                     <a href="#">Pages</a>
                                     <ul class="sub-menu">
                                         <li class="">
-                                            <a href="#">Blog</a>
+                                            <a href="{{route('all.blog.post')}}">Blog</a>
                                         </li>
                                         <li class="has-dropdown">
                                             <a href="{{ route('aboutus') }}">About</a>

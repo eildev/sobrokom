@@ -64,7 +64,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Tags</label>
                                             <input type="text" class="form-control" data-role="tagsinput"
-                                                placeholder="Recipes,Homemade" name="tags">
+                                                 name="tags">
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
                                         <div class="my-1">
                                             <i>
-                                                <b>Note:</b> Please provide 335 × 215  size
+                                                <b>Note:</b> Please provide 1410 × 882  size
                                                 image
                                             </i>
                                         </div>

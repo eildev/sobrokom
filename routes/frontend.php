@@ -13,6 +13,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
 use App\Http\Controllers\Frontend\SocialLoginController;
 use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Backend\OrderManageController;
 /*
 |--------------------------------------------------------------------------
@@ -128,3 +130,14 @@ Route::middleware('auth', 'role:user')->group(function () {
     });
 
     //All Routes for Contact us
+    //Blog Post Route Start
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/blog/post/details/{id}', 'BlogPostDetails')->name('blog.post.details');
+        Route::get('/blog/post/all', 'AllBlogPost')->name('all.blog.post');
+    });
+   //Blog Post Route End
+   //Blog Comment Route
+    // Route::controller(BlogCommentController::class)->group(function () {
+    //     Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+    // });
+   //Blog Comment Route End
