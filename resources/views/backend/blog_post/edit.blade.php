@@ -64,7 +64,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Tags</label>
                                             <input type="text" class="form-control" data-role="tagsinput"
-                                                placeholder="Recipes,Homemade" value="{{$blogPost->tags}}" name="tags">
+                                                value="{{$blogPost->tags}}" name="tags">
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
                                         <div class="my-1">
                                             <i>
-                                                <b>Note:</b> Please provide 335 × 215  size
+                                                <b>Note:</b> Please provide 1410 × 882 size
                                                 image
                                             </i>
                                         </div>
@@ -94,7 +94,7 @@
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-info px-5 text-white">Add Blog</button>
+                                        <button type="submit" class="btn btn-info px-5 text-white">Update Blog</button>
                                     </div>
                                 </div>
                             </div>

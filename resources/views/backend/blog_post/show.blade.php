@@ -19,7 +19,9 @@
                                 <tr>
                                     <th>SI</th>
                                     <th>Category</th>
+                                    <th>Title</th>
                                     <th>Description</th>
+                                    <th>Tags</th>
                                     <th>image</th>
                                     <th>Action</th>
                                 </tr>
@@ -33,8 +35,9 @@
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $blog['category']['cat_name'] }}</td>
-                                            <td>{{ $blog->title }}</td>
-                                            <td>{{ $blog->desc }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($blog->title, 20) }}</td>
+                                            <td> {{ Illuminate\Support\Str::limit($blog->desc, 40) }}  </td>
+                                            <td> {{ $blog->tags }}  </td>
 
                                             <td>
                                                 <img src="{{ asset('/uploads/blog/blog_post/'.$blog->image) }}"

@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\frontend;
+
+use App\Http\Controllers\Controller;
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
+use Illuminate\Http\Request;
+
+class BlogController extends Controller
+{
+   public function BlogPostDetails($id){
+    $singleBlog = BlogPost::findOrFail($id);
+    return view('frontend.indexContent.blog_details',compact('singleBlog'));
+    }//End Method
+    public function AllBlogPost(){
+        $allBlog = BlogPost::all();
+        $blogCat = BlogCategory::latest()->limit(8)->get();
+        $BlogSide = BlogPost::latest()->limit(5)->get();
+        return view('frontend.indexContent.all_blog',compact('allBlog','blogCat','BlogSide'));
+    }
+}

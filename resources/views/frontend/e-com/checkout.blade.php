@@ -499,16 +499,14 @@
 
                         grandTotal = subTotalWithShipingAmaount - grandTotal;
                         const data = `
-                        <tr class="cart-subtotal">
-                                            <th colspan="2">Coupon Discount</th>
-                                            <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th colspan="2" >Grand Total</th>
-                                            <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong>
-                                            </td>
-                                        </tr>
-
+                                <tr class="cart-subtotal">
+                                    <th colspan="2">Coupon Discount</th>
+                                    <td><span class="amount coupon_discount">${res.couponData.discount}%</span></td>
+                                </tr>
+                                <tr class="order-total">
+                                    <th colspan="2" >Grand Total</th>
+                                    <td><strong><span class="amount grand_total" >৳${grandTotal}</span></strong></td>
+                                </tr>
                         `;
                         $('.coupon_section').html(data);
                         $(".coupon_id").val(res.couponData.id);
