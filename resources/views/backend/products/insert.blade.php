@@ -134,7 +134,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <textarea class="form-control" name="long_desc" placeholder="Enter Long Description"
-                                                            style="resize: none; height: 100px;"></textarea>
+                                                            style="resize: none; height: 100px;" id="product_descriptions"></textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>

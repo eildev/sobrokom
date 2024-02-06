@@ -420,12 +420,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">OPT Check</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">OTP Verification</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Enter OTP</label>
+                        <p>We sent a message with the verification code to the phone number. It may take a few minutes for the code to arrive</p>
+                        <label for="exampleInputEmail1">Verification Code *</label>
                         <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
                     </div>
@@ -742,6 +743,10 @@
             }
         }
         totalWeight();
+
+        $(document).ready(function() {
+            $("#otpCheck").modal({backdrop: 'static', keyboard: false});
+        });
     </script>
 
 
