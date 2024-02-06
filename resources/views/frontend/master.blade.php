@@ -35,9 +35,7 @@
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
 
     <!-- tinymce js here -->
-    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js'
-        referrerpolicy="origin"></script>
-
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
