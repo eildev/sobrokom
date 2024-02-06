@@ -125,6 +125,7 @@ class OTPController extends Controller
 
             // Product oRDER Details
                 $products = Cart::content();
+                // dd($products);
                 foreach($products as $product) {
                     $OrderDetails = new OrderDetails;
                     $OrderDetails->order_id = $order->id;
@@ -138,7 +139,7 @@ class OTPController extends Controller
                 Cart::destroy();
                 return response()->json([
                 'status' => 200,
-                'message' =>'Your order has been Submited successfully'
+                'message' =>'Your order has been Submitted successfully'
                 ]);
         }
 
