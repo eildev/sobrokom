@@ -14,6 +14,8 @@ use App\Http\Controllers\Backend\OfferBannerController;
 use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\Backend\StockManageController;
 use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,6 +165,27 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/contact-message/delete', 'destroy')->name('contact-message.delete');
     });
     //All Routes for Contact us
+
+    //All Route for Blog Category
+    Route::controller(BlogCategoryController::class)->group(function () {
+        Route::get('/blog/category/view', 'AddBlogCategory')->name('blog.category.view');
+        Route::post('/blog/store/category', 'StoreBlogCategory')->name('blog.category.store');
+        Route::get('/blog/all/category/view', 'BlogAllCategoryView')->name('blog.all.category.view');
+        Route::get('/blog/category/edit/{id}', 'EditBlogCategory')->name('blog.category.edit');
+        Route::post('/blog/category/update/{id}', 'UpdateBlogCategory')->name('blog.category.update');
+        Route::get('/blog/category/delete/{id}', 'DeleteBlogCategory')->name('blog.category.delete');
+    });
+    //Blog Post All Route Start
+    Route::controller(BlogPostController::class)->group(function () {
+        Route::get('/blog/post/add', 'AddBlogPost')->name('blog.post.add.view');
+        Route::post('/blog/post/store', 'StoreBlogPost')->name('blog.store');
+        Route::get('/blog/post/all/view', 'allBlogPostView')->name('blog.all.post.view');
+        Route::get('/blog/post/edit/{id}', 'BlogPostEdit')->name('blog.post.edit');
+        Route::post('/blog/post/update/{id}', 'BlogPostupdate')->name('blog.post.update');
+        Route::get('/blog/post/delete/{id}', 'BlogPostDelete')->name('blog.post.delete');
+    });
+     //Blog Post All Route End
+
 
 });
 
