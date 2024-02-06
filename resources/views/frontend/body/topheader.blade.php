@@ -11,11 +11,12 @@
                     <div class="tpfooter__widget-social pt-5 pb-5">
                         <a target="_blank" href="https://www.facebook.com/profile.php?id=100094627520182"><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab ml-5 fa-twitter"></i></a>
+                        <a href="#"><i class="fa ml-5 fa-twitter"></i></a>
                         <a href="#"><i class="fab ml-5 fa-youtube"></i></a>
                         <a href="#"><i class="fab ml-5 fa-pinterest-p"></i></a>
                         <a href="#"><i class="fab ml-5 fa-skype"></i></a>
                     </div>
+
                 </div>
             </div>
         </div>

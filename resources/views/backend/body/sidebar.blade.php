@@ -212,10 +212,12 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('blog.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog Category</a>
+                    <a href="{{ route('blog.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog
+                        Category</a>
                 </li>
                 <li>
-                    <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog Category</a>
+                    <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog
+                        Category</a>
                 </li>
             </ul>
         </li>
@@ -235,6 +237,16 @@
                 </li>
             </ul>
         </li>
+        <div class="menu-title">Contact Messages</div>
+        </a>
+        <ul>
+            <li>
+                <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New
+                    Message</a>
+            </li>
+        </ul>
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -38,6 +39,16 @@ class OrderManageController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($ch);
         curl_close($ch);
+
+        // $url = 'https://sobrokom.store/order-tracking/invoice';
+        // $data = [
+        //     'name' => $request->first_name,
+        //     'invoiceNumber' => $invoiceNumber,
+        //     'trackingURL'=> $url
+        // ];
+        // Mail::to($request->email)->send(new OrderMail($data));
+
+
         $response = json_decode($response, true);
         if($response['response_code'] == 202){
             return back()->with('success','Order Successfully Approved');

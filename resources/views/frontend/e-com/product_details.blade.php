@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                              </button> -->
+                                                                                                                                                          </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -203,6 +203,10 @@
                                                         <input type="hidden"
                                                             value="{{ $product->varient[0]->discount_amount }}"
                                                             name="selling_price" class="selling_price">
+                                                        <input type="hidden" value="{{ $product->varient[0]->weight }}"
+                                                            name="weight" class="weight">
+                                                        <input type="hidden" value="{{ $product->varient[0]->unit }}"
+                                                            name="unit" class="unit">
                                                         <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
                                                             to
                                                             cart</button>
@@ -251,11 +255,11 @@
                                                     <li class="text-capitalize">Tags: {{ $product->tags }}</li>
                                                 </ul>
                                             </div>
-                                            <div class="product__details-payment text-center">
+                                            {{-- <div class="product__details-payment text-center">
                                                 <img src="{{ asset('frontend') }}/assets/img/shape/footer-payment.png "
                                                     alt="">
                                                 <span>Guarantee safe & Secure checkout</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -653,7 +657,9 @@
             let product_id = document.querySelector('.product_id').value;
             let variant_id = document.querySelector('.variant_id').value;
             let selling_price = document.querySelector('.selling_price').value;
-            let Quantity = document.querySelector('.pr_quantity').value;
+            let quantity = document.querySelector('.pr_quantity').value;
+            let weight = document.querySelector('.weight').value;
+            let unit = document.querySelector('.unit').value;
             $.ajax({
                 url: '/product/add_to_cart',
                 type: 'POST',
@@ -661,7 +667,9 @@
                     'product_id': product_id,
                     'variant_id': variant_id,
                     'selling_price': selling_price,
-                    'pr_quantity': Quantity,
+                    'pr_quantity': quantity,
+                    'weight': weight,
+                    'unit': unit
                 },
                 success: function(success_response) {
                     console.log(success_response);

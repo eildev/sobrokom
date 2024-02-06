@@ -4,8 +4,10 @@
             <div class="row align-items-center">
                 <div class="col-xl-3">
                     <div class="header__logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('frontend') }}/assets/img/logo/logo.png"
-                                alt="logo"></a>
+                        <a style="" href="{{ route('home') }}">
+                            <img src="{{ asset('frontend') }}/assets/img/logo/sobrokom-logo.svg" alt="logo"
+                                class="img-fluid">
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-6">

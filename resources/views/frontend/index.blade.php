@@ -37,7 +37,7 @@
     <!-- brand-product-area-end -->
 
     <!-- testimonial-area-start -->
-    @include('frontend.indexContent.testimonial')
+    {{-- @include('frontend.indexContent.testimonial') --}}
     <!-- testimonial-area-end -->
 
     <!-- cart-area-start -->

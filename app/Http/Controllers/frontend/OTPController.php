@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Mail;
 class OTPController extends Controller
 {
     public function storeOTP(Request $request){
-
         $otp = $this->otpGenarate($request->phone);
         $number = $otp->phone;
         $api_key = "0yRu5BkB8tK927YQBA8u";
@@ -67,6 +66,7 @@ class OTPController extends Controller
     }
 
     public function checkOTP(Request $request){
+        // dd($request);
         $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
         $now = Carbon::now();
         if(!$verificationCode){
@@ -93,7 +93,7 @@ class OTPController extends Controller
                 $order->discount = $request->discount;
                 $order->sub_total = $request->sub_total;
                 $order->shipping_method = 'In Dhaka';
-                $order->shipping_amount = 0;
+                $order->shipping_amount = $request->shipping_amount;
                 $order->grand_total = $request->sub_total;
                 $order->payment_method = 'Cash on Delivery';
                 $order->save();
@@ -134,10 +134,6 @@ class OTPController extends Controller
                     $OrderDetails->save();
                 }
                 Cart::destroy();
-                $url = url('/order-tracking/invoice');
-                $data = ['name' => $request->first_name,'trackingNumber' => $invoiceNumber,'trackingURL'=> $url]; // Replace with your actual data
-                Mail::to($request->email)->send(new OrderMail($data));
-
                 return response()->json([
                 'status' => 200,
                 'message' =>'Your order has been Submited successfully'
@@ -146,6 +142,3 @@ class OTPController extends Controller
 
     }
 }
-
-
-
