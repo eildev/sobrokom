@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                                                          </button> -->
+                                                                                                                                                              </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -357,7 +357,11 @@
                                 <div class="tab-pane fade" id="nav-review" role="tabpanel"
                                     aria-labelledby="nav-review-tab" tabindex="0">
                                     <div class="tpreview__wrapper">
-                                        {{-- <h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken
+                                        @php
+
+                                        @dd($review_rating);
+                                        @endphp
+                                        <h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken
                                         </h4>
                                         <div class="tpreview__comment">
                                             <div class="tpreview__comment-img mr-20">
@@ -381,37 +385,50 @@
                                                 <span class="date mb-20">--April 9, 2022: </span>
                                                 <p>very good</p>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         <div class="tpreview__form">
                                             <h4 class="tpreview__form-title mb-25">Add a review </h4>
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="tpreview__input mb-30">
-                                                        <input type="text" placeholder="Name">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="tpreview__input mb-30">
-                                                        <input type="email" placeholder="Email">
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-12">
-                                                    <div class="tpreview__star mb-20">
-                                                        <h4 class="title">Your Rating</h4>
-                                                        <div class="tpreview__star-icon">
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                    <form action="{{ Route('review-rating.insert') }}" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="text" value="{{ $product->id }}" name="product_id"
+                                                    class="">
+                                                        <div class="tpreview__star mb-20">
+                                                            <h4 class="title">Your Rating</h4>
+                                                            <div class="tpreview__star-icon ratings">
+                                                                <input type="text" name="rating" id="rating"
+                                                                    value="0" required>
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                                @error('rating')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="tpreview__input mb-30">
-                                                        <textarea name="text" placeholder="Message"></textarea>
-                                                        <div class="tpreview__submit mt-30">
-                                                            <button class="tp-btn">Submit</button>
+                                                        <div class="tpreview__input mb-30">
+                                                            <label for="message" class="form-label">Disabled file input example</label>
+                                                            <textarea id="message" name="message" placeholder="Message" required></textarea>
+                                                            @error('message')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            <label for="imageGallery" class="form-label">Disabled file input example</label>
+                                                            <input type="file" id="imageGallery" class="form-control h-auto ps-3" name="imageGallery[]" multiple>
+                                                            @error('imageGallery[]')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            <div class="tpreview__submit mt-30">
+                                                                <button class="tp-btn">Submit</button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        <div class="tpreview__input mb-30">
+
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -421,6 +438,27 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const stars = document.querySelectorAll('.ratings a');
+
+                        stars.forEach((star, index) => {
+                            star.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const ratingValue = index + 1;
+                                document.getElementById('rating').value = ratingValue;
+                                stars.forEach((s, i) => {
+                                    if (i < ratingValue) {
+                                        s.classList.add('active');
+                                    } else {
+                                        s.classList.remove('active');
+                                    }
+                                });
+                            });
+                        });
+                    });
+                </script>
+
 
                 @php
                     $featureProducts = App\Models\Product::where('product_feature', 'like', '%' . 'new-arrival' . '%')

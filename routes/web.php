@@ -27,6 +27,9 @@ use App\Http\Controllers\Frontend\ContactUsController;
 */
 
 Route::get('/', function () {
+    return view('frontend.comming_soon');
+})->name('comming_soon');
+Route::get('/home', function () {
     return view('frontend.index');
 })->name('home');
 
