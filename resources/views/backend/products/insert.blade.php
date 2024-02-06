@@ -26,7 +26,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
-                                                        <select class="form-select" name="category_id">
+                                                        <select class="form-select category_id" name="category_id">
                                                             <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}">
@@ -351,7 +351,7 @@
 
 
     <script>
-        // sku Generator 
+        // sku Generator
         function generateProductSKU(length) {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             let sku = '';
@@ -526,7 +526,7 @@
         }
 
 
-        // Input field Validation 
+        // Input field Validation
         function inputFieldValidation(inputFieldName) {
             var inputField = document.querySelector(inputFieldName);
             // console.log(inputField);
@@ -556,23 +556,5 @@
         inputFieldValidation2('.shipping');
 
 
-
-
-
-        // // delete varient data
-        // const delete_variant = document.querySelectorAll('#delete_variant');
-        // delete_variant.map(data => {
-        //     data.addEventListener('click', function(event) {
-        //         alert('delete');
-
-        //     })
-        // })
-
-        // delete_variant.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     const id = this.value;
-        //     alert('hello');
-        //     console.log(id);
-        // })
     </script>
 @endsection

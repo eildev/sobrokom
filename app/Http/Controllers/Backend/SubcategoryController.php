@@ -14,6 +14,13 @@ class SubcategoryController extends Controller
     {
         return view('backend.subcategory.insert');
     }
+    public function findSubcat($id)
+    {
+        $subcats = Subcategory::where('categoryId', $id)->get();
+        return response()->json([
+            'subcats' => $subcats
+        ]);
+    }
 
     // subcategory store function
     public function store(Request $request)
@@ -38,14 +45,14 @@ class SubcategoryController extends Controller
         return view('backend.subcategory.view', compact('subcategories'));
     }
 
-    // subcategory edit function 
+    // subcategory edit function
     public function edit($id)
     {
         $subcategory = Subcategory::findOrFail($id);
         return view('backend.subcategory.edit', compact('subcategory'));
     }
 
-    // subcategory update function 
+    // subcategory update function
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -60,7 +67,7 @@ class SubcategoryController extends Controller
         return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Updated');
     }
 
-    // subcategory delete function 
+    // subcategory delete function
     public function delete($id)
     {
         $subcategory = Subcategory::findOrFail($id);
