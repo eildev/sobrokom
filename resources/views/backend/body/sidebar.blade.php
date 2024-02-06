@@ -208,13 +208,43 @@
                 <div class="parent-icon">
                     <i class="fas fa-bell"></i>
                 </div>
-                <div class="menu-title">Contact Messages</div>
+                <div class="menu-title">Blog Category</div>
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New Message</a>
+                    <a href="{{ route('blog.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog
+                        Category</a>
+                </li>
+                <li>
+                    <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog
+                        Category</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Blog Post</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('blog.post.add.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog</a>
+                </li>
+                <li>
+                    <a href="{{ route('blog.all.post.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog</a>
+                </li>
+            </ul>
+        </li>
+        <div class="menu-title">Contact Messages</div>
+        </a>
+        <ul>
+            <li>
+                <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New
+                    Message</a>
+            </li>
+        </ul>
         </li>
 
     </ul>

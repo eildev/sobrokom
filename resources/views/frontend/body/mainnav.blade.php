@@ -6,7 +6,7 @@
                     <div class="header__logo">
                         <a style="" href="{{ route('home') }}">
                             <img src="{{ asset('frontend') }}/assets/img/logo/sobrokom-logo.svg" alt="logo"
-                                class="img-fluid">
+                                class="img-fluid" style="aspect-ratio: 120/45;">
                         </a>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                                     <a href="#">Pages</a>
                                     <ul class="sub-menu">
                                         <li class="">
-                                            <a href="#">Blog</a>
+                                            <a href="{{route('all.blog.post')}}">Blog</a>
                                         </li>
                                         <li class="has-dropdown">
                                             <a href="{{ route('aboutus') }}">About</a>

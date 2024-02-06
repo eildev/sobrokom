@@ -13,6 +13,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\OTPController;
 use App\Http\Controllers\Frontend\SocialLoginController;
 use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
 /*
@@ -53,8 +55,9 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/features', 'allFeatureProduct')->name('all.feature.product');
     Route::get('/product/search', 'SearchbyProduct')->name('search.product');
     Route::get('/product/filterby-brand', 'filterbyBrand')->name('product.filterByBrand');
-    Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
 
+    Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
+    Route::get('/product/global/search/{value}', 'globalSearch');
 });
 
 // product related routes
@@ -135,3 +138,14 @@ Route::middleware('auth', 'role:user')->group(function () {
     });
 
     //All Routes for Contact us
+    //Blog Post Route Start
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/blog/post/details/{id}', 'BlogPostDetails')->name('blog.post.details');
+        Route::get('/blog/post/all', 'AllBlogPost')->name('all.blog.post');
+    });
+   //Blog Post Route End
+   //Blog Comment Route
+    // Route::controller(BlogCommentController::class)->group(function () {
+    //     Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+    // });
+   //Blog Comment Route End
