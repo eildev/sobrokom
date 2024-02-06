@@ -59,6 +59,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/subcategory/edit/{id}', 'edit')->name('subcategory.edit');
         Route::post('/subcategory/update/{id}', 'update')->name('subcategory.update');
         Route::get('/subcategory/delete/{id}', 'delete')->name('subcategory.delete');
+        Route::get('/find/subcategory/{id}', 'findSubcat')->name('subcategory.find');
     });
     //All Routes for Subcategory End
 

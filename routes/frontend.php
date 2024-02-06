@@ -54,8 +54,9 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/features', 'allFeatureProduct')->name('all.feature.product');
     Route::get('/product/search', 'SearchbyProduct')->name('search.product');
     Route::get('/product/filterby-brand', 'filterbyBrand')->name('product.filterByBrand');
-    Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
 
+    Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
+    Route::get('/product/global/search/{value}', 'globalSearch');
 });
 
 // product related routes

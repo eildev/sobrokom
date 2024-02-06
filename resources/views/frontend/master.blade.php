@@ -35,9 +35,7 @@
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
 
     <!-- tinymce js here -->
-    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js'
-        referrerpolicy="origin"></script>
-
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
@@ -294,7 +292,7 @@
                         });
                         document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
                         updateCartDisplay(res.cartData);
-                        console.log(res.cartData);
+                        // console.log(res.cartData);
                     }
                 }
             });
@@ -355,8 +353,79 @@
 
             });
         });
-    </script>
 
+        // search by suggestion 
+        const top_search = document.querySelector('.top_search');
+        const top_search_list = document.querySelector('.top_search_list');
+        top_search.addEventListener('keyup', function(e) {
+            let search_value = this.value;
+            if (search_value) {
+                $.ajax({
+                    url: '/product/global/search/' + search_value,
+                    type: "GET",
+                    success: function(res) {
+                        if (res.products) {
+                            $('.top_search_list').css('display', 'block');
+                            let data = "";
+                            $.each(res.products, function(key, val) {
+                                data += '<li>' + val.product_name + '</li>';
+                            });
+                            $('.top_search_list').html(data);
+                        }
+                    }
+                })
+
+
+            } else {
+                $('.top_search_list').css('display', 'none');
+            }
+        });
+
+
+
+        // function searchSuggetion(inputField) {
+        //     inputField.addEventListener('keyup', function(e) {
+        //         let search_value = this.value;
+        //         if (search_value) {
+        //             $.ajax({
+        //                 url: '/product/global/search/' + search_value,
+        //                 type: "GET",
+        //                 success: function(res) {
+        //                     if (res.products) {
+        //                         $('.top_search_list').css('display', 'block');
+        //                         let data = "";
+        //                         $.each(res.products, function(key, val) {
+        //                             data += '<li>' + val.product_name + '</li>';
+        //                         });
+        //                         $('.top_search_list').html(data);
+        //                     }
+        //                 }
+        //             })
+
+
+        //         } else {
+        //             $('.top_search_list').css('display', 'none');
+        //         }
+        //     });
+
+        //     $(document).on('click', '.top_search_list li', function() {
+        //         // $('.top_search').val($(this).text());
+        //         inputField.value = this.value;
+        //         $('.top_search_list').css('display', 'none');
+        //     });
+        // }
+
+        $(document).on('click', '.top_search_list li', function() {
+                $('.top_search').val($(this).text());
+                $('.top_search_list').css('display', 'none');
+            });
+    </script>
+    <style>
+        .top_search_list li {
+            cursor: pointer;
+            padding: 5px 0;
+        }
+    </style>
 </body>
 
 </html>

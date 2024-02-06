@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('product_id');
             $table->string('product_quantity');
             $table->float('total_price');
+            $table->string('weight');
+            $table->float('product_price');
 
             $table->foreign('order_id')
                 ->references('id')

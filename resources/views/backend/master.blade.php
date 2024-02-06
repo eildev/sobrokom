@@ -77,9 +77,8 @@
     <script src="{{ asset('backend') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/input-tags/js/tagsinput.js"></script>
 
-
-    <script src="https://cdn.tiny.cloud/1/no-origin/tinymce/5.10.9-138/tinymce.min.js"></script>
-
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
     {{-- multi select tags  --}}
@@ -168,10 +167,34 @@
 
             });
         });
-        // tinymce.init({
-		//   selector: '#product_descriptions'
-		// });
 
+
+
+        $(document).ready(function() {
+        $('#product_descriptions').summernote();
+$('.category_id').on('change', function() {
+
+    let category_id = $(this).val();
+    if (category_id) {
+        $.ajax({
+            url: '/find/subcategory/' + category_id,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(result) {
+                $('select[name="subcategory_id"]').html(
+                    '<option value="">Select a Sub-Category</option>');
+                $.each(result.subcats, function(key, item) {
+                    $('select[name="subcategory_id"]').append(
+                        '<option myid="' + item.id +
+                        '" value="' + item.subcategoryName +
+                        '">' + item
+                        .subcategoryName + '</option>');
+                })
+            }
+        });
+    }
+})
+});
     </script>
 </body>
 
