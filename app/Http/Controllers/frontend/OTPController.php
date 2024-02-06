@@ -129,6 +129,8 @@ class OTPController extends Controller
                     $OrderDetails = new OrderDetails;
                     $OrderDetails->order_id = $order->id;
                     $OrderDetails->product_id = $product->id;
+                    $OrderDetails->weight = $product->weight;
+                    $OrderDetails->product_price = $product->price;
                     $OrderDetails->total_price = $product->price;
                     $OrderDetails->product_quantity = $product->qty;
                     $OrderDetails->save();
