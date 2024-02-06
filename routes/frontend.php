@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\SocialLoginController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\BlogCommentController;
+use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,12 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::post('/billing/insert', 'insert')->name('billing.insert');
     });
     // Billing related route
+
+    // Review and Rating related route
+    Route::controller(ReviewRatingController::class)->group(function () {
+        Route::post('/review-rating/insert', 'store')->name('review-rating.insert');
+    });
+    // Review and Rating related route
 });
 
 // WithOut Auth All Routes
@@ -137,8 +144,8 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::get('/blog/post/all', 'AllBlogPost')->name('all.blog.post');
     });
    //Blog Post Route End
-   //Blog Comment Route
-    // Route::controller(BlogCommentController::class)->group(function () {
-    //     Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
-    // });
+  // Blog Comment Route
+    Route::controller(BlogCommentController::class)->group(function () {
+        Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+    });
    //Blog Comment Route End
