@@ -268,11 +268,15 @@
                                             @csrf
                                             <div class="d-flex">
                                                 <input value="{{ $searchTag }}" type="text" name="search"
-                                                    placeholder="Search Here"
-                                                    class="form-control rounded-0 rounded-start">
+                                                autocomplete="off"  placeholder="Search Here"
+                                                    class="form-control rounded-0 rounded-start top_search">
                                                 <button class="tp-btn rounded-0 rounded-end">Search</button>
                                             </div>
                                         </form>
+                                        <ul class="list-unstyled top_search_list"
+                                            style="text-align: left; padding-left:5px;display:none">
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
