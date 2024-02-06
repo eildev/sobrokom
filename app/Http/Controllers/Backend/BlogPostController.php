@@ -16,11 +16,11 @@ class BlogPostController extends Controller
     }
     public function StoreBlogPost(Request $request) {
         $request->validate([
-            'title' => 'required|max:100',
+            'title' => 'required|max:200',
             'category' => 'required',
-            'description' => 'required|max:100',
+            'description' => 'required',
             'tags' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         if ($request->image) {
@@ -50,11 +50,11 @@ class BlogPostController extends Controller
     public function BlogPostupdate(Request $request,$id){
         if ($request->image) {
             $request->validate([
-                'title' => 'required|max:100',
+                'title' => 'required|max:200',
                 'category' => 'required',
-                'description' => 'required|max:100',
+                'description' => 'required',
                 'tags' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/blog/blog_post/'), $imageName);
@@ -70,9 +70,9 @@ class BlogPostController extends Controller
             return redirect()->route('blog.all.post.view')->with('success', 'Blog Successfully updated With Image');
         } else {
             $request->validate([
-                'title' => 'required|max:100',
+                'title' => 'required|max:200',
                 'category' => 'required',
-                'description' => 'required|max:100',
+                'description' => 'required',
                 'tags' => 'required',
             ]);
             $blog = BlogPost::findOrFail($id);
