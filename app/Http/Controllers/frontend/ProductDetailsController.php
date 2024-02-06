@@ -52,6 +52,12 @@ class ProductDetailsController extends Controller
         $brand = Brand::where('slug', $brandslug)->first();
         return view('frontend/e-com/brand-wise-product', compact('brand'));
     }
+    public function globalSearch($value){
+        $products = Product::where('product_name', 'LIKE', '%'.$value.'%')->get();
+        return response()->json([
+            'products' => $products,
+        ]);
+    }
     public function allFeatureProduct(){
         $features = Product::where('status', 1)
         ->where('product_feature', 'like', '%weekend-deals%')

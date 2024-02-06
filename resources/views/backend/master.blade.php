@@ -136,7 +136,6 @@
         });
     </script>
 
-
     {{-- swwetalert  --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -173,6 +172,32 @@
 		//   selector: '#product_descriptions'
 		// });
 
+
+        $(document).ready(function() {
+
+$('.category_id').on('change', function() {
+
+    let category_id = $(this).val();
+    if (category_id) {
+        $.ajax({
+            url: '/find/subcategory/' + category_id,
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(result) {
+                $('select[name="subcategory_id"]').html(
+                    '<option value="">Select a Sub-Category</option>');
+                $.each(result.subcats, function(key, item) {
+                    $('select[name="subcategory_id"]').append(
+                        '<option myid="' + item.id +
+                        '" value="' + item.subcategoryName +
+                        '">' + item
+                        .subcategoryName + '</option>');
+                })
+            }
+        });
+    }
+})
+});
     </script>
 </body>
 

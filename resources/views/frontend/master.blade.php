@@ -355,8 +355,45 @@
 
             });
         });
-    </script>
 
+        const top_search = document.querySelector('.top_search');
+        const top_search_list = document.querySelector('.top_search_list');
+        top_search.addEventListener('keyup', function(e) {
+            let search_value= this.value;
+            if(search_value){
+                $.ajax({
+                    url: '/product/global/search/' + search_value,
+                    type: "GET",
+                    success: function(res) {
+                        if(res.products){
+                            $('.top_search_list').css('display','block');
+                            let data ="";
+                            $.each(res.products, function(key,val){
+                                data +='<li>'+val.product_name+'</li>';
+                            });
+                            $('.top_search_list').html(data);
+                        }
+                    }
+                })
+
+
+            }else{
+                $('.top_search_list').css('display','none');
+            }
+        });
+        $(document).on('click', '.top_search_list li',function(){
+            $('.top_search').val($(this).text());
+            $('.top_search_list').css('display','none');
+        });
+
+
+    </script>
+    <style>
+        .top_search_list li{
+            cursor: pointer;
+            padding: 5px 0;
+        }
+    </style>
 </body>
 
 </html>
