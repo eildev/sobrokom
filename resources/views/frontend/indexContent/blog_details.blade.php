@@ -44,11 +44,7 @@
                            <p>
                             {{$singleBlog->desc}}
                            </p>
-
-
                         </div>
-
-
                         <div class="postbox__tag-border mb-45">
                            <div class="row align-items-center">
                               <div class="col-xl-7 col-lg-6 col-md-12">
@@ -61,8 +57,6 @@
                                         @for($i=0; $i < count($tags); $i++)
                                         <a href="#">{{$tags[$i]}}</a>
                                         @endfor
-
-
                                     </div>
                                  </div>
                               </div>
@@ -78,72 +72,102 @@
                            </div>
                         </div>
 
-
+{{-- //Here Start Work --}}
                         <div class="postbox__comment mb-65">
                            <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
                            <ul>
-                              <li>
-                                 <div class="postbox__comment-box d-flex">
-                                    <div class="postbox__comment-info">
-                                       <div class="postbox__comment-avater mr-25">
-                                          <img src="assets/img/blog/comment-1.jpg" alt="">
-                                       </div>
-                                    </div>
-                                    <div class="postbox__comment-text">
-                                       <div class="postbox__comment-name">
-                                          <h5>Kristin Watson</h5>
-                                       </div>
-                                       <p>The tiles are highly resistant to water and dirt and can be cleaned, so they are compatible with the cultivation of plants and cooking and the functions. There are few plugins and apps available for this purpose, many of them required a monthly subscription. </p>
-                                       <div class="postbox__comment-reply">
-                                          <a href="#">Leave Reply</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="children mb-30">
-                                 <div class="postbox__comment-box pl-90 d-flex">
-                                    <div class="postbox__comment-info">
-                                       <div class="postbox__comment-avater mr-25">
-                                          <img src="assets/img/blog/comment-2.jpg" alt="">
-                                       </div>
-                                    </div>
-                                    <div class="postbox__comment-text">
-                                       <div class="postbox__comment-name">
-                                          <h5>Brooklyn Simmons</h5>
-                                       </div>
-                                       <p>Include anecdotal examples of your experience, or things you took notice of that you <br> feel others would find useful.</p>
-                                       <div class="postbox__comment-reply">
-                                          <a href="#">Leave Reply</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="postbox__comment-box d-flex">
-                                    <div class="postbox__comment-info">
-                                       <div class="postbox__comment-avater mr-25">
-                                          <img src="assets/img/blog/comment-3.jpg" alt="">
-                                       </div>
-                                    </div>
-                                    <div class="postbox__comment-text">
-                                       <div class="postbox__comment-name">
-                                          <h5>Kristin Watson</h5>
-                                       </div>
-                                       <p>The tiles are highly resistant to water and dirt and can be cleaned, so they are compatible with the cultivation of plants and cooking and the functions. There are few plugins and apps available for this purpose, many of them required a monthly subscription. </p>
-                                       <div class="postbox__comment-reply">
-                                          <a href="#">Leave Reply</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
+
+                            @foreach ($blogComment as $comment)
+                            @if ($comment->status == 0)
+
+                            @else
+                            <li>
+                                <div class="postbox__comment-box d-flex">
+                                   <div class="postbox__comment-info">
+                                      <div class="postbox__comment-avater mr-25">
+                                         <img src="{{asset('uploads/user.jpg')}}" alt="">
+                                      </div>
+                                   </div>
+                                   <div class="postbox__comment-text">
+                                      <div class="postbox__comment-name">
+                                         <h5 class="d-inline-block">{{$comment['user']['fullName']}} </h5>
+
+                                         <small class="small">{{ date('d-M-Y', strtotime($comment->created_at)) }} at {{ date('h:i A', strtotime($comment->created_at)) }}</small>
+
+                                      </div>
+                                      <p>{{$comment->comment}}</p>
+                                      <div class="postbox__comment-reply">
+                                         <button class="btn btn-sm ReplyOpen" id="{{$comment->id}}">Leave Reply</button>
+                                      </div>
+                                      {{-- reply ///// --}}
+                                      @foreach ($comment->getReply as $reply )
+                                      <div>
+                                        <ul>
+                                        <li class="children mb-30">
+                                          <div class="postbox__comment-box pl-90 d-flex">
+                                             <div class="postbox__comment-info">
+                                                <div class="postbox__comment-avater mr-25">
+                                                   <img src="{{asset('uploads/user.jpg')}}" alt="">
+                                                </div>
+                                             </div>
+                                             <div class="postbox__comment-text">
+                                                <div class="postbox__comment-name">
+                                                   <h5 class="d-inline-block">{{$reply->user->fullName ?? NULL}}</h5><small class="small">{{ date('d-M-Y', strtotime($reply->created_at)) }} at {{ date('h:i A', strtotime($reply->created_at)) }}</small>
+                                                </div>
+                                                <p>{{$reply->reply}}</p>
+
+                                             </div>
+                                          </div>
+                                       </li>
+                                       </ul>
+                                      </div>
+                                     @endforeach
+
+                                      <div class="tpreview__form postbox__form ShowReply{{$comment->id}}" style="display:none;">
+                                        <h4 class="tpreview__form-title mb-10">Reply A Comments </h4>
+                                         <form action="{{url('blog-comment-reply-submit')}}" method="POST">
+                                             @csrf
+                                             <input type="hidden" name="subcriber_id" value="{{Auth::user()->id ?? 0}}">
+                                             <input type="hidden" name="comment_id"  value="{{$comment->id}}">
+
+                                               <div class="row">
+                                                  <div class="col-lg-12">
+                                                     <div class="tpreview__input mb-5">
+                                                        <textarea  name="reply_message" required placeholder="Message"></textarea>
+                                                     </div>
+                                                  </div>
+                                                  <div class="col-lg-12">
+                                                    @guest
+                                                    <div class="tpreview__submit mt-25">
+                                                        <a id="login" class="tp-btn">Leave Reply</a>
+                                                     </div>
+                                                        @else
+                                                    <div class="tpreview__submit mt-25">
+                                                    <button type="submit"  class="tp-btn">Leave Reply</button>
+                                                    </div>
+                                                    @endguest
+
+                                                  </div>
+                                               </div>
+
+                                            </form>
+                                     </div>
+                                      {{-- reply Comment///// --}}
+                                   </div>
+                                </div>
+                             </li>
+                            @endif
+                            @endforeach
                            </ul>
                         </div>
+
                         <div class="tpreview__form postbox__form">
-                           <h4 class="tpreview__form-title mb-10">LEAVE A REPLY </h4>
+                           <h4 class="tpreview__form-title mb-10">LEAVE A Comments </h4>
                            @guest
-                           <h4 class="tpreview__form-title mb-10 text-danger">At first, you need to login to your account | <a class="btn btn-sm bg-light" href="{{route('login')}}">Login</a> |</h4
+                           <h4 class="tpreview__form-title mb-10 text-danger" id="login">At first, you need to login to your account | <a class="btn btn-sm bg-light" href="{{route('login')}}">Login</a> |</h4>
                             @else
                             <p>Your email address will not be published. Required fields are marked *</p>
+
                             <form action="{{route('blog.comment')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="subcriber_id" id="subcriber_id" value="{{Auth::user()->id}}">
@@ -169,7 +193,9 @@
                                         </div>
                                      </div>
                                   </div>
+
                                </form>
+
                            @endguest
 
 
@@ -186,5 +212,11 @@
     <!-- feature-area-end -->
 
 
+<script type="text/javascript">
+$('.ReplyOpen').click(function(){
+ var id = $(this).attr('id');
+ $('.ShowReply'+id).toggle();
+})
+</script>
 
 @endsection
