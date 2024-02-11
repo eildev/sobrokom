@@ -396,6 +396,9 @@
             document.querySelector('.discount_amount').value = sellingPrice;
         });
     </script>
+
+
+
 </body>
 
 </html>
