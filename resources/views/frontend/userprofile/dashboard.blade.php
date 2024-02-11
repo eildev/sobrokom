@@ -80,17 +80,18 @@
                                         <span><i class="far fa-home pe-2"></i>
                                             <a href="#" tabindex="4">Orders</a>
                                     </li>
-                                    <li>
-                                        <span><i class="far fa-home pe-2"></i>
-                                            <a href="#" tabindex="5">Order Tracking</a>
-                                    </li>
-                                    <li>
+
+                                    {{-- <li>
                                         <span><i class="fas fa-money-check-alt pe-2"></i>
                                             <a href="#" tabindex="6">Refunds</a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <span><i class="fas fa-user-cog pe-2"></i>
                                             <a href="#" tabindex="7">Settings</a>
+                                    </li>
+                                    <div style="font-size: 14px">
+                                        <span><i class="far fa-home pe-2"></i>
+                                            <a href="{{ route('order.tracking') }}" target="_blank">Order Tracking</a>
                                     </li>
                                 </ul>
                             </div>
@@ -137,14 +138,11 @@
                     <div class="tab__content--4 tabContent">
                         @include('frontend.userprofile.tabs.orders')
                     </div>
-                    {{-- Orders Tracking body --}}
-                    <div class="tab__content--5 tabContent">
-                        @include('frontend.userprofile.tabs.orderTracking')
-                    </div>
+
                     {{-- Refunds body --}}
-                    <div class="tab__content--6 tabContent">
+                    {{-- <div class="tab__content--6 tabContent">
                         @include('frontend.userprofile.tabs.refunds')
-                    </div>
+                    </div> --}}
                     {{-- settings body --}}
                     <div class="tab__content--7 tabContent">
                         @include('frontend.userprofile.tabs.settings')
@@ -152,162 +150,7 @@
 
                 </div>
             </div>
-            {{-- <div class="row justify-content-center my-5">
-                <div class="col-12 tab__container">
-                    <div class="row">
-                        <div class="col-md-3 tab__main">
 
-                            <ul class="nav flex-column border border-primary">
-                                <li>
-                                    <a class="nav-link active" href="#" tabindex="1">Dashboard</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#" tabindex="2">Profile</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#" tabindex="3">Orders</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="#" tabindex="4">Dashboard</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-9 tab__content">
-                            <div class="tab__content--1 tabContent ">
-                                <ul class="nav nav-tabs">
-                                    <li>
-                                        <a class="nav-link active" href="#">Active</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#">Link</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#">Link</a>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link" href="#" tabindex="-1"
-                                            aria-disabled="true">Disabled</a>
-                                    </li>
-                                </ul>
-                                this is dashboard
-                            </div>
-                            <div class="tab__content--2 tabContent">this is Profile</div>
-                            <div class="tab__content--3 tabContent">this is Orders</div>
-                            <div class="tab__content--4 tabContent">this is dashboard</div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-
-
-            <div class="card">
-                <div class="card-body">
-                    <div id="invoice">
-                        <div class="toolbar hidden-print">
-                            <div class="text-end">
-                                <button type="button" class="btn btn-dark"><i class="fa fa-print"></i> Print</button>
-                                <button type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as
-                                    PDF</button>
-                            </div>
-                            <hr />
-                        </div>
-                        <div class="invoice overflow-auto">
-                            <div style="min-width: 600px">
-                                <header>
-                                    <div class="row">
-                                        <div class="col">
-                                            <a href="javascript:;">
-                                                <img src="assets/images/logo-icon.png" width="80" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="col company-details">
-                                            <h2 class="name">
-                                                <a target="_blank" href="javascript:;">
-                                                    Sobrokom Corporation
-                                                </a>
-                                            </h2>
-                                            <div>+880 1602 08 51 21</div>
-                                            <div>sobrokom.store@gmail.com</div>
-                                            <div>info@sobrokom.store</div>
-                                        </div>
-                                    </div>
-                                </header>
-                                <main>
-                                    <div class="row contacts">
-                                        <div class="col invoice-to">
-                                            <div class="text-gray-light">INVOICE TO:</div>
-                                            <h2 class="to">Client Name</h2>
-                                            <div class="address">Client Address</div>
-                                            <div class="email"><a href="mailto:john@example.com">client@example.com</a>
-                                            </div>
-                                        </div>
-                                        <div class="col invoice-details">
-                                            <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                                            <div class="date">Date of Invoice: 01/10/2018</div>
-                                            <div class="date">Due Date: 30/10/2018</div>
-                                        </div>
-                                    </div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th class="text-left">PRODUCT NAME</th>
-                                                <th class="text-right">PRODUCT QUANTITY</th>
-                                                <th class="text-right">WEIGHT</th>
-                                                <th class="text-right">UNIT PRICE</th>
-                                                <th class="text-right">TOTAL</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="no">01</td>
-                                                <td class="text-left">
-                                                    <h3>Website Design</h3>Creating a recognizable design solution based on
-                                                    the
-                                                    company's existing visual identity
-                                                </td>
-                                                <td class="">30</td>
-                                                <td class="unit">$40.00</td>
-                                                <td class="qty">30</td>
-                                                <td class="total">$1,200.00</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="2"></td>
-                                                <td colspan="3">SUBTOTAL</td>
-                                                <td>$5,200.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2"></td>
-                                                <td colspan="2">TAX 25%</td>
-                                                <td>$1,300.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2"></td>
-                                                <td colspan="2">GRAND TOTAL</td>
-                                                <td>$6,500.00</td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    <div class="thanks">Thank you!</div>
-                                    <div class="notices">
-                                        <div>NOTICE:</div>
-                                        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after
-                                            30
-                                            days.</div>
-                                    </div>
-                                </main>
-                                <footer>Invoice was created on a computer and is valid without the signature and seal.
-                                </footer>
-                            </div>
-                            <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
-                            <div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
