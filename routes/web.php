@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\StockManageController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
+use App\Http\Controllers\Backend\BlogCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,6 @@ use App\Http\Controllers\Backend\BlogPostController;
 */
 
 Route::get('/', function () {
-    return view('frontend.comming_soon');
-})->name('comming_soon');
-Route::get('/home', function () {
     return view('frontend.index');
 })->name('home');
 
@@ -128,14 +126,15 @@ Route::middleware('auth','role:admin')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::post('/product/store', 'store')->name('product.store');
+        Route::post('/product/update/{id}', 'update')->name('product.update');
         Route::post('/product/variant/store', 'variantStore')->name('variant.store');
         Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
         Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/view/{id}', 'viewDetails')->name('product.view.details');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
-        Route::post('/product/update/{id}', 'update')->name('product.update');
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
+        Route::post('/product/status/{id}', 'productStatus')->name('product.status');
     });
     //All Routes for Product End
 
@@ -188,6 +187,18 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/blog/post/delete/{id}', 'BlogPostDelete')->name('blog.post.delete');
     });
      //Blog Post All Route End
+
+    //Blog Comment All Route Start
+    Route::controller(BlogCommentController::class)->group(function () {
+        Route::get('/blog/all/pending/comment', 'BlogAllPendingComment')->name('blog.all.pending.comment');
+        Route::get('/blog/all/approve/comment', 'BlogAllApproveComment')->name('blog.all.approved.comment');
+        Route::get('/blog/pending/comment/approve/{id}', 'BlogCommentPendingToApprove')->name('blog.comment.approve');
+        Route::get('/blog/approve/comment/pending/{id}', 'BlogCommentApproveToPending')->name('comment.approve.cancel');
+        Route::get('/blog/comment/delete/{id}', 'BlogCommentDelete')->name('comment.delete');
+        //Reply Comment route
+
+    });
+     //Blog Comment All Route End
 
 
 });

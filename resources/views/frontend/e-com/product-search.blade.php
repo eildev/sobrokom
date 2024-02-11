@@ -103,22 +103,7 @@
                         </div>
 
                         {{-- filter by Price  --}}
-                        {{-- <div class="tpshop__widget mb-30 pb-25">
-
-                            <h4 class="tpshop__widget-title mb-20">FILTER BY PRICE</h4>
-                            <div class="productsidebar">
-                                <div class="productsidebar__head">
-                                </div>
-                                <div class="productsidebar__range">
-                                    <div id="slider-range"></div>
-                                    <div class="price-filter mt-10"><input type="text" id="amount">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="productsidebar__btn mt-15 mb-15">
-                                <a href="#">FILTER</a>
-                            </div>
-                        </div> --}}
+                        
 
                         {{-- filter by Brand  --}}
                         <div class="tpshop__widget mb-30 pb-25">

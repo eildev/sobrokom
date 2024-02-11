@@ -7,12 +7,11 @@
         </div>
 
         @php
-            $category = App\Models\Category::where('categoryName', 'like', '%' . 'Fashion' . '%')->first();
-            $products = App\Models\Product::where('category_id', $category->id)
+            $brand = App\Models\Brand::where('BrandName', 'like', '%' . 'Local' . '%')->first();
+            $products = App\Models\Product::where('brand_id', $brand->id)
                 ->take(10)
                 ->orderBy('id', 'ASC')
                 ->get();
-            // dd($products);
         @endphp
         <div class="tpproduct__arrow double-product p-relative">
             <div class="swiper-container tpproduct-active tpslider-bottom p-relative">
@@ -91,75 +90,20 @@
                                     </div>
                                     <div class="tpproduct__hover-text">
                                         <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                            <form method="POST" id="add_to_cart_form">
+                                             <form method="POST" id="add_to_cart_form">
                                                 @csrf
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                                <input type="hidden" value="{{ $product->varient[0]->id }}"
-                                                    name="variant_id">
-                                                <input type="hidden"
-                                                    value="{{ $product->varient[0]->discount_amount }}"
-                                                    name="selling_price">
-                                                <button class="tp-btn-2">Add to
-                                                    cart</button>
+                                                <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
+                                                <input type="hidden" value="{{ $product->varient[0]->discount_amount }}"name="selling_price">
+                                                <input type="hidden" value="{{ $product->varient[0]->weight }}" name="weight">
+                                                <input type="hidden" value="{{ $product->varient[0]->unit }}" name="unit">
+                                                <button class="tp-btn-2">Add to cart</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                    @else
-                        <div class="swiper-slide">
-                            <div class="tpproduct p-relative">
-                                <div class="tpproduct__thumb p-relative text-center">
-                                    <a href="#"><img src="assets/img/product/products29-min.jpg"
-                                            alt=""></a>
-                                    <a class="tpproduct__thumb-img" href="shop-details.html"><img
-                                            src="assets/img/product/products30-min.jpg" alt=""></a>
-                                    <div class="tpproduct__info bage">
-                                        <span class="tpproduct__info-discount bage__discount">-50%</span>
-                                        <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                    </div>
-                                    <div class="tpproduct__shopping">
-                                        <a class="tpproduct__shopping-wishlist" href="wishlist.html"><i
-                                                class="icon-heart icons"></i></a>
-                                        <a class="tpproduct__shopping-wishlist" href="#"><i
-                                                class="icon-layers"></i></a>
-                                        <a class="tpproduct__shopping-cart" href="#"><i class="icon-eye"></i></a>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__content">
-                                    <span class="tpproduct__content-weight">
-                                        <a href="shop-details.html">Fresh Meat</a>
-                                    </span>
-                                    <h4 class="tpproduct__title">
-                                        <a href="shop-details-top-.html">Mangosteen Organic From VietNamese</a>
-                                    </h4>
-                                    <div class="tpproduct__rating mb-5">
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                        <a href="#"><i class="icon-star_outline1"></i></a>
-                                    </div>
-                                    <div class="tpproduct__price">
-                                        <span>$56.00</span>
-                                        <del>$19.00</del>
-                                    </div>
-                                </div>
-                                <div class="tpproduct__hover-text">
-                                    <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                        <a class="tp-btn-2" href="cart.html">Add to cart</a>
-                                    </div>
-                                    <div class="tpproduct__descrip">
-                                        <ul>
-                                            <li>Type: Organic</li>
-                                            <li>MFG: August 4.2021</li>
-                                            <li>LIFE: 60 days</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     @endif
                 </div>
             </div>

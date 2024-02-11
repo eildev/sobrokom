@@ -10,7 +10,7 @@
         <div class="feature-bg-round white-bg pt-50 pb-15">
             <div class="tpfeature-border">
                 <div class="row row-cols-lg-5 row-cols-md-3 row-cols-1">
-                    <div class="col offset-1">
+                    <div class="col offset-lg-1">
                         <div class="mainfeature__item text-center mb-45">
                             <div class="mainfeature__icon">
                                 <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-6.svg"
@@ -18,7 +18,7 @@
                             </div>
                             <div class="mainfeature__content">
                                 <h4 class="mainfeature__title">Fast Delivery</h4>
-                                <p>Across West & East India</p>
+                                <p>Across All Bangladesh</p>
                             </div>
                         </div>
                     </div>

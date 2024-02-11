@@ -44,10 +44,14 @@
                                                         <div class="tpproduct__info bage">
                                                             @if ($product->varient[0]->discount > 0)
                                                                 <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                            @else
+                                                                <span></span>
                                                             @endif
                                                             @if ($product->varient[0]->discount > 0)
                                                                 <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @else
+                                                                <span></span>
                                                             @endif
 
                                                         </div>
@@ -84,8 +88,7 @@
                                                             </a>
                                                         </span>
                                                         <h4 class="tpproduct__title">
-                                                            <a href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}
-                                                            </a>
+                                                            <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
                                                             <a href="#"><i class="icon-star_outline1"></i></a>
@@ -96,22 +99,26 @@
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
                                                             <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                            <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                             <span class="text-secondary text-capitalize" style="font-size: 14px">
+                                                                /{{ $product->varient[0]->weight ?? '' }}
+                                                                {{ $product->varient[0]->unit ?? '' }}
+                                                            </span>
                                                             @if ($product->varient[0]->discount > 0)
                                                                 <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                                @else
+                                                                <span></span>
                                                             @endif
 
                                                         </div>
-                                                        <div class="tpproduct__progress">
-                                                            <div class="progress mb-5">
-                                                                <div class="progress-bar w-25" role="progressbar"
-                                                                    aria-label="Basic example" aria-valuenow="75"
-                                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                                            </div>
-                                                            <span>Sold:
-                                                                <b>16/{{ $product->varient[0]->stock_quantity }}</b></span>
-                                                        </div>
+                                                        <!--<div class="tpproduct__progress">-->
+                                                        <!--    <div class="progress mb-5">-->
+                                                        <!--        <div class="progress-bar w-25" role="progressbar"-->
+                                                        <!--            aria-label="Basic example" aria-valuenow="75"-->
+                                                        <!--            aria-valuemin="0" aria-valuemax="100"></div>-->
+                                                        <!--    </div>-->
+                                                        <!--    <span>Sold:-->
+                                                        <!--        <b>16/{{ $product->varient[0]->stock_quantity }}</b></span>-->
+                                                        <!--</div>-->
                                                     </div>
                                                     <div class="tpproduct__hover-text">
                                                         <div
@@ -150,6 +157,5 @@
             </div>
         </div>
     </section>
-@else
 @endif
 <!-- product-area-end -->

@@ -13,7 +13,7 @@
                     </div>
                     <hr />
                     <div class="form-body mt-4">
-                        <form action="" method="POST" id="productForm" enctype="multipart/form-data">
+                        <form method="post" id="productForm" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3 mb-3">
                                 <div class="col-lg-8">
@@ -40,19 +40,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                @php
-                                                    $subcategories = App\Models\Subcategory::all();
-                                                @endphp
+                                              
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
                                                         <select class="form-select " name="subcategory_id">
                                                             <option value="">Select Subcategory</option>
-                                                            @foreach ($subcategories as $subcategory)
-                                                                <option value="{{ $subcategory->id }}">
-                                                                    {{ $subcategory->subcategoryName }}
-                                                                </option>
-                                                            @endforeach
                                                         </select>
                                                         <span class="subcategory_error text-danger"></span>
 
@@ -190,7 +183,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary add_product">Add Product</button>
+                                                    <button type="submit" class="btn btn-primary add_product">Add Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -252,6 +245,7 @@
                                                     <option value="inch">Inch</option>
                                                     <option value="gm">GM</option>
                                                     <option value="ml">ML</option>
+                                                    <option value="packet">Packet</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
@@ -344,9 +338,6 @@
             </div>
         </div>
     </div>
-    </div>
-    <!--end row-->
-    </div>
 
 
 
@@ -386,9 +377,13 @@
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
+             document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "flex", "important");
+                
             let allData = new FormData(jQuery("#productForm")[0]);
             $.ajax({
-                url: "/product/store/",
+                url: "/product/store",
                 type: "POST",
                 data: allData,
                 contentType: false,
@@ -399,6 +394,9 @@
                         $('.add_product').addClass('disabled');
                         $('.product_id').val(res.productId);
                         toastr.success(res.message);
+                         document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
@@ -412,6 +410,9 @@
                         $('.shipping_error').text(res.error.shipping);
                         // $('.tag_error').text(res.error.tags);
                         toastr.warning(res.error);
+                         document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
                     }
                 },
             });
@@ -423,9 +424,12 @@
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
+             document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "flex", "important");
             let varientData = new FormData(jQuery("#productVariant")[0]);
             $.ajax({
-                url: '/product/variant/store/',
+                url: '/product/variant/store',
                 type: "POST",
                 data: varientData,
                 contentType: false,
@@ -449,8 +453,14 @@
                         document.querySelector('.unit').value = '';
                         document.querySelector('.weight').value = '';
                         show();
+                         document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
                     } else {
                         toastr.warning('please provide varient');
+                         document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
                     }
                 }
             })
@@ -473,16 +483,16 @@
                         allData.forEach(function(data) {
                             const tr = document.createElement('tr');
                             tr.innerHTML += `
-                                            <td>${data.regular_price}</td>
-                                            <td>${data.discount}</td>
-                                            <td>${data.discount_amount}</td>
-                                            <td>${data.stock_quantity}</td>
-                                            <td>${data.unit}</td>
-                                            <td>${data.weight}</td>
-                                            <td>${data.manufacture_date}</td>
-                                            <td>${data.expire_date}</td>
-                                            <td>
-                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
+                                <td>${data.regular_price}</td>
+                                <td>${data.discount}</td>
+                                <td>${data.discount_amount}</td>
+                                <td>${data.stock_quantity}</td>
+                                <td>${data.unit}</td>
+                                <td>${data.weight}</td>
+                                <td>${data.manufacture_date}</td>
+                                <td>${data.expire_date}</td>
+                                <td>
+                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
                                             </td>
                                     `;
                             varient_container.appendChild(tr);
@@ -525,35 +535,6 @@
             }
         }
 
-
-        // Input field Validation
-        function inputFieldValidation(inputFieldName) {
-            var inputField = document.querySelector(inputFieldName);
-            // console.log(inputField);
-            inputField.addEventListener('keyup', function() {
-                let inputValue = parseInt(this.value);
-                // console.log(quantity);
-                if (inputValue < 1 || isNaN(inputValue)) {
-                    toastr.warning('Please provide a valid number greater than or equal to 1.');
-                }
-            })
-        }
-
-        function inputFieldValidation2(inputFieldName) {
-            var inputField = document.querySelector(inputFieldName);
-            // console.log(inputField);
-            inputField.addEventListener('change', function() {
-                let inputValue = parseInt(this.value);
-                // console.log(quantity);
-                if (inputValue < 1) {
-                    toastr.warning('Please provide a valid number greater than or equal to 1.');
-                }
-            })
-        }
-
-
-        inputFieldValidation('.shipping');
-        inputFieldValidation2('.shipping');
 
 
     </script>

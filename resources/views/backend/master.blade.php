@@ -34,9 +34,35 @@
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "none", "important");
+        });
+    </script>
 </head>
 
 <body>
+     <style>
+        .pageLoader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            //display:none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, .7);
+            z-index: 9999999999999999999999;
+        }
+    </style>
+    <div class="pageLoader">
+        <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">
+    </div>
     <!--wrapper-->
     <div class="wrapper">
         <!--sidebar wrapper -->
@@ -186,7 +212,7 @@ $('.category_id').on('change', function() {
                 $.each(result.subcats, function(key, item) {
                     $('select[name="subcategory_id"]').append(
                         '<option myid="' + item.id +
-                        '" value="' + item.subcategoryName +
+                        '" value="' + item.id +
                         '">' + item
                         .subcategoryName + '</option>');
                 })

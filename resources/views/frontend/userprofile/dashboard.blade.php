@@ -130,7 +130,7 @@
                     @php
                         $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
 
-                        $orders = App\Models\Order::where('user_identity', $billingInfo->phone)->get();
+                        $orders = App\Models\Order::where('user_identity', $billingInfo->phone ?? 0)->get();
                         //  dd($billingInfo);
                     @endphp
 

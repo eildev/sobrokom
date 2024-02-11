@@ -78,10 +78,11 @@
                                 <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse"
                                     aria-labelledby="panelsStayOpen-headingSeven">
                                     <div class="accordion-body">
-                                        consectetur adipisicing elit, sed do
-                                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.
+                                        You can use our search engine or just explore the website to find the product you're
+                                        looking for. Once you've added them to your shopping cart, click "Place Order" to
+                                        provide us with your name, address, and phone number. We will send an OTP number to
+                                        your phone for that purpose; if you enter it correctly, you're done. To deliver your
+                                        order, a Sobrokom representative will come to your house or place of business.
                                     </div>
                                 </div>
                             </div>
@@ -317,23 +318,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingEight">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight"
-                                            aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
-                                            How long will it take to get my package?
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingEight">
-                                        <div class="accordion-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingNine">
                                         <button class="accordion-button collapsed" type="button"

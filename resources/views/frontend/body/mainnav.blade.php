@@ -112,23 +112,23 @@
 
                                 </li>
 
-                                <li class="has-dropdown">
-                                    <a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li class="">
-                                            <a href="{{route('all.blog.post')}}">Blog</a>
-                                        </li>
-                                        <li class="has-dropdown">
-                                            <a href="{{ route('aboutus') }}">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('contactus') }}">Contact Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('order.tracking') }}">Tracking</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <!--<li class="has-dropdown">-->
+                                <!--    <a href="#">Pages</a>-->
+                                <!--    <ul class="sub-menu">-->
+                                <!--        <li class="">-->
+                                <!--            <a href="{{route('all.blog.post')}}">Blog</a>-->
+                                <!--        </li>-->
+                                <!--        <li class="has-dropdown">-->
+                                <!--            <a href="{{ route('aboutus') }}">About</a>-->
+                                <!--        </li>-->
+                                <!--        <li>-->
+                                <!--            <a href="{{ route('contactus') }}">Contact Us</a>-->
+                                <!--        </li>-->
+                                <!--        <li>-->
+                                <!--            <a href="{{ route('order.tracking') }}">Tracking</a>-->
+                                <!--        </li>-->
+                                <!--    </ul>-->
+                                <!--</li>-->
 
 
                             </ul>
