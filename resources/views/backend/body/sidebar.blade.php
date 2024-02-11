@@ -13,6 +13,48 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bx bx-menu"></i>
+                </div>
+                <div class="menu-title">Manage Store</div>
+            </a>
+            <ul class="mm-collapse">
+                {{-- Product menu  --}}
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-package'></i>
+                        </div>
+                        <div class="menu-title">Manage Products</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('product.view') }}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+
+
+
+                <li> <a class="has-arrow" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Level One</a>
+                    <ul class="mm-collapse">
+                        <li> <a class="has-arrow" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Level Two</a>
+                            <ul class="mm-collapse">
+                                <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Level Three</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
             <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
                 </div>
@@ -247,23 +289,33 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending Comment</a>
+                    <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending
+                        Comment</a>
                 </li>
                 <li>
-                    <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve Comment</a>
+                    <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve
+                        Comment</a>
                 </li>
             </ul>
         </li>
-       {{-- ////Comment --}}
-        <div class="menu-title">Contact Messages</div>
-        </a>
-        <ul>
-            <li>
-                <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New
-                    Message</a>
-            </li>
-        </ul>
+        {{-- ////Comment --}}
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Contact Messages</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New
+                        Message</a>
+                </li>
+
+            </ul>
         </li>
+
 
     </ul>
     <!--end navigation-->

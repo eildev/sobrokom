@@ -67,7 +67,7 @@ class ReviewRatingController extends Controller
     public function show(string $id)
     {
         $review_rating = ReviewRating::all();
-        dd($review_rating);
+        // dd($review_rating);
         return view('frontend.e-com.product_details', compact('review_rating'));
     }
 
