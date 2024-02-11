@@ -38,12 +38,12 @@
                                 <li class="has-dropdown has-megamenu">
                                     <a href="#">Categories</a>
                                     @php
-                                        $categoris = App\Models\Category::take(4)->get();
+                                        $categoris = App\Models\Category::take(6)->get();
                                     @endphp
                                     @if ($categoris->count() > 0)
                                         <ul class="sub-menu mega-menu">
                                             @foreach ($categoris as $category)
-                                                <li>
+                                                <li class="w_180">
 
                                                     <a href="{{ route('category.wise.product', $category->slug) }}"
                                                         class="mega-menu-title">{{ $category->categoryName }}</a>

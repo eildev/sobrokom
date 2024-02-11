@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/icon-dukamarket.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/all.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/invoice.css">
 
     <!-- Toastr -->
@@ -354,7 +355,7 @@
             });
         });
 
-        // search by suggestion 
+        // search by suggestion
         const top_search = document.querySelector('.top_search');
         const top_search_list = document.querySelector('.top_search_list');
         top_search.addEventListener('keyup', function(e) {

@@ -30,7 +30,7 @@ $home_blog = App\Models\BlogPost::latest()->limit(6)->get()
                             <div class="tpblog__entry-wap">
                                 <span class="cat-links"><a href="shop-details.html">{{$blog['category']['cat_name']}}</a></span>
 
-                                <span class="author-by"><a href=#"">Admin</a></span>
+                                <span class="author-by"><a href="#">Admin</a></span>
 
                                 <span class="post-data"><a href="#">{{Carbon\Carbon::parse($blog->created_at)->diffForHumans()}}</a></span>
                             </div>
