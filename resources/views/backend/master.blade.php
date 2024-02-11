@@ -34,7 +34,7 @@
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
@@ -45,7 +45,7 @@
 </head>
 
 <body>
-     <style>
+    <style>
         .pageLoader {
             position: fixed;
             left: 0;
@@ -197,30 +197,85 @@
 
 
         $(document).ready(function() {
-        $('#product_descriptions').summernote();
-$('.category_id').on('change', function() {
+            $('#product_descriptions').summernote();
+            $('.category_id').on('change', function() {
 
-    let category_id = $(this).val();
-    if (category_id) {
-        $.ajax({
-            url: '/find/subcategory/' + category_id,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function(result) {
-                $('select[name="subcategory_id"]').html(
-                    '<option value="">Select a Sub-Category</option>');
-                $.each(result.subcats, function(key, item) {
-                    $('select[name="subcategory_id"]').append(
-                        '<option myid="' + item.id +
-                        '" value="' + item.id +
-                        '">' + item
-                        .subcategoryName + '</option>');
-                })
-            }
+                let category_id = $(this).val();
+                if (category_id) {
+                    $.ajax({
+                        url: '/find/subcategory/' + category_id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(result) {
+                            $('select[name="subcategory_id"]').html(
+                                '<option value="">Select a Sub-Category</option>');
+                            $.each(result.subcats, function(key, item) {
+                                $('select[name="subcategory_id"]').append(
+                                    '<option myid="' + item.id +
+                                    '" value="' + item.id +
+                                    '">' + item
+                                    .subcategoryName + '</option>');
+                            })
+                        }
+                    });
+                }
+            })
+
+            $('.subcategory_id').on('change', function() {
+                // alert('ok');
+                let subcategory_id = $(this).val();
+                if (subcategory_id) {
+                    $.ajax({
+                        url: '/find/sub-subcategory/' + subcategory_id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(result) {
+                            // console.log(result);
+                            $('select[name="sub_subcategory_id"]').html(
+                                '<option value="">Select a Sub-Subcategory</option>');
+                            if (result.subsubcats.lenth > 0) {
+
+                                $.each(result.subsubcats, function(key, item) {
+                                    $('select[name="sub_subcategory_id"]').append(
+                                        '<option myid="' + item.id +
+                                        '" value="' + item.id +
+                                        '">' + item
+                                        .subSubcategoryName + '</option>');
+                                })
+                            } else {
+                                $('select[name="sub_subcategory_id"]').append(
+                                    '<option value="0" selected>N/A</option>'
+                                );
+                            }
+                        }
+                    });
+                }
+            })
         });
-    }
-})
-});
+
+
+
+
+        // delete variant 
+        $(document).ready(function() {
+            $(document).on('click', '.delete_variant', function(e) {
+                e.preventDefault();
+                let id = this.getAttribute('value');
+                $.ajax({
+                    url: '/product/variant/delete/' + id,
+                    type: "GET",
+                    success: function(res) {
+                        console.log(res);
+                        if (res.status == 200) {
+                            toastr.success(res.message);
+                        } else {
+                            toastr.error("variant not deleted");
+                        }
+
+                    }
+                })
+            });
+        });
     </script>
 </body>
 

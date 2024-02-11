@@ -114,6 +114,24 @@
             </ul>
         </li>
 
+        {{-- Sub Subcategory menu  --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-menu-alt-right'></i>
+                </div>
+                <div class="menu-title">Sub Subcategory</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('sub.subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                        Sub-Subcategory</a>
+                </li>
+                <li> <a href="{{ route('sub.subcategory.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Sub-Subcategory</a>
+                </li>
+            </ul>
+        </li>
+
         {{-- brand menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -123,9 +141,11 @@
                 <div class="menu-title">Brands</div>
             </a>
             <ul>
-                <li> <a href="{{ route('brand') }}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a>
+                <li>
+                    <a href="{{ route('brand') }}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a>
                 </li>
-                <li> <a href="{{ route('brand.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Brand</a>
+                <li>
+                    <a href="{{ route('brand.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Brand</a>
                 </li>
             </ul>
         </li>
@@ -216,7 +236,8 @@
                 <div class="menu-title">Global Coupon</div>
             </a>
             <ul>
-                <li> <a href="{{ route('global.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Add Global Coupon</a>
+                <li> <a href="{{ route('global.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Add Global
+                        Coupon</a>
                 </li>
             </ul>
         </li>

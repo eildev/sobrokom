@@ -40,6 +40,7 @@ class ProductController extends Controller
                 $product->category_id = $request->category_id;
                 $product->subcategory_id = $request->subcategory_id;
                 $product->brand_id = $request->brand_id;
+                $product->sub_subcategory_id = $request->sub_subcategory_id;
                 $product->product_feature = implode(',', $request->product_feature);
                 $product->product_name = $request->product_name;
                 $product->slug = Str::slug($request->product_name);
@@ -132,9 +133,13 @@ class ProductController extends Controller
 
     public function deleteVariant($id)
     {
+        // dd($id);
         $variant = Variant::findOrFail($id);
         $variant->delete();
-        return back()->with('success', 'Variant Delete Successfully');
+        return response()->json([
+            'status' => '200',
+            'message' => 'Variant Delete Successfully'
+        ]);
     }
 
 
@@ -180,6 +185,7 @@ class ProductController extends Controller
                 unlink(public_path('uploads/products/').$product->product_image);
                 $product->category_id = $request->category_id;
                 $product->subcategory_id = $request->subcategory_id;
+                $product->sub_subcategory_id = $request->sub_subcategory_id;
                 $product->brand_id = $request->brand_id;
                 $product->product_feature = implode(',', $request->product_feature);
                 $product->product_name = $request->product_name;
@@ -213,6 +219,7 @@ class ProductController extends Controller
                 $product = Product::findOrFail($id);
                 $product->category_id = $request->category_id;
                 $product->subcategory_id = $request->subcategory_id;
+                $product->sub_subcategory_id = $request->sub_subcategory_id;
                 $product->brand_id = $request->brand_id;
                 $product->product_feature = implode(',', $request->product_feature);
                 $product->product_name = $request->product_name;

@@ -10,7 +10,7 @@
                     <hr />
                     <div class="form-body mt-4">
                         {{-- update product section  --}}
-                          
+
                         <form action="" method="POST" id="productForm" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3 mb-3">
@@ -27,7 +27,7 @@
                                                         @php
                                                             $categories = App\Models\Category::all();
                                                         @endphp
-                                                        <select class="form-select" name="category_id">
+                                                        <select class="form-select category_id" name="category_id">
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}"
                                                                     {{ $category->id == $product->category_id ? 'selected' : '' }}>
@@ -47,7 +47,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
-                                                        <select class="form-select " name="subcategory_id">
+                                                        <select class="form-select subcategory_id" name="subcategory_id">
                                                             @foreach ($subcategories as $subcategory)
                                                                 <option value="{{ $subcategory->id }}"
                                                                     {{ $subcategory->id == $product->subcategory_id ? 'selected' : '' }}>
@@ -62,6 +62,35 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                @php
+                                                    $sub_subcategories = App\Models\SubSubcategory::all();
+                                                @endphp
+                                                <div class="row">
+                                                    <label class="form-label col-12">Select Sub-Subcategory</label>
+                                                    <div class="col-12">
+                                                        <select class="form-select" name="sub_subcategory_id">
+                                                            @if ($product->sub_subcategory_id)
+                                                                @foreach ($sub_subcategories as $sub_subcategory)
+                                                                    <option value="{{ $sub_subcategory->id ?? '' }}"
+                                                                        {{ $sub_subcategory->id == $product->sub_subcategory_id ? 'selected' : '' }}>
+                                                                        {{ $sub_subcategory->subSubcategoryName }}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option value="">Select Sub-Subcategory</option>
+                                                                @foreach ($sub_subcategories as $sub_subcategory)
+                                                                    <option value="{{ $sub_subcategory->id ?? '' }}">
+                                                                        {{ $sub_subcategory->subSubcategoryName }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+
+
+                                                        </select>
+                                                        <span class="sub_subcategory_id text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 @php
                                                     $brands = App\Models\Brand::all();
@@ -81,41 +110,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="row mb-3">
-                                                    <label for="multiple-select-field" class="form-label">Select Feature</label>
-                                                    <div class="col-12">
-                                                        @php
-                                                            $features = (explode(",",$product->product_feature));
-                                                        @endphp
-                                                        <select id="multi_select" name="product_feature[]" multiple>
-                                                            @foreach($features as $feature)
-                                                                <option value="{{$feature}}" {{ $features ? 'selected' : '' }} >{{$feature}}</option>
-                                                            @endforeach
-                                                          <!--@for($i = 0; $i < count($features); $i++)-->
-                                                          <!--  <option value="feature" {{ $features[$i] ? 'selected' : '' }} >{{$features[$i]}}</option>-->
-                                                          <!--@endfor-->
-                                                            <option value="new-arrival">New Arrival</option>
-                                                            <option value="trending">Trending</option>
-                                                            <option value="best-rate">Best Rate</option>
-                                                            <option value="weekend-deals">Weekend Deals</option>
-                                                            <option value="top-seller">Top Seller</option>
-                                                            <option value="top-offers">Top Offers</option>
-                                                        </select>
-                                                        <span class="feature_error text-danger"></span>
-                                                          <!--                        <select class="form-select select2-hidden-accessible" name="product_feature[]" multiple id="multiple-select-field" data-placeholder="Choose anything" data-select2-id="select2-data-multiple-select-field" tabindex="-1" aria-hidden="true" >-->
-                        								<!--	<option data-select2-id="select2-data-10-wdnx" value="feature">Feature</option>-->
-                        								<!--	<option data-select2-id="select2-data-11-x9g5" value="new-arrival">New Arrival</option>-->
-                        								<!--	<option data-select2-id="select2-data-12-kmgo" value="trending">Trending</option>-->
-                        								<!--	<option data-select2-id="select2-data-110-qu07" value="best-rate">Best Rate</option>-->
-                        								<!--	<option data-select2-id="select2-data-111-88zw" value="weekend-deals">Weekend Deals</option>-->
-                        								<!--	<option data-select2-id="select2-data-112-jbgv" value="top-seller">Top Seller</option>-->
-                        								<!--	<option data-select2-id="select2-data-113-dksn" value="top-offers">Top Offers</option>-->
-								                        <!--</select>-->
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-12">
@@ -127,6 +121,33 @@
                                                         <input type="text" name="product_name" class="form-control "
                                                             id="inputEnterYourName" value="{{ $product->product_name }}">
                                                         <span class="product_name_error text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <div class="row mb-3">
+                                                    <label for="multiple-select-field" class="form-label">Select
+                                                        Feature</label>
+                                                    <div class="col-12">
+                                                        @php
+                                                            $features = explode(',', $product->product_feature);
+                                                        @endphp
+                                                        <select id="multi_select" name="product_feature[]" multiple>
+                                                            @foreach ($features as $feature)
+                                                                <option value="{{ $feature }}"
+                                                                    {{ $features ? 'selected' : '' }}>{{ $feature }}
+                                                                </option>
+                                                            @endforeach
+                                                            <option value="new-arrival">New Arrival</option>
+                                                            <option value="trending">Trending</option>
+                                                            <option value="best-rate">Best Rate</option>
+                                                            <option value="weekend-deals">Weekend Deals</option>
+                                                            <option value="top-seller">Top Seller</option>
+                                                            <option value="top-offers">Top Offers</option>
+                                                        </select>
+                                                        <span class="feature_error text-danger"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,7 +174,8 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;" id="product_descriptions">
+                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;"
+                                                            id="product_descriptions">
                                                             {{ $product->long_desc }}
                                                         </textarea>
                                                         <span class="long_desc text-danger"></span>
@@ -366,8 +388,9 @@
                                                             <td>{{ $variant->manufacture_date }}</td>
                                                             <td>{{ $variant->expire_date }}</td>
                                                             <td>
-                                                                <a href="{{ route('variant.delete', $variant->id) }}"
-                                                                    id="delete" class="btn-sm btn-danger">
+                                                                <a href="{{ route('variant.delete', $variant->id ?? 0) }}"
+                                                                    class="btn-sm btn-danger delete_variant"
+                                                                    value="{{ $variant->id ?? 0 }}">
                                                                     Delete
                                                                 </a>
                                                             </td>
@@ -415,7 +438,7 @@
             // alert(id);
             let allData = new FormData(jQuery("#productForm")[0]);
             $.ajax({
-                url: "/product/update/"+id,
+                url: "/product/update/" + id,
                 type: "POST",
                 data: allData,
                 contentType: false,
@@ -502,9 +525,8 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <a href="{{ route('variant.delete', $variant->id) }}"
-                                                                    id="delete" class="btn-sm btn-danger">
-                                                                    Delete
+                                                <a href="{{ route('variant.delete', $variant->id ?? 0) }}" class="btn-sm btn-danger" value="${data.id}">
+                                                    Delete
                                                 </a>
                                             </td>
                                     `;
@@ -516,9 +538,6 @@
                 }
             })
         }
-
-
-
 
         // price and discount calculation 
         const regular_price = document.querySelector('.regular_price');
@@ -550,8 +569,7 @@
                 discount.setAttribute('disabled', '');
             }
         })
-        
+
         // delete varienet 
-        
     </script>
 @endsection
