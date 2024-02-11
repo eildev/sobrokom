@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 class OTPController extends Controller
 {
     public function storeOTP(Request $request){
+       
         $otp = $this->otpGenarate($request->phone);
         $number = $otp->phone;
         $api_key = "0yRu5BkB8tK927YQBA8u";
@@ -106,7 +107,7 @@ class OTPController extends Controller
                     'division' => 'required|max:5',
                     'post_code' => 'required'
                 ]);
-                if ($validator->passes()) {
+                
                     $order_billing_details = new OrderBillingDetails;
                     $order_billing_details->phone = $request->phone;
                     $order_billing_details->order_id = $order->id;
@@ -121,11 +122,10 @@ class OTPController extends Controller
                     $order_billing_details->country = 'Bangladesh';
                     $order_billing_details->order_notes = $request->order_notes;
                     $order_billing_details->save();
-                }
+                
 
             // Product oRDER Details
                 $products = Cart::content();
-                // dd($products);
                 foreach($products as $product) {
                     $OrderDetails = new OrderDetails;
                     $OrderDetails->order_id = $order->id;

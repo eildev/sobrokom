@@ -24,24 +24,20 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="tpshop__details">
-                        <div class="tpshop__category">
+                       
+                         <div class="tpshop__category">
                             <div class="swiper-container inner-category-two">
                                 <div class="swiper-wrapper">
                                     @php
-                                        $categories = App\Models\Category::all();
-                                        $allProducts = App\Models\Product::where('subcategory_id', $subcategory->id)->paginate(10);
+                                        $subcategories = App\Models\Subcategory::all();
+                                        $allProducts = App\Models\Product::where('subcategory_id', $subcategory->id)->orderBy('id', 'DESC')->paginate(12);
                                     @endphp
-                                    @foreach ($categories as $category)
+                                    @foreach ($subcategories as $subcategory)
                                         <div class="swiper-slide">
                                             <div class="category__item mb-30">
-                                                <div class="category__thumb fix mb-15">
-                                                    <a href="{{ route('category.wise.product', $category->slug) }}"><img
-                                                            src="{{ asset('uploads/category/' . $category->image) }}"
-                                                            alt="category-thumb"></a>
-                                                </div>
                                                 <div class="category__content">
                                                     <h5 class="category__title"><a
-                                                            href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
+                                                            href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
                                                     </h5>
                                                 </div>
                                             </div>

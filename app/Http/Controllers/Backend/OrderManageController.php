@@ -14,9 +14,7 @@ class OrderManageController extends Controller
         return view('backend.order.new-order', compact('newOrders'));
     }
     public function adminApprove($invoice){
-        // dd($invoice);
         $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
-        // dd($newOrders->id);
         $newOrders->status = "approve";
         $newOrders->update();
 
@@ -41,7 +39,7 @@ class OrderManageController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         $email = OrderBillingDetails::where('order_id',$newOrders->id)->first();
-        // dd($email);
+        
         $url = 'https://sobrokom.store/order-tracking/invoice';
         $data = [
             'name' => $newOrders->first_name,

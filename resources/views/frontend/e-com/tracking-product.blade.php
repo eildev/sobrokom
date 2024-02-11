@@ -104,9 +104,8 @@
                             <div id="invoice">
                                 <div class="toolbar hidden-print">
                                     <div class="text-end">
-                                        <button type="button" class="btn btn-dark invoice_print"><i class="fa fa-print"></i> Print</button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as
-                                            PDF</button>
+                                        <a href="{{ url('/pdf/genarate/'.$order->id.'/'.$order->invoice_number) }}" type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as
+                                            PDF</a>
                                     </div>
                                     <hr>
                                 </div>
@@ -120,11 +119,11 @@
                                                     </a>
                                                 </div>
                                                 <div class="col company-details">
-                                                    <h2 class="name">
+                                                    <h5 class="name">
                                                         <a target="_blank" href="javascript:;">
                                                             Sobrokom Corporation
                                                         </a>
-                                                    </h2>
+                                                    </h5>
                                                     <div>+880 1602 08 51 21</div>
                                                     <div>sobrokom.store@gmail.com</div>
                                                     <div>info@sobrokom.store</div>
@@ -134,14 +133,14 @@
                                         <main>
                                             <div class="row contacts">
                                                 <div class="col invoice-to">
-                                                    <div class="text-gray-light">INVOICE TO:</div>
-                                                    <h2 class="to">{{$address->first_name}}</h2>
+                                                    <div class="text-gray-light" style="font-size:15px">INVOICE TO:</div>
+                                                    <h5 class="to">{{$address->first_name}}</h5>
                                                     <div class="address">{{$address->address_1 ?? ''}}</div>
                                                     <div class="email"><a href="{{$address->email}}">{{$address->email}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col invoice-details">
-                                                    <h1 class="invoice-id">INVOICE: #{{ $order->invoice_number }}</h1>
+                                                    <h5 class="invoice-id">INVOICE: #{{ $order->invoice_number }}</h5>
                                                     <div class="date">Date of Invoice: {{ $order->created_at }}</div>
                                                     <div class="date">Paymentt Status: <span class="badge text-bg-warning px-25">Unpaid</span></div>
                                                 </div>

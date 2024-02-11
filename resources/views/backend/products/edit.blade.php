@@ -10,6 +10,7 @@
                     <hr />
                     <div class="form-body mt-4">
                         {{-- update product section  --}}
+                          
                         <form action="" method="POST" id="productForm" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3 mb-3">
@@ -82,10 +83,18 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row mb-3">
-                                                    <label class="form-label col-12">Select Feature</label>
+                                                    <label for="multiple-select-field" class="form-label">Select Feature</label>
                                                     <div class="col-12">
+                                                        @php
+                                                            $features = (explode(",",$product->product_feature));
+                                                        @endphp
                                                         <select id="multi_select" name="product_feature[]" multiple>
-                                                            <option value="feature">Feature</option>
+                                                            @foreach($features as $feature)
+                                                                <option value="{{$feature}}" {{ $features ? 'selected' : '' }} >{{$feature}}</option>
+                                                            @endforeach
+                                                          <!--@for($i = 0; $i < count($features); $i++)-->
+                                                          <!--  <option value="feature" {{ $features[$i] ? 'selected' : '' }} >{{$features[$i]}}</option>-->
+                                                          <!--@endfor-->
                                                             <option value="new-arrival">New Arrival</option>
                                                             <option value="trending">Trending</option>
                                                             <option value="best-rate">Best Rate</option>
@@ -94,6 +103,16 @@
                                                             <option value="top-offers">Top Offers</option>
                                                         </select>
                                                         <span class="feature_error text-danger"></span>
+                                                          <!--                        <select class="form-select select2-hidden-accessible" name="product_feature[]" multiple id="multiple-select-field" data-placeholder="Choose anything" data-select2-id="select2-data-multiple-select-field" tabindex="-1" aria-hidden="true" >-->
+                        								<!--	<option data-select2-id="select2-data-10-wdnx" value="feature">Feature</option>-->
+                        								<!--	<option data-select2-id="select2-data-11-x9g5" value="new-arrival">New Arrival</option>-->
+                        								<!--	<option data-select2-id="select2-data-12-kmgo" value="trending">Trending</option>-->
+                        								<!--	<option data-select2-id="select2-data-110-qu07" value="best-rate">Best Rate</option>-->
+                        								<!--	<option data-select2-id="select2-data-111-88zw" value="weekend-deals">Weekend Deals</option>-->
+                        								<!--	<option data-select2-id="select2-data-112-jbgv" value="top-seller">Top Seller</option>-->
+                        								<!--	<option data-select2-id="select2-data-113-dksn" value="top-offers">Top Offers</option>-->
+								                        <!--</select>-->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,7 +153,7 @@
                                                         <label for="" class="form-label">Long Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;">
+                                                        <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;" id="product_descriptions">
                                                             {{ $product->long_desc }}
                                                         </textarea>
                                                         <span class="long_desc text-danger"></span>
@@ -201,7 +220,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary add_product">Update Product</button>
+                                                    <button class="btn btn-primary update_product">Update Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -366,6 +385,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="my-3">
+                                <a href="{{ route('product') }}" class="btn btn-success">
+                                    <i class="fas fa-plus"></i>
+                                    Add New Product</a>
+                            </div>
                         </div>
                     </div>
 
@@ -382,40 +406,39 @@
 
 
     <script>
-        // // !.. add product ajax Crud 
-        // const add_product = document.querySelector('.add_product');
-        // add_product.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     // alert('ok');
-        //     let allData = new FormData(jQuery("#productForm")[0]);
-        //     $.ajax({
-        //         url: "/product/store/",
-        //         type: "POST",
-        //         data: allData,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(res) {
-        //             if (res.status == 200) {
-        //                 $('.variant_section').show();
-        //                 $('.add_product').addClass('disabled');
-        //                 $('.product_id').val(res.productId);
-        //                 toastr.success(res.message);
-        //             } else {
-        //                 $('.category_error').text(res.error.category_id);
-        //                 $('.subcategory_error').text(res.error.subcategory_id);
-        //                 $('.brand_error').text(res.error.brand_id);
-        //                 $('.feature_error').text(res.error.product_feature);
-        //                 $('.product_name_error').text(res.error.product_name);
-        //                 $('.short_desc').text(res.error.short_desc);
-        //                 $('.long_desc').text(res.error.long_desc);
-        //                 $('.product_image').text(res.error.product_image);
-        //                 $('.sku_error').text(res.error.sku);
-        //                 // $('.tag_error').text(res.error.tags);
-        //                 toastr.warning(response.error);
-        //             }
-        //         },
-        //     });
-        // });
+        // product Update Ajax Crud 
+        const updateProduct = document.querySelector('.update_product');
+        updateProduct.addEventListener('click', function(e) {
+            e.preventDefault();
+            // alert('ok');
+            let id = "{{ $product->id }}"
+            // alert(id);
+            let allData = new FormData(jQuery("#productForm")[0]);
+            $.ajax({
+                url: "/product/update/"+id,
+                type: "POST",
+                data: allData,
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    if (res.status == 200) {
+                        $('.update_product').addClass('disabled');
+                        $('.product_id').val(res.productId);
+                        toastr.success(res.message);
+                    } else {
+                        $('.category_error').text(res.error.category_id);
+                        $('.subcategory_error').text(res.error.subcategory_id);
+                        $('.brand_error').text(res.error.brand_id);
+                        $('.feature_error').text(res.error.product_feature);
+                        $('.product_name_error').text(res.error.product_name);
+                        $('.short_desc').text(res.error.short_desc);
+                        $('.long_desc').text(res.error.long_desc);
+                        $('.product_image').text(res.error.product_image);
+                        $('.sku_error').text(res.error.sku);
+                    }
+                },
+            });
+        });
 
 
 
@@ -423,26 +446,23 @@
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
+            let regular_price = parseFloat(document.querySelector('.regular_price').value);
+            let discount = parseFloat(document.querySelector('.discount').value);
+            let discount_amount = parseFloat(document.querySelector('.discount_amount').value);
+            let stock = parseFloat(document.querySelector('#stock').value);
             let varientData = new FormData(jQuery("#productVariant")[0]);
             $.ajax({
-                url: '/product/variant/store/',
+                url: '/product/variant/store',
                 type: "POST",
                 data: varientData,
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    let regular_price = parseFloat(document.querySelector('.regular_price').value);
-                    let discount = parseFloat(document.querySelector('.discount').value);
-                    let discount_amount = parseFloat(document.querySelector('.discount_amount')
-                        .value);
-                    let stock = parseFloat(document.querySelector('#stock').value);
-
                     if (response.status == 200 && regular_price > 0 && discount >= 0 &&
                         discount_amount >
                         0 && stock > 0) {
                         toastr.success(response.message);
-                        document.querySelector('.discount_amount')
-                            .value = '';
+                        document.querySelector('.discount_amount').value = '';
                         document.querySelector('.regular_price').value = '';
                         document.querySelector('.discount').value = '';
                         document.querySelector('#stock').value = '';
@@ -482,7 +502,10 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
+                                                <a href="{{ route('variant.delete', $variant->id) }}"
+                                                                    id="delete" class="btn-sm btn-danger">
+                                                                    Delete
+                                                </a>
                                             </td>
                                     `;
                             varient_container.appendChild(tr);
@@ -527,15 +550,8 @@
                 discount.setAttribute('disabled', '');
             }
         })
-
-
-        // // delete varient data 
-        // const delete_variant = document.querySelector('.delete_variant');
-        // delete_variant.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     alert('hello');
-        //     // const id = this.value;
-
-        // })
+        
+        // delete varienet 
+        
     </script>
 @endsection

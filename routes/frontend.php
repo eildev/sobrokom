@@ -59,6 +59,8 @@ Route::controller(ProductDetailsController::class)->group(function () {
 
     Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
     Route::get('/product/global/search/{value}', 'globalSearch');
+    Route::post('/product/filter/feature/category/brand', 'productFilterByFeatureCategoryBrand');
+    Route::get('/product/filter/feature/category/brand/findVariant/{id}', 'productFilterByFeatureCategoryBrandFindVariant');
 });
 
 // Invoice Genarate Product
