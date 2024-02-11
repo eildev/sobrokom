@@ -130,6 +130,8 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/product/update/{id}', 'update')->name('product.update');
         Route::post('/product/variant/store', 'variantStore')->name('variant.store');
         Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
+        Route::get('/product/variant/edit/{id}', 'editVariant')->name('variant.edit');
+        Route::post('/product/variant/update/{id}', 'updateVariant')->name('variant.update');
         Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/view/{id}', 'viewDetails')->name('product.view.details');
