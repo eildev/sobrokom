@@ -40,11 +40,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                              
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
-                                                        <select class="form-select " name="subcategory_id">
+                                                        <select class="form-select subcategory_id" name="subcategory_id">
                                                             <option value="">Select Subcategory</option>
                                                         </select>
                                                         <span class="subcategory_error text-danger"></span>
@@ -53,7 +52,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                {{-- @php
+                                                    $sub_subcategories = App\Models\SubSubcategory::all();
+                                                @endphp --}}
+                                                <div class="row">
+                                                    <label class="form-label col-12">Select Sub-Subcategory</label>
+                                                    <div class="col-12">
+                                                        <select class="form-select" name="sub_subcategory_id">
+                                                            <option value="">Select Sub-Subcategory</option>
+                                                            {{-- @foreach ($sub_subcategories as $sub_subcategory)
+                                                                <option value="{{ $sub_subcategory->id }}">
+                                                                    {{ $sub_subcategory->subSubcategoryName }}</option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                        <span class="sub_subcategory_id text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 @php
                                                     $brands = App\Models\Brand::all();
@@ -73,7 +90,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label for="" class="form-label">Product Name</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="product_name"
+                                                            class="form-control product_name" id="inputEnterYourName"
+                                                            placeholder="Enter Product Name">
+                                                        <span class="product_name_error text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="row mb-3">
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
@@ -91,21 +125,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <label for="" class="form-label">Product Name</label>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <input type="text" name="product_name"
-                                                            class="form-control product_name" id="inputEnterYourName"
-                                                            placeholder="Enter Product Name">
-                                                        <span class="product_name_error text-danger"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <div class="row">
@@ -183,7 +203,8 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary add_product">Add Product</button>
+                                                    <button type="submit" class="btn btn-primary add_product">Add
+                                                        Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -377,10 +398,10 @@
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
-             document
+            document
                 .querySelector(".pageLoader")
                 .style.setProperty("display", "flex", "important");
-                
+
             let allData = new FormData(jQuery("#productForm")[0]);
             $.ajax({
                 url: "/product/store",
@@ -394,9 +415,9 @@
                         $('.add_product').addClass('disabled');
                         $('.product_id').val(res.productId);
                         toastr.success(res.message);
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
@@ -410,9 +431,9 @@
                         $('.shipping_error').text(res.error.shipping);
                         // $('.tag_error').text(res.error.tags);
                         toastr.warning(res.error);
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     }
                 },
             });
@@ -424,7 +445,7 @@
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
-             document
+            document
                 .querySelector(".pageLoader")
                 .style.setProperty("display", "flex", "important");
             let varientData = new FormData(jQuery("#productVariant")[0]);
@@ -453,14 +474,14 @@
                         document.querySelector('.unit').value = '';
                         document.querySelector('.weight').value = '';
                         show();
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     } else {
                         toastr.warning('please provide varient');
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     }
                 }
             })
@@ -534,8 +555,5 @@
                 discount.setAttribute('disabled', '');
             }
         }
-
-
-
     </script>
 @endsection
