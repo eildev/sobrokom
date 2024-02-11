@@ -147,5 +147,7 @@ Route::middleware('auth', 'role:user')->group(function () {
   // Blog Comment Route
     Route::controller(BlogCommentController::class)->group(function () {
         Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+        //Comment Reply Route
+        Route::post('blog-comment-reply-submit', 'BlogCommentReplys')->name('blog.comment.reply');
     });
    //Blog Comment Route End

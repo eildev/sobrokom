@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\StockManageController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
+use App\Http\Controllers\Backend\BlogCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -188,6 +189,18 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/blog/post/delete/{id}', 'BlogPostDelete')->name('blog.post.delete');
     });
      //Blog Post All Route End
+
+    //Blog Comment All Route Start
+    Route::controller(BlogCommentController::class)->group(function () {
+        Route::get('/blog/all/pending/comment', 'BlogAllPendingComment')->name('blog.all.pending.comment');
+        Route::get('/blog/all/approve/comment', 'BlogAllApproveComment')->name('blog.all.approved.comment');
+        Route::get('/blog/pending/comment/approve/{id}', 'BlogCommentPendingToApprove')->name('blog.comment.approve');
+        Route::get('/blog/approve/comment/pending/{id}', 'BlogCommentApproveToPending')->name('comment.approve.cancel');
+        Route::get('/blog/comment/delete/{id}', 'BlogCommentDelete')->name('comment.delete');
+        //Reply Comment route
+
+    });
+     //Blog Comment All Route End
 
 
 });

@@ -237,6 +237,24 @@
                 </li>
             </ul>
         </li>
+        {{-- ////Comment --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Blog Comment</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending Comment</a>
+                </li>
+                <li>
+                    <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve Comment</a>
+                </li>
+            </ul>
+        </li>
+       {{-- ////Comment --}}
         <div class="menu-title">Contact Messages</div>
         </a>
         <ul>
