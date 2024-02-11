@@ -252,6 +252,30 @@
                 }
             })
         });
+
+
+
+
+        // delete variant 
+        $(document).ready(function() {
+            $(document).on('click', '.delete_variant', function(e) {
+                e.preventDefault();
+                let id = this.getAttribute('value');
+                $.ajax({
+                    url: '/product/variant/delete/' + id,
+                    type: "GET",
+                    success: function(res) {
+                        console.log(res);
+                        if (res.status == 200) {
+                            toastr.success(res.message);
+                        } else {
+                            toastr.error("variant not deleted");
+                        }
+
+                    }
+                })
+            });
+        });
     </script>
 </body>
 

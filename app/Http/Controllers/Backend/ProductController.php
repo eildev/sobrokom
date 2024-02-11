@@ -133,9 +133,13 @@ class ProductController extends Controller
 
     public function deleteVariant($id)
     {
+        // dd($id);
         $variant = Variant::findOrFail($id);
         $variant->delete();
-        return back()->with('success', 'Variant Delete Successfully');
+        return response()->json([
+            'status' => '200',
+            'message' => 'Variant Delete Successfully'
+        ]);
     }
 
 

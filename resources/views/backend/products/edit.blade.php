@@ -388,8 +388,9 @@
                                                             <td>{{ $variant->manufacture_date }}</td>
                                                             <td>{{ $variant->expire_date }}</td>
                                                             <td>
-                                                                <a href="{{ route('variant.delete', $variant->id) }}"
-                                                                    id="delete" class="btn-sm btn-danger">
+                                                                <a href="{{ route('variant.delete', $variant->id ?? 0) }}"
+                                                                    class="btn-sm btn-danger delete_variant"
+                                                                    value="{{ $variant->id ?? 0 }}">
                                                                     Delete
                                                                 </a>
                                                             </td>
@@ -524,9 +525,8 @@
                                             <td>${data.manufacture_date}</td>
                                             <td>${data.expire_date}</td>
                                             <td>
-                                                <a href="{{ route('variant.delete', $variant->id ? "") }}"
-                                                                    id="delete" class="btn-sm btn-danger">
-                                                                    Delete
+                                                <a href="{{ route('variant.delete', $variant->id ?? 0) }}" class="btn-sm btn-danger" value="${data.id}">
+                                                    Delete
                                                 </a>
                                             </td>
                                     `;
@@ -538,9 +538,6 @@
                 }
             })
         }
-
-
-
 
         // price and discount calculation 
         const regular_price = document.querySelector('.regular_price');
