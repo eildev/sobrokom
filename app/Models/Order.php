@@ -13,4 +13,5 @@ class Order extends Model
     public function orderBillingDetails(){
         return $this->belongsTo(OrderBillingDetails::class, 'order_id', 'id');
     }
+
 }

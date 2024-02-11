@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
-
+use App\Models\OrderBillingDetails;
 class OrderManageController extends Controller
 {
     public function index(){
@@ -14,7 +14,6 @@ class OrderManageController extends Controller
         return view('backend.order.new-order', compact('newOrders'));
     }
     public function adminApprove($invoice){
-        // dd($invoice);
         $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
         $newOrders->status = "approve";
         $newOrders->update();
@@ -39,15 +38,15 @@ class OrderManageController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($ch);
         curl_close($ch);
-
-        // $url = 'https://sobrokom.store/order-tracking/invoice';
-        // $data = [
-        //     'name' => $request->first_name,
-        //     'invoiceNumber' => $invoiceNumber,
-        //     'trackingURL'=> $url
-        // ];
-        // Mail::to($request->email)->send(new OrderMail($data));
-
+        $email = OrderBillingDetails::where('order_id',$newOrders->id)->first();
+        
+        $url = 'https://sobrokom.store/order-tracking/invoice';
+        $data = [
+            'name' => $newOrders->first_name,
+            'invoiceNumber' => $invoice,
+            'trackingURL'=> $url
+        ];
+        Mail::to($email->email)->send(new OrderMail($data));
 
         $response = json_decode($response, true);
         if($response['response_code'] == 202){

@@ -232,15 +232,17 @@
                                                             src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                             alt="Products Image"></a>
                                                     <div class="tpproduct__info bage">
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span
-                                                                class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                        @endif
-
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                        @endif
-
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span
+                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
                                                     </div>
                                                     <div class="tpproduct__shopping">
                                                         @auth
@@ -270,15 +272,12 @@
                                                 </div>
                                                 <div class="tpproduct__content">
                                                     <span class="tpproduct__content-weight">
-                                                        <a
-                                                            href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
-                                                        <a
-                                                            href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
+                                                        <a href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
+                                                        <a href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
                                                     </span>
-                                                    <h4 class="tpproduct__title">
-                                                        <a
-                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
-                                                    </h4>
+                                                     <h4 class="tpproduct__title">
+                                                            <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
+                                                        </h4>
                                                     <div class="tpproduct__rating mb-5">
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -288,10 +287,14 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                        <span class="text-secondary"
-                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
-                                                        @if ($product->varient[0]->discount > 0)
+                                                         <span class="text-secondary text-capitalize" style="font-size: 14px">
+                                                                /{{ $product->varient[0]->weight ?? '' }}
+                                                                {{ $product->varient[0]->unit ?? '' }}
+                                                            </span>
+                                                         @if ($product->varient[0]->discount > 0)
                                                             <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @else
+                                                            <span></span>
                                                         @endif
 
                                                     </div>
@@ -329,7 +332,7 @@
                                 <div
                                     class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
                                     @foreach ($allProducts as $product)
-                                        <div class="col">
+                                         <div class="col">
                                             <div class="tpproduct p-relative mb-20">
                                                 <div class="tpproduct__thumb p-relative text-center">
                                                     <a href="{{ route('product.details', $product->slug) }}"><img
@@ -340,15 +343,17 @@
                                                             src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                             alt="Products Image"></a>
                                                     <div class="tpproduct__info bage">
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span
-                                                                class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                        @endif
-
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                        @endif
-
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span
+                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
                                                     </div>
                                                     <div class="tpproduct__shopping">
                                                         @auth
@@ -378,15 +383,12 @@
                                                 </div>
                                                 <div class="tpproduct__content">
                                                     <span class="tpproduct__content-weight">
-                                                        <a
-                                                            href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
-                                                        <a
-                                                            href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
+                                                        <a href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>,
+                                                        <a href="{{ route('subcategory.wise.product', $product->subcategory->slug) }}">{{ $product->subcategory->subcategoryName }}</a>
                                                     </span>
-                                                    <h4 class="tpproduct__title">
-                                                        <a
-                                                            href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
-                                                    </h4>
+                                                     <h4 class="tpproduct__title">
+                                                            <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
+                                                        </h4>
                                                     <div class="tpproduct__rating mb-5">
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
@@ -396,11 +398,16 @@
                                                     </div>
                                                     <div class="tpproduct__price">
                                                         <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                        <span class="text-secondary"
-                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
-                                                        @if ($product->varient[0]->discount > 0)
+                                                         <span class="text-secondary text-capitalize" style="font-size: 14px">
+                                                                /{{ $product->varient[0]->weight ?? '' }}
+                                                                {{ $product->varient[0]->unit ?? '' }}
+                                                            </span>
+                                                         @if ($product->varient[0]->discount > 0)
                                                             <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                        @else
+                                                            <span></span>
                                                         @endif
+
                                                     </div>
                                                 </div>
                                                 <div class="tpproduct__hover-text">
@@ -449,13 +456,17 @@
                                                             alt="Product Image" style="height: 200px">
                                                     </a>
                                                     <div class="tpproduct__info bage">
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span
-                                                                class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                        @endif
-                                                        @if ($product->varient[0]->discount > 0)
-                                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                        @endif
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span
+                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
+                                                            @if ($product->varient[0]->discount > 0)
+                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @else
+                                                                <span></span>
+                                                            @endif
                                                     </div>
                                                 </div>
                                                 <div class="tplist__content">
@@ -470,22 +481,18 @@
                                                         <a href="#"><i class="icon-star_outline1"></i></a>
                                                     </div>
                                                     <ul class="tplist__content-info">
-                                                        <li>Delicous Non-Dairy cheese sauce</li>
-                                                        <li>Vegan & Allergy Friendly</li>
                                                         <li>{{ $product->short_desc }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="tplist__price justify-content-end">
                                                     <h4 class="tplist__instock">Availability:
-                                                        <span>{{ $product->varient[0]->stock_quantity }} in stock</span>
+                                                        <span>{{ $product->varient[0]->stock_quantity ?? '' }} in stock</span>
                                                     </h4>
                                                     <h3 class="tplist__count mb-15">
-                                                        ৳{{ $product->varient[0]->discount_amount }}
+                                                        ৳{{ $product->varient[0]->discount_amount ?? '' }}
                                                         <span class="text-secondary"
-                                                            style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                            style="font-size: 14px">/{{ $product->varient[0]->weight ?? '' }} {{ $product->varient[0]->unit ?? '' }}</span>
                                                     </h3>
-
-
                                                     <form method="POST" id="add_to_cart_form">
                                                         @csrf
                                                         <input type="hidden" value="{{ $product->id }}"

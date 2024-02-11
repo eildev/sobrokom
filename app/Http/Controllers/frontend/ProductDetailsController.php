@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Brand;
+use App\Models\Variant;
 class ProductDetailsController extends Controller
 {
     public function productDetails($slug){
@@ -59,16 +60,58 @@ class ProductDetailsController extends Controller
         ]);
     }
     public function allFeatureProduct(){
-        $features = Product::where('status', 1)
-        ->where('product_feature', 'like', '%weekend-deals%')
-        ->orWhere('product_feature', 'like', '%feature%')
-        ->orWhere('product_feature', 'like', '%new-arrival%')
-        ->orWhere('product_feature', 'like', '%trending%')
-        ->orWhere('product_feature', 'like', '%best-rate%')
-        ->orWhere('product_feature', 'like', '%top-seller%')
-        ->orWhere('product_feature', 'like', '%top-offers%')
-        ->orderBy('id', 'ASC')
-        ->paginate(12);
+        $features = Product::where('status', 1)->orderBy('id', 'ASC')->paginate(12);
         return view('frontend/e-com/all-feature-product', compact('features'));
     }
+    public function productFilterByFeatureCategoryBrand(Request $request){
+        // dd($request->all());
+        $featureAllValue = $request->featureAllValue ?? '';
+        // dd($featureAllValue);
+        $categoryAllValue = $request->categoryAllValue ?? [];
+        $brandAllValue = $request->brandAllValue ?? [];
+        $filterProducts = Product::where('product_feature', 'LIKE','%'.$featureAllValue.'%')->get();
+        // $filterProducts = Product::where(function ($query) use ($featureAllValue) {
+        //     $query->orwhereIn('product_feature', $featureAllValue)
+        //           ->orWhereNull('product_feature'); 
+        // })
+        // ->where(function ($query) use ($categoryAllValue) {
+        //     $query->orwhereIn('category_id', $categoryAllValue)
+        //           ->orWhereNull('category_id');
+        // })
+        // ->where(function ($query) use ($brandAllValue) {
+        //     $query->orwhereIn('brand_id', $brandAllValue)
+        //           ->orWhereNull('brand_id');
+        // })->get();
+        // dd($filterProducts);
+        if($filterProducts){
+            return response()->json([
+            'status' => 200,
+            'filterProducts' => $filterProducts
+            ]);
+        }
+        else{
+            return response()->json([
+            'status' => 500
+            ]);
+        }
+    }
+    public function productFilterByFeatureCategoryBrandFindVariant($id){
+        $variant = Variant::where('product_id',$id)->first();
+        if($variant){
+            return response()->json([
+            'status' => 200,
+            'variant' => $variant
+            ]);
+        }
+        else{
+            return response()->json([
+            'status' => 500
+            ]);
+        }
+    }
 }
+
+
+
+
+

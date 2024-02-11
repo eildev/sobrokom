@@ -357,48 +357,48 @@
                                 <div class="tab-pane fade" id="nav-review" role="tabpanel"
                                     aria-labelledby="nav-review-tab" tabindex="0">
                                     <div class="tpreview__wrapper">
-                                        @php
+                                        <!--@php-->
 
-                                        @dd($review_rating);
-                                        @endphp
-                                        <h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken
-                                        </h4>
-                                        <div class="tpreview__comment">
-                                            <div class="tpreview__comment-img mr-20">
-                                                <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"
-                                                    alt="">
-                                            </div>
-                                            <div class="tpreview__comment-text">
-                                                <div
-                                                    class="tpreview__comment-autor-info d-flex align-items-center justify-content-between">
-                                                    <div class="tpreview__comment-author">
-                                                        <span>admin</span>
-                                                    </div>
-                                                    <div class="tpreview__comment-star">
-                                                        <i class="icon-star_outline1"></i>
-                                                        <i class="icon-star_outline1"></i>
-                                                        <i class="icon-star_outline1"></i>
-                                                        <i class="icon-star_outline1"></i>
-                                                        <i class="icon-star_outline1"></i>
-                                                    </div>
-                                                </div>
-                                                <span class="date mb-20">--April 9, 2022: </span>
-                                                <p>very good</p>
-                                            </div>
-                                        </div>
+                                        <!--@dd($review_rating);-->
+                                        <!--@endphp-->
+                                        <!--<h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken-->
+                                        <!--</h4>-->
+                                        <!--<div class="tpreview__comment">-->
+                                        <!--    <div class="tpreview__comment-img mr-20">-->
+                                        <!--        <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"-->
+                                        <!--            alt="">-->
+                                        <!--    </div>-->
+                                        <!--    <div class="tpreview__comment-text">-->
+                                        <!--        <div-->
+                                        <!--            class="tpreview__comment-autor-info d-flex align-items-center justify-content-between">-->
+                                        <!--            <div class="tpreview__comment-author">-->
+                                        <!--                <span>admin</span>-->
+                                        <!--            </div>-->
+                                        <!--            <div class="tpreview__comment-star">-->
+                                        <!--                <i class="icon-star_outline1"></i>-->
+                                        <!--                <i class="icon-star_outline1"></i>-->
+                                        <!--                <i class="icon-star_outline1"></i>-->
+                                        <!--                <i class="icon-star_outline1"></i>-->
+                                        <!--                <i class="icon-star_outline1"></i>-->
+                                        <!--            </div>-->
+                                        <!--        </div>-->
+                                        <!--        <span class="date mb-20">--April 9, 2022: </span>-->
+                                        <!--        <p>very good</p>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
                                         <div class="tpreview__form">
-                                            <h4 class="tpreview__form-title mb-25">Add a review </h4>
+                                            <h4 class="tpreview__form-title mb-25">Add a Review</h4>
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <form action="{{ Route('review-rating.insert') }}" method="POST"
                                                         enctype="multipart/form-data">
                                                         @csrf
-                                                        <input type="text" value="{{ $product->id }}" name="product_id"
+                                                        <input type="hidden" value="{{ $product->id }}" name="product_id"
                                                     class="">
                                                         <div class="tpreview__star mb-20">
                                                             <h4 class="title">Your Rating</h4>
                                                             <div class="tpreview__star-icon ratings">
-                                                                <input type="text" name="rating" id="rating"
+                                                                <input type="hidden" name="rating" id="rating"
                                                                     value="0" required>
                                                                 <a href="#"><i class="icon-star_outline1"></i></a>
                                                                 <a href="#"><i class="icon-star_outline1"></i></a>
@@ -411,12 +411,12 @@
                                                             </div>
                                                         </div>
                                                         <div class="tpreview__input mb-30">
-                                                            <label for="message" class="form-label">Disabled file input example</label>
+                                                            <label for="message" class="form-label">Write Your Comment here.</label>
                                                             <textarea id="message" name="message" placeholder="Message" required></textarea>
                                                             @error('message')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
-                                                            <label for="imageGallery" class="form-label">Disabled file input example</label>
+                                                            <label for="imageGallery" class="form-label">Add pictures from here.</label>
                                                             <input type="file" id="imageGallery" class="form-control h-auto ps-3" name="imageGallery[]" multiple>
                                                             @error('imageGallery[]')
                                                                 <span class="text-danger">{{ $message }}</span>
@@ -513,92 +513,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            @else
-                                <div class="tpsidebar__product-item">
-                                    <div class="tpsidebar__product-thumb p-relative">
-                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-1.jpg"
-                                            alt="">
-                                        <div class="tpsidebar__info bage">
-                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                        </div>
-                                    </div>
-                                    <div class="tpsidebar__product-content">
-                                        <span class="tpproduct__product-category">
-                                            <a href="shop-details-3.html">Fresh Fruits</a>
-                                        </span>
-                                        <h4 class="tpsidebar__product-title">
-                                            <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
-                                        </h4>
-                                        <div class="tpproduct__rating mb-5">
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                        </div>
-                                        <div class="tpproduct__price">
-                                            <span>$56.00</span>
-                                            <del>$19.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tpsidebar__product-item">
-                                    <div class="tpsidebar__product-thumb p-relative">
-                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-2.jpg"
-                                            alt="">
-                                        <div class="tpsidebar__info bage">
-                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                        </div>
-                                    </div>
-                                    <div class="tpsidebar__product-content">
-                                        <span class="tpproduct__product-category">
-                                            <a href="shop-details-3.html">Fresh Fruits</a>
-                                        </span>
-                                        <h4 class="tpsidebar__product-title">
-                                            <a href="shop-details-3.html">Fresh Mangosteen 100% Organic From VietNamese</a>
-                                        </h4>
-                                        <div class="tpproduct__rating mb-5">
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                        </div>
-                                        <div class="tpproduct__price">
-                                            <span>$56.00</span>
-                                            <del>$19.00</del>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tpsidebar__product-item">
-                                    <div class="tpsidebar__product-thumb p-relative">
-                                        <img src="{{ asset('frontend') }}/assets/img/product/sidebar-pro-3.jpg"
-                                            alt="">
-                                        <div class="tpsidebar__info bage">
-                                            <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                        </div>
-                                    </div>
-                                    <div class="tpsidebar__product-content">
-                                        <span class="tpproduct__product-category">
-                                            <a href="shop-details-3.html">Fresh Fruits</a>
-                                        </span>
-                                        <h4 class="tpsidebar__product-title">
-                                            <a href="shop-details-grid.html">Fresh Mangosteen 100% Organic From
-                                                VietNamese</a>
-                                        </h4>
-                                        <div class="tpproduct__rating mb-5">
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                        </div>
-                                        <div class="tpproduct__price">
-                                            <span>$56.00</span>
-                                            <del>$19.00</del>
-                                        </div>
-                                    </div>
-                                </div>
                             @endif
 
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,6 +59,13 @@ Route::controller(ProductDetailsController::class)->group(function () {
 
     Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
     Route::get('/product/global/search/{value}', 'globalSearch');
+    Route::post('/product/filter/feature/category/brand', 'productFilterByFeatureCategoryBrand');
+    Route::get('/product/filter/feature/category/brand/findVariant/{id}', 'productFilterByFeatureCategoryBrandFindVariant');
+});
+
+// Invoice Genarate Product
+Route::controller(PDFController::class)->group(function () {
+    Route::get('/pdf/genarate/{orderId}/{invoice}', 'generateIvoicePDF')->name('invoice.genarate');
 });
 
 // product related routes

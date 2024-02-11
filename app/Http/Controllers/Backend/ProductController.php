@@ -19,20 +19,16 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-
+        
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'subcategory_id' => 'required',
             'brand_id' => 'required',
             'product_feature' => 'required',
             'product_name' => 'required|max:100',
-            'short_desc' => 'required|max:150',
-            'long_desc' => 'required|max:200',
+            'short_desc' => 'required|max:255',
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'sku' => 'required',
-            // 'shipping' => 'required',
-            // 'tags' => 'required',
         ]);
 
         if ($validator->passes()) {
@@ -162,4 +158,91 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.view')->with('success', 'Product deleted successfully');
     }
+    // public function productStatus(Request $request,$id)
+    // {
+    //     // dd($request);
+    //     $product = Product::findOrFail($id);
+    //     $product->status = $request->status;
+    //     $product->update();
+        
+    //     return response()->json([
+    //         'status' => '200',
+    //         'message' => "Status Changed Successfully"
+    //     ]);
+    // }
+    
+    public function update(Request $request, $id){
+        // dd($request->product_feature);
+         if ($request->product_image) {
+                $productImage = rand() . '.' . $request->product_image->extension();
+                $request->product_image->move(public_path('uploads/products/'), $productImage);
+                $product = Product::findOrFail($id);
+                unlink(public_path('uploads/products/').$product->product_image);
+                $product->category_id = $request->category_id;
+                $product->subcategory_id = $request->subcategory_id;
+                $product->brand_id = $request->brand_id;
+                $product->product_feature = implode(',', $request->product_feature);
+                $product->product_name = $request->product_name;
+                $product->slug = Str::slug($request->product_name);
+                $product->short_desc = $request->short_desc;
+                $product->long_desc = $request->long_desc;
+                $product->product_image = $productImage;
+                $product->sku = $request->sku;
+                $product->tags = $request->tag;
+                // $product->shipping = $request->shipping;
+                $product->update();
+                if ($request->imageGallery) {
+                    $imagesGallery = $request->imageGallery;
+                    foreach ($imagesGallery as $image) {
+                        $galleryImage = rand() . '.' . $image->extension();
+                        $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                        $productGallery = new ProductGallery;
+                        unlink(public_path('uploads/products/gallery').$productGallery->image);
+                        $productGallery->product_id = $product->id;
+                        $productGallery->image = $galleryImage;
+                        $productGallery->save();
+                    }
+                }
+                return response()->json([
+                    'status' => '200',
+                    'message' => 'Product Update successfully',
+                    'productId' => $product->id,
+                ]);
+        }
+        else {
+                $product = Product::findOrFail($id);
+                $product->category_id = $request->category_id;
+                $product->subcategory_id = $request->subcategory_id;
+                $product->brand_id = $request->brand_id;
+                $product->product_feature = implode(',', $request->product_feature);
+                $product->product_name = $request->product_name;
+                $product->slug = Str::slug($request->product_name);
+                $product->short_desc = $request->short_desc;
+                $product->long_desc = $request->long_desc;
+                $product->sku = $request->sku;
+                $product->tags = $request->tag;
+                // $product->shipping = $request->shipping;
+                $product->update();
+                if ($request->imageGallery) {
+                    $imagesGallery = $request->imageGallery;
+                    foreach ($imagesGallery as $image) {
+                        $galleryImage = rand() . '.' . $image->extension();
+                        $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                        $productGallery = new ProductGallery;
+                        unlink(public_path('uploads/products/gallery').$productGallery->image);
+                        $productGallery->product_id = $product->id;
+                        $productGallery->image = $galleryImage;
+                        $productGallery->save();
+                    }
+                }
+                return response()->json([
+                    'status' => '200',
+                    'message' => 'Product Update successfully',
+                    'productId' => $product->id,
+                ]);
+        }
+    
+    }
+    
 }
+    

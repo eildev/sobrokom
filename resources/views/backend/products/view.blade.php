@@ -44,23 +44,19 @@
                                             </td>
 
                                             <td>
-                                                @if ($product->status == 1)
-                                                <a href="#" class="btn btn-warning">Active</a>
-                                                @endif
+                                                 <button class="btn btn-sm btn-success status_active" value="{{$product->id}}">Active</button>
                                             </td>
                                             <td>
-                                                <a href="{{ route('product.view.details', $product->id) }}"
-                                                    class="btn btn-info text-white">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('product.edit', $product->id) }}"
-                                                    class="btn btn-success text-white">
-                                                    <i class='bx bx-edit'></i>
-                                                </a>
-                                                <a href="{{ route('product.delete', $product->id) }}"
-                                                    class="btn btn-danger text-white" id="delete">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                                <div class="col">
+                                                    <div class="dropdown">
+            											<button class="btn btn-sm btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
+            											<ul class="dropdown-menu" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);">
+            												<li><a class="dropdown-item" href="{{ route('product.view.details', $product->id) }}">View Details</a></li>
+            												<li><a class="dropdown-item" href="{{ route('product.edit', $product->id) }}">Edit</a></li>
+            												<li><a class="dropdown-item" href="{{ route('product.delete', $product->id) }}" id="delete">Delete</a></li>
+            											</ul>
+            									</div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -78,4 +74,36 @@
         </div>
         <!--end row-->
     </div>
+    
+    
+    
+    <script>
+         $(document).ready(function() {
+            // Status Update
+            $(document).on('click', '.status_active', function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                
+                let itemValue = this.value;
+                
+                $.ajax({
+                    url: '/product/status/'+itemValue,
+                    type: 'POST',
+                    data: {
+                        'status': 0,
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                        } else {
+                            toastr.warning(error.message);
+                        }
+                    }
+                });
+            })
+         })
+    </script>
 @endsection

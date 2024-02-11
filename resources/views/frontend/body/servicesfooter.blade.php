@@ -16,7 +16,7 @@
                         </div>
                         <div class="mainfeature__content">
                             <h4 class="mainfeature__title">Fast Delivery</h4>
-                            <p>Across West & East India</p>
+                            <p>Across West all Bangladesh</p>
                         </div>
                     </div>
                 </div>

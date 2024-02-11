@@ -24,7 +24,7 @@ class Product extends Model
         return $this->hasMany(ProductGallery::class);
     }
     function varient(){
-        return $this->hasMany(Variant::class);
+        return $this->hasMany(Variant::class,'product_id', 'id');
     }
 
 }
