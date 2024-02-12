@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\frontend\BlogReactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -123,8 +124,13 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::post('/review-rating/insert', 'store')->name('review-rating.insert');
     });
     // Review and Rating related route
-});
 
+});
+Route::middleware('auth')->group(function () {
+Route::controller(BlogReactionController::class)->group(function () {
+    Route::post('/blog/user-like', 'BlogReact');
+   });
+});
 // WithOut Auth All Routes
     Route::controller(OTPController::class)->group(function () {
         Route::post('/otp/store', 'storeOTP');
@@ -159,3 +165,7 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::post('blog-comment-reply-submit', 'BlogCommentReplys')->name('blog.comment.reply');
     });
    //Blog Comment Route End
+  //Blog Reaction Route
+
+
+   //Blog Reaction Route

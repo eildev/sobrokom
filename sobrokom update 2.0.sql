@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 10, 2024 at 11:31 PM
--- Server version: 10.5.23-MariaDB-cll-lve-log
--- PHP Version: 7.4.27
+-- Host: 127.0.0.1
+-- Generation Time: Feb 12, 2024 at 04:22 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sobrhudo_database`
+-- Database: `sobrokom`
 --
 
 -- --------------------------------------------------------
@@ -84,6 +84,22 @@ CREATE TABLE `blog_comments` (
   `subscriber_id` int(11) DEFAULT NULL,
   `blog_id` bigint(20) UNSIGNED NOT NULL,
   `comment` text DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_comment_replies`
+--
+
+CREATE TABLE `blog_comment_replies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subscriber_id` int(11) DEFAULT NULL,
+  `comment_id` bigint(20) UNSIGNED NOT NULL,
+  `reply` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -368,7 +384,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (30, '2024_02_05_091501_create_blog_posts_table', 13),
 (31, '2024_02_06_083633_create_blog_comments_table', 14),
 (32, '2024_02_06_042159_create_review_ratings_table', 15),
-(33, '2024_02_06_073418_create_review_images_table', 15);
+(33, '2024_02_06_073418_create_review_images_table', 15),
+(34, '2024_02_11_054654_create_sub_subcategories_table', 16),
+(35, '2024_02_08_093333_create_blog_comment_replies_table', 17);
 
 -- --------------------------------------------------------
 
@@ -626,6 +644,7 @@ CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `subcategory_id` bigint(20) UNSIGNED NOT NULL,
+  `sub_subcategory_id` int(11) DEFAULT NULL,
   `brand_id` bigint(20) UNSIGNED NOT NULL,
   `product_feature` varchar(255) NOT NULL,
   `product_name` varchar(255) NOT NULL,
@@ -644,56 +663,56 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `brand_id`, `product_feature`, `product_name`, `slug`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `status`, `created_at`, `updated_at`) VALUES
-(99, 28, 75, 27, 'new-arrival,weekend-deals', 'Jodi Chicken Sausage', 'jodi-chicken-sausage', 'Imported chicken sausage Malaysia', NULL, '125497956.jpg', 'IPVRMDLQGM', 'Chicken sausage,Chicken,Sausage', 1, '2024-02-07 13:13:03', '2024-02-08 17:21:47'),
-(101, 28, 75, 26, 'new-arrival,weekend-deals', 'Doux Chicken sausage', 'doux-chicken-sausage', 'Imported chicken sausage from France', NULL, '819430430.jpg', 'YSI1WZRUZV', 'Imported chicken sausage ,Chicken,Sausage,Chicken sausage', 1, '2024-02-07 13:36:50', '2024-02-07 13:36:50'),
-(102, 28, 75, 32, 'new-arrival,weekend-deals', 'Seara Chicken sausage', 'seara-chicken-sausage', 'Imported chicken sausage from Brazil', NULL, '1837969729.jpg', 'P4MRFBWQEQ', 'Seara,Seara chicken Sausage,Chicken,Sausage,Frozen Food', 1, '2024-02-07 13:50:07', '2024-02-07 13:50:07'),
-(103, 28, 75, 33, 'new-arrival,weekend-deals', 'Boneless Chicken breast', 'boneless-chicken-breast', 'Halal Boneless Chicken breast', NULL, '2046017926.jpg', 'RM04I9VA5B', 'Boneless Chicken breast,Boneless Chicken breast,Chicken breast,Chicken,Halal,Halal food', 1, '2024-02-07 14:19:07', '2024-02-07 14:19:07'),
-(104, 28, 75, 33, 'new-arrival,weekend-deals', 'Chicken Drumstick', 'chicken-drumstick', 'Halal Chicken drumstick with skin', NULL, '1164781691.jpg', 'LK53CFGIZN', 'Chicken drumstick with skin,chicken,Drumstick,Halal Chicken,Frozen food,Food', 1, '2024-02-07 14:26:26', '2024-02-07 14:26:26'),
-(105, 28, 75, 33, 'new-arrival,weekend-deals', 'Chicken Wings', 'chicken-wings', 'Halal Chicken wings with skin', NULL, '424413775.jpg', '2SKS2HBFUQ', 'Halal Chicken wings with skin,Halal,Chicken wings,Frozen Food,Food', 1, '2024-02-07 14:31:29', '2024-02-07 14:31:29'),
-(106, 28, 75, 33, 'new-arrival,weekend-deals', 'Chicken Meatballs', 'chicken-meatballs', 'Halal Chicken meatballs', NULL, '667492599.jpg', 'Z0VOSHL3Y4', 'Chicken meatballs ,Chicken ,Meatballs ,Frozen Food,Food', 1, '2024-02-07 14:45:47', '2024-02-07 14:45:47'),
-(108, 28, 75, 33, 'new-arrival,weekend-deals', 'Chicken Nuggets', 'chicken-nuggets', 'Halal and Fresh Chicken Nuggets', NULL, '124607698.jpg', 'F9VG3ESFD9', 'Halal and Fresh Chicken Nuggets ,Fresh Chicken Nuggets ,Chicken Nuggets ,Chicken,Nuggets', 1, '2024-02-07 14:59:33', '2024-02-10 13:53:07'),
-(109, 28, 75, 33, 'new-arrival,weekend-deals', 'Octopus', 'octopus', 'Raw full Octopus', NULL, '269084245.jpg', 'MMMAXR04F4', 'Raw Octopus ,Sea Food,Octopus ,Frozen Food', 1, '2024-02-07 15:12:35', '2024-02-07 15:12:35'),
-(110, 28, 75, 33, 'new-arrival,weekend-deals', 'Crab', 'crab', 'Raw full crab', NULL, '401926607.jpg', 'TMI810DV48', 'Raw crab ,Crab ,Sea Food,Frozen Food', 1, '2024-02-07 15:16:44', '2024-02-07 15:16:44'),
-(111, 28, 75, 33, 'new-arrival,weekend-deals', 'Squid', 'squid', 'Raw full Squid', NULL, '1388669354.jpg', '0091ETGO6G', 'Raw full squid ,Squid ,Sea food,Frozen Food', 1, '2024-02-07 15:21:25', '2024-02-07 15:21:25'),
-(112, 28, 75, 33, 'new-arrival,weekend-deals', 'Momo Sheets', 'momo-sheets', 'Made with Wheat Flower and Egg', NULL, '1720365845.jpg', 'K9JCUSU6ZM', 'Momo Sheets,Momo,Frozen Food,Food,Yo Momo', 1, '2024-02-07 15:31:18', '2024-02-07 15:31:18'),
-(113, 28, 75, 33, 'new-arrival,weekend-deals', 'Wonthon Sheets', 'wonthon-sheets', 'Made with Wheat Flower and Egg', NULL, '952859793.jpg', 'XINCK4RVMC', 'Made with wheat flower and egg ,Wonthon Sheets,Wonthon,Sheets,Frozen Food,Food', 1, '2024-02-07 15:36:54', '2024-02-07 15:36:54'),
-(114, 28, 73, 34, 'new-arrival,weekend-deals', 'BBQ Sauce', 'bbq-sauce', 'Imported BBQ Sauce  from America', NULL, '1320674588.jpg', 'STE4HXYZV0', 'Imported BBQ Sauce  from America,Imported,BBQ Sauce ,BBQ,Sauce', 1, '2024-02-07 15:56:15', '2024-02-07 15:56:15'),
-(115, 28, 76, 35, 'new-arrival,weekend-deals', 'Sushi Rice', 'sushi-rice', 'Sticky rice for making Sushi and Kimbap', NULL, '1278017117.jpg', 'AWMD5KVV94', 'Sticky rice,rice,Sushi,Sushi Rice,Food,Imported food', 1, '2024-02-07 16:04:50', '2024-02-07 16:04:50'),
-(116, 28, 72, 36, 'new-arrival,weekend-deals', 'Amul Dark Chocolate', 'amul-dark-chocolate', 'Chocolate', NULL, '1265108539.jpg', '8T7N1HCLDA', 'Amul Dark Chocolate,Chocolate,Amul ,Dark Chocolate,Sweet ,Love Chocolate', 1, '2024-02-07 16:19:07', '2024-02-07 16:19:07'),
-(117, 28, 72, 37, 'new-arrival,weekend-deals', 'Toblerone Chocolate', 'toblerone-chocolate', 'Toblerone Chocolate', NULL, '616369288.jpg', '2VDAK9N702', 'Toblerone chocolate ,Chocolate ,Toblerone,Sweet,Love Chocolate,Love', 1, '2024-02-07 16:31:06', '2024-02-07 16:31:06'),
-(119, 28, 77, 38, 'new-arrival,weekend-deals', 'Almarai Cheese Jar', 'almarai-cheese-jar', 'Almarai Spread Cheese', NULL, '1611270762.jpg', 'MWTL55NE9J', 'Almarai Spread Cheese,Cheese,Almarai', 1, '2024-02-07 16:54:26', '2024-02-07 16:54:26'),
-(120, 28, 77, 38, 'new-arrival,weekend-deals', 'Almarai Cheese Triangle', 'almarai-cheese-triangle', 'Almarai Spread cheese', NULL, '575161830.jpg', 'TPXF78NZRV', 'Spread cheese ,Almarai,Cheese,Almarai Cheese Triangle', 1, '2024-02-07 16:58:41', '2024-02-07 16:58:41'),
-(121, 28, 78, 36, 'new-arrival,weekend-deals', 'Amul Butter', 'amul-butter', 'Imported Amul Butter', NULL, '874058157.jpg', 'VHLVJVS8ZM', 'Imported Amul Butter,Amul Butter,Amul,Butter', 1, '2024-02-07 17:03:57', '2024-02-07 17:03:57'),
-(122, 28, 77, 39, 'new-arrival,weekend-deals', 'La vache Cheese Triangle', 'la-vache-cheese-triangle', 'imported La vache Spread cheese', NULL, '508302652.jpg', 'PHYB73MJZD', 'La vache quirit,Cheese,La vache spread cheese,spread cheese', 1, '2024-02-07 17:13:30', '2024-02-07 17:13:30'),
-(123, 28, 73, 41, 'new-arrival,weekend-deals', 'Kikkoman Soya-Sause', 'kikkoman-soya-sause', 'Chinese Kikkoman Soya-Sause', NULL, '1311921040.jpg', '27Z3EL5Q9Z', 'Kikkoman Soya-Sause,Soya-Sause,Kikkoman,Sause', 1, '2024-02-07 17:54:12', '2024-02-07 17:54:12'),
-(124, 28, 79, 42, 'new-arrival,weekend-deals', 'Kashmiri Chili Powder', 'kashmiri-chili-powder', 'Original Red Spicy Chili Powder', NULL, '1614761464.jpg', 'YF5GK5M2J9', 'Original Red Spicy Chili Powder,Chili Powder,Spicy Chili,Red Spicy,Spicy,MDH,Spices', 1, '2024-02-08 10:30:47', '2024-02-08 10:30:47'),
-(125, 28, 77, 43, 'new-arrival,weekend-deals', 'Lactima Slice Cheese', 'lactima-slice-cheese', '12 pcs Slice cheese', NULL, '2034479218.jpg', 'NON6EPZL9J', 'Cheese,Lactima Cheese,Lactima', 1, '2024-02-08 11:08:25', '2024-02-08 11:08:25'),
-(126, 28, 73, 35, 'new-arrival,weekend-deals', 'Thai Cook & Lobster Fish Sauce', 'thai-cook-lobster-fish-sauce', 'Thai Cook & Lobster Fish Sauce for Cooking', NULL, '415796679.jpg', '1G12C2VEY3', 'Fish Sauce,Lobster,Thai Cook,Thai Cook & Lobster Fish Sauce', 1, '2024-02-08 11:35:49', '2024-02-08 11:35:49'),
-(127, 28, 80, 44, 'new-arrival,weekend-deals', 'Bibigo Nori sheet/Seaweed sheet (Korean)', 'bibigo-nori-sheetseaweed-sheet-korean', 'Bibigo Crispy Seaweed sheet for making Kimbap and Sushi Roll.', NULL, '1689058305.jpg', 'GYGWEWOKZO', 'Bibigo Nori sheet,Nori sheet,Seaweed sheet,Sushi Roll,Sushi,Crispy Seaweed shee', 1, '2024-02-08 12:38:37', '2024-02-08 12:38:37'),
-(129, 28, 80, 44, 'new-arrival,weekend-deals', 'Bibigo Nori sheet/Seaweed sheet (Korean) 10 piece', 'bibigo-nori-sheetseaweed-sheet-korean-10-piece', 'Bibigo Crispy Seaweed sheet for Making Kimbap and Sushi roll.', NULL, '620399059.jpg', 'Z2S1Z0W1WN', 'Bibigo Nori sheet,Nori sheet,Seaweed sheet,Sushi Roll,Sushi,Kimbap', 1, '2024-02-08 12:55:31', '2024-02-08 17:24:43'),
-(130, 29, 81, 35, 'feature,new-arrival,best-rate', 'Sushi Roll Maker Mat, Non-stick Natural Bamboo Sushi Mat.', 'sushi-roll-maker-mat-non-stick-natural-bamboo-sushi-mat', 'Non-stick Natural Bamboo Sushi Mat for making Sushi roll.', NULL, '677381485.jpg', 'D2NMULTJMQ', 'Sushi Roll Maker,Roll Maker,Sushi,Bamboo Sushi Mat,Bamboo', 1, '2024-02-08 13:58:49', '2024-02-08 13:58:49'),
-(131, 28, 82, 35, 'feature,trending,best-rate', 'Champion Mushroom Can.(400gm)', 'champion-mushroom-can400gm', 'Preserved button Mushroom (Product of China)', NULL, '2039418816.jpg', 'UFG06JMV23', 'Mushroom Can,Champion,Mushroom,Food', 1, '2024-02-08 14:27:42', '2024-02-08 14:27:42'),
-(133, 28, 83, 45, 'new-arrival,trending,best-rate,top-offers', 'Davidoff Rich Aroma Coffee - 100gm', 'davidoff-rich-aroma-coffee-100gm', 'Davidoff Rich Aroma Instant Coffee Jar.', NULL, '958723758.jpg', '7EWUIJB7ES', 'Coffee,Davidoff Coffee,Rich aroma Coffee', 1, '2024-02-08 14:48:39', '2024-02-08 14:48:39'),
-(135, 28, 83, 45, 'feature,trending,best-rate,top-offers', 'Davidoff Espresso 57 Coffee - 100gm jar.', 'davidoff-espresso-57-coffee-100gm-jar', 'Davidoff espresso 57 instant coffee.', NULL, '716679074.jpg', 'A4J3LD1NAK', 'Coffee,Davidoff espresso,Davidoff espresso 57 Coffee', 1, '2024-02-08 15:25:26', '2024-02-08 15:25:26'),
-(136, 28, 83, 45, 'feature,trending,best-rate,top-offers', 'Davidoff Fine Aroma Coffee -100gm.', 'davidoff-fine-aroma-coffee-100gm', 'Davidoff Fine Aroma Instant Coffee -100gm.', NULL, '999769302.jpg', 'AYPKROIOQM', 'Davidoff Fine Aroma Coffee,Coffee,Fine Aroma', 1, '2024-02-08 15:38:20', '2024-02-08 15:38:20'),
-(137, 28, 79, 35, 'trending,best-rate', 'Lao Gan Ma - Chili Oil - 210gm.', 'lao-gan-ma-chili-oil-210gm', 'Lao Gan Ma - Chinese Chili Oil Sauce. net wet-210gm.', NULL, '1484230127.jpg', '6CORI80UZV', 'Chili Oil Sauce,Lao Gan Ma,Chili Oil', 1, '2024-02-08 16:00:20', '2024-02-08 16:00:20'),
-(138, 28, 71, 40, 'feature,trending,best-rate,top-offers', 'Danisa Traditional Butter Cookies - 454g', 'danisa-traditional-butter-cookies-454g', 'Danisa Traditional Butter Cookies.', NULL, '1501012210.jpg', 'FCKZPSUET0', 'Danisa Traditional Butter Cookies,Butter Cookies,Cookies,Butter', 1, '2024-02-08 16:46:38', '2024-02-08 16:46:38'),
-(139, 28, 73, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot Chicken Sauce 200g (Korean)', 'samyang-buldak-hot-chicken-sauce-200g-korean', 'Samyang Buldak Highly Spicy Sauce.', NULL, '919016267.png', 'FTFEJK632O', 'Spicy Red Sauce,Spicy Sauce,Red Sauce,Sauce', 1, '2024-02-08 17:50:13', '2024-02-08 18:16:04'),
-(140, 28, 73, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot 2x Spicy flavor Chicken Sauce - 200g (Korean)', 'samyang-buldak-hot-2x-spicy-flavor-chicken-sauce-200g-korean', 'Samyang Buldak Hot 2x Spicy flavor Chicken Sauce.', NULL, '1487488589.png', 'FBIFFJD28E', '2x Spicy,2x Spicy flavor Chicken Sauce, Buldak Hot 2x Spicy,Chicken Sauce', 1, '2024-02-08 18:05:34', '2024-02-08 18:05:34'),
-(141, 28, 73, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor) 200g.', 'samyang-buldak-hot-chicken-flavor-sauce-carbonara-flavor-200g', 'Korean Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor).', NULL, '1321536677.png', 'IKUEVLXLLB', 'Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor), Hot Chicken,Hot Chicken Sauce', 1, '2024-02-08 18:14:25', '2024-02-08 18:14:25'),
-(143, 30, 84, 46, 'feature,new-arrival', 'Ciao Churu Chicken Fillet & Squid (4 pack)', 'ciao-churu-chicken-fillet-squid-4-pack', 'Ciao Churu Chicken Fillet & Squid (4 pack)  Double the protein delight, now', NULL, '1524242432.jpg', '2OPH1XXC2F', 'pet food,cat food,ciao churu,fillet,squid,Chicken Fillet & Squid', 1, '2024-02-08 18:35:37', '2024-02-08 18:35:37'),
-(144, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Jjajang Buldak Hot Chicken Flavor Ramen (Family Pack- 5 Packet)', 'jjajang-buldak-hot-chicken-flavor-ramen-family-pack-5-packet', 'Jjajang Buldak Hot Chicken Flavor Ramen, Korean Black Bean Sauce.5 Packs', NULL, '1190946305.png', 'HBJPF8HFUP', 'Ramen,Korean ,Korean Noodles,Hot Chicken ramen,Buldak ramen', 1, '2024-02-08 18:40:25', '2024-02-10 12:58:14'),
-(145, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Seafood Party (Family Pack- 5 packet)', 'seafood-party-family-pack-5-packet', 'Seafood Flavor.', NULL, '913006062.png', 'Y0EAWYZFOE', 'Ramen,Seafood Ramen,Hot Ramen,Buldak Ramen', 1, '2024-02-08 18:48:49', '2024-02-08 18:48:49'),
-(146, 30, 84, 46, 'new-arrival,best-rate', 'Ciao Churu Chicken Fillet in Jelly, 4 Packs -60 gm.', 'ciao-churu-chicken-fillet-in-jelly-4-packs-60-gm', 'Ciao Churu Chicken Fillet in Jelly(4 pack): Classic favorite with a juicy twist.', NULL, '1517672284.jpg', 'PYY42NH7E8', 'Chicken Fillet in Jelly,Ciao Churu Chicken Fillet in Jelly,Ciao Churu ,Chicken Fillet', 1, '2024-02-08 18:52:43', '2024-02-10 15:44:31'),
-(147, 30, 84, 46, 'feature,new-arrival', 'Ciao Churu Grilled Tuna Dried Bonito Flavor, 4 Packs - 48gm.', 'ciao-churu-grilled-tuna-dried-bonito-flavor-4-packs-48gm', 'Ciao Churu Grilled Tuna Dried Bonito Flavor (4 pack): Ocean flavors to tantalize taste buds', NULL, '943435561.jpg', 'O8M3MVB0RC', 'Ciao Churu Grilled Tuna Dried Bonito Flavor,Grilled Tuna Dried Bonito Flavor', 1, '2024-02-08 19:00:53', '2024-02-10 14:15:51'),
-(148, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak 3X SPICY HOT Chicken Flavor Ramen, Family Pack (5 Packs) Korean.', 'samayang-buldak-3x-spicy-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Much Hotter and 3X spicy Flavor Buldak Ramen.', NULL, '298175114.png', '7C1I34HDQ3', 'Samayang Buldak,3X SPICY,3X SPICY HOT,HOT Chicken Flavor Ramen,3X spicy Flavor,Family Pack,Korean', 1, '2024-02-10 12:55:09', '2024-02-10 12:55:09'),
-(149, 28, 70, 30, 'new-arrival,trending,best-rate,top-offers', 'Samayang Buldak CHEESE HOT Chicken Flavor Ramen, Family Pack (5 Packs) Korean.', 'samayang-buldak-cheese-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Samayang Buldak CHEESE Flavor and Hot Chicken Ramen.', NULL, '146945865.png', 'ZJMFZUQQAM', 'HOT Chicken,Samayang, CHEESE, HOT Chicken Flavor Ramen,Family Pack,Korean,Hot Chicken Ramen', 1, '2024-02-10 13:06:54', '2024-02-10 13:06:54'),
-(150, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak CARBONARA Flavor Hot Chicken Ramen. Family Pack (5 Packs) Korean.', 'samayang-buldak-carbonara-flavor-hot-chicken-ramen-family-pack-5-packs-korean', 'Samayang Buldak CARBONARA hot Chicken Flavor Ramen.', NULL, '145535806.png', '7WKRKC7YCX', 'Samayang Buldak, CARBONARA Flavor,Hot Chicken Ramen, hot Chicken Flavor', 1, '2024-02-10 14:01:38', '2024-02-10 14:01:38'),
-(151, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak QUATTRO CHEESE HOT Chicken Flavor Ramen, Family Pack - 5 Packs. Korean.', 'samayang-buldak-quattro-cheese-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'QUATTRO CHEESE HOT Chicken Flavor Ramen.', NULL, '294806158.png', 'C40ZWJDU6A', 'Samayang Buldak,QUATTRO CHEESE,HOT Chicken,Ramen,HOT Chicken Flavor', 1, '2024-02-10 14:29:05', '2024-02-10 14:29:05'),
-(152, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Buldak KIMChi  HoT Chicken Flavor Ramen. Family Pack - 5 packs.', 'buldak-kimchi-hot-chicken-flavor-ramen-family-pack-5-packs', 'Kimchi Hot Chicken Flavor Ramen.', NULL, '907591259.png', '59QXGHKZRR', 'Kimchi,Ramen,Hot Chicken,Family Pack,Kimchi Hot Flavor,Buldak', 1, '2024-02-10 14:34:46', '2024-02-10 14:34:46'),
-(153, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Ramen KIMChi, Korean KIMChi Flavor. Family Pack - 5 Packs', 'ramen-kimchi-korean-kimchi-flavor-family-pack-5-packs', 'Korean Kimchi Flavor Ramen. Kimchi Flavor.', NULL, '264558116.png', '3ZGCOJI0U1', 'Family Pack,Korean KIMChi Flavor.,Ramen KIMChi,Korean,Kimchi,Kimchi Flavor', 1, '2024-02-10 14:40:18', '2024-02-10 14:40:18'),
-(154, 28, 70, 30, 'feature,trending,best-rate,top-offers', 'Buldak HOT Chicken Flavor Ramen. Family Pack - 5 Packs. Korean.', 'buldak-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Buldak HOT Chicken Flavor Ramen.', NULL, '1400454184.png', '9HHUHBOAGY', 'HOT Chicken Flavor Ramen,HOT Chicken,Ramen', 1, '2024-02-10 14:50:01', '2024-02-10 14:56:31');
+INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `sub_subcategory_id`, `brand_id`, `product_feature`, `product_name`, `slug`, `short_desc`, `long_desc`, `product_image`, `sku`, `tags`, `status`, `created_at`, `updated_at`) VALUES
+(99, 28, 75, NULL, 27, 'new-arrival,weekend-deals', 'Jodi Chicken Sausage', 'jodi-chicken-sausage', 'Imported chicken sausage Malaysia', NULL, '125497956.jpg', 'IPVRMDLQGM', 'Chicken sausage,Chicken,Sausage', 1, '2024-02-07 13:13:03', '2024-02-08 17:21:47'),
+(101, 28, 75, NULL, 26, 'new-arrival,weekend-deals', 'Doux Chicken sausage', 'doux-chicken-sausage', 'Imported chicken sausage from France', NULL, '819430430.jpg', 'YSI1WZRUZV', 'Imported chicken sausage ,Chicken,Sausage,Chicken sausage', 1, '2024-02-07 13:36:50', '2024-02-07 13:36:50'),
+(102, 28, 75, NULL, 32, 'new-arrival,weekend-deals', 'Seara Chicken sausage', 'seara-chicken-sausage', 'Imported chicken sausage from Brazil', NULL, '1837969729.jpg', 'P4MRFBWQEQ', 'Seara,Seara chicken Sausage,Chicken,Sausage,Frozen Food', 1, '2024-02-07 13:50:07', '2024-02-07 13:50:07'),
+(103, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Boneless Chicken breast', 'boneless-chicken-breast', 'Halal Boneless Chicken breast', NULL, '2046017926.jpg', 'RM04I9VA5B', 'Boneless Chicken breast,Boneless Chicken breast,Chicken breast,Chicken,Halal,Halal food', 1, '2024-02-07 14:19:07', '2024-02-07 14:19:07'),
+(104, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Chicken Drumstick', 'chicken-drumstick', 'Halal Chicken drumstick with skin', NULL, '1164781691.jpg', 'LK53CFGIZN', 'Chicken drumstick with skin,chicken,Drumstick,Halal Chicken,Frozen food,Food', 1, '2024-02-07 14:26:26', '2024-02-07 14:26:26'),
+(105, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Chicken Wings', 'chicken-wings', 'Halal Chicken wings with skin', NULL, '424413775.jpg', '2SKS2HBFUQ', 'Halal Chicken wings with skin,Halal,Chicken wings,Frozen Food,Food', 1, '2024-02-07 14:31:29', '2024-02-07 14:31:29'),
+(106, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Chicken Meatballs', 'chicken-meatballs', 'Halal Chicken meatballs', NULL, '667492599.jpg', 'Z0VOSHL3Y4', 'Chicken meatballs ,Chicken ,Meatballs ,Frozen Food,Food', 1, '2024-02-07 14:45:47', '2024-02-07 14:45:47'),
+(108, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Chicken Nuggets', 'chicken-nuggets', 'Halal and Fresh Chicken Nuggets', NULL, '124607698.jpg', 'F9VG3ESFD9', 'Halal and Fresh Chicken Nuggets ,Fresh Chicken Nuggets ,Chicken Nuggets ,Chicken,Nuggets', 1, '2024-02-07 14:59:33', '2024-02-10 13:53:07'),
+(109, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Octopus', 'octopus', 'Raw full Octopus', NULL, '269084245.jpg', 'MMMAXR04F4', 'Raw Octopus ,Sea Food,Octopus ,Frozen Food', 1, '2024-02-07 15:12:35', '2024-02-07 15:12:35'),
+(110, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Crab', 'crab', 'Raw full crab', NULL, '401926607.jpg', 'TMI810DV48', 'Raw crab ,Crab ,Sea Food,Frozen Food', 1, '2024-02-07 15:16:44', '2024-02-07 15:16:44'),
+(111, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Squid', 'squid', 'Raw full Squid', NULL, '1388669354.jpg', '0091ETGO6G', 'Raw full squid ,Squid ,Sea food,Frozen Food', 1, '2024-02-07 15:21:25', '2024-02-07 15:21:25'),
+(112, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Momo Sheets', 'momo-sheets', 'Made with Wheat Flower and Egg', NULL, '1720365845.jpg', 'K9JCUSU6ZM', 'Momo Sheets,Momo,Frozen Food,Food,Yo Momo', 1, '2024-02-07 15:31:18', '2024-02-07 15:31:18'),
+(113, 28, 75, NULL, 33, 'new-arrival,weekend-deals', 'Wonthon Sheets', 'wonthon-sheets', 'Made with Wheat Flower and Egg', NULL, '952859793.jpg', 'XINCK4RVMC', 'Made with wheat flower and egg ,Wonthon Sheets,Wonthon,Sheets,Frozen Food,Food', 1, '2024-02-07 15:36:54', '2024-02-07 15:36:54'),
+(114, 28, 73, NULL, 34, 'new-arrival,weekend-deals', 'BBQ Sauce', 'bbq-sauce', 'Imported BBQ Sauce  from America', NULL, '1320674588.jpg', 'STE4HXYZV0', 'Imported BBQ Sauce  from America,Imported,BBQ Sauce ,BBQ,Sauce', 1, '2024-02-07 15:56:15', '2024-02-07 15:56:15'),
+(115, 28, 76, NULL, 35, 'new-arrival,weekend-deals', 'Sushi Rice', 'sushi-rice', 'Sticky rice for making Sushi and Kimbap', NULL, '1278017117.jpg', 'AWMD5KVV94', 'Sticky rice,rice,Sushi,Sushi Rice,Food,Imported food', 1, '2024-02-07 16:04:50', '2024-02-07 16:04:50'),
+(116, 28, 72, NULL, 36, 'new-arrival,weekend-deals', 'Amul Dark Chocolate', 'amul-dark-chocolate', 'Chocolate', NULL, '1265108539.jpg', '8T7N1HCLDA', 'Amul Dark Chocolate,Chocolate,Amul ,Dark Chocolate,Sweet ,Love Chocolate', 1, '2024-02-07 16:19:07', '2024-02-07 16:19:07'),
+(117, 28, 72, NULL, 37, 'new-arrival,weekend-deals', 'Toblerone Chocolate', 'toblerone-chocolate', 'Toblerone Chocolate', NULL, '616369288.jpg', '2VDAK9N702', 'Toblerone chocolate ,Chocolate ,Toblerone,Sweet,Love Chocolate,Love', 1, '2024-02-07 16:31:06', '2024-02-07 16:31:06'),
+(119, 28, 77, NULL, 38, 'new-arrival,weekend-deals', 'Almarai Cheese Jar', 'almarai-cheese-jar', 'Almarai Spread Cheese', NULL, '1611270762.jpg', 'MWTL55NE9J', 'Almarai Spread Cheese,Cheese,Almarai', 1, '2024-02-07 16:54:26', '2024-02-07 16:54:26'),
+(120, 28, 77, NULL, 38, 'new-arrival,weekend-deals', 'Almarai Cheese Triangle', 'almarai-cheese-triangle', 'Almarai Spread cheese', NULL, '575161830.jpg', 'TPXF78NZRV', 'Spread cheese ,Almarai,Cheese,Almarai Cheese Triangle', 1, '2024-02-07 16:58:41', '2024-02-07 16:58:41'),
+(121, 28, 78, NULL, 36, 'new-arrival,weekend-deals', 'Amul Butter', 'amul-butter', 'Imported Amul Butter', NULL, '874058157.jpg', 'VHLVJVS8ZM', 'Imported Amul Butter,Amul Butter,Amul,Butter', 1, '2024-02-07 17:03:57', '2024-02-07 17:03:57'),
+(122, 28, 77, NULL, 39, 'new-arrival,weekend-deals', 'La vache Cheese Triangle', 'la-vache-cheese-triangle', 'imported La vache Spread cheese', NULL, '508302652.jpg', 'PHYB73MJZD', 'La vache quirit,Cheese,La vache spread cheese,spread cheese', 1, '2024-02-07 17:13:30', '2024-02-07 17:13:30'),
+(123, 28, 73, NULL, 41, 'new-arrival,weekend-deals', 'Kikkoman Soya-Sause', 'kikkoman-soya-sause', 'Chinese Kikkoman Soya-Sause', NULL, '1311921040.jpg', '27Z3EL5Q9Z', 'Kikkoman Soya-Sause,Soya-Sause,Kikkoman,Sause', 1, '2024-02-07 17:54:12', '2024-02-07 17:54:12'),
+(124, 28, 79, NULL, 42, 'new-arrival,weekend-deals', 'Kashmiri Chili Powder', 'kashmiri-chili-powder', 'Original Red Spicy Chili Powder', NULL, '1614761464.jpg', 'YF5GK5M2J9', 'Original Red Spicy Chili Powder,Chili Powder,Spicy Chili,Red Spicy,Spicy,MDH,Spices', 1, '2024-02-08 10:30:47', '2024-02-08 10:30:47'),
+(125, 28, 77, NULL, 43, 'new-arrival,weekend-deals', 'Lactima Slice Cheese', 'lactima-slice-cheese', '12 pcs Slice cheese', NULL, '2034479218.jpg', 'NON6EPZL9J', 'Cheese,Lactima Cheese,Lactima', 1, '2024-02-08 11:08:25', '2024-02-08 11:08:25'),
+(126, 28, 73, NULL, 35, 'new-arrival,weekend-deals', 'Thai Cook & Lobster Fish Sauce', 'thai-cook-lobster-fish-sauce', 'Thai Cook & Lobster Fish Sauce for Cooking', NULL, '415796679.jpg', '1G12C2VEY3', 'Fish Sauce,Lobster,Thai Cook,Thai Cook & Lobster Fish Sauce', 1, '2024-02-08 11:35:49', '2024-02-08 11:35:49'),
+(127, 28, 80, NULL, 44, 'new-arrival,weekend-deals', 'Bibigo Nori sheet/Seaweed sheet (Korean)', 'bibigo-nori-sheetseaweed-sheet-korean', 'Bibigo Crispy Seaweed sheet for making Kimbap and Sushi Roll.', NULL, '1689058305.jpg', 'GYGWEWOKZO', 'Bibigo Nori sheet,Nori sheet,Seaweed sheet,Sushi Roll,Sushi,Crispy Seaweed shee', 1, '2024-02-08 12:38:37', '2024-02-08 12:38:37'),
+(129, 28, 80, NULL, 44, 'new-arrival,weekend-deals', 'Bibigo Nori sheet/Seaweed sheet (Korean) 10 piece', 'bibigo-nori-sheetseaweed-sheet-korean-10-piece', 'Bibigo Crispy Seaweed sheet for Making Kimbap and Sushi roll.', NULL, '620399059.jpg', 'Z2S1Z0W1WN', 'Bibigo Nori sheet,Nori sheet,Seaweed sheet,Sushi Roll,Sushi,Kimbap', 1, '2024-02-08 12:55:31', '2024-02-08 17:24:43'),
+(130, 29, 81, NULL, 35, 'feature,new-arrival,best-rate', 'Sushi Roll Maker Mat, Non-stick Natural Bamboo Sushi Mat.', 'sushi-roll-maker-mat-non-stick-natural-bamboo-sushi-mat', 'Non-stick Natural Bamboo Sushi Mat for making Sushi roll.', NULL, '677381485.jpg', 'D2NMULTJMQ', 'Sushi Roll Maker,Roll Maker,Sushi,Bamboo Sushi Mat,Bamboo', 1, '2024-02-08 13:58:49', '2024-02-08 13:58:49'),
+(131, 28, 82, NULL, 35, 'feature,trending,best-rate', 'Champion Mushroom Can.(400gm)', 'champion-mushroom-can400gm', 'Preserved button Mushroom (Product of China)', NULL, '2039418816.jpg', 'UFG06JMV23', 'Mushroom Can,Champion,Mushroom,Food', 1, '2024-02-08 14:27:42', '2024-02-08 14:27:42'),
+(133, 28, 83, NULL, 45, 'new-arrival,trending,best-rate,top-offers', 'Davidoff Rich Aroma Coffee - 100gm', 'davidoff-rich-aroma-coffee-100gm', 'Davidoff Rich Aroma Instant Coffee Jar.', NULL, '958723758.jpg', '7EWUIJB7ES', 'Coffee,Davidoff Coffee,Rich aroma Coffee', 1, '2024-02-08 14:48:39', '2024-02-08 14:48:39'),
+(135, 28, 83, NULL, 45, 'feature,trending,best-rate,top-offers', 'Davidoff Espresso 57 Coffee - 100gm jar.', 'davidoff-espresso-57-coffee-100gm-jar', 'Davidoff espresso 57 instant coffee.', NULL, '716679074.jpg', 'A4J3LD1NAK', 'Coffee,Davidoff espresso,Davidoff espresso 57 Coffee', 1, '2024-02-08 15:25:26', '2024-02-08 15:25:26'),
+(136, 28, 83, NULL, 45, 'feature,trending,best-rate,top-offers', 'Davidoff Fine Aroma Coffee -100gm.', 'davidoff-fine-aroma-coffee-100gm', 'Davidoff Fine Aroma Instant Coffee -100gm.', NULL, '999769302.jpg', 'AYPKROIOQM', 'Davidoff Fine Aroma Coffee,Coffee,Fine Aroma', 1, '2024-02-08 15:38:20', '2024-02-08 15:38:20'),
+(137, 28, 79, NULL, 35, 'trending,best-rate', 'Lao Gan Ma - Chili Oil - 210gm.', 'lao-gan-ma-chili-oil-210gm', 'Lao Gan Ma - Chinese Chili Oil Sauce. net wet-210gm.', NULL, '1484230127.jpg', '6CORI80UZV', 'Chili Oil Sauce,Lao Gan Ma,Chili Oil', 1, '2024-02-08 16:00:20', '2024-02-08 16:00:20'),
+(138, 28, 71, NULL, 40, 'feature,trending,best-rate,top-offers', 'Danisa Traditional Butter Cookies - 454g', 'danisa-traditional-butter-cookies-454g', 'Danisa Traditional Butter Cookies.', NULL, '1501012210.jpg', 'FCKZPSUET0', 'Danisa Traditional Butter Cookies,Butter Cookies,Cookies,Butter', 1, '2024-02-08 16:46:38', '2024-02-08 16:46:38'),
+(139, 28, 73, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot Chicken Sauce 200g (Korean)', 'samyang-buldak-hot-chicken-sauce-200g-korean', 'Samyang Buldak Highly Spicy Sauce.', NULL, '919016267.png', 'FTFEJK632O', 'Spicy Red Sauce,Spicy Sauce,Red Sauce,Sauce', 1, '2024-02-08 17:50:13', '2024-02-08 18:16:04'),
+(140, 28, 73, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot 2x Spicy flavor Chicken Sauce - 200g (Korean)', 'samyang-buldak-hot-2x-spicy-flavor-chicken-sauce-200g-korean', 'Samyang Buldak Hot 2x Spicy flavor Chicken Sauce.', NULL, '1487488589.png', 'FBIFFJD28E', '2x Spicy,2x Spicy flavor Chicken Sauce, Buldak Hot 2x Spicy,Chicken Sauce', 1, '2024-02-08 18:05:34', '2024-02-08 18:05:34'),
+(141, 28, 73, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor) 200g.', 'samyang-buldak-hot-chicken-flavor-sauce-carbonara-flavor-200g', 'Korean Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor).', NULL, '1321536677.png', 'IKUEVLXLLB', 'Samyang Buldak Hot Chicken flavor Sauce (Carbonara flavor), Hot Chicken,Hot Chicken Sauce', 1, '2024-02-08 18:14:25', '2024-02-08 18:14:25'),
+(143, 30, 84, NULL, 46, 'feature,new-arrival', 'Ciao Churu Chicken Fillet & Squid (4 pack)', 'ciao-churu-chicken-fillet-squid-4-pack', 'Ciao Churu Chicken Fillet & Squid (4 pack)  Double the protein delight, now', NULL, '1524242432.jpg', '2OPH1XXC2F', 'pet food,cat food,ciao churu,fillet,squid,Chicken Fillet & Squid', 1, '2024-02-08 18:35:37', '2024-02-08 18:35:37'),
+(144, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Jjajang Buldak Hot Chicken Flavor Ramen (Family Pack- 5 Packet)', 'jjajang-buldak-hot-chicken-flavor-ramen-family-pack-5-packet', 'Jjajang Buldak Hot Chicken Flavor Ramen, Korean Black Bean Sauce.5 Packs', NULL, '1190946305.png', 'HBJPF8HFUP', 'Ramen,Korean ,Korean Noodles,Hot Chicken ramen,Buldak ramen', 1, '2024-02-08 18:40:25', '2024-02-10 12:58:14'),
+(145, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Seafood Party (Family Pack- 5 packet)', 'seafood-party-family-pack-5-packet', 'Seafood Flavor.', NULL, '913006062.png', 'Y0EAWYZFOE', 'Ramen,Seafood Ramen,Hot Ramen,Buldak Ramen', 1, '2024-02-08 18:48:49', '2024-02-08 18:48:49'),
+(146, 30, 84, NULL, 46, 'new-arrival,best-rate', 'Ciao Churu Chicken Fillet in Jelly, 4 Packs -60 gm.', 'ciao-churu-chicken-fillet-in-jelly-4-packs-60-gm', 'Ciao Churu Chicken Fillet in Jelly(4 pack): Classic favorite with a juicy twist.', NULL, '1517672284.jpg', 'PYY42NH7E8', 'Chicken Fillet in Jelly,Ciao Churu Chicken Fillet in Jelly,Ciao Churu ,Chicken Fillet', 1, '2024-02-08 18:52:43', '2024-02-10 15:44:31'),
+(147, 30, 84, NULL, 46, 'feature,new-arrival', 'Ciao Churu Grilled Tuna Dried Bonito Flavor, 4 Packs - 48gm.', 'ciao-churu-grilled-tuna-dried-bonito-flavor-4-packs-48gm', 'Ciao Churu Grilled Tuna Dried Bonito Flavor (4 pack): Ocean flavors to tantalize taste buds', NULL, '943435561.jpg', 'O8M3MVB0RC', 'Ciao Churu Grilled Tuna Dried Bonito Flavor,Grilled Tuna Dried Bonito Flavor', 1, '2024-02-08 19:00:53', '2024-02-10 14:15:51'),
+(148, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak 3X SPICY HOT Chicken Flavor Ramen, Family Pack (5 Packs) Korean.', 'samayang-buldak-3x-spicy-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Much Hotter and 3X spicy Flavor Buldak Ramen.', NULL, '298175114.png', '7C1I34HDQ3', 'Samayang Buldak,3X SPICY,3X SPICY HOT,HOT Chicken Flavor Ramen,3X spicy Flavor,Family Pack,Korean', 1, '2024-02-10 12:55:09', '2024-02-10 12:55:09'),
+(149, 28, 70, NULL, 30, 'new-arrival,trending,best-rate,top-offers', 'Samayang Buldak CHEESE HOT Chicken Flavor Ramen, Family Pack (5 Packs) Korean.', 'samayang-buldak-cheese-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Samayang Buldak CHEESE Flavor and Hot Chicken Ramen.', NULL, '146945865.png', 'ZJMFZUQQAM', 'HOT Chicken,Samayang, CHEESE, HOT Chicken Flavor Ramen,Family Pack,Korean,Hot Chicken Ramen', 1, '2024-02-10 13:06:54', '2024-02-10 13:06:54'),
+(150, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak CARBONARA Flavor Hot Chicken Ramen. Family Pack (5 Packs) Korean.', 'samayang-buldak-carbonara-flavor-hot-chicken-ramen-family-pack-5-packs-korean', 'Samayang Buldak CARBONARA hot Chicken Flavor Ramen.', NULL, '145535806.png', '7WKRKC7YCX', 'Samayang Buldak, CARBONARA Flavor,Hot Chicken Ramen, hot Chicken Flavor', 1, '2024-02-10 14:01:38', '2024-02-10 14:01:38'),
+(151, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Samayang Buldak QUATTRO CHEESE HOT Chicken Flavor Ramen, Family Pack - 5 Packs. Korean.', 'samayang-buldak-quattro-cheese-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'QUATTRO CHEESE HOT Chicken Flavor Ramen.', NULL, '294806158.png', 'C40ZWJDU6A', 'Samayang Buldak,QUATTRO CHEESE,HOT Chicken,Ramen,HOT Chicken Flavor', 1, '2024-02-10 14:29:05', '2024-02-10 14:29:05'),
+(152, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Buldak KIMChi  HoT Chicken Flavor Ramen. Family Pack - 5 packs.', 'buldak-kimchi-hot-chicken-flavor-ramen-family-pack-5-packs', 'Kimchi Hot Chicken Flavor Ramen.', NULL, '907591259.png', '59QXGHKZRR', 'Kimchi,Ramen,Hot Chicken,Family Pack,Kimchi Hot Flavor,Buldak', 1, '2024-02-10 14:34:46', '2024-02-10 14:34:46'),
+(153, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Ramen KIMChi, Korean KIMChi Flavor. Family Pack - 5 Packs', 'ramen-kimchi-korean-kimchi-flavor-family-pack-5-packs', 'Korean Kimchi Flavor Ramen. Kimchi Flavor.', NULL, '264558116.png', '3ZGCOJI0U1', 'Family Pack,Korean KIMChi Flavor.,Ramen KIMChi,Korean,Kimchi,Kimchi Flavor', 1, '2024-02-10 14:40:18', '2024-02-10 14:40:18'),
+(154, 28, 70, NULL, 30, 'feature,trending,best-rate,top-offers', 'Buldak HOT Chicken Flavor Ramen. Family Pack - 5 Packs. Korean.', 'buldak-hot-chicken-flavor-ramen-family-pack-5-packs-korean', 'Buldak HOT Chicken Flavor Ramen.', NULL, '1400454184.png', '9HHUHBOAGY', 'HOT Chicken Flavor Ramen,HOT Chicken,Ramen', 1, '2024-02-10 14:50:01', '2024-02-10 14:56:31');
 
 -- --------------------------------------------------------
 
@@ -858,6 +877,30 @@ CREATE TABLE `subscribes` (
 
 INSERT INTO `subscribes` (`id`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (2, 'devkishor@gmail.com', 0, '2024-02-08 11:01:58', '2024-02-08 11:01:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sub_subcategories`
+--
+
+CREATE TABLE `sub_subcategories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subcategoryId` bigint(20) UNSIGNED NOT NULL,
+  `subSubcategoryName` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sub_subcategories`
+--
+
+INSERT INTO `sub_subcategories` (`id`, `subcategoryId`, `subSubcategoryName`, `slug`, `status`, `created_at`, `updated_at`) VALUES
+(2, 65, 'T-Shirt', 't-shirt', 1, '2024-02-11 00:52:13', '2024-02-11 00:52:13'),
+(3, 65, 'Pant', 'pant', 1, '2024-02-11 02:49:24', '2024-02-11 02:49:24');
 
 -- --------------------------------------------------------
 
@@ -1029,6 +1072,13 @@ ALTER TABLE `blog_comments`
   ADD KEY `blog_comments_blog_id_foreign` (`blog_id`);
 
 --
+-- Indexes for table `blog_comment_replies`
+--
+ALTER TABLE `blog_comment_replies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog_comment_replies_comment_id_foreign` (`comment_id`);
+
+--
 -- Indexes for table `blog_posts`
 --
 ALTER TABLE `blog_posts`
@@ -1191,6 +1241,13 @@ ALTER TABLE `subscribes`
   ADD UNIQUE KEY `subscribes_email_unique` (`email`);
 
 --
+-- Indexes for table `sub_subcategories`
+--
+ALTER TABLE `sub_subcategories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sub_subcategories_subcategoryid_foreign` (`subcategoryId`);
+
+--
 -- Indexes for table `tag_names`
 --
 ALTER TABLE `tag_names`
@@ -1238,6 +1295,12 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_comment_replies`
+--
+ALTER TABLE `blog_comment_replies`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1298,7 +1361,7 @@ ALTER TABLE `image_galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `offer_banners`
@@ -1346,13 +1409,13 @@ ALTER TABLE `popup_messages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
 
 --
 -- AUTO_INCREMENT for table `review_images`
@@ -1379,6 +1442,12 @@ ALTER TABLE `subscribes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `sub_subcategories`
+--
+ALTER TABLE `sub_subcategories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tag_names`
 --
 ALTER TABLE `tag_names`
@@ -1394,7 +1463,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `variants`
 --
 ALTER TABLE `variants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `wish_lists`
@@ -1417,6 +1486,12 @@ ALTER TABLE `billing_infos`
 --
 ALTER TABLE `blog_comments`
   ADD CONSTRAINT `blog_comments_blog_id_foreign` FOREIGN KEY (`blog_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `blog_comment_replies`
+--
+ALTER TABLE `blog_comment_replies`
+  ADD CONSTRAINT `blog_comment_replies_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `blog_comments` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `blog_posts`
@@ -1467,6 +1542,12 @@ ALTER TABLE `product_galleries`
 --
 ALTER TABLE `subcategories`
   ADD CONSTRAINT `subcategories_categoryid_foreign` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sub_subcategories`
+--
+ALTER TABLE `sub_subcategories`
+  ADD CONSTRAINT `sub_subcategories_subcategoryid_foreign` FOREIGN KEY (`subcategoryId`) REFERENCES `subcategories` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `variants`

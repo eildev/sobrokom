@@ -264,12 +264,20 @@
                                                     placeholder="00.00" name="regular_price">
                                                 <input type="hidden" class="product_id" name="product_id"
                                                     value="{{ $product->id }}">
+                                                <input type="hidden" class="variant_id" name="variant_id"
+                                                    value="">
                                                 <span class="regular_price_error text-danger"></span>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
+                                                <label for="inputPrice" class="form-label">Discount Price</label>
+                                                <input type="number" class="form-control discount_amount"
+                                                    id="inputPrice" placeholder="00.00" name="discount_amount">
+                                                <span class="discount_amount_error text-danger"></span>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Discount</label>
-                                                <select class="form-select discount" name="discount" disabled>
-                                                    <option value="0">discount</option>
+                                                <select class="form-select discount" name="discount">
+                                                    <option value="">discount</option>
                                                     <option value="0">0</option>
                                                     <option value="10">10%</option>
                                                     <option value="20">20%</option>
@@ -279,12 +287,7 @@
                                                 </select>
                                                 <span class="discount_error text-danger"></span>
                                             </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <label for="inputPrice" class="form-label">Discount Price</label>
-                                                <input type="number" class="form-control discount_amount"
-                                                    id="inputPrice" placeholder="00.00" name="discount_amount" readonly>
-                                                <span class="discount_amount_error text-danger"></span>
-                                            </div>
+
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
                                                 <input type="number" class="form-control" id="stock"
@@ -334,17 +337,20 @@
                                             </div> --}}
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Manufacture Date</label> <br>
-                                                <input type="date" class="form-control" id="inputPrice"
-                                                    placeholder="" name="manufacture_date">
+                                                <input type="date" class="form-control manufacture_date"
+                                                    id="inputPrice" placeholder="" name="manufacture_date">
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Expire Date</label> <br>
-                                                <input type="date" class="form-control" id="inputPrice"
+                                                <input type="date" class="form-control expire_date" id="inputPrice"
                                                     placeholder="" name="expire_date">
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="d-flex justify-content-center align-items-center h-100">
                                                     <button type="button" class="btn btn-primary add_varient">Add
+                                                        Varients</button>
+                                                    <button type="button" class="btn btn-primary update_varient"
+                                                        style="display: none;">Update
                                                         Varients</button>
                                                 </div>
                                             </div>
@@ -388,6 +394,11 @@
                                                             <td>{{ $variant->manufacture_date }}</td>
                                                             <td>{{ $variant->expire_date }}</td>
                                                             <td>
+                                                                <a href="{{ route('variant.edit', $variant->id) }}"
+                                                                    class="btn-sm btn-info me-2 edit_variant"
+                                                                    value="{{ $variant->id ?? 0 }}">
+                                                                    Edit
+                                                                </a>
                                                                 <a href="{{ route('variant.delete', $variant->id ?? 0) }}"
                                                                     class="btn-sm btn-danger delete_variant"
                                                                     value="{{ $variant->id ?? 0 }}">
@@ -516,60 +527,30 @@
                         allData.forEach(function(data) {
                             const tr = document.createElement('tr');
                             tr.innerHTML += `
-                                            <td>${data.regular_price}</td>
-                                            <td>${data.discount}</td>
-                                            <td>${data.discount_amount}</td>
-                                            <td>${data.stock_quantity}</td>
-                                            <td>${data.unit}</td>
-                                            <td>${data.weight}</td>
-                                            <td>${data.manufacture_date}</td>
-                                            <td>${data.expire_date}</td>
-                                            <td>
-                                                <a href="{{ route('variant.delete', $variant->id ?? 0) }}" class="btn-sm btn-danger" value="${data.id}">
-                                                    Delete
-                                                </a>
-                                            </td>
+                                    <td>${data.regular_price}</td>
+                                    <td>${data.discount}</td>
+                                    <td>${data.discount_amount}</td>
+                                    <td>${data.stock_quantity}</td>
+                                    <td>${data.unit}</td>
+                                    <td>${data.weight}</td>
+                                    <td>${data.manufacture_date}</td>
+                                    <td>${data.expire_date}</td>
+                                    <td>
+                                        <a href="#" class="btn-sm btn-info edit_variant me-2" value="${data.id}">
+                                            Edit
+                                        </a>
+                                        <a href="{{ route('variant.delete', $variant->id ?? 0) }}" class="btn-sm btn-danger delete_variant" value="${data.id}">
+                                            Delete
+                                        </a>
+                                    </td>
                                     `;
                             varient_container.appendChild(tr);
-                        })
+                        });
                     } else {
                         toastr.warning(res.error);
                     }
                 }
             })
         }
-
-        // price and discount calculation 
-        const regular_price = document.querySelector('.regular_price');
-        const discount = document.querySelector('.discount');
-        discount.addEventListener('change', function() {
-            let regurlarPrice = parseFloat(regular_price.value);
-            let discountAmount = ((regurlarPrice * parseFloat(this.value)) / 100);
-            discountAmount = regurlarPrice - discountAmount;
-            document.querySelector('.discount_amount').value = discountAmount;
-        })
-
-
-        regular_price.addEventListener('keyup', function() {
-            let regularPrice = this.value;
-            // console.log(regularPrice);
-            if (regularPrice !== "" && regularPrice > 0) {
-                discount.removeAttribute('disabled');
-            } else {
-                discount.setAttribute('disabled', '');
-            }
-        })
-
-        regular_price.addEventListener('change', function() {
-            let regularPrice = this.value;
-            // console.log(regularPrice);
-            if (regularPrice !== "" && regularPrice > 0) {
-                discount.removeAttribute('disabled');
-            } else {
-                discount.setAttribute('disabled', '');
-            }
-        })
-
-        // delete varienet 
     </script>
 @endsection
