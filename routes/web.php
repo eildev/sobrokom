@@ -150,7 +150,24 @@ Route::middleware('auth','role:admin')->group(function () {
     //All Routes for Order  Start
     Route::controller(OrderManageController::class)->group(function () {
         Route::get('/new-order', 'index')->name('new.order');
+
         Route::get('/admin-approve-order/{invoiceNumber}', 'adminApprove')->name('admin.approve.order');
+
+
+        Route::get('/order/confirmed', 'approvedOrders')->name('order.confirmed');
+
+        Route::get('/order/admin-process-order/{invoiceNumber}', 'orderProcessing')->name('admin.process.order');
+        Route::get('/order/processed', 'processedOrders')->name('order.processed');
+
+        Route::get('/order/admin-delivery-order/{invoiceNumber}', 'orderDelivering')->name('admin.delivery.order');
+        Route::get('/order/delivering', 'deliveringOrders')->name('order.delivering');
+
+        Route::get('/order/admin-completed-order/{invoiceNumber}', 'orderCompleted')->name('admin.completed.order');
+        Route::get('/order/completed', 'completedOrders')->name('order.completed');
+
+
+
+        // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
 
     });
     //All Routes for Order End
