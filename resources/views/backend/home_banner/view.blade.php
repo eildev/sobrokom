@@ -35,28 +35,28 @@
                                     @foreach ($all_banner as $banner)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ $banner->title }}</td>
-                                            <td>{{ $banner->short_description }}</td>
-                                            <td>{{ $banner->long_description }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->title,15)}}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->short_description,30)}}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->long_description,30)}}</td>
 
                                             <td>
                                                 <img src="{{ asset('/uploads/banner/' . $banner->image) }}"
-                                                    style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                    style="height: 100px; object-fit: contain;" class="img-fluid" alt="banner Image">
                                             </td>
                                             <td>
-                                                {{-- @php
-                                                    $imageGalleries = App\Models\ImageGallery::filter($banner_id);
-                                                    dd($imageGalleries->all());
+                                                @php
+                                                    $imageGalleries = App\Models\ImageGallery::where("banner_id", $banner->id)->get();
+                                                    // dd($imageGalleries->all());
                                                 @endphp
-                                                @if ($all_banner->count() > 0)
+                                                @if ($imageGalleries->count() > 0)
                                                     @foreach ($imageGalleries as $imageGallery)
                                                         <img src="{{ asset('/uploads/banner/gallery/' . $imageGallery->image) }}"
-                                                            style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                            style="height: 50px; object-fit:contain;" class="img-fluid" alt="banner Image">
                                                     @endforeach
                                                 @else
-                                                    <span colspan="6" class="text-center text-warning">Data not
+                                                    <span class="text-center text-warning">Image not
                                                         Found</span>
-                                                @endif --}}
+                                                @endif
                                             </td>
                                             <td>{{ $banner->status }}</td>
                                             <td>

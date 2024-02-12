@@ -40,7 +40,11 @@
                                                 <img src="{{ asset('/uploads/category/' . $category->image) }}"
                                                     style="height: 100px;" class="img-fluid" alt="Category Image">
                                             </td>
-                                            <td>{{ $category->status }}</td>
+                                            <td>
+                                                {{-- {{ $category->status }} --}}
+                                                <a href="#" class="btn btn-sm btn-success cat_active">Active</a>
+                                                <a href="#" class="btn btn-sm btn-success">Inactive</a>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('category.edit', $category->id) }}"
                                                     class="btn btn-info">Edit</a>
