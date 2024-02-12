@@ -7,10 +7,20 @@
                     <div class="card-title d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 text-info">Add Product</h5>
 
-                        <a href="{{ route('product.view') }}" class=" btn-info btn-sm text-light ">
-                            <i class='bx bx-show'></i>
-                        </a>
+                        <div class="d-flex items-center">
+                            <div class="my-3 me-2">
+                                <a href="{{ route('product.view') }}" class="btn btn-danger">
+                                    <i class='bx bx-show'></i>
+                                    View All Product</a>
+                            </div>
+                            <div class="my-3">
+                                <a href="{{ route('product') }}" class="btn btn-success">
+                                    <i class="fas fa-plus"></i>
+                                    Add New Product</a>
+                            </div>
+                        </div>
                     </div>
+
                     <hr />
                     <div class="form-body mt-4">
                         <form method="post" id="productForm" enctype="multipart/form-data">
@@ -40,11 +50,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                              
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
-                                                        <select class="form-select " name="subcategory_id">
+                                                        <select class="form-select subcategory_id" name="subcategory_id">
                                                             <option value="">Select Subcategory</option>
                                                         </select>
                                                         <span class="subcategory_error text-danger"></span>
@@ -53,7 +62,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                {{-- @php
+                                                    $sub_subcategories = App\Models\SubSubcategory::all();
+                                                @endphp --}}
+                                                <div class="row">
+                                                    <label class="form-label col-12">Select Sub-Subcategory</label>
+                                                    <div class="col-12">
+                                                        <select class="form-select" name="sub_subcategory_id">
+                                                            <option value="">Select Sub-Subcategory</option>
+                                                            {{-- @foreach ($sub_subcategories as $sub_subcategory)
+                                                                <option value="{{ $sub_subcategory->id }}">
+                                                                    {{ $sub_subcategory->subSubcategoryName }}</option>
+                                                            @endforeach --}}
+                                                        </select>
+                                                        <span class="sub_subcategory_id text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 @php
                                                     $brands = App\Models\Brand::all();
@@ -73,7 +100,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label for="" class="form-label">Product Name</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <input type="text" name="product_name"
+                                                            class="form-control product_name" id="inputEnterYourName"
+                                                            placeholder="Enter Product Name">
+                                                        <span class="product_name_error text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="row mb-3">
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
@@ -91,21 +135,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <label for="" class="form-label">Product Name</label>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <input type="text" name="product_name"
-                                                            class="form-control product_name" id="inputEnterYourName"
-                                                            placeholder="Enter Product Name">
-                                                        <span class="product_name_error text-danger"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <div class="row">
@@ -183,7 +213,8 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary add_product">Add Product</button>
+                                                    <button type="submit" class="btn btn-primary add_product">Add
+                                                        Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,11 +238,19 @@
                                                 <input type="number" class="form-control regular_price" id="inputPrice"
                                                     placeholder="00.00" name="regular_price">
                                                 <input type="hidden" class="product_id" name="product_id">
+                                                <input type="hidden" class="variant_id" name="variant_id"
+                                                    value="">
                                                 <span class="regular_price_error text-danger"></span>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
+                                                <label for="inputPrice" class="form-label">Discount Price</label>
+                                                <input type="number" class="form-control discount_amount"
+                                                    id="inputPrice" placeholder="00.00" name="discount_amount">
+                                                <span class="discount_amount_error text-danger"></span>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Discount</label>
-                                                <select class="form-select discount" name="discount" disabled>
+                                                <select class="form-select discount" name="discount">
                                                     <option value="0">discount</option>
                                                     <option value="0">0</option>
                                                     <option value="10">10%</option>
@@ -222,12 +261,7 @@
                                                 </select>
                                                 <span class="discount_error text-danger"></span>
                                             </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <label for="inputPrice" class="form-label">Discount Price</label>
-                                                <input type="number" class="form-control discount_amount"
-                                                    id="inputPrice" placeholder="00.00" name="discount_amount" readonly>
-                                                <span class="discount_amount_error text-danger"></span>
-                                            </div>
+
                                             <div class="col-lg-3 col-md-6">
                                                 <label for="inputPrice" class="form-label">Stock Quantity</label>
                                                 <input type="number" class="form-control" id="stock"
@@ -290,6 +324,9 @@
                                                 <div class="d-flex justify-content-center align-items-center h-100">
                                                     <button type="button" class="btn btn-primary add_varient">Add
                                                         Varients</button>
+                                                    <button type="button" class="btn btn-primary update_varient"
+                                                        style="display: none;">Update
+                                                        Varients</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -324,11 +361,7 @@
                                 </div>
                             </div>
 
-                            <div class="my-3">
-                                <a href="{{ route('product') }}" class="btn btn-success">
-                                    <i class="fas fa-plus"></i>
-                                    Add New Product</a>
-                            </div>
+
                         </div>
                     </div>
 
@@ -377,10 +410,10 @@
         const add_product = document.querySelector('.add_product');
         add_product.addEventListener('click', function(e) {
             e.preventDefault();
-             document
+            document
                 .querySelector(".pageLoader")
                 .style.setProperty("display", "flex", "important");
-                
+
             let allData = new FormData(jQuery("#productForm")[0]);
             $.ajax({
                 url: "/product/store",
@@ -394,9 +427,9 @@
                         $('.add_product').addClass('disabled');
                         $('.product_id').val(res.productId);
                         toastr.success(res.message);
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     } else {
                         $('.category_error').text(res.error.category_id);
                         $('.subcategory_error').text(res.error.subcategory_id);
@@ -410,9 +443,9 @@
                         $('.shipping_error').text(res.error.shipping);
                         // $('.tag_error').text(res.error.tags);
                         toastr.warning(res.error);
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     }
                 },
             });
@@ -424,7 +457,7 @@
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
-             document
+            document
                 .querySelector(".pageLoader")
                 .style.setProperty("display", "flex", "important");
             let varientData = new FormData(jQuery("#productVariant")[0]);
@@ -453,14 +486,14 @@
                         document.querySelector('.unit').value = '';
                         document.querySelector('.weight').value = '';
                         show();
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     } else {
                         toastr.warning('please provide varient');
-                         document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+                        document
+                            .querySelector(".pageLoader")
+                            .style.setProperty("display", "none", "important");
                     }
                 }
             })
@@ -492,7 +525,10 @@
                                 <td>${data.manufacture_date}</td>
                                 <td>${data.expire_date}</td>
                                 <td>
-                                <button value="${data.id}" id="delete_variant" class="btn-sm btn-danger btn">Delete</button>
+                                <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
+                                    Edit
+                                </button>
+                                <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
                                             </td>
                                     `;
                             varient_container.appendChild(tr);
@@ -503,39 +539,5 @@
                 }
             })
         }
-
-
-
-        // price and discount calculation
-        const regular_price = document.querySelector('.regular_price');
-        const discount = document.querySelector('.discount');
-        discount.addEventListener('change', function() {
-            let regurlarPrice = parseFloat(regular_price.value);
-            let discountAmount = ((regurlarPrice * parseFloat(this.value)) / 100);
-            discountAmount = regurlarPrice - discountAmount;
-            document.querySelector('.discount_amount').value = discountAmount;
-        })
-
-
-        regular_price.addEventListener('keyup', function() {
-            let regularPrice = this.value;
-            update(regularPrice, discount);
-        })
-
-        regular_price.addEventListener('change', function() {
-            let regularPrice = this.value;
-            update(regularPrice, discount);
-        });
-
-        function update(regularPrice, discount) {
-            if (regularPrice !== "" && regularPrice > 0) {
-                discount.removeAttribute('disabled');
-            } else {
-                discount.setAttribute('disabled', '');
-            }
-        }
-
-
-
     </script>
 @endsection

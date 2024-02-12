@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\SubSubcategoryController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\GlobalCouponController;
 use App\Http\Controllers\Backend\PopupMessageController;
@@ -129,6 +130,8 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/product/update/{id}', 'update')->name('product.update');
         Route::post('/product/variant/store', 'variantStore')->name('variant.store');
         Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
+        Route::get('/product/variant/edit/{id}', 'editVariant')->name('variant.edit');
+        Route::post('/product/variant/update/{id}', 'updateVariant')->name('variant.update');
         Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/view/{id}', 'viewDetails')->name('product.view.details');
@@ -187,6 +190,18 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/blog/post/delete/{id}', 'BlogPostDelete')->name('blog.post.delete');
     });
      //Blog Post All Route End
+
+     //All Routes for Sub Subcategory Start
+    Route::controller(SubSubcategoryController::class)->group(function () {
+        Route::get('/sub-subcategory', 'index')->name('sub.subcategory');
+        Route::post('/sub-subcategory/store', 'store')->name('sub.subcategory.store');
+        Route::get('/sub-subcategory/view', 'view')->name('sub.subcategory.view');
+        Route::get('/sub-subcategory/edit/{id}', 'edit')->name('sub.subcategory.edit');
+        Route::post('/sub-subcategory/update/{id}', 'update')->name('sub.subcategory.update');
+        Route::get('/sub-subcategory/delete/{id}', 'delete')->name('sub.subcategory.delete');
+        Route::get('/find/sub-subcategory/{id}', 'findSubSubcat')->name('sub.subcategory.find');
+    });
+    //All Routes for Sub Subcategory End
 
     //Blog Comment All Route Start
     Route::controller(BlogCommentController::class)->group(function () {

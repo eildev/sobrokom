@@ -34,7 +34,7 @@
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document
@@ -45,7 +45,7 @@
 </head>
 
 <body>
-     <style>
+    <style>
         .pageLoader {
             position: fixed;
             left: 0;
@@ -195,33 +195,210 @@
         });
 
 
-
+        // subcategory select function 
         $(document).ready(function() {
-        $('#product_descriptions').summernote();
-$('.category_id').on('change', function() {
+            $('#product_descriptions').summernote();
+            $('.category_id').on('change', function() {
 
-    let category_id = $(this).val();
-    if (category_id) {
-        $.ajax({
-            url: '/find/subcategory/' + category_id,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function(result) {
-                $('select[name="subcategory_id"]').html(
-                    '<option value="">Select a Sub-Category</option>');
-                $.each(result.subcats, function(key, item) {
-                    $('select[name="subcategory_id"]').append(
-                        '<option myid="' + item.id +
-                        '" value="' + item.id +
-                        '">' + item
-                        .subcategoryName + '</option>');
+                let category_id = $(this).val();
+                if (category_id) {
+                    $.ajax({
+                        url: '/find/subcategory/' + category_id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(result) {
+                            $('select[name="subcategory_id"]').html(
+                                '<option value="">Select a Sub-Category</option>');
+                            $.each(result.subcats, function(key, item) {
+                                $('select[name="subcategory_id"]').append(
+                                    '<option myid="' + item.id +
+                                    '" value="' + item.id +
+                                    '">' + item
+                                    .subcategoryName + '</option>');
+                            })
+                        }
+                    });
+                }
+            })
+
+            $('.subcategory_id').on('change', function() {
+                // alert('ok');
+                let subcategory_id = $(this).val();
+                if (subcategory_id) {
+                    $.ajax({
+                        url: '/find/sub-subcategory/' + subcategory_id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(result) {
+                            // console.log(result);
+                            $('select[name="sub_subcategory_id"]').html(
+                                '<option value="">Select a Sub-Subcategory</option>');
+                            // console.log(result.subsubcats.length);
+                            if (result.subsubcats.length > 0) {
+
+                                $.each(result.subsubcats, function(key, item) {
+                                    $('select[name="sub_subcategory_id"]').append(
+                                        '<option myid="' + item.id +
+                                        '" value="' + item.id +
+                                        '">' + item
+                                        .subSubcategoryName + '</option>');
+                                })
+                            } else {
+                                $('select[name="sub_subcategory_id"]').append(
+                                    '<option value="0" selected>N/A</option>'
+                                );
+                            }
+                        }
+                    });
+                }
+            })
+        });
+
+
+
+
+        // delete variant 
+        $(document).ready(function() {
+            $(document).on('click', '.delete_variant', function(e) {
+                e.preventDefault();
+                let id = this.getAttribute('value');
+                $.ajax({
+                    url: '/product/variant/delete/' + id,
+                    type: "GET",
+                    success: function(res) {
+                        // console.log(res);
+                        if (res.status == 200) {
+                            toastr.success(res.message);
+                            show();
+                        } else {
+                            toastr.error("variant deleted unsuccessful");
+                        }
+
+                    }
                 })
+            });
+        });
+
+
+
+        // Edit Variant
+        $(document).on('click', '.edit_variant', function(e) {
+            e.preventDefault();
+            let id = this.getAttribute('value');
+            // alert(id);
+            $('.add_varient').css('display', 'none');
+            $('.update_varient').css('display', 'block');
+
+            $.ajax({
+                url: "/product/variant/edit/" + id,
+                type: "GET",
+                success: function(data) {
+                    let variantData = data.variantData;
+                    // console.log(variantData);
+                    toastr.warning(data.message);
+                    $('.variant_id').val(variantData.id);
+                    $('.regular_price').val(variantData.regular_price);
+                    $('.discount').val(variantData.discount);
+                    $('.discount_amount').val(variantData.discount_amount);
+                    $('#stock').val(variantData.stock_quantity);
+                    $('.unit').val(variantData.unit);
+                    $('.weight').val(variantData.weight);
+                    $('.manufacture_date').val(variantData.manufacture_date);
+                    $('.expire_date').val(variantData.expire_date);
+                }
+            })
+        });
+
+        // updateProductVariant
+        $(document).on('click', '.update_varient', function(e) {
+            e.preventDefault();
+            let id = $('.variant_id').val();
+            // alert(id);
+            let regular_price = parseFloat(document.querySelector('.regular_price').value);
+            let discount = parseFloat(document.querySelector('.discount').value);
+            let discount_amount = parseFloat(document.querySelector('.discount_amount').value);
+            let stock = parseFloat(document.querySelector('#stock').value);
+            let varientData = new FormData(jQuery("#productVariant")[0]);
+            $.ajax({
+                url: '/product/variant/update/' + id,
+                type: "POST",
+                data: varientData,
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    // console.log(res);
+                    if (res.status == 200) {
+                        toastr.success(res.message);
+                        document.querySelector('.discount_amount').value = '';
+                        document.querySelector('.regular_price').value = '';
+                        document.querySelector('.discount').value = '';
+                        document.querySelector('#stock').value = '';
+                        document.querySelector('.unit').value = '';
+                        document.querySelector('.weight').value = '';
+                        show();
+                        $('.add_varient').css('display', 'block');
+                        $('.update_varient').css('display', 'none');
+                    } else {
+                        toastr.error("variant update unsuccessful");
+                    }
+
+                }
+
+            })
+        })
+
+
+
+        // price and discount calculation 
+        const regular_price = document.querySelector('.regular_price');
+        const discount_amount = document.querySelector('.discount_amount');
+        let Select_discount = document.querySelector('.discount');
+        discount_amount.addEventListener('change', function() {
+            let regurlarPrice = parseFloat(regular_price.value);
+            let discountAmount = parseFloat(discount_amount.value);
+            // alert(discountAmount);
+            let discount = Math.round((regurlarPrice - discountAmount) / (regurlarPrice / 100));
+            if (regurlarPrice > discountAmount) {
+                let selectElement = document.querySelector('.discount');
+                let option = document.createElement('option');
+                option.value = discount;
+                option.text = discount + '%';
+                option.selected = true;
+                selectElement.appendChild(option);
+            } else {
+                toastr.warning("discount amount is out of range");
             }
         });
-    }
-})
-});
+        discount_amount.addEventListener('blur', function() {
+            // alert('ok');
+            let regurlarPrice = parseFloat(regular_price.value);
+            let discountAmount = parseFloat(discount_amount.value);
+            // alert(discountAmount);
+            let discount = Math.round((regurlarPrice - discountAmount) / (regurlarPrice / 100));
+            if (regurlarPrice > discountAmount) {
+                let selectElement = document.querySelector('.discount');
+                let option = document.createElement('option');
+                option.value = discount;
+                option.text = discount + '%';
+                option.selected = true;
+                selectElement.appendChild(option);
+            } else {
+                toastr.warning("discount amount is out of range");
+            }
+        });
+        // discount calculation 
+        Select_discount.addEventListener('click', function(e) {
+            // alert('ok');
+            let regurlarPrice = parseFloat(regular_price.value);
+            let amount = ((regurlarPrice * parseFloat(this.value)) / 100);
+            // console.log(((regurlarPrice * parseFloat(this.value)) / 100));
+            let sellingPrice = regurlarPrice - amount;
+            document.querySelector('.discount_amount').value = sellingPrice;
+        });
     </script>
+
+
+
 </body>
 
 </html>
