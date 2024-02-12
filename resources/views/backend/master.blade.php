@@ -15,8 +15,8 @@
     <link href="{{ asset('backend') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
 
 
-        <!-- Data table-->
-	<link href="{{asset('backend') }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <!-- Data table-->
+    <link href="{{ asset('backend') }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 
     <!-- loader-->
     <link href="{{ asset('backend') }}/assets/css/pace.min.css" rel="stylesheet" />
@@ -113,19 +113,19 @@
 
     {{-- Jquery data table  --}}
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
 
-	<script>
-		$(document).ready(function() {
-			var table = $('#order_table').DataTable( {
-				lengthChange: false,
-				buttons: [ 'copy', 'excel', 'pdf', 'print']
-			} );
+    <script>
+        $(document).ready(function() {
+            var table = $('#order_table').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
 
-			table.buttons().container()
-				.appendTo( '#order_table .col-md-6:eq(0)' );
-		} );
-	</script>
+            table.buttons().container()
+                .appendTo('#order_table .col-md-6:eq(0)');
+        });
+    </script>
 
     {{-- multi select tags  --}}
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>

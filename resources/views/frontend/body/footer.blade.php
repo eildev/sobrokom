@@ -109,7 +109,8 @@
                     </div>
                     <div class="col-lg-6 col-md-5 col-sm-12">
                         <div class="tpfooter__copyright text-md-end">
-                            <span class="tpfooter__copyright-text">Design and Developed by © <a href="">Eclipse
+                            <span class="tpfooter__copyright-text">Design and Developed by © <a target="_blank"
+                                    href="https://eclipseintellitech.com/">Eclipse
                                     Intellitech Ltd.</a></span>
 
                         </div>

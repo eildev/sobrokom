@@ -7,7 +7,6 @@
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 text-info">Manage Category</h5>
-
                         <a href="{{ route('offerbanner') }}" class="btn btn-info btn-sm text-light ">
                             <i class='bx bx-plus'></i>
                         </a>
@@ -35,12 +34,16 @@
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $banner->head }}</td>
-                                            <td>{{ $banner->title }}</td>
-                                            <td>{{ $banner->short_description }}</td>
+                                            <td>
+                                                {{ Illuminate\Support\Str::limit($banner->title, 20) }}
+                                            </td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->short_description, 20) }}
+                                            </td>
 
                                             <td>
                                                 <img src="{{ asset('/uploads/offer_banner/' . $banner->image) }}"
-                                                    style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                    style="max-width: 300px; object-fit:contain;" class="img-fluid"
+                                                    alt="banner Image">
                                             </td>
                                             <td>{{ $banner->status }}</td>
                                             <td>
@@ -48,8 +51,8 @@
 
                                                 <a href="{{ route('offerbanner.edit', $banner->id) }}"
                                                     class="btn btn-info">Edit</a>
-                                                <a href="{{ route('offerbanner.delete', $banner->id) }}" class="btn btn-danger"
-                                                    id="delete">Delete</a>
+                                                <a href="{{ route('offerbanner.delete', $banner->id) }}"
+                                                    class="btn btn-danger" id="delete">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
