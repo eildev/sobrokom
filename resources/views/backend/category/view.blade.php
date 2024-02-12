@@ -43,7 +43,7 @@
                                             <td>
                                                 {{-- {{ $category->status }} --}}
                                                 <a href="#" class="btn btn-sm btn-success cat_active">Active</a>
-                                                <a href="#" class="btn btn-sm btn-success">Inactive</a>
+                                                <a href="#" class="btn btn-sm btn-success cat_inactive">Inactive</a>
                                             </td>
                                             <td>
                                                 <a href="{{ route('category.edit', $category->id) }}"
