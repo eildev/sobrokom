@@ -221,42 +221,42 @@
 
                                                 <style>
                                                     /* width */
-.custom_scroll::-webkit-scrollbar {
-  width: 10px;
-}
+                                                    .custom_scroll::-webkit-scrollbar {
+                                                        width: 10px;
+                                                    }
 
-/* Track */
-.custom_scroll::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
+                                                    /* Track */
+                                                    .custom_scroll::-webkit-scrollbar-track {
+                                                        box-shadow: inset 0 0 5px grey;
+                                                        border-radius: 10px;
+                                                    }
 
-/* Handle */
-.custom_scroll::-webkit-scrollbar-thumb {
-  background: red;
-  border-radius: 10px;
-}
+                                                    /* Handle */
+                                                    .custom_scroll::-webkit-scrollbar-thumb {
+                                                        background: red;
+                                                        border-radius: 10px;
+                                                    }
 
-/* Handle on hover */
-.custom_scroll::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
-}
+                                                    /* Handle on hover */
+                                                    .custom_scroll::-webkit-scrollbar-thumb:hover {
+                                                        background: #b30000;
+                                                    }
 
-.sorting_bar{
-    /* margin-right: -20px; */
-}
-
-
+                                                    .sorting_bar {
+                                                        /* margin-right: -20px; */
+                                                    }
                                                 </style>
                                                 <div class="nice-select sorting_bar" tabindex="0">
                                                     <span class="current">All Brands</span>
-                                                    <ul class="list custom_scroll" style="height: 200px; overflow-y:scroll; border-radius: 10px; margin-top: 15px !important;">
+                                                    <ul class="list custom_scroll"
+                                                        style="height: 200px; overflow-y:scroll; border-radius: 10px; margin-top: 15px !important;">
                                                         @foreach ($brands as $brand)
-                                                        <a href="{{ route('brand.wise.product', $brand->slug) }}"><li data-value="Show 12" class="option selected">
-                                                            {{ $brand->BrandName }}
+                                                            <a href="{{ route('brand.wise.product', $brand->slug) }}">
+                                                                <li data-value="Show 12" class="option selected">
+                                                                    {{ $brand->BrandName }}
 
-                                                        </li></a>
-
+                                                                </li>
+                                                            </a>
                                                         @endforeach
                                                     </ul>
                                                 </div>
