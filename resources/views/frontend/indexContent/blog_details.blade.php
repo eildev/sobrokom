@@ -14,6 +14,7 @@
                                 </a></span>
                             <span class="dvdr">/</span>
                             <span>{{ $singleBlog->title }}</span>
+
                         </div>
                     </div>
                 </div>
@@ -75,33 +76,56 @@
                                         <div class="postbox__tag-list reactions">
                                             <span>React: </span>
                                             {{-- //Like --}}
-
+                                            <input type="hidden" class="post_id" value="{{ $singleBlog->id }}">
                                             <span>
-                                                <a href="#" class="like" name="like" value="like"><i
-                                                        class="far fa-thumbs-up fs-2 text-primary"></i></a></span>
+                                                @php
+                                                    $like = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('like', 1)->count();
+                                                @endphp
+                                                <a href="#" class="like react" name="like" value="like"><i
+                                                        class="far fa-thumbs-up fs-2 text-primary"></i></a><span class="like_count">{{ $like }}</span></span>
 
                                             {{-- //Dislike --}}
-                                            <span><a href="#" class="dislike" name="dislike"  value="dislike"><i
-                                                        class="far fa-thumbs-down fs-2 text-info"></i></a></span>
+                                            <span>
+                                                @php
+                                                    $dislike = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('dislike', 1)->count();
+                                                @endphp
+                                                <a href="#" class="dislike react" name="dislike"  value="dislike"><i
+                                                        class="far fa-thumbs-down fs-2 text-info"></i></a><span class="dislike_count">{{ $dislike }}</span></span>
 
                                             {{-- //heart --}}
-                                            <span><a href="#" class="love" name="love"  value="love"> <i
-                                                        class="far fa-heart fs-2 text-danger"></i></a></span>
+                                            <span>
+                                                @php
+                                                    $love = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('love', 1)->count();
+                                                @endphp
+                                                <a href="#" class="love react" name="love"  value="love"> <i
+                                                        class="far fa-heart fs-2 text-danger"></i></a><span class="love_count">{{ $love }}</span></span>
 
                                             {{-- //Sad --}}
 
-                                            <span><a href="#" class="sad" name="sad"  value="sad"><i
-                                                        class="far fa-sad-tear fs-2 text-warning"></i></a></span>
+                                            <span>
+                                                @php
+                                                    $sad = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('sad', 1)->count();
+                                                @endphp
+                                                <a href="#" class="sad react" name="sad"  value="sad"><i
+                                                        class="far fa-sad-tear fs-2 text-warning"></i></a><span class="sad_count">{{ $sad }}</span></span>
 
                                             {{-- //anger --}}
 
-                                            <span><a href="#" class="angry" name="angry"  value="angry"><i
-                                                        class="far fa-angry fs-2 text-danger"></i></a></span>
+                                            <span>
+                                                @php
+                                                    $angry = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('angry', 1)->count();
+                                                @endphp
+                                                <a href="#" class="angry react" name="angry"  value="angry"><i
+                                                        class="far fa-angry fs-2 text-danger"></i></a><span class="angry_count">{{ $angry }}</span></span>
 
                                             {{-- //Funny --}}
 
-                                            <span><a href="#" class="haha" name="haha"  value="haha"><i
-                                                        class="far fa-laugh fs-2 text-warning"></i></a></span>
+                                            <span>
+                                                @php
+                                                    $haha = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('haha', 1)->count();
+                                                @endphp
+                                                <a href="#" class="haha react" name="haha"  value="haha"><i
+                                                        class="far fa-laugh fs-2 text-warning"></i></a><span class="haha_count">{{ $haha }}</span></span>
 
                                         </div>
                                     </div>
@@ -279,6 +303,34 @@
         $('.ReplyOpen').click(function() {
             var id = $(this).attr('id');
             $('.ShowReply' + id).toggle();
+        });
+        $(document).ready(function() {
+            $('.react').click(function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                let value = $(this).attr('value');
+                let post_id = $('.post_id').val();
+                $.ajax({
+                    url:"/blog/user-like",
+                    type:"POST",
+                    data:{
+                        value:value,
+                        post_id:post_id
+                    },
+                    success:function(res){
+                        $('.like_count').text(res.like);
+                        $('.dislike_count').text(res.dislike);
+                        $('.love_count').text(res.love);
+                        $('.sad_count').text(res.sad);
+                        $('.angry_count').text(res.angry);
+                        $('.haha_count').text(res.hh);
+                    }
+                })
+            });
         })
     </script>
 

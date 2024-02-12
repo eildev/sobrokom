@@ -124,8 +124,13 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::post('/review-rating/insert', 'store')->name('review-rating.insert');
     });
     // Review and Rating related route
-});
 
+});
+Route::middleware('auth')->group(function () {
+Route::controller(BlogReactionController::class)->group(function () {
+    Route::post('/blog/user-like', 'BlogReact');
+   });
+});
 // WithOut Auth All Routes
     Route::controller(OTPController::class)->group(function () {
         Route::post('/otp/store', 'storeOTP');
@@ -162,8 +167,5 @@ Route::middleware('auth', 'role:user')->group(function () {
    //Blog Comment Route End
   //Blog Reaction Route
 
-//   Route::controller(BlogReactionController::class)->group(function () {
-//     Route::post('/blog/like', 'Bloglike')->name('blog.like');
 
-//    });
    //Blog Reaction Route
