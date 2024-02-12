@@ -49,6 +49,7 @@ class ContactUsController extends Controller
                 $ContactUs->subject = $request->subject;
                 $ContactUs->phone = $request->phone;
                 $ContactUs->message = $request->message;
+                $ContactUs->read = 0;
                 $ContactUs->save();
 
                 return response()->json([
@@ -69,7 +70,7 @@ class ContactUsController extends Controller
 
     public function show(){
 
-        $contact_us = ContactUs::all();
+        $contact_us = ContactUs::where('read','0')->get();
         return view('backend.contacts.message_list', compact('contact_us'));
     }
 

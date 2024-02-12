@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\BlogCommentController;
+use App\Http\Controllers\AllMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('/', function () {
 Route::get('admin/dashboard', function () {
     return view('backend.dashboard');
 })->middleware(['auth','role:admin'])->name('admin.dashboard');
-
+Route::controller(AllMail::class)->group(function () {
+        Route::post('/reply/mail', 'replyMail')->name('reply.mail');
+    });
 Route::middleware('auth','role:admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -51,6 +54,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/category/update/{id}', 'update')->name('category.update');
         Route::get('/category/delete/{id}', 'delete')->name('category.delete');
     });
+
     //All Routes for Category End
 
     //All Routes for Subcategory Start

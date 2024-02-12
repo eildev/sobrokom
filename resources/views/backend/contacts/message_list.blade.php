@@ -2,7 +2,7 @@
 @section('admin')
     <div class="page-content">
         <div class="row">
-            <div class="card border-0 border-top border-3 border-info col-md-8 offset-md-2">
+            <div class="card border-0 border-top border-3 border-info col-md-12">
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 text-info">Contact Us Message list</h5>
@@ -49,7 +49,6 @@
                                                 @endif
                                             </td>
                                             <td>
-
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">View Meassage</button>
@@ -58,49 +57,47 @@
 
                                             </td>
                                         </tr>
-                                    @endforeach
-
-                                </tbody>
-
-                            </table>
-                        </div>
-
-                        <div class="col">
-
-                            <!-- Modal -->
+                                         <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{ $message->subject }}</h5>
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{ $message->subject }}</h5>
 
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <p class="fw-bold">{{ $message->name }}</p>
-                                            <p>{{ $message->message }}</p>
-
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Write Replay
-                                                    Message
-                                                    Here</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Send Replay</button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('reply.mail') }}" method="POST">
+                                        @csrf
+                                    <div class="modal-body">
+                                        <p class="fw-bold">{{ $message->name }}</p>
+                                        <p>{{ $message->message }}</p>
+                                        <input type="hidden" name="mail" value="{{ $message->email }}">
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Write Replay
+                                                Message
+                                                Here</label>
+                                            <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Send Replay</button>
+                                    </div>
+                                </form>
                                 </div>
                             </div>
+                        </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+
                         </div>
                     @else
                         <div class="text-center">Data not Found</div>

@@ -220,13 +220,8 @@
                     </div>
                 </div>
             </div>
-        @else
-            <p>No Order found</p>
-            @endif
-            @endif
-
             <div class="container py-2">
-                <h2 class="font-weight-light text-center text-muted py-3">Timeline Example 2</h2>
+                <h2 class="font-weight-light text-center text-muted py-3">Order Status</h2>
                 <!-- timeline item 1 -->
                 <div class="row g-0">
                     <div class="col-sm">
@@ -234,12 +229,12 @@
                     </div>
                     <!-- timeline item 1 center dot -->
                     <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
-                        <div class="row h-50">
-                            <div class="col">&nbsp;</div>
-                            <div class="col">&nbsp;</div>
+                        <div class="row h-50" >
+                            <div class="col" >&nbsp;</div>
+                            <div class="col" >&nbsp;</div>
                         </div>
                         <h5 class="m-2">
-                            <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            <span class="badge rounded-pill bg-light border submit_circle majid">&nbsp;</span>
                         </h5>
                         <div class="row h-50">
                             <div class="col border-end">&nbsp;</div>
@@ -248,10 +243,26 @@
                     </div>
                     <!-- timeline item 1 event content -->
                     <div class="col-sm py-2">
-                        <div class="card radius-15">
+                        <div class="card radius-15 submit_card">
                             <div class="card-body">
-                                <div class="float-end text-muted small">Jan 9th 2019 7:00 AM</div>
-                                <h4 class="card-title text-muted">Order Submited</h4>
+                                <?php
+                                    $date = new DateTime($order->created_at);
+                                    $formattedDate = $date->format('M j');
+                                    $day = $date->format('j');
+                                    if ($day % 10 == 1 && $day != 11) {
+                                        $formattedDate .= 'st';
+                                    } elseif ($day % 10 == 2 && $day != 12) {
+                                        $formattedDate .= 'nd';
+                                    } elseif ($day % 10 == 3 && $day != 13) {
+                                        $formattedDate .= 'rd';
+                                    } else {
+                                        $formattedDate .= 'th';
+                                    }
+                                    $formattedDate .= $date->format(' Y g:i A');
+
+                                ?>
+                                <div class="float-end text-muted small"><span class="submit_data">{{$formattedDate}}</span></div>
+                                <h4 class="card-title text-muted submit_title">Order Submited</h4>
                                 <p class="card-text">Your Order has been submited sucessfully. waiting for admin approval.
                                     you will get Order Confirmation SMS into your phone. </p>
                             </div>
@@ -262,22 +273,11 @@
                 <!-- timeline item 2 -->
                 <div class="row g-0">
                     <div class="col-sm py-2">
-                        <div class="card border-primary shadow radius-15">
+                        <div class="card radius-15 confirm_card">
                             <div class="card-body">
-                                <div class="float-end text-primary small">Jan 10th 2019 8:30 AM</div>
-                                <h4 class="card-title text-primary">Order Confirmed</h4>
+                                <div class="float-end small"><span class="confirm_date">Jan 10th 2019 8:30 AM</span></div>
+                                <h4 class="card-title confirm_title">Order Confirmed</h4>
                                 <p class="card-text">Your Order has been Confirmed by admin. Waiting for Processing.</p>
-                                <button class="btn btn-sm btn-outline-secondary collapsed" type="button"
-                                    data-bs-target="#t22_details" data-bs-toggle="collapse" aria-expanded="false">Show
-                                    Details ▼</button>
-                                <div class="border collapse" id="t22_details" style="">
-                                    <div class="p-2 text-monospace">
-                                        <div>08:30 - 09:00 Breakfast in CR 2A</div>
-                                        <div>09:00 - 10:30 Live sessions in CR 3</div>
-                                        <div>10:30 - 10:45 Break</div>
-                                        <div>10:45 - 12:00 Live sessions in CR 3</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                             <div class="col">&nbsp;</div>
                         </div>
                         <h5 class="m-2">
-                            <span class="badge rounded-pill bg-primary">&nbsp;</span>
+                            <span class="badge rounded-pill bg-light border confirm_circle">&nbsp;</span>
                         </h5>
                         <div class="row h-50">
                             <div class="col border-end">&nbsp;</div>
@@ -310,7 +310,7 @@
                             <div class="col">&nbsp;</div>
                         </div>
                         <h5 class="m-2">
-                            <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            <span class="badge rounded-pill bg-light border process_circle">&nbsp;</span>
                         </h5>
                         <div class="row h-50">
                             <div class="col border-end">&nbsp;</div>
@@ -319,9 +319,9 @@
                     </div>
                     <div class="col-sm py-2">
                         <div class="card radius-15">
-                            <div class="card-body">
-                                <div class="float-end text-muted small">Jan 11th 2019 8:30 AM</div>
-                                <h4 class="card-title">Order Processing</h4>
+                            <div class="card-body process_card">
+                                <div class="float-end text-muted small process_date">Jan 11th 2019 8:30 AM</div>
+                                <h4 class="card-title process_title">Order Processing</h4>
                                 <p>Your Order is Processing now. After processing it will send to delivery man.</p>
                             </div>
                         </div>
@@ -332,9 +332,9 @@
                 <div class="row g-0">
                     <div class="col-sm py-2">
                         <div class="card radius-15">
-                            <div class="card-body">
-                                <div class="float-end text-muted small">Jan 12th 2019 11:30 AM</div>
-                                <h4 class="card-title">On the way </h4>
+                            <div class="card-body onthe_way_card">
+                                <div class="float-end text-muted small onthe_way_date">Jan 12th 2019 11:30 AM</div>
+                                <h4 class="card-title onthe_way_title">On the way </h4>
                                 <p>Your order has been processed and now it's on the way.</p>
                             </div>
                         </div>
@@ -345,7 +345,7 @@
                             <div class="col">&nbsp;</div>
                         </div>
                         <h5 class="m-2">
-                            <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            <span class="badge rounded-pill bg-light border onthe_way_circle">&nbsp;</span>
                         </h5>
                         <div class="row h-50">
                             <div class="col border-end">&nbsp;</div>
@@ -368,7 +368,7 @@
                             <div class="col">&nbsp;</div>
                         </div>
                         <h5 class="m-2">
-                            <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            <span class="badge rounded-pill bg-light border complete_circle">&nbsp;</span>
                         </h5>
                         <div class="row h-50">
                             <div class="col border-end">&nbsp;</div>
@@ -377,9 +377,9 @@
                     </div>
                     <div class="col-sm py-2">
                         <div class="card radius-15">
-                            <div class="card-body">
-                                <div class="float-end text-muted small">Jan 11th 2019 8:30 AM</div>
-                                <h4 class="card-title">Order Completed</h4>
+                            <div class="card-body complete_card">
+                                <div class="float-end text-muted small complete_date">Jan 11th 2019 8:30 AM</div>
+                                <h4 class="card-title complete_title">Order Completed</h4>
                                 <p>Your Order has been Completed</p>
                             </div>
                         </div>
@@ -387,6 +387,13 @@
                 </div>
                 <!--/row-->
             </div>
+            @else
+            <p>No Order found</p>
+            @endif
+            @endif
+
+
     </section>
     <!-- shop-area-end -->
 @endsection
+

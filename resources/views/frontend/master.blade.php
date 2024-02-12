@@ -427,21 +427,165 @@
             padding: 5px 0;
         }
     </style>
-    
-  
+
+    {{-- ALl Code For Order Tracking Information --}}
+    @if(!empty($order))
+    <script>
+        <?php
+            $date = new DateTime($order->updated_at);
+            $formattedDate = $date->format('M j');
+            $day = $date->format('j');
+            if ($day % 10 == 1 && $day != 11) {
+                $formattedDate .= 'st';
+            } elseif ($day % 10 == 2 && $day != 12) {
+                $formattedDate .= 'nd';
+            } elseif ($day % 10 == 3 && $day != 13) {
+                $formattedDate .= 'rd';
+            } else {
+                $formattedDate .= 'th';
+            }
+            $formattedDate .= $date->format(' Y g:i A');
+        ?>
+        let status = '{{ $order->status }}';
+        let date = '{{ $formattedDate }}';
+        const submit_circle = document.querySelector('.submit_circle');
+        const submit_card = document.querySelector('.submit_card');
+        const submit_card_date = document.querySelector('.submit_data');
+        const submit_card_h4 = document.querySelector('.submit_title');
+
+        const confirm_circle = document.querySelector('.confirm_circle');
+        const confirm_card = document.querySelector('.confirm_card');
+        const confirm_card_date = document.querySelector('.confirm_date');
+        const confirm_card_h4 = document.querySelector('.confirm_title');
+
+        const process_circle = document.querySelector('.process_circle');
+        const process_card = document.querySelector('.process_card');
+        const process_card_date = document.querySelector('.process_date');
+        const process_card_h4 = document.querySelector('.process_title');
+
+        const onthe_way_circle = document.querySelector('.onthe_way_circle');
+        const onthe_way_card = document.querySelector('.onthe_way_card');
+        const onthe_way_card_date = document.querySelector('.onthe_way_date');
+        const onthe_way_card_h4 = document.querySelector('.onthe_way_title');
+
+        const complete_circle = document.querySelector('.complete_circle');
+        const complete_card = document.querySelector('.complete_card');
+        const complete_card_date = document.querySelector('.complete_date');
+        const complete_card_h4 = document.querySelector('.complete_title');
+
+        if(status === 'pending'){
+            submit_circle.setAttribute('style','background: #9e54a1 !important');
+            submit_card.setAttribute('style','border-color: #9e54a1 !important');
+            submit_card_date.setAttribute('style','color: #9e54a1 !important');
+            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
+            submit_card.classList.add('shadow');
+        }
+        if(status === 'approve'){
+            submit_circle.setAttribute('style','background: #9e54a1 !important');
+            submit_card.setAttribute('style','border-color: #9e54a1 !important');
+            submit_card_date.setAttribute('style','color: #9e54a1 !important');
+            submit_card_date.innerHTML = date;
+            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
+            submit_card.classList.add('shadow');
+
+            confirm_circle.setAttribute('style','background: #9e54a1 !important');
+            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
+            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
+            confirm_card_date.innerHTML = date;
+            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
+            confirm_card.classList.add('shadow');
+        }
+        if(status === 'processing'){
+            submit_circle.setAttribute('style','background: #9e54a1 !important');
+            submit_card.setAttribute('style','border-color: #9e54a1 !important');
+            submit_card_date.setAttribute('style','color: #9e54a1 !important');
+            submit_card_date.innerHTML = date;
+            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
+            submit_card.classList.add('shadow');
+
+            confirm_circle.setAttribute('style','background: #9e54a1 !important');
+            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
+            confirm_card_date.innerHTML = date;
+            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
+            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
+            confirm_card.classList.add('shadow');
+
+            process_circle.setAttribute('style','background: #9e54a1 !important');
+            process_card.setAttribute('style','border-color: #9e54a1 !important');
+            process_card_date.setAttribute('style','color: #9e54a1 !important');
+            process_card_date.innerHTML = date;
+            process_card_h4.setAttribute('style','color: #9e54a1 !important');
+            process_card.classList.add('shadow');
+        }
+        if(status === 'ontheway'){
+            submit_circle.setAttribute('style','background: #9e54a1 !important');
+            submit_card.setAttribute('style','border-color: #9e54a1 !important');
+            submit_card_date.setAttribute('style','color: #9e54a1 !important');
+            submit_card_date.innerHTML = date;
+            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
+            submit_card.classList.add('shadow');
+
+            confirm_circle.setAttribute('style','background: #9e54a1 !important');
+            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
+            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
+            confirm_card_date.innerHTML = date;
+            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
+            confirm_card.classList.add('shadow');
+
+            process_circle.setAttribute('style','background: #9e54a1 !important');
+            process_card.setAttribute('style','border-color: #9e54a1 !important');
+            process_card_date.setAttribute('style','color: #9e54a1 !important');
+            process_card_date.innerHTML = date;
+            process_card_h4.setAttribute('style','color: #9e54a1 !important');
+            process_card.classList.add('shadow');
+
+            onthe_way_circle.setAttribute('style','background: #9e54a1 !important');
+            onthe_way_card.setAttribute('style','border-color: #9e54a1 !important');
+            onthe_way_card_date.setAttribute('style','color: #9e54a1 !important');
+            onthe_way_card_date.innerHTML = date;
+            onthe_way_card_h4.setAttribute('style','color: #9e54a1 !important');
+            onthe_way_card.classList.add('shadow');
+        }
+        if(status === 'complete'){
+            submit_circle.setAttribute('style','background: #9e54a1 !important');
+            submit_card.setAttribute('style','border-color: #9e54a1 !important');
+            submit_card_date.setAttribute('style','color: #9e54a1 !important');
+            submit_card_date.innerHTML = date;
+            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
+            submit_card.classList.add('shadow');
+
+            confirm_circle.setAttribute('style','background: #9e54a1 !important');
+            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
+            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
+            confirm_card_date.innerHTML = date;
+            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
+            confirm_card.classList.add('shadow');
+
+            process_circle.setAttribute('style','background: #9e54a1 !important');
+            process_card.setAttribute('style','border-color: #9e54a1 !important');
+            process_card_date.setAttribute('style','color: #9e54a1 !important');
+            process_card_date.innerHTML = date;
+            process_card_h4.setAttribute('style','color: #9e54a1 !important');
+            process_card.classList.add('shadow');
+
+            onthe_way_circle.setAttribute('style','background: #9e54a1 !important');
+            onthe_way_card.setAttribute('style','border-color: #9e54a1 !important');
+            onthe_way_card_date.setAttribute('style','color: #9e54a1 !important');
+            onthe_way_card_date.innerHTML = date;
+            onthe_way_card_h4.setAttribute('style','color: #9e54a1 !important');
+            onthe_way_card.classList.add('shadow');
+
+            complete_circle.setAttribute('style','background: #9e54a1 !important');
+            complete_card.setAttribute('style','border-color: #9e54a1 !important');
+            complete_card_date.setAttribute('style','color: #9e54a1 !important');
+            complete_card_date.innerHTML = date;
+            complete_card_h4.setAttribute('style','color: #9e54a1 !important');
+            complete_card.classList.add('shadow');
+        }
+
+    </script>
+    @endif
 </body>
 
 </html>
 
- <!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4843955,4,0,0,0,00010000']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4843955&101" alt="free hit counter code" border="0"></a></noscript>
-<!-- Histats.com  END  -->
