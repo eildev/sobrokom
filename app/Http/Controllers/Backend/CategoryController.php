@@ -24,7 +24,7 @@ class CategoryController extends Controller
         ]);
 
         if ($request->image) {
-            
+
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/category/'), $imageName);
             $category = new Category;
@@ -34,7 +34,7 @@ class CategoryController extends Controller
             $category->save();
             return back()->with('success', 'Category Successfully Saved');
         }
-       
+
 
     }
 

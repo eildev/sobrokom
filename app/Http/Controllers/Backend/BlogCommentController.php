@@ -29,7 +29,7 @@ class BlogCommentController extends Controller
     }//End Method
 
     public function BlogCommentDelete($id){
-        BlogComment::findOrFail($id)->delete();
+        BlogComment::findOrFail($id)->delete(); 
         return redirect()->back()->with('success', 'Blog Comment Successfully Deleted');
     }//End Method
 }

@@ -35,6 +35,19 @@
                                         </ul>
                                     @endif
                                 </li>
+                                <style>
+                                    .sub_cat{
+                                        position: relative;
+                                    }
+                                    .subsubmenuUl{
+                                        display: none;
+                                        margin-left: 10px !important;
+                                    }
+                                    .subsubmenuUl li a{
+                                        display: block !important;
+                                    }
+                                </style>
+
                                 <li class="has-dropdown has-megamenu">
                                     <a href="#">Categories</a>
                                     @php
@@ -47,66 +60,29 @@
 
                                                     <a href="{{ route('category.wise.product', $category->slug) }}"
                                                         class="mega-menu-title">{{ $category->categoryName }}</a>
-                                                    <ul>
+                                                    <ul id="sub_cat">
                                                         @php
                                                             $subcategories = $category->subcategories->take(5);
                                                         @endphp
                                                         @foreach ($subcategories as $subcategory)
-                                                            <li><a
+                                                            <li class="sub_cat"><a
                                                                     href="{{ route('subcategory.wise.product', $subcategory->slug) }}">
-                                                                    {{ $subcategory->subcategoryName }}</a>
+                                                                     {{ $subcategory->subcategoryName }}</a>
+                                                                    <ul class="subsubmenuUl">
+                                                                        @php
+                                                                            $subSubcategories = App\Models\SubSubcategory::where('subcategoryId',$subcategory->id)->take(5)->get();
+                                                                        @endphp
+                                                                        @foreach($subSubcategories as $subSubcategorie)
+                                                                        <li>
+                                                                            <a href=""> - {{ $subSubcategorie->subSubcategoryName }}</a>
+                                                                        </li>
+                                                                        @endforeach
+                                                                    </ul>
                                                             </li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
                                             @endforeach
-                                        </ul>
-                                    @else
-                                        <ul class="sub-menu mega-menu"
-                                            data-background="{{ asset('frontend') }}/assets/img/banner/mega-menu-shop-1.jpg">
-                                            <li>
-                                                <a class="mega-menu-title">Shop layout</a>
-                                                <ul>
-                                                    <li><a href="shop-left-sidebar.html">Shop With Banner </a></li>
-                                                    <li><a href="shop-3.html">Shop Without Banner</a></li>
-                                                    <li><a href="shop-2.html">Shop Version</a></li>
-                                                    <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                                                    <li><a href="shop-right-sidebar.html">Shop Right sidebar</a></li>
-                                                    <li><a href="shop-list-view.html">Shop List view</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Product layout</a>
-                                                <ul>
-                                                    <li><a href="shop-details-3.html">Image scroll</a></li>
-                                                    <li><a href="shop-details-grid.html">Product grid</a></li>
-                                                    <li><a href="shop-details-top.html">Top Thumb Product</a></li>
-                                                    <li><a href="shop-details.html">Bottom Thumb Product</a></li>
-                                                    <li><a href="shop-details-4.html">Simple Product</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Product type</a>
-                                                <ul>
-                                                    <li><a href="shop-details.html">Products Simple</a></li>
-                                                    <li><a href="shop-details-grid.html">Products Group</a></li>
-                                                    <li><a href="shop-details-3.html">Products Variable</a></li>
-                                                    <li><a href="shop-details-3.html">Special</a></li>
-                                                    <li><a href="shop-details-4.html">Decoration</a></li>
-                                                    <li><a href="shop-details-top.html">Contruction</a></li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <a class="mega-menu-title">Product category</a>
-                                                <ul>
-                                                    <li><a href="shop-details.html">Fresh bakery</a></li>
-                                                    <li><a href="shop-details-3.html">Fresh fruits</a></li>
-                                                    <li><a href="shop-details-4.html">Fresh meat</a></li>
-                                                    <li><a href="shop-details.html">Fruit drink</a></li>
-                                                    <li><a href="shop-details.html">Fresh bakery</a></li>
-                                                    <li><a href="shop-details-grid.html">Biscuits snack</a></li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     @endif
 
@@ -184,4 +160,27 @@
 
 <!-- sidebar-menu-area -->
 @include('frontend.body.sidebar')
+
+<script>
+    let items = document.querySelectorAll('.sub_cat a').forEach((item)=>{
+        item.addEventListener("mouseover",()=>{
+            let submenuUl = item.nextElementSibling;
+            if(submenuUl.style.display == "block"){
+                submenuUl.style.display = "none";
+            }else{
+                submenuUl.style.display = "block";
+            }
+        })
+    })
+    $(document).on("mouseleave",'.subsubmenuUl', function(){
+        $('.subsubmenuUl').css({'display':"none"});
+    });
+    $(document).ready(function() {
+        $('#sub_cat li').each(function() {
+            if ($(this).find('ul li').length > 0) {
+                $(this).prepend("+");
+            }
+        });
+    })
+</script>
 <!-- sidebar-menu-area-end -->

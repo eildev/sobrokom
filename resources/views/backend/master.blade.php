@@ -13,6 +13,11 @@
     <link href="{{ asset('backend') }}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="{{ asset('backend') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+
+
+        <!-- Data table-->
+	<link href="{{asset('backend') }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
     <!-- loader-->
     <link href="{{ asset('backend') }}/assets/css/pace.min.css" rel="stylesheet" />
     <script src="{{ asset('backend') }}/assets/js/pace.min.js"></script>
@@ -106,6 +111,21 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+    {{-- Jquery data table  --}}
+    <script src="{{ asset('backend') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+	<script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			var table = $('#order_table').DataTable( {
+				lengthChange: false,
+				buttons: [ 'copy', 'excel', 'pdf', 'print']
+			} );
+
+			table.buttons().container()
+				.appendTo( '#order_table .col-md-6:eq(0)' );
+		} );
+	</script>
 
     {{-- multi select tags  --}}
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
@@ -257,7 +277,7 @@
 
 
 
-        // delete variant 
+        // delete variant
         $(document).ready(function() {
             $(document).on('click', '.delete_variant', function(e) {
                 e.preventDefault();

@@ -28,7 +28,8 @@
                             <form action="{{ route('order.tracking.invoice') }}" method="GET">
                                 <div class="d-flex">
                                     <input type="text" name="search" placeholder="Search your Invoice Number"
-                                        class="form-control rounded-0 rounded-start" value="{{ !empty($searchTag)? $searchTag : '' }}">
+                                        class="form-control rounded-0 rounded-start"
+                                        value="{{ !empty($searchTag) ? $searchTag : '' }}">
                                     <button type="submit" class="tp-btn rounded-0 rounded-end">Search</button>
                                 </div>
                             </form>
@@ -39,9 +40,8 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    @if(!empty($trackes))
+                    @if (!empty($trackes))
                         @if ($trackes->count() > 0)
-
                             <div class="table-content table-responsive">
                                 <table class="table">
                                     <thead>
@@ -58,9 +58,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($trackes as $order)
-                                        @php
-                                        $address = App\Models\OrderBillingDetails::where('order_id', $order->id)->first();
-                                    @endphp
+                                            @php
+                                                $address = App\Models\OrderBillingDetails::where('order_id', $order->id)->first();
+                                            @endphp
                                             <tr>
                                                 <td class="product-thumbnail">
                                                     {{ $order->created_at }}
@@ -85,7 +85,8 @@
                                                     {{ $address->address_1 ?? '' }}
                                                 </td>
                                                 <td class="product-remove">
-                                                    <a href="{{ url('/pdf/genarate/'.$order->id.'/'.$order->invoice_number) }}">Download</a>
+                                                    <a
+                                                        href="{{ url('/pdf/genarate/' . $order->id . '/' . $order->invoice_number) }}">Download</a>
                                                 </td>
 
                                             </tr>
@@ -104,7 +105,8 @@
                             <div id="invoice">
                                 <div class="toolbar hidden-print">
                                     <div class="text-end">
-                                        <a href="{{ url('/pdf/genarate/'.$order->id.'/'.$order->invoice_number) }}" type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as
+                                        <a href="{{ url('/pdf/genarate/' . $order->id . '/' . $order->invoice_number) }}"
+                                            type="button" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as
                                             PDF</a>
                                     </div>
                                     <hr>
@@ -115,7 +117,8 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <a href="javascript:;">
-                                                        <img src="{{ asset('frontend/assets/img/logo/sobrokom-logo.svg') }}" width="80" alt="">
+                                                        <img src="{{ asset('frontend/assets/img/logo/sobrokom-logo.svg') }}"
+                                                            width="80" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="col company-details">
@@ -134,15 +137,17 @@
                                             <div class="row contacts">
                                                 <div class="col invoice-to">
                                                     <div class="text-gray-light" style="font-size:15px">INVOICE TO:</div>
-                                                    <h5 class="to">{{$address->first_name}}</h5>
-                                                    <div class="address">{{$address->address_1 ?? ''}}</div>
-                                                    <div class="email"><a href="{{$address->email}}">{{$address->email}}</a>
+                                                    <h5 class="to">{{ $address->first_name }}</h5>
+                                                    <div class="address">{{ $address->address_1 ?? '' }}</div>
+                                                    <div class="email"><a
+                                                            href="{{ $address->email }}">{{ $address->email }}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col invoice-details">
                                                     <h5 class="invoice-id">INVOICE: #{{ $order->invoice_number }}</h5>
                                                     <div class="date">Date of Invoice: {{ $order->created_at }}</div>
-                                                    <div class="date">Paymentt Status: <span class="badge text-bg-warning px-25">Unpaid</span></div>
+                                                    <div class="date">Paymentt Status: <span
+                                                            class="badge text-bg-warning px-25">Unpaid</span></div>
                                                 </div>
                                             </div>
                                             <table>
@@ -161,16 +166,16 @@
                                                         $orderDetails = App\Models\OrderDetails::where('order_id', $order->id)->get();
                                                     @endphp
                                                     @foreach ($orderDetails as $key => $orderDetail)
-                                                    <tr>
-                                                        <td class="no">{{ $key+1 }}</td>
-                                                        <td class="text-left">
-                                                           <p>name</p>
-                                                        </td>
-                                                        <td class="">{{ $orderDetail->product_quantity }}</td>
-                                                        <td class="unit">1kg</td>
-                                                        <td class="qty">৳250</td>
-                                                        <td class="total">৳{{ $orderDetail->total_price }}</td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td class="no">{{ $key + 1 }}</td>
+                                                            <td class="text-left">
+                                                                <p>name</p>
+                                                            </td>
+                                                            <td class="">{{ $orderDetail->product_quantity }}</td>
+                                                            <td class="unit">1kg</td>
+                                                            <td class="qty">৳250</td>
+                                                            <td class="total">৳{{ $orderDetail->total_price }}</td>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
@@ -180,7 +185,8 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5">Dis {{ $order->discount }}%</td>
-                                                        <td>৳{{ ((($order->product_total*$order->discount)/100)+$order->product_total) }}</td>
+                                                        <td>৳{{ ($order->product_total * $order->discount) / 100 + $order->product_total }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5">Shipping Chage</td>
@@ -195,12 +201,14 @@
                                             <div class="thanks">Thank you!</div>
                                             <div class="notices">
                                                 <div>NOTICE:</div>
-                                                <div class="notice">A finance charge of 1.5% will be made on unpaid balances after
+                                                <div class="notice">A finance charge of 1.5% will be made on unpaid
+                                                    balances after
                                                     50
                                                     days.</div>
                                             </div>
                                         </main>
-                                        <footer>Invoice was created on a computer and is valid without the signature and seal.
+                                        <footer>Invoice was created on a computer and is valid without the signature and
+                                            seal.
                                         </footer>
 
                                     </div>
@@ -212,10 +220,180 @@
                     </div>
                 </div>
             </div>
+            <div class="container py-2">
+                <h2 class="font-weight-light text-center text-muted py-3">Order Status</h2>
+                <!-- timeline item 1 -->
+                <div class="row g-0">
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                    <!-- timeline item 1 center dot -->
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50" >
+                            <div class="col" >&nbsp;</div>
+                            <div class="col" >&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge rounded-pill bg-light border submit_circle majid">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- timeline item 1 event content -->
+                    <div class="col-sm py-2">
+                        <div class="card radius-15 submit_card">
+                            <div class="card-body">
+                                <?php
+                                    $date = new DateTime($order->created_at);
+                                    $formattedDate = $date->format('M j');
+                                    $day = $date->format('j');
+                                    if ($day % 10 == 1 && $day != 11) {
+                                        $formattedDate .= 'st';
+                                    } elseif ($day % 10 == 2 && $day != 12) {
+                                        $formattedDate .= 'nd';
+                                    } elseif ($day % 10 == 3 && $day != 13) {
+                                        $formattedDate .= 'rd';
+                                    } else {
+                                        $formattedDate .= 'th';
+                                    }
+                                    $formattedDate .= $date->format(' Y g:i A');
+
+                                ?>
+                                <div class="float-end text-muted small"><span class="submit_data">{{$formattedDate}}</span></div>
+                                <h4 class="card-title text-muted submit_title">Order Submited</h4>
+                                <p class="card-text">Your Order has been submited sucessfully. waiting for admin approval.
+                                    you will get Order Confirmation SMS into your phone. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+                <!-- timeline item 2 -->
+                <div class="row g-0">
+                    <div class="col-sm py-2">
+                        <div class="card radius-15 confirm_card">
+                            <div class="card-body">
+                                <div class="float-end small"><span class="confirm_date">Jan 10th 2019 8:30 AM</span></div>
+                                <h4 class="card-title confirm_title">Order Confirmed</h4>
+                                <p class="card-text">Your Order has been Confirmed by admin. Waiting for Processing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge rounded-pill bg-light border confirm_circle">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                </div>
+                <!--/row-->
+                <!-- timeline item 3 -->
+                <div class="row g-0">
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge rounded-pill bg-light border process_circle">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm py-2">
+                        <div class="card radius-15">
+                            <div class="card-body process_card">
+                                <div class="float-end text-muted small process_date">Jan 11th 2019 8:30 AM</div>
+                                <h4 class="card-title process_title">Order Processing</h4>
+                                <p>Your Order is Processing now. After processing it will send to delivery man.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+                <!-- timeline item 4 -->
+                <div class="row g-0">
+                    <div class="col-sm py-2">
+                        <div class="card radius-15">
+                            <div class="card-body onthe_way_card">
+                                <div class="float-end text-muted small onthe_way_date">Jan 12th 2019 11:30 AM</div>
+                                <h4 class="card-title onthe_way_title">On the way </h4>
+                                <p>Your order has been processed and now it's on the way.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge rounded-pill bg-light border onthe_way_circle">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                </div>
+                <!--/row-->
+                <!-- timeline item 5 -->
+                <div class="row g-0">
+                    <div class="col-sm">
+                        <!--spacer-->
+                    </div>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge rounded-pill bg-light border complete_circle">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-end">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm py-2">
+                        <div class="card radius-15">
+                            <div class="card-body complete_card">
+                                <div class="float-end text-muted small complete_date">Jan 11th 2019 8:30 AM</div>
+                                <h4 class="card-title complete_title">Order Completed</h4>
+                                <p>Your Order has been Completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+            </div>
             @else
-                            <p>No Order found</p>
-                        @endif
-                    @endif
+            <p>No Order found</p>
+            @endif
+            @endif
+
+
     </section>
     <!-- shop-area-end -->
 @endsection
+

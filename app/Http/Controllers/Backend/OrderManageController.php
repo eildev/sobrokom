@@ -13,6 +13,49 @@ class OrderManageController extends Controller
         $newOrders = Order::where("status", 'pending')->latest()->get();
         return view('backend.order.new-order', compact('newOrders'));
     }
+
+    public function approvedOrders(){
+        $approved_orders = Order::where("status", 'approve')->latest()->get();
+        return view('backend.order.approved-order', compact('approved_orders'));
+    }
+    public function processedOrders(){
+        $processed_orders = Order::where("status", 'processing')->latest()->get();
+        return view('backend.order.processed-order', compact('processed_orders'));
+    }
+    public function deliveringOrders(){
+        $delivering_orders = Order::where("status", 'delivering')->latest()->get();
+        return view('backend.order.logistics', compact('delivering_orders'));
+    }
+    public function completedOrders(){
+        $completed_orders = Order::where("status", 'completed')->latest()->get();
+        return view('backend.order.completed-order', compact('completed_orders'));
+    }
+
+
+    public function orderProcessing($invoice){
+        // dd($invoice);
+        $processing_Orders = Order::where("invoice_number",$invoice)->latest()->first();
+        // dd($processing_Orders);
+        $processing_Orders->status = "processing";
+        $processing_Orders->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+    public function orderDelivering($invoice){
+        // dd($invoice);
+        $orders_delivering = Order::where("invoice_number",$invoice)->latest()->first();
+        // dd($processing_Orders);
+        $orders_delivering->status = "delivering";
+        $orders_delivering->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+
+    public function orderCompleted($invoice){
+        $completed_Orders = Order::where("invoice_number",$invoice)->latest()->first();
+        // dd($completed_Orders);
+        $completed_Orders->status = "completed";
+        $completed_Orders->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
     public function adminApprove($invoice){
         $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
         $newOrders->status = "approve";
@@ -39,7 +82,7 @@ class OrderManageController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         $email = OrderBillingDetails::where('order_id',$newOrders->id)->first();
-        
+
         $url = 'https://sobrokom.store/order-tracking/invoice';
         $data = [
             'name' => $newOrders->first_name,
@@ -57,14 +100,18 @@ class OrderManageController extends Controller
         }
 
     }
-
+    public function order($invoice){
+        $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
+        $newOrders->status = "proccessing";
+        $newOrders->update();
+        return back()->with('success','Order Successfully Approved');
+    }
     public function orderTracking(){
         return view('frontend/e-com/tracking-product');
     }
     public function orderTrackingInvoice(Request $request){
         $searchTag = $request->search;
-        $trackes = Order::where('invoice_number', $request->search)->where('status', 'approve')
-        ->get();
+        $trackes = Order::where('invoice_number', $request->search)->get();
         return view('frontend/e-com/tracking-product', compact('trackes','searchTag'));
     }
 }
