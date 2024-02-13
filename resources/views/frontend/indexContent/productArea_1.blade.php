@@ -93,21 +93,21 @@
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
                                                             @php
-                                                                $ratingAvg = App\Models\ReviewRating::where('product_id',$product->id)->avg('rating');
+                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
                                                             @endphp
                                                             @php
                                                                 $last = 0;
                                                             @endphp
-                                                            @for ($i =1; $i <= $ratingAvg; $i++)
-                                                            <a href="#"><i class="icon-star"></i></a>
+                                                            @for ($i = 1; $i <= $ratingAvg; $i++)
+                                                                <a href="#"><i class="icon-star"></i></a>
                                                                 @php $last = $i @endphp
                                                             @endfor
-                                                            @for ($j=$last; $j < 5; $j++)
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
                                                             @endfor
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
-                                                            <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                            <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                             <span class="text-secondary"
                                                                 style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
                                                             </span>
