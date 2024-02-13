@@ -220,6 +220,10 @@
                     </div>
                 </div>
             </div>
+
+
+
+            <!--- Delivery Status --->
             <div class="container py-2">
                 <h2 class="font-weight-light text-center text-muted py-3">Order Status</h2>
                 <!-- timeline item 1 -->

@@ -19,7 +19,16 @@
     <!-- breadcrumb-area-end -->
 
 
+<style>
+    .error {
+    border-color: red !important; /* Highlight input field with red border */
+    }
 
+    .error_message {
+        color: red; /* Color error messages in red */
+    }
+
+</style>
 
     @php
         $billingInfo = Auth::check() ? App\Models\BillingInfo::where('user_id', Auth::user()->id)->first() : null;
@@ -140,93 +149,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="different-address">
-                                <div class="ship-different-title">
-                                   <h3>
-                                      <label>Ship to a different address?</label>
-                                      <input id="ship-box" type="checkbox" >
-                                   </h3>
-                                </div>
-                                <div id="ship-box-info">
-                                   <div class="row">
-                                      <div class="col-md-12">
-                                            <div class="country-select">
-                                               <label>Country <span class="required">*</span></label>
-                                               <select>
-                                                  <option value="volvo">bangladesh</option>
-                                                  <option value="saab">Algeria</option>
-                                                  <option value="mercedes">Afghanistan</option>
-                                                  <option value="audi">Ghana</option>
-                                                  <option value="audi2">Albania</option>
-                                                  <option value="audi3">Bahrain</option>
-                                                  <option value="audi4">Colombia</option>
-                                                  <option value="audi5">Dominican Republic</option>
-                                               </select>
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>First Name <span class="required">*</span></label>
-                                               <input type="text" placeholder="" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>Last Name <span class="required">*</span></label>
-                                               <input type="text" placeholder="" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                               <label>Company Name</label>
-                                               <input type="text" placeholder="" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                               <label>Address <span class="required">*</span></label>
-                                               <input type="text" placeholder="Street address" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                               <input type="text" placeholder="Apartment, suite, unit etc. (optional)" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                            <div class="checkout-form-list">
-                                               <label>Town / City <span class="required">*</span></label>
-                                               <input type="text" placeholder="Town / City" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>State / County <span class="required">*</span></label>
-                                               <input type="text" placeholder="" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>Postcode / Zip <span class="required">*</span></label>
-                                               <input type="text" placeholder="Postcode / Zip" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>Email Address <span class="required">*</span></label>
-                                               <input type="email" placeholder="" >
-                                            </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                            <div class="checkout-form-list">
-                                               <label>Phone <span class="required">*</span></label>
-                                               <input type="text" placeholder="Postcode / Zip" >
-                                            </div>
-                                      </div>
-                                   </div>
-                                </div>
-
-                          </div> --}}
 
                             {{-- creat account --}}
                             @if (!$billingInfo)
@@ -517,11 +439,14 @@
             })
         });
 
-
         // place order otp checked
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
+
+            // Reset previous error styles
+            $('.error').removeClass('error');
+            $('.error_message').empty();
 
             const first_name = $('.first_name').val();
             const phone = $('.phone').val();
@@ -532,26 +457,41 @@
             const country = $('.country').val();
 
             if (first_name === "") {
-                document.querySelector('.first_name_error').textContent = 'First Name is Required';
+                $('.first_name').addClass('error').focus();
+                $('.first_name_error').text('First Name is Required');
+                return;
             }
             if (phone === "") {
-                document.querySelector('.phone_error').textContent = 'Phone number is Required';
+                $('.phone').addClass('error').focus();
+                $('.phone_error').text('Phone number is Required');
+                return;
             }
             if (address_1 === "") {
-                document.querySelector('.address_1_error').textContent = 'Address is Required';
+                $('.address_1').addClass('error').focus();
+                $('.address_1_error').text('Address is Required');
+                return;
             }
             if (city === "") {
-                document.querySelector('.city_error').textContent = 'City is Required';
+                $('.city').addClass('error').focus();
+                $('.city_error').text('City is Required');
+                return;
             }
             if (division === "") {
-                document.querySelector('.division_error').textContent = 'Division Name is Required';
+                $('.division').addClass('error').focus();
+                $('.division_error').text('Division Name is Required');
+                return;
             }
             if (post_code === "") {
-                document.querySelector('.post_code_error').textContent = 'Post code is Required';
+                $('.post_code').addClass('error').focus();
+                $('.post_code_error').text('Post code is Required');
+                return;
             }
             if (country === "") {
-                document.querySelector('.country_error').textContent = 'Country is Required';
+                $('.country').addClass('error').focus();
+                $('.country_error').text('Country is Required');
+                return;
             } else {
+
                 let user_phone = document.querySelector('.user_phone').value;
                 $.ajaxSetup({
                     headers: {
@@ -574,11 +514,9 @@
                         }
                     })
                 } else {
-                    toastr.warning("plese select shiping method");
+                    toastr.warning("Please select shipping method");
                 }
             }
-
-
         });
 
 
@@ -656,7 +594,7 @@
                     payment_id,
                 },
                 success: function(res) {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status == 200) {
                         $('#otpCheck').modal('hide');
                         toastr.success(res.message);
