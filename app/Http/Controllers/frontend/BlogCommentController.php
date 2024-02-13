@@ -29,7 +29,6 @@ class BlogCommentController extends Controller
    public function BlogCommentReplys(Request $request){
     $subcriber_id =  $request->subcriber_id;
     $comment_id = $request->comment_id;
-
     BlogCommentReply::create([
         'subscriber_id' => $subcriber_id,
         'comment_id' => $comment_id,

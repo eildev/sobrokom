@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="#">Home</a></span>
                             <span class="dvdr">/</span>
                             <span class="tp-breadcrumb__active"><a
                                     href="{{ route('all.blog.post') }}">{{ $singleBlog['category']['cat_name'] }}
@@ -74,7 +74,7 @@
                                 <div class="col-xl-7 col-lg-6 col-md-12">
                                     <div class="postbox__tag">
                                         <div class="postbox__tag-list d-flex">
-                                            <span>React: </span>
+                                            <span></span>
                                             {{-- //Like --}}
                                             <input type="hidden" class="post_id" value="{{ $singleBlog->id }}">
 
@@ -95,38 +95,38 @@
                                                         class="fas fa-thumbs-down fs-4 text-primary"></i></a><span class="dislike_count fw-bold text-dark">{{ $dislike }}</span></span>
 
                                             {{-- //heart --}}
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $love = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('love', 1)->count();
                                                 @endphp
                                                 <a href="#" class="love react" name="love"  value="love"> <i
-                                                        class="fas fa-heart fs-4 text-primary"></i></a><span class="love_count fw-bold text-dark">{{ $love }}</span></span>
+                                                        class="fas fa-heart fs-4 text-primary"></i></a><span class="love_count fw-bold text-dark">{{ $love }}</span></span> --}}
                                             {{-- //Sad --}}
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $sad = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('sad', 1)->count();
                                                 @endphp
                                                 <a href="#" class="sad react" name="sad"  value="sad"><i
                                                         class="fas fa-sad-tear fs-4 text-primary"></i></a><span class="sad_count fw-bold text-dark">{{ $sad }}</span>
-                                                </span>
+                                                </span> --}}
 
                                             {{-- //anger --}}
 
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $angry = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('angry', 1)->count();
                                                 @endphp
                                                 <a href="#" class="angry react" name="angry"  value="angry"><i
                                                  class="fas fa-angry fs-4 text-primary"></i></a>
                                                     <span class="angry_count fw-bold text-dark">{{ $angry }}</span>
-                                            </span>
+                                            </span> --}}
                                             {{-- //Funny --}}
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $haha = App\Models\BlogReact::where('blog_id',$singleBlog->id)->where('haha', 1)->count();
                                                 @endphp
                                                 <a href="#" class="haha react" name="haha"  value="haha"><i
-                                                        class="fas fa-laugh fs-4 text-primary "></i></a><span class="haha_count fw-bold text-dark">{{ $haha }}</span></span>
+                                                        class="fas fa-laugh fs-4 text-primary "></i></a><span class="haha_count fw-bold text-dark">{{ $haha }}</span></span> --}}
 
                                         </div>
                                     </div>
@@ -326,10 +326,10 @@
                     success:function(res){
                         $('.like_count').text(res.like);
                         $('.dislike_count').text(res.dislike);
-                        $('.love_count').text(res.love);
-                        $('.sad_count').text(res.sad);
-                        $('.angry_count').text(res.angry);
-                        $('.haha_count').text(res.hh);
+                        // $('.love_count').text(res.love);
+                        // $('.sad_count').text(res.sad);
+                        // $('.angry_count').text(res.angry);
+                        // $('.haha_count').text(res.hh);
                     }
                 })
             });

@@ -13,13 +13,18 @@ class BlogReactionController extends Controller
     public function BlogReact(Request $request){
         // dd(Auth::user()->id);
         $val = $request->value;
-        $react = BlogReact::where('user_id',Auth::user()->id)->where('blog_id',$request->post_id)->where('like', 1)->orWhere('love', 1)->orWhere('dislike', 1)->orWhere('haha', 1)->orWhere('angry', 1)->orWhere('sad', 1)->first();
+        $react = BlogReact::where('user_id',Auth::user()->id)->where('blog_id',$request->post_id)->where('like', 1)->orWhere('dislike', 1)->first();
+
+        // $react = BlogReact::where('user_id',Auth::user()->id)->where('blog_id',$request->post_id)->where('like', 1)->orWhere('love', 1)->orWhere('dislike', 1)->orWhere('haha', 1)->orWhere('angry', 1)->orWhere('sad', 1)->first();
+
         $like = BlogReact::where('blog_id',$request->post_id)->where('like', 1)->count();
         $dislike = BlogReact::where('blog_id',$request->post_id)->where('dislike', 1)->count();
-        $love = BlogReact::where('blog_id',$request->post_id)->where('love', 1)->count();
-        $haha = BlogReact::where('blog_id',$request->post_id)->where('haha', 1)->count();
-        $angry = BlogReact::where('blog_id',$request->post_id)->where('angry', 1)->count();
-        $sad = BlogReact::where('blog_id',$request->post_id)->where('sad', 1)->count();
+
+       // $love = BlogReact::where('blog_id',$request->post_id)->where('love', 1)->count();
+       // $haha = BlogReact::where('blog_id',$request->post_id)->where('haha', 1)->count();
+      //  $angry = BlogReact::where('blog_id',$request->post_id)->where('angry', 1)->count();
+       // $sad = BlogReact::where('blog_id',$request->post_id)->where('sad', 1)->count();
+
         if(!$react){
             $react = new BlogReact;
             $react->user_id = Auth::user()->id;
@@ -29,19 +34,19 @@ class BlogReactionController extends Controller
             return response()->json([
                 'status' => 200,
                 'like'=>$like,
-                'dislike'=>$dislike,
-                'love'=>$love,
-                'haha'=>$haha,
-                'angry'=>$angry,
+               'dislike'=>$dislike,
+              //  'love'=>$love,
+             //   'haha'=>$haha,
+             //   'angry'=>$angry,
             ]);
         }else{
             return response()->json([
                 'status' => 500,
                 'like'=>$like,
-                'dislike'=>$dislike,
-                'love'=>$love,
-                'haha'=>$haha,
-                'angry'=>$angry,
+               // 'dislike'=>$dislike,
+              //  'love'=>$love,
+              //  'haha'=>$haha,
+             //   'angry'=>$angry,
             ]);
         }
     }
