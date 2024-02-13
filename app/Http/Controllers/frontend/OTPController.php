@@ -10,6 +10,7 @@ use App\Models\OrderBillingDetails;
 use App\Models\OrderDetails;
 use Illuminate\Support\Carbon;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
@@ -86,7 +87,14 @@ class OTPController extends Controller
             $invoiceNumber = rand(123456,999999);
             // store order details
                 $order = new Order;
-                $order->user_identity = $request->phone;
+                $identifer = '';
+                if(!empty(Auth::user()->id)){
+                    $identifer = Auth::user()->id;
+                }
+                else{
+                    $identifer = $request->phone;
+                }
+                $order->user_identity = $identifer;
                 $order->invoice_number = $invoiceNumber;
                 $order->product_quantity = Cart::count();
                 $order->product_total = Cart::total();

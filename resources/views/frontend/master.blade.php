@@ -517,7 +517,7 @@
             process_card_h4.setAttribute('style','color: #9e54a1 !important');
             process_card.classList.add('shadow');
         }
-        if(status === 'ontheway'){
+        if(status === 'delivering'){
             submit_circle.setAttribute('style','background: #9e54a1 !important');
             submit_card.setAttribute('style','border-color: #9e54a1 !important');
             submit_card_date.setAttribute('style','color: #9e54a1 !important');
@@ -546,7 +546,7 @@
             onthe_way_card_h4.setAttribute('style','color: #9e54a1 !important');
             onthe_way_card.classList.add('shadow');
         }
-        if(status === 'complete'){
+        if(status === 'completed'){
             submit_circle.setAttribute('style','background: #9e54a1 !important');
             submit_card.setAttribute('style','border-color: #9e54a1 !important');
             submit_card_date.setAttribute('style','color: #9e54a1 !important');

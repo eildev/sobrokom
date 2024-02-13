@@ -54,7 +54,7 @@
                                         <td>{{ $order->grand_total }}</td>
                                         <td>{{ $order->status }}</td>
                                         <td> </td>
-                                        <td> <button class="btn btn-sm-info">Refund</button></td>
+                                        <td> <a href="" class="btn btn-info btn-sm">Refund</a></td>
                                     </tr>
                                 @endforeach
                             @else
