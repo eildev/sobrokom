@@ -565,7 +565,8 @@
                                 @endif
                             </div>
                         </div>
-                        @if ($allProducts->count() > 0)
+
+                        @if ($allProducts->count() > 12)
                             <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
                                 <ul class="pagination">
                                     {{-- Previous Page Link --}}

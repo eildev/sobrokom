@@ -88,7 +88,8 @@
                                                             </a>
                                                         </span>
                                                         <h4 class="tpproduct__title">
-                                                            <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
+                                                            <a
+                                                                href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
                                                             <a href="#"><i class="icon-star_outline1"></i></a>
@@ -99,13 +100,12 @@
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
                                                             <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                             <span class="text-secondary text-capitalize" style="font-size: 14px">
-                                                                /{{ $product->varient[0]->weight ?? '' }}
-                                                                {{ $product->varient[0]->unit ?? '' }}
+                                                            <span class="text-secondary"
+                                                                style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
                                                             </span>
                                                             @if ($product->varient[0]->discount > 0)
                                                                 <del>৳{{ $product->varient[0]->regular_price }}</del>
-                                                                @else
+                                                            @else
                                                                 <span></span>
                                                             @endif
 

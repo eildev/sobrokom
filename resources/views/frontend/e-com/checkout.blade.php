@@ -425,7 +425,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>We sent a message with the verification code to the phone number. It may take a few minutes for the code to arrive</p>
+                        <p>We sent a message with the verification code to the phone number. It may take a few minutes for
+                            the code to arrive</p>
                         <label for="exampleInputEmail1">Verification Code *</label>
                         <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
@@ -745,7 +746,10 @@
         totalWeight();
 
         $(document).ready(function() {
-            $("#otpCheck").modal({backdrop: 'static', keyboard: false});
+            $("#otpCheck").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
         });
     </script>
 

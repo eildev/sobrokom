@@ -18,9 +18,7 @@
             </div>
 
             @php
-                $brands = App\Models\Brand::where('status', 1)
-                    ->where('BrandName', 'Local')
-                    ->first();
+                $brands = App\Models\Brand::where('status', 1)->where('BrandName', 'Local')->first();
             @endphp
 
 
@@ -29,7 +27,8 @@
                 <div class="col-lg-3">
                     <div class="tpbrandproduct__main text-center">
                         <div class="tpbrandproduct__main-thumb mb-20">
-                            <img src="{{ !empty($brands->image) ? asset('uploads/brands/' . $brands->image) : '' }} " alt="">
+                            <img src="{{ !empty($brands->image) ? asset('uploads/brands/' . $brands->image) : '' }} "
+                                alt="">
                         </div>
                         <div class="tpbrandproduct__main-contetn">
                             <h4 class="tpbrandproduct__title">{{ $brands->BrandName ?? '' }}</h4>
@@ -61,7 +60,7 @@
                                                 <div class="tpproduct__info bage tpbrandproduct__bage">
                                                     @if ($product->varient[0]->discount > 0)
                                                         <span
-                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount  }}%</span>
+                                                            class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                     @else
                                                         <span></span>
                                                     @endif
@@ -69,7 +68,8 @@
                                             </div>
                                             <div class="tpbrandproduct__contact">
                                                 <span class="tpbrandproduct__product-title">
-                                                    <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a></span>
+                                                    <a
+                                                        href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a></span>
                                                 <div class="tpproduct__rating mb-5">
                                                     <a href="#"><i class="icon-star_outline1"></i></a>
                                                     <a href="#"><i class="icon-star_outline1"></i></a>
@@ -79,9 +79,8 @@
                                                 </div>
                                                 <div class="tpproduct__price">
                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
-                                                    <span class="text-secondary" style="font-size: 14px">
-                                                        /{{ $product->varient[0]->weight ?? '' }}
-                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                    <span class="text-secondary"
+                                                        style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
                                                     </span>
                                                     <br>
                                                     @if ($product->varient[0]->discount > 0)

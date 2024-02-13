@@ -19,16 +19,18 @@
 
                                 <hr>
                                 <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-sm-3 col-form-label">Select Category  Name</label>
+                                    <label for="inputEnterYourName" class="col-sm-3 col-form-label">Select Category
+                                        Name</label>
                                     <div class="col-sm-9 form-group text-secondary">
-                                        <select class="form-select @error('category') is-invalid  @enderror" name ="category"  aria-label="Default select example">
-                                            <option selected="" value="" > Select Category</option>
-                                         @foreach($category as $Cat)
-                                            <option value="{{$Cat->id}}">{{$Cat->cat_name}}</option>
-                                           @endforeach
+                                        <select class="form-select @error('category') is-invalid  @enderror"
+                                            name ="category" aria-label="Default select example">
+                                            <option selected="" value=""> Select Category</option>
+                                            @foreach ($category as $Cat)
+                                                <option value="{{ $Cat->id }}">{{ $Cat->cat_name }}</option>
+                                            @endforeach
                                         </select>
                                         @error('category')
-                                        <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -50,8 +52,8 @@
                                 <div class="row mb-3">
                                     <label for="" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control @error('description') is-invalid  @enderror" id="product_descriptions" name="description" placeholder=""
-                                            style="resize: none; height: 150px;"></textarea>
+                                        <textarea class="form-control @error('description') is-invalid  @enderror" id="product_descriptions" name="description"
+                                            placeholder="" style="resize: none; height: 150px;" id="product_descriptions"></textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -63,8 +65,7 @@
                                     <div class="col-sm-9">
                                         <div class="mb-3">
                                             <label class="form-label">Tags</label>
-                                            <input type="text" class="form-control" data-role="tagsinput"
-                                                 name="tags">
+                                            <input type="text" class="form-control" data-role="tagsinput" name="tags">
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +77,7 @@
                                             class="form-control  @error('image') is-invalid  @enderror" name="image">
                                         <div class="my-1">
                                             <i>
-                                                <b>Note:</b> Please provide 1410 × 882  size
+                                                <b>Note:</b> Please provide 1410 × 882 size
                                                 image
                                             </i>
                                         </div>

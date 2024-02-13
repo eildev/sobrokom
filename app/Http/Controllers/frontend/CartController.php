@@ -73,11 +73,17 @@ class CartController extends Controller
 
     public function cartPageUpdateItem(Request $request, $id)
     {
-        // dd($request->all());
-        $rowId = $id;
+        // dd($request);
         $quantity = $request->quantity;
-        Cart::update($rowId, $quantity);
-        return back()->with('success', 'Product Quantity Update successfully');
+        Cart::update($id, $quantity);
+        // $rowId = Cart::content()->rowId;
+        // dd(Cart::content());
+        // return response()->json([
+        //     'status' => '200',
+        //     'message' => 'Product Quantity Update successfully',
+        //     'id' => $id,
+        // ]);
+        return redirect()->back()->with('success', 'Product Quantity Update successfully');
     }
 
 

@@ -16,10 +16,7 @@
                                     data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
                                     aria-selected="true">All</button>
                                 @php
-                                    $cats = App\Models\Category::where('status', 1)
-                                        ->take(4)
-                                        ->orderBy('id', 'ASC')
-                                        ->get();
+                                    $cats = App\Models\Category::where('status', 1)->take(4)->orderBy('id', 'ASC')->get();
                                 @endphp
                                 @foreach ($cats as $cat)
                                     <button class="nav-link" id="nav-meat-tab" data-bs-toggle="tab"
@@ -39,10 +36,7 @@
 
 
                             @php
-                                $all_product = App\Models\Product::where('status', 1)
-                                    ->take(10)
-                                    ->orderBy('id', 'ASC')
-                                    ->get();
+                                $all_product = App\Models\Product::where('status', 1)->take(10)->orderBy('id', 'ASC')->get();
                                 // @dd($all_product);
                             @endphp
                             @if ($all_product->count() > 0)
@@ -66,12 +60,12 @@
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                         alt=""></a>
-                                                               <div class="tpproduct__info bage">
+                                                                <div class="tpproduct__info bage">
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <span
                                                                             class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @else
-                                                                      <span></span>
+                                                                        <span></span>
                                                                     @endif
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <span
@@ -113,7 +107,8 @@
                                                                         href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>
                                                                 </span>
                                                                 <h4 class="tpproduct__title">
-                                                                    <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
+                                                                    <a
+                                                                        href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a>
                                                                 </h4>
                                                                 <div class="tpproduct__rating mb-5">
                                                                     <a href="#"><i
@@ -130,9 +125,7 @@
                                                                 <div class="tpproduct__price">
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary text-capitalize"
-                                                                        style="font-size: 14px">
-                                                                        /{{ $product->varient[0]->weight ?? '' }}
-                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
                                                                     </span>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
@@ -224,7 +217,7 @@
                                                                         <span
                                                                             class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
                                                                     @else
-                                                                      <span></span>
+                                                                        <span></span>
                                                                     @endif
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <span
@@ -266,7 +259,8 @@
                                                                         href="{{ route('category.wise.product', $product->category->slug) }}">{{ $product->category->categoryName }}</a>
                                                                 </span>
                                                                 <h4 class="tpproduct__title">
-                                                                    <a href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name,18)}}</a>
+                                                                    <a
+                                                                        href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a>
                                                                 </h4>
                                                                 <div class="tpproduct__rating mb-5">
                                                                     <a href="#"><i
@@ -283,9 +277,7 @@
                                                                 <div class="tpproduct__price">
                                                                     <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                                     <span class="text-secondary text-capitalize"
-                                                                        style="font-size: 14px">
-                                                                        /{{ $product->varient[0]->weight ?? '' }}
-                                                                        {{ $product->varient[0]->unit ?? '' }}
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
                                                                     </span>
                                                                     @if ($product->varient[0]->discount > 0)
                                                                         <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>

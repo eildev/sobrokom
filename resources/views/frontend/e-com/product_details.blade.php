@@ -79,7 +79,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                                                              </button> -->
+                                                                                                                                                                  </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -100,7 +100,7 @@
                                                 <h5 class="product__details-price mb-1">
                                                     ৳{{ $product->varient[0]->discount_amount }}
                                                     <span class="text-secondary" style="font-size: 14px">
-                                                        /{{ $product->varient[0]->weight ?? '' }}
+                                                        /
                                                         {{ $product->varient[0]->unit ?? '' }}
                                                     </span>
 
@@ -359,8 +359,8 @@
                                     <div class="tpreview__wrapper">
                                         <!--@php-->
 
-                                        <!--@dd($review_rating);-->
-                                        <!--@endphp-->
+                                                                                    <!--@dd($review_rating);-->
+                                                                                <!--@endphp ?>-->
                                         <!--<h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken-->
                                         <!--</h4>-->
                                         <!--<div class="tpreview__comment">-->
@@ -393,8 +393,8 @@
                                                     <form action="{{ Route('review-rating.insert') }}" method="POST"
                                                         enctype="multipart/form-data">
                                                         @csrf
-                                                        <input type="hidden" value="{{ $product->id }}" name="product_id"
-                                                    class="">
+                                                        <input type="hidden" value="{{ $product->id }}"
+                                                            name="product_id" class="">
                                                         <div class="tpreview__star mb-20">
                                                             <h4 class="title">Your Rating</h4>
                                                             <div class="tpreview__star-icon ratings">
@@ -406,18 +406,22 @@
                                                                 <a href="#"><i class="icon-star_outline1"></i></a>
                                                                 <a href="#"><i class="icon-star_outline1"></i></a>
                                                                 @error('rating')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                         <div class="tpreview__input mb-30">
-                                                            <label for="message" class="form-label">Write Your Comment here.</label>
+                                                            <label for="message" class="form-label">Write Your Comment
+                                                                here.</label>
                                                             <textarea id="message" name="message" placeholder="Message" required></textarea>
                                                             @error('message')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
-                                                            <label for="imageGallery" class="form-label">Add pictures from here.</label>
-                                                            <input type="file" id="imageGallery" class="form-control h-auto ps-3" name="imageGallery[]" multiple>
+                                                            <label for="imageGallery" class="form-label">Add pictures from
+                                                                here.</label>
+                                                            <input type="file" id="imageGallery"
+                                                                class="form-control h-auto ps-3" name="imageGallery[]"
+                                                                multiple>
                                                             @error('imageGallery[]')
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
