@@ -144,7 +144,9 @@
                         </div>
                         {{-- Blog React and share End  --}}
                         <div class="postbox__comment mb-65">
+
                             <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
+
                             <ul>
 
                                 @foreach ($blogComment as $comment)
@@ -167,12 +169,11 @@
 
                                                     </div>
                                                     <p>{{ $comment->comment }}
+{{-- 
                          @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::user()->id)
-
                          <span class="btn btn-sm badge text-danger"><a href="{{route('comment.delete',$comment->id)}}"><i class="far fa-trash-alt"></i></a></span>
                                                             @else
-
-                                                        @endif
+                                                        @endif --}}
                                                        </p>
                                                     <div class="postbox__comment-reply">
                                                         <button class="btn btn-sm ReplyOpen" id="{{ $comment->id }}">Leave
@@ -200,11 +201,13 @@
                                                                             {{ date('h:i A', strtotime($reply->created_at)) }}</small>
                                                                     </div>
                                                                     <p>{{ $reply->reply }}
-                             @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::user()->id)
+                             {{-- @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::user()->id)
+
                              <span class="btn btn-sm badge text-danger"><a href="{{route('comment.reply.delete',$reply->id)}}"><i class="fal fa-trash-alt"></i></a></span>
+                                                                     </p>
                                                                             @else
-                                                                           </p>
-                                                                        @endif
+
+                                                                        @endif --}}
 
 
                                                                 </div>
