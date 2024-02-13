@@ -169,11 +169,11 @@
 
                                                     </div>
                                                     <p>{{ $comment->comment }}
-{{-- 
-                         @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::user()->id)
+
+                         @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
                          <span class="btn btn-sm badge text-danger"><a href="{{route('comment.delete',$comment->id)}}"><i class="far fa-trash-alt"></i></a></span>
                                                             @else
-                                                        @endif --}}
+                                                        @endif
                                                        </p>
                                                     <div class="postbox__comment-reply">
                                                         <button class="btn btn-sm ReplyOpen" id="{{ $comment->id }}">Leave
@@ -201,13 +201,12 @@
                                                                             {{ date('h:i A', strtotime($reply->created_at)) }}</small>
                                                                     </div>
                                                                     <p>{{ $reply->reply }}
-                             {{-- @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::user()->id)
+                             @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
 
                              <span class="btn btn-sm badge text-danger"><a href="{{route('comment.reply.delete',$reply->id)}}"><i class="fal fa-trash-alt"></i></a></span>
                                                                      </p>
                                                                             @else
-
-                                                                        @endif --}}
+                                                                        @endif
 
 
                                                                 </div>
