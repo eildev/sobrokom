@@ -9,7 +9,7 @@
                     <div class="swiper-slide">
                         <div class="tpblog__single p-relative">
                            <div class="tpblog__single-img">
-                              <img src="{{asset('uploads/blog/blog_post/'.$blog->image)}}" alt="">
+                              <img src="{{asset('uploads/blog/blog_post/'.$blog->image)}}" width="392px" height="251px" alt="">
                            </div>
                            <div class="tpblog__single-text text-center">
                               <div class="tpblog__entry-wap">
@@ -25,8 +25,6 @@
                         </div>
                      </div>
                     @endforeach
-
-
                   </div>
                </div>
             </div>
@@ -45,7 +43,7 @@
                               <div class="col-lg-6 col-md-6">
                                  <div class="tpblog__item tpblog__item-2 mb-20">
                                     <div class="tpblog__thumb fix">
-                                       <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{asset('uploads/blog/blog_post/'.$blog->image)}}" alt=""></a>
+                                       <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{asset('uploads/blog/blog_post/'.$blog->image)}}"  width="392px" height="251px" alt="blog-image"></a>
                                     </div>
                                     <div class="tpblog__wrapper">
                                        <div class="tpblog__entry-wap">
@@ -76,13 +74,13 @@
                                              <span class="current">1</span>
                                           </li>
                                           <li>
-                                             <a href="blog.html">2</a>
+                                             <a href="#">2</a>
                                           </li>
                                           <li>
-                                             <a href="blog.html">3</a>
+                                             <a href="#">3</a>
                                           </li>
                                           <li>
-                                             <a href="blog.html">
+                                             <a href="#">
                                                 <i class="icon-chevrons-right"></i>
                                              </a>
                                           </li>

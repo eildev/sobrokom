@@ -73,10 +73,11 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-7 col-lg-6 col-md-12">
                                     <div class="postbox__tag">
-                                        <div class="postbox__tag-list reactions">
-                                            <span>React: </span>
+                                        <div class="postbox__tag-list d-flex">
+                                            <span></span>
                                             {{-- //Like --}}
                                             <input type="hidden" class="post_id" value="{{ $singleBlog->id }}">
+
                                             <span>
                                                 @php
                                                     $like = App\Models\BlogReact::where('blog_id', $singleBlog->id)
@@ -99,51 +100,46 @@
                                                     class="dislike_count">{{ $dislike }}</span></span>
 
                                             {{-- //heart --}}
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $love = App\Models\BlogReact::where('blog_id', $singleBlog->id)
                                                         ->where('love', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="love react" name="love" value="love"> <i
-                                                        class="far fa-heart fs-2 text-danger"></i></a><span
-                                                    class="love_count">{{ $love }}</span></span>
-
+                                                <a href="#" class="love react" name="love"  value="love"> <i
+                                                        class="fas fa-heart fs-4 text-primary"></i></a><span class="love_count fw-bold text-dark">{{ $love }}</span></span> --}}
                                             {{-- //Sad --}}
-
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $sad = App\Models\BlogReact::where('blog_id', $singleBlog->id)
                                                         ->where('sad', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="sad react" name="sad" value="sad"><i
-                                                        class="far fa-sad-tear fs-2 text-warning"></i></a><span
-                                                    class="sad_count">{{ $sad }}</span></span>
+                                                <a href="#" class="sad react" name="sad"  value="sad"><i
+                                                        class="fas fa-sad-tear fs-4 text-primary"></i></a><span class="sad_count fw-bold text-dark">{{ $sad }}</span>
+                                                </span> --}}
 
                                             {{-- //anger --}}
 
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $angry = App\Models\BlogReact::where('blog_id', $singleBlog->id)
                                                         ->where('angry', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="angry react" name="angry" value="angry"><i
-                                                        class="far fa-angry fs-2 text-danger"></i></a><span
-                                                    class="angry_count">{{ $angry }}</span></span>
-
+                                                <a href="#" class="angry react" name="angry"  value="angry"><i
+                                                 class="fas fa-angry fs-4 text-primary"></i></a>
+                                                    <span class="angry_count fw-bold text-dark">{{ $angry }}</span>
+                                            </span> --}}
                                             {{-- //Funny --}}
-
-                                            <span>
+                                            {{-- <span>
                                                 @php
                                                     $haha = App\Models\BlogReact::where('blog_id', $singleBlog->id)
                                                         ->where('haha', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="haha react" name="haha" value="haha"><i
-                                                        class="far fa-laugh fs-2 text-warning"></i></a><span
-                                                    class="haha_count">{{ $haha }}</span></span>
+                                                <a href="#" class="haha react" name="haha"  value="haha"><i
+                                                        class="fas fa-laugh fs-4 text-primary "></i></a><span class="haha_count fw-bold text-dark">{{ $haha }}</span></span> --}}
 
                                         </div>
                                     </div>
@@ -161,7 +157,9 @@
                         </div>
                         {{-- Blog React and share End  --}}
                         <div class="postbox__comment mb-65">
+
                             <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
+
                             <ul>
 
                                 @foreach ($blogComment as $comment)
@@ -184,10 +182,17 @@
                                                             at {{ date('h:i A', strtotime($comment->created_at)) }}</small>
 
                                                     </div>
-                                                    <p>{{ $comment->comment }}</p>
+                                                    <p>{{ $comment->comment }}
+
+                                                        @if ($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
+                                                            <span class="btn btn-sm badge text-danger"><a
+                                                                    href="{{ route('comment.delete', $comment->id) }}"><i
+                                                                        class="far fa-trash-alt"></i></a></span>
+                                                        @else
+                                                        @endif
+                                                    </p>
                                                     <div class="postbox__comment-reply">
-                                                        <button class="btn btn-sm ReplyOpen"
-                                                            id="{{ $comment->id }}">Leave
+                                                        <button class="btn btn-sm ReplyOpen" id="{{ $comment->id }}">Leave
                                                             Reply</button>
                                                     </div>
                                                     {{-- reply ///// --}}
@@ -211,107 +216,99 @@
                                                                                     at
                                                                                     {{ date('h:i A', strtotime($reply->created_at)) }}</small>
                                                                             </div>
-                                                                            <p>{{ $reply->reply }}</p>
+                                                                            <p>{{ $reply->reply }}
+                                                                                @if ($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
+                                                                                    <span
+                                                                                        class="btn btn-sm badge text-danger"><a
+                                                                                            href="{{ route('comment.reply.delete', $reply->id) }}"><i
+                                                                                                class="fal fa-trash-alt"></i></a></span>
+                                                                            </p>
+                                                                        @else
+                                                    @endif
 
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    @endforeach
 
-                                                    <div class="tpreview__form postbox__form ShowReply{{ $comment->id }}"
-                                                        style="display:none;">
-                                                        <h4 class="tpreview__form-title mb-10">Reply A Comments </h4>
-                                                        <form action="{{ url('blog-comment-reply-submit') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="hidden" name="subcriber_id"
-                                                                value="{{ Auth::user()->id ?? 0 }}">
-                                                            <input type="hidden" name="comment_id"
-                                                                value="{{ $comment->id }}">
-
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="tpreview__input mb-5">
-                                                                        <textarea name="reply_message" required placeholder="Message"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    @guest
-                                                                        <div class="tpreview__submit mt-25">
-                                                                            <a id="login" class="tp-btn">Leave Reply</a>
-                                                                        </div>
-                                                                    @else
-                                                                        <div class="tpreview__submit mt-25">
-                                                                            <button type="submit" class="tp-btn">Leave
-                                                                                Reply</button>
-
-                                                                        </div>
-                                                                        <span></span>
-                                                                    @endguest
-
-                                                                </div>
-                                                            </div>
-
-                                                        </form>
-                                                    </div>
-                                                    {{-- reply Comment///// --}}
                                                 </div>
                                             </div>
                                         </li>
-                                    @endif
-                                @endforeach
                             </ul>
                         </div>
-
-                        <div class="tpreview__form postbox__form">
-                            <h4 class="tpreview__form-title mb-10">LEAVE A Comments </h4>
-                            @guest
-                                <h4 class="tpreview__form-title mb-10 text-danger" id="login">At first, you need to login
-                                    to your account | <a class="btn btn-sm bg-light" href="{{ route('login') }}">Login</a> |
-                                </h4>
-                            @else
-                                <p>Your email address will not be published. Required fields are marked *</p>
-
-                                <form action="{{ route('blog.comment') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="subcriber_id" id="subcriber_id"
-                                        value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="blog_id" id="blog_id" value="{{ $singleBlog->id }}">
-                                    <div class="row">
-
-                                        <div class="col-lg-12">
-                                            <div class="tpreview__input mb-5">
-                                                <textarea name="message" required placeholder="Message"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="tpfooter__widget-newsletter-check postbox__check-box">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault2">
-                                                    <label class="form-check-label" for="flexCheckDefault2">
-                                                        Save my name, email, and website in this browser for the next time I
-                                                        comment.
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="tpreview__submit mt-25">
-                                                <button type="submit" class="tp-btn">Post Comment</button>
-                                            </div>
+                        @endforeach
+                        <div class="tpreview__form postbox__form ShowReply{{ $comment->id }}" style="display:none;">
+                            <h4 class="tpreview__form-title mb-10">Reply A Comments </h4>
+                            <form action="{{ url('blog-comment-reply-submit') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="subcriber_id" value="{{ Auth::user()->id ?? 0 }}">
+                                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="tpreview__input mb-5">
+                                            <textarea name="reply_message" required placeholder="Message"></textarea>
                                         </div>
                                     </div>
-
-                                </form>
-
-                            @endguest
-
-
+                                    <div class="col-lg-12">
+                                        @guest
+                                            <div class="tpreview__submit mt-25">
+                                                <a id="login" class="tp-btn">Leave Reply</a>
+                                            </div>
+                                        @else
+                                            <div class="tpreview__submit mt-25">
+                                                <button type="submit" class="tp-btn">Leave Reply</button>
+                                            </div>
+                                        @endguest
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                        {{-- reply Comment///// --}}
                     </div>
                 </div>
+                </li>
+                @endif
+                @endforeach
+                </ul>
             </div>
+            <div class="tpreview__form postbox__form">
+                <h4 class="tpreview__form-title mb-10">LEAVE A Comments </h4>
+                @guest
+                    <h4 class="tpreview__form-title mb-10 text-danger" id="login">At first, you need to login
+                        to your account | <a class="btn btn-sm bg-light" href="{{ route('login') }}">Login</a> |
+                    </h4>
+                @else
+                    <p>Your email address will not be published. Required fields are marked *</p>
+
+                    <form action="{{ route('blog.comment') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="subcriber_id" id="subcriber_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="blog_id" id="blog_id" value="{{ $singleBlog->id }}">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tpreview__input mb-5">
+                                    <textarea name="message" required placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="tpfooter__widget-newsletter-check postbox__check-box">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="flexCheckDefault2">
+                                        <label class="form-check-label" for="flexCheckDefault2">
+                                            Save my name, email, and website in this browser for the next time I
+                                            comment.
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="tpreview__submit mt-25">
+                                    <button type="submit" class="tp-btn">Post Comment</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                @endguest
+            </div>
+        </div>
+        </div>
+        </div>
         </div>
     </section>
     <!-- blog-details-area-end -->
@@ -344,10 +341,10 @@
                     success: function(res) {
                         $('.like_count').text(res.like);
                         $('.dislike_count').text(res.dislike);
-                        $('.love_count').text(res.love);
-                        $('.sad_count').text(res.sad);
-                        $('.angry_count').text(res.angry);
-                        $('.haha_count').text(res.hh);
+                        // $('.love_count').text(res.love);
+                        // $('.sad_count').text(res.sad);
+                        // $('.angry_count').text(res.angry);
+                        // $('.haha_count').text(res.hh);
                     }
                 })
             });

@@ -73,11 +73,21 @@
                                                 href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                         </h4>
                                         <div class="tpproduct__rating mb-5">
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            @php
+                                            $indivitualReviews = App\Models\ReviewRating::where('product_id',$product->id)->get();
+                                            $indivitualRatingAvg = App\Models\ReviewRating::where('product_id',$product->id)->avg('rating');
+                                        @endphp
+                                        @php
+                                            $last = 0;
+                                        @endphp
+                                        @for ($i =1; $i <= $indivitualRatingAvg; $i++)
+                                        <a href="#"><i class="icon-star"></i></a>
+                                            @php $last = $i @endphp
+                                        @endfor
+                                        @for ($j=$last; $j < 5; $j++)
+                                        <a href="#"><i class="icon-star_outline1"></i></a>
+                                        @endfor
+                                        ({{ $indivitualReviews->count() }})
                                         </div>
                                         <div class="tpproduct__price">
 

@@ -38,12 +38,21 @@
                                             href="{{ route('brand.wise.product', $product->brand->slug) }}">{{ $product->brand->BrandName }}</a>
                                     </li>
                                     <li>
-                                        <i class="icon-star_outline1"></i>
-                                        <i class="icon-star_outline1"></i>
-                                        <i class="icon-star_outline1"></i>
-                                        <i class="icon-star_outline1"></i>
-                                        <i class="icon-star_outline1"></i>
-                                        <b>02 Reviews</b>
+                                        @php
+                                            $reviews = App\Models\ReviewRating::where('product_id', $product->id)->get();
+                                            $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                        @endphp
+                                        @php
+                                            $last = 0;
+                                        @endphp
+                                        @for ($i = 1; $i <= $ratingAvg; $i++)
+                                            <a href="#"><i class="icon-star"></i></a>
+                                            @php $last = $i @endphp
+                                        @endfor
+                                        @for ($j = $last; $j < 5; $j++)
+                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                        @endfor
+                                        <b>{{ $reviews->count() }} Reviews</b>
                                     </li>
                                     <li>
                                         SKU: <span>{{ $product->sku }}</span>
@@ -79,7 +88,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                                                                  </button> -->
+                                                                                                                                                                      </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -273,10 +282,10 @@
                                             data-bs-target="#nav-description" type="button" role="tab"
                                             aria-controls="nav-description" aria-selected="true">Product
                                             Description</button>
-
                                         <button class="nav-link" id="nav-review-tab" data-bs-toggle="tab"
                                             data-bs-target="#nav-review" type="button" role="tab"
-                                            aria-controls="nav-review" aria-selected="false">Reviews (0)</button>
+                                            aria-controls="nav-review" aria-selected="false">Reviews
+                                            ({{ $reviews->count() }})</button>
                                     </div>
                                 </nav>
                             </div>
@@ -285,7 +294,23 @@
                                     aria-labelledby="nav-description-tab" tabindex="0">
 
                                     <div class="tpdescription__content">
-                                        <p> {{ $product->long_desc }}</p>
+                                        @if (!empty($product->long_desc))
+                                            <p> {{ $product->long_desc }}</p>
+                                        @else
+                                            <div class="product__details-stock mb-25">
+                                                <ul>
+                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }}
+                                                            Instock</i>
+                                                    </li>
+                                                    <li>Category: <span>{{ $product->category->categoryName }} </span>
+                                                    </li>
+                                                    <li>Subcategory: <span>{{ $product->subcategory->subcategoryName }}
+                                                        </span>
+                                                    </li>
+                                                    <li class="text-capitalize">Tags: {{ $product->tags }}</li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                     </div>
                                     {{-- <div
                                         class="tpdescription__product-wrapper mt-30 mb-30 d-flex justify-content-between align-items-center">
@@ -349,103 +374,180 @@
                                             consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
                                     </div> --}}
                                 </div>
-
-
-
-
-
                                 <div class="tab-pane fade" id="nav-review" role="tabpanel"
                                     aria-labelledby="nav-review-tab" tabindex="0">
                                     <div class="tpreview__wrapper">
-                                        <!--@php-->
-
-                                                                                    <!--@dd($review_rating);-->
-                                                                                <!--@endphp ?>-->
-                                        <!--<h4 class="tpreview__wrapper-title">1 review for Cheap and delicious fresh chicken-->
-                                        <!--</h4>-->
-                                        <!--<div class="tpreview__comment">-->
-                                        <!--    <div class="tpreview__comment-img mr-20">-->
-                                        <!--        <img src="{{ asset('frontend') }}/assets/img/testimonial/test-avata-1.png"-->
-                                        <!--            alt="">-->
-                                        <!--    </div>-->
-                                        <!--    <div class="tpreview__comment-text">-->
-                                        <!--        <div-->
-                                        <!--            class="tpreview__comment-autor-info d-flex align-items-center justify-content-between">-->
-                                        <!--            <div class="tpreview__comment-author">-->
-                                        <!--                <span>admin</span>-->
-                                        <!--            </div>-->
-                                        <!--            <div class="tpreview__comment-star">-->
-                                        <!--                <i class="icon-star_outline1"></i>-->
-                                        <!--                <i class="icon-star_outline1"></i>-->
-                                        <!--                <i class="icon-star_outline1"></i>-->
-                                        <!--                <i class="icon-star_outline1"></i>-->
-                                        <!--                <i class="icon-star_outline1"></i>-->
-                                        <!--            </div>-->
-                                        <!--        </div>-->
-                                        <!--        <span class="date mb-20">--April 9, 2022: </span>-->
-                                        <!--        <p>very good</p>-->
-                                        <!--    </div>-->
-                                        <!--</div>-->
-                                        <div class="tpreview__form">
-                                            <h4 class="tpreview__form-title mb-25">Add a Review</h4>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <form action="{{ Route('review-rating.insert') }}" method="POST"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="hidden" value="{{ $product->id }}"
-                                                            name="product_id" class="">
-                                                        <div class="tpreview__star mb-20">
-                                                            <h4 class="title">Your Rating</h4>
-                                                            <div class="tpreview__star-icon ratings">
-                                                                <input type="hidden" name="rating" id="rating"
-                                                                    value="0" required>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                                @error('rating')
-                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="tpreview__input mb-30">
-                                                            <label for="message" class="form-label">Write Your Comment
-                                                                here.</label>
-                                                            <textarea id="message" name="message" placeholder="Message" required></textarea>
-                                                            @error('message')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                            <label for="imageGallery" class="form-label">Add pictures from
-                                                                here.</label>
-                                                            <input type="file" id="imageGallery"
-                                                                class="form-control h-auto ps-3" name="imageGallery[]"
-                                                                multiple>
-                                                            @error('imageGallery[]')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                            <div class="tpreview__submit mt-30">
-                                                                <button class="tp-btn">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="tpreview__input mb-30">
-
-                                                        </div>
-                                                    </form>
+                                        <h4 class="tpreview__wrapper-title">{{ $reviews->count() }} review for Cheap and
+                                            delicious fresh chicken
+                                        </h4>
+                                        @foreach ($reviews as $review)
+                                            <div class="tpreview__comment">
+                                                <div class="tpreview__comment-img mr-20">
+                                                    <img style="height: 40px;width:40px"
+                                                        src="{{ asset('/default/user.svg') }}" alt="">
                                                 </div>
+
+                                                <div class="tpreview__comment-text w-50">
+                                                    <div
+                                                        class="tpreview__comment-autor-info d-flex align-items-center justify-content-between">
+                                                        <div class="tpreview__comment-author">
+                                                            <span>{{ $review->user->userName }}</span>
+                                                        </div>
+                                                        <div class="tpreview__comment-star">
+                                                            @php
+                                                                $last = 0;
+                                                            @endphp
+                                                            @for ($i = 1; $i <= $review->rating; $i++)
+                                                                <i class="icon-star"></i>
+                                                                @php $last = $i @endphp
+                                                            @endfor
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <i class="icon-star_outline1"></i>
+                                                            @endfor
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $date = new DateTime($review->created_at);
+                                                    $formattedDate = $date->format('M j');
+                                                    $day = $date->format('j');
+                                                    if ($day % 10 == 1 && $day != 11) {
+                                                        $formattedDate .= 'st';
+                                                    } elseif ($day % 10 == 2 && $day != 12) {
+                                                        $formattedDate .= 'nd';
+                                                    } elseif ($day % 10 == 3 && $day != 13) {
+                                                        $formattedDate .= 'rd';
+                                                    } else {
+                                                        $formattedDate .= 'th';
+                                                    }
+                                                    $formattedDate .= $date->format(' Y g:i A');
+                                                    
+                                                    ?>
+                                                    <span class="date mb-20">{{ $formattedDate }}</span>
+                                                    @if ($review->gallary->count() > 0)
+                                                        @foreach ($review->gallary as $image)
+                                                        @endforeach
+                                                        <img src="{{ asset('/uploads/review_image/' . $image->image) }}"
+                                                            alt="Review Image" class="img-fluid">
+                                                    @endif
+
+
+                                                    <p class="mt-2">{{ $review->review }}</p>
+                                                </div>
+
                                             </div>
-                                        </div>
+                                        @endforeach
+                                        @auth
+                                            @php
+                                                // @dd(Auth::user()->id);
+                                                $userId = Auth::user()->id;
+                                                $order = App\Models\Order::where('user_identity', $userId)->where('status', 'completed')->latest()->first();
+                                                if (!empty($order->id)) {
+                                                    $orderDetail = App\Models\OrderDetails::where('order_id', $order->id)
+                                                        ->where('product_id', $product->id)
+                                                        ->latest()
+                                                        ->first();
+                                                }
+                                            @endphp
+                                            @if (!empty($orderDetail->id))
+                                                <div class="tpreview__form">
+                                                    <h4 class="tpreview__form-title mb-25">Add a Review</h4>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <form action="{{ Route('review-rating.insert') }}" method="POST"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                    name="product_id" class="">
+                                                                <div class="tpreview__star mb-20">
+                                                                    <h4 class="title">Your Rating</h4>
+                                                                    <div class="star-rating ratings">
+                                                                        <input type="hidden" name="rating" id="rating"
+                                                                            value="0" required>
+                                                                        <span class="star" data-value="1">&#9733;</span>
+                                                                        <span class="star" data-value="2">&#9733;</span>
+                                                                        <span class="star" data-value="3">&#9733;</span>
+                                                                        <span class="star" data-value="4">&#9733;</span>
+                                                                        <span class="star" data-value="5">&#9733;</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tpreview__input mb-30">
+                                                                    <label for="message" class="form-label">Write Your
+                                                                        Comment here.</label>
+                                                                    <textarea id="message" name="message" placeholder="Message" required></textarea>
+                                                                    @error('message')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                    <label for="imageGallery" class="form-label">Add pictures
+                                                                        from here.</label>
+                                                                    <input type="file" id="imageGallery"
+                                                                        class="form-control h-auto ps-3" name="imageGallery[]"
+                                                                        multiple>
+                                                                    @error('imageGallery[]')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
+                                                                    <div class="tpreview__submit mt-30">
+                                                                        <button class="tp-btn">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tpreview__input mb-30">
+
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endauth
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const stars = document.querySelectorAll('.ratings a');
+                <style>
+                    .star-rating {
+                        display: flex;
+                        direction: row;
+                        font-size: 20px;
+                        color: #ddd;
+                        /* Default star color */
+                    }
 
+                    .star-rating .star {
+                        cursor: pointer;
+                        transition-duration: 1s;
+                    }
+
+                    .star-rating .star:hover {
+                        color: #ffc107;
+                    }
+
+                    /* Change color for active stars */
+                    .star-rating .star.active {
+                        color: #ffc107;
+                        /* Active star color, typically gold */
+
+                    }
+                </style>
+                <script>
+                    document.querySelectorAll('.star-rating .star').forEach(star => {
+                        star.onclick = () => {
+                            // Remove active class from all stars
+                            document.querySelectorAll('.star-rating .star').forEach(innerStar => {
+                                innerStar.classList.remove('active');
+                            });
+
+                            // Add active class to clicked star and all previous stars
+                            star.classList.add('active');
+                            let previousSibling = star.previousElementSibling;
+                            while (previousSibling) {
+                                previousSibling.classList.add('active');
+                                previousSibling = previousSibling.previousElementSibling;
+                            }
+                        };
+                    });
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const stars = document.querySelectorAll('.ratings span');
                         stars.forEach((star, index) => {
                             star.addEventListener('click', function(e) {
                                 e.preventDefault();
@@ -501,11 +603,21 @@
                                                     href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                             </h4>
                                             <div class="tpproduct__rating mb-5">
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                @php
+                                                    $indivitualReviews = App\Models\ReviewRating::where('product_id', $product->id)->get();
+                                                    $indivitualRatingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                @endphp
+                                                @php
+                                                    $last = 0;
+                                                @endphp
+                                                @for ($i = 1; $i <= $indivitualRatingAvg; $i++)
+                                                    <a href="#"><i class="icon-star"></i></a>
+                                                    @php $last = $i @endphp
+                                                @endfor
+                                                @for ($j = $last; $j < 5; $j++)
+                                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                                @endfor
+                                                ({{ $indivitualReviews->count() }})
                                             </div>
                                             <div class="tpproduct__price">
                                                 <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
@@ -531,72 +643,10 @@
     <!-- Recommended product-area-start -->
     @include('frontend.pageContent.recommendedProduct')
     <!-- Recommended product-area-end -->
-
     <!-- feature-area-start -->
-    <section class="feature-area mainfeature__bg pt-50 pb-40"
-        data-background="{{ asset('frontend') }}/assets/img/shape/footer-shape-1.svg">
-        <div class="container">
-            <div class="mainfeature__border pb-15">
-                <div class="row row-cols-lg-5 row-cols-md-3 row-cols-2">
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-30">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-1.svg" alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">Fast Delivery</h4>
-                                <p>Across West & East India</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-30">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-2.svg" alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">safe payment</h4>
-                                <p>100% Secure Payment</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-30">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-3.svg" alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">Online Discount</h4>
-                                <p>Add Multi-buy Discount </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-30">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-4.svg" alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">Help Center</h4>
-                                <p>Dedicated 24/7 Support </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mainfeature__item text-center mb-30">
-                            <div class="mainfeature__icon">
-                                <img src="{{ asset('frontend') }}/assets/img/icon/feature-icon-5.svg" alt="">
-                            </div>
-                            <div class="mainfeature__content">
-                                <h4 class="mainfeature__title">Curated items</h4>
-                                <p>From Handpicked Sellers</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('frontend.body.servicesfooter')
+    <!-- feature-area-end -->
+
     <!-- feature-area-end -->
 
     <script>

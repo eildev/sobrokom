@@ -34,13 +34,12 @@ class ReviewRatingController extends Controller
         // @dd($request);
         // Validate the incoming data
         $validatedData = $request->validate([
-            'rating' => 'required|integer|min:1|max:5',
             'message' => 'required|string|max:250',
         ]);
 
         // Create and save the review
         $review_rating = new ReviewRating();
-        $review_rating->user_id = Auth::user()->id;;
+        $review_rating->user_id = Auth::user()->id;
         $review_rating->product_id = $request->product_id;
         $review_rating->rating = $request->rating;
         $review_rating->review = $request->message;

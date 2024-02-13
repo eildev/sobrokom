@@ -38,6 +38,7 @@
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Download Invoice</th>
+                                <th>Refunds</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,7 @@
                                         <td>{{ $order->grand_total }}</td>
                                         <td>{{ $order->status }}</td>
                                         <td> </td>
+                                        <td> <a href="" class="btn btn-info btn-sm">Refund</a></td>
                                     </tr>
                                 @endforeach
                             @else
