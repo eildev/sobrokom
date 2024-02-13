@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\BillingInfo;
 use Illuminate\Http\Request;
