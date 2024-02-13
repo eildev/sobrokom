@@ -35,12 +35,25 @@
                                             <td>{{ $sub_subcategory->subcategory->subcategoryName }}</td>
                                             <td>{{ $sub_subcategory->subSubcategoryName }}</td>
                                             <td>{{ $sub_subcategory->slug }}</td>
-                                            <td>{{ $sub_subcategory->status }}</td>
                                             <td>
-                                                <a href="{{ route('sub.subcategory.edit', $sub_subcategory->id) }}"
-                                                    class="btn btn-info">Edit</a>
-                                                <a href="{{ route('sub.subcategory.delete', $sub_subcategory->id) }}"
-                                                    class="btn btn-danger" id="delete">Delete</a>
+                                                <a href="#"
+                                                    class="btn btn-sm btn-success sub_subcat_active">Active</a>
+                                                <a href="#" class="btn btn-sm btn-success sub_subcat_inactive"
+                                                    style="display: none;">Inactive</a>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-info dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">Action</button>
+                                                    <ul class="dropdown-menu" data-popper-placement="bottom-start"
+                                                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);">
+                                                        <li><a href="{{ route('sub.subcategory.edit', $sub_subcategory->id) }}"
+                                                                class="dropdown-item">Edit</a></li>
+                                                        <li><a href="{{ route('sub.subcategory.delete', $sub_subcategory->id) }}"
+                                                                class="dropdown-item" id="delete">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

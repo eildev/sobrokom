@@ -9,9 +9,9 @@
             <div class="col-lg-6 col-md-12">
                 <div class="header__top-right d-flex align-items-center">
                     <div class="header__top-link">
-                           <a href="{{ route('order.tracking') }}">Order Tracking</a>
-                           <a class= "me-3" href="{{ route('faqs') }}">FAQs</a>
-                        </div>
+                        <a href="{{ route('order.tracking') }}">Order Tracking</a>
+                        <a class= "me-3" href="{{ route('faqs') }}">FAQ</a>
+                    </div>
                     <div class="tpfooter__widget-social pt-5 pb-5">
                         <a target="_blank" href="https://www.facebook.com/profile.php?id=100094627520182"><i
                                 class="fab fa-facebook-f"></i></a>

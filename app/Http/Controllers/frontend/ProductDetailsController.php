@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Brand;
+use App\Models\SubSubcategory;
 use App\Models\Variant;
 class ProductDetailsController extends Controller
 {
@@ -48,6 +49,10 @@ class ProductDetailsController extends Controller
     public function subcategoryWiseProduct($subcategoryslug){
         $subcategory = Subcategory::where('slug', $subcategoryslug)->first();
         return view('frontend/e-com/subcategory-wise-product', compact('subcategory'));
+    }
+    public function subSubcategoryWiseProduct($subsubcategoryslug){
+        $subSubcategory = SubSubcategory::where('slug', $subsubcategoryslug)->first();
+        return view('frontend.e-com.sub-subcategory-wise-product', compact('subSubcategory'));
     }
     public function brandWiseProduct($brandslug){
         $brand = Brand::where('slug', $brandslug)->first();

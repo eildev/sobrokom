@@ -113,6 +113,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/banner/edit/{id}', 'edit')->name('banner.edit');
         Route::post('/banner/update/{id}', 'update')->name('banner.update');
         Route::get('/banner/delete/{id}', 'delete')->name('banner.delete');
+        Route::post('/banner/status/{id}', 'bannerStatus')->name('banner.status');
     });
     //All Routes for Home Banner End
 

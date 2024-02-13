@@ -74,7 +74,7 @@
                                                                         @endphp
                                                                         @foreach($subSubcategories as $subSubcategorie)
                                                                         <li>
-                                                                            <a href=""> - {{ $subSubcategorie->subSubcategoryName }}</a>
+                                                                            <a href="{{route('sub.subcategory.wise.product', $subSubcategorie->slug)}}"> - {{ $subSubcategorie->subSubcategoryName }}</a>
                                                                         </li>
                                                                         @endforeach
                                                                     </ul>
