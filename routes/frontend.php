@@ -127,9 +127,12 @@ Route::middleware('auth', 'role:user')->group(function () {
 
 });
 Route::middleware('auth')->group(function () {
+      //Blog Reaction Route
 Route::controller(BlogReactionController::class)->group(function () {
     Route::post('/blog/user-like', 'BlogReact');
    });
+      //Blog Reaction Route
+
 });
 // WithOut Auth All Routes
     Route::controller(OTPController::class)->group(function () {
@@ -161,11 +164,11 @@ Route::controller(BlogReactionController::class)->group(function () {
   // Blog Comment Route
     Route::controller(BlogCommentController::class)->group(function () {
         Route::post('/blog/comment', 'BlogCommentInsert')->name('blog.comment');
+        Route::get('/blog/comment/delete/{id}', 'BlogCommentDelete')->name('comment.delete');
         //Comment Reply Route
         Route::post('blog-comment-reply-submit', 'BlogCommentReplys')->name('blog.comment.reply');
+        Route::get('/blog-comment-reply-delete/{id}', 'ReplyDelete')->name('comment.reply.delete');
     });
    //Blog Comment Route End
-  //Blog Reaction Route
 
 
-   //Blog Reaction Route

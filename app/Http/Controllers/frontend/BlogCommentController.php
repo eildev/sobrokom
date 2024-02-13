@@ -20,6 +20,10 @@ class BlogCommentController extends Controller
     ]);
    return redirect()->back()->with('success', 'Comments Successfully Submited');
    }//
+   public function BlogCommentDelete($id){
+    BlogComment::findOrFail($id)->delete();
+    return redirect()->back()->with('success', 'Comment Delete Successfully');
+   }
    //Comment Reply route
 
    public function BlogCommentReplys(Request $request){
@@ -33,5 +37,9 @@ class BlogCommentController extends Controller
         'created_at' =>Carbon::now(),
     ]);
    return redirect()->back()->with('success', 'Comment Reply Successfully');
+   }//
+   public function ReplyDelete($id){
+    BlogCommentReply::findOrFail($id)->delete();
+    return redirect()->back()->with('success', 'Comment Delete Successfully');
    }
 }
