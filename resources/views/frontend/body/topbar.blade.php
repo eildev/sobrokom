@@ -13,7 +13,7 @@
                     <div class="header__top-link">
                         <a href="#">Store Location</a>
                         <a href="#">Order Tracking</a>
-                        <a href="faq.html">FAQs</a>
+                        <a href="faq.html">FAQ</a>
                     </div>
                     <div class="header__lang">
                         <span class="header__lang-select">English <i class="far fa-angle-down"></i></span>

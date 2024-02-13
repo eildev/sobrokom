@@ -126,4 +126,23 @@ class HomeBannerController extends Controller
         $banner->delete();
         return back()->with('success', 'banner Successfully deleted');
     }
+    public function bannerStatus(Request $request,$id)
+    {
+        dd($request);
+        $banner = HomeBanner::findOrFail($id, $request);
+        if ($banner->status == 0) {
+            $newStatus = 1;
+        } else {
+            $newStatus = 0;
+        }
+         
+        $banner->update([
+            'status'=>$newStatus
+        ]);
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'banner inactive successful',
+        ]);
+    }
 }

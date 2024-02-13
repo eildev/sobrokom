@@ -33,10 +33,15 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $Brand->BrandName }}</td>
                                             <td>
-                                                <img src="{{ asset('/uploads/brands/' . $Brand->image) }}" style="height: 100px;" class="img-fluid"
+                                                <img src="{{ asset('/uploads/brands/' . $Brand->image) }}"
+                                                    style="height: 80px; object-fit: contain;" class="img-fluid"
                                                     alt="">
                                             </td>
-                                            <td>{{ $Brand->status }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-success brand_active">Active</a>
+                                                <a href="#" class="btn btn-sm btn-success brand_inactive"
+                                                    style="display: none;">Inactive</a>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('brand.edit', $Brand->id) }}"
                                                     class="btn btn-info">Edit</a>

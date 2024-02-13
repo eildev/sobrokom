@@ -53,11 +53,11 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/product-details/{slug}', 'productDetails')->name('product.details');
     Route::get('/category/{categoryslug}', 'categoryWiseProduct')->name('category.wise.product');
     Route::get('/subcategory/{subcategoryslug}', 'subcategoryWiseProduct')->name('subcategory.wise.product');
+    Route::get('/sub-subcategory/{subsubcategoryslug}', 'subSubcategoryWiseProduct')->name('sub.subcategory.wise.product');
     Route::get('/brand/{brandslug}', 'brandWiseProduct')->name('brand.wise.product');
     Route::get('/features', 'allFeatureProduct')->name('all.feature.product');
     Route::get('/product/search', 'SearchbyProduct')->name('search.product');
     Route::get('/product/filterby-brand', 'filterbyBrand')->name('product.filterByBrand');
-
     Route::get('/product/filterby-category', 'filterbyCategory')->name('product.filterByCategory');
     Route::get('/product/global/search/{value}', 'globalSearch');
     Route::post('/product/filter/feature/category/brand', 'productFilterByFeatureCategoryBrand');

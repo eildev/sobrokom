@@ -174,18 +174,23 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.view')->with('success', 'Product deleted successfully');
     }
-    // public function productStatus(Request $request,$id)
-    // {
-    //     // dd($request);
-    //     $product = Product::findOrFail($id);
-    //     $product->status = $request->status;
-    //     $product->update();
-        
-    //     return response()->json([
-    //         'status' => '200',
-    //         'message' => "Status Changed Successfully"
-    //     ]);
-    // }
+
+    // product status changed
+    public function productStatus($id)
+    {
+        // dd($request);
+        $product = Product::findOrFail($id);
+        if ($product->status == 0) {
+            $newStatus = 1;
+        } else {
+            $newStatus = 0;
+        }
+         
+        $product->update([
+            'status'=>$newStatus
+        ]);
+        return redirect()->back()->with('message', 'status changed successfully');
+    }
     
     // product update function 
     public function update(Request $request, $id)

@@ -6,7 +6,7 @@
 
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-info">Manage Category</h5>
+                        <h5 class="mb-0 text-info">Manage Home Banner</h5>
 
                         <a href="{{ route('banner') }}" class="btn btn-info btn-sm text-light ">
                             <i class='bx bx-plus'></i>
@@ -35,33 +35,38 @@
                                     @foreach ($all_banner as $banner)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ $banner->title }}</td>
-                                            <td>{{ $banner->short_description }}</td>
-                                            <td>{{ $banner->long_description }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->title, 15) }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->short_description, 20) }}</td>
+                                            <td>{{ Illuminate\Support\Str::limit($banner->long_description, 20) }}</td>
 
                                             <td>
                                                 <img src="{{ asset('/uploads/banner/' . $banner->image) }}"
-                                                    style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                    style="height: 100px; object-fit: contain;" class="img-fluid"
+                                                    alt="banner Image">
                                             </td>
                                             <td>
-                                                {{-- @php
-                                                    $imageGalleries = App\Models\ImageGallery::filter($banner_id);
-                                                    dd($imageGalleries->all());
+                                                @php
+                                                    $imageGalleries = App\Models\ImageGallery::where('banner_id', $banner->id)->get();
+                                                    // dd($imageGalleries->all());
                                                 @endphp
-                                                @if ($all_banner->count() > 0)
+                                                @if ($imageGalleries->count() > 0)
                                                     @foreach ($imageGalleries as $imageGallery)
                                                         <img src="{{ asset('/uploads/banner/gallery/' . $imageGallery->image) }}"
-                                                            style="height: 100px;" class="img-fluid" alt="banner Image">
+                                                            style="height: 50px; object-fit:cover;" class="img-fluid"
+                                                            alt="banner Image">
                                                     @endforeach
                                                 @else
-                                                    <span colspan="6" class="text-center text-warning">Data not
+                                                    <span class="text-center text-warning">Image not
                                                         Found</span>
-                                                @endif --}}
+                                                @endif
                                             </td>
-                                            <td>{{ $banner->status }}</td>
                                             <td>
-
-
+                                                <a href="#" class="btn btn-sm btn-success home_banner_active"
+                                                    value="{{ $banner->id }}">Active</a>
+                                                <a href="#" class="btn btn-sm btn-success home_banner_inactive"
+                                                    style="display: none;" value="{{ $banner->id }}">Inactive</a>
+                                            </td>
+                                            <td>
                                                 <a href="{{ route('banner.edit', $banner->id) }}"
                                                     class="btn btn-info">Edit</a>
                                                 <a href="{{ route('banner.delete', $banner->id) }}" class="btn btn-danger"
@@ -83,4 +88,41 @@
         </div>
         <!--end row-->
     </div>
+
+
+    <script>
+        // $(document).ready(function() {
+        //     // let csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //     $('.home_banner_active').on('click', function(e) {
+        //         e.preventDefault();
+        //         // alert('ok')
+
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+        //         let id = this.getAttribute('value');
+        //         $.ajax({
+        //             url: '/banner/status/' + id,
+        //             type: "POST",
+        //             data: {
+        //                 status: 0
+        //             },
+        //             contentType: false,
+        //             processData: false,
+        //             // headers: {
+        //             //     'X-CSRF-TOKEN': csrfToken
+        //             // },
+        //             suuccess: function(response) {
+        //                 console.log(response);
+        //             }
+        //             // error: function(xhr, status, error) {
+        //             //     console.error(xhr.responseText);
+        //             // }
+        //         })
+
+        //     });
+        // });
+    </script>
 @endsection

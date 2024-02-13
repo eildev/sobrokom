@@ -31,21 +31,34 @@
                                 @endphp
                                 @if ($categories->count() > 0)
                                     @foreach ($categories as $category)
-                                        
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $category->categoryName }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>
                                                 <img src="{{ asset('/uploads/category/' . $category->image) }}"
-                                                    style="height: 100px;" class="img-fluid" alt="Category Image">
+                                                    style="height: 60px; object-fit:contain;" class="img-fluid"
+                                                    alt="Category Image">
                                             </td>
-                                            <td>{{ $category->status }}</td>
                                             <td>
-                                                <a href="{{ route('category.edit', $category->id) }}"
-                                                    class="btn btn-info">Edit</a>
-                                                <a href="{{ route('category.delete', $category->id) }}"
-                                                    class="btn btn-danger" id="delete">Delete</a>
+                                                {{-- {{ $category->status }} --}}
+                                                <a href="#" class="btn btn-sm btn-success cat_active">Active</a>
+                                                <a href="#" class="btn btn-sm btn-success cat_inactive"
+                                                    style="display: none;">Inactive</a>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-info dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">Action</button>
+                                                    <ul class="dropdown-menu" data-popper-placement="bottom-start"
+                                                        style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);">
+                                                        <li><a href="{{ route('category.edit', $category->id) }}"
+                                                                class="dropdown-item">Edit</a></li>
+                                                        <li><a href="{{ route('category.delete', $category->id) }}"
+                                                                class="dropdown-item" id="delete">Delete</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
