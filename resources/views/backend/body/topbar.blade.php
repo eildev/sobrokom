@@ -63,9 +63,13 @@
                             </div>
                         </div>
                     </li> --}}
+
+                    @php
+                        $newOrder = App\Models\Order::all();
+                    @endphp
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: none"> <span
                                 class="alert-count">7</span>
                             <i class='bx bx-bell'></i>
                         </a>
@@ -193,8 +197,8 @@
                     </li>
                     <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span
-                                class="alert-count">8</span>
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: none">
+                            <span class="alert-count">8</span>
                             <i class='bx bx-comment'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">

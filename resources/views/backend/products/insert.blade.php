@@ -287,7 +287,7 @@
                                                 <input type="text" class="form-control weight" id="inputPrice"
                                                     placeholder="Weight" name="weight">
                                             </div>
-                                            {{-- <div class="col-lg-3 col-md-6">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
                                                 <select class="form-select color" name="color">
                                                     <option value="">Color</option>
@@ -304,7 +304,7 @@
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                            </div> --}}
+                                            </div>
                                             {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
                                                 <input type="text" class="form-control barcode" id="inputPrice"
@@ -348,6 +348,8 @@
                                                     <th>Stock Quantity</th>
                                                     <th>Unit</th>
                                                     <th>Weight</th>
+                                                    <th>color</th>
+                                                    <th>Size</th>
                                                     <th>Manufacture Date</th>
                                                     <th>Expire Date</th>
                                                     <th>Action</th>
@@ -384,13 +386,12 @@
                 const randomIndex = Math.floor(Math.random() * characters.length);
                 sku += characters.charAt(randomIndex);
             }
-
             return sku;
         }
         document.querySelector(".product_name").addEventListener('blur', function() {
             const skuGenerate = document.querySelector(".sku_generate");
             const productNameValue = this.value;
-            console.log(productNameValue);
+            // console.log(productNameValue);
 
             if (productNameValue.trim() !== '') {
                 skuGenerate.value = generateProductSKU(10);
@@ -460,43 +461,55 @@
             document
                 .querySelector(".pageLoader")
                 .style.setProperty("display", "flex", "important");
-            let varientData = new FormData(jQuery("#productVariant")[0]);
-            $.ajax({
-                url: '/product/variant/store',
-                type: "POST",
-                data: varientData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    let regular_price = parseFloat(document.querySelector('.regular_price').value);
-                    let discount = parseFloat(document.querySelector('.discount').value);
-                    let discount_amount = parseFloat(document.querySelector('.discount_amount')
-                        .value);
-                    let stock = parseFloat(document.querySelector('#stock').value);
+            let regular_price = parseFloat(document.querySelector('.regular_price').value);
+            let discount = parseFloat(document.querySelector('.discount').value);
+            let discount_amount = parseFloat(document.querySelector('.discount_amount')
+                .value);
+            let stock = parseFloat(document.querySelector('#stock').value);
 
-                    if (response.status == 200 && regular_price > 0 && discount >= 0 &&
-                        discount_amount >
-                        0 && stock > 0) {
-                        toastr.success(response.message);
-                        document.querySelector('.discount_amount')
-                            .value = '';
-                        document.querySelector('.regular_price').value = '';
-                        document.querySelector('.discount').value = '';
-                        document.querySelector('#stock').value = '';
-                        document.querySelector('.unit').value = '';
-                        document.querySelector('.weight').value = '';
-                        show();
-                        document
-                            .querySelector(".pageLoader")
-                            .style.setProperty("display", "none", "important");
-                    } else {
-                        toastr.warning('please provide varient');
-                        document
-                            .querySelector(".pageLoader")
-                            .style.setProperty("display", "none", "important");
+            let varientData = new FormData(jQuery("#productVariant")[0]);
+            if (regular_price > 0 && discount >= 0 && discount_amount > 0 && stock > 0) {
+                $.ajax({
+                    url: '/product/variant/store',
+                    type: "POST",
+                    data: varientData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            document.querySelector('.discount_amount')
+                                .value = '';
+                            document.querySelector('.regular_price').value = '';
+                            document.querySelector('.discount').value = '';
+                            document.querySelector('#stock').value = '';
+                            document.querySelector('.unit').value = '';
+                            document.querySelector('.weight').value = '';
+                            document.querySelector('.color').value = '';
+                            document.querySelector('.size').value = '';
+                            show();
+                            document
+                                .querySelector(".pageLoader")
+                                .style.setProperty("display", "none", "important");
+                        } else {
+                            toastr.error('Something went wrong');
+                            document
+                                .querySelector(".pageLoader")
+                                .style.setProperty("display", "none", "important");
+                        }
                     }
-                }
-            })
+                })
+
+                document
+                    .querySelector(".pageLoader")
+                    .style.setProperty("display", "none", "important");
+            } else {
+                toastr.error('please provide valid input');
+                document
+                    .querySelector(".pageLoader")
+                    .style.setProperty("display", "none", "important");
+            }
+
         })
 
 
@@ -522,6 +535,8 @@
                                 <td>${data.stock_quantity}</td>
                                 <td>${data.unit}</td>
                                 <td>${data.weight}</td>
+                                <td>${data.color}</td>
+                                <td>${data.size}</td>
                                 <td>${data.manufacture_date}</td>
                                 <td>${data.expire_date}</td>
                                 <td>
