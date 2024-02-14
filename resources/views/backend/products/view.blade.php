@@ -123,7 +123,7 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
                         <ul class="pagination">
-                            @if ($allProducts->onFirstPage())
+                            @if ($products->onFirstPage())
                                 <li class="paginate_button page-item previous disabled" id="example_previous">
                                     <a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"
                                         class="page-link">Prev</a>
