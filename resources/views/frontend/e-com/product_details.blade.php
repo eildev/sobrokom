@@ -88,7 +88,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                                                                      </button> -->
+                                                                                                                                                                                                  </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -249,7 +249,16 @@
                                                     <li>
                                                         <a href="#"><i class="icon-share-2"></i> Share</a>
                                                     </li>
+
                                                 </ul>
+                                                <div id="social-links">
+                                                    <ul>
+                                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/product-details/{{ $product->slug }}"
+                                                                class="social-button btn btn-primary  my-class"
+                                                                id="my-id" rel="nofollow noopener noreferrer"><span
+                                                                    class="fa fa-facebook-official"></span></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div class="product__details-stock mb-25">
                                                 <ul>
