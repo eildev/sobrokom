@@ -169,7 +169,7 @@
                                             <div class="postbox__comment-box d-flex">
                                                 <div class="postbox__comment-info">
                                                     <div class="postbox__comment-avater mr-25">
-                                                        <img src="{{ asset('uploads/user.jpg') }}" alt="">
+                                                        <img src="{{ asset('default/user.svg') }}" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="postbox__comment-text">
@@ -199,7 +199,7 @@
                                                                     <div class="postbox__comment-box pl-90 d-flex">
                                                                         <div class="postbox__comment-info">
                                                                             <div class="postbox__comment-avater mr-25">
-                                                                                <img src="{{ asset('uploads/user.jpg') }}"
+                                                                                <img src="{{ asset('default/user.svg') }}"
                                                                                     alt="">
                                                                             </div>
                                                                         </div>
