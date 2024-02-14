@@ -108,7 +108,7 @@ class OTPController extends Controller
                 $order->save();
             // store billing details
                 $validator = Validator::make($request->all(), [
-                    'phone' => 'required|max:50',
+                    'phone' => 'required|max:11|min:11',
                     'first_name' => 'required|max:15',
                     'address_1' => 'required|max:5',
                     'city' => 'required||max:100',

@@ -66,39 +66,42 @@
         <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">
     </div>
     <style>
-        .chat{
+        .chat {
             font-size: 20px;
             display: flex !important;
             justify-content: center;
             align-items: center;
-            position:fixed;
-            bottom:24px;
-            left:20px;
-            z-index:99999;
-            border-radius:50%;
+            position: fixed;
+            bottom: 24px;
+            left: 20px;
+            z-index: 99999;
+            border-radius: 50%;
             height: 50px;
             width: 50px;
-            box-shadow:1px 1px 5px gray;
+            box-shadow: 1px 1px 5px gray;
             background: #2D2A6E;
             border-color: #9e54a1 !important;
         }
-        .chat:hover{
+
+        .chat:hover {
             scale: 1.045;
-            color:#2D2A6E !important;
+            color: #2D2A6E !important;
             background: white;
         }
+
         .chat::after {
-		position: absolute;
-		z-index: -1;
-		content: '';
-		top: 100%;
-		left: 5%;
-		height: 10px;
-		width: 90%;
-		background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
-	}
+            position: absolute;
+            z-index: -1;
+            content: '';
+            top: 100%;
+            left: 5%;
+            height: 10px;
+            width: 90%;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+        }
     </style>
-    <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/101120972767678"><i class="fab fa-facebook-messenger"></i></a>
+    <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/105731512599106"><i
+            class="fab fa-facebook-messenger"></i></a>
 
     @php
         $cartData = Cart::content();
@@ -153,6 +156,7 @@
     <script src="{{ asset('frontend') }}/assets/js/ajax-form.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/meanmenu.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
+    <script src="{{ asset('js') }}/share.js"></script>
 
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -451,9 +455,9 @@
         // }
 
         $(document).on('click', '.top_search_list li', function() {
-                $('.top_search').val($(this).text());
-                $('.top_search_list').css('display', 'none');
-            });
+            $('.top_search').val($(this).text());
+            $('.top_search_list').css('display', 'none');
+        });
     </script>
     <style>
         .top_search_list li {
@@ -463,9 +467,9 @@
     </style>
 
     {{-- ALl Code For Order Tracking Information --}}
-    @if(!empty($order))
-    <script>
-        <?php
+    @if (!empty($order))
+        <script>
+            <?php
             $date = new DateTime($order->updated_at);
             $formattedDate = $date->format('M j');
             $day = $date->format('j');
@@ -479,147 +483,145 @@
                 $formattedDate .= 'th';
             }
             $formattedDate .= $date->format(' Y g:i A');
-        ?>
-        let status = '{{ $order->status }}';
-        let date = '{{ $formattedDate }}';
-        const submit_circle = document.querySelector('.submit_circle');
-        const submit_card = document.querySelector('.submit_card');
-        const submit_card_date = document.querySelector('.submit_data');
-        const submit_card_h4 = document.querySelector('.submit_title');
+            ?>
+            let status = '{{ $order->status }}';
+            let date = '{{ $formattedDate }}';
+            const submit_circle = document.querySelector('.submit_circle');
+            const submit_card = document.querySelector('.submit_card');
+            const submit_card_date = document.querySelector('.submit_data');
+            const submit_card_h4 = document.querySelector('.submit_title');
 
-        const confirm_circle = document.querySelector('.confirm_circle');
-        const confirm_card = document.querySelector('.confirm_card');
-        const confirm_card_date = document.querySelector('.confirm_date');
-        const confirm_card_h4 = document.querySelector('.confirm_title');
+            const confirm_circle = document.querySelector('.confirm_circle');
+            const confirm_card = document.querySelector('.confirm_card');
+            const confirm_card_date = document.querySelector('.confirm_date');
+            const confirm_card_h4 = document.querySelector('.confirm_title');
 
-        const process_circle = document.querySelector('.process_circle');
-        const process_card = document.querySelector('.process_card');
-        const process_card_date = document.querySelector('.process_date');
-        const process_card_h4 = document.querySelector('.process_title');
+            const process_circle = document.querySelector('.process_circle');
+            const process_card = document.querySelector('.process_card');
+            const process_card_date = document.querySelector('.process_date');
+            const process_card_h4 = document.querySelector('.process_title');
 
-        const onthe_way_circle = document.querySelector('.onthe_way_circle');
-        const onthe_way_card = document.querySelector('.onthe_way_card');
-        const onthe_way_card_date = document.querySelector('.onthe_way_date');
-        const onthe_way_card_h4 = document.querySelector('.onthe_way_title');
+            const onthe_way_circle = document.querySelector('.onthe_way_circle');
+            const onthe_way_card = document.querySelector('.onthe_way_card');
+            const onthe_way_card_date = document.querySelector('.onthe_way_date');
+            const onthe_way_card_h4 = document.querySelector('.onthe_way_title');
 
-        const complete_circle = document.querySelector('.complete_circle');
-        const complete_card = document.querySelector('.complete_card');
-        const complete_card_date = document.querySelector('.complete_date');
-        const complete_card_h4 = document.querySelector('.complete_title');
+            const complete_circle = document.querySelector('.complete_circle');
+            const complete_card = document.querySelector('.complete_card');
+            const complete_card_date = document.querySelector('.complete_date');
+            const complete_card_h4 = document.querySelector('.complete_title');
 
-        if(status === 'pending'){
-            submit_circle.setAttribute('style','background: #9e54a1 !important');
-            submit_card.setAttribute('style','border-color: #9e54a1 !important');
-            submit_card_date.setAttribute('style','color: #9e54a1 !important');
-            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
-            submit_card.classList.add('shadow');
-        }
-        if(status === 'approve'){
-            submit_circle.setAttribute('style','background: #9e54a1 !important');
-            submit_card.setAttribute('style','border-color: #9e54a1 !important');
-            submit_card_date.setAttribute('style','color: #9e54a1 !important');
-            submit_card_date.innerHTML = date;
-            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
-            submit_card.classList.add('shadow');
+            if (status === 'pending') {
+                submit_circle.setAttribute('style', 'background: #9e54a1 !important');
+                submit_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                submit_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card.classList.add('shadow');
+            }
+            if (status === 'approve') {
+                submit_circle.setAttribute('style', 'background: #9e54a1 !important');
+                submit_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                submit_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card_date.innerHTML = date;
+                submit_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card.classList.add('shadow');
 
-            confirm_circle.setAttribute('style','background: #9e54a1 !important');
-            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
-            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
-            confirm_card_date.innerHTML = date;
-            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
-            confirm_card.classList.add('shadow');
-        }
-        if(status === 'processing'){
-            submit_circle.setAttribute('style','background: #9e54a1 !important');
-            submit_card.setAttribute('style','border-color: #9e54a1 !important');
-            submit_card_date.setAttribute('style','color: #9e54a1 !important');
-            submit_card_date.innerHTML = date;
-            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
-            submit_card.classList.add('shadow');
+                confirm_circle.setAttribute('style', 'background: #9e54a1 !important');
+                confirm_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                confirm_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card_date.innerHTML = date;
+                confirm_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card.classList.add('shadow');
+            }
+            if (status === 'processing') {
+                submit_circle.setAttribute('style', 'background: #9e54a1 !important');
+                submit_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                submit_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card_date.innerHTML = date;
+                submit_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card.classList.add('shadow');
 
-            confirm_circle.setAttribute('style','background: #9e54a1 !important');
-            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
-            confirm_card_date.innerHTML = date;
-            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
-            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
-            confirm_card.classList.add('shadow');
+                confirm_circle.setAttribute('style', 'background: #9e54a1 !important');
+                confirm_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                confirm_card_date.innerHTML = date;
+                confirm_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card.classList.add('shadow');
 
-            process_circle.setAttribute('style','background: #9e54a1 !important');
-            process_card.setAttribute('style','border-color: #9e54a1 !important');
-            process_card_date.setAttribute('style','color: #9e54a1 !important');
-            process_card_date.innerHTML = date;
-            process_card_h4.setAttribute('style','color: #9e54a1 !important');
-            process_card.classList.add('shadow');
-        }
-        if(status === 'delivering'){
-            submit_circle.setAttribute('style','background: #9e54a1 !important');
-            submit_card.setAttribute('style','border-color: #9e54a1 !important');
-            submit_card_date.setAttribute('style','color: #9e54a1 !important');
-            submit_card_date.innerHTML = date;
-            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
-            submit_card.classList.add('shadow');
+                process_circle.setAttribute('style', 'background: #9e54a1 !important');
+                process_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                process_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                process_card_date.innerHTML = date;
+                process_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                process_card.classList.add('shadow');
+            }
+            if (status === 'delivering') {
+                submit_circle.setAttribute('style', 'background: #9e54a1 !important');
+                submit_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                submit_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card_date.innerHTML = date;
+                submit_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card.classList.add('shadow');
 
-            confirm_circle.setAttribute('style','background: #9e54a1 !important');
-            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
-            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
-            confirm_card_date.innerHTML = date;
-            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
-            confirm_card.classList.add('shadow');
+                confirm_circle.setAttribute('style', 'background: #9e54a1 !important');
+                confirm_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                confirm_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card_date.innerHTML = date;
+                confirm_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card.classList.add('shadow');
 
-            process_circle.setAttribute('style','background: #9e54a1 !important');
-            process_card.setAttribute('style','border-color: #9e54a1 !important');
-            process_card_date.setAttribute('style','color: #9e54a1 !important');
-            process_card_date.innerHTML = date;
-            process_card_h4.setAttribute('style','color: #9e54a1 !important');
-            process_card.classList.add('shadow');
+                process_circle.setAttribute('style', 'background: #9e54a1 !important');
+                process_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                process_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                process_card_date.innerHTML = date;
+                process_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                process_card.classList.add('shadow');
 
-            onthe_way_circle.setAttribute('style','background: #9e54a1 !important');
-            onthe_way_card.setAttribute('style','border-color: #9e54a1 !important');
-            onthe_way_card_date.setAttribute('style','color: #9e54a1 !important');
-            onthe_way_card_date.innerHTML = date;
-            onthe_way_card_h4.setAttribute('style','color: #9e54a1 !important');
-            onthe_way_card.classList.add('shadow');
-        }
-        if(status === 'completed'){
-            submit_circle.setAttribute('style','background: #9e54a1 !important');
-            submit_card.setAttribute('style','border-color: #9e54a1 !important');
-            submit_card_date.setAttribute('style','color: #9e54a1 !important');
-            submit_card_date.innerHTML = date;
-            submit_card_h4.setAttribute('style','color: #9e54a1 !important');
-            submit_card.classList.add('shadow');
+                onthe_way_circle.setAttribute('style', 'background: #9e54a1 !important');
+                onthe_way_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                onthe_way_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                onthe_way_card_date.innerHTML = date;
+                onthe_way_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                onthe_way_card.classList.add('shadow');
+            }
+            if (status === 'completed') {
+                submit_circle.setAttribute('style', 'background: #9e54a1 !important');
+                submit_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                submit_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card_date.innerHTML = date;
+                submit_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                submit_card.classList.add('shadow');
 
-            confirm_circle.setAttribute('style','background: #9e54a1 !important');
-            confirm_card.setAttribute('style','border-color: #9e54a1 !important');
-            confirm_card_date.setAttribute('style','color: #9e54a1 !important');
-            confirm_card_date.innerHTML = date;
-            confirm_card_h4.setAttribute('style','color: #9e54a1 !important');
-            confirm_card.classList.add('shadow');
+                confirm_circle.setAttribute('style', 'background: #9e54a1 !important');
+                confirm_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                confirm_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card_date.innerHTML = date;
+                confirm_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                confirm_card.classList.add('shadow');
 
-            process_circle.setAttribute('style','background: #9e54a1 !important');
-            process_card.setAttribute('style','border-color: #9e54a1 !important');
-            process_card_date.setAttribute('style','color: #9e54a1 !important');
-            process_card_date.innerHTML = date;
-            process_card_h4.setAttribute('style','color: #9e54a1 !important');
-            process_card.classList.add('shadow');
+                process_circle.setAttribute('style', 'background: #9e54a1 !important');
+                process_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                process_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                process_card_date.innerHTML = date;
+                process_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                process_card.classList.add('shadow');
 
-            onthe_way_circle.setAttribute('style','background: #9e54a1 !important');
-            onthe_way_card.setAttribute('style','border-color: #9e54a1 !important');
-            onthe_way_card_date.setAttribute('style','color: #9e54a1 !important');
-            onthe_way_card_date.innerHTML = date;
-            onthe_way_card_h4.setAttribute('style','color: #9e54a1 !important');
-            onthe_way_card.classList.add('shadow');
+                onthe_way_circle.setAttribute('style', 'background: #9e54a1 !important');
+                onthe_way_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                onthe_way_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                onthe_way_card_date.innerHTML = date;
+                onthe_way_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                onthe_way_card.classList.add('shadow');
 
-            complete_circle.setAttribute('style','background: #9e54a1 !important');
-            complete_card.setAttribute('style','border-color: #9e54a1 !important');
-            complete_card_date.setAttribute('style','color: #9e54a1 !important');
-            complete_card_date.innerHTML = date;
-            complete_card_h4.setAttribute('style','color: #9e54a1 !important');
-            complete_card.classList.add('shadow');
-        }
-
-    </script>
+                complete_circle.setAttribute('style', 'background: #9e54a1 !important');
+                complete_card.setAttribute('style', 'border-color: #9e54a1 !important');
+                complete_card_date.setAttribute('style', 'color: #9e54a1 !important');
+                complete_card_date.innerHTML = date;
+                complete_card_h4.setAttribute('style', 'color: #9e54a1 !important');
+                complete_card.classList.add('shadow');
+            }
+        </script>
     @endif
 </body>
 
 </html>
-
