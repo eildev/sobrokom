@@ -100,7 +100,7 @@
             background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
         }
     </style>
-    <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/101120972767678"><i
+    <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/105731512599106"><i
             class="fab fa-facebook-messenger"></i></a>
 
     @php

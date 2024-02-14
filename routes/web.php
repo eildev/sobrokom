@@ -172,11 +172,16 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/order/admin-completed-order/{invoiceNumber}', 'orderCompleted')->name('admin.completed.order');
         Route::get('/order/completed', 'completedOrders')->name('order.completed');
 
+        Route::get('/order/admin-refunded-order/{invoiceNumber}', 'orderRefunded')->name('admin.refunded.order');
+        Route::get('/order/refunding-orders', 'refundOrders')->name('order.refunding');
+
+        Route::get('/order/refunded-orders', 'refundedOrders')->name('order.refunded');
 
 
         // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
 
     });
+
     //All Routes for Order End
 
 

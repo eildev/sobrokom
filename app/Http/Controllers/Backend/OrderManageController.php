@@ -30,6 +30,14 @@ class OrderManageController extends Controller
         $completed_orders = Order::where("status", 'completed')->latest()->get();
         return view('backend.order.completed-order', compact('completed_orders'));
     }
+    public function refundOrders(){
+        $refunding_orders = Order::where("status", 'refunding')->latest()->get();
+        return view('backend.order.refunding-order', compact('refunding_orders'));
+    }
+    public function refundedOrders(){
+        $refunded_orders = Order::where("status", 'refunded')->latest()->get();
+        return view('backend.order.refunded-orders', compact('refunded_orders'));
+    }
 
 
     public function orderProcessing($invoice){
@@ -56,6 +64,20 @@ class OrderManageController extends Controller
         $completed_Orders->update();
         return back()->with('success','Order Status Updated Sucessfully');
     }
+    public function orderRefund($invoice){
+        $refund_orders = Order::where("invoice_number",$invoice)->latest()->first();
+        $refund_orders->status = "refunding";
+        $refund_orders->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+    public function orderRefunded($invoice){
+        $refunded_orders = Order::where("invoice_number",$invoice)->latest()->first();
+        $refunded_orders->status = "refunded";
+        $refunded_orders->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+
+
     public function adminApprove($invoice){
         $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
         $newOrders->status = "approve";
@@ -99,12 +121,6 @@ class OrderManageController extends Controller
             return back()->with('warring','Something went wrong Order Not Approved');
         }
 
-    }
-    public function order($invoice){
-        $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
-        $newOrders->status = "proccessing";
-        $newOrders->update();
-        return back()->with('success','Order Successfully Approved');
     }
     public function orderTracking(){
         return view('frontend/e-com/tracking-product');
