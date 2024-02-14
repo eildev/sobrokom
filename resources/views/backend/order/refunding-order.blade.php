@@ -5,7 +5,7 @@
             <div class="card border-top border-0 border-3 border-info col-md-12">
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-info">Completed Orders</h5>
+                        <h5 class="mb-0 text-info">Request For Refunds</h5>
                     </div>
                     <hr>
                     <div class="table-responsive">
@@ -21,14 +21,15 @@
                                     <th>Pay to</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                     $serialNumber = 1;
                                 @endphp
-                                @if ($completed_orders->count() > 0)
-                                    @foreach ($completed_orders as $order)
+                                @if ($refunding_orders->count() > 0)
+                                    @foreach ($refunding_orders as $order)
                                     @php
                                     $originalDateString = $order->created_at;
                                     $dateTime = new DateTime($originalDateString);
@@ -45,6 +46,9 @@
                                             <td>{{ $order->orderBillingDetails->address_1 ?? '' }}</td>
                                             <td>
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.refunded.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Approve</a>
                                             </td>
                                         </tr>
                                     @endforeach

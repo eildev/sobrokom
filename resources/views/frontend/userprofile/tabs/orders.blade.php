@@ -52,14 +52,25 @@
                                         <td>{{ $order->invoice_number }}</td>
                                         <td>{{ $order->product_quantity }}</td>
                                         <td>{{ $order->grand_total }}</td>
-                                        <td>{{ $order->status }}</td>
+                                        <td>
+                                        @if ($order->status == 'approve')
+                                            {{'Order Approved'}}
+                                        @elseif ($order->status == 'processing')
+                                            {{'Order Processing'}}
+                                        @elseif ($order->status == 'delivering')
+                                            {{'Order Delivering'}}
+                                        @elseif ($order->status == 'completed')
+                                            {{'Order Completed'}}
+                                        @endif
+
+                                        </td>
                                         <td> </td>
-                                        <td> <a href="" class="btn btn-info btn-sm">Refund</a></td>
+                                        <td> <a href="{{ route('user.refund.order',$order->invoice_number) }}" class="btn btn-info btn-sm">Refund </a></td>
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6" class="text-center text-warning">Data not Found</td>
+                                    <td colspan="7" class="text-center text-warning">Data not Found</td>
                                 </tr>
                             @endif
                         </tbody>
