@@ -6,10 +6,6 @@
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 text-info">New Order Table</h5>
-
-                        <a href="{{ route('popupMessage') }}" class="btn btn-info btn-sm text-light ">
-                            <i class='bx bx-plus'></i>
-                        </a>
                     </div>
                     <hr>
                     <div class="table-responsive">
@@ -34,11 +30,11 @@
                                 @endphp
                                 @if ($newOrders->count() > 0)
                                     @foreach ($newOrders as $order)
-                                    @php
-                                    $originalDateString = $order->created_at;
-                                    $dateTime = new DateTime($originalDateString);
-                                    $formattedDate = $dateTime->format('Y-m-d');
-                                    @endphp
+                                        @php
+                                            $originalDateString = $order->created_at;
+                                            $dateTime = new DateTime($originalDateString);
+                                            $formattedDate = $dateTime->format('Y-m-d');
+                                        @endphp
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $formattedDate }}</td>
@@ -52,7 +48,8 @@
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.approve.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Approve</a>
+                                                <a href="{{ route('admin.approve.order', $order->invoice_number) }}"
+                                                    class="btn btn-sm btn-info">Approve</a>
                                                 <a href="#" class="btn btn-sm btn-success" id="delete">View</a>
                                                 <a href="#" class="btn btn-sm btn-danger" id="delete">Denied</a>
                                             </td>
