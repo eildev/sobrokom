@@ -88,7 +88,7 @@
                                                 <div class="nav nav-tabs justify-content-center" id="nav-tab"
                                                     role="tablist">
                                                     <!-- <button class="active nav-link" id="nav-home-tab" data-bs-toggle="tab"
-                                                                                                                                                                                                  </button> -->
+                                                                                                                                                                                                      </button> -->
                                                     @foreach ($product->gallary as $gallery)
                                                         <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab"
                                                             data-bs-target="#nav-home{{ $gallery->id }}" type="button"
@@ -574,7 +574,8 @@
                     });
                 </script>
                 @php
-                    $featureProducts = App\Models\Product::where('product_feature', 'like', '%' . 'new-arrival' . '%')
+                    $featureProducts = App\Models\Product::whereHas('varient')
+                        ->where('product_feature', 'like', '%' . 'new-arrival' . '%')
                         ->take(3)
                         ->orderBy('id', 'ASC')
                         ->get();
@@ -588,7 +589,8 @@
                                 @foreach ($featureProducts as $product)
                                     <div class="tpsidebar__product-item">
                                         <div class="tpsidebar__product-thumb p-relative">
-                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"alt="Product Image">
+                                            <img
+                                                src="{{ asset('uploads/products/' . $product->product_image) }}"alt="Product Image">
                                             <div class="tpsidebar__info bage">
                                                 @if ($product->varient[0]->discount > 0)
                                                     <span

@@ -41,7 +41,9 @@
                                 <div class="swiper-wrapper">
                                     @php
                                         $brands = App\Models\Brand::all();
-                                        $allProducts = App\Models\Product::where('brand_id', $brand->id)->paginate(12);
+                                        $allProducts = App\Models\Product::whereHas('varient')
+                                            ->where('brand_id', $brand->id)
+                                            ->paginate(12);
                                         // dd($allProducts->all());
                                     @endphp
                                     @foreach ($brands as $brand)

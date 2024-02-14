@@ -1,5 +1,6 @@
 @php
-    $flash_selling_product = App\Models\Product::where('status', 1)
+    $flash_selling_product = App\Models\Product::whereHas('varient')
+        ->where('status', 1)
         ->where('product_feature', 'like', '%' . 'weekend-deals' . '%')
         ->take(10)
         ->orderBy('id', 'ASC')

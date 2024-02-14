@@ -32,7 +32,7 @@
                         <div class="tab-content" id="nav-tabContent-tp">
                             {{-- New arrival products  --}}
                             @php
-                                $arrival_product = App\Models\Product::where('status', 1)->orderByRaw('RAND()')->get();
+                                $arrival_product = App\Models\Product::whereHas('varient')->where('status', 1)->orderByRaw('RAND()')->get();
                             @endphp
                             @if ($arrival_product->count() > 0)
                                 <div class="tab-pane fade show active" id="nav-arrivals" role="tabpanel"
@@ -178,7 +178,8 @@
 
                             {{-- featured products  --}}
                             @php
-                                $featured_product = App\Models\Product::where('status', 1)
+                                $featured_product = App\Models\Product::whereHas('varient')
+                                    ->where('status', 1)
                                     ->where('product_feature', 'like', '%' . 'feature' . '%')
                                     ->orderByRaw('RAND()')
                                     ->get();
@@ -328,7 +329,8 @@
 
                             {{-- Best Selling  --}}
                             @php
-                                $best_selling = App\Models\Product::where('status', 1)
+                                $best_selling = App\Models\Product::whereHas('varient')
+                                    ->where('status', 1)
                                     ->where('product_feature', 'like', '%' . 'best-rate' . '%')
                                     ->orderByRaw('RAND()')
                                     ->get();

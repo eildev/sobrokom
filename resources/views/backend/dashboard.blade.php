@@ -6,7 +6,7 @@
                 <div class="card radius-10 bg-gradient-deepblue">
                     <div class="card-body">
                         @php
-                            $products = App\Models\Product::count();
+                            $products = App\Models\Product::whereHas('varient')->count();
                             $users = App\Models\User::where('role', 'user')->count();
                             $orders = App\Models\Order::where('status', 'pending')->count();
                             $refund = App\Models\Order::where('status', 'refunded')->count();

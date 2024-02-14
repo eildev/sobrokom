@@ -27,10 +27,10 @@
                         <div class="tptrack__content grey-bg">
                             <div class="tptrack__item d-flex mb-20">
                                 <div class="tptrack__item-icon">
-                                    <i class="fal fa-user-unlock"></i>
+                                    <i class="fal fa-lock"></i>
                                 </div>
                                 <div class="tptrack__item-content">
-                                    <h4 class="tptrack__item-title">Login Here</h4>
+                                    <h4 class="tptrack__item-title">Sign Up</h4>
                                     <p>Your personal data will be used to support your experience throughout this
                                         website,
                                         to manage access to your account.</p>
@@ -41,42 +41,48 @@
                                 <a href="{{ route('google.redirect') }}"
                                     class="btn bg-white w-100 text-dark rounded-2 py-2 px-4 border-0">
                                     <img class="img-fluid" style="max-height: 16px;"
-                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt=""> Log
-                                    In
+                                        src="{{ asset('frontend') }}/assets/img/logo/google.png" alt="">
+                                    Sign Up
                                     With Google </a>
                                 {{-- <a href="{{ route('google.redirect') }}" class="tp-btn"> Login With <i
-                                            class="fab fa-facebook-f"></i></a> --}}
+                                      class="fab fa-facebook-f"></i></a> --}}
                             </div>
-                            <form method="POST" action="{{ route('login') }}">
+                            <form class="signUp" action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="tptrack__id mb-10">
-
-                                    <span><i class="fal fa-user"></i></span>
-                                    <input name="email" type="email" placeholder="Email address">
+                                    <span><i class="fa fa-user"></i></span>
+                                    <input name="userName" type="text" placeholder="User Name" required>
+                                    <x-input-error :messages="$errors->get('userName')" class="mt-2" />
+                                </div>
+                                <div class="tptrack__id mb-10">
+                                    <span><i class="fa fa-envelope"></i></span>
+                                    <input name="email" type="email" placeholder="Enter Email" required>
                                 </div>
                                 <x-input-error :messages="$errors->get('email')" class="my-2 ms-4 text-danger" />
                                 <div class="tptrack__email mb-10">
-                                    <span><i class="fal fa-key"></i></span>
-                                    <input name="password" type="password" placeholder="Password">
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2 text-danger" />
+                                    <span><i class="fa fa-key"></i></span>
+                                    <input name="password" type="password" placeholder="Password" required>
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                 </div>
-                                <div class="tpsign__remember d-flex align-items-center justify-content-between mb-15">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault2">
-                                        <label class="form-check-label" for="flexCheckDefault2">Remember me</label>
-                                    </div>
-                                    <div class="tpsign__pass">
-                                        <a href="{{ route('password.request') }}">Forget Password</a>
-                                    </div>
+                                <div class="tptrack__email mb-10">
+                                    <span><i class="fa fa-key"></i></span>
+                                    <input type="password" name="password_confirmation" placeholder="Confirmation Password"
+                                        required>
+                                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="termandcondition"
+                                        checked>
+                                    <label class="form-check-label" for="termandcondition"><a href="#"
+                                            target="_blank">I accept term & condition</a></label>
                                 </div>
                                 <div class="tptrack__btn">
-                                    <button class="tptrack__submition active">Login Now<i
+                                    <button class="tptrack__submition tpsign__reg">Register Now<i
                                             class="fal fa-long-arrow-right"></i></button>
                                 </div>
                                 <div class="tptrack__btn mt-20">
-                                    <p>If You Have'nt an account. Please <a class="text-primary"
-                                            href="{{ route('register') }}">Register</a> here.</p>
+                                    <p>If You Already Have an account. Please <a class="text-primary"
+                                            href="{{ route('login') }}">Login</a>.</p>
                                 </div>
                             </form>
                         </div>

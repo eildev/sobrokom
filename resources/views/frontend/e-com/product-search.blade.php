@@ -35,7 +35,9 @@
                                 <form method="get" action="{{ route('product.filterByCategory') }}">
                                     @foreach ($categories as $category)
                                         @php
-                                            $categoryProducts = App\Models\Product::where('category_id', $category->id)->count();
+                                            $categoryProducts = App\Models\Product::whereHas('varient')
+                                                ->where('category_id', $category->id)
+                                                ->count();
                                         @endphp
                                         <div class="form-check">
                                             <input class="form-check-input checkbox_category{{ $category->id }}"
@@ -112,7 +114,9 @@
                                 <form method="get" action="{{ route('product.filterByBrand') }}">
                                     @foreach ($brands as $brand)
                                         @php
-                                            $brandProducts = App\Models\Product::where('brand_id', $brand->id)->get();
+                                            $brandProducts = App\Models\Product::whereHas('varient')
+                                                ->where('brand_id', $brand->id)
+                                                ->get();
                                         @endphp
 
                                         <div class="form-check">

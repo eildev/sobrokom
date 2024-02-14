@@ -37,7 +37,8 @@
                                 <div class="swiper-wrapper">
                                     @php
                                         $subSubcategories = App\Models\SubSubcategory::all();
-                                        $allProducts = App\Models\Product::where('sub_subcategory_id', $subSubcategory->id)
+                                        $allProducts = App\Models\Product::whereHas('varient')
+                                            ->where('sub_subcategory_id', $subSubcategory->id)
                                             ->orderBy('id', 'DESC')
                                             ->paginate(12);
                                     @endphp

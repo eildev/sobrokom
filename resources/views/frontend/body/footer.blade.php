@@ -103,7 +103,8 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7 col-sm-12">
                         <div class="tpfooter__copyright">
-                            <span class="tpfooter__copyright-text">Copyright © <a href="#">SOBROKOM.STORE</a> all
+                            <span class="tpfooter__copyright-text">Copyright © <a
+                                    href="{{ route('home') }}">SOBROKOM.STORE</a> all
                                 rights reserved.</span>
                         </div>
                     </div>

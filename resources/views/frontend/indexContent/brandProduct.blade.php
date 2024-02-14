@@ -12,7 +12,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="tpproduct__all-item">
-                        <a href="#">View All <i class="icon-chevron-right"></i></a>
+                        <a href="{{ route('brand.wise.product', 'local') }}">View All <i
+                                class="icon-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,8 @@
                 </div>
 
                 @php
-                    $products = App\Models\Product::where('status', 1)
+                    $products = App\Models\Product::whereHas('varient')
+                        ->where('status', 1)
                         ->where('brand_id', $brands->id)
                         ->take(6)
                         ->orderBy('id', 'DESC')

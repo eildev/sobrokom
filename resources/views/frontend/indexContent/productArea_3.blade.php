@@ -34,7 +34,7 @@
                         <div class="tab-content" id="nav-tabContent">
                             <!-- All Product here without Condition -->
                             @php
-                                $all_product = App\Models\Product::where('status', 1)->take(10)->orderByRaw('RAND()')->get();
+                                $all_product = App\Models\Product::whereHas('varient')->where('status', 1)->take(10)->orderByRaw('RAND()')->get();
                                 // @dd($all_product);
                             @endphp
                             @if ($all_product->count() > 0)
@@ -188,7 +188,8 @@
 
                             @foreach ($cats as $cat)
                                 @php
-                                    $all_product = App\Models\Product::where('status', 1)
+                                    $all_product = App\Models\Product::whereHas('varient')
+                                        ->where('status', 1)
                                         ->where('category_id', $cat->id)
                                         ->take(10)
                                         ->orderByRaw('RAND()')
