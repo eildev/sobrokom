@@ -134,7 +134,7 @@ class ProductController extends Controller
     // show all products function 
     public function view()
     {
-        $products = Product::orderBy('id', 'ASC')->paginate(10);
+        $products = Product::all();
         return view('backend.products.view', compact('products'));
     }
 
