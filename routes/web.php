@@ -210,6 +210,8 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/blog/post/edit/{id}', 'BlogPostEdit')->name('blog.post.edit');
         Route::post('/blog/post/update/{id}', 'BlogPostupdate')->name('blog.post.update');
         Route::get('/blog/post/delete/{id}', 'BlogPostDelete')->name('blog.post.delete');
+        Route::get('/blog/post/inactive/{id}', 'BlogActiveToInactive')->name('blog.post.inactive');
+        Route::get('/blog/post/active/{id}', 'BlogInctiveToActive')->name('blog.post.active');
     });
      //Blog Post All Route End
 

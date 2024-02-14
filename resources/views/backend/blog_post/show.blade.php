@@ -36,7 +36,15 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $blog['category']['cat_name'] }}</td>
                                             <td>{{ Illuminate\Support\Str::limit($blog->title, 20) }}</td>
-                                            <td> {{ Illuminate\Support\Str::limit($blog->desc, 40) }}  </td>
+                                            <td>
+                                                <?php
+                                                    $text = $blog->desc;
+                                                    $strippedText = strip_tags($text, '<br>');
+                                                    $trimmedText = mb_substr($strippedText, 0, 30);
+                                                    $trimmedTextWithTags = nl2br($trimmedText);
+                                                    echo $trimmedTextWithTags;
+                                                ?>..
+                                                 </td>
                                             <td> {{ $blog->tags }}  </td>
 
                                             <td>
@@ -44,8 +52,14 @@
                                                     style="height: 50px;width:50px;" class="img-fluid" alt="banner Image">
                                             </td>
                                             <td>
-                                                <a href="{{route('blog.post.edit',$blog->id)}}"class="btn btn-info" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                                <a href="{{route('blog.post.delete',$blog->id)}}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                                @if( $blog->status == 0)
+                                                <a href="{{route('blog.post.inactive',$blog->id)}}"class="btn btn-warning btn-sm" title="Edit Data">Inactive</a>
+                                                @else
+                                                    <a href="{{route('blog.post.active',$blog->id)}}"class="btn btn-success btn-sm" title="Edit Data">Active</a>
+                                                @endif
+
+                                                <a href="{{route('blog.post.edit',$blog->id)}}"class="btn btn-info btn-sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                                <a href="{{route('blog.post.delete',$blog->id)}}" class="btn btn-danger btn-sm" title="Delete Data" id="delete"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

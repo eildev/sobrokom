@@ -261,61 +261,75 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="menu-title">Blog Category</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('blog.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog
-                        Category</a>
-                </li>
-                <li>
-                    <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog
-                        Category</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="menu-title">Blog Post</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('blog.post.add.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog</a>
-                </li>
-                <li>
-                    <a href="{{ route('blog.all.post.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog</a>
-                </li>
-            </ul>
-        </li>
-        {{-- ////Comment --}}
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="menu-title">Blog Comment</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending
-                        Comment</a>
-                </li>
-                <li>
-                    <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve
-                        Comment</a>
-                </li>
-            </ul>
-        </li>
-        {{-- ////Comment --}}
 
+        {{-- //Manege Blog Start --}}
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="fab fa-blogger"></i>
+                </div>
+                <div class="menu-title">Manage Blog</div>
+            </a>
+            <ul class="mm-collapse">
+                    {{-- //Blog Category --}}
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class="fab fa-slack"></i>
+                        </div>
+                        <div class="menu-title">Blog Category</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('blog.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog
+                                Category</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog
+                                Category</a>
+                        </li>
+                    </ul>
+                </li>
+
+                {{-- //Blog post --}}
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <div class="menu-title">Blog Post</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('blog.post.add.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('blog.all.post.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog</a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- //Blog Comment --}}
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class="far fa-comment"></i>
+                        </div>
+                        <div class="menu-title">Blog Comment</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending
+                                Comment</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve
+                                Comment</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        {{-- //Blog Manage End --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">

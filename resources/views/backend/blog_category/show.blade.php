@@ -32,9 +32,9 @@
                                             <td>{{ $blogCategory->cat_name }}</td>
                                             <td>
                                                 <a href="{{route('blog.category.edit',$blogCategory->id)}}"
-                                                    class="btn btn-info" title="Edit Data"> <i class="fas fa-edit"></i></a>
+                                                    class="btn btn-info btn-sm" title="Edit Data"> <i class="fas fa-edit"></i></a>
 
-                                                <a href="{{route('blog.category.delete',$blogCategory->id)}}" class="btn btn-danger"
+                                                <a href="{{route('blog.category.delete',$blogCategory->id)}}" class="btn btn-danger btn-sm"
                                                     id="delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

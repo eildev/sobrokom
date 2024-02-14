@@ -46,7 +46,7 @@
                             </div>
                             <h2 class="tp-blog-details__title mb-25">{{ $singleBlog->title }}</h2>
                             <p>
-                                {{ $singleBlog->desc }}
+                                {!! $singleBlog->desc !!}
                             </p>
                         </div>
                         <div class="postbox__tag-border mb-10">
@@ -84,7 +84,6 @@
                                                 @endphp
                                                 <a href="#" class="like react" name="like" value="like"><i
                                                         class="fas fa-thumbs-up fs-4 text-primary"></i></a><span class="like_count fw-bold text-dark">{{ $like }} </span></span>
-                                                        {{-- //bootstrap --}}
 
                                             {{-- //Dislike --}}
                                             <span>
@@ -144,9 +143,10 @@
                         </div>
                         {{-- Blog React and share End  --}}
                         <div class="postbox__comment mb-65">
-
-                            <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
-
+                        @guest
+                        @else
+                        <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
+                        @endguest
                             <ul>
 
                                 @foreach ($blogComment as $comment)
@@ -161,19 +161,17 @@
                                                 </div>
                                                 <div class="postbox__comment-text">
                                                     <div class="postbox__comment-name">
-                                                        <h5 class="d-inline-block">{{$comment['user']['fullName'] }} </h5>
-
+                                                        <h5 class="d-inline-block">{{$comment['user']['fullName'] }}
+                                                      </h5>
                                                         <small
                                                             class="small">{{ date('d-M-Y', strtotime($comment->created_at)) }}
                                                             at {{ date('h:i A', strtotime($comment->created_at)) }}</small>
-
+                                     @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
+                                     <span class="btn btn-sm badge text-danger"><a href="{{route('comment.delete',$comment->id)}}"><i class="far fa-trash-alt"></i></a></span>
+                                     @else
+                                     @endif
                                                     </div>
                                                     <p>{{ $comment->comment }}
-
-                         @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
-                         <span class="btn btn-sm badge text-danger"><a href="{{route('comment.delete',$comment->id)}}"><i class="far fa-trash-alt"></i></a></span>
-                                                            @else
-                                                        @endif
                                                        </p>
                                                     <div class="postbox__comment-reply">
                                                         <button class="btn btn-sm ReplyOpen" id="{{ $comment->id }}">Leave
@@ -199,16 +197,13 @@
                                                                             class="small">{{ date('d-M-Y', strtotime($reply->created_at)) }}
                                                                             at
                                                                             {{ date('h:i A', strtotime($reply->created_at)) }}</small>
-                                                                    </div>
-                                                                    <p>{{ $reply->reply }}
-                             @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
-
+                            @if($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
                              <span class="btn btn-sm badge text-danger"><a href="{{route('comment.reply.delete',$reply->id)}}"><i class="fal fa-trash-alt"></i></a></span>
+                            @else
+                            @endif
+                                                                        </div>
+                                                                    <p>{{ $reply->reply }}
                                                                      </p>
-                                                                            @else
-                                                                        @endif
-
-
                                                                 </div>
                                                             </div>
                                                             </li>
@@ -260,8 +255,6 @@
                                     to your account | <a class="btn btn-sm bg-light" href="{{ route('login') }}">Login</a> |
                                 </h4>
                             @else
-                                <p>Your email address will not be published. Required fields are marked *</p>
-
                                 <form action="{{ route('blog.comment') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="subcriber_id" id="subcriber_id"
@@ -274,22 +267,11 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="tpfooter__widget-newsletter-check postbox__check-box">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault2">
-                                                    <label class="form-check-label" for="flexCheckDefault2">
-                                                        Save my name, email, and website in this browser for the next time I
-                                                        comment.
-                                                    </label>
-                                                </div>
-                                            </div>
                                             <div class="tpreview__submit mt-25">
                                                 <button type="submit" class="tp-btn">Post Comment</button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                             @endguest
                         </div>

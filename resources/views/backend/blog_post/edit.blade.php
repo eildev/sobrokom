@@ -50,8 +50,10 @@
                                 <div class="row mb-3">
                                     <label for="" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control @error('description') is-invalid  @enderror" name="description" placeholder=""
-                                            style="resize: none; height: 150px;">{{$blogPost->desc}}</textarea>
+                                        <textarea class="form-control @error('description') is-invalid  @enderror" name="description" id="product_descriptions" placeholder=""
+                                            style="resize: none; height: 150px;">
+                                            {!!$blogPost->desc!!}
+                                        </textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
