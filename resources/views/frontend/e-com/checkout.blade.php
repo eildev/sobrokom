@@ -57,7 +57,7 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Name <span class="required">*</span></label>
-                                        <input type="text" required placeholder="Enter Your Name" class="first_name"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" required placeholder="Enter Your Name" class="first_name"
                                             value="" name="first_name">
                                         <span class="first_name_error text-danger"></span>
                                     </div>
@@ -72,7 +72,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="01**********" value=""
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="01**********" value=""
                                             class="phone user_phone" name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
@@ -80,7 +80,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Address<span class="required">*</span></label>
-                                        <input type="text" placeholder="Address" value="" class="address_1"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Address" value="" class="address_1"
                                             name="address_1">
                                         <span class="address_1_error text-danger"></span>
                                     </div>
@@ -88,7 +88,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>City/Town<span class="required">*</span></label>
-                                        <input type="text" placeholder="City/Town" value="" class="city"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="City/Town" value="" class="city"
                                             name="city">
                                         <span class="city_error text-danger"></span>
                                     </div>
@@ -96,7 +96,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Division <span class="required">*</span></label>
-                                        <input type="text" placeholder="Division" value="" class="division"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Division" value="" class="division"
                                             name="division">
                                         <span class="division_error text-danger"></span>
                                     </div>
@@ -111,7 +111,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" value="" class="post_code"
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text" placeholder="Postcode / Zip" value="" class="post_code"
                                             name="post_code">
                                         <span class="post_code_error text-danger"></span>
                                     </div>
@@ -392,7 +392,7 @@
 
 
     <script>
-        // apply coupon 
+        // apply coupon
         const applyCoupon = document.querySelector('.apply_coupon');
         applyCoupon.addEventListener('click', function(e) {
             e.preventDefault();
@@ -431,7 +431,14 @@
                 }
             })
         });
-
+        function checker(element) {
+            if(element.value =="") {
+                element.style.border="1px solid red";
+                element.focus();
+            }else{
+                element.style.border="1px solid green";
+            }
+        }
 
         function clearErrorMessages(className) {
             $(className).removeClass('error');
@@ -447,9 +454,7 @@
             // Reset previous error styles
             $('.error').removeClass('error');
             $('.error_message').hide();
-            $('.first_name').keyup(function() {
-                clearErrorMessages('.first_name');
-            });
+
             $('.phone').keyup(function() {
                 clearErrorMessages('.phone');
             });
