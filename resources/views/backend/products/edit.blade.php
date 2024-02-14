@@ -312,7 +312,7 @@
                                                 <input type="text" class="form-control weight" id="inputPrice"
                                                     placeholder="Weight" name="weight">
                                             </div>
-                                            {{-- <div class="col-lg-3 col-md-6">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label class="form-label col-12">Color</label>
                                                 <select class="form-select color" name="color">
                                                     <option value="">Color</option>
@@ -329,7 +329,7 @@
                                                     <option value="L">L</option>
                                                     <option value="XL">XL</option>
                                                 </select>
-                                            </div> --}}
+                                            </div>
                                             {{-- <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
                                                 <input type="text" class="form-control barcode" id="inputPrice"
@@ -373,6 +373,8 @@
                                                     <th>Stock Quantity</th>
                                                     <th>Unit</th>
                                                     <th>Weight</th>
+                                                    <th>Size</th>
+                                                    <th>Color</th>
                                                     <th>Manufacture Date</th>
                                                     <th>Expire Date</th>
                                                     <th>Action</th>
@@ -391,6 +393,8 @@
                                                             <td>{{ $variant->stock_quantity }}</td>
                                                             <td>{{ $variant->unit }}</td>
                                                             <td>{{ $variant->weight }}</td>
+                                                            <td>{{ $variant->size }}</td>
+                                                            <td>{{ $variant->color }}</td>
                                                             <td>{{ $variant->manufacture_date }}</td>
                                                             <td>{{ $variant->expire_date }}</td>
                                                             <td>
@@ -480,34 +484,58 @@
         const add_varient = document.querySelector('.add_varient');
         add_varient.addEventListener('click', function(e) {
             e.preventDefault();
+            document
+                .querySelector(".pageLoader")
+                .style.setProperty("display", "flex", "important");
             let regular_price = parseFloat(document.querySelector('.regular_price').value);
             let discount = parseFloat(document.querySelector('.discount').value);
-            let discount_amount = parseFloat(document.querySelector('.discount_amount').value);
+            let discount_amount = parseFloat(document.querySelector('.discount_amount')
+                .value);
             let stock = parseFloat(document.querySelector('#stock').value);
+
             let varientData = new FormData(jQuery("#productVariant")[0]);
-            $.ajax({
-                url: '/product/variant/store',
-                type: "POST",
-                data: varientData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    if (response.status == 200 && regular_price > 0 && discount >= 0 &&
-                        discount_amount >
-                        0 && stock > 0) {
-                        toastr.success(response.message);
-                        document.querySelector('.discount_amount').value = '';
-                        document.querySelector('.regular_price').value = '';
-                        document.querySelector('.discount').value = '';
-                        document.querySelector('#stock').value = '';
-                        document.querySelector('.unit').value = '';
-                        document.querySelector('.weight').value = '';
-                        show();
-                    } else {
-                        toastr.warning('please provide varient');
+            if (regular_price > 0 && discount >= 0 && discount_amount > 0 && stock > 0) {
+                $.ajax({
+                    url: '/product/variant/store',
+                    type: "POST",
+                    data: varientData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            document.querySelector('.discount_amount')
+                                .value = '';
+                            document.querySelector('.regular_price').value = '';
+                            document.querySelector('.discount').value = '';
+                            document.querySelector('#stock').value = '';
+                            document.querySelector('.unit').value = '';
+                            document.querySelector('.weight').value = '';
+                            document.querySelector('.color').value = '';
+                            document.querySelector('.size').value = '';
+                            show();
+                            document
+                                .querySelector(".pageLoader")
+                                .style.setProperty("display", "none", "important");
+                        } else {
+                            toastr.error('Something went wrong');
+                            document
+                                .querySelector(".pageLoader")
+                                .style.setProperty("display", "none", "important");
+                        }
                     }
-                }
-            })
+                })
+
+                document
+                    .querySelector(".pageLoader")
+                    .style.setProperty("display", "none", "important");
+            } else {
+                toastr.error('please provide variants');
+                document
+                    .querySelector(".pageLoader")
+                    .style.setProperty("display", "none", "important");
+            }
+
         })
 
 
@@ -527,25 +555,25 @@
                         allData.forEach(function(data) {
                             const tr = document.createElement('tr');
                             tr.innerHTML += `
-                                    <td>${data.regular_price}</td>
-                                    <td>${data.discount}</td>
-                                    <td>${data.discount_amount}</td>
-                                    <td>${data.stock_quantity}</td>
-                                    <td>${data.unit}</td>
-                                    <td>${data.weight}</td>
-                                    <td>${data.manufacture_date}</td>
-                                    <td>${data.expire_date}</td>
-                                    <td>
-                                        <a href="#" class="btn-sm btn-info edit_variant me-2" value="${data.id}">
-                                            Edit
-                                        </a>
-                                        <a href="{{ route('variant.delete', $variant->id ?? 0) }}" class="btn-sm btn-danger delete_variant" value="${data.id}">
-                                            Delete
-                                        </a>
-                                    </td>
+                                <td>${data.regular_price}</td>
+                                <td>${data.discount}</td>
+                                <td>${data.discount_amount}</td>
+                                <td>${data.stock_quantity}</td>
+                                <td>${data.unit}</td>
+                                <td>${data.weight}</td>
+                                <td>${data.color}</td>
+                                <td>${data.size}</td>
+                                <td>${data.manufacture_date}</td>
+                                <td>${data.expire_date}</td>
+                                <td>
+                                <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
+                                    Edit
+                                </button>
+                                <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
+                                            </td>
                                     `;
                             varient_container.appendChild(tr);
-                        });
+                        })
                     } else {
                         toastr.warning(res.error);
                     }

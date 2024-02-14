@@ -29,7 +29,7 @@ class ProductController extends Controller
             'product_feature' => 'required',
             'product_name' => 'required|max:100',
             'short_desc' => 'required|max:255',
-            'product_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'sku' => 'required',
         ]);
 
@@ -134,7 +134,7 @@ class ProductController extends Controller
     // show all products function 
     public function view()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'ASC')->paginate(10);
         return view('backend.products.view', compact('products'));
     }
 
