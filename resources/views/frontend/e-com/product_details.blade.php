@@ -573,8 +573,6 @@
                         });
                     });
                 </script>
-
-
                 @php
                     $featureProducts = App\Models\Product::where('product_feature', 'like', '%' . 'new-arrival' . '%')
                         ->take(3)
@@ -590,8 +588,7 @@
                                 @foreach ($featureProducts as $product)
                                     <div class="tpsidebar__product-item">
                                         <div class="tpsidebar__product-thumb p-relative">
-                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                alt="Product Image">
+                                            <img src="{{ asset('uploads/products/' . $product->product_image) }}"alt="Product Image">
                                             <div class="tpsidebar__info bage">
                                                 @if ($product->varient[0]->discount > 0)
                                                     <span

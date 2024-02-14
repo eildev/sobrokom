@@ -41,7 +41,7 @@
                                         <input type="text" name="title"
                                             class="form-control @error('title') is-invalid  @enderror"
                                             id="inputEnterYourName" value="{{ old('title') }}"
-                                            placeholder="Enter Banner Title">
+                                            placeholder="Enter Blog Title">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

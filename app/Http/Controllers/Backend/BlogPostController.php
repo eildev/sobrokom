@@ -95,4 +95,16 @@ class BlogPostController extends Controller
         BlogPost::findOrFail($id)->delete();
         return redirect()->route('blog.all.post.view')->with('success', 'Blog Post Successfully Deleted');
     }
+    public function BlogActiveToInactive($id){
+        BlogPost::findOrFail($id)->update([
+            'status' => 1,
+        ]);
+        return redirect()->back()->with('success', 'Blog Inactive Successfully');;
+    }//End Method
+    public function BlogInctiveToActive($id){
+        BlogPost::findOrFail($id)->update([
+            'status' => 0,
+        ]);
+        return redirect()->back()->with('success', 'Blog Active Successfully');;
+    }//End Method
 }

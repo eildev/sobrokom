@@ -46,7 +46,7 @@
                             </div>
                             <h2 class="tp-blog-details__title mb-25">{{ $singleBlog->title }}</h2>
                             <p>
-                                {{ $singleBlog->desc }}
+                                {!! $singleBlog->desc !!}
                             </p>
                         </div>
                         <div class="postbox__tag-border mb-10">
@@ -85,19 +85,18 @@
                                                         ->count();
                                                 @endphp
                                                 <a href="#" class="like react" name="like" value="like"><i
-                                                        class="far fa-thumbs-up fs-2 text-primary"></i></a><span
-                                                    class="like_count">{{ $like }}</span></span>
+                                                        class="fas fa-thumbs-up fs-4 text-primary"></i></a><span class="like_count fw-bold text-dark">{{ $like }} </span>
 
                                             {{-- //Dislike --}}
-                                            <span>
+
                                                 @php
                                                     $dislike = App\Models\BlogReact::where('blog_id', $singleBlog->id)
                                                         ->where('dislike', 1)
                                                         ->count();
                                                 @endphp
                                                 <a href="#" class="dislike react" name="dislike" value="dislike"><i
-                                                        class="far fa-thumbs-down fs-2 text-info"></i></a><span
-                                                    class="dislike_count">{{ $dislike }}</span></span>
+                                                        class="far fa-thumbs-down fs-4 text-info"></i></a><span
+                                                    class="dislike_count">{{ $dislike }}</span>
 
                                             {{-- //heart --}}
                                             {{-- <span>
@@ -157,9 +156,10 @@
                         </div>
                         {{-- Blog React and share End  --}}
                         <div class="postbox__comment mb-65">
-
-                            <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
-
+                        @guest
+                        @else
+                        <h3 class="postbox__comment-title mb-35">LEAVE A COMMENTs</h3>
+                        @endguest
                             <ul>
 
                                 @foreach ($blogComment as $comment)
@@ -180,16 +180,12 @@
                                                         <small
                                                             class="small">{{ date('d-M-Y', strtotime($comment->created_at)) }}
                                                             at {{ date('h:i A', strtotime($comment->created_at)) }}</small>
-
+                                     @if($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
+                                     <span class="btn btn-sm badge text-danger"><a href="{{route('comment.delete',$comment->id)}}"><i class="far fa-trash-alt"></i></a></span>
+                                     @else
+                                     @endif
                                                     </div>
                                                     <p>{{ $comment->comment }}
-
-                                                        @if ($comment->subscriber_id == Illuminate\Support\Facades\Auth::id())
-                                                            <span class="btn btn-sm badge text-danger"><a
-                                                                    href="{{ route('comment.delete', $comment->id) }}"><i
-                                                                        class="far fa-trash-alt"></i></a></span>
-                                                        @else
-                                                        @endif
                                                     </p>
                                                     <div class="postbox__comment-reply">
                                                         <button class="btn btn-sm ReplyOpen" id="{{ $comment->id }}">Leave
@@ -208,24 +204,20 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="postbox__comment-text">
-                                                                            <div class="postbox__comment-name">
-                                                                                <h5 class="d-inline-block">
-                                                                                    {{ $reply->user->fullName ?? null }}
-                                                                                </h5><small
-                                                                                    class="small">{{ date('d-M-Y', strtotime($reply->created_at)) }}
-                                                                                    at
-                                                                                    {{ date('h:i A', strtotime($reply->created_at)) }}</small>
-                                                                            </div>
-                                                                            <p>{{ $reply->reply }}
-                                                                                @if ($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
-                                                                                    <span
-                                                                                        class="btn btn-sm badge text-danger"><a
-                                                                                            href="{{ route('comment.reply.delete', $reply->id) }}"><i
-                                                                                                class="fal fa-trash-alt"></i></a></span>
-                                                                            </p>
-                                                                        @else
-                                                    @endif
+                                                                    <div class="postbox__comment-name">
+                                                                        <h5 class="d-inline-block">
+                                                                            {{ $reply->user->fullName ?? null }}
+                                                                        </h5><small
+                                                                            class="small">{{ date('d-M-Y', strtotime($reply->created_at)) }}
+                                                                            at
+                                                                            {{ date('h:i A', strtotime($reply->created_at)) }}</small>
+                        @if ($reply->subscriber_id == Illuminate\Support\Facades\Auth::id())
+                        <span class="btn btn-sm badge text-danger"><a href="{{ route('comment.reply.delete', $reply->id) }}"><i class="fal fa-trash-alt"></i></a></span>                                                                                 @else
+                         @endif
+                                                                        </div>
+                                                            <p>{{ $reply->reply }}
 
+                                                                </p>
 
                                                 </div>
                                             </div>
