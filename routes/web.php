@@ -177,6 +177,8 @@ Route::middleware('auth','role:admin')->group(function () {
 
         Route::get('/order/refunded-orders', 'refundedOrders')->name('order.refunded');
 
+        Route::get('/order/canceled-orders', 'canceledOrders')->name('order.canceled');
+
 
         // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
 

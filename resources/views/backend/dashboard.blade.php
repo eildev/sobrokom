@@ -9,6 +9,7 @@
                             $products = App\Models\Product::count();
                             $users = App\Models\User::where('role', 'user')->count();
                             $orders = App\Models\Order::where('status', 'pending')->count();
+                            $refund = App\Models\Order::where('status', 'refunded')->count();
                         @endphp
                         <div class="d-flex align-items-center">
                             <h5 class="mb-0 text-white">{{ $products }}</h5>
@@ -71,7 +72,7 @@
                 <div class="card radius-10 bg-gradient-ibiza">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white"></h5>
+                            <h5 class="mb-0 text-white">{{ $refund ?? 0 }}</h5>
                             <div class="ms-auto">
                                 <i class='bx bx-envelope fs-3 text-white'></i>
                             </div>
@@ -81,7 +82,7 @@
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Messages</p>
+                            <p class="mb-0">Total Refund</p>
                             <p class="mb-0 ms-auto">+2.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
                         </div>
                     </div>

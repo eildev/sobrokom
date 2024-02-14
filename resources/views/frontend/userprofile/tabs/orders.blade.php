@@ -53,8 +53,10 @@
                                         <td>{{ $order->product_quantity }}</td>
                                         <td>{{ $order->grand_total }}</td>
                                         <td>
-                                        @if ($order->status == 'approve')
-                                            {{'Order Approved'}}
+                                        @if ($order->status == 'pending')
+                                            {{'Order Pending'}}
+                                        @elseif ($order->status == 'approve')
+                                            {{'Order Processing'}}
                                         @elseif ($order->status == 'processing')
                                             {{'Order Processing'}}
                                         @elseif ($order->status == 'delivering')
@@ -65,7 +67,13 @@
 
                                         </td>
                                         <td> </td>
-                                        <td> <a href="{{ route('user.refund.order',$order->invoice_number) }}" class="btn btn-info btn-sm">Refund </a></td>
+                                        @if ($order->status == 'completed')
+                                            <td><a href="{{ route('user.refund.order',$order->invoice_number) }}" class="btn btn-info btn-sm">Refund </a></td>
+
+                                        @else
+                                            <td><a href="{{ route('user.cancel.order',$order->invoice_number) }}" class="btn btn-danger btn-sm" id="order_cancel">Cancel</a></td>
+                                        @endif
+
                                     </tr>
                                 @endforeach
                             @else
@@ -82,3 +90,35 @@
     </div>
 
 </div>
+
+
+<script>
+            $(document).ready(function() {
+            //    delete function
+            $(document).on('click', '#order_cancel', function(e) {
+                e.preventDefault();
+
+                var link = $(this).attr("href");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You want to cancel this order!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Confirm!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link
+                        Swal.fire(
+                            'Deleted!',
+                            'Your Order has been canceld.',
+                            'success'
+                        )
+                    }
+                })
+
+            });
+        });
+</script>

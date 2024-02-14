@@ -252,6 +252,9 @@
                 <li>
                     <a href="{{ route('order.refunded') }}"><i class="bx bx-right-arrow-alt"></i>Refunded Orders</a>
                 </li>
+                <li>
+                    <a href="{{ route('order.canceled') }}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>
+                </li>
             </ul>
         </li>
         <li>
