@@ -246,6 +246,12 @@
                 <li>
                     <a href="{{ route('order.completed') }}"><i class="bx bx-right-arrow-alt"></i>Completed Order</a>
                 </li>
+                <li>
+                    <a href="{{ route('order.refunding') }}"><i class="bx bx-right-arrow-alt"></i>Refunding Orders</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.refunded') }}"><i class="bx bx-right-arrow-alt"></i>Refunded Orders</a>
+                </li>
             </ul>
         </li>
         <li>

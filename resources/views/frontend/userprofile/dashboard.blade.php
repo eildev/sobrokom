@@ -81,10 +81,10 @@
                                             <a href="#" tabindex="4">Orders</a>
                                     </li>
 
-                                    {{-- <li>
+                                    <li>
                                         <span><i class="fas fa-money-check-alt pe-2"></i>
                                             <a href="#" tabindex="6">Refunds</a>
-                                    </li> --}}
+                                    </li>
                                     <li>
                                         <span><i class="fas fa-user-cog pe-2"></i>
                                             <a href="#" tabindex="7">Settings</a>
@@ -131,7 +131,9 @@
                     @php
                         $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
 
-                        $orders = App\Models\Order::where('user_identity', $billingInfo->phone ?? 0)->get();
+                        $orders = App\Models\Order::where('user_identity', Auth::user()->id )
+                        ->WhereIn('status', ['pending', 'approve', 'processing', 'delivering', 'completed'])
+                        ->get();
                         //  dd($billingInfo);
                     @endphp
 
@@ -140,9 +142,15 @@
                     </div>
 
                     {{-- Refunds body --}}
-                    {{-- <div class="tab__content--6 tabContent">
+                    @php
+                        $orders = App\Models\Order::where('user_identity', Auth::user()->id )
+                        ->WhereIn('status', ['refunding', 'refunded'])
+                        ->get();
+                        //  dd($billingInfo);
+                    @endphp
+                    <div class="tab__content--6 tabContent">
                         @include('frontend.userprofile.tabs.refunds')
-                    </div> --}}
+                    </div>
                     {{-- settings body --}}
                     <div class="tab__content--7 tabContent">
                         @include('frontend.userprofile.tabs.settings')

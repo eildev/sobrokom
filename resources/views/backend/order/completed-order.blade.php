@@ -21,7 +21,6 @@
                                     <th>Pay to</th>
                                     <th>Address</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,11 +45,6 @@
                                             <td>{{ $order->orderBillingDetails->address_1 ?? '' }}</td>
                                             <td>
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
-                                            </td>
-                                            <td>
-                                                <a href="" class="btn btn-sm btn-info">Completed</a>
-                                                <a href="#" class="btn btn-sm btn-success" id="delete">View</a>
-                                                <a href="#" class="btn btn-sm btn-danger" id="delete">Cancel</a>
                                             </td>
                                         </tr>
                                     @endforeach

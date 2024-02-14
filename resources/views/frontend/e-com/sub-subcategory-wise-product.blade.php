@@ -226,7 +226,6 @@
                                 @if ($allProducts->count() > 0)
                                     <div
                                         class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
-
                                         @foreach ($allProducts as $product)
                                             <div class="col">
                                                 <div class="tpproduct p-relative mb-20">
@@ -239,15 +238,13 @@
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                 alt="Products Image"></a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                @endif
                                                             @endif
-
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                            @endif
-
                                                         </div>
                                                         <div class="tpproduct__shopping">
                                                             @auth
@@ -284,21 +281,32 @@
                                                         </span>
                                                         <h4 class="tpproduct__title">
                                                             <a
-                                                                href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
+                                                                href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @php
+                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                            @endphp
+                                                            @php
+                                                                $last = 0;
+                                                            @endphp
+                                                            @for ($i = 1; $i <= $ratingAvg; $i++)
+                                                                <a href="#"><i class="icon-star"></i></a>
+                                                                @php $last = $i @endphp
+                                                            @endfor
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @endfor
                                                         </div>
                                                         <div class="tpproduct__price">
-                                                            <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                            <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                            <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                            <span class="text-secondary text-capitalize"
+                                                                style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
+                                                            </span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -307,19 +315,19 @@
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
-                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                <input type="hidden" value="{{ $product->id ?? 0 }}"
                                                                     name="product_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->id }}"
+                                                                    value="{{ $product->varient[0]->id ?? 0 }}"
                                                                     name="variant_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->discount_amount }}"
+                                                                    value="{{ $product->varient[0]->discount_amount ?? 0 }}"
                                                                     name="selling_price">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->weight }}"
+                                                                    value="{{ $product->varient[0]->weight ?? 0 }}"
                                                                     name="weight">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->unit }}"
+                                                                    value="{{ $product->varient[0]->unit ?? 0 }}"
                                                                     name="unit">
                                                                 <button class="tp-btn-2">Add to
                                                                     cart</button>
@@ -330,8 +338,6 @@
                                                 </div>
                                             </div>
                                         @endforeach
-
-
                                     </div>
                                 @else
                                     <div class="col">
@@ -345,7 +351,6 @@
                                 @if ($allProducts->count() > 0)
                                     <div
                                         class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
-
                                         @foreach ($allProducts as $product)
                                             <div class="col">
                                                 <div class="tpproduct p-relative mb-20">
@@ -358,15 +363,13 @@
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                 alt="Products Image"></a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                @endif
                                                             @endif
-
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                            @endif
-
                                                         </div>
                                                         <div class="tpproduct__shopping">
                                                             @auth
@@ -403,21 +406,32 @@
                                                         </span>
                                                         <h4 class="tpproduct__title">
                                                             <a
-                                                                href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
+                                                                href="{{ route('product.details', $product->slug) }}">{{ Illuminate\Support\Str::limit($product->product_name, 18) }}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @php
+                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                            @endphp
+                                                            @php
+                                                                $last = 0;
+                                                            @endphp
+                                                            @for ($i = 1; $i <= $ratingAvg; $i++)
+                                                                <a href="#"><i class="icon-star"></i></a>
+                                                                @php $last = $i @endphp
+                                                            @endfor
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @endfor
                                                         </div>
                                                         <div class="tpproduct__price">
-                                                            <span>৳{{ $product->varient[0]->discount_amount }}</span>
-                                                            <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                            <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
+                                                            <span class="text-secondary text-capitalize"
+                                                                style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
+                                                            </span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -426,19 +440,19 @@
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
-                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                <input type="hidden" value="{{ $product->id ?? 0 }}"
                                                                     name="product_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->id }}"
+                                                                    value="{{ $product->varient[0]->id ?? 0 }}"
                                                                     name="variant_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->discount_amount }}"
+                                                                    value="{{ $product->varient[0]->discount_amount ?? 0 }}"
                                                                     name="selling_price">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->weight }}"
+                                                                    value="{{ $product->varient[0]->weight ?? 0 }}"
                                                                     name="weight">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->unit }}"
+                                                                    value="{{ $product->varient[0]->unit ?? 0 }}"
                                                                     name="unit">
                                                                 <button class="tp-btn-2">Add to
                                                                     cart</button>
@@ -449,7 +463,6 @@
                                                 </div>
                                             </div>
                                         @endforeach
-
                                     </div>
                                 @else
                                     <div class="col">
@@ -477,12 +490,13 @@
                                                                 alt="Product Image" style="height: 200px">
                                                         </a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                            @endif
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+
+                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -490,43 +504,51 @@
                                                         <h4 class="tplist__content-title"><a
                                                                 href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                         </h4>
-                                                        <div class="tplist__rating mb-5">
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                        <div class="tpproduct__rating mb-5">
+                                                            @php
+                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                            @endphp
+                                                            @php
+                                                                $last = 0;
+                                                            @endphp
+                                                            @for ($i = 1; $i <= $ratingAvg; $i++)
+                                                                <a href="#"><i class="icon-star"></i></a>
+                                                                @php $last = $i @endphp
+                                                            @endfor
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @endfor
                                                         </div>
                                                         <ul class="tplist__content-info">
-                                                            <li>Delicous Non-Dairy cheese sauce</li>
-                                                            <li>Vegan & Allergy Friendly</li>
                                                             <li>{{ $product->short_desc }}</li>
                                                         </ul>
                                                     </div>
                                                     <div class="tplist__price justify-content-end">
                                                         <h4 class="tplist__instock">Availability:
-                                                            <span>{{ $product->varient[0]->stock_quantity }} in
+                                                            <span>{{ $product->varient[0]->stock_quantity ?? '' }} in
                                                                 stock</span>
                                                         </h4>
                                                         <h3 class="tplist__count mb-15">
-                                                            ৳{{ $product->varient[0]->discount_amount }}
-                                                            <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
+                                                            ৳{{ $product->varient[0]->discount_amount ?? '' }}
+                                                            <span class="text-secondary" style="font-size: 14px">/
+                                                                {{ $product->varient[0]->unit ?? '' }}</span>
                                                         </h3>
                                                         <form method="POST" id="add_to_cart_form">
                                                             @csrf
-                                                            <input type="hidden" value="{{ $product->id }}"
+                                                            <input type="hidden" value="{{ $product->id ?? '' }}"
                                                                 name="product_id">
-                                                            <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                            <input type="hidden"
+                                                                value="{{ $product->varient[0]->id ?? '' }}"
                                                                 name="variant_id">
                                                             <input type="hidden"
-                                                                value="{{ $product->varient[0]->discount_amount }}"
+                                                                value="{{ $product->varient[0]->discount_amount ?? '' }}"
                                                                 name="selling_price">
                                                             <input type="hidden"
-                                                                value="{{ $product->varient[0]->weight }}"
+                                                                value="{{ $product->varient[0]->weight ?? '' }}"
                                                                 name="weight">
                                                             <input type="hidden"
-                                                                value="{{ $product->varient[0]->unit }}" name="unit">
+                                                                value="{{ $product->varient[0]->unit ?? '' }}"
+                                                                name="unit">
                                                             <button class="tp-btn-2 mb-10">Add to
                                                                 cart</button>
                                                         </form>
@@ -565,7 +587,8 @@
                                 @endif
                             </div>
                         </div>
-                        @if ($allProducts->count() > 0)
+
+                        @if ($allProducts->count() > 12)
                             <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
                                 <ul class="pagination">
                                     {{-- Previous Page Link --}}

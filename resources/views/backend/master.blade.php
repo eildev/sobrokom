@@ -315,7 +315,7 @@
                 success: function(data) {
                     let variantData = data.variantData;
                     // console.log(variantData);
-                    toastr.warning(data.message);
+                    toastr.success(data.message);
                     $('.variant_id').val(variantData.id);
                     $('.regular_price').val(variantData.regular_price);
                     $('.discount').val(variantData.discount);
@@ -323,6 +323,8 @@
                     $('#stock').val(variantData.stock_quantity);
                     $('.unit').val(variantData.unit);
                     $('.weight').val(variantData.weight);
+                    $('.color').val(variantData.color);
+                    $('.size').val(variantData.size);
                     $('.manufacture_date').val(variantData.manufacture_date);
                     $('.expire_date').val(variantData.expire_date);
                 }
@@ -355,6 +357,10 @@
                         document.querySelector('#stock').value = '';
                         document.querySelector('.unit').value = '';
                         document.querySelector('.weight').value = '';
+                        document.querySelector('.color').value = '';
+                        document.querySelector('.size').value = '';
+                        document.querySelector('.manufacture_date').value = '';
+                        document.querySelector('.expire_date').value = '';
                         show();
                         $('.add_varient').css('display', 'block');
                         $('.update_varient').css('display', 'none');

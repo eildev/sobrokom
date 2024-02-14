@@ -10,6 +10,9 @@ class ReviewRating extends Model
     use HasFactory;
 
     function gallary(){
-        return $this->hasMany(ReviewImages::class);
+        return $this->hasMany(ReviewImages::class,'review_id','id');
+    }
+    function user(){
+        return $this->belongsTo(User::class);
     }
 }

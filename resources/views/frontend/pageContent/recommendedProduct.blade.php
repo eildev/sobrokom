@@ -73,11 +73,21 @@
                                                 href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                         </h4>
                                         <div class="tpproduct__rating mb-5">
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                            @php
+                                                $indivitualReviews = App\Models\ReviewRating::where('product_id', $product->id)->get();
+                                                $indivitualRatingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                            @endphp
+                                            @php
+                                                $last = 0;
+                                            @endphp
+                                            @for ($i = 1; $i <= $indivitualRatingAvg; $i++)
+                                                <a href="#"><i class="icon-star"></i></a>
+                                                @php $last = $i @endphp
+                                            @endfor
+                                            @for ($j = $last; $j < 5; $j++)
+                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                            @endfor
+                                            ({{ $indivitualReviews->count() }})
                                         </div>
                                         <div class="tpproduct__price">
 
@@ -85,18 +95,22 @@
                                             @if ($product->varient[0]->discount > 0)
                                                 <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
                                             @endif
-                                            <span>/{{ ($product->varient[0]->unit) }}</span>
+                                            <span>/{{ $product->varient[0]->unit }}</span>
                                         </div>
                                     </div>
                                     <div class="tpproduct__hover-text">
                                         <div class="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                                             <form method="POST" id="add_to_cart_form">
+                                            <form method="POST" id="add_to_cart_form">
                                                 @csrf
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                                <input type="hidden" value="{{ $product->varient[0]->id }}" name="variant_id">
-                                                <input type="hidden" value="{{ $product->varient[0]->discount_amount }}"name="selling_price">
-                                                <input type="hidden" value="{{ $product->varient[0]->weight }}" name="weight">
-                                                <input type="hidden" value="{{ $product->varient[0]->unit }}" name="unit">
+                                                <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                    name="variant_id">
+                                                <input type="hidden"
+                                                    value="{{ $product->varient[0]->discount_amount }}"name="selling_price">
+                                                <input type="hidden" value="{{ $product->varient[0]->weight }}"
+                                                    name="weight">
+                                                <input type="hidden" value="{{ $product->varient[0]->unit }}"
+                                                    name="unit">
                                                 <button class="tp-btn-2">Add to cart</button>
                                             </form>
                                         </div>

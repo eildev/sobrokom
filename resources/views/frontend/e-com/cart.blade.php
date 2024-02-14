@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
                             <span>Cart</span>
                         </div>
@@ -39,8 +39,8 @@
                                 {{-- @dd($products); --}}
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
-                                        <form action="{{ route('product.cartpage.update', $product->rowId) }}"
-                                            method="POST">
+                                        <form method="POST"
+                                            action="{{ route('product.cartpage.update', $product->rowId) }}">
                                             @csrf
                                             <tr class="cart_row">
                                                 <td class="product-thumbnail">
@@ -58,19 +58,21 @@
                                                     </span>
                                                 </td>
                                                 <td class="product-quantity">
-                                                    <span class="cart-minus">-</span>
+                                                    <button class="cart-minus" value="{{ $product->rowId }}">-</button>
                                                     <input class="cart-input product_input" type="text"
                                                         value="{{ $product->qty }}" name="quantity">
-                                                    <span class="cart-plus cart_plus" value="{{ $product->rowId }}">+</span>
+                                                    <button class="cart-plus cart_plus"
+                                                        value="{{ $product->rowId }}">+</button>
                                                 </td>
                                                 <td class="product-subtotal">
                                                     <span
                                                         class="amount subTotal_price">৳{{ $product->price * $product->qty }}</span>
                                                 </td>
                                                 <td class="product-remove">
-                                                    <button type="submit" class="me-2">Edit</button>
+                                                    {{-- <button type="submit" class="me-2 btn btn-sm btn-info">Update
+                                                        Price</button> --}}
                                                     <a href="{{ route('product.cartpage.remove', $product->rowId) }}"
-                                                        value="{{ $product->rowId }}" class="">
+                                                        value="{{ $product->rowId }}" class="btn btn-sm btn-danger">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                 </td>
@@ -88,7 +90,7 @@
                                 <ul class="mb-20">
                                     <li>Subtotal
                                         <span>
-                                            &#2547 {{ Cart::subtotal() }}
+                                            &#2547 <span class="subTotalAmount">{{ Cart::subtotal() }}</span>
                                         </span>
                                     </li>
 
@@ -105,6 +107,38 @@
     <!-- cart area end-->
 
     <script>
+        // function Decrement(rowId) {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: "/cart-decrement/" + rowId,
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             Cart();
+        //             miniCart();
+        //         }
+        //     });
+        // } ///
+        // function Increment(rowId) {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: "/cart/update-cart-product/" + rowId,
+        //         dataType: 'json',
+        //         success: function(res) {
+        //             console.log(res);
+        //             // Cart();
+        //             // miniCart();
+
+        //         }
+        //     });
+        // }
+
+        // function grandTotal(subTotalPrice) {
+        //     // let subTTotalPrice = subTotalPrice + subTotalPrice;
+        //     // console.log(subTTotalPrice);
+        //     // $('.subTotalAmount').text(subTTotalPrice);
+        // }
+
+
         $(document).ready(function() {
             $('.cart-minus').on('click', function() {
                 var $input = $(this).parent().find('input');
@@ -113,12 +147,50 @@
                 $input.val(count);
                 $input.change();
                 let productQty = parseFloat($input.val());
-                let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr(
+                let rowId = this.getAttribute('value');
+                let unit_price_element = $(this).parents('.cart_row').find(
+                    '.unit_price').attr(
                     'data-value');
                 unit_price_element = parseFloat(unit_price_element);
                 let subTotalPrice = unit_price_element * productQty;
                 // console.log(subTotalPrice);
-                $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
+                $(this).parents('.cart_row').find('.subTotal_price').text("৳" +
+                    subTotalPrice);
+                // console.log(new Date());
+                // grandTotal(subTotalPrice);
+                // console.log(rowId);
+                // e.preventDefault();
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
+                // $.ajax({
+                //     url: "/cart/update-cart-product/" + rowId,
+                //     type: "POST",
+                //     data: {
+                //         productQty: 'quantity'
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 200) {
+                //             console.log(res.id);
+                //             toastr.success(res.message);
+                //             let unit_price_element = $(this).parents('.cart_row').find(
+                //                 '.unit_price').attr(
+                //                 'data-value');
+                //             unit_price_element = parseFloat(unit_price_element);
+                //             let subTotalPrice = unit_price_element * productQty;
+                //             // console.log(subTotalPrice);
+                //             $(this).parents('.cart_row').find('.subTotal_price').text("৳" +
+                //                 subTotalPrice);
+                //             this.setAttribute('value', res.id);
+                //         } else {
+                //             toastr.error('something went wrong!');
+                //         }
+
+                //     }
+                // })
+
             });
         });
 
@@ -127,29 +199,74 @@
                 var $input = $(this).parent().find('input');
                 $input.val(parseInt($input.val()) + 1);
                 $input.change();
-                let productQty = parseFloat($input.val());
+                let productQty = parseInt($input.val());
                 // console.log(productQty);
-                // Find the parent <td> and then find the .unit_price within it
-                let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr(
+                let unit_price_element = $(this).parents('.cart_row').find(
+                    '.unit_price').attr(
                     'data-value');
                 unit_price_element = parseFloat(unit_price_element);
                 let subTotalPrice = unit_price_element * productQty;
                 // console.log(subTotalPrice);
-                $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
+                $(this).parents('.cart_row').find('.subTotal_price').text("৳" +
+                    subTotalPrice);
+                // grandTotal();
+
+
+
+                // let rowId = this.getAttribute('value');
+                // console.log(rowId);
+                // e.preventDefault();
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
+                // $.ajax({
+                //     url: "/cart/update-cart-product/" + rowId,
+                //     type: "POST",
+                //     data: {
+                //         productQty: productQty
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 200) {
+                //             console.log(res.id);
+                //             toastr.success(res.message);
+                //             let unit_price_element = $(this).parents('.cart_row').find(
+                //                 '.unit_price').attr(
+                //                 'data-value');
+                //             unit_price_element = parseFloat(unit_price_element);
+                //             let subTotalPrice = unit_price_element * productQty;
+                //             // console.log(subTotalPrice);
+                //             $(this).parents('.cart_row').find('.subTotal_price').text("৳" +
+                //                 subTotalPrice);
+                //             this.setAttribute('value', res.id);
+                //         } else {
+                //             toastr.error('something went wrong!');
+                //         }
+
+                //     }
+                // })
+                // // Find the parent <td> and then find the .unit_price within it
+                // let unit_price_element = $(this).parents('.cart_row').find('.unit_price').attr(
+                //     'data-value');
+                // unit_price_element = parseFloat(unit_price_element);
+                // let subTotalPrice = unit_price_element * productQty;
+                // // console.log(subTotalPrice);
+                // $(this).parents('.cart_row').find('.subTotal_price').text("৳" + subTotalPrice);
             });
         });
 
 
-        $(document).ready(function() {
-            // console.log($('.cart-input'));
-            $('.cart-input').on('keyup', function() {
-                $quantity = parseInt($(this).val());
-                // console.log($quantity);
-                if ($quantity < 1 || isNaN($quantity)) {
-                    toastr.warning('Please provide a valid number greater than or equal to 1.');
-                }
-            });
-        });
+        // $(document).ready(function() {
+        //     // console.log($('.cart-input'));
+        //     $('.cart-input').on('keyup', function() {
+        //         $quantity = parseInt($(this).val());
+        //         // console.log($quantity);
+        //         if ($quantity < 1 || isNaN($quantity)) {
+        //             toastr.warning('Please provide a valid number greater than or equal to 1.');
+        //         }
+        //     });
+        // });
 
 
         // cart quantity update

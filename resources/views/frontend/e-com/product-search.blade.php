@@ -101,14 +101,10 @@
                             @endif
 
                         </div>
-
-                        {{-- filter by Price  --}}
-                        
-
                         {{-- filter by Brand  --}}
                         <div class="tpshop__widget mb-30 pb-25">
                             @php
-                                $brands = App\Models\Brand::where('status', 1)->get();
+                                $brands = App\Models\Brand::where('status', 1)->take(10)->orderByRaw('RAND()')->get();
                             @endphp
                             <h4 class="tpshop__widget-title">FILTER BY BRAND</h4>
 
@@ -178,7 +174,7 @@
                         </div>
 
                         {{-- filter by Best Ratings  --}}
-                        <div class="tpshop__widget">
+                        {{-- <div class="tpshop__widget">
                             <h4 class="tpshop__widget-title">FILTER BY RATING</h4>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault24">
@@ -235,7 +231,7 @@
                                     (02)
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="tpshop__widget tpshop__leftbar-area">
                         <div class="tpshop__sidbar-thumb mt-35">
@@ -253,7 +249,7 @@
                                             @csrf
                                             <div class="d-flex">
                                                 <input value="{{ $searchTag }}" type="text" name="search"
-                                                autocomplete="off"  placeholder="Search Here"
+                                                    autocomplete="off" placeholder="Search Here"
                                                     class="form-control rounded-0 rounded-start top_search">
                                                 <button class="tp-btn rounded-0 rounded-end">Search</button>
                                             </div>
@@ -284,15 +280,14 @@
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                 alt="Products Image"></a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
-                                                            @endif
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount }}%</span>
 
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                @endif
                                                             @endif
-
                                                         </div>
                                                         <div class="tpproduct__shopping">
                                                             @auth
@@ -332,18 +327,28 @@
                                                                 href="{{ route('product.details', $product->slug) }}">{{ $product->product_name }}</a>
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
-                                                            <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @php
+                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                            @endphp
+                                                            @php
+                                                                $last = 0;
+                                                            @endphp
+                                                            @for ($i = 1; $i <= $ratingAvg; $i++)
+                                                                <a href="#"><i class="icon-star"></i></a>
+                                                                @php $last = $i @endphp
+                                                            @endfor
+                                                            @for ($j = $last; $j < 5; $j++)
+                                                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                                            @endfor
                                                         </div>
                                                         <div class="tpproduct__price">
-                                                            <span>৳{{ $product->varient[0]->discount_amount }}</span>
+                                                            <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                             <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit }}</span>
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                                style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}</span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <del>৳{{ $product->varient[0]->regular_price ?? '' }}</del>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -352,19 +357,19 @@
                                                             class="tpproduct__hover-btn d-flex justify-content-center mb-10">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
-                                                                <input type="hidden" value="{{ $product->id }}"
+                                                                <input type="hidden" value="{{ $product->id ?? 0 }}"
                                                                     name="product_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->id }}"
+                                                                    value="{{ $product->varient[0]->id ?? 0 }}"
                                                                     name="variant_id">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->discount_amount }}"
+                                                                    value="{{ $product->varient[0]->discount_amount ?? 0 }}"
                                                                     name="selling_price">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->weight }}"
+                                                                    value="{{ $product->varient[0]->weight ?? 0 }}"
                                                                     name="weight">
                                                                 <input type="hidden"
-                                                                    value="{{ $product->varient[0]->unit }}"
+                                                                    value="{{ $product->varient[0]->unit ?? 0 }}"
                                                                     name="unit">
                                                                 <button class="tp-btn-2">Add to
                                                                     cart</button>

@@ -19,16 +19,17 @@
     <!-- breadcrumb-area-end -->
 
 
-<style>
-    .error {
-    border-color: red !important; /* Highlight input field with red border */
-    }
+    <style>
+        .error {
+            border-color: red !important;
+            /* Highlight input field with red border */
+        }
 
-    .error_message {
-        color: red; /* Color error messages in red */
-    }
-
-</style>
+        .error_message {
+            color: red;
+            /* Color error messages in red */
+        }
+    </style>
 
     @php
         $billingInfo = Auth::check() ? App\Models\BillingInfo::where('user_id', Auth::user()->id)->first() : null;
@@ -53,21 +54,12 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="checkout-form-list">
-                                        <label>First Name <span class="required">*</span></label>
-                                        <input type="text" required placeholder="First Name" class="first_name"
+                                        <label>Name <span class="required">*</span></label>
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" required placeholder="Enter Your Name" class="first_name"
                                             value="" name="first_name">
                                         <span class="first_name_error text-danger"></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Last Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="Last Name" class="last_name" value=""
-                                            name="last_name">
-                                        <span class="last_name_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -80,30 +72,23 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Phone" value="" class="phone user_phone"
-                                            name="phone">
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="01**********" value=""
+                                            class="phone user_phone" name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="checkout-form-list">
-                                        <label>Address 1<span class="required">*</span></label>
-                                        <input type="text" placeholder="Address 1" value="" class="address_1"
+                                        <label>Address<span class="required">*</span></label>
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Address" value="" class="address_1"
                                             name="address_1">
                                         <span class="address_1_error text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Address 2</label>
-                                        <input type="text" placeholder="Address 2" value="" class="address_2"
-                                            name="address_2">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>City/Town<span class="required">*</span></label>
-                                        <input type="text" placeholder="City/Town" value="" class="city"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="City/Town" value="" class="city"
                                             name="city">
                                         <span class="city_error text-danger"></span>
                                     </div>
@@ -111,23 +96,29 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Division <span class="required">*</span></label>
-                                        <input type="text" placeholder="Division" value="" class="division"
+                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Division" value="" class="division"
                                             name="division">
                                         <span class="division_error text-danger"></span>
                                     </div>
                                 </div>
 
+                                <style>
+                                    /* input::-webkit-inner-spin-button,
+                                                    input::-webkit-outer-spin-button {
+                                                        -webkit-appearance: none !important;
+                                                    } */
+                                </style>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" value="" class="post_code"
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text" placeholder="Postcode / Zip" value="" class="post_code"
                                             name="post_code">
                                         <span class="post_code_error text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="country-select">
-                                        <label>Country <span class="required">*</span></label>
+                                        <label>Country </label>
                                         <select name="country" class="country" readonly>
                                             <option value="bangladesh">Bangladesh</option>
                                             <option value="united-states">United States</option>
@@ -139,7 +130,7 @@
                                         </select>
                                         <span class="country_error text-danger"></span>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="order-notes">
                                     <div class="checkout-form-list">
                                         <label>Order Notes</label>
@@ -175,12 +166,12 @@
                         </div>
                     </div>
 
-                    {{-- your Order  --}}
+                    {{-- your Order --}}
                     @php
                         $cartProducts = Cart::content();
                         // dd($cartProducts);
                     @endphp
-                    <div style="margin-top: 70px" class="col-lg-6 col-md-12">
+                    <div style="margin-top: 40px" class="col-lg-6 col-md-12">
                         <div class="your-order mb-30 ">
                             <h3>Your order</h3>
                             <div class="your-order-table table-responsive">
@@ -284,38 +275,38 @@
                                         </div>
                                     </div>
                                     {{-- <div class="accordion-item">
-                                        <h2 class="accordion-header" id="paymentTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#payment" aria-expanded="false"
-                                                aria-controls="payment">
-                                                Cheque Payment
-                                            </button>
-                                        </h2>
-                                        <div id="payment" class="accordion-collapse collapse"
-                                            aria-labelledby="paymentTwo" data-bs-parent="#checkoutAccordion">
-                                            <div class="accordion-body">
-                                                Please send your cheque to Store Name, Store Street, Store Town, Store
-                                                State / County, Store
-                                                Postcode.
-                                            </div>
+                                    <h2 class="accordion-header" id="paymentTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#payment" aria-expanded="false"
+                                            aria-controls="payment">
+                                            Cheque Payment
+                                        </button>
+                                    </h2>
+                                    <div id="payment" class="accordion-collapse collapse" aria-labelledby="paymentTwo"
+                                        data-bs-parent="#checkoutAccordion">
+                                        <div class="accordion-body">
+                                            Please send your cheque to Store Name, Store Street, Store Town, Store
+                                            State / County, Store
+                                            Postcode.
                                         </div>
                                     </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="paypalThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#paypal" aria-expanded="false"
-                                                aria-controls="paypal">
-                                                PayPal
-                                            </button>
-                                        </h2>
-                                        <div id="paypal" class="accordion-collapse collapse"
-                                            aria-labelledby="paypalThree" data-bs-parent="#checkoutAccordion">
-                                            <div class="accordion-body">
-                                                Pay via PayPal; you can pay with your credit card if you don’t have a
-                                                PayPal account.
-                                            </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="paypalThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#paypal" aria-expanded="false"
+                                            aria-controls="paypal">
+                                            PayPal
+                                        </button>
+                                    </h2>
+                                    <div id="paypal" class="accordion-collapse collapse" aria-labelledby="paypalThree"
+                                        data-bs-parent="#checkoutAccordion">
+                                        <div class="accordion-body">
+                                            Pay via PayPal; you can pay with your credit card if you don’t have a
+                                            PayPal account.
                                         </div>
-                                    </div> --}}
+                                    </div>
+                                </div> --}}
                                 </div>
                                 <div class="order-button-payment mt-20">
                                     <button type="submit"
@@ -347,7 +338,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>We sent a message with the verification code to the phone number. It may take a few minutes for the code to arrive</p>
+                        <p>We sent a message with the verification code to the phone number. It may take a few minutes for
+                            the code to arrive</p>
                         <label for="exampleInputEmail1">Verification Code *</label>
                         <input type="text" class="form-control otp_code" name="otp" id="exampleInputEmail1"
                             aria-describedby="emailHelp">
@@ -400,7 +392,7 @@
 
 
     <script>
-        // console.log("{{ Cart::count() }}");
+        // apply coupon
         const applyCoupon = document.querySelector('.apply_coupon');
         applyCoupon.addEventListener('click', function(e) {
             e.preventDefault();
@@ -414,9 +406,10 @@
                     if (res.status == 500) {
                         toastr.warning(res.message);
                     } else if (res.status == 200) {
+                        handleShippingChange();
                         let couponDiscount = parseInt(res.couponData.discount);
-                        let subTotalWithShipingAmaount = parseFloat(document.querySelector(
-                            '.sub_total_with_shiping_amaount').textContent).toFixed(2);
+                        let subTotalWithShipingAmaount = document.querySelector(
+                            '.sub_total_with_shiping_amaount').innerText;
                         let grandTotal = ((subTotalWithShipingAmaount * couponDiscount) / 100);
 
                         grandTotal = subTotalWithShipingAmaount - grandTotal;
@@ -438,6 +431,20 @@
                 }
             })
         });
+        function checker(element) {
+            if(element.value =="") {
+                element.style.border="1px solid red";
+                element.focus();
+            }else{
+                element.style.border="1px solid green";
+            }
+        }
+
+        function clearErrorMessages(className) {
+            $(className).removeClass('error');
+            $('.error_message').hide();
+            $(className + '_error').hide();
+        }
 
         // place order otp checked
         const place_order = document.querySelector('.place_order');
@@ -446,7 +453,20 @@
 
             // Reset previous error styles
             $('.error').removeClass('error');
-            $('.error_message').empty();
+            $('.error_message').hide();
+
+            $('.phone').keyup(function() {
+                clearErrorMessages('.phone');
+            });
+            $('.address_1').keyup(function() {
+                clearErrorMessages('.address_1');
+            });
+            $('.city').keyup(function() {
+                clearErrorMessages('.city');
+            });
+            $('.post_code').keyup(function() {
+                clearErrorMessages('.post_code');
+            });
 
             const first_name = $('.first_name').val();
             const phone = $('.phone').val();
@@ -454,7 +474,7 @@
             const city = $('.city').val();
             const division = $('.division').val();
             const post_code = $('.post_code').val();
-            const country = $('.country').val();
+
 
             if (first_name === "") {
                 $('.first_name').addClass('error').focus();
@@ -464,6 +484,27 @@
             if (phone === "") {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Phone number is Required');
+                return;
+            }
+            if (isNaN(phone)) {
+                $('.phone').addClass('error').focus();
+                $('.phone_error').text('Phone number is not valid');
+                return;
+            }
+            if (phone.slice(0, 2) !== "01") {
+                $('.phone').addClass('error').focus();
+                $('.phone_error').text('Phone number is not valid');
+                return;
+            }
+            if (phone.length != 11) {
+                $('.phone').addClass('error').focus();
+                $('.phone_error').text('Phone number is must be 11 character');
+                return;
+            }
+            const thirdValue = phone.charAt(2);
+            if (!['3', '4', '5', '6', '7', '8', '9'].includes(thirdValue)) {
+                $('.phone').addClass('error').focus();
+                $('.phone_error').text('Please provide valid phone number');
                 return;
             }
             if (address_1 === "") {
@@ -484,11 +525,6 @@
             if (post_code === "") {
                 $('.post_code').addClass('error').focus();
                 $('.post_code_error').text('Post code is Required');
-                return;
-            }
-            if (country === "") {
-                $('.country').addClass('error').focus();
-                $('.country_error').text('Country is Required');
                 return;
             } else {
 
@@ -653,6 +689,7 @@
                     orderTotal = orderTotal + shippingAmount;
                     // console.log(orderTotal);
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
+                    // couponApply(orderTotal);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // totalWeightConvertToKG = totalWeightConvertToKG - 2;
@@ -662,6 +699,7 @@
                     }
 
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                    // couponApply((orderTotal + shippingAmount));
                 }
             } else if (outSideShipping.checked) {
                 let shippingAmount = parseInt(outSideShippingAmount.textContent);
@@ -669,6 +707,7 @@
                 if (totalWeight <= 2000) {
                     orderTotal = orderTotal + shippingAmount;
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal).toFixed(2);
+                    // couponApply(orderTotal);
                 } else {
                     let totalWeightConvertToKG = totalWeight / 1000;
                     // console.log(typeof totalWeightConvertToKG);
@@ -677,13 +716,17 @@
                         shippingAmount += 20;
                     }
                     subTotalWithShipingAmaount.textContent = parseFloat(orderTotal + shippingAmount).toFixed(2);
+                    // couponApply(orderTotal + shippingAmount);
                 }
             }
         }
         totalWeight();
 
         $(document).ready(function() {
-            $("#otpCheck").modal({backdrop: 'static', keyboard: false});
+            $("#otpCheck").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
         });
     </script>
 

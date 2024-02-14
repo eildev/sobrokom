@@ -2,19 +2,19 @@
 @section('admin')
     <div class="page-content">
         <!--breadcrumb-->
-        {{-- <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Dashboard</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Product Table</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
-                <div class="btn-group">
+                {{-- <div class="btn-group">
                     <button type="button" class="btn btn-primary">Settings</button>
                     <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
@@ -25,9 +25,9 @@
                         <a class="dropdown-item" href="javascript:;">Something else here</a>
                         <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated link</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
-        </div> --}}
+        </div>
         <!--end breadcrumb-->
         <div class="row">
             <div class="card">
@@ -76,12 +76,12 @@
                                             </td>
 
                                             <td>
-                                                <form action="{{route('product.status',$product->id )}}" method="POST">
+                                                <form action="{{ route('product.status', $product->id) }}" method="POST">
                                                     @csrf
                                                     @if ($product->status == 0)
                                                         <button class="btn btn-sm btn-danger status_inactive"
-                                                    value="{{ $product->id }}" >Inactive</button>
-                                                        @else
+                                                            value="{{ $product->id }}">Inactive</button>
+                                                    @else
                                                         <button class="btn btn-sm btn-success status_active"
                                                             value="{{ $product->id }}">Active</button>
                                                     @endif
@@ -119,6 +119,50 @@
                     </div>
                 </div>
             </div>
+            {{-- @if ($products->count() > 9)
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                        <ul class="pagination">
+                            @if ($products->onFirstPage())
+                                <li class="paginate_button page-item previous disabled" id="example_previous">
+                                    <a href="#" aria-controls="example" data-dt-idx="0" tabindex="0"
+                                        class="page-link">Prev</a>
+                                </li>
+                            @else
+                                <li class="paginate_button page-item previous">
+                                    <a class="page-link pt-0" href="{{ $products->previousPageUrl() }}" rel="prev"
+                                        aria-label="@lang('pagination.previous')">Prev</a>
+                                </li>
+                            @endif
+
+                            @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                @if ($page == $products->currentPage())
+                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example"
+                                            data-dt-idx="1" tabindex="0" class="page-link">{{ $page }}</a></li>
+                                @else
+                                    <li class="paginate_button page-item "><a href="{{ $url }}"
+                                            aria-controls="example" data-dt-idx="2" tabindex="0"
+                                            class="page-link">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="2"
+                                    tabindex="0" class="page-link">2</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="3"
+                                    tabindex="0" class="page-link">3</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example" data-dt-idx="4"
+                                    tabindex="0" class="page-link">4</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example"
+                                    data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example"
+                                    data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                            <li class="paginate_button page-item next" id="example_next"><a href="#"
+                                    aria-controls="example" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            @endif --}}
         </div>
         <!--end row-->
     </div>
