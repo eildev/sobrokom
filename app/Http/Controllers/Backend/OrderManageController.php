@@ -38,6 +38,10 @@ class OrderManageController extends Controller
         $refunded_orders = Order::where("status", 'refunded')->latest()->get();
         return view('backend.order.refunded-orders', compact('refunded_orders'));
     }
+    public function canceledOrders(){
+        $canceled_orders = Order::where("status", 'canceled')->latest()->get();
+        return view('backend.order.canceled-orders', compact('canceled_orders'));
+    }
 
 
     public function orderProcessing($invoice){
@@ -74,6 +78,12 @@ class OrderManageController extends Controller
         $refunded_orders = Order::where("invoice_number",$invoice)->latest()->first();
         $refunded_orders->status = "refunded";
         $refunded_orders->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+    public function orderCancel($invoice){
+        $canceled_order = Order::where("invoice_number",$invoice)->latest()->first();
+        $canceled_order->status = "canceled";
+        $canceled_order->update();
         return back()->with('success','Order Status Updated Sucessfully');
     }
 
