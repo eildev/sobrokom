@@ -29,7 +29,7 @@
                                 <div class="swiper-wrapper">
                                     @php
                                         $categories = App\Models\Category::all();
-                                        $allProducts = App\Models\Product::where('category_id', $category->id)->paginate(12);
+                                        $allProducts = App\Models\Product::whereHas('varient')->where('category_id', $category->id)->paginate(12);
                                     @endphp
                                     @foreach ($categories as $category)
                                         <div class="swiper-slide">

@@ -85,7 +85,7 @@
                                                     {{ $address->address_1 ?? '' }}
                                                 </td>
                                                 <td class="product-remove">
-                                                    <a
+                                                    <a style="color: #9e54a1"
                                                         href="{{ url('/pdf/genarate/' . $order->id . '/' . $order->invoice_number) }}">Download</a>
                                                 </td>
 
@@ -111,13 +111,13 @@
                                     </div>
                                     <hr>
                                 </div>
-                                <div class="invoice overflow-auto">
+                                <div class="invoice overflow-auto pt-0">
                                     <div style="min-width: 600px">
                                         <header>
                                             <div class="row">
                                                 <div class="col">
                                                     <a href="javascript:;">
-                                                        <img src="{{ asset('frontend/assets/img/logo/sobrokom-logo.svg') }}"
+                                                        <img src="{{ asset('frontend/assets/img/logo/horizontal-logo.webp') }}"
                                                             width="80" alt="">
                                                     </a>
                                                 </div>
@@ -164,15 +164,21 @@
                                                 <tbody>
                                                     @php
                                                         $orderDetails = App\Models\OrderDetails::where('order_id', $order->id)->get();
+
                                                     @endphp
                                                     @foreach ($orderDetails as $key => $orderDetail)
+                                                    @php
+                                                    // dd($orderDetail);
+                                                        $productDetails = App\Models\Variant::where('product_id', $orderDetail->product_id)->first();
+
+                                                    @endphp
                                                         <tr>
                                                             <td class="no">{{ $key + 1 }}</td>
                                                             <td class="text-left">
                                                                 <p>name</p>
                                                             </td>
                                                             <td class="">{{ $orderDetail->product_quantity }}</td>
-                                                            <td class="unit">1kg</td>
+                                                            <td class="unit">{{ $orderDetail->weight }}{{ $productDetails->unit }}</td>
                                                             <td class="qty">৳250</td>
                                                             <td class="total">৳{{ $orderDetail->total_price }}</td>
                                                         </tr>
@@ -198,16 +204,23 @@
                                                     </tr>
                                                 </tfoot>
                                             </table>
+                                            <style>
+                                                .invoice table tbody tr:last-child td {
+                                                    padding: 5px 5px 0 5px !important;
+                                                    font-size: 16px !important;
+                                                }
+                                            </style>
                                             <div class="thanks">Thank you!</div>
-                                            <div class="notices">
-                                                <div>NOTICE:</div>
-                                                <div class="notice">A finance charge of 1.5% will be made on unpaid
+                                            <div class="notices" style="font-size: 15px !important">
+                                                <div  style="font-size: 13px !important">NOTICE:</div>
+                                                <div class="notice"  style="font-size: 15px !important">A finance charge of 1.5% will be made on unpaid
                                                     balances after
                                                     50
                                                     days.</div>
                                             </div>
                                         </main>
-                                        <footer>Invoice was created on a computer and is valid without the signature and
+                                        <footer>
+                                            Invoice was created on a computer and is valid without the signature and
                                             seal.
                                         </footer>
 
