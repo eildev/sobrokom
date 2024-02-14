@@ -169,7 +169,7 @@
                                             <div class="postbox__comment-box d-flex">
                                                 <div class="postbox__comment-info">
                                                     <div class="postbox__comment-avater mr-25">
-                                                        <img src="{{ asset('uploads/user.jpg') }}" alt="">
+                                                        <img src="{{ asset('default/user.svg') }}" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="postbox__comment-text">
@@ -199,7 +199,7 @@
                                                                     <div class="postbox__comment-box pl-90 d-flex">
                                                                         <div class="postbox__comment-info">
                                                                             <div class="postbox__comment-avater mr-25">
-                                                                                <img src="{{ asset('uploads/user.jpg') }}"
+                                                                                <img src="{{ asset('default/user.svg') }}"
                                                                                     alt="">
                                                                             </div>
                                                                         </div>
@@ -260,13 +260,16 @@
                 </ul>
             </div>
             <div class="tpreview__form postbox__form">
+                @guest
+                @else
                 <h4 class="tpreview__form-title mb-10">LEAVE A Comments </h4>
+                @endguest
                 @guest
                     <h4 class="tpreview__form-title mb-10 text-danger" id="login">At first, you need to login
                         to your account | <a class="btn btn-sm bg-light" href="{{ route('login') }}">Login</a> |
                     </h4>
                 @else
-                    <p>Your email address will not be published. Required fields are marked *</p>
+
 
                     <form action="{{ route('blog.comment') }}" method="POST">
                         @csrf
@@ -280,14 +283,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="tpfooter__widget-newsletter-check postbox__check-box">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="flexCheckDefault2">
-                                        <label class="form-check-label" for="flexCheckDefault2">
-                                            Save my name, email, and website in this browser for the next time I
-                                            comment.
-                                        </label>
-                                    </div>
+
                                 </div>
                                 <div class="tpreview__submit mt-25">
                                     <button type="submit" class="tp-btn">Post Comment</button>
