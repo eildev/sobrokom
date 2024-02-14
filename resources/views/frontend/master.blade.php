@@ -65,6 +65,40 @@
     <div class="pageLoader">
         <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">
     </div>
+    <style>
+        .chat{
+            font-size: 20px;
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            position:fixed;
+            bottom:24px;
+            left:20px;
+            z-index:99999;
+            border-radius:50%;
+            height: 50px;
+            width: 50px;
+            box-shadow:1px 1px 5px gray;
+            background: #2D2A6E;
+            border-color: #9e54a1 !important;
+        }
+        .chat:hover{
+            scale: 1.045;
+            color:#2D2A6E !important;
+            background: white;
+        }
+        .chat::after {
+		position: absolute;
+		z-index: -1;
+		content: '';
+		top: 100%;
+		left: 5%;
+		height: 10px;
+		width: 90%;
+		background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+	}
+    </style>
+    <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/101120972767678"><i class="fab fa-facebook-messenger"></i></a>
 
     @php
         $cartData = Cart::content();

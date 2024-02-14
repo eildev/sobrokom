@@ -46,5 +46,6 @@
 
     <!-- blog-area-start -->
     @include('frontend.indexContent.blogArea')
+
     <!-- blog-area-end -->
 @endsection
