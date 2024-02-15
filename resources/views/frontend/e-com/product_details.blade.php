@@ -253,7 +253,7 @@
                                                 </ul>
                                                 <div id="social-links">
                                                     <ul>
-                                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/product-details/{{ $product->slug }}"
+                                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://sobrokom.store/product-details/{{ $product->slug }}"
                                                                 class="social-button btn btn-primary  my-class"
                                                                 id="my-id" rel="nofollow noopener noreferrer"><span
                                                                     class="fa fa-facebook-official"></span></a></li>
@@ -429,7 +429,7 @@
                                                         $formattedDate .= 'th';
                                                     }
                                                     $formattedDate .= $date->format(' Y g:i A');
-                                                    
+
                                                     ?>
                                                     <span class="date mb-20">{{ $formattedDate }}</span>
                                                     @if ($review->gallary->count() > 0)
