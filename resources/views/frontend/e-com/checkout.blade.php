@@ -440,34 +440,11 @@
             }
         }
 
-        function clearErrorMessages(className) {
-            $(className).removeClass('error');
-            $('.error_message').hide();
-            $(className + '_error').hide();
-        }
-
         // place order otp checked
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-
-            // Reset previous error styles
-            $('.error').removeClass('error');
-            $('.error_message').hide();
-
-            $('.phone').keyup(function() {
-                clearErrorMessages('.phone');
-            });
-            $('.address_1').keyup(function() {
-                clearErrorMessages('.address_1');
-            });
-            $('.city').keyup(function() {
-                clearErrorMessages('.city');
-            });
-            $('.post_code').keyup(function() {
-                clearErrorMessages('.post_code');
-            });
-
+            document.querySelector(".pageLoader").style.setProperty("display", "flex", "important");
             const first_name = $('.first_name').val();
             const phone = $('.phone').val();
             const address_1 = $('.address_1').val();
@@ -479,52 +456,62 @@
             if (first_name === "") {
                 $('.first_name').addClass('error').focus();
                 $('.first_name_error').text('First Name is Required');
+                toastr.error('First Name is Required');
                 return;
             }
             if (phone === "") {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Phone number is Required');
+                toastr.error('Phone number Required');
                 return;
             }
             if (isNaN(phone)) {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Phone number is not valid');
+                toastr.error('Phone number is not valid');
                 return;
             }
             if (phone.slice(0, 2) !== "01") {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Phone number is not valid');
+                toastr.error('Phone number is not valid');
                 return;
             }
             if (phone.length != 11) {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Phone number is must be 11 character');
+                toastr.error('Phone number is must be 11 character');
                 return;
             }
             const thirdValue = phone.charAt(2);
             if (!['3', '4', '5', '6', '7', '8', '9'].includes(thirdValue)) {
                 $('.phone').addClass('error').focus();
                 $('.phone_error').text('Please provide valid phone number');
+                toastr.error('Please provide valid phone number');
                 return;
             }
             if (address_1 === "") {
                 $('.address_1').addClass('error').focus();
                 $('.address_1_error').text('Address is Required');
+                 toastr.error('Address is Required');
                 return;
             }
             if (city === "") {
                 $('.city').addClass('error').focus();
                 $('.city_error').text('City is Required');
+                 toastr.error('City is Required');
                 return;
             }
             if (division === "") {
                 $('.division').addClass('error').focus();
                 $('.division_error').text('Division Name is Required');
+                 toastr.error('Division Name is Required');
                 return;
             }
             if (post_code === "") {
                 $('.post_code').addClass('error').focus();
                 $('.post_code_error').text('Post code is Required');
+                 toastr.error('Post code is Required');
                 return;
             } else {
 
@@ -545,11 +532,13 @@
                         success: function(res) {
                             // console.log(res);
                             if (res.status == 200) {
+                                document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
                                 $('#otpCheck').modal('show');
                             }
                         }
                     })
                 } else {
+                    document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
                     toastr.warning("Please select shipping method");
                 }
             }

@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\BlogCommentController;
+use App\Http\Controllers\Backend\CompanyDetailsController;
 use App\Http\Controllers\AllMail;
 
 /*
@@ -245,6 +246,19 @@ Route::middleware('auth','role:admin')->group(function () {
 
     });
      //Blog Comment All Route End
+     
+     
+     //Company Details All Route Start
+    Route::controller(CompanyDetailsController::class)->group(function () {
+        Route::get('/company-details', 'index')->name('company-details');
+        Route::post('/company-details/add', 'store')->name('company-details.store');
+        Route::get('/company-details/view', 'view')->name('company-details.view');
+        Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
+        Route::post('/company-details/update/{id}', 'update')->name('company-details.update');
+        Route::get('/company-details/delete/{id}', 'delete')->name('company-details.delete');
+        Route::post('/company-details/status/{id}', 'status')->name('company-details.status');
+    });
+    //Company Details All Route End
 
 
 });

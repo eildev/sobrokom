@@ -14,7 +14,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="order_table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>SI</th>
@@ -61,10 +61,20 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-success home_banner_active"
-                                                    value="{{ $banner->id }}">Active</a>
-                                                <a href="#" class="btn btn-sm btn-success home_banner_inactive"
-                                                    style="display: none;" value="{{ $banner->id }}">Inactive</a>
+                                                <form action="{{ route('banner.status', $banner->id) }}" method="POST">
+                                                    @csrf
+                                                    @if ($banner->status == 0)
+                                                        <button class="btn btn-sm btn-danger status_inactive"
+                                                            value="{{ $banner->id }}">Inactive</button>
+                                                    @else
+                                                        <button class="btn btn-sm btn-success status_active"
+                                                            value="{{ $banner->id }}">Active</button>
+                                                    @endif
+                                                </form>
+                                                <!--<a href="#" class="btn btn-sm btn-success home_banner_active"-->
+                                                <!--    value="{{ $banner->id }}">Active</a>-->
+                                                <!--<a href="#" class="btn btn-sm btn-success home_banner_inactive"-->
+                                                <!--    style="display: none;" value="{{ $banner->id }}">Inactive</a>-->
                                             </td>
                                             <td>
                                                 <a href="{{ route('banner.edit', $banner->id) }}"

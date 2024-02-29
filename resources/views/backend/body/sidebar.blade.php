@@ -81,8 +81,11 @@
                         <li> <a href="{{ route('category.view') }}"><i class="bx bx-right-arrow-alt"></i>
                                 All Category</a>
                         </li>
-                        {{-- Subcategory menu  --}}
-                        <li>
+                    </ul>
+                </li>
+                
+                {{-- Subcategory menu  --}}
+                <li>
                             <a class="has-arrow" href="javascript:;">
                                 <div class="parent-icon"><i class='bx bx-category-alt'></i>
                                 </div></i>
@@ -117,8 +120,6 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
 
                 {{-- brand Related menu  --}}
                 <li>
@@ -354,7 +355,22 @@
 
             </ul>
         </li>
+          <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-message-rounded-dots'></i>
+                </div>
+                <div class="menu-title">Company Details</div>
+            </a>
+            <ul>
 
+                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+                </li>
+                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Company</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!--end navigation-->

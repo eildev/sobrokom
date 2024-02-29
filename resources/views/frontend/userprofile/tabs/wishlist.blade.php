@@ -28,16 +28,23 @@
                             </div>
                         </div>
                         <div class="tplist__content">
-                            <span>1 {{ $wishlist->wishlistProduct->varient[0]->unit }}</span>
                             <h4 class="tplist__content-title"><a
                                     href="{{ route('product.details', $wishlist->wishlistProduct->slug) }}">{{ $wishlist->wishlistProduct->product_name }}</a>
                             </h4>
                             <div class="tplist__rating mb-5">
-                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                <a href="#"><i class="icon-star_outline1"></i></a>
-                                <a href="#"><i class="icon-star_outline1"></i></a>
+                                @php
+                                    $ratingAvg = App\Models\ReviewRating::where('product_id', $wishlist->wishlistProduct->id)->avg('rating');
+                                @endphp
+                                @php
+                                    $last = 0;
+                                @endphp
+                                @for ($i = 1; $i <= $ratingAvg; $i++)
+                                    <a href="#"><i class="icon-star"></i></a>
+                                @php $last = $i @endphp
+                                @endfor
+                                @for ($j = $last; $j < 5; $j++)
+                                    <a href="#"><i class="icon-star_outline1"></i></a>
+                                @endfor
                             </div>
                             <ul class="tplist__content-info">
                                 <li>Delicous Non-Dairy cheese sauce</li>
@@ -46,9 +53,18 @@
                             </ul>
                         </div>
                         <div class="tplist__price justify-content-end">
-                            <h4 class="tplist__instock">Availability: <span>{{$wishlist->wishlistProduct->varient[0]->stock_quantity ?? 10 }} in stock</span> </h4>
-                            <h3 class="tplist__count mb-15">৳{{$wishlist->wishlistProduct->varient[0]->discount_amount ?? 10 }}</h3>
-                            <button class="tp-btn-2 mb-10">Add to cart</button>
+                            <h4 class="tplist__instock">Availability: <span> In Stock</span> </h4>
+                            <h3 class="tplist__count mb-15" style="color: #9e54a1;">৳{{$wishlist->wishlistProduct->varient[0]->discount_amount ?? 10 }}</h3>
+                            <form method="POST" id="add_to_cart_form">
+                            @csrf
+                                <input type="hidden"  value="{{ $wishlist->wishlistProduct->id ?? 0 }}" name="product_id">
+                                <input type="hidden" value="{{ $wishlist->wishlistProduct->varient[0]->id ?? 0 }}" name="variant_id">
+                                <input type="hidden" value="{{ $wishlist->wishlistProduct->varient[0]->discount_amount ?? 0 }}" name="selling_price">
+                                <input type="hidden" value="{{ $wishlist->wishlistProduct->varient[0]->weight ?? 0 }}" name="weight">
+                                <input type="hidden" value="{{ $wishlist->wishlistProduct->varient[0]->unit ?? 0 }}" name="unit">
+                                <button class="tp-btn-2 mb-10">Add to cart</button>
+                            </form>
+                            
                             <div class="tplist__shopping">
                                 <a href="{{ route('wishlist.delete', $wishlist->id) }}"><i
                                         style="color: {{ !empty($wishlist->loved) ? 'red' : '' }}"

@@ -9,7 +9,7 @@ class BlogCommentController extends Controller
 {
     public function BlogAllPendingComment(){
       $blogComment = BlogComment::latest()->get();
-        return view('Backend.blog_comments.pending_comment',compact('blogComment'));
+        return view('backend.blog_comments.pending_comment',compact('blogComment'));
     }//End Method
     public function BlogCommentPendingToApprove($id){
         BlogComment::findOrFail($id)->update([
@@ -19,7 +19,7 @@ class BlogCommentController extends Controller
     }//End  MEthod
     public function BlogAllApproveComment(){
         $blogComment = BlogComment::latest()->get();
-        return view('Backend.blog_comments.approve_comment',compact('blogComment'));
+        return view('backend.blog_comments.approve_comment',compact('blogComment'));
     }//End Method
     public function BlogCommentApproveToPending($id){
         BlogComment::findOrFail($id)->update([

@@ -18,7 +18,7 @@ use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\frontend\BlogReactionController;
+use App\Http\Controllers\Frontend\BlogReactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +46,10 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
+
+Route::get('/sobrokom-career', function () {
+    return view('frontend/pages/career');
+})->name('career');
 
 
 // product related routes

@@ -16,10 +16,10 @@
                 </div>
                 <div class="tpcart__checkout-btn">
                     <a class="tpcart-btn mb-10" href="{{ route('product.show_cart_products') }}">View Cart</a>
+                    <!--<a class="tpcheck-btn" href="{{ route('checkout') }}">Checkout</a>-->
+                    @if (Cart::count() > 0)
                     <a class="tpcheck-btn" href="{{ route('checkout') }}">Checkout</a>
-                    {{-- @if (Cart::count() > 0)
-                    <a class="tpcheck-btn" href="{{ route('checkout') }}">Checkout</a>
-                    @endif --}}
+                    @endif
                 </div>
             </div>
         </div>

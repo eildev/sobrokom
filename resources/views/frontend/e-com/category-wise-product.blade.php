@@ -518,10 +518,9 @@
                                                     </div>
                                                     <div class="tplist__price justify-content-end">
                                                         <h4 class="tplist__instock">Availability:
-                                                            <span>{{ $product->varient[0]->stock_quantity ?? '' }} in
-                                                                stock</span>
+                                                            <span>In Stock</span>
                                                         </h4>
-                                                        <h3 class="tplist__count mb-15">
+                                                        <h3 class="tplist__count mb-15" style="color: #9e54a1;">
                                                             ৳{{ $product->varient[0]->discount_amount ?? '' }}
                                                             <span class="text-secondary" style="font-size: 14px">/
                                                                 {{ $product->varient[0]->unit ?? '' }}</span>
@@ -547,7 +546,7 @@
                                                         </form>
                                                         <div class="tplist__shopping">
                                                             @auth
-                                                                <a class="" href="#"
+                                                                <a class="add_whishlist" href="#"
                                                                     value="{{ $product->id }}">
                                                                     <!-- <i class="icon-heart icons"></i> -->
                                                                     @auth

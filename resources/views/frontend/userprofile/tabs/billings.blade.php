@@ -5,12 +5,12 @@
                 <div class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-popular-tab" data-bs-toggle="tab"
+                            <button class="nav-link {{ !empty(Auth::user()->billing->id) ? 'active' : '' }}" id="nav-popular-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular"
                                 aria-selected="true">
                                 <i class="icon-eye"></i> Billing Details 
                             </button>
-                            <button class="nav-link" id="nav-product-tab" data-bs-toggle="tab"
+                            <button class="nav-link {{ !empty(Auth::user()->billing->id) ? '' : 'active' }}" id="nav-product-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product"
                                 aria-selected="false">
                                 <i class="fas fa-gear"></i> Manage Information
@@ -28,7 +28,7 @@
             $billingInfo = App\Models\BillingInfo::where('user_id', Auth::user()->id)->first();
         @endphp
         {{-- tab 2 details  --}}
-        <div class="tab-pane fade show active whight-product" id="nav-popular" role="tabpanel"
+        <div class="tab-pane fade show {{ !empty(Auth::user()->billing->id) ? 'active' : '' }} whight-product" id="nav-popular" role="tabpanel"
             aria-labelledby="nav-popular-tab">
             <div class="row">
                 <div class="tab_card d-flex align-items-center justify-content-between mb-20">
@@ -129,7 +129,7 @@
         </div>
 
         {{-- tab-3 details  --}}
-        <div class="tab-pane fade whight-product" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
+        <div class="tab-pane fade whight-product {{ !empty(Auth::user()->billing->id) ? '' : 'active show' }}" id="nav-product" role="tabpanel" aria-labelledby="nav-product-tab">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tab_card d-flex align-items-center justify-content-between mb-20">

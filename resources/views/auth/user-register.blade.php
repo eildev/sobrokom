@@ -7,9 +7,9 @@
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
-                            <span class="tp-breadcrumb__active"><a href="index.html">Home</a></span>
+                            <span class="tp-breadcrumb__active"><a href="{{route('home')}}">Home</a></span>
                             <span class="dvdr">/</span>
-                            <span>Sign in</span>
+                            <span>Sign Up</span>
                         </div>
                     </div>
                 </div>
@@ -62,17 +62,16 @@
                                 <div class="tptrack__email mb-10">
                                     <span><i class="fa fa-key"></i></span>
                                     <input name="password" type="password" placeholder="Password" required>
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('password')" class="my-2 ms-4 text-danger" />
                                 </div>
                                 <div class="tptrack__email mb-10">
                                     <span><i class="fa fa-key"></i></span>
                                     <input type="password" name="password_confirmation" placeholder="Confirmation Password"
                                         required>
-                                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                    <x-input-error :messages="$errors->get('password_confirmation')" class="my-2 ms-4 text-danger" />
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="termandcondition"
-                                        checked>
+                                    <input class="form-check-input" type="checkbox" value="" id="termandcondition">
                                     <label class="form-check-label" for="termandcondition"><a href="#"
                                             target="_blank">I accept term & condition</a></label>
                                 </div>
