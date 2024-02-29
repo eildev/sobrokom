@@ -5,6 +5,7 @@ use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\OrderBillingDetails;
 use App\Models\User;
@@ -71,6 +72,11 @@ class OrderManageController extends Controller
         // dd($completed_Orders);
         $completed_Orders->status = "completed";
         $completed_Orders->update();
+
+        $orderId = $completed_Orders->id;
+        // dd($orderId);
+        $orders = OrderDetails::where("order_id", $orderId)->get();
+        dd($orders);
         return back()->with('success','Order Status Updated Sucessfully');
     }
     public function orderRefund($invoice){

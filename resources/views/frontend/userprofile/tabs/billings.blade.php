@@ -8,7 +8,7 @@
                             <button class="nav-link {{ !empty(Auth::user()->billing->id) ? 'active' : '' }}" id="nav-popular-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-popular" type="button" role="tab" aria-controls="nav-popular"
                                 aria-selected="true">
-                                <i class="icon-eye"></i> Billing Details 
+                                <i class="icon-eye"></i> Billing Details
                             </button>
                             <button class="nav-link {{ !empty(Auth::user()->billing->id) ? '' : 'active' }}" id="nav-product-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-product" type="button" role="tab" aria-controls="nav-product"
@@ -265,7 +265,7 @@
     </div>
 </div>
 <script>
-    // Add Billing Details 
+    // Add Billing Details
     const add_billing_details = document.querySelector('.add_billing_details');
     add_billing_details.addEventListener('click', function(e) {
         e.preventDefault();
