@@ -159,9 +159,7 @@
                                                         <label for="" class="form-label">Short Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="short_desc" placeholder="" style="resize: none; height: 70px;">
-                                                            {{ $product->short_desc }}
-                                                        </textarea>
+                                                        <textarea class="form-control " name="short_desc" placeholder="" style="resize: none; height: 70px;">{{ $product->short_desc }}</textarea>
                                                         <span class="short_desc text-danger"></span>
                                                     </div>
                                                 </div>
@@ -175,9 +173,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <textarea class="form-control " name="long_desc" placeholder="" style="resize: none; height: 100px;"
-                                                            id="product_descriptions">
-                                                            {{ $product->long_desc }}
-                                                        </textarea>
+                                                            id="product_descriptions">{{ $product->long_desc }}</textarea>
                                                         <span class="long_desc text-danger"></span>
                                                     </div>
                                                 </div>

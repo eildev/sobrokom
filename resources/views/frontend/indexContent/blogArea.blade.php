@@ -3,7 +3,7 @@
 $home_blog = App\Models\BlogPost::latest()->limit(6)->get()
 
 @endphp
-<section class="blog-area pb-20 pt-50">
+<section class="blog-area pb-20 pt-50"  style="margin-left: 20px">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 text-center">

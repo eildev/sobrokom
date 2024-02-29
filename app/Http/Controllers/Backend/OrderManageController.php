@@ -5,15 +5,23 @@ use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\OrderBillingDetails;
+use App\Models\User;
 class OrderManageController extends Controller
 {
+    public function allUser(){
+        $allUsers = User::all();
+        return response()->json([
+            'status' => 200,
+            'allusers' => $allUsers
+            ]);
+    }
     public function index(){
         $newOrders = Order::where("status", 'pending')->latest()->get();
         return view('backend.order.new-order', compact('newOrders'));
     }
-
     public function approvedOrders(){
         $approved_orders = Order::where("status", 'approve')->latest()->get();
         return view('backend.order.approved-order', compact('approved_orders'));
@@ -42,8 +50,6 @@ class OrderManageController extends Controller
         $canceled_orders = Order::where("status", 'canceled')->latest()->get();
         return view('backend.order.canceled-orders', compact('canceled_orders'));
     }
-
-
     public function orderProcessing($invoice){
         // dd($invoice);
         $processing_Orders = Order::where("invoice_number",$invoice)->latest()->first();
@@ -66,6 +72,11 @@ class OrderManageController extends Controller
         // dd($completed_Orders);
         $completed_Orders->status = "completed";
         $completed_Orders->update();
+
+        $orderId = $completed_Orders->id;
+        // dd($orderId);
+        $orders = OrderDetails::where("order_id", $orderId)->get();
+        dd($orders);
         return back()->with('success','Order Status Updated Sucessfully');
     }
     public function orderRefund($invoice){
@@ -86,14 +97,12 @@ class OrderManageController extends Controller
         $canceled_order->update();
         return back()->with('success','Order Status Updated Sucessfully');
     }
-
-
     public function adminApprove($invoice){
         $newOrders = Order::where("invoice_number",$invoice)->latest()->first();
         $newOrders->status = "approve";
         $newOrders->update();
 
-        $trackingUrl = 'http://127.0.0.1:8000/order-tracking';
+        $trackingUrl = 'https://sobrokom.store/order-tracking';
         $number = $newOrders->user_identity;
         $api_key = "0yRu5BkB8tK927YQBA8u";
         $senderid = "8809617615171";
@@ -114,7 +123,6 @@ class OrderManageController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         $email = OrderBillingDetails::where('order_id',$newOrders->id)->first();
-
         $url = 'https://sobrokom.store/order-tracking/invoice';
         $data = [
             'name' => $newOrders->first_name,
@@ -122,7 +130,6 @@ class OrderManageController extends Controller
             'trackingURL'=> $url
         ];
         Mail::to($email->email)->send(new OrderMail($data));
-
         $response = json_decode($response, true);
         if($response['response_code'] == 202){
             return back()->with('success','Order Successfully Approved');
@@ -130,7 +137,6 @@ class OrderManageController extends Controller
         else{
             return back()->with('warring','Something went wrong Order Not Approved');
         }
-
     }
     public function orderTracking(){
         return view('frontend/e-com/tracking-product');

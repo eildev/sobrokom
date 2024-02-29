@@ -29,10 +29,10 @@
 		}
 	});
 
-	
+
 	////////////////////////////////////////////////////
 	// 03. Swiper Js
-	
+
 
 
 	////////////////////////////////////////////////////
@@ -59,7 +59,7 @@
 		$('#ship-box-info').slideToggle(1000);
 	});
 
-	
+
 	///////////////////////////////////////////////////
 	// 08.  Scroll to top
 	windowOn.on('scroll', function () {
@@ -82,7 +82,7 @@
 		$('html, body').animate({
 			scrollTop: $(target).offset().top
 		}, 1000);
-	
+
 		});
 	}
 
@@ -210,14 +210,14 @@
 		$(".tpsideinfo").addClass("tp-sidebar-opened");
 		$(".body-overlay").addClass("opened");
 	});
-	$(".tpsideinfo__close").on("click", function () {
-		$(".tpsideinfo").removeClass("tp-sidebar-opened");
-		$(".body-overlay").removeClass("opened");
-	});
-	$(".body-overlay").on("click", function () {
-		$(".tpsideinfo").removeClass("tp-sidebar-opened");
-		$(".body-overlay").removeClass("opened");
-	});
+	// $(".tpsideinfo__close").on("click", function () {
+	// 	$(".tpsideinfo").removeClass("tp-sidebar-opened");
+	// 	$(".body-overlay").removeClass("opened");
+	// });
+	// $(".body-overlay").on("click", function () {
+	// 	$(".tpsideinfo").removeClass("tp-sidebar-opened");
+	// 	$(".body-overlay").removeClass("opened");
+	// });
 
 
 	////////////////////////////////////////////////////
@@ -483,7 +483,7 @@
 	});
 
 
-	
+
 	////////////////////////////////////////////////////
 	// 30. Slider Js
 	var categoryswiper = new Swiper('.blog-active-3', {
@@ -989,7 +989,7 @@
 		},
 	});
 
-	
+
 	////////////////////////////////////////////////////
 	// 44. Price Filter Js
 	if ($("#slider-range").length) {
@@ -1023,6 +1023,6 @@
 		});
 
 	}
-	
+
 
 })(jQuery);

@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-6 text-center">
                         <div class="tpsection mb-15">
-                            <h4 class="tpsection__title text-start brand-product-title">Weekly Best Offers</h4>
+                            <h4 class="tpsection__title text-start brand-product-title" id="weekly_offers">Weekly Best Offers</h4>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -43,18 +43,12 @@
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
                                                                 alt=""></a>
                                                         <div class="tpproduct__info bage">
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span
-                                                                    class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
-                                                            @else
-                                                                <span></span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <span class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                @endif
                                                             @endif
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <span class="tpproduct__info-hot bage__hot">HOT</span>
-                                                            @else
-                                                                <span></span>
-                                                            @endif
-
                                                         </div>
                                                         <div class="tpproduct__shopping">
                                                             @auth
@@ -109,15 +103,19 @@
                                                         </div>
                                                         <div class="tpproduct__price mb-5">
                                                             <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
-                                                            <span class="text-secondary"
-                                                                style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}
-                                                            </span>
-                                                            @if ($product->varient[0]->discount > 0)
-                                                                <del>৳{{ $product->varient[0]->regular_price }}</del>
-                                                            @else
-                                                                <span></span>
+                                                            @if (!empty($product->varient[0]))
+                                                                @if($product->varient[0]->weight == "gm" || $product->varient[0]->weight == "ml")
+                                                                    <span class="text-secondary" style="font-size: 14px">/{{ $product->varient[0]->weight ?? '' }} {{ $product->varient[0]->unit ?? '' }}</span>
+                                                                @else
+                                                                    <span class="text-secondary" style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}</span>
+                                                                @endif
                                                             @endif
 
+                                                            @if (!empty($product->varient[0]))
+                                                                @if ($product->varient[0]->discount > 0)
+                                                                    <del>৳{{ $product->varient[0]->regular_price }}</del>
+                                                                @endif
+                                                            @endif
                                                         </div>
                                                         <!--<div class="tpproduct__progress">-->
                                                         <!--    <div class="progress mb-5">-->

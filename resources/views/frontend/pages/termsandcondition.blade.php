@@ -174,7 +174,7 @@
                         <div class="tplocation__text">
                            <h4 class="tplocation__text-title">Contact Information</h4>
                            <div class="tplocation__content tplocation__content-two">
-                              <p> For any questions regarding these Terms and Conditions, please contact us at <a style="color:#9e54a1" href="mailto:www.sobrokom.store@gmail.com">www.sobrokom.store@gmail.com</a></p>
+                              <p> For any questions regarding these Terms and Conditions, please contact us at <a style="color:#9e54a1" href="mailto:www.sobrokom.store@gmail.com">sobrokom.store@gmail.com</a></p>
                            </div>
                         </div>
                      </div>

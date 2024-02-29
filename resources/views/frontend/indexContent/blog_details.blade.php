@@ -84,9 +84,10 @@
                                                         ->where('like', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="like react" name="like" value="like"><i
-                                                        class="fas fa-thumbs-up fs-4 text-primary"></i></a><span class="like_count fw-bold text-dark">{{ $like }} </span>
-
+                                                <a href="#" class="like react" name="like" value="like">
+                                                    <i class="fas fa-thumbs-up fs-4 text-primary"></i>
+                                                    <span class="like_count fw-bold text-dark">{{ $like }} </span>
+                                                </a>
                                             {{-- //Dislike --}}
 
                                                 @php
@@ -94,51 +95,53 @@
                                                         ->where('dislike', 1)
                                                         ->count();
                                                 @endphp
-                                                <a href="#" class="dislike react" name="dislike" value="dislike"><i
-                                                        class="far fa-thumbs-down fs-4 text-info"></i></a><span
-                                                    class="dislike_count">{{ $dislike }}</span>
+                                                <a href="#" class="dislike react" name="dislike" value="dislike">
+                                                    <i class="far fa-thumbs-down fs-4 text-info"></i>
+                                                    <span class="dislike_count">{{ $dislike }}</span>
 
-                                            {{-- //heart --}}
-                                            {{-- <span>
-                                                @php
-                                                    $love = App\Models\BlogReact::where('blog_id', $singleBlog->id)
-                                                        ->where('love', 1)
-                                                        ->count();
-                                                @endphp
-                                                <a href="#" class="love react" name="love"  value="love"> <i
-                                                        class="fas fa-heart fs-4 text-primary"></i></a><span class="love_count fw-bold text-dark">{{ $love }}</span></span> --}}
-                                            {{-- //Sad --}}
-                                            {{-- <span>
-                                                @php
-                                                    $sad = App\Models\BlogReact::where('blog_id', $singleBlog->id)
-                                                        ->where('sad', 1)
-                                                        ->count();
-                                                @endphp
-                                                <a href="#" class="sad react" name="sad"  value="sad"><i
-                                                        class="fas fa-sad-tear fs-4 text-primary"></i></a><span class="sad_count fw-bold text-dark">{{ $sad }}</span>
-                                                </span> --}}
+                                                </a>
 
-                                            {{-- //anger --}}
+                                            <!--{{-- //heart --}}-->
+                                            <!--{{-- <span>-->
+                                            <!--    @php-->
+                                            <!--        $love = App\Models\BlogReact::where('blog_id', $singleBlog->id)-->
+                                            <!--            ->where('love', 1)-->
+                                            <!--            ->count();-->
+                                            <!--    @endphp-->
+                                            <!--    <a href="#" class="love react" name="love"  value="love"> <i-->
+                                            <!--            class="fas fa-heart fs-4 text-primary"></i></a><span class="love_count fw-bold text-dark">{{ $love }}</span></span> --}}-->
+                                            <!--{{-- //Sad --}}-->
+                                            <!--{{-- <span>-->
+                                            <!--    @php-->
+                                            <!--        $sad = App\Models\BlogReact::where('blog_id', $singleBlog->id)-->
+                                            <!--            ->where('sad', 1)-->
+                                            <!--            ->count();-->
+                                            <!--    @endphp-->
+                                            <!--    <a href="#" class="sad react" name="sad"  value="sad"><i-->
+                                            <!--            class="fas fa-sad-tear fs-4 text-primary"></i></a><span class="sad_count fw-bold text-dark">{{ $sad }}</span>-->
+                                            <!--    </span> --}}-->
 
-                                            {{-- <span>
-                                                @php
-                                                    $angry = App\Models\BlogReact::where('blog_id', $singleBlog->id)
-                                                        ->where('angry', 1)
-                                                        ->count();
-                                                @endphp
-                                                <a href="#" class="angry react" name="angry"  value="angry"><i
-                                                 class="fas fa-angry fs-4 text-primary"></i></a>
-                                                    <span class="angry_count fw-bold text-dark">{{ $angry }}</span>
-                                            </span> --}}
-                                            {{-- //Funny --}}
-                                            {{-- <span>
-                                                @php
-                                                    $haha = App\Models\BlogReact::where('blog_id', $singleBlog->id)
-                                                        ->where('haha', 1)
-                                                        ->count();
-                                                @endphp
-                                                <a href="#" class="haha react" name="haha"  value="haha"><i
-                                                        class="fas fa-laugh fs-4 text-primary "></i></a><span class="haha_count fw-bold text-dark">{{ $haha }}</span></span> --}}
+                                            <!--{{-- //anger --}}-->
+
+                                            <!--{{-- <span>-->
+                                            <!--    @php-->
+                                            <!--        $angry = App\Models\BlogReact::where('blog_id', $singleBlog->id)-->
+                                            <!--            ->where('angry', 1)-->
+                                            <!--            ->count();-->
+                                            <!--    @endphp-->
+                                            <!--    <a href="#" class="angry react" name="angry"  value="angry"><i-->
+                                            <!--     class="fas fa-angry fs-4 text-primary"></i></a>-->
+                                            <!--        <span class="angry_count fw-bold text-dark">{{ $angry }}</span>-->
+                                            <!--</span> --}}-->
+                                            <!--{{-- //Funny --}}-->
+                                            <!--{{-- <span>-->
+                                            <!--    @php-->
+                                            <!--        $haha = App\Models\BlogReact::where('blog_id', $singleBlog->id)-->
+                                            <!--            ->where('haha', 1)-->
+                                            <!--            ->count();-->
+                                            <!--    @endphp-->
+                                            <!--    <a href="#" class="haha react" name="haha"  value="haha"><i-->
+                                            <!--            class="fas fa-laugh fs-4 text-primary "></i></a><span class="haha_count fw-bold text-dark">{{ $haha }}</span></span> --}}-->
 
                                         </div>
                                     </div>
@@ -312,6 +315,7 @@
         $(document).ready(function() {
             $('.react').click(function(e) {
                 e.preventDefault();
+                // alert('ok');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -327,6 +331,7 @@
                         post_id: post_id
                     },
                     success: function(res) {
+                        console.log(res.like);
                         $('.like_count').text(res.like);
                         $('.dislike_count').text(res.dislike);
                         // $('.love_count').text(res.love);

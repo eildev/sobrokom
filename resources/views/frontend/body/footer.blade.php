@@ -27,7 +27,7 @@
                             <h4 class="tpfooter__widget-title">HOT CATEGORIES</h4>
                             <div class="tpfooter__widget-links">
                                 @php
-                                    $categories = App\Models\Category::all();
+                                    $categories = App\Models\Category::where('status', '1')->get();
                                 @endphp
                                 @if ($categories->count() > 0)
                                     <ul>
@@ -61,7 +61,8 @@
                                     <li><a href="{{ route('termsandcondition') }}">Terms & Conditions</a></li>
                                     <li><a href="{{ route('privacypolicy') }}">Privacy Policy</a></li>
                                     <li><a href="{{ route('aboutus') }}">Returns & Refunds</a></li>
-                                    <li><a href="{{ route('faqs') }}">Faq's</a></li>
+                                    <li><a href="{{ route('faqs') }}">FAQ</a></li>
+                                    <li><a href="{{ route('career') }}">Sobrokom Career</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -121,43 +122,4 @@
         </div>
     </div>
 </footer>
-
-<script>
-    const btn = document.querySelector('.subscribe');
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        // Check if the "Accept Terms & Conditions" checkbox is checked
-        let acceptTermsCheckbox = document.querySelector('.accept_terms');
-        if (!acceptTermsCheckbox.checked) {
-            toastr.warning('Please accept our terms and conditions to subscribe.');
-            return;
-        }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        let email = document.querySelector('#subscriber_mail').value;
-        $.ajax({
-            url: '/subscribe/store',
-            type: 'POST',
-            data: {
-                'email': email,
-            },
-            success: function(success_response) {
-                if (success_response.status == 200) {
-                    toastr.success(success_response.message);
-                    document.querySelector('#subscriber_mail').value = '';
-                } else {
-                    toastr.warning(success_response.error.email);
-                }
-                // console.log(majid.message);
-
-            }
-        });
-    });
-</script>
 <!-- footer-area-end -->
