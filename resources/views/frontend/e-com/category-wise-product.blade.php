@@ -25,7 +25,20 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="tpshop__details">
                         <div class="tpshop__category">
+
                             <div class="swiper-container inner-category-two">
+                                <div class="category__item mb-30">
+                                    <div class="category__thumb fix mb-15">
+                                        <a href="{{ route('category.wise.product', $category->slug) }}"><img
+                                                src="{{ asset('uploads/category/' . $category->image) }}"
+                                                alt="category-thumb"></a>
+                                    </div>
+                                    <div class="category__content">
+                                        <h5 class="category__title"><a
+                                                href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
+                                        </h5>
+                                    </div>
+                                </div>
                                 <div class="swiper-wrapper">
                                     @php
                                         $categories = App\Models\Category::all();
@@ -192,27 +205,57 @@
                                         </nav>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="product__navtabs d-flex justify-content-end align-items-center">
-                                        <div class="tp-shop-selector">
-                                            <select style="display: none;">
-                                                <option>Default sorting</option>
-                                                <option>Show 14</option>
-                                                <option>Show 08</option>
-                                                <option>Show 20</option>
-                                            </select>
-                                            <div class="nice-select" tabindex="0">
-                                                <span class="current">Default sorting</span>
-                                                <ul class="list">
-                                                    <li data-value="Show 12" class="option selected">Default sorting</li>
-                                                    <li data-value="Show 14" class="option">Short popularity</li>
-                                                    <li data-value="Show 08" class="option">Show 08</li>
-                                                    <li data-value="Show 20" class="option">Show 20</li>
-                                                </ul>
+                                @if ($categories->count() > 0)
+                                    <div class="col-sm-4">
+                                        <div class="product__navtabs d-flex justify-content-end align-items-center">
+                                            <div class="tp-shop-selector">
+
+                                                <style>
+                                                    /* width */
+                                                    .custom_scroll::-webkit-scrollbar {
+                                                        width: 10px;
+                                                    }
+
+                                                    /* Track */
+                                                    .custom_scroll::-webkit-scrollbar-track {
+                                                        box-shadow: inset 0 0 5px grey;
+                                                        border-radius: 10px;
+                                                    }
+
+                                                    /* Handle */
+                                                    .custom_scroll::-webkit-scrollbar-thumb {
+                                                        background: #c8a3cc;
+                                                        border-radius: 10px;
+                                                    }
+
+                                                    /* Handle on hover */
+                                                    .custom_scroll::-webkit-scrollbar-thumb:hover {
+                                                        background: #b30000;
+                                                    }
+
+                                                    .sorting_bar {
+                                                        /* margin-right: -20px; */
+                                                    }
+                                                </style>
+                                                <div class="nice-select sorting_bar" style="width: 200px;" tabindex="0">
+                                                    <span class="current">All Categories</span>
+                                                    <ul class="list custom_scroll"
+                                                        style="height: 200px; width: 200px; overflow-y:scroll; border-radius: 10px; margin-top: 15px !important;">
+                                                        @foreach ($categories as $category)
+                                                            <a href="{{ route('category.wise.product', $category->slug) }}">
+                                                                <li data-value="Show 12" class="option selected">
+                                                                    {{ $category->categoryName }}
+
+                                                                </li>
+                                                            </a>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">

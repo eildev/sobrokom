@@ -29,7 +29,18 @@
                                     $serialNumber = 1;
                                 @endphp
                                 @if ($newOrders->count() > 0)
+                                {{-- @dd($newOrders); --}}
                                     @foreach ($newOrders as $order)
+                                    @dd($order->orderDetails);
+                                    @php
+                                        $orderDetails = App\Models\OrderDetails::where('order_id ', $order->id)->get();
+                                    @endphp
+                                    @dd($orderDetails);
+
+                                    {{-- @foreach ($orderDetails as $orderDetail)
+                                    @dd($orderDetail);
+                                    @endforeach --}}
+
                                         @php
                                             $originalDateString = $order->created_at;
                                             $dateTime = new DateTime($originalDateString);

@@ -24,8 +24,15 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="tpshop__details">
+                        @php
+                            $subcategories = App\Models\Subcategory::all();
+                            $allProducts = App\Models\Product::whereHas('varient')
+                                ->where('subcategory_id', $subcategory->id)
+                                ->orderBy('id', 'DESC')
+                                ->paginate(12);
+                        @endphp
 
-                        <div class="tpshop__category">
+                        {{-- <div class="tpshop__category">
                             <div class="swiper-container inner-category-two">
                                 <div class="swiper-wrapper">
                                     @php
@@ -48,7 +55,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="product__filter-content mb-30">
                             <div class="row align-items-center">
                                 <div class="col-sm-4">
@@ -194,19 +201,42 @@
                                 <div class="col-sm-4">
                                     <div class="product__navtabs d-flex justify-content-end align-items-center">
                                         <div class="tp-shop-selector">
-                                            <select style="display: none;">
-                                                <option>Default sorting</option>
-                                                <option>Show 14</option>
-                                                <option>Show 08</option>
-                                                <option>Show 20</option>
-                                            </select>
-                                            <div class="nice-select" tabindex="0">
-                                                <span class="current">Default sorting</span>
-                                                <ul class="list">
-                                                    <li data-value="Show 12" class="option selected">Default sorting</li>
-                                                    <li data-value="Show 14" class="option">Short popularity</li>
-                                                    <li data-value="Show 08" class="option">Show 08</li>
-                                                    <li data-value="Show 20" class="option">Show 20</li>
+                                            <style>
+                                                /* width */
+                                                .custom_scroll::-webkit-scrollbar {
+                                                    width: 10px;
+                                                }
+
+                                                /* Track */
+                                                .custom_scroll::-webkit-scrollbar-track {
+                                                    box-shadow: inset 0 0 5px grey;
+                                                    border-radius: 10px;
+                                                }
+
+                                                /* Handle */
+                                                .custom_scroll::-webkit-scrollbar-thumb {
+                                                    background: #c8a3cc;
+                                                    border-radius: 10px;
+                                                }
+
+                                                /* Handle on hover */
+                                                .custom_scroll::-webkit-scrollbar-thumb:hover {
+                                                    background: #b30000;
+                                                }
+
+                                            </style>
+                                            <div class="nice-select"  style="width: 200px;" tabindex="0">
+                                                <span class="current">All Subcategory</span>
+                                                <ul class="list custom_scroll"
+                                                    style="height: 200px; overflow-y:scroll; border-radius: 10px; margin-top: 15px !important;">
+                                                    @foreach ($subcategories as $subcategory)
+                                                        <a href="{{ route('subcategory.wise.product', $subcategory->slug) }}">
+                                                            <li data-value="Show 12" class="option selected">
+                                                                {{ $subcategory->subcategoryName }}
+
+                                                            </li>
+                                                        </a>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
