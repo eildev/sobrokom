@@ -122,7 +122,8 @@
         @endforeach
     @endif
     <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target my-scroll-top d-flex justify-content-center align-content-center" data-target="html">
+    <button class="scroll-top scroll-to-target my-scroll-top d-flex justify-content-center align-content-center"
+        data-target="html">
         <i class="icon-chevrons-up" style="margin-top: 15px"></i>
     </button>
     <!-- Scroll-top-end-->
@@ -133,61 +134,70 @@
         @include('frontend.body.mainnav')
     </header>
     <style>
-        .my_menu{
+        .my_menu {
             font-weight: 100;
             font-size: 14px;
         }
+
         /* .first_li{
             display: flex;
             justify-content: space-between
         } */
-        .first_li > ul{
+        .first_li>ul {
             margin-left: 13px;
             color: white;
             font-weight: 100;
             font-size: 14px;
             display: none;
         }
-        .second_li > ul{
+
+        .second_li>ul {
             margin-left: 13px;
             color: white;
             font-weight: 100;
             font-size: 14px;
             display: none;
         }
+
         .my_menu li,
-        .my_menu i{
+        .my_menu i {
             line-height: 30px
         }
-        hr{
-            margin:0
+
+        hr {
+            margin: 0
         }
-        .mobile-bottom-menu{
+
+        .mobile-bottom-menu {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             right: 0;
-            background:#2D2C6E;
-            color:#2D2C6E;
+            background: #2D2C6E;
+            color: #2D2C6E;
             z-index: 999;
             border-top: 1px solid white;
         }
+
         .bottom-chat,
-        .mycard{
+        .mycard {
             padding: 7px 10px;
             background: white;
             text-align: center
         }
-        .mycard{
+
+        .mycard {
             width: 80px;
             height: 100% !important;
             padding: 14px 10px;
         }
-        .cardI{
+
+        .cardI {
             font-size: 40px
         }
-        .bottom-chat a{
+
+        .bottom-chat a {
             color: #2D2C6E !important;
             background: white !important;
             border: none;
@@ -202,7 +212,7 @@
         <div class="mobile-bottom-menu d-none justify-content-between align-items-center">
             <div class="bottom-chat brl" style="width: 80px">
                 <a target="_blank" class="" href="https://www.m.me/105731512599106"><i
-                    class="fab fa-facebook-messenger"></i></a>
+                        class="fab fa-facebook-messenger"></i></a>
             </div>
             <div class="bottom-button d-flex justify-content-around w-75">
                 <a href="{{ route('home') }}" style="color: white">Home</a>
@@ -224,58 +234,69 @@
                 </div>
             </div>
         </div>
-        <div class="mySlidBar" style="width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white">
+        <div class="mySlidBar"
+            style="width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white">
             <div class="my_menu">
                 <div class="my_menu_inner">
                     <div class="my_menu_list">
                         <ul class="list-unstyled">
-                            <li class="first_li" ><a href="#weekly_offers">Weekly Offers</a><li><hr>
-                            <li class="first_li" ><a href="#New_Arrivals">New Arrivals</a><li><hr>
-                            <li class="first_li" ><a href="#top_trending">Top Trending</a><li><hr>
-                            @php
-                                $categoris = App\Models\Category::all();
-                            @endphp
-                            @if ($categoris->count() > 0)
-                            @foreach ($categoris as $category)
-                            <li class="first_li" id="first_li_{{$category->id}}"><a href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
+                            <li class="first_li"><a href="#weekly_offers">Weekly Offers</a>
+                            <li>
+                                <hr>
+                            <li class="first_li"><a href="#New_Arrivals">New Arrivals</a>
+                            <li>
+                                <hr>
+                            <li class="first_li"><a href="#top_trending">Top Trending</a>
+                            <li>
+                                <hr>
+                                @php
+                                    $categoris = App\Models\Category::all();
+                                @endphp
+                                @if ($categoris->count() > 0)
+                                    @foreach ($categoris as $category)
+                            <li class="first_li" id="first_li_{{ $category->id }}"><a
+                                    href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
                                 <ul class="list-unstyled">
                                     @php
                                         $subcategories = $category->subcategories;
                                     @endphp
                                     @if ($subcategories->count() > 0)
                                         @foreach ($subcategories as $subcategory)
-                                            <li class="second_li" id="second_li_{{$subcategory->id}}"><a href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
+                                            <li class="second_li" id="second_li_{{ $subcategory->id }}"><a
+                                                    href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
 
-                                                    @php
-                                                        $subSubcategories = App\Models\SubSubcategory::where('subcategoryId',$subcategory->id)->take(5)->get();
-                                                    @endphp
-                                                    @if ($subSubcategories->count() > 0)<ul class="list-unstyled">
-                                                        @foreach($subSubcategories as $subSubcategorie)
-                                                        <li class="third_li" id="third_li_{{$subSubcategorie->id}}"><a href="{{route('sub.subcategory.wise.product', $subSubcategorie->slug)}}">{{ $subSubcategorie->subSubcategoryName }}</a></li>
-                                                        @endforeach</ul>
-                                                    @endif
+                                                @php
+                                                    $subSubcategories = App\Models\SubSubcategory::where('subcategoryId', $subcategory->id)
+                                                        ->take(5)
+                                                        ->get();
+                                                @endphp
+                                                @if ($subSubcategories->count() > 0)
+                                                    <ul class="list-unstyled">
+                                                        @foreach ($subSubcategories as $subSubcategorie)
+                                                            <li class="third_li"
+                                                                id="third_li_{{ $subSubcategorie->id }}"><a
+                                                                    href="{{ route('sub.subcategory.wise.product', $subSubcategorie->slug) }}">{{ $subSubcategorie->subSubcategoryName }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
 
                                             </li>
                                         @endforeach
                                     @endif
                                 </ul>
-                            </li><hr>
-                                @endforeach
+                            </li>
+                            <hr>
+                            @endforeach
                             @endif
-                            <li class="first_li" ><a href="{{route('order.tracking')}}">Order Tracking</a><li><hr>
-                                @auth
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button href="#">Logout</button>
-                                    </form>
-                                </li>
-                                @endauth
+                            <li class="first_li"><a href="{{ route('order.tracking') }}">Order Tracking</a>
+                            <li>
+                                <hr>
                         </ul>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
         @yield('maincontent')
     </main>
@@ -583,42 +604,48 @@
         });
     </script>
     <style>
-        .mySlidBarActive{
+        .mySlidBarActive {
             width: 0px !important;
             display: none;
             padding: 0px !important;
             transition: 0.2s ease-in-out;
         }
-        .first_liActive{
+
+        .first_liActive {
             font-weight: 500 !important;
             color: var(--tp-heading-secondary);
         }
         .my_menu i{
             float: right;
         }
-        li{
+
+        li {
             cursor: pointer;
         }
-        .second_liActive{
+
+        .second_liActive {
             font-weight: 500 !important;
             color: var(--tp-heading-secondary);
         }
-        .third_liActive{
+
+        .third_liActive {
             font-weight: 500 !important;
             color: var(--tp-heading-secondary);
         }
-        .rotate90{
+
+        .rotate90 {
             transform: rotate(90deg);
             /* transition: transform 0.3s ease; */
         }
-                /* width */
+
+        /* width */
         ::-webkit-scrollbar {
-        width: 5px;
+            width: 5px;
         }
 
         /* Track */
         ::-webkit-scrollbar-track {
-        background: #FFF;
+            background: #FFF;
         }
 
         /* Handle */
@@ -630,17 +657,21 @@
         ::-webkit-scrollbar-thumb:hover {
         background: #2D2C6E;
         }
-        .container{
+
+        .container {
             margin-top: 20px !important;
         }
-        .container{
+
+        .container {
             margin-left: 215px;
         }
-        @media (max-width: 1080px){
-            .container{
+
+        @media (max-width: 1080px) {
+            .container {
                 margin-left: 60px;
-              }
             }
+        }
+
         @media (max-width: 767px),
             only screen and (min-width: 576px) and (max-width: 767px) {
                 .tpslider__content{
@@ -677,10 +708,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let width = document.body.offsetWidth;
-            if(width < 767){
+            if (width < 767) {
                 const sidebar = document.querySelector('.mySlidBar').classList.add('mySlidBarActive');
                 console.log(sidebar);
-                $('.container').css({'marginLeft':'65px','marginRight':'0'})
+                $('.container').css({
+                    'marginLeft': '65px',
+                    'marginRight': '0'
+                })
             }
             const firstLis = document.querySelectorAll('.first_li');
             const secondLis = document.querySelectorAll('.second_li');
@@ -701,17 +735,22 @@
                 }
             });
 
-             // Toggle sidebar
+            // Toggle sidebar
             const myToggle = document.querySelector('.myToggle');
             myToggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
                 let width = document.body.offsetWidth;
-                if(width > 1080){
-                    if(document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')){
-                        $('.container').css({'marginLeft':'130px','marginRight':'0'})
-                    }else{
-                        $('.container').css({'marginLeft':'215px'})
+                if (width > 1080) {
+                    if (document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')) {
+                        $('.container').css({
+                            'marginLeft': '130px',
+                            'marginRight': '0'
+                        })
+                    } else {
+                        $('.container').css({
+                            'marginLeft': '215px'
+                        })
                     }
                 }
                 // if(width > 767){
@@ -734,7 +773,8 @@
                 items.forEach((item) => {
                     item.addEventListener('click', function(e) {
                         items.forEach((el) => {
-                            el.classList.remove('first_liActive', 'second_liActive'); // Adjust based on your classes
+                            el.classList.remove('first_liActive',
+                                'second_liActive'); // Adjust based on your classes
                             const insideI = el.querySelector('i');
                             if (insideI) {
                                 insideI.classList.remove('rotate90');
@@ -743,7 +783,8 @@
                                 el.querySelector('ul').style.display = "none";
                             }
                         });
-                        item.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' : 'second_liActive');
+                        item.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' :
+                            'second_liActive');
                         const insideI = item.querySelector('i');
                         if (insideI) {
                             insideI.classList.add('rotate90');
@@ -772,7 +813,8 @@
                 if (activeLiId) {
                     const activeLi = document.getElementById(activeLiId);
                     if (activeLi) {
-                        activeLi.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' : 'second_liActive');
+                        activeLi.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' :
+                            'second_liActive');
                         const insideI = activeLi.querySelector('i');
                         if (insideI) {
                             insideI.classList.add('rotate90');
@@ -847,6 +889,34 @@
         //         }
         //     })
         // });
+    </script>
+
+    <script>
+        //add Tracker
+        $(document).ready(function() {
+            fetch('https://ipinfo.io/json')
+                .then(response => response.json())
+                .then(data => {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: 'user-tracker/user-count',
+                        type: 'post',
+                        data: {
+                            'country_info': data.country,
+                        },
+                        success: function(response) {
+                            // console.log(response);
+
+                        }
+                    });
+                })
+        })
     </script>
 
     {{-- ALl Code For Order Tracking Information --}}

@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\CompanyDetailsController;
+use App\Http\Controllers\Backend\UserTrackerController;
 use App\Http\Controllers\Backend\userController;
 use App\Http\Controllers\AllMail;
 
@@ -265,6 +266,8 @@ Route::middleware('auth','role:admin')->group(function () {
     //Company Details All Route End
 
 
+
+
 });
 
 //All Routes for Global Coupons Start
@@ -273,7 +276,17 @@ Route::middleware('auth','role:admin')->group(function () {
 });
 //All Routes for Global Coupons End
 
-
+//User Tracker Details All Route Start
+    Route::controller(UserTrackerController::class)->group(function () {
+        Route::post('/user-tracker/user-count', 'store');
+        Route::get('/user-tracker/show', 'index')->name('user-tracker.show');
+        // Route::post('/company-details/add', 'store')->name('company-details.store');
+        // Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
+        // Route::post('/company-details/update/{id}', 'update')->name('company-details.update');
+        // Route::get('/company-details/delete/{id}', 'delete')->name('company-details.delete');
+        // Route::post('/company-details/status/{id}', 'status')->name('company-details.status');
+    });
+//User Tracker All Route End
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
