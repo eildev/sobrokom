@@ -83,7 +83,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 {{-- Subcategory menu  --}}
                 <li>
                             <a class="has-arrow" href="javascript:;">
@@ -351,6 +351,20 @@
                 <li>
                     <a href="{{ route('contact-message.show') }}"><i class="bx bx-right-arrow-alt"></i>View New
                         Message</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">User Tracker</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('user-tracker.show') }}"><i class="bx bx-right-arrow-alt"></i>View Online User</a>
                 </li>
 
             </ul>
