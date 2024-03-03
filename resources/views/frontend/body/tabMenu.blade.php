@@ -1,5 +1,5 @@
 <!-- tablet-menu-area -->
-<div id="header-sticky-2" class="tpmobile-menu d-xl-none">
+{{-- <div id="header-sticky-2 d-none" class="tpmobile-menu d-xl-none">
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-lg-4 col-md-4 col-3 col-sm-3">
@@ -36,6 +36,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="body-overlay"></div>
 <!-- tablet-menu-area-end -->

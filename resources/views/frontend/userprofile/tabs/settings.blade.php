@@ -21,7 +21,7 @@
                             <span><i class="fal fa-key"></i></span>
                             <input placeholder="Old Password" name="current_password" type="password"
                                 autocomplete="current-password">
-                            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+                            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="my-2 ms-4 text-danger" />
 
                         </div>
                         <div class="tptrack__email mb-10">
@@ -29,7 +29,7 @@
                             <span><i class="fal fa-key"></i></span>
                             <input id="update_password_password" name="password" type="password"
                                 autocomplete="new-password" placeholder="New Password">
-                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+                                <x-input-error :messages="$errors->updatePassword->get('password')" class="my-2 ms-4 text-danger" />
 
                         </div>
                         <div class="tptrack__email mb-10">

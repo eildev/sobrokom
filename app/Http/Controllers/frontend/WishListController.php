@@ -11,15 +11,26 @@ use Illuminate\Http\Request;
 class WishListController extends Controller
 {
     public function wishlistAdd(Request $request){
-        $loved = new WishList;
-        $loved->user_id = Auth::user()->id;
-        $loved->product_id = $request->product_id;
-        $loved->save();
-        return response()->json([
-            "status" => 200,
-            "loved_id" => $loved->id,
-            'message' => "successfully Added to your WishList",
-        ]);
+        $checkedLoved = Wishlist::where("user_id", Auth::user()->id)->where('product_id', $request->product_id)->latest()->first();
+        if(!$checkedLoved){
+            $loved = new WishList;
+                $loved->user_id = Auth::user()->id;
+                $loved->product_id = $request->product_id;
+                $loved->save();
+                return response()->json([
+                    "status" => 200,
+                    "loved_id" => $loved->id,
+                    'message' => "successfully Added to your WishList",
+                ]);
+        } else {
+            $wishlist = WishList::where('product_id', $request->product_id);
+            $wishlist->delete();
+            return response()->json([
+                    "status" => 500,
+                    'message' => "Removed from your WishList",
+                ]);
+        }
+        
     }
 
 

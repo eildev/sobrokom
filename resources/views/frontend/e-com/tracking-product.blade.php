@@ -77,12 +77,12 @@
                                                 <td class="product-subtotal">
                                                     {{ $order->grand_total }}
                                                 </td>
-                                                <td class="product-remove text-info">
-                                                    {{ $order->status }}
-                                                </td>
                                                 <td class="product-remove">
 
                                                     {{ $address->address_1 ?? '' }}
+                                                </td>
+                                                <td class="product-remove text-info">
+                                                    {{ $order->status }}
                                                 </td>
                                                 <td class="product-remove">
                                                     <a style="color: #9e54a1"
@@ -168,15 +168,12 @@
                                                     @endphp
                                                     @foreach ($orderDetails as $key => $orderDetail)
                                                     @php
-                                                    // dd($orderDetail);
                                                         $productDetails = App\Models\Variant::where('product_id', $orderDetail->product_id)->first();
-
+                                                        $productInfo = App\Models\Product::findorFail($orderDetail->product_id);
                                                     @endphp
                                                         <tr>
                                                             <td class="no">{{ $key + 1 }}</td>
-                                                            <td class="text-left">
-                                                                <p>name</p>
-                                                            </td>
+                                                            <td class="text-left">{{ $productInfo->product_name }}</td>
                                                             <td class="">{{ $orderDetail->product_quantity }}</td>
                                                             <td class="unit">{{ $orderDetail->weight }}{{ $productDetails->unit }}</td>
                                                             <td class="qty">৳250</td>
@@ -233,11 +230,8 @@
                     </div>
                 </div>
             </div>
-
-
-
             <!--- Delivery Status --->
-            <div class="container py-2">
+            <div class="py-2">
                 <h2 class="font-weight-light text-center text-muted py-3">Order Status</h2>
                 <!-- timeline item 1 -->
                 <div class="row g-0">

@@ -128,21 +128,16 @@ class HomeBannerController extends Controller
     }
     public function bannerStatus(Request $request,$id)
     {
-        dd($request);
-        $banner = HomeBanner::findOrFail($id, $request);
-        if ($banner->status == 0) {
-            $newStatus = 1;
-        } else {
-            $newStatus = 0;
-        }
+        $banner = HomeBanner::findOrFail($id);
+            if ($banner->status == 0) {
+                $newStatus = 1;
+            } else {
+                $newStatus = 0;
+            }
          
         $banner->update([
             'status'=>$newStatus
         ]);
-
-        return response()->json([
-            'status' => '200',
-            'message' => 'banner inactive successful',
-        ]);
+        return redirect()->back()->with('success', 'status changed successfully');
     }
 }

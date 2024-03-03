@@ -9,7 +9,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="order_table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>SI</th>
@@ -29,7 +29,18 @@
                                     $serialNumber = 1;
                                 @endphp
                                 @if ($newOrders->count() > 0)
+                                {{-- @dd($newOrders); --}}
                                     @foreach ($newOrders as $order)
+                                    @dd($order->orderDetails);
+                                    @php
+                                        $orderDetails = App\Models\OrderDetails::where('order_id ', $order->id)->get();
+                                    @endphp
+                                    @dd($orderDetails);
+
+                                    {{-- @foreach ($orderDetails as $orderDetail)
+                                    @dd($orderDetail);
+                                    @endforeach --}}
+
                                         @php
                                             $originalDateString = $order->created_at;
                                             $dateTime = new DateTime($originalDateString);

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class BlogReactionController extends Controller
 {
     public function BlogReact(Request $request){
-        // dd(Auth::user()->id);
+        // dd($request);
         $val = $request->value;
         $react = BlogReact::where('user_id',Auth::user()->id)->where('blog_id',$request->post_id)->where('like', 1)->orWhere('dislike', 1)->first();
 
@@ -25,7 +25,13 @@ class BlogReactionController extends Controller
       //  $angry = BlogReact::where('blog_id',$request->post_id)->where('angry', 1)->count();
        // $sad = BlogReact::where('blog_id',$request->post_id)->where('sad', 1)->count();
 
-        if(!$react){
+        if(!empty($react->id)){
+           return response()->json([
+                'status' => 500,
+                'like'=> $like,
+                'dislike'=>$dislike,
+            ]);
+        }else{
             $react = new BlogReact;
             $react->user_id = Auth::user()->id;
             $react->blog_id = $request->post_id;
@@ -35,19 +41,8 @@ class BlogReactionController extends Controller
                 'status' => 200,
                 'like'=>$like,
                'dislike'=>$dislike,
-              //  'love'=>$love,
-             //   'haha'=>$haha,
-             //   'angry'=>$angry,
             ]);
-        }else{
-            return response()->json([
-                'status' => 500,
-                'like'=>$like,
-               // 'dislike'=>$dislike,
-              //  'love'=>$love,
-              //  'haha'=>$haha,
-             //   'angry'=>$angry,
-            ]);
+            
         }
     }
 }
