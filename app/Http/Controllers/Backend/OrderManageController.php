@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Models\OrderBillingDetails;
+use App\Models\Variant;
 class OrderManageController extends Controller
 {
     public function index(){
@@ -68,10 +69,21 @@ class OrderManageController extends Controller
         $completed_Orders->status = "completed";
         $completed_Orders->update();
 
-        $orderId = $completed_Orders->id;
-        // dd($orderId);
-        $orders = OrderDetails::where("order_id", $orderId)->get();
-        dd($orders);
+        // $orderId = $completed_Orders->id;
+        // // dd($orderId);
+        // $orders = OrderDetails::where("order_id", $orderId)->get();
+
+        // foreach($orders as $order){
+
+        //     $product_id = $order->product_id;
+        //     $product_quantity = $order->product_quantity;
+        //     // dd($product_id);
+
+        //     $variant = Variant::where("product_id", $product_id)->get();
+        //     dd($variant->stock_quantity);
+        //     $updated_stock = $variant->stock_quantity - $product_quantity;
+        //     dd($updated_stock);
+        // }
         return back()->with('success','Order Status Updated Sucessfully');
     }
     public function orderRefund($invoice){
