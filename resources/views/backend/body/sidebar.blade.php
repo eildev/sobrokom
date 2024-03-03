@@ -83,7 +83,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 {{-- Subcategory menu  --}}
                 <li>
                             <a class="has-arrow" href="javascript:;">
@@ -372,6 +372,38 @@
             </ul>
         </li>
 
+         </li>
+          <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-message-rounded-dots'></i>
+                </div>
+                <div class="menu-title">Company Details</div>
+            </a>
+            <ul>
+
+                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+                </li>
+                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Company</a>
+                </li>
+            </ul>
+        </li>
+        {{-- All Users Information --}}
+        </li>
+        <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon">
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="menu-title">Users</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('all.users') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                    Users</a>
+            </li>
+        </ul>
+    </li>
     </ul>
     <!--end navigation-->
 </div>

@@ -50,22 +50,24 @@
             </div>
             <div class="col">
                 <div class="card radius-10 bg-gradient-ohhappiness">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">{{ $users }}</h5>
-                            <div class="ms-auto">
-                                <i class='bx bx-group fs-3 text-white'></i>
+                    <a href="{{ route('all.users') }}">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mb-0 text-white">{{ $users }}</h5>
+                                <div class="ms-auto">
+                                    <i class='bx bx-group fs-3 text-white'></i>
+                                </div>
+                            </div>
+                            <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex align-items-center text-white">
+                                <p class="mb-0">Users</p>
+                                <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
                             </div>
                         </div>
-                        <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Users</p>
-                            <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="col">

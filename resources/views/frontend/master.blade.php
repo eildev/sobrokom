@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SOBROKOM | Largest Ecommerce Website </title>
-    <meta name="description" content="">
+    <title>Sobrokom – Let’s Shop </title>
+    <meta name="description" content="Sobrokom.store, your premier destination for online shopping, offers a curated selection of grocery, food, fashion, electronics, home decor, and more. Discover quality products, exclusive deals, and a seamless shopping experience that reflects the modern lifestyle. Elevate your online shopping journey with Sobrokom.store">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword" content="onlineshopping,e-commerce,groceryfoods,electronics,homedecor,gadgets,trendyapparel,affordableprices,qualityproducts,techaccessories,lifestyle,exclusivedeals,fastshipping,bestprices,homeessentials,stylishgoods,modernliving,smarthome,latesttrends,beautyproducts,uniquefinds,digitalmarketplace,convenientshopping,securetransactions,customersatisfaction">
     <!-- Ajax Header -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -204,12 +205,12 @@
                     class="fab fa-facebook-messenger"></i></a>
             </div>
             <div class="bottom-button d-flex justify-content-around w-75">
-                <a href="#" style="color: white">Home</a>
+                <a href="{{ route('home') }}" style="color: white">Home</a>
                 <div style="height: 100%; width:1px; background:white;border:none">s</div>
                 @auth
-                <a href="#" style="color: white">Account</a>
+                <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}" style="color: white">Account</a>
                 @else
-                <a href="#" style="color: white">Login</a>
+                <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}" style="color: white">Login</a>
                 @endauth
             </div>
             <div class="mycard">
@@ -262,6 +263,14 @@
                                 @endforeach
                             @endif
                             <li class="first_li" ><a href="{{route('order.tracking')}}">Order Tracking</a><li><hr>
+                                @auth
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button href="#">Logout</button>
+                                    </form>
+                                </li>
+                                @endauth
                         </ul>
                     </div>
                 </div>
@@ -584,7 +593,7 @@
             font-weight: 500 !important;
             color: var(--tp-heading-secondary);
         }
-        i{
+        .my_menu i{
             float: right;
         }
         li{
@@ -614,12 +623,12 @@
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: #2D2C6E;
+        background: var(--tp-heading-secondary)
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: #2D2C6E;
         }
         .container{
             margin-top: 20px !important;
@@ -634,7 +643,9 @@
             }
         @media (max-width: 767px),
             only screen and (min-width: 576px) and (max-width: 767px) {
-                .tp-btn {
+                .tpslider__content{
+                    margin-top: 50px !important;
+                }.tp-btn {
                     padding: 8px 30px;
                 }
                 .mytop-logo{

@@ -1,5 +1,5 @@
 <!-- slider-area-start -->
-<section class="container slider-area tpslider__home-3 tpslider-delay grey-bg slider-three" style="margin-top:64px !important">
+<section class="container slider-area tpslider__home-3 tpslider-delay grey-bg slider-three" style="margin-top:70px !important">
     <div class="swiper-container slider-active">
         <div class="swiper-wrapper">
             @php
