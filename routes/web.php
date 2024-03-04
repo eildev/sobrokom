@@ -184,6 +184,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/order/refunded-orders', 'refundedOrders')->name('order.refunded');
 
         Route::get('/order/canceled-orders', 'canceledOrders')->name('order.canceled');
+        Route::post('/order/send-sms', 'SendSMS')->name('send.sms');
 
 
         // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
@@ -278,7 +279,7 @@ Route::middleware('auth','role:admin')->group(function () {
 
 //User Tracker Details All Route Start
     Route::controller(UserTrackerController::class)->group(function () {
-        Route::post('/user-tracker/user-count', 'store');
+        Route::post('/user-tracker/user-count', 'store')->name('user.count');
         Route::get('/user-tracker/show', 'index')->name('user-tracker.show');
         // Route::post('/company-details/add', 'store')->name('company-details.store');
         // Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
