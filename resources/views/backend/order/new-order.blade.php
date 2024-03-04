@@ -40,7 +40,10 @@
                                                     <td>{{ $serialNumber++ }}</td>
                                                     <td>{{ $formattedDate }}</td>
                                                     <td>{{ $order->invoice_number }}</td>
-                                                    <td>{{ $order->user_identity ?? '' }} @if(!empty($order->user_identity)) <button data-bs-target="#sms{{$order->id}}" data-bs-toggle="modal" class="btn btn-sm btn-success">SMS</button>  @endif</td>
+                                                    <td>{{ $order->user_identity ?? '' }} @if(!empty($order->user_identity)) <button data-bs-target="#sms{{$order->id}}" data-bs-toggle="modal" class="btn btn-sm btn-success">SMS
+
+
+                                                    </button>  @endif</td>
                                                     <td>{{ $order->product_quantity }}</td>
                                                     <td>{{ $order->grand_total }}</td>
                                                     <td>{{ $order->payment_method }}</td>
@@ -50,35 +53,35 @@
                                                     <td>
                                                         <a href="{{ route('admin.approve.order', $order->invoice_number) }}"
                                                             class="btn btn-sm btn-info">Approve</a>
-                                                        <a href="#" class="btn btn-sm btn-success">View</a>
+                                                        <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
                                                         <a href="#" class="btn btn-sm btn-danger" id="delete">Denied</a>
                                                     </td>
                                                 </tr>
                                                 <!-- Modal -->
-    <div class="modal fade" id="sms{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Send SMS to User</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('send.sms') }}" method="POST">
-                @csrf
-                <div class="modal-body">
-                <div class="form-control">
-                    <label for="sms">Write Message</label>
-                    <input type="hidden" name="phone" value="{{ $order->user_identity }}">
-                    <textarea name="sms" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Send changes</button>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
+                                                <div class="modal fade" id="sms{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Send SMS to User</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{{ route('send.sms') }}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                            <div class="form-control">
+                                                                <label for="sms">Write Message</label>
+                                                                <input type="hidden" name="phone" value="{{ $order->user_identity }}">
+                                                                <textarea name="sms" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Send changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                             @endif
                                         @endforeach
                                     @endforeach

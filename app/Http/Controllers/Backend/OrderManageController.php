@@ -187,4 +187,14 @@ class OrderManageController extends Controller
         $trackes = Order::where('invoice_number', $request->search)->get();
         return view('frontend/e-com/tracking-product', compact('trackes','searchTag'));
     }
+
+    public function DetailOrders($order_id){
+
+        $orders = Order::findOrFail($order_id);
+        // dd($orders);
+        return view('backend.order.order_details', compact('orders'));
+        // $order_details->status = "Inactive";
+        // $order_details->update();
+        return back();
+    }
 }

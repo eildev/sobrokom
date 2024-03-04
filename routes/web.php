@@ -189,6 +189,10 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::post('/order/send-sms', 'SendSMS')->name('send.sms');
 
 
+        Route::get('/order/detailed-orders/{order_id}', 'DetailOrders')->name('order.details');
+        // Route::post('/order/send-sms', 'SendSMS')->name('send.sms');
+
+
         // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
 
     });
