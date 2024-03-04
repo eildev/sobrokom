@@ -3,8 +3,15 @@
 @php
     $products = App\Models\Product::whereHas('varient')->count();
     $users = App\Models\User::where('role', 'user')->count();
-    $orders = App\Models\Order::where('status', 'pending')->count();
-    $refund = App\Models\Order::where('status', 'refunded')->count();
+    $total_orders = App\Models\Order::all()->count();
+    $new_orders = App\Models\Order::where('status', 'pending')->count();
+    $approve_orders = App\Models\Order::where('status', 'approve')->count();
+    $processing_orders = App\Models\Order::where('status', 'processing')->count();
+    $delivering_orders = App\Models\Order::where('status', 'delivering')->count();
+    $completed_order = App\Models\Order::where('status', 'completed')->count();
+    $refunding_order = App\Models\Order::where('status', 'refunding')->count();
+    $refunded_order = App\Models\Order::where('status', 'refunded')->count();
+    $canceled_order = App\Models\Order::where('status', 'canceled')->count();
     $visitors = App\Models\UserTracker::all()->count();
 @endphp
     <div class="page-content">
@@ -60,7 +67,7 @@
                 <div class="card radius-10 bg-gradient-orange">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">{{ $orders }}</h5>
+                            <h5 class="mb-0 text-white">{{ $new_orders }}</h5>
                             <div class="ms-auto">
                                 <i class='bx bx-package fs-3 text-white'></i>
                             </div>
@@ -234,7 +241,7 @@
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Total Order</p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> 1100 Nos</p>
+                                    <p class="mb-0 text-white"> {{$total_orders}} Nos</p>
                                 </div>
                             </div>
 
@@ -253,32 +260,42 @@
                                 <tbody>
                                     <tr>
                                         <td>New </td>
-                                        <td>10</td>
+                                        <td>{{ $new_orders }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Confirm</td>
-                                        <td>10</td>
+                                        <td>{{ $approve_orders }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Proccess</td>
-                                        <td>10</td>
+                                        <td>{{ $processing_orders }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Delivery</td>
-                                        <td>10</td>
+                                        <td>{{ $delivering_orders }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Completed</td>
-                                        <td>10</td>
+                                        <td>{{ $completed_order }}</td>
+                                        <td><a href="">View Details</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refunding</td>
+                                        <td>{{ $refunding_order }}</td>
+                                        <td><a href="">View Details</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refunded</td>
+                                        <td>{{ $refunded_order }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Canceled</td>
-                                        <td>10</td>
+                                        <td>{{ $canceled_order }}</td>
                                         <td><a href="">View Details</a></td>
                                     </tr>
                                 </tbody>
