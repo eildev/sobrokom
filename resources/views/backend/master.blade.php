@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--favicon-->
     <link rel="icon" href="{{ asset('backend') }}/assets/images/logo.svg" type="image/png" />
     <!--plugins-->
@@ -36,6 +37,10 @@
     {{-- multi select tags  --}}
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
     {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
     <title>Sobrokom Control Panel</title>
@@ -115,6 +120,10 @@
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
 
+    <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <script>
         $(document).ready(function() {
             var table = $('#order_table').DataTable({
@@ -178,6 +187,40 @@
             });
 
 
+        });
+
+        // datepicker 
+        $(".datepicker").flatpickr();
+
+        $(".time-picker").flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        $(".date-time").flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        $(".date-format").flatpickr({
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
+        $(".date-range").flatpickr({
+            mode: "range",
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
+        $(".date-inline").flatpickr({
+            inline: true,
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
         });
     </script>
 
@@ -273,6 +316,86 @@
                 }
             })
         });
+
+
+
+        // variants select function 
+        // $(document).ready(function() {
+        //     $('.product-id').on('change', function() {
+        //         // alert('ok');
+        //         let product_id = $(this).val();
+        //         // alert(product_id);
+        //         if (product_id) {
+        //             $.ajax({
+        //                 url: '/find/variant/' + product_id,
+        //                 type: 'GET',
+        //                 dataType: 'JSON',
+        //                 success: function(result) {
+        //                     // console.log(result);
+        //                     let varient_container = document.querySelector(
+        //                         '.varient_container');
+        //                     varient_container.innerHTML = "";
+        //                     const allData = result.variant;
+        //                     console.log(allData);
+        //                     allData.forEach(function(data) {
+        //                         const tr = document.createElement('tr');
+        //                         tr.innerHTML += `
+    //                         <td>${data.regular_price ?? ""}</td>
+    //                         <td>${data.discount ?? ""}</td>
+    //                         <td>${data.discount_amount ?? ""}</td>
+    //                         <td>${data.stock_quantity ?? "" }</td>
+    //                         <td>${data.unit ?? ""}</td>
+    //                         <td>${data.weight ?? ""}</td>
+    //                         <td>${data.color ?? ""}</td>
+    //                         <td>${data.size ?? ""}</td>
+    //                         <td>${data.manufacture_date ?? ""}</td>
+    //                         <td>${data.expire_date ?? ""}</td>
+    //                         <td>
+    //                         <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
+    //                             Edit
+    //                         </button>
+    //                         <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
+    //                                     </td>
+    //                             `;
+        //                         varient_container.appendChild(tr);
+        //                     })
+        //                 }
+        //             });
+        //         }
+        //     })
+
+        //     // $('.subcategory_id').on('change', function() {
+        //     //     // alert('ok');
+        //     //     let subcategory_id = $(this).val();
+        //     //     if (subcategory_id) {
+        //     //         $.ajax({
+        //     //             url: '/find/sub-subcategory/' + subcategory_id,
+        //     //             type: 'GET',
+        //     //             dataType: 'JSON',
+        //     //             success: function(result) {
+        //     //                 // console.log(result);
+        //     //                 $('select[name="sub_subcategory_id"]').html(
+        //     //                     '<option value="">Select a Sub-Subcategory</option>');
+        //     //                 // console.log(result.subsubcats.length);
+        //     //                 if (result.subsubcats.length > 0) {
+
+        //     //                     $.each(result.subsubcats, function(key, item) {
+        //     //                         $('select[name="sub_subcategory_id"]').append(
+        //     //                             '<option myid="' + item.id +
+        //     //                             '" value="' + item.id +
+        //     //                             '">' + item
+        //     //                             .subSubcategoryName + '</option>');
+        //     //                     })
+        //     //                 } else {
+        //     //                     $('select[name="sub_subcategory_id"]').append(
+        //     //                         '<option value="0" selected>N/A</option>'
+        //     //                     );
+        //     //                 }
+        //     //             }
+        //     //         });
+        //     //     }
+        //     // })
+        // });
 
 
 
@@ -384,15 +507,16 @@
             let discountAmount = parseFloat(discount_amount.value);
             // alert(discountAmount);
             let discount = Math.round((regurlarPrice - discountAmount) / (regurlarPrice / 100));
-            if (regurlarPrice > discountAmount) {
+            if (discountAmount > regurlarPrice) {
+                toastr.warning("discount amount is out of range");
+                this.value = '';
+            } else {
                 let selectElement = document.querySelector('.discount');
                 let option = document.createElement('option');
                 option.value = discount;
                 option.text = discount + '%';
                 option.selected = true;
                 selectElement.appendChild(option);
-            } else {
-                toastr.warning("discount amount is out of range");
             }
         });
         discount_amount.addEventListener('blur', function() {
@@ -401,15 +525,16 @@
             let discountAmount = parseFloat(discount_amount.value);
             // alert(discountAmount);
             let discount = Math.round((regurlarPrice - discountAmount) / (regurlarPrice / 100));
-            if (regurlarPrice > discountAmount) {
+            if (discountAmount > regurlarPrice) {
+                toastr.warning("discount amount is out of range");
+                this.value = '';
+            } else {
                 let selectElement = document.querySelector('.discount');
                 let option = document.createElement('option');
                 option.value = discount;
                 option.text = discount + '%';
                 option.selected = true;
                 selectElement.appendChild(option);
-            } else {
-                toastr.warning("discount amount is out of range");
             }
         });
         // discount calculation 

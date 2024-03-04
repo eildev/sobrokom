@@ -99,7 +99,13 @@
             width: 90%;
             background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
         }
+
+        .top_search_list li {
+            cursor: pointer;
+            padding: 5px 0;
+        }
     </style>
+
     <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/105731512599106"><i
             class="fab fa-facebook-messenger"></i></a>
 
@@ -123,7 +129,6 @@
 
     <!-- header-area-start -->
     <header>
-
         @include('frontend.body.topheader')
         @include('frontend.body.mainnav')
     </header>
@@ -160,6 +165,8 @@
 
     <!-- Toastr -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script defer src="{{ asset('frontend') }}/assets/js/myjsforfrontendmaster.js"></script> --}}
     <script>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}");
@@ -173,10 +180,9 @@
         @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
         @endif
-    </script>
 
-    {{-- add wishlist  --}}
-    <script>
+
+        //add wishlist
         const add_whishlist = document.querySelectorAll('.add_whishlist');
         // console.log(add_whishlist);
         add_whishlist.forEach(element => {
@@ -201,19 +207,16 @@
                             toastr.success(response.message);
                             element.querySelector('i').setAttribute('style', 'color:red');
                             // console.log(element.querySelector('i'));
-                        } else {
-                            // toastr.warning(response);
+                        } else if (response.status == 500) {
+                            toastr.warning("Remove from wishlist");
+                            element.querySelector('i').removeAttribute('style', 'color:red');
                         }
                     }
                 });
             })
         });
-    </script>
 
-
-
-    {{-- add To Cart  --}}
-    <script>
+        // add To Cart  
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
             element.addEventListener('submit', function(e) {
@@ -252,13 +255,9 @@
 
             });
         })
-    </script>
 
 
-
-
-    <script>
-        // document.querySelector(".heilight-price").textContent = "200";
+        // update cart 
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -295,10 +294,14 @@
                 }
 
 
+
+
                 if (Object.keys(cartData).length > 3) {
                     var remainingItems = Object.keys(cartData).length - itemsToDisplay;
                     $('.cart_container').append('<li>and ' + remainingItems + ' more item(s)</li>');
                 }
+
+
             } else {
                 // Display a message when the cart is empty
                 $('.cart_container').append('<p>Your cart is empty</p>');
@@ -312,7 +315,6 @@
 
         $(document).ready(function() {
             showCart();
-            // document.querySelector(".heilight-price").textContent = "200";
         });
 
 
@@ -331,7 +333,13 @@
                         });
                         document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
                         updateCartDisplay(res.cartData);
-                        // console.log(res.cartData);
+                        // if (res.cartData.length > 0) {
+                        //     const view_checkout = document.querySelector('.view_checkout');
+                        //     view_checkout.style.display = 'block';
+                        // } else {
+                        //     const view_checkout = document.querySelector('.view_checkout');
+                        //     view_checkout.style.display = 'none';
+                        // }
                     }
                 }
             });
@@ -355,15 +363,10 @@
                 })
             })
         });
-    </script>
 
 
 
-
-
-    {{-- swwetalert  --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
+        // swwetalert    
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {
@@ -459,12 +462,7 @@
             $('.top_search_list').css('display', 'none');
         });
     </script>
-    <style>
-        .top_search_list li {
-            cursor: pointer;
-            padding: 5px 0;
-        }
-    </style>
+
 
     {{-- ALl Code For Order Tracking Information --}}
     @if (!empty($order))
@@ -622,6 +620,7 @@
             }
         </script>
     @endif
+
 </body>
 
 </html>

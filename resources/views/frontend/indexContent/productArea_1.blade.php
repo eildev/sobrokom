@@ -60,7 +60,6 @@
                                                             @auth
                                                                 <a class="tpproduct__shopping-wishlist add_whishlist"
                                                                     href="#" value="{{ $product->id }}">
-                                                                    <!-- <i class="icon-heart icons"></i> -->
                                                                     @auth
                                                                         @php
                                                                             $loved = App\Models\WishList::where('user_id', Auth::user()->id)
@@ -117,7 +116,6 @@
                                                             @else
                                                                 <span></span>
                                                             @endif
-
                                                         </div>
                                                         <!--<div class="tpproduct__progress">-->
                                                         <!--    <div class="progress mb-5">-->

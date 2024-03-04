@@ -126,10 +126,10 @@ class HomeBannerController extends Controller
         $banner->delete();
         return back()->with('success', 'banner Successfully deleted');
     }
-    public function bannerStatus(Request $request,$id)
+    public function bannerStatus($id)
     {
-        dd($request);
-        $banner = HomeBanner::findOrFail($id, $request);
+        // dd($request);
+        $banner = HomeBanner::findOrFail($id);
         if ($banner->status == 0) {
             $newStatus = 1;
         } else {
@@ -139,10 +139,10 @@ class HomeBannerController extends Controller
         $banner->update([
             'status'=>$newStatus
         ]);
-
-        return response()->json([
-            'status' => '200',
-            'message' => 'banner inactive successful',
-        ]);
+        return redirect()->back()->with('success', 'status changed successfully');
+        // return response()->json([
+        //     'status' => '200',
+        //     'message' => 'banner inactive successful',
+        // ]);
     }
 }

@@ -13,6 +13,8 @@
                     </ol>
                 </nav>
             </div>
+
+
             <div class="ms-auto">
                 {{-- <div class="btn-group">
                     <button type="button" class="btn btn-primary">Settings</button>
@@ -57,6 +59,7 @@
                             <tbody>
                                 @php
                                     $serialNumber = 1;
+                                    // dd($products->varient);
                                 @endphp
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)

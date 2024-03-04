@@ -104,4 +104,38 @@ class OfferBannerController extends Controller
         $banner->delete();
         return back()->with('success', 'banner Successfully deleted');
     }
+    // banner status Update function
+    public function statusUpdate(Request $request,$id)
+    {
+        $banner = OfferBanner::findOrFail($id);
+        if ($banner->status == 0) {
+            $newStatus = 1;
+        } else {
+            $newStatus = 0;
+        }
+         
+        $banner->update([
+            'status'=>$newStatus
+        ]);
+        return redirect()->back()->with('success', 'status changed successfully');
+        // dd($request->all());
+        // $banner = OfferBanner::where('id',$id)->where('status', $request->status)->first();
+        // if($banner->status == "0"){
+        //     $banner->update([
+        //         'status' => 1
+        //     ]);
+        //     return response()->json([
+        //         'status' => 200,
+        //         'message' => 'Banner active successful',
+        //     ]);
+        // } else {
+        //     $banner->update([
+        //         'status' => 0
+        //     ]);
+        //     return response()->json([
+        //         'status' => 500,
+        //         'message' => 'Banner Inactive successful',
+        //     ]);
+        // }
+    }
 }

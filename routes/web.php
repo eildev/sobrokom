@@ -19,6 +19,8 @@ use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\AllMail;
+use App\Http\Controllers\Backend\CompanyDetailsController;
+use App\Http\Controllers\Backend\PurchaseDetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +39,11 @@ Route::get('/', function () {
 
 Route::get('admin/dashboard', function () {
     return view('backend.dashboard');
-})->middleware(['auth','role:admin'])->name('admin.dashboard');
+})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
 Route::controller(AllMail::class)->group(function () {
-        Route::post('/reply/mail', 'replyMail')->name('reply.mail');
-    });
-Route::middleware('auth','role:admin')->group(function () {
+    Route::post('/reply/mail', 'replyMail')->name('reply.mail');
+});
+Route::middleware('auth', 'role:admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -125,6 +127,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/offerbanner/edit/{id}', 'edit')->name('offerbanner.edit');
         Route::post('/offerbanner/update/{id}', 'update')->name('offerbanner.update');
         Route::get('/offerbanner/delete/{id}', 'delete')->name('offerbanner.delete');
+        Route::post('/offerbanner/status/{id}', 'statusUpdate')->name('offerbanner.status');
     });
     //All Routes for Offer Banner End
 
@@ -143,6 +146,7 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
         Route::post('/product/status/{id}', 'productStatus')->name('product.status');
+        Route::get('/find/variant/{id}', 'findVariant')->name('find.variant');
     });
     //All Routes for Product End
 
@@ -220,9 +224,9 @@ Route::middleware('auth','role:admin')->group(function () {
         Route::get('/blog/post/inactive/{id}', 'BlogActiveToInactive')->name('blog.post.inactive');
         Route::get('/blog/post/active/{id}', 'BlogInctiveToActive')->name('blog.post.active');
     });
-     //Blog Post All Route End
+    //Blog Post All Route End
 
-     //All Routes for Sub Subcategory Start
+    //All Routes for Sub Subcategory Start
     Route::controller(SubSubcategoryController::class)->group(function () {
         Route::get('/sub-subcategory', 'index')->name('sub.subcategory');
         Route::post('/sub-subcategory/store', 'store')->name('sub.subcategory.store');
@@ -244,13 +248,38 @@ Route::middleware('auth','role:admin')->group(function () {
         //Reply Comment route
 
     });
-     //Blog Comment All Route End
+    //Blog Comment All Route End
+
+    //Company Details All Route Start
+    Route::controller(CompanyDetailsController::class)->group(function () {
+        Route::get('/company-details', 'index')->name('company-details');
+        Route::post('/company-details/add', 'store')->name('company-details.store');
+        Route::get('/company-details/view', 'view')->name('company-details.view');
+        Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
+        Route::post('/company-details/update/{id}', 'update')->name('company-details.update');
+        Route::get('/company-details/delete/{id}', 'delete')->name('company-details.delete');
+        Route::post('/company-details/status/{id}', 'status')->name('company-details.status');
+    });
+    //Company Details All Route End
+
+    //Purchase Details All Route Start
+    Route::controller(PurchaseDetailsController::class)->group(function () {
+        Route::get('/purchase', 'index')->name('purchase');
+        Route::post('/purchase/add', 'store')->name('purchase.store');
+        Route::get('/purchase/view', 'view')->name('purchase.view');
+        Route::get('/purchase/view/details', 'view')->name('purchase.view.details');
+        Route::get('/purchase/edit/{id}', 'edit')->name('purchase.edit');
+        Route::post('/purchase/update/{id}', 'update')->name('purchase.update');
+        Route::get('/purchase/delete/{id}', 'delete')->name('purchase.delete');
+        // Route::post('/purchase/status/{id}', 'status')->name('purchase.status');
+    });
+    //Purchase Details All Route End
 
 
 });
 
 //All Routes for Global Coupons Start
- Route::controller(GlobalCouponController::class)->group(function () {
+Route::controller(GlobalCouponController::class)->group(function () {
     Route::get('/apply-coupon/{code}', 'applyCoupon')->name('apply.coupon');
 });
 //All Routes for Global Coupons End

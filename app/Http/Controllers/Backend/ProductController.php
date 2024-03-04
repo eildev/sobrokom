@@ -17,11 +17,18 @@ class ProductController extends Controller
     {
         return view('backend.products.insert');
     }
+    public function findVariant($id)
+    {
+        $variant = Variant::where('product_id', $id)->get();
+        return response()->json([
+            'variant' => $variant
+        ]);
+    }
 
     // product add function 
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'category_id' => 'required',
             'subcategory_id' => 'required',
@@ -90,8 +97,7 @@ class ProductController extends Controller
             'unit' => 'required|max:50',
         ]);
 
-        if($validator->passes())
-        {
+        if ($validator->passes()) {
             $variant = new Variant;
             $variant->regular_price    = $request->regular_price;
             $variant->discount    = $request->discount;
@@ -116,7 +122,6 @@ class ProductController extends Controller
             'status' => '500',
             'error' => $validator->messages()
         ]);
-
     }
 
     // show variants function 
@@ -170,7 +175,7 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::findOrFail($id);
-        unlink(public_path('uploads/products/').$product->product_image);
+        unlink(public_path('uploads/products/') . $product->product_image);
         $product->delete();
         return redirect()->route('product.view')->with('success', 'Product deleted successfully');
     }
@@ -185,23 +190,22 @@ class ProductController extends Controller
         } else {
             $newStatus = 0;
         }
-         
+
         $product->update([
-            'status'=>$newStatus
+            'status' => $newStatus
         ]);
         return redirect()->back()->with('message', 'status changed successfully');
     }
-    
+
     // product update function 
     public function update(Request $request, $id)
     {
         // dd($request->product_feature);
-         if ($request->product_image) 
-         {
+        if ($request->product_image) {
             $productImage = rand() . '.' . $request->product_image->extension();
             $request->product_image->move(public_path('uploads/products/'), $productImage);
             $product = Product::findOrFail($id);
-            unlink(public_path('uploads/products/').$product->product_image);
+            unlink(public_path('uploads/products/') . $product->product_image);
             $product->category_id = $request->category_id;
             $product->subcategory_id = $request->subcategory_id;
             $product->sub_subcategory_id = $request->sub_subcategory_id;
@@ -216,75 +220,69 @@ class ProductController extends Controller
             $product->tags = $request->tag;
             // $product->shipping = $request->shipping;
             $product->update();
-                if ($request->imageGallery) 
-                {
-                    $imagesGallery = $request->imageGallery;
-                    foreach ($imagesGallery as $image) 
-                    {
-                        $galleryImage = rand() . '.' . $image->extension();
-                        $image->move(public_path('uploads/products/gallery'), $galleryImage);
-                        $productGallery = new ProductGallery;
-                        unlink(public_path('uploads/products/gallery').$productGallery->image);
-                        $productGallery->product_id = $product->id;
-                        $productGallery->image = $galleryImage;
-                        $productGallery->save();
-                    }
+            if ($request->imageGallery) {
+                $imagesGallery = $request->imageGallery;
+                foreach ($imagesGallery as $image) {
+                    $galleryImage = rand() . '.' . $image->extension();
+                    $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                    $productGallery = new ProductGallery;
+                    unlink(public_path('uploads/products/gallery') . $productGallery->image);
+                    $productGallery->product_id = $product->id;
+                    $productGallery->image = $galleryImage;
+                    $productGallery->save();
                 }
-                return response()->json([
-                    'status' => '200',
-                    'message' => 'Product Update successfully',
-                    'productId' => $product->id,
-                ]);
-        } else 
-            {
-                $product = Product::findOrFail($id);
-                $product->category_id = $request->category_id;
-                $product->subcategory_id = $request->subcategory_id;
-                $product->sub_subcategory_id = $request->sub_subcategory_id;
-                $product->brand_id = $request->brand_id;
-                $product->product_feature = implode(',', $request->product_feature);
-                $product->product_name = $request->product_name;
-                $product->slug = Str::slug($request->product_name);
-                $product->short_desc = $request->short_desc;
-                $product->long_desc = $request->long_desc;
-                $product->sku = $request->sku;
-                $product->tags = $request->tag;
-                // $product->shipping = $request->shipping;
-                $product->update();
-                if ($request->imageGallery) 
-                {
-                    $imagesGallery = $request->imageGallery;
-                    foreach ($imagesGallery as $image) 
-                    {
-                        $galleryImage = rand() . '.' . $image->extension();
-                        $image->move(public_path('uploads/products/gallery'), $galleryImage);
-                        $productGallery = new ProductGallery;
-                        unlink(public_path('uploads/products/gallery').$productGallery->image);
-                        $productGallery->product_id = $product->id;
-                        $productGallery->image = $galleryImage;
-                        $productGallery->save();
-                    }
-                }
-                return response()->json([
-                    'status' => '200',
-                    'message' => 'Product Update successfully',
-                    'productId' => $product->id,
-                ]);
             }
-    
+            return response()->json([
+                'status' => '200',
+                'message' => 'Product Update successfully',
+                'productId' => $product->id,
+            ]);
+        } else {
+            $product = Product::findOrFail($id);
+            $product->category_id = $request->category_id;
+            $product->subcategory_id = $request->subcategory_id;
+            $product->sub_subcategory_id = $request->sub_subcategory_id;
+            $product->brand_id = $request->brand_id;
+            $product->product_feature = implode(',', $request->product_feature);
+            $product->product_name = $request->product_name;
+            $product->slug = Str::slug($request->product_name);
+            $product->short_desc = $request->short_desc;
+            $product->long_desc = $request->long_desc;
+            $product->sku = $request->sku;
+            $product->tags = $request->tag;
+            // $product->shipping = $request->shipping;
+            $product->update();
+            if ($request->imageGallery) {
+                $imagesGallery = $request->imageGallery;
+                foreach ($imagesGallery as $image) {
+                    $galleryImage = rand() . '.' . $image->extension();
+                    $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                    $productGallery = new ProductGallery;
+                    unlink(public_path('uploads/products/gallery') . $productGallery->image);
+                    $productGallery->product_id = $product->id;
+                    $productGallery->image = $galleryImage;
+                    $productGallery->save();
+                }
+            }
+            return response()->json([
+                'status' => '200',
+                'message' => 'Product Update successfully',
+                'productId' => $product->id,
+            ]);
+        }
     }
 
     public function editVariant($id)
     {
         $variant = Variant::where('id', $id)->first();
         return response()->json([
-            'status'=> '200',
+            'status' => '200',
             'message' => 'Please Update variant',
-            'variantData'=> $variant
+            'variantData' => $variant
         ]);
     }
 
-    public function updateVariant(Request $request,$id)
+    public function updateVariant(Request $request, $id)
     {
         // dd($request);
         $variant = Variant::findOrFail($id);
@@ -307,7 +305,4 @@ class ProductController extends Controller
 
         ]);
     }
-    
-    
 }
-    
