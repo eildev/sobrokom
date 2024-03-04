@@ -30,6 +30,7 @@
             </a>
             <ul class="mm-collapse">
                 {{-- Product Related menu  --}}
+
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
@@ -64,8 +65,21 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-message-rounded-dots'></i>
+                        </div>
+                        <div class="menu-title">Purchase</div>
+                    </a>
+                    <ul>
 
-
+                        <li> <a href="{{ route('purchase') }}"><i class="bx bx-right-arrow-alt"></i>Add Purchase</a>
+                        </li>
+                        <li> <a href="{{ route('purchase.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage  Purchase</a>
+                        </li>
+                    </ul>
+                </li>
 
                 {{-- category Related menu  --}}
 
@@ -86,40 +100,39 @@
 
                 {{-- Subcategory menu  --}}
                 <li>
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><i class='bx bx-category-alt'></i>
+                        </div></i>
+                        <div class="menu-title">Manage
+                            Sub-Category</div>
+                    </a>
+                    <ul class="mm-collapse">
+                        <li> <a href="{{ route('subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                                Subcategory</a>
+                        </li>
+                        <li> <a href="{{ route('subcategory.view') }}"><i class="bx bx-right-arrow-alt"></i>All
+                                Subcategory</a>
+                        </li>
+                        {{-- Sub Subcategory menu  --}}
+                        <li>
                             <a class="has-arrow" href="javascript:;">
                                 <div class="parent-icon"><i class='bx bx-category-alt'></i>
                                 </div></i>
-                                <div class="menu-title">Manage
+                                <div class="menu-title">Manage Sub
                                     Sub-Category</div>
                             </a>
                             <ul class="mm-collapse">
-                                <li> <a href="{{ route('subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
-                                        Subcategory</a>
+                                <li> <a href="{{ route('sub.subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                                        Sub-Subcategory</a>
                                 </li>
-                                <li> <a href="{{ route('subcategory.view') }}"><i class="bx bx-right-arrow-alt"></i>All
-                                        Subcategory</a>
-                                </li>
-                                {{-- Sub Subcategory menu  --}}
-                                <li>
-                                    <a class="has-arrow" href="javascript:;">
-                                        <div class="parent-icon"><i class='bx bx-category-alt'></i>
-                                        </div></i>
-                                        <div class="menu-title">Manage Sub
-                                            Sub-Category</div>
-                                    </a>
-                                    <ul class="mm-collapse">
-                                        <li> <a href="{{ route('sub.subcategory') }}"><i
-                                                    class="bx bx-right-arrow-alt"></i>Add
-                                                Sub-Subcategory</a>
-                                        </li>
-                                        <li> <a href="{{ route('sub.subcategory.view') }}"><i
-                                                    class="bx bx-right-arrow-alt"></i>All
-                                                Sub-Subcategory</a>
-                                        </li>
-                                    </ul>
+                                <li> <a href="{{ route('sub.subcategory.view') }}"><i
+                                            class="bx bx-right-arrow-alt"></i>All
+                                        Sub-Subcategory</a>
                                 </li>
                             </ul>
                         </li>
+                    </ul>
+                </li>
 
                 {{-- brand Related menu  --}}
                 <li>
@@ -242,13 +255,15 @@
                     <a href="{{ route('order.processed') }}"><i class="bx bx-right-arrow-alt"></i>Processed Order</a>
                 </li>
                 <li>
-                    <a href="{{ route('order.delivering') }}"><i class="bx bx-right-arrow-alt"></i>Delivering Order</a>
+                    <a href="{{ route('order.delivering') }}"><i class="bx bx-right-arrow-alt"></i>Delivering
+                        Order</a>
                 </li>
                 <li>
                     <a href="{{ route('order.completed') }}"><i class="bx bx-right-arrow-alt"></i>Completed Order</a>
                 </li>
                 <li>
-                    <a href="{{ route('order.refunding') }}"><i class="bx bx-right-arrow-alt"></i>Refunding Orders</a>
+                    <a href="{{ route('order.refunding') }}"><i class="bx bx-right-arrow-alt"></i>Refunding
+                        Orders</a>
                 </li>
                 <li>
                     <a href="{{ route('order.refunded') }}"><i class="bx bx-right-arrow-alt"></i>Refunded Orders</a>
@@ -280,7 +295,7 @@
                 <div class="menu-title">Manage Blog</div>
             </a>
             <ul class="mm-collapse">
-                    {{-- //Blog Category --}}
+                {{-- //Blog Category --}}
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
@@ -294,7 +309,8 @@
                                 Category</a>
                         </li>
                         <li>
-                            <a href="{{ route('blog.all.category.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog
+                            <a href="{{ route('blog.all.category.view') }}"><i
+                                    class="bx bx-right-arrow-alt"></i>Manage Blog
                                 Category</a>
                         </li>
                     </ul>
@@ -310,10 +326,12 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('blog.post.add.view') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog</a>
+                            <a href="{{ route('blog.post.add.view') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                                Blog</a>
                         </li>
                         <li>
-                            <a href="{{ route('blog.all.post.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage Blog</a>
+                            <a href="{{ route('blog.all.post.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                                Blog</a>
                         </li>
                     </ul>
                 </li>
@@ -327,11 +345,13 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('blog.all.pending.comment') }}"><i class="bx bx-right-arrow-alt"></i>Pending
+                            <a href="{{ route('blog.all.pending.comment') }}"><i
+                                    class="bx bx-right-arrow-alt"></i>Pending
                                 Comment</a>
                         </li>
                         <li>
-                            <a href="{{ route('blog.all.approved.comment') }}"><i class="bx bx-right-arrow-alt"></i>Approve
+                            <a href="{{ route('blog.all.approved.comment') }}"><i
+                                    class="bx bx-right-arrow-alt"></i>Approve
                                 Comment</a>
                         </li>
                     </ul>
@@ -364,48 +384,31 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('user-tracker.show') }}"><i class="bx bx-right-arrow-alt"></i>View Online User</a>
+                    <a href="{{ route('user-tracker.show') }}"><i class="bx bx-right-arrow-alt"></i>View Online
+                        User</a>
                 </li>
 
             </ul>
-        </li>
-          <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class='bx bx-message-rounded-dots'></i>
-                </div>
-                <div class="menu-title">Company Details</div>
-            </a>
-            <ul>
-
-                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
-                </li>
-                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                        Company</a>
-                </li>
-            </ul>
-        </li>
-
-         </li>
-          <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class='bx bx-message-rounded-dots'></i>
-                </div>
-                <div class="menu-title">Company Details</div>
-            </a>
-            <ul>
-
-                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
-                </li>
-                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                        Company</a>
-                </li>
-            </ul>
-        </li>
-        {{-- All Users Information --}}
         </li>
         <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-message-rounded-dots'></i>
+                </div>
+                <div class="menu-title">Company Details</div>
+            </a>
+            <ul>
+
+                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+                </li>
+                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Company</a>
+                </li>
+            </ul>
+        </li>
+
+    {{-- All Users Information --}}
+    <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon">
                 <i class='bx bx-user'></i>
@@ -418,6 +421,7 @@
             </li>
         </ul>
     </li>
+
     </ul>
     <!--end navigation-->
 </div>

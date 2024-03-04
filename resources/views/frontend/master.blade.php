@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Sobrokom – Let’s Shop </title>
-    <meta name="description" content="Sobrokom.store, your premier destination for online shopping, offers a curated selection of grocery, food, fashion, electronics, home decor, and more. Discover quality products, exclusive deals, and a seamless shopping experience that reflects the modern lifestyle. Elevate your online shopping journey with Sobrokom.store">
+    <meta name="description"
+        content="Sobrokom.store, your premier destination for online shopping, offers a curated selection of grocery, food, fashion, electronics, home decor, and more. Discover quality products, exclusive deals, and a seamless shopping experience that reflects the modern lifestyle. Elevate your online shopping journey with Sobrokom.store">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keyword" content="onlineshopping,e-commerce,groceryfoods,electronics,homedecor,gadgets,trendyapparel,affordableprices,qualityproducts,techaccessories,lifestyle,exclusivedeals,fastshipping,bestprices,homeessentials,stylishgoods,modernliving,smarthome,latesttrends,beautyproducts,uniquefinds,digitalmarketplace,convenientshopping,securetransactions,customersatisfaction">
+    <meta name="keyword"
+        content="onlineshopping,e-commerce,groceryfoods,electronics,homedecor,gadgets,trendyapparel,affordableprices,qualityproducts,techaccessories,lifestyle,exclusivedeals,fastshipping,bestprices,homeessentials,stylishgoods,modernliving,smarthome,latesttrends,beautyproducts,uniquefinds,digitalmarketplace,convenientshopping,securetransactions,customersatisfaction">
     <!-- Ajax Header -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -106,6 +108,7 @@
             padding: 5px 0;
         }
     </style>
+
     <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/105731512599106"><i
             class="fab fa-facebook-messenger"></i></a>
 
@@ -218,9 +221,11 @@
                 <a href="{{ route('home') }}" style="color: white">Home</a>
                 <div style="height: 100%; width:1px; background:white;border:none">s</div>
                 @auth
-                <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}" style="color: white">Account</a>
+                    <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"
+                        style="color: white">Account</a>
                 @else
-                <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}" style="color: white">Login</a>
+                    <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"
+                        style="color: white">Login</a>
                 @endauth
             </div>
             <div class="mycard">
@@ -266,7 +271,10 @@
                                                     href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
 
                                                 @php
-                                                    $subSubcategories = App\Models\SubSubcategory::where('subcategoryId', $subcategory->id)
+                                                    $subSubcategories = App\Models\SubSubcategory::where(
+                                                        'subcategoryId',
+                                                        $subcategory->id,
+                                                    )
                                                         ->take(5)
                                                         ->get();
                                                 @endphp
@@ -371,46 +379,44 @@
                 });
             })
         });
-        // add To Cart
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
-            element.addEventListener('submit', function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                let product_id = this.elements.product_id.value;
-                let variant_id = this.elements.variant_id.value;
-                let selling_price = this.elements.selling_price.value;
-                let weight = this.elements.weight.value;
-                let unit = this.elements.unit.value;
-                // console.log(product_id, variant_id,selling_price);
-                $.ajax({
-                    url: '/product/add_to_cart',
-                    type: 'POST',
-                    data: {
-                        'product_id': product_id,
-                        'variant_id': variant_id,
-                        'selling_price': selling_price,
-                        'pr_quantity': '1',
-                        'weight': weight,
-                        'unit': unit
-                    },
-                    success: function(response) {
-                        if (response.status == 200) {
-                            toastr.success(response.message);
-                            showCart();
-                        } else {
-
+                element.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
-                    }
-                });
+                    });
+                    let product_id = this.elements.product_id.value;
+                    let variant_id = this.elements.variant_id.value;
+                    let selling_price = this.elements.selling_price.value;
+                    let weight = this.elements.weight.value;
+                    let unit = this.elements.unit.value;
+                    // console.log(product_id, variant_id,selling_price);
+                    $.ajax({
+                        url: '/product/add_to_cart',
+                        type: 'POST',
+                        data: {
+                            'product_id': product_id,
+                            'variant_id': variant_id,
+                            'selling_price': selling_price,
+                            'pr_quantity': '1',
+                            'weight': weight,
+                            'unit': unit
+                        },
+                        success: function(response) {
+                            if (response.status == 200) {
+                                toastr.success(response.message);
+                                showCart();
+                            } else {
 
-            });
-        })
-        // update cart
+                            }
+                        }
+                    });
+
+                });
+            })
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -510,7 +516,6 @@
                 })
             })
         });
-        // swwetalert
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {
@@ -615,7 +620,8 @@
             font-weight: 500 !important;
             color: var(--tp-heading-secondary);
         }
-        .my_menu i{
+
+        .my_menu i {
             float: right;
         }
 
@@ -650,12 +656,12 @@
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: var(--tp-heading-secondary)
+            background: var(--tp-heading-secondary)
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #2D2C6E;
+            background: #2D2C6E;
         }
 
         .container {
@@ -673,37 +679,47 @@
         }
 
         @media (max-width: 767px),
-            only screen and (min-width: 576px) and (max-width: 767px) {
-                .tpslider__content{
-                    margin-top: 50px !important;
-                }.tp-btn {
-                    padding: 8px 30px;
-                }
-                .mytop-logo{
-                    padding-right: 20px !important;
-                }
-                .accounts-nav{
-                    display: none !important;
-                }
-                .top-serch-container{
-                    margin-top: 10px
-                }
-                .mySlidBar{
-                    margin-top: 48px !important;
-                }
-                .container{
-                    margin: 0 !important;
-                }
-                .mobile-bottom-menu{
-                    display: flex !important;
-                }
-                .my-scroll-top{
-                    display: none!important;
-                }
-                .container{
-                        margin-top: 40px !important;
-                    }
+        only screen and (min-width: 576px) and (max-width: 767px) {
+            .tpslider__content {
+                margin-top: 50px !important;
             }
+
+            .tp-btn {
+                padding: 8px 30px;
+            }
+
+            .mytop-logo {
+                padding-right: 20px !important;
+            }
+
+            .accounts-nav {
+                display: none !important;
+            }
+
+            .top-serch-container {
+                margin-top: 10px
+            }
+
+            .mySlidBar {
+                margin-top: 48px !important;
+            }
+
+            .container {
+                margin: 0 !important;
+            }
+
+            .mobile-bottom-menu {
+                display: flex !important;
+            }
+
+            .my-scroll-top {
+                display: none !important;
+            }
+
+            .container {
+                margin-top: 40px !important;
+            }
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -905,11 +921,11 @@
                     });
 
                     $.ajax({
-                        url: '{{route('user.count')}}',
+                        url: '{{ route('user.count') }}',
                         type: 'post',
                         data: {
                             'country_info': data.country,
-                            'url':window.location.href
+                            'url': window.location.href
                         },
                         success: function(response) {
                             // console.log(response);

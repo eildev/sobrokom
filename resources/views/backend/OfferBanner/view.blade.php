@@ -45,10 +45,20 @@
                                                     style="max-width: 300px; object-fit:contain;" class="img-fluid"
                                                     alt="banner Image">
                                             </td>
-                                            <td>{{ $banner->status }}</td>
                                             <td>
-
-
+                                                <form action="{{ route('offerbanner.status', $banner->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @if ($banner->status == 0)
+                                                        <button class="btn btn-sm btn-danger"
+                                                            value="{{ $banner->id }}">Inactive</button>
+                                                    @else
+                                                        <button class="btn btn-sm btn-success"
+                                                            value="{{ $banner->id }}">Active</button>
+                                                    @endif
+                                                </form>
+                                            </td>
+                                            <td>
                                                 <a href="{{ route('offerbanner.edit', $banner->id) }}"
                                                     class="btn btn-info">Edit</a>
                                                 <a href="{{ route('offerbanner.delete', $banner->id) }}"
@@ -70,4 +80,53 @@
         </div>
         <!--end row-->
     </div>
+
+
+    <script>
+        // let offerBannerStatus = document.querySelectorAll('.offer_banner_status');
+        // $(document).ready(function() {
+        //     offerBannerStatus.forEach(element => {
+        //         element.addEventListener('click', function(e) {
+        //             e.preventDefault();
+        //             let id = this.value;
+        //             let status = this.getAttribute('status');
+        //             // alert(status);
+        //             let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute(
+        //                 'content');
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': csrfToken
+        //                 }
+        //             });
+
+        //             $.ajax({
+        //                 url: '/offerbanner/status/' + id,
+        //                 type: "POST",
+        //                 data: {
+        //                     'status': status
+        //                 },
+        //                 success: function(response) {
+        //                     if (response.status == 200) {
+        //                         // Show inactive button
+        //                         $('.offer_banner_status[value="' + id + '"]').text(
+        //                             'Inactive');
+        //                         $('.offer_banner_status[value="' + id + '"]')
+        //                             .removeClass('btn-success')
+        //                             .addClass('btn-danger');
+        //                         toastr.success(response.message);
+        //                     } else if (response.status == 1) {
+        //                         // Show active button
+        //                         $('.offer_banner_status[value="' + id + '"]').text(
+        //                             'Active');
+        //                         $('.offer_banner_status[value="' + id + '"]')
+        //                             .removeClass('btn-danger')
+        //                             .addClass('btn-success');
+        //                         toastr.success(response.message);
+        //                     }
+        //                 }
+        //             })
+        //         })
+        //     });
+        // })
+    </script>
 @endsection

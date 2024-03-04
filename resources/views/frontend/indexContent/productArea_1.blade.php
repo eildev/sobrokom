@@ -15,7 +15,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-6 text-center">
                         <div class="tpsection mb-15">
-                            <h4 class="tpsection__title text-start brand-product-title" id="weekly_offers">Weekly Best Offers</h4>
+                            <h4 class="tpsection__title text-start brand-product-title" id="weekly_offers">Weekly Best
+                                Offers</h4>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -45,8 +46,10 @@
                                                         <div class="tpproduct__info bage">
                                                             @if (!empty($product->varient[0]))
                                                                 @if ($product->varient[0]->discount > 0)
-                                                                    <span class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
-                                                                    <span class="tpproduct__info-hot bage__hot">HOT</span>
+                                                                    <span
+                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
+                                                                    <span
+                                                                        class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 @endif
                                                             @endif
                                                         </div>
@@ -54,10 +57,12 @@
                                                             @auth
                                                                 <a class="tpproduct__shopping-wishlist add_whishlist"
                                                                     href="#" value="{{ $product->id }}">
-                                                                    <!-- <i class="icon-heart icons"></i> -->
                                                                     @auth
                                                                         @php
-                                                                            $loved = App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                            $loved = App\Models\WishList::where(
+                                                                                'user_id',
+                                                                                Auth::user()->id,
+                                                                            )
                                                                                 ->where('product_id', $product->id)
                                                                                 ->first();
                                                                         @endphp
@@ -88,7 +93,10 @@
                                                         </h4>
                                                         <div class="tpproduct__rating mb-5">
                                                             @php
-                                                                $ratingAvg = App\Models\ReviewRating::where('product_id', $product->id)->avg('rating');
+                                                                $ratingAvg = App\Models\ReviewRating::where(
+                                                                    'product_id',
+                                                                    $product->id,
+                                                                )->avg('rating');
                                                             @endphp
                                                             @php
                                                                 $last = 0;
@@ -104,10 +112,13 @@
                                                         <div class="tpproduct__price mb-5">
                                                             <span>৳{{ $product->varient[0]->discount_amount ?? '' }}</span>
                                                             @if (!empty($product->varient[0]))
-                                                                @if($product->varient[0]->weight == "gm" || $product->varient[0]->weight == "ml")
-                                                                    <span class="text-secondary" style="font-size: 14px">/{{ $product->varient[0]->weight ?? '' }} {{ $product->varient[0]->unit ?? '' }}</span>
+                                                                @if ($product->varient[0]->weight == 'gm' || $product->varient[0]->weight == 'ml')
+                                                                    <span class="text-secondary"
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->weight ?? '' }}
+                                                                        {{ $product->varient[0]->unit ?? '' }}</span>
                                                                 @else
-                                                                    <span class="text-secondary" style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}</span>
+                                                                    <span class="text-secondary"
+                                                                        style="font-size: 14px">/{{ $product->varient[0]->unit ?? '' }}</span>
                                                                 @endif
                                                             @endif
 
