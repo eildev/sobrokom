@@ -19,6 +19,35 @@ class OrderManageController extends Controller
             'allusers' => $allUsers
             ]);
     }
+    public function SendSMS(Request $request){
+        // dd($request->all());
+        $number = $request->phone;
+        $api_key = "0yRu5BkB8tK927YQBA8u";
+        $senderid = "8809617615171";
+        $message = $request->sms;
+        $url = "http://bulksmsbd.net/api/smsapi";
+        $data = [
+            "api_key" => $api_key,
+            'number' =>$number,
+            'senderid' => $senderid,
+            'message' => $message
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response = json_decode($response, true);
+        if($response['response_code'] == 202){
+            return back()->with('success','Order Successfully Approved');
+        }
+        else{
+            return back()->with('warring','Something went wrong Order Not Approved');
+        }
+    }
     public function index(){
         $newOrders = Order::where("status", 'pending')->latest()->get();
         return view('backend.order.new-order', compact('newOrders'));

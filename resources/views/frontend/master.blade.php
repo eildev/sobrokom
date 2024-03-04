@@ -905,10 +905,11 @@
                     });
 
                     $.ajax({
-                        url: 'user-tracker/user-count',
+                        url: '{{route('user.count')}}',
                         type: 'post',
                         data: {
                             'country_info': data.country,
+                            'url':window.location.href
                         },
                         success: function(response) {
                             // console.log(response);
