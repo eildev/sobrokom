@@ -42,10 +42,10 @@ class OrderManageController extends Controller
         curl_close($ch);
         $response = json_decode($response, true);
         if($response['response_code'] == 202){
-            return back()->with('success','Order Successfully Approved');
+            return back()->with('success','Message Successfully Send');
         }
         else{
-            return back()->with('warring','Something went wrong Order Not Approved');
+            return back()->with('warring','Something went wrong Message not Send');
         }
     }
     public function index(){

@@ -1,7 +1,31 @@
 @extends('backend.master')
 @section('admin')
     <div class="page-content">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+        <div class="col-12 mb-3">
+                <span class="badge bg-info p-2">All Time History</span>
+            </div>
+        <div class="row">
+            <div class="col">
+                <div class="card radius-10 bg-gradient-ibiza">
+                    <div class="card-body">
+                        <p class="mb-0 text-white pb-2"> Visitor </p>
+                        <div class="d-flex align-items-center">
+                            <h6 class="mb-0 text-white">Today</h6>
+                            <div class="ms-auto">
+                                <h6 class="mb-0 text-white"> {{ $refund ?? 0 }}</h6>
+                            </div>
+                        </div>
+                        <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="d-flex align-items-center text-white">
+                            <h6 class="mb-0 text-white">Total</h6>
+                            <h6 class="mb-0 ms-auto text-white">100</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col">
                 <div class="card radius-10 bg-gradient-deepblue">
                     <div class="card-body">
@@ -27,7 +51,7 @@
                         </div>
                         <div class="d-flex align-items-center text-white">
                             <p class="mb-0">Total Products</p>
-                            <p class="mb-0 ms-auto">+4.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0 ms-auto"></p>
                         </div>
                     </div>
                 </div>
@@ -47,7 +71,7 @@
                         </div>
                         <div class="d-flex align-items-center text-white">
                             <p class="mb-0">New Order</p>
-                            <p class="mb-0 ms-auto">+1.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0 ms-auto"></p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +92,7 @@
                             </div>
                             <div class="d-flex align-items-center text-white">
                                 <p class="mb-0">Users</p>
-                                <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                                <p class="mb-0 ms-auto"></p>
                             </div>
                         </div>
                     </a>
@@ -89,34 +113,115 @@
                         </div>
                         <div class="d-flex align-items-center text-white">
                             <p class="mb-0">Total Refund</p>
-                            <p class="mb-0 ms-auto">+2.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0 ms-auto"></p>
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <span class="badge bg-info p-2">Today History</span>
             </div>
             <div class="col">
                 <a href="{{ route('user-tracker.show') }}">
                     <div class="card radius-10 bg-gradient-ohhappiness">
                         <div class="card-body">
+                            <div class="text-center text-white">
+                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                            </div>
                             <div class="d-flex align-items-center">
-                                <h5 class="mb-0 text-white">{{ $visitors }}</h5>
+                                <p class="mb-0 text-white">Total Order </p>
                                 <div class="ms-auto">
-                                    <i class='bx bx-group fs-3 text-white'></i>
+                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 text-white">Quantity </p>
+                                <div class="ms-auto">
+                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
                                 </div>
                             </div>
                             <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                                <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="d-flex align-items-center text-white">
-                                <p class="mb-0">Visitors</p>
-                                <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                                <h6 class="mb-0">Amount</h6>
+                                <p class="mb-0 ms-auto">151521212 TK</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('user-tracker.show') }}">
+                    <div class="card radius-10 bg-gradient-ohhappiness">
+                        <div class="card-body">
+                            <div class="text-center text-white">
+                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 text-white">Total Purchase </p>
+                                <div class="ms-auto">
+                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 text-white">Quantity </p>
+                                <div class="ms-auto">
+                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
+                                </div>
+                            </div>
+                            <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex align-items-center text-white">
+                                <h6 class="mb-0">Amount</h6>
+                                <p class="mb-0 ms-auto">151521212 TK</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('user-tracker.show') }}">
+                    <div class="card radius-10 bg-gradient-ohhappiness">
+                        <div class="card-body">
+                            <div class="text-center text-white">
+                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 text-white">Total Refund </p>
+                                <div class="ms-auto">
+                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <p class="mb-0 text-white">Total Quantity </p>
+                                <div class="ms-auto">
+                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
+                                </div>
+                            </div>
+                            <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex align-items-center text-white">
+                                <h6 class="mb-0">Amount</h6>
+                                <p class="mb-0 ms-auto">151521212 TK</p>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
+
+
         <!--end row-->
     </div>
 @endsection
