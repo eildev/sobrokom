@@ -345,13 +345,7 @@
         @endif
         @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
-        @endif <<
-        << << < HEAD
-
-
-            ===
-            === = >>>
-            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
+        @endif
         //add wishlist
         const add_whishlist = document.querySelectorAll('.add_whishlist');
         // console.log(add_whishlist);
@@ -384,15 +378,7 @@
                     }
                 });
             })
-        }); <<
-        << << < HEAD
-
-            // add To Cart  
-            ===
-            === =
-            // add To Cart
-            >>>
-            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
+        });
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
                 element.addEventListener('submit', function(e) {
@@ -430,16 +416,7 @@
                     });
 
                 });
-            }) <<
-            << << < HEAD
-
-
-            // update cart 
-            ===
-            === =
-            // update cart
-            >>>
-            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
+            })
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -538,17 +515,7 @@
                     }
                 })
             })
-        }); <<
-        << << < HEAD
-
-
-
-            // swwetalert    
-            ===
-            === =
-            // swwetalert
-            >>>
-            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
+        });
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {

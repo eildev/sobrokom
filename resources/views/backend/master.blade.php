@@ -133,6 +133,14 @@
 
             table.buttons().container()
                 .appendTo('#order_table .col-md-6:eq(0)');
+
+            var table = $('#genarel').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
+
+            table.buttons().container()
+                .appendTo('#genarel .col-md-6:eq(0)');
         });
     </script>
 
@@ -189,7 +197,7 @@
 
         });
 
-        // datepicker 
+        // datepicker
         $(".datepicker").flatpickr();
 
         $(".time-picker").flatpickr({
@@ -258,7 +266,7 @@
         });
 
 
-        // subcategory select function 
+        // subcategory select function
         $(document).ready(function() {
             $('#product_descriptions').summernote();
             $('.category_id').on('change', function() {
@@ -319,7 +327,7 @@
 
 
 
-        // variants select function 
+        // variants select function
         // $(document).ready(function() {
         //     $('.product-id').on('change', function() {
         //         // alert('ok');
@@ -498,7 +506,7 @@
 
 
 
-        // price and discount calculation 
+        // price and discount calculation
         const regular_price = document.querySelector('.regular_price');
         const discount_amount = document.querySelector('.discount_amount');
         let Select_discount = document.querySelector('.discount');
@@ -537,7 +545,7 @@
                 selectElement.appendChild(option);
             }
         });
-        // discount calculation 
+        // discount calculation
         Select_discount.addEventListener('click', function(e) {
             // alert('ok');
             let regurlarPrice = parseFloat(regular_price.value);

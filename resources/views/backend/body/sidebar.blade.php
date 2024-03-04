@@ -30,6 +30,7 @@
             </a>
             <ul class="mm-collapse">
                 {{-- Product Related menu  --}}
+
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
@@ -64,8 +65,21 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class='bx bx-message-rounded-dots'></i>
+                        </div>
+                        <div class="menu-title">Purchase</div>
+                    </a>
+                    <ul>
 
-
+                        <li> <a href="{{ route('purchase') }}"><i class="bx bx-right-arrow-alt"></i>Add Purchase</a>
+                        </li>
+                        <li> <a href="{{ route('purchase.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage  Purchase</a>
+                        </li>
+                    </ul>
+                </li>
 
                 {{-- category Related menu  --}}
 
@@ -392,51 +406,8 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class='bx bx-message-rounded-dots'></i>
-                </div>
-                <div class="menu-title">Product Purchase</div>
-            </a>
-            <ul>
 
-                <li> <a href="{{ route('purchase') }}"><i class="bx bx-right-arrow-alt"></i>Add Product Purchase</a>
-                </li>
-                <li> <a href="{{ route('purchase.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                        Product Purchase</a>
-                </li>
-            </ul>
-        </li>
-
-
-        <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
-        </li>
-        <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                Company</a>
-        </li>
-    </ul>
-    </li>
-
-    </li>
-    <li>
-        <a href="javascript:;" class="has-arrow">
-            <div class="parent-icon">
-                <i class='bx bx-message-rounded-dots'></i>
-            </div>
-            <div class="menu-title">Company Details</div>
-        </a>
-        <ul>
-
-            <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
-            </li>
-            <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                    Company</a>
-            </li>
-        </ul>
-    </li>
     {{-- All Users Information --}}
-    </li>
     <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon">
@@ -450,6 +421,7 @@
             </li>
         </ul>
     </li>
+
     </ul>
     <!--end navigation-->
 </div>
