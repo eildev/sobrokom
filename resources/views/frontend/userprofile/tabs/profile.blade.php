@@ -5,7 +5,7 @@
 
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="{{ !empty($user->pic) ? asset('uploads/user/' . $user->pic) : asset('/default/user.svg') }}"
+                        <img src="{{ !empty($user->socialId) ? asset($user->pic) : asset('/default/user.svg') }}"
                             alt="User Image" class="rounded-circle p-1 bg-primary" width="110">
                         <div class="mt-3">
                             <p>{{ $user->userName ?? 'Your User Name' }}</p>

@@ -4,9 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>SOBROKOM | Largest Ecommerce Website </title>
-    <meta name="description" content="">
+    <title>Sobrokom – Let’s Shop </title>
+    <meta name="description"
+        content="Sobrokom.store, your premier destination for online shopping, offers a curated selection of grocery, food, fashion, electronics, home decor, and more. Discover quality products, exclusive deals, and a seamless shopping experience that reflects the modern lifestyle. Elevate your online shopping journey with Sobrokom.store">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keyword"
+        content="onlineshopping,e-commerce,groceryfoods,electronics,homedecor,gadgets,trendyapparel,affordableprices,qualityproducts,techaccessories,lifestyle,exclusivedeals,fastshipping,bestprices,homeessentials,stylishgoods,modernliving,smarthome,latesttrends,beautyproducts,uniquefinds,digitalmarketplace,convenientshopping,securetransactions,customersatisfaction">
     <!-- Ajax Header -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -46,7 +49,7 @@
     </script>
 </head>
 
-<body>
+<body style="background: var(--tp-grey-1);">
     <style>
         .pageLoader {
             position: fixed;
@@ -68,7 +71,7 @@
     <style>
         .chat {
             font-size: 20px;
-            display: flex !important;
+            display: none !important;
             justify-content: center;
             align-items: center;
             position: fixed;
@@ -122,8 +125,9 @@
         @endforeach
     @endif
     <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target" data-target="html">
-        <i class="icon-chevrons-up"></i>
+    <button class="scroll-top scroll-to-target my-scroll-top d-flex justify-content-center align-content-center"
+        data-target="html">
+        <i class="icon-chevrons-up" style="margin-top: 15px"></i>
     </button>
     <!-- Scroll-top-end-->
 
@@ -132,19 +136,181 @@
         @include('frontend.body.topheader')
         @include('frontend.body.mainnav')
     </header>
+    <style>
+        .my_menu {
+            font-weight: 100;
+            font-size: 14px;
+        }
+
+        /* .first_li{
+            display: flex;
+            justify-content: space-between
+        } */
+        .first_li>ul {
+            margin-left: 13px;
+            color: white;
+            font-weight: 100;
+            font-size: 14px;
+            display: none;
+        }
+
+        .second_li>ul {
+            margin-left: 13px;
+            color: white;
+            font-weight: 100;
+            font-size: 14px;
+            display: none;
+        }
+
+        .my_menu li,
+        .my_menu i {
+            line-height: 30px
+        }
+
+        hr {
+            margin: 0
+        }
+
+        .mobile-bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            right: 0;
+            background: #2D2C6E;
+            color: #2D2C6E;
+            z-index: 999;
+            border-top: 1px solid white;
+        }
+
+        .bottom-chat,
+        .mycard {
+            padding: 7px 10px;
+            background: white;
+            text-align: center
+        }
+
+        .mycard {
+            width: 80px;
+            height: 100% !important;
+            padding: 14px 10px;
+        }
+
+        .cardI {
+            font-size: 40px
+        }
+
+        .bottom-chat a {
+            color: #2D2C6E !important;
+            background: white !important;
+            border: none;
+            display: flex;
+            justify-content: center;
+            padding: 7px 10px;
+        }
+    </style>
     <!-- header-area-end -->
 
     <main>
+        <div class="mobile-bottom-menu d-none justify-content-between align-items-center">
+            <div class="bottom-chat brl" style="width: 80px">
+                <a target="_blank" class="" href="https://www.m.me/105731512599106"><i
+                        class="fab fa-facebook-messenger"></i></a>
+            </div>
+            <div class="bottom-button d-flex justify-content-around w-75">
+                <a href="{{ route('home') }}" style="color: white">Home</a>
+                <div style="height: 100%; width:1px; background:white;border:none">s</div>
+                @auth
+                    <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"
+                        style="color: white">Account</a>
+                @else
+                    <a href="{{ !empty(Auth::user()->id) ? route('user.dashboard') : route('login') }}"
+                        style="color: white">Login</a>
+                @endauth
+            </div>
+            <div class="mycard">
+                <div class="header__info-cart tp-cart-toggle">
+                    <button>
+                        <i class="cardI">
+                            <img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt="">
+                        </i>
+                        {{-- <span class="cart_quantity d-inline"></span> --}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mySlidBar"
+            style="width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white">
+            <div class="my_menu">
+                <div class="my_menu_inner">
+                    <div class="my_menu_list">
+                        <ul class="list-unstyled">
+                            <li class="first_li"><a href="#weekly_offers">Weekly Offers</a>
+                            <li>
+                                <hr>
+                            <li class="first_li"><a href="#New_Arrivals">New Arrivals</a>
+                            <li>
+                                <hr>
+                            <li class="first_li"><a href="#top_trending">Top Trending</a>
+                            <li>
+                                <hr>
+                                @php
+                                    $categoris = App\Models\Category::all();
+                                @endphp
+                                @if ($categoris->count() > 0)
+                                    @foreach ($categoris as $category)
+                            <li class="first_li" id="first_li_{{ $category->id }}"><a
+                                    href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
+                                <ul class="list-unstyled">
+                                    @php
+                                        $subcategories = $category->subcategories;
+                                    @endphp
+                                    @if ($subcategories->count() > 0)
+                                        @foreach ($subcategories as $subcategory)
+                                            <li class="second_li" id="second_li_{{ $subcategory->id }}"><a
+                                                    href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
 
+                                                @php
+                                                    $subSubcategories = App\Models\SubSubcategory::where(
+                                                        'subcategoryId',
+                                                        $subcategory->id,
+                                                    )
+                                                        ->take(5)
+                                                        ->get();
+                                                @endphp
+                                                @if ($subSubcategories->count() > 0)
+                                                    <ul class="list-unstyled">
+                                                        @foreach ($subSubcategories as $subSubcategorie)
+                                                            <li class="third_li"
+                                                                id="third_li_{{ $subSubcategorie->id }}"><a
+                                                                    href="{{ route('sub.subcategory.wise.product', $subSubcategorie->slug) }}">{{ $subSubcategorie->subSubcategoryName }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </li>
+                            <hr>
+                            @endforeach
+                            @endif
+                            <li class="first_li"><a href="{{ route('order.tracking') }}">Order Tracking</a>
+                            <li>
+                                <hr>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
         @yield('maincontent')
-
     </main>
-
     <!-- footer-area-start -->
     @include('frontend.body.footer')
     <!-- footer-area-end -->
-
-
     <!-- JS here -->
     <script src="{{ asset('frontend') }}/assets/js/jquery.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/waypoints.js"></script>
@@ -179,9 +345,13 @@
         @endif
         @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
-        @endif
+        @endif <<
+        << << < HEAD
 
 
+            ===
+            === = >>>
+            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
         //add wishlist
         const add_whishlist = document.querySelectorAll('.add_whishlist');
         // console.log(add_whishlist);
@@ -214,50 +384,62 @@
                     }
                 });
             })
-        });
+        }); <<
+        << << < HEAD
 
-        // add To Cart  
+            // add To Cart  
+            ===
+            === =
+            // add To Cart
+            >>>
+            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
-            element.addEventListener('submit', function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                let product_id = this.elements.product_id.value;
-                let variant_id = this.elements.variant_id.value;
-                let selling_price = this.elements.selling_price.value;
-                let weight = this.elements.weight.value;
-                let unit = this.elements.unit.value;
-                // console.log(product_id, variant_id,selling_price);
-                $.ajax({
-                    url: '/product/add_to_cart',
-                    type: 'POST',
-                    data: {
-                        'product_id': product_id,
-                        'variant_id': variant_id,
-                        'selling_price': selling_price,
-                        'pr_quantity': '1',
-                        'weight': weight,
-                        'unit': unit
-                    },
-                    success: function(response) {
-                        if (response.status == 200) {
-                            toastr.success(response.message);
-                            showCart();
-                        } else {
-
+                element.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
-                    }
+                    });
+                    let product_id = this.elements.product_id.value;
+                    let variant_id = this.elements.variant_id.value;
+                    let selling_price = this.elements.selling_price.value;
+                    let weight = this.elements.weight.value;
+                    let unit = this.elements.unit.value;
+                    // console.log(product_id, variant_id,selling_price);
+                    $.ajax({
+                        url: '/product/add_to_cart',
+                        type: 'POST',
+                        data: {
+                            'product_id': product_id,
+                            'variant_id': variant_id,
+                            'selling_price': selling_price,
+                            'pr_quantity': '1',
+                            'weight': weight,
+                            'unit': unit
+                        },
+                        success: function(response) {
+                            if (response.status == 200) {
+                                toastr.success(response.message);
+                                showCart();
+                            } else {
+
+                            }
+                        }
+                    });
+
                 });
+            }) <<
+            << << < HEAD
 
-            });
-        })
 
-
-        // update cart 
+            // update cart 
+            ===
+            === =
+            // update cart
+            >>>
+            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -312,13 +494,9 @@
             }
 
         }
-
         $(document).ready(function() {
             showCart();
         });
-
-
-
         // Function to show data on cart
         function showCart() {
             $.ajax({
@@ -344,8 +522,6 @@
                 }
             });
         }
-
-
         // item remove from cart
         $(document).ready(function() {
             $(document).on('click', '.item_remove', function(e) {
@@ -362,11 +538,17 @@
                     }
                 })
             })
-        });
+        }); <<
+        << << < HEAD
 
 
 
-        // swwetalert    
+            // swwetalert    
+            ===
+            === =
+            // swwetalert
+            >>>
+            >>> > 678 c5d8860dede1787fd229afad6144daf7e4747
         $(document).ready(function() {
             //    delete function
             $(document).on('click', '#delete', function(e) {
@@ -395,7 +577,6 @@
 
             });
         });
-
         // search by suggestion
         const top_search = document.querySelector('.top_search');
         const top_search_list = document.querySelector('.top_search_list');
@@ -422,8 +603,6 @@
                 $('.top_search_list').css('display', 'none');
             }
         });
-
-
 
         // function searchSuggetion(inputField) {
         //     inputField.addEventListener('keyup', function(e) {
@@ -462,7 +641,333 @@
             $('.top_search_list').css('display', 'none');
         });
     </script>
+    <style>
+        .mySlidBarActive {
+            width: 0px !important;
+            display: none;
+            padding: 0px !important;
+            transition: 0.2s ease-in-out;
+        }
 
+        .first_liActive {
+            font-weight: 500 !important;
+            color: var(--tp-heading-secondary);
+        }
+
+        .my_menu i {
+            float: right;
+        }
+
+        li {
+            cursor: pointer;
+        }
+
+        .second_liActive {
+            font-weight: 500 !important;
+            color: var(--tp-heading-secondary);
+        }
+
+        .third_liActive {
+            font-weight: 500 !important;
+            color: var(--tp-heading-secondary);
+        }
+
+        .rotate90 {
+            transform: rotate(90deg);
+            /* transition: transform 0.3s ease; */
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #FFF;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: var(--tp-heading-secondary)
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2D2C6E;
+        }
+
+        .container {
+            margin-top: 20px !important;
+        }
+
+        .container {
+            margin-left: 215px;
+        }
+
+        @media (max-width: 1080px) {
+            .container {
+                margin-left: 60px;
+            }
+        }
+
+        @media (max-width: 767px),
+        only screen and (min-width: 576px) and (max-width: 767px) {
+            .tpslider__content {
+                margin-top: 50px !important;
+            }
+
+            .tp-btn {
+                padding: 8px 30px;
+            }
+
+            .mytop-logo {
+                padding-right: 20px !important;
+            }
+
+            .accounts-nav {
+                display: none !important;
+            }
+
+            .top-serch-container {
+                margin-top: 10px
+            }
+
+            .mySlidBar {
+                margin-top: 48px !important;
+            }
+
+            .container {
+                margin: 0 !important;
+            }
+
+            .mobile-bottom-menu {
+                display: flex !important;
+            }
+
+            .my-scroll-top {
+                display: none !important;
+            }
+
+            .container {
+                margin-top: 40px !important;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let width = document.body.offsetWidth;
+            if (width < 767) {
+                const sidebar = document.querySelector('.mySlidBar').classList.add('mySlidBarActive');
+                console.log(sidebar);
+                $('.container').css({
+                    'marginLeft': '65px',
+                    'marginRight': '0'
+                })
+            }
+            const firstLis = document.querySelectorAll('.first_li');
+            const secondLis = document.querySelectorAll('.second_li');
+
+            firstLis.forEach((li) => {
+                if (li.querySelector('ul')) { // Check if the li contains a ul
+                    const icon = document.createElement('i'); // Create the i element
+                    icon.className = 'fas fa-angle-right'; // Add the class
+                    li.insertBefore(icon, li.childNodes[1]); // Insert the icon before the first child of li
+                }
+            });
+
+            secondLis.forEach((li) => {
+                if (li.querySelector('ul')) { // Check if the li contains a ul
+                    const icon = document.createElement('i'); // Create the i element
+                    icon.className = 'fas fa-angle-right'; // Add the class
+                    li.insertBefore(icon, li.childNodes[1]); // Insert the icon before the first child of li
+                }
+            });
+
+            // Toggle sidebar
+            const myToggle = document.querySelector('.myToggle');
+            myToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
+                let width = document.body.offsetWidth;
+                if (width > 1080) {
+                    if (document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')) {
+                        $('.container').css({
+                            'marginLeft': '130px',
+                            'marginRight': '0'
+                        })
+                    } else {
+                        $('.container').css({
+                            'marginLeft': '215px'
+                        })
+                    }
+                }
+                // if(width > 767){
+                //     if(document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')){
+                //         $('.container').css({'marginLeft':'50px','marginRight':'0'})
+                //     }else{
+                //         $('.container').css({'marginLeft':'130px'})
+                //     }
+                // }
+                // let width = document.body.offsetWidth;
+                // if(width < 767){
+                //     $('.container').css({'marginLeft':'40px','marginRight':'0'})
+                // }
+                // if(width < 1081){
+                //     $('.container').css({'marginLeft':'20','width':'100%'})
+                // }
+            });
+            // Function to handle click on list items
+            function handleLiClick(items, storageKey) {
+                items.forEach((item) => {
+                    item.addEventListener('click', function(e) {
+                        items.forEach((el) => {
+                            el.classList.remove('first_liActive',
+                                'second_liActive'); // Adjust based on your classes
+                            const insideI = el.querySelector('i');
+                            if (insideI) {
+                                insideI.classList.remove('rotate90');
+                            }
+                            if (el.querySelector('ul')) { // Check if the li contains a ul
+                                el.querySelector('ul').style.display = "none";
+                            }
+                        });
+                        item.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' :
+                            'second_liActive');
+                        const insideI = item.querySelector('i');
+                        if (insideI) {
+                            insideI.classList.add('rotate90');
+                        }
+                        if (item.querySelector('ul')) { // Check if the li contains a ul
+                            item.querySelector('ul').style.display = "block";
+                        }
+                        // Save the id of the clicked item in localStorage
+                        localStorage.setItem(storageKey, item.id);
+                    })
+                });
+            }
+
+            const first_lis = document.querySelectorAll('.first_li');
+            handleLiClick(first_lis, 'firstActiveLi');
+
+            const second_lis = document.querySelectorAll('.second_li');
+            handleLiClick(second_lis, 'secondActiveLi');
+
+            const third_lis = document.querySelectorAll('.third_li');
+            handleLiClick(third_lis, 'thirdActiveLi');
+
+            // Restore active state from localStorage
+            function restoreActiveState(items, storageKey) {
+                const activeLiId = localStorage.getItem(storageKey);
+                if (activeLiId) {
+                    const activeLi = document.getElementById(activeLiId);
+                    if (activeLi) {
+                        activeLi.classList.add(storageKey === 'firstActiveLi' ? 'first_liActive' :
+                            'second_liActive');
+                        const insideI = activeLi.querySelector('i');
+                        if (insideI) {
+                            insideI.classList.add('rotate90');
+                        }
+                        if (activeLi.querySelector('ul')) {
+                            activeLi.querySelector('ul').style.display = "block";
+                        }
+                    }
+                }
+            }
+
+            restoreActiveState(first_lis, 'firstActiveLi');
+            restoreActiveState(second_lis, 'secondActiveLi');
+            restoreActiveState(second_lis, 'thirdActiveLi');
+
+        });
+        // const myToggle = document.querySelector('.myToggle');
+        // myToggle.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
+        // });
+
+        // const first_lis = document.querySelectorAll('.first_li');
+        // first_lis.forEach((item) => {
+        //     item.addEventListener('click', function(e){
+        //         // e.preventDefault();
+        //         // alert("OK")
+        //         document.querySelectorAll('.first_li').forEach((el)=>{
+        //             el.classList.remove('first_liActive');
+        //             const insideI = el.querySelector('i');
+        //             if(insideI){
+        //                 insideI.classList.remove('rotate90');
+        //             }
+        //             if (el.querySelector('ul')) { // Check if the li contains a ul
+        //                 el.querySelector('ul').style.display ="none";
+        //         }
+        //         });
+        //         item.classList.add('first_liActive');
+        //         const insideI = item.querySelector('i');
+        //         if(insideI){
+        //             insideI.classList.add('rotate90');
+        //         }
+        //         // console.log(item)
+        //         if (item.querySelector('ul')) { // Check if the li contains a ul
+        //             item.querySelector('ul').style.display ="block";
+        //         }
+        //     })
+        // });
+
+        // const second_lis = document.querySelectorAll('.second_li');
+        // second_lis.forEach((item) => {
+        //     item.addEventListener('click', function(e){
+        //         // alert("OK")
+        //         document.querySelectorAll('.second_li').forEach((el)=>{
+        //             el.classList.remove('second_liActive');
+        //             const insideI = el.querySelector('i');
+        //             if(insideI){
+        //                 insideI.classList.remove('rotate90');
+        //             }
+        //             if (el.querySelector('ul')) { // Check if the li contains a ul
+        //                 el.querySelector('ul').style.display ="none";
+        //         }
+        //         });
+        //         item.classList.add('second_liActive');
+        //         const insideI = item.querySelector('i');
+        //         if(insideI){
+        //             insideI.classList.add('rotate90');
+        //         }
+        //         // console.log(item)
+        //         if (item.querySelector('ul')) { // Check if the li contains a ul
+        //             item.querySelector('ul').style.display ="block";
+        //         }
+        //     })
+        // });
+    </script>
+
+    <script>
+        //add Tracker
+        $(document).ready(function() {
+            fetch('https://ipinfo.io/json')
+                .then(response => response.json())
+                .then(data => {
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: '{{ route('user.count') }}',
+                        type: 'post',
+                        data: {
+                            'country_info': data.country,
+                            'url': window.location.href
+                        },
+                        success: function(response) {
+                            // console.log(response);
+
+                        }
+                    });
+                })
+        })
+    </script>
 
     {{-- ALl Code For Order Tracking Information --}}
     @if (!empty($order))

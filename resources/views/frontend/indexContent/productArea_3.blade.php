@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="tpsection mb-10">
-                        <h4 class="tpsection__title brand-product-title">Top Trending Products</h4>
+                        <h4 class="tpsection__title brand-product-title" id="top_trending">Top Trending Products</h4>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 text-center">

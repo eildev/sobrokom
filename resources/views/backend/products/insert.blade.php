@@ -291,7 +291,9 @@
                                                 <label class="form-label col-12">Color</label>
                                                 <select class="form-select color" name="color">
                                                     <option value="">Color</option>
-                                                    <option value="red">red</option>
+                                                    <option value="black">Black</option>
+                                                    <option value="white">White</option>
+                                                    <option value="red">Red</option>
                                                     <option value="blue">Blue</option>
                                                     <option value="green">Green</option>
                                                 </select>

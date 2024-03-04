@@ -81,39 +81,39 @@
                         <li> <a href="{{ route('category.view') }}"><i class="bx bx-right-arrow-alt"></i>
                                 All Category</a>
                         </li>
-                        {{-- Subcategory menu  --}}
+                    </ul>
+                </li>
+
+                {{-- Subcategory menu  --}}
+                <li>
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><i class='bx bx-category-alt'></i>
+                        </div></i>
+                        <div class="menu-title">Manage
+                            Sub-Category</div>
+                    </a>
+                    <ul class="mm-collapse">
+                        <li> <a href="{{ route('subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                                Subcategory</a>
+                        </li>
+                        <li> <a href="{{ route('subcategory.view') }}"><i class="bx bx-right-arrow-alt"></i>All
+                                Subcategory</a>
+                        </li>
+                        {{-- Sub Subcategory menu  --}}
                         <li>
                             <a class="has-arrow" href="javascript:;">
                                 <div class="parent-icon"><i class='bx bx-category-alt'></i>
                                 </div></i>
-                                <div class="menu-title">Manage
+                                <div class="menu-title">Manage Sub
                                     Sub-Category</div>
                             </a>
                             <ul class="mm-collapse">
-                                <li> <a href="{{ route('subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
-                                        Subcategory</a>
+                                <li> <a href="{{ route('sub.subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Add
+                                        Sub-Subcategory</a>
                                 </li>
-                                <li> <a href="{{ route('subcategory.view') }}"><i class="bx bx-right-arrow-alt"></i>All
-                                        Subcategory</a>
-                                </li>
-                                {{-- Sub Subcategory menu  --}}
-                                <li>
-                                    <a class="has-arrow" href="javascript:;">
-                                        <div class="parent-icon"><i class='bx bx-category-alt'></i>
-                                        </div></i>
-                                        <div class="menu-title">Manage Sub
-                                            Sub-Category</div>
-                                    </a>
-                                    <ul class="mm-collapse">
-                                        <li> <a href="{{ route('sub.subcategory') }}"><i
-                                                    class="bx bx-right-arrow-alt"></i>Add
-                                                Sub-Subcategory</a>
-                                        </li>
-                                        <li> <a href="{{ route('sub.subcategory.view') }}"><i
-                                                    class="bx bx-right-arrow-alt"></i>All
-                                                Sub-Subcategory</a>
-                                        </li>
-                                    </ul>
+                                <li> <a href="{{ route('sub.subcategory.view') }}"><i
+                                            class="bx bx-right-arrow-alt"></i>All
+                                        Sub-Subcategory</a>
                                 </li>
                             </ul>
                         </li>
@@ -361,7 +361,21 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">User Tracker</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('user-tracker.show') }}"><i class="bx bx-right-arrow-alt"></i>View Online
+                        User</a>
+                </li>
 
+            </ul>
+        </li>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
@@ -396,6 +410,46 @@
         </li>
 
 
+        <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+        </li>
+        <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                Company</a>
+        </li>
+    </ul>
+    </li>
+
+    </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon">
+                <i class='bx bx-message-rounded-dots'></i>
+            </div>
+            <div class="menu-title">Company Details</div>
+        </a>
+        <ul>
+
+            <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+            </li>
+            <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                    Company</a>
+            </li>
+        </ul>
+    </li>
+    {{-- All Users Information --}}
+    </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon">
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="menu-title">Users</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('all.users') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                    Users</a>
+            </li>
+        </ul>
+    </li>
     </ul>
     <!--end navigation-->
 </div>

@@ -18,6 +18,9 @@ use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\BlogCommentController;
+use App\Http\Controllers\Backend\CompanyDetailsController;
+use App\Http\Controllers\Backend\UserTrackerController;
+use App\Http\Controllers\Backend\userController;
 use App\Http\Controllers\AllMail;
 use App\Http\Controllers\Backend\CompanyDetailsController;
 use App\Http\Controllers\Backend\PurchaseDetailsController;
@@ -55,6 +58,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/category/edit/{id}', 'edit')->name('category.edit');
         Route::post('/category/update/{id}', 'update')->name('category.update');
         Route::get('/category/delete/{id}', 'delete')->name('category.delete');
+    });
+    Route::controller(userController::class)->group(function () {
+        Route::get('/all-user', 'allUser')->name('all.users');
     });
 
     //All Routes for Category End
@@ -182,6 +188,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/order/refunded-orders', 'refundedOrders')->name('order.refunded');
 
         Route::get('/order/canceled-orders', 'canceledOrders')->name('order.canceled');
+        Route::post('/order/send-sms', 'SendSMS')->name('send.sms');
 
 
         // Route::get('/admin-cancel-order/{invoiceNumber}', 'adminCancel')->name('admin.cancel.order');
@@ -276,6 +283,21 @@ Route::middleware('auth', 'role:admin')->group(function () {
     //Purchase Details All Route End
 
 
+     //Company Details All Route Start
+    Route::controller(CompanyDetailsController::class)->group(function () {
+        Route::get('/company-details', 'index')->name('company-details');
+        Route::post('/company-details/add', 'store')->name('company-details.store');
+        Route::get('/company-details/view', 'view')->name('company-details.view');
+        Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
+        Route::post('/company-details/update/{id}', 'update')->name('company-details.update');
+        Route::get('/company-details/delete/{id}', 'delete')->name('company-details.delete');
+        Route::post('/company-details/status/{id}', 'status')->name('company-details.status');
+    });
+    //Company Details All Route End
+
+
+
+
 });
 
 //All Routes for Global Coupons Start
@@ -284,7 +306,17 @@ Route::controller(GlobalCouponController::class)->group(function () {
 });
 //All Routes for Global Coupons End
 
-
+//User Tracker Details All Route Start
+    Route::controller(UserTrackerController::class)->group(function () {
+        Route::post('/user-tracker/user-count', 'store')->name('user.count');
+        Route::get('/user-tracker/show', 'index')->name('user-tracker.show');
+        // Route::post('/company-details/add', 'store')->name('company-details.store');
+        // Route::get('/company-details/edit/{id}', 'edit')->name('company-details.edit');
+        // Route::post('/company-details/update/{id}', 'update')->name('company-details.update');
+        // Route::get('/company-details/delete/{id}', 'delete')->name('company-details.delete');
+        // Route::post('/company-details/status/{id}', 'status')->name('company-details.status');
+    });
+//User Tracker All Route End
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';

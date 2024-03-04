@@ -205,16 +205,16 @@
                                                         <span class="cart-plus"><i class="far fa-plus"></i></span>
                                                     </div>
                                                     <div class="product__details-btn">
-                                                        <input type="hidden" value="{{ $product->id }}" name="product_id"
+                                                        <input type="hidden" value="{{ $product->id ?? 0 }}" name="product_id"
                                                             class="product_id">
-                                                        <input type="hidden" value="{{ $product->varient[0]->id }}"
+                                                        <input type="hidden" value="{{ $product->varient[0]->id ?? 0 }}"
                                                             name="variant_id" class="variant_id">
                                                         <input type="hidden"
-                                                            value="{{ $product->varient[0]->discount_amount }}"
+                                                            value="{{ $product->varient[0]->discount_amount ?? 0 }}"
                                                             name="selling_price" class="selling_price">
-                                                        <input type="hidden" value="{{ $product->varient[0]->weight }}"
+                                                        <input type="hidden" value="{{ $product->varient[0]->weight ?? 0 }}"
                                                             name="weight" class="weight">
-                                                        <input type="hidden" value="{{ $product->varient[0]->unit }}"
+                                                        <input type="hidden" value="{{ $product->varient[0]->unit ?? 0 }}"
                                                             name="unit" class="unit">
                                                         <button class="tp-btn-2 px-5 py-1" id="details_cart">Add
                                                             to
@@ -224,7 +224,7 @@
                                                 <ul class="product__details-check">
                                                     @auth
                                                         <li>
-                                                            <a class="" href="#" value="{{ $product->id }}">
+                                                            <a class="add_whishlist" href="#" value="{{ $product->id }}">
                                                                 <!-- <i class="icon-heart icons"></i> -->
                                                                 @auth
                                                                     @php
@@ -234,7 +234,7 @@
                                                                     @endphp
                                                                 @endauth
                                                                 <i style="color: {{ !empty($loved->loved) ? 'red' : '' }}"
-                                                                    class="icon-heart icons"></i> add to
+                                                                    class="fas fa-heart icons"></i> add to
                                                                 wishlist
                                                             </a>
                                                         </li>
@@ -251,19 +251,18 @@
                                                     </li>
 
                                                 </ul>
-                                                <div id="social-links">
-                                                    <ul>
-                                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/product-details/{{ $product->slug }}"
-                                                                class="social-button btn btn-primary  my-class"
-                                                                id="my-id" rel="nofollow noopener noreferrer"><span
-                                                                    class="fa fa-facebook-official"></span></a></li>
-                                                    </ul>
-                                                </div>
+                                                <!--<div id="social-links">-->
+                                                <!--    <ul>-->
+                                                <!--        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://sobrokom.store/product-details/{{ $product->slug }}"-->
+                                                <!--                class="social-button btn btn-primary  my-class"-->
+                                                <!--                id="my-id" rel="nofollow noopener noreferrer"><span-->
+                                                <!--                    class="fa fa-facebook-official"></span></a></li>-->
+                                                <!--    </ul>-->
+                                                <!--</div>-->
                                             </div>
                                             <div class="product__details-stock mb-25">
                                                 <ul>
-                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }}
-                                                            Instock</i>
+                                                    <li>Availability: <i>In Stock</i>
                                                     </li>
                                                     <li>Category: <span>{{ $product->category->categoryName }} </span>
                                                     </li>
@@ -308,8 +307,7 @@
                                         @else
                                             <div class="product__details-stock mb-25">
                                                 <ul>
-                                                    <li>Availability: <i>{{ $product->varient[0]->stock_quantity ?? 0 }}
-                                                            Instock</i>
+                                                    <li>Availability: <i>In Stock</i>
                                                     </li>
                                                     <li>Category: <span>{{ $product->category->categoryName }} </span>
                                                     </li>
@@ -429,7 +427,7 @@
                                                         $formattedDate .= 'th';
                                                     }
                                                     $formattedDate .= $date->format(' Y g:i A');
-                                                    
+
                                                     ?>
                                                     <span class="date mb-20">{{ $formattedDate }}</span>
                                                     @if ($review->gallary->count() > 0)

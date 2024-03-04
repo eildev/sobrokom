@@ -233,7 +233,7 @@
 
                                                     /* Handle */
                                                     .custom_scroll::-webkit-scrollbar-thumb {
-                                                        background: red;
+                                                        background: #c8a3cc;
                                                         border-radius: 10px;
                                                     }
 
@@ -246,7 +246,7 @@
                                                         /* margin-right: -20px; */
                                                     }
                                                 </style>
-                                                <div class="nice-select sorting_bar" tabindex="0">
+                                                <div class="nice-select sorting_bar"  style="width: 200px;" tabindex="0">
                                                     <span class="current">All Brands</span>
                                                     <ul class="list custom_scroll"
                                                         style="height: 200px; overflow-y:scroll; border-radius: 10px; margin-top: 15px !important;">
@@ -533,9 +533,7 @@
                                                         <div class="tpproduct__info bage">
                                                             @if (!empty($product->varient[0]))
                                                                 @if ($product->varient[0]->discount > 0)
-                                                                    <span
-                                                                        class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
-
+                                                                    <span class="tpproduct__info-discount bage__discount">-{{ $product->varient[0]->discount ?? '' }}%</span>
                                                                     <span class="tpproduct__info-hot bage__hot">HOT</span>
                                                                 @endif
                                                             @endif
@@ -566,10 +564,9 @@
                                                     </div>
                                                     <div class="tplist__price justify-content-end">
                                                         <h4 class="tplist__instock">Availability:
-                                                            <span>{{ $product->varient[0]->stock_quantity ?? '' }} in
-                                                                stock</span>
+                                                            <span>In Stock</span>
                                                         </h4>
-                                                        <h3 class="tplist__count mb-15">
+                                                        <h3 class="tplist__count mb-15" style="color: #9e54a1;">
                                                             ৳{{ $product->varient[0]->discount_amount ?? '' }}
                                                             <span class="text-secondary" style="font-size: 14px">/
                                                                 {{ $product->varient[0]->unit ?? '' }}</span>
@@ -595,7 +592,7 @@
                                                         </form>
                                                         <div class="tplist__shopping">
                                                             @auth
-                                                                <a class="" href="#"
+                                                                <a class="add_whishlist" href="#"
                                                                     value="{{ $product->id }}">
                                                                     <!-- <i class="icon-heart icons"></i> -->
                                                                     @auth

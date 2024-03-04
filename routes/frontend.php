@@ -18,7 +18,7 @@ use App\Http\Controllers\Frontend\BlogCommentController;
 use App\Http\Controllers\Frontend\ReviewRatingController;
 use App\Http\Controllers\Backend\OrderManageController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\frontend\BlogReactionController;
+use App\Http\Controllers\Frontend\BlogReactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +46,10 @@ Route::get('/privacy-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend/pages/faqs');
 })->name('faqs');
+
+Route::get('/sobrokom-career', function () {
+    return view('frontend/pages/career');
+})->name('career');
 
 
 // product related routes
@@ -124,13 +128,14 @@ Route::middleware('auth', 'role:user')->group(function () {
         Route::post('/review-rating/insert', 'store')->name('review-rating.insert');
     });
     // Review and Rating related route
-       //All Routes for Order  Start
-       Route::controller(OrderManageController::class)->group(function () {
+
+    //All Routes for Order  Start
+    Route::controller(OrderManageController::class)->group(function () {
 
         Route::get('/user/refund-order/{invoiceNumber}', 'orderRefund')->name('user.refund.order');
         Route::get('/user/cancel-order/{invoiceNumber}', 'orderCancel')->name('user.cancel.order');
 
-        Route::get('/order/completed', 'completedOrders')->name('order.completed');
+        // Route::get('/order/completed', 'completedOrders')->name('order.completed');
 
     });
 

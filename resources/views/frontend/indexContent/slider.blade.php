@@ -1,5 +1,5 @@
 <!-- slider-area-start -->
-<section class="slider-area tpslider__home-3 tpslider-delay grey-bg slider-three">
+<section class="container slider-area tpslider__home-3 tpslider-delay grey-bg slider-three" style="margin-top:70px !important">
     <div class="swiper-container slider-active">
         <div class="swiper-wrapper">
             @php
@@ -9,7 +9,7 @@
                 @foreach ($sliders as $slider)
                     <div class="swiper-slide">
                         <div class="tpslider grey-bg">
-                            <div class="container">
+                            <div class="" style="margin-left: 20px !important">
                                 <div class="row align-items-center">
                                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-7">
                                         <div class="tpslider__content slider-three-content text-center">
@@ -35,7 +35,6 @@
                                                         src="{{ asset('uploads/banner/gallery/' . $slider->gallery[1]->image) }}"
                                                         alt="shape">
                                                 @endif
-
                                             </div>
 
                                         </div>

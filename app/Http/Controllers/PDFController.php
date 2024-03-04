@@ -22,7 +22,7 @@ class PDFController extends Controller
         // $pdf = PDF::loadView('frontend/pdf/invoicepdf', $data);
         // Create an instance of Dompdf
         $pdf = new Dompdf();
-
+        $pdf->getOptions()->setIsRemoteEnabled(true);
         // Load the HTML from the view
         $html = View::make('frontend/pdf/invoicepdf', $data,compact('data'))->render();
 
@@ -30,7 +30,7 @@ class PDFController extends Controller
         $pdf->loadHtml($html);
 
         // (Optional) Set the paper size and orientation
-        $pdf->setPaper('A4', 'landscape');
+        $pdf->setPaper('A4', 'portrait');
 
         // Render the HTML as PDF
         $pdf->render();

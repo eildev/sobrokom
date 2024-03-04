@@ -14,7 +14,7 @@
                     </div>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="order_table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>SI</th>
@@ -46,7 +46,10 @@
                                             </td>
                                             <td>
                                                 @php
-                                                    $imageGalleries = App\Models\ImageGallery::where('banner_id', $banner->id)->get();
+                                                    $imageGalleries = App\Models\ImageGallery::where(
+                                                        'banner_id',
+                                                        $banner->id,
+                                                    )->get();
                                                     // dd($imageGalleries->all());
                                                 @endphp
                                                 @if ($imageGalleries->count() > 0)
@@ -71,10 +74,6 @@
                                                             value="{{ $banner->id }}">Active</button>
                                                     @endif
                                                 </form>
-                                                {{-- <a href="#" class="btn btn-sm btn-success home_banner_active"
-                                                    value="{{ $banner->id }}">Active</a>
-                                                <a href="#" class="btn btn-sm btn-success home_banner_inactive"
-                                                    style="display: none;" value="{{ $banner->id }}">Inactive</a> --}}
                                             </td>
                                             <td>
                                                 <a href="{{ route('banner.edit', $banner->id) }}"

@@ -1,11 +1,8 @@
 <!-- cart-area-start -->
 <section class="cart-area pt-30">
     <div class="container">
-        <div class="swiper-container product-details-active">
+        <div class="swiper-container product-details-active" style="margin-left: 25px;">
             <div class="swiper-wrapper">
-
-
-
                 @php
                     $Categories = App\Models\Category::where('status', 1)
                         ->take(6)

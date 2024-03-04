@@ -36,9 +36,9 @@ class HomeBannerController extends Controller
             $banner->link = $request->link;
             $banner->image = $imageName;
             $banner->save();
-            if($request->galleryimages){
+            if ($request->galleryimages) {
                 $allImages = $request->galleryimages;
-                foreach($allImages as $galleryImage){
+                foreach ($allImages as $galleryImage) {
                     $imageName = rand() . '.' . $galleryImage->extension();
                     $galleryImage->move(public_path('uploads/banner/gallery/'), $imageName);
                     $ImageGallery = new ImageGallery;
@@ -49,7 +49,6 @@ class HomeBannerController extends Controller
             }
             return back()->with('success', 'banner Successfully Saved');
         }
-       
     }
 
     // banner View function
@@ -70,7 +69,7 @@ class HomeBannerController extends Controller
     // banner update function
     public function update(Request $request, $id)
     {
-        
+
         if ($request->image) {
             $request->validate([
                 'title' => 'required|max:50',
@@ -82,16 +81,16 @@ class HomeBannerController extends Controller
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/banner/'), $imageName);
             $banner = HomeBanner::findOrFail($id);
-            unlink(public_path('uploads/banner/').$banner->image);
+            unlink(public_path('uploads/banner/') . $banner->image);
             $banner->title = $request->title;
             $banner->short_description = $request->short_description;
             $banner->long_description = $request->long_description;
             $banner->link = $request->link;
             $banner->image = $imageName;
             $banner->update();
-            if($request->galleryimages){
+            if ($request->galleryimages) {
                 $allImages = $request->galleryimages;
-                foreach($allImages as $galleryImage){
+                foreach ($allImages as $galleryImage) {
                     $imageName = rand() . '.' . $galleryImage->extension();
                     $galleryImage->move(public_path('uploads/banner/gallery/'), $imageName);
                     $ImageGallery = new ImageGallery;
@@ -101,8 +100,7 @@ class HomeBannerController extends Controller
                 }
             }
             return back()->with('success', 'banner Successfully Saved');
-        }
-        else {
+        } else {
             $request->validate([
                 'title' => 'required|max:50',
                 'short_description' => 'required|max:100',
@@ -122,7 +120,7 @@ class HomeBannerController extends Controller
     public function delete($id)
     {
         $banner = HomeBanner::findOrFail($id);
-        unlink(public_path('uploads/banner/').$banner->image);
+        unlink(public_path('uploads/banner/') . $banner->image);
         $banner->delete();
         return back()->with('success', 'banner Successfully deleted');
     }
@@ -135,9 +133,9 @@ class HomeBannerController extends Controller
         } else {
             $newStatus = 0;
         }
-         
+
         $banner->update([
-            'status'=>$newStatus
+            'status' => $newStatus
         ]);
         return redirect()->back()->with('success', 'status changed successfully');
         // return response()->json([

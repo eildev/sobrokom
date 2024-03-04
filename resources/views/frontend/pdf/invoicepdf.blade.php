@@ -55,7 +55,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <a href="javascript:;">
-                                                <img src="{{ asset('frontend/assets/img/logo/sobrokom-logo.svg') }}" width="80" alt="">
+                                                <img src="https://sobrokom.store/frontend/assets/img/logo/horizontal-logo.webp" style="height:100px; width:100px;position:absolute">
                                             </a>
                                         </div>
                                         <div class="col company-details">
@@ -75,16 +75,16 @@
 
                                         $billInfo = App\Models\OrderBillingDetails::where('order_id', $data['order']['id'])->first();
                                     @endphp
-                                    <div class="row contacts">
-                                        <div class="col invoice-to">
+                                    <div class="row contacts" style="position:relative">
+                                        <div class="col col-md-6 invoice-to">
                                             <div class="text-gray-light">INVOICE TO:</div>
                                             <h2 class="to">{{$billInfo->first_name}}</h2>
                                             <div class="address">{{$billInfo->address_1 ?? ''}}</div>
                                             <div class="email"><a href="{{$billInfo->email}}">{{$billInfo->email}}</a>
                                             </div>
                                         </div>
-                                        <div class="col invoice-details">
-                                            <h1 class="invoice-id">INVOICE: #{{ $data['invoice'] }}</h1>
+                                        <div class="col col-md-6 invoice-details" style="position:absolute;top:10px;right:10px">
+                                            <h3 class="invoice-id">INVOICE: #{{ $data['invoice'] }}</h3>
                                             <div class="date">Date of Invoice: {{ $billInfo->created_at }}</div>
                                             <div class="date">Paymentt Status: <span class="badge text-bg-warning px-25">Unpaid</span></div>
                                         </div>
