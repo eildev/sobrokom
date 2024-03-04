@@ -59,6 +59,8 @@ Route::middleware('auth','role:admin')->group(function () {
     });
     Route::controller(userController::class)->group(function () {
         Route::get('/all-user', 'allUser')->name('all.users');
+        Route::get('/admin/disable-user/{user_id}', 'DisableUser')->name('admin.disable-user');
+        Route::get('/admin/enable-user/{user_id}', 'EnableUser')->name('admin.enable-user');
     });
 
     //All Routes for Category End

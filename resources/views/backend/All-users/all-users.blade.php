@@ -22,7 +22,6 @@
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,13 +38,13 @@
                                             <td>{{ $alluser->fullName }}</td>
                                             <td>{{ $alluser->phone }}</td>
                                             <td>{{ $alluser->email}}</td>
+
                                             <td>
-                                                {{$alluser->status}}
-                                            </td>
-                                            <td>
-                                             <a href="#" class="btn btn-sm btn-success">Active</a>
-                                             <a href="#" class="btn btn-sm btn-warning">Inactive</a>
-                                             <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                @if ( $alluser->status == 'Active')
+                                                    <a href="{{ route('admin.disable-user',$alluser->id) }}" class="btn btn-sm btn-warning">Inactive</a>
+                                                @else
+                                                    <a href="{{ route('admin.enable-user',$alluser->id) }}" class="btn btn-sm btn-success">Active</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
