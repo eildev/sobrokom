@@ -103,7 +103,8 @@
                                             <label for="inputPrice" class="form-label">Quantity</label>
                                             <input type="number"
                                                 class="form-control  @error('quantity') is-invalid  @enderror"
-                                                id="quantity" placeholder="00.00" name="quantity">
+                                                id="quantity" placeholder="00.00" name="quantity"
+                                                onblur="calculation(this.value);">
                                             @error('quantity')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -204,7 +205,8 @@
                                         <div class="col-md-6">
                                             <label for="inputPrice" class="form-label">Regular Price</label>
                                             <input type="number" class="form-control regular_price" id="inputPrice"
-                                                placeholder="00.00" name="regular_price">
+                                                placeholder="00.00" name="regular_price" onkeyup="calculation();">
+                                            <input type="hidden" class="variant_id">
                                             <span class="regular_price_error text-danger"></span>
                                         </div>
                                         <div class="col-md-6">
@@ -267,13 +269,13 @@
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Manufacture Date</label> <br>
-                                            <input type="date" class="form-control datepicker" id="inputPrice"
-                                                placeholder="" name="manufacture_date">
+                                            <input type="date" class="form-control datepicker manufacture_date"
+                                                id="inputPrice" placeholder="" name="manufacture_date">
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Expire Date</label> <br>
-                                            <input type="date" class="form-control datepicker" id="inputPrice"
-                                                placeholder="" name="expire_date">
+                                            <input type="date" class="form-control datepicker expire_date"
+                                                id="inputPrice" placeholder="" name="expire_date">
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid">
@@ -292,20 +294,81 @@
 
 
     <script>
-        let unitPrice = document.querySelector('#unit_price');
-        unitPrice.addEventListener('keyup', function() {
-            // alert(this.value);
-            let price = parseFloat(this.value);
-            let stock = parseInt(document.querySelector('#quantity').value);
-            if (stock === 0 || isNaN(stock)) {
-                toastr.warning('Please add Quantity');
-                this.value = "";
-                document.querySelector('#quantity').focus();
+        function calculation() {
+            let unitPrice = document.querySelector('#unit_price').value;
+            let quantity = document.querySelector('#quantity').value;
+            let totalPrice = document.querySelector('#total_price').value;
+            let vehicleCost = document.querySelector('#vehicle_cost').value;
+            let otherCost = document.querySelector('#other_cost').value;
+            let grandTotal = document.querySelector('#grand_total').value;
+            let payableAmount = document.querySelector('#payable_amount').value;
+            let due = document.querySelector('#due').value;
+            if (unitPrice > 0) {
+                toastr.warning('Please Provide Valid Input');
             } else {
-                let totalPrice = parseFloat(stock * price).toFixed(2);
-                document.querySelector('#total_price').value = totalPrice;
+                if (!isNaN(quantity)) {
+                    let quantity = 0;
+                }
+                let total = unitPrice * quantity;
+                document.querySelector('#total_price').value = total;
             }
-        })
+        }
+        // // unitPrice calculation 
+        // let unitPrice = document.querySelector('#unit_price');
+        // unitPrice.addEventListener('keyup', function() {
+        //     // alert(this.value);
+        //     let price = parseFloat(this.value);
+        //     let stock = parseInt(document.querySelector('#quantity').value);
+        //     if (stock < 0 || isNaN(stock)) {
+        //         toastr.warning('Please add Quantity');
+        //         this.value = "";
+        //         document.querySelector('#quantity').focus();
+        //     } else {
+        //         let totalPrice = parseFloat(stock * price).toFixed(2);
+        //         document.querySelector('#total_price').value = totalPrice;
+        //     }
+        // });
+        // unitPrice.addEventListener('change', function() {
+        //     // alert(this.value);
+        //     let price = parseFloat(this.value);
+        //     let stock = parseInt(document.querySelector('#quantity').value);
+        //     if (stock < 0 || isNaN(stock)) {
+        //         toastr.warning('Please add Quantity');
+        //         this.value = "";
+        //         document.querySelector('#quantity').focus();
+        //     } else {
+        //         let totalPrice = parseFloat(stock * price).toFixed(2);
+        //         document.querySelector('#total_price').value = totalPrice;
+        //     }
+        // });
+        // unitPrice.addEventListener('blur', function() {
+        //     // alert(this.value);
+        //     let price = parseFloat(this.value);
+        //     let stock = parseInt(document.querySelector('#quantity').value);
+        //     if (stock < 0 || isNaN(stock)) {
+        //         toastr.warning('Please add Quantity');
+        //         this.value = "";
+        //         document.querySelector('#quantity').focus();
+        //     } else {
+        //         let totalPrice = parseFloat(stock * price).toFixed(2);
+        //         document.querySelector('#total_price').value = totalPrice;
+        //     }
+        // });
+        // let quantity = document.querySelector('#quantity');
+        // quantity.addEventListener('blur', function() {
+        //     let stock = parseFloat(this.value);
+        //     let price = parseInt(document.querySelector('#unit_price').value);
+        //     // alert(price);
+        //     if (isNaN(price)) {
+        //         alert(price);
+        //         unit = 0;
+        //         let totalPrice = parseFloat(stock * price).toFixed(2);
+        //         document.querySelector('#total_price').value = totalPrice;
+        //     } else {
+        //         let totalPrice = parseFloat(stock * price).toFixed(2);
+        //         document.querySelector('#total_price').value = totalPrice;
+        //     }
+        // })
         let otherCost = document.querySelector('#other_cost');
         otherCost.addEventListener('keyup', function() {
             // alert(this.value);
@@ -315,11 +378,11 @@
             // console.log(vehicleCost);
             let totalPrice = parseFloat(document.querySelector('#total_price').value);
             // console.log(totalPrice);
-            if (totalPrice === 0 || isNaN(totalPrice)) {
+            if (totalPrice < 0 || isNaN(totalPrice)) {
                 toastr.warning('Please add Total Price');
                 this.value = "";
                 document.querySelector('#unit_price').focus();
-            } else if (vehicleCost === 0 || isNaN(vehicleCost)) {
+            } else if (vehicleCost < 0 || isNaN(vehicleCost)) {
                 toastr.warning('Please add vehicle cost');
                 this.value = "";
                 document.querySelector('#vehicle_cost').focus();
@@ -338,7 +401,7 @@
             // console.log(vehicleCost);
             let totalPrice = parseFloat(document.querySelector('#total_price').value);
             // console.log(totalPrice);
-            if (totalPrice === 0 || isNaN(totalPrice)) {
+            if (totalPrice < 0 || isNaN(totalPrice)) {
                 toastr.warning('Please add Total Price');
                 this.value = "";
                 document.querySelector('#unit_price').focus();
@@ -353,7 +416,7 @@
             // alert(this.value);
             let pay = parseFloat(this.value);
             let grandTotal = parseFloat(document.querySelector('#grand_total').value);
-            if (grandTotal === 0 || isNaN(grandTotal)) {
+            if (grandTotal < 0 || isNaN(grandTotal)) {
                 toastr.warning('Please add Grand Total Price');
                 this.value = "";
                 document.querySelector('#other_cost').focus();

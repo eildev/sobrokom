@@ -320,82 +320,53 @@
 
 
         // variants select function
-        // $(document).ready(function() {
-        //     $('.product-id').on('change', function() {
-        //         // alert('ok');
-        //         let product_id = $(this).val();
-        //         // alert(product_id);
-        //         if (product_id) {
-        //             $.ajax({
-        //                 url: '/find/variant/' + product_id,
-        //                 type: 'GET',
-        //                 dataType: 'JSON',
-        //                 success: function(result) {
-        //                     // console.log(result);
-        //                     let varient_container = document.querySelector(
-        //                         '.varient_container');
-        //                     varient_container.innerHTML = "";
-        //                     const allData = result.variant;
-        //                     console.log(allData);
-        //                     allData.forEach(function(data) {
-        //                         const tr = document.createElement('tr');
-        //                         tr.innerHTML += `
-    //                         <td>${data.regular_price ?? ""}</td>
-    //                         <td>${data.discount ?? ""}</td>
-    //                         <td>${data.discount_amount ?? ""}</td>
-    //                         <td>${data.stock_quantity ?? "" }</td>
-    //                         <td>${data.unit ?? ""}</td>
-    //                         <td>${data.weight ?? ""}</td>
-    //                         <td>${data.color ?? ""}</td>
-    //                         <td>${data.size ?? ""}</td>
-    //                         <td>${data.manufacture_date ?? ""}</td>
-    //                         <td>${data.expire_date ?? ""}</td>
-    //                         <td>
-    //                         <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
-    //                             Edit
-    //                         </button>
-    //                         <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
-    //                                     </td>
-    //                             `;
-        //                         varient_container.appendChild(tr);
-        //                     })
-        //                 }
-        //             });
-        //         }
-        //     })
-
-        //     // $('.subcategory_id').on('change', function() {
-        //     //     // alert('ok');
-        //     //     let subcategory_id = $(this).val();
-        //     //     if (subcategory_id) {
-        //     //         $.ajax({
-        //     //             url: '/find/sub-subcategory/' + subcategory_id,
-        //     //             type: 'GET',
-        //     //             dataType: 'JSON',
-        //     //             success: function(result) {
-        //     //                 // console.log(result);
-        //     //                 $('select[name="sub_subcategory_id"]').html(
-        //     //                     '<option value="">Select a Sub-Subcategory</option>');
-        //     //                 // console.log(result.subsubcats.length);
-        //     //                 if (result.subsubcats.length > 0) {
-
-        //     //                     $.each(result.subsubcats, function(key, item) {
-        //     //                         $('select[name="sub_subcategory_id"]').append(
-        //     //                             '<option myid="' + item.id +
-        //     //                             '" value="' + item.id +
-        //     //                             '">' + item
-        //     //                             .subSubcategoryName + '</option>');
-        //     //                     })
-        //     //                 } else {
-        //     //                     $('select[name="sub_subcategory_id"]').append(
-        //     //                         '<option value="0" selected>N/A</option>'
-        //     //                     );
-        //     //                 }
-        //     //             }
-        //     //         });
-        //     //     }
-        //     // })
-        // });
+        $(document).ready(function() {
+            $('.product-id').on('change', function() {
+                // alert('ok');
+                let product_id = $(this).val();
+                // alert(product_id);
+                if (product_id) {
+                    $.ajax({
+                        url: '/find/variant/' + product_id,
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(result) {
+                            let data = result.variant;
+                            if (data) {
+                                $('.regular_price').val(data.regular_price);
+                                $('.variant_id').val(data.id);
+                                $('.discount_amount').val(data.discount_amount);
+                                $('select[name="discount"]').append(
+                                    `<option selected  value="${data.discount ?? ""}" >${data.discount ?? ""}</option>`
+                                );
+                                $('select[name="unit"]').append(
+                                    `<option selected  value="${data.unit ?? ""}" >${data.unit ?? ""}</option>`
+                                );
+                                $('.weight').val(data.weight);
+                                $('select[name="color"]').append(
+                                    `<option selected  value="${data.color ?? ""}" >${data.color ?? ""}</option>`
+                                );
+                                $('select[name="size"]').append(
+                                    `<option selected  value="${data.size ?? ""}" >${data.size ?? ""}</option>`
+                                );
+                                $('.manufacture_date').val(data.manufacture_date);
+                                $('.expire_date').val(data.expire_date);
+                            } else {
+                                $('.regular_price').val("");
+                                $('.discount_amount').val("");
+                                $('.discount').val("");
+                                $('.unit').val("");
+                                $('.weight').val("");
+                                $('.color').val("");
+                                $('.size').val("");
+                                $('.manufacture_date').val("");
+                                $('.expire_date').val("");
+                            }
+                        }
+                    });
+                }
+            })
+        });
 
 
 

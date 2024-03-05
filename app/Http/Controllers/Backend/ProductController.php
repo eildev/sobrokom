@@ -19,7 +19,7 @@ class ProductController extends Controller
     }
     public function findVariant($id)
     {
-        $variant = Variant::where('product_id', $id)->get();
+        $variant = Variant::where('product_id', $id)->first();
         return response()->json([
             'variant' => $variant
         ]);

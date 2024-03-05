@@ -16,38 +16,55 @@ class PurchaseDetailsController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        // $request->validate([
-        //     'product_id' => 'required',
-        //     'regular_price' => 'required',
-        //     'discount' => 'required',
-        //     'discount_amount' => 'required',
-        //     'quantity' => 'required',
-        //     'unit' => 'required',
-        //     'weight' => 'required',
-        //     'company_id' => 'required',
-        //     'purchase_date' => 'required',
-        //     'unit_price' => 'required',
-        //     'total_price' => 'required',
-        //     'vehicle_cost' => 'required',
-        //     'grand_total' => 'required',
-        //     'payment_method' => 'required',
-        //     'payable_amount' => 'required',
-        //     'due' => 'required',
-        // ]);
-        $variantId = Variant::insertGetId([
-            'product_id' => $request->product_id,
-            'color' => $request->color,
-            'size' => $request->size,
-            'regular_price' => $request->regular_price,
-            'discount' => $request->discount,
-            'discount_amount' => $request->discount_amount,
-            'stock_quantity' => $request->quantity,
-            'unit' => $request->unit,
-            'weight' => $request->weight,
-            'expire_date' => $request->expire_date,
-            'manufacture_date' => $request->manufacture_date,
-
+        $request->validate([
+            'product_id' => 'required',
+            'regular_price' => 'required',
+            'discount' => 'required',
+            'discount_amount' => 'required',
+            'quantity' => 'required',
+            'unit' => 'required',
+            'weight' => 'required',
+            'company_id' => 'required',
+            'purchase_date' => 'required',
+            'unit_price' => 'required',
+            'total_price' => 'required',
+            'vehicle_cost' => 'required',
+            'grand_total' => 'required',
+            'payment_method' => 'required',
+            'payable_amount' => 'required',
+            'due' => 'required',
         ]);
+        $variantId = $request->variant_id;
+        if (!empty($variantId)) {
+            Variant::findOrFail($variantId)->update([
+                'product_id' => $request->product_id,
+                'color' => $request->color,
+                'size' => $request->size,
+                'regular_price' => $request->regular_price,
+                'discount' => $request->discount,
+                'discount_amount' => $request->discount_amount,
+                'stock_quantity' => $request->quantity,
+                'unit' => $request->unit,
+                'weight' => $request->weight,
+                'expire_date' => $request->expire_date,
+                'manufacture_date' => $request->manufacture_date,
+
+            ]);
+        } else {
+            $variantId = Variant::insertGetId([
+                'product_id' => $request->product_id,
+                'color' => $request->color,
+                'size' => $request->size,
+                'regular_price' => $request->regular_price,
+                'discount' => $request->discount,
+                'discount_amount' => $request->discount_amount,
+                'stock_quantity' => $request->quantity,
+                'unit' => $request->unit,
+                'weight' => $request->weight,
+                'expire_date' => $request->expire_date,
+                'manufacture_date' => $request->manufacture_date,
+            ]);
+        }
         PurchaseDetails::insert([
             'company_id' => $request->company_name,
             'product_id' => $request->product_id,
@@ -64,7 +81,6 @@ class PurchaseDetailsController extends Controller
             'due' => $request->due,
             'remarks' => $request->remarks,
         ]);
-
         return back()->with('success', 'Product Purchase Added');
     }
 
