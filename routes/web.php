@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\UserTrackerController;
 use App\Http\Controllers\Backend\userController;
 use App\Http\Controllers\AllMail;
 use App\Http\Controllers\Backend\PurchaseDetailsController;
+use App\Http\Controllers\Backend\historyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,9 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/category/edit/{id}', 'edit')->name('category.edit');
         Route::post('/category/update/{id}', 'update')->name('category.update');
         Route::get('/category/delete/{id}', 'delete')->name('category.delete');
+    });
+    Route::controller(historyController::class)->group(function () {
+        Route::get('/current-history/{value}', 'CurrentHistory');
     });
     Route::controller(userController::class)->group(function () {
         Route::get('/all-user', 'allUser')->name('all.users');

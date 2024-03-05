@@ -13,6 +13,7 @@
     $refunded_order = App\Models\Order::where('status', 'refunded')->count();
     $canceled_order = App\Models\Order::where('status', 'canceled')->count();
     $visitors = App\Models\UserTracker::all()->count();
+    $purchases = App\Models\PurchaseDetails::all();
 @endphp
     <div class="page-content">
         <div class="col-12 mb-3">
@@ -21,7 +22,6 @@
         <div class="row">
             <div class="col">
                 <div class="card radius-10 bg-gradient-ibiza">
-
                 <a href="{{ route('user-tracker.show') }}">
                     <div class="card-body">
                         <p class="mb-0 text-white pb-2"> Visitor </p>
@@ -126,12 +126,13 @@
                 </div>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-12 mb-3 d-flex">
-                <button class="btn btn-sm btn-info me-1">Today</button>
-                <button class="btn btn-sm btn-info me-1">Current Weekly</button>
-                <button class="btn btn-sm btn-info me-1">Current Monthly</button>
-                <button class="btn btn-sm btn-info me-1">Current Yearly</button>
+                <button class="btn btn-sm btn-info me-1 toDayHistory" onclick="historyFunction(this)" value="today">Today</button>
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Weekly">Current Weekly</button>
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Monthly">Current Monthly</button>
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Yearly">Current Yearly</button>
                 <input type="month" class="bg-info border-0 rounded">
                 <div class="ms-1">
                     <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Year</button>
@@ -234,6 +235,7 @@
                     </div>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col">
                     <div class="card radius-10 bg-gradient-ohhappiness">
@@ -261,42 +263,42 @@
                                     <tr>
                                         <td>New </td>
                                         <td>{{ $new_orders }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('new.order')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Confirm</td>
                                         <td>{{ $approve_orders }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.confirmed')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Proccess</td>
                                         <td>{{ $processing_orders }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.processed')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Delivery</td>
                                         <td>{{ $delivering_orders }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.delivering')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Completed</td>
                                         <td>{{ $completed_order }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.completed')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Refunding</td>
                                         <td>{{ $refunding_order }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.refunding')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Refunded</td>
                                         <td>{{ $refunded_order }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.refunded')}}">View Details</a></td>
                                     </tr>
                                     <tr>
                                         <td>Canceled</td>
                                         <td>{{ $canceled_order }}</td>
-                                        <td><a href="">View Details</a></td>
+                                        <td><a href="{{route('order.canceled')}}">View Details</a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -319,42 +321,26 @@
                             <table class="table" id="genarel">
                                 <thead>
                                     <tr>
-                                        <th>Order Status</th>
-                                        <th>Total</th>
+                                        <th>Purchse Data</th>
+                                        <th>Quantity</th>
+                                        <th>Amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>New </td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Confirm</td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Proccess</td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Delivery</td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Completed</td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Canceled</td>
-                                        <td>10</td>
-                                        <td><a href="">View Details</a></td>
-                                    </tr>
+                                    @foreach ($purchases as $purchase)
+                                        @php
+                                            $originalDateString = $purchase->created_at;
+                                            $date = new DateTime($originalDateString);
+                                            $formattedDate = $date->format('d-m-Y');
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $formattedDate }}</td>
+                                            <td>{{ $purchase->quantity }}</td>
+                                            <td>{{ $purchase->grand_total }}</td>
+                                            <td><a href="{{route('purchase.view')}}">View Details</a></td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -365,4 +351,19 @@
 
         <!--end row-->
     </div>
+    <script>
+        const toDayHistory = document.querySelector('.toDayHistory');
+        // toDayHistory.addEventListener('click', () => {
+        //     alert()
+        // });
+        function historyFunction(resultValue){
+            $.ajax({
+                url:"/current-history/"+resultValue.value,
+                type:"GET",
+                success:function(result){
+                    console.log(result);
+                }
+            });
+        }
+    </script>
 @endsection

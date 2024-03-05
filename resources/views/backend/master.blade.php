@@ -166,9 +166,6 @@
         @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}");
         @endif
-
-
-
         $(function() {
             $(".knob").knob();
         });
@@ -176,9 +173,6 @@
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
-
-
-
     {{-- image onload event  --}}
     <script>
         $(document).ready(function() {
@@ -193,8 +187,6 @@
                     reader.readAsDataURL(file);
                 }
             });
-
-
         });
 
         // datepicker
