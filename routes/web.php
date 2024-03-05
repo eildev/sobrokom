@@ -279,7 +279,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/purchase', 'index')->name('purchase');
         Route::post('/purchase/add', 'store')->name('purchase.store');
         Route::get('/purchase/view', 'view')->name('purchase.view');
-        Route::get('/purchase/view/details', 'view')->name('purchase.view.details');
+        Route::get('/purchase/view/details', 'viewDetails')->name('purchase.view.details');
         Route::get('/purchase/edit/{id}', 'edit')->name('purchase.edit');
         Route::post('/purchase/update/{id}', 'update')->name('purchase.update');
         Route::get('/purchase/delete/{id}', 'delete')->name('purchase.delete');
