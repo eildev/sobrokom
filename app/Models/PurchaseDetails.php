@@ -17,4 +17,8 @@ class PurchaseDetails extends Model
     {
         return $this->belongsTo(CompanyDetails::class, 'company_id', 'id');
     }
+    function variant()
+    {
+        return $this->belongsTo(Variant::class, 'variant_id', 'id');
+    }
 }

@@ -1,81 +1,305 @@
 @extends('backend.master')
 @section('admin')
     <div class="page-content">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="card border-top border-0 border-3 border-info">
-                    <form action="{{ Route('company-details.update', $data->id) }}" method="POST">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Purchase</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Update Purchase Product</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Settings</button>
+                    <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown"> <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
+                            href="javascript:;">Action</a>
+                        <a class="dropdown-item" href="javascript:;">Another action</a>
+                        <a class="dropdown-item" href="javascript:;">Something else here</a>
+                        <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end breadcrumb-->
+
+        <div class="card">
+            <div class="card-body p-4">
+                <h5 class="card-title">Update Purchase Product</h5>
+                <hr />
+                <div class="form-body mt-4">
+                    <form action="{{ route('purchase.update', $data->id) }}" method="POST">
                         @csrf
-                        <div class="card-body">
-                            <div class="border p-4 rounded">
-                                <div class="card-title d-flex align-items-center">
-                                    <h5 class="mb-0 text-info">Update Company Details</h5>
-                                </div>
-                                <hr>
-                                <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-12 form-label">Company Name</label>
-                                    <div class="col-12">
-                                        <input type="text" name="company_name"
-                                            class="form-control @error('company_name') is-invalid  @enderror"
-                                            id="inputEnterYourName" placeholder="Enter Company Name"
-                                            value="{{ $data->company_name }}">
-                                        @error('company_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="border border-3 p-4 rounded">
+                                    @php
+                                        $products = App\Models\Product::all();
+                                        $company = App\Models\CompanyDetails::all();
+                                        // $variant = App\Models\Variant::all();
+                                    @endphp
+                                    <div class="row mb-3">
+                                        </select>
+                                        <div class="col-12">
+                                            <label for="single-select-clear-field" class="col-12 form-label">Product
+                                                Name</label>
+                                            <select name="product_id"
+                                                class="form-select product-id @error('product_id') is-invalid  @enderror"
+                                                id="single-select-clear-field" data-placeholder="Choose one thing">
+                                                <option value="{{ $data->product->id }}" selected>
+                                                    {{ $data->product->product_name }}</option>
+                                                @if ($products->count() > 0)
+                                                    @foreach ($products as $product)
+                                                        <option value="{{ $product->id }}" class="d-flex ">
+                                                            {{ Illuminate\Support\Str::limit($product->product_name ?? '', 40) }}
+                                                            (SKU-{{ $product->sku }})
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @error('product_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="inputEnterYourName" class="col-12 form-label">Company Name</label>
+                                            <select name="company_name"
+                                                class="form-select @error('company_name') is-invalid  @enderror"
+                                                id="single-select-field" data-placeholder="Choose one thing">
+                                                <option selected value="{{ $data->company->id }}">
+                                                    {{ $data->company->company_name }}</option>
+                                                @if ($company->count() > 0)
+                                                    @foreach ($company as $item)
+                                                        <option value="{{ $item->id }}" class="d-flex ">
+                                                            {{ Illuminate\Support\Str::limit($item->company_name ?? '', 40) }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @error('company_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputProductTitle" class="form-label ">Purchase Date</label>
+                                            <input type="date"
+                                                class="form-control datepicker @error('purchase_date') is-invalid  @enderror"
+                                                name="purchase_date" value="{{ $data->purchase_date }}" />
+                                            @error('purchase_date')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="inputPrice" class="form-label">Quantity</label>
+                                            <input type="number"
+                                                class="form-control  @error('quantity') is-invalid  @enderror"
+                                                id="quantity" placeholder="00.00" name="quantity"
+                                                value="{{ $data->quantity }}">
+                                            @error('quantity')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputCompareatprice" class="form-label">Unit Price</label>
+                                            <input type="number"
+                                                class="form-control @error('unit_price') is-invalid  @enderror"
+                                                id="unit_price" placeholder="00.00" name="unit_price"
+                                                value="{{ $data->unit_price }}">
+                                            @error('unit_price')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputCostPerPrice" class="form-label">Total Price</label>
+                                            <input type="number"
+                                                class="form-control @error('total_price') is-invalid  @enderror"
+                                                id="total_price" placeholder="00.00" name="total_price" readonly
+                                                value="{{ $data->total_price }}">
+                                            @error('total_price')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="inputStarPoints" class="form-label">Vehicle Cost</label>
+                                            <input type="number"
+                                                class="form-control @error('vehicle_cost') is-invalid  @enderror"
+                                                id="vehicle_cost" placeholder="00.00" name="vehicle_cost"
+                                                value="{{ $data->total_price }}">
+                                            @error('vehicle_cost')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputStarPoints" class="form-label">Other Cost</label>
+                                            <input type="number"
+                                                class="form-control @error('other_cost') is-invalid  @enderror"
+                                                id="other_cost" placeholder="00.00" name="other_cost"
+                                                value="{{ $data->other_cost }}">
+                                            @error('other_cost')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputStarPoints" class="form-label">Grand Total</label>
+                                            <input type="number"
+                                                class="form-control @error('grand_total') is-invalid  @enderror"
+                                                id="grand_total" placeholder="00.00" name="grand_total" readonly
+                                                value="{{ $data->grand_total }}">
+                                            @error('grand_total')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="inputStarPoints" class="form-label">Payable Amount</label>
+                                            <input type="number"
+                                                class="form-control @error('payable_amount') is-invalid  @enderror"
+                                                id="payable_amount" placeholder="00.00" name="payable_amount"
+                                                value="{{ $data->payable_amount }}">
+                                            @error('payable_amount')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputStarPoints" class="form-label ">Total Due</label>
+                                            <input type="number"
+                                                class="form-control @error('due') is-invalid  @enderror" id="due"
+                                                placeholder="00.00" name="due" readonly value="{{ $data->due }}">
+                                            @error('due')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="inputProductType" class="form-label">Payment With</label>
+                                            <select class="form-select @error('payment_method') is-invalid  @enderror"
+                                                id="inputProductType" name="payment_method">
+                                                <option selected value="{{ $data->payment_method }}">
+                                                    {{ $data->payment_method }}</option>
+                                                <option value="bank">Bank</option>
+                                                <option value="check">Check</option>
+                                                <option value="mobile-banking">Mobile Banking</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <label for="inputProductTitle" class="form-label">Remarks</label>
+                                            <textarea class="form-control" id="inputProductDescription" rows="3" name="remarks">{{ $data->remarks }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-12 form-label">Manager Name</label>
-                                    <div class="col-12">
-                                        <input type="text" name="manager_name"
-                                            class="form-control @error('manager_name') is-invalid  @enderror"
-                                            id="inputEnterYourName" placeholder="Enter Manager Name"
-                                            value="{{ $data->manager_name }}">
-                                        @error('manager_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-12 form-label">Company Adress</label>
-                                    <div class="col-12">
-                                        <input type="text" name="address"
-                                            class="form-control @error('address') is-invalid  @enderror"
-                                            id="inputEnterYourName" placeholder="Enter Company Address"
-                                            value="{{ $data->address }}">
-                                        @error('address')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-12 form-label">Company Email</label>
-                                    <div class="col-12">
-                                        <input type="email" name="email"
-                                            class="form-control @error('email') is-invalid  @enderror"
-                                            id="inputEnterYourName" placeholder="Enter Company Email"
-                                            value="{{ $data->email }}">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEnterYourName" class="col-12 form-label">Company Phone Number</label>
-                                    <div class="col-12">
-                                        <input type="number" name="phone"
-                                            class="form-control @error('phone') is-invalid  @enderror"
-                                            id="inputEnterYourName" placeholder="Enter Company Phone Number"
-                                            value="{{ $data->phone }}">
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-3 col-form-label"></label>
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-info px-5">Update Company</button>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="border border-3 p-4 rounded">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="inputPrice" class="form-label">Regular Price</label>
+                                            <input type="number" class="form-control regular_price" id="inputPrice"
+                                                placeholder="00.00" name="regular_price"
+                                                value="{{ $data->variant->regular_price }}">
+                                            {{-- <input type="hidden" value="{{ $data->variant->id }}" name="variant_id"> --}}
+                                            <span class="regular_price_error text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputPrice" class="form-label">Discount Price</label>
+                                            <input type="number" class="form-control discount_amount" id="inputPrice"
+                                                placeholder="00.00" name="discount_amount"
+                                                value="{{ $data->variant->discount_amount }}">
+                                            <span class="discount_amount_error text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label col-12">Discount</label>
+                                            <select class="form-select discount" name="discount"
+                                                value="{{ $data->variant->discount_amount }}">
+                                                <option value="{{ $data->variant->discount_amount }}">
+                                                    {{ $data->variant->discount_amount }}</option>
+                                                <option value="0">0</option>
+                                                <option value="10">10%</option>
+                                                <option value="20">20%</option>
+                                                <option value="30">30%</option>
+                                                <option value="40">40%</option>
+
+                                            </select>
+                                            <span class="discount_error text-danger"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label col-12">Unit</label>
+                                            <select class="form-select unit" name="unit">
+                                                <option value="{{ $data->variant->unit }}">{{ $data->variant->unit }}
+                                                </option>
+                                                <option value="kg">KG</option>
+                                                <option value="liter">Liter</option>
+                                                <option value="piece">Piece</option>
+                                                <option value="dozon">Dozon</option>
+                                                <option value="inch">Inch</option>
+                                                <option value="gm">GM</option>
+                                                <option value="ml">ML</option>
+                                                <option value="packet">Packet</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Weight</label> <br>
+                                            <input type="text" class="form-control weight" id="inputPrice"
+                                                placeholder="Weight" name="weight"
+                                                value="{{ $data->variant->weight }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label col-12">Color</label>
+                                            <select class="form-select color" name="color">
+                                                <option value="{{ $data->variant->color }}">{{ $data->variant->color }}
+                                                </option>
+                                                <option value="black">Black</option>
+                                                <option value="white">White</option>
+                                                <option value="red">Red</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="green">Green</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label col-12">Size</label>
+                                            <select class="form-select size" name="size">
+                                                <option value="{{ $data->variant->size }}">{{ $data->variant->size }}
+                                                </option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Manufacture Date</label> <br>
+                                            <input type="date" class="form-control datepicker" id="inputPrice"
+                                                placeholder="" name="manufacture_date"
+                                                value="{{ $data->variant->manufacture_date ?? '' }}">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Expire Date</label> <br>
+                                            <input type="date" class="form-control datepicker" id="inputPrice"
+                                                placeholder="" name="expire_date"
+                                                value="{{ $data->variant->expire_date ?? '' }}">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-grid">
+                                                <button type="submit" class="btn btn-primary">Save </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -84,6 +308,82 @@
                 </div>
             </div>
         </div>
-        <!--end row-->
     </div>
+
+
+    <script>
+        let unitPrice = document.querySelector('#unit_price');
+        unitPrice.addEventListener('keyup', function() {
+            // alert(this.value);
+            let price = parseFloat(this.value);
+            let stock = parseInt(document.querySelector('#quantity').value);
+            if (stock === 0 || isNaN(stock)) {
+                toastr.warning('Please add Quantity');
+                this.value = "";
+                document.querySelector('#quantity').focus();
+            } else {
+                let totalPrice = parseFloat(stock * price).toFixed(2);
+                document.querySelector('#total_price').value = totalPrice;
+            }
+        })
+        let otherCost = document.querySelector('#other_cost');
+        otherCost.addEventListener('keyup', function() {
+            // alert(this.value);
+            let other = parseFloat(this.value);
+            // console.log(other);
+            let vehicleCost = parseInt(document.querySelector('#vehicle_cost').value);
+            // console.log(vehicleCost);
+            let totalPrice = parseFloat(document.querySelector('#total_price').value);
+            // console.log(totalPrice);
+            if (totalPrice === 0 || isNaN(totalPrice)) {
+                toastr.warning('Please add Total Price');
+                this.value = "";
+                document.querySelector('#unit_price').focus();
+            } else if (vehicleCost === 0 || isNaN(vehicleCost)) {
+                toastr.warning('Please add vehicle cost');
+                this.value = "";
+                document.querySelector('#vehicle_cost').focus();
+            } else {
+                let grandTotal = other + vehicleCost + totalPrice;
+                // console.log(grandTotal);
+                document.querySelector('#grand_total').value = grandTotal.toFixed(2);
+            }
+        })
+        let vehicleCost = document.querySelector('#vehicle_cost');
+        vehicleCost.addEventListener('keyup', function() {
+            // alert(this.value);
+            let other = 0;
+            // console.log(other);
+            let vehicleCost = parseFloat(this.value);
+            // console.log(vehicleCost);
+            let totalPrice = parseFloat(document.querySelector('#total_price').value);
+            // console.log(totalPrice);
+            if (totalPrice === 0 || isNaN(totalPrice)) {
+                toastr.warning('Please add Total Price');
+                this.value = "";
+                document.querySelector('#unit_price').focus();
+            } else {
+                let grandTotal = other + vehicleCost + totalPrice;
+                // console.log(grandTotal);
+                document.querySelector('#grand_total').value = grandTotal.toFixed(2);
+            }
+        })
+        let payableAmount = document.querySelector('#payable_amount');
+        payableAmount.addEventListener('keyup', function() {
+            // alert(this.value);
+            let pay = parseFloat(this.value);
+            let grandTotal = parseFloat(document.querySelector('#grand_total').value);
+            if (grandTotal === 0 || isNaN(grandTotal)) {
+                toastr.warning('Please add Grand Total Price');
+                this.value = "";
+                document.querySelector('#other_cost').focus();
+            } else if (pay > grandTotal) {
+                toastr.warning("Grant total price is greater than payable amount");
+                this.value = "";
+            } else {
+                let due = grandTotal - pay;
+                document.querySelector('#due').value = due.toFixed(2);
+            }
+        })
+    </script>
 @endsection

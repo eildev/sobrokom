@@ -45,6 +45,29 @@
                                         $company = App\Models\CompanyDetails::all();
                                     @endphp
                                     <div class="row mb-3">
+                                        </select>
+                                        <div class="col-12">
+                                            <label for="single-select-clear-field" class="col-12 form-label">Product
+                                                Name</label>
+                                            <select name="product_id"
+                                                class="form-select product-id @error('product_id') is-invalid  @enderror"
+                                                id="single-select-clear-field" data-placeholder="Choose one thing">
+                                                <option></option>
+                                                @if ($products->count() > 0)
+                                                    @foreach ($products as $product)
+                                                        <option value="{{ $product->id }}" class="d-flex ">
+                                                            {{ Illuminate\Support\Str::limit($product->product_name ?? '', 40) }}
+                                                            (SKU-{{ $product->sku }})
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @error('product_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="inputEnterYourName" class="col-12 form-label">Company Name</label>
                                             <select name="company_name"
@@ -147,8 +170,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="inputStarPoints" class="form-label ">Total Due</label>
-                                            <input type="number" class="form-control @error('due') is-invalid  @enderror"
-                                                id="due" placeholder="00.00" name="due" readonly>
+                                            <input type="number"
+                                                class="form-control @error('due') is-invalid  @enderror" id="due"
+                                                placeholder="00.00" name="due" readonly>
                                             @error('due')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -171,29 +195,7 @@
                                             <textarea class="form-control" id="inputProductDescription" rows="3" name="remarks"></textarea>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        </select>
-                                        <div class="col-12">
-                                            <label for="single-select-clear-field" class="col-12 form-label">Product
-                                                Name</label>
-                                            <select name="product_id"
-                                                class="fo+rm-select product-id @error('product_id') is-invalid  @enderror"
-                                                id="single-select-clear-field" data-placeholder="Choose one thing">
-                                                <option></option>
-                                                @if ($products->count() > 0)
-                                                    @foreach ($products as $product)
-                                                        <option value="{{ $product->id }}" class="d-flex ">
-                                                            {{ Illuminate\Support\Str::limit($product->product_name ?? '', 40) }}
-                                                            (SKU-{{ $product->sku }})
-                                                        </option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                            @error('product_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-lg-4">
