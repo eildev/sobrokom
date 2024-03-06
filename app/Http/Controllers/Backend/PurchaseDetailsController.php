@@ -136,4 +136,9 @@ class PurchaseDetailsController extends Controller
         PurchaseDetails::findOrFail($id)->delete();
         return back()->with('success', 'Purchase Details successfully Deleted');
     }
+    public function viewDetails($id)
+    {
+        $purchase = PurchaseDetails::findOrFail($id);
+        return view('backend.purchase-details.view-details', compact('purchase'));
+    }
 }

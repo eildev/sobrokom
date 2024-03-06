@@ -11,7 +11,8 @@
                     <div class="form-body mt-4">
                         {{-- update product section  --}}
 
-                        <form action="" method="POST" id="productForm" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $product->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3 mb-3">
                                 <div class="col-lg-8">
@@ -78,11 +79,11 @@
                                                                 @endforeach
                                                             @else
                                                                 <option value="">Select Sub-Subcategory</option>
-                                                                @foreach ($sub_subcategories as $sub_subcategory)
+                                                                {{-- @foreach ($sub_subcategories as $sub_subcategory)
                                                                     <option value="{{ $sub_subcategory->id ?? '' }}">
                                                                         {{ $sub_subcategory->subSubcategoryName }}
                                                                     </option>
-                                                                @endforeach
+                                                                @endforeach --}}
                                                             @endif
 
 
@@ -125,7 +126,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
+                                        {{-- <div class="row mb-3">
                                             <div class="col-md-12">
                                                 <div class="row mb-3">
                                                     <label for="multiple-select-field" class="form-label">Select
@@ -151,7 +152,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row mb-3">
                                             <div class="col-12">
                                                 <div class="row">
@@ -214,6 +215,33 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="mb-3">
+                                                    <label class="form-label col-12">Select Feature</label>
+                                                    <div class="col-12">
+                                                        @php
+                                                            $features = explode(',', $product->product_feature);
+                                                        @endphp
+                                                        <select class="form-select" id="multiple-select-field"
+                                                            name="product_feature[]" data-placeholder="Choose anything"
+                                                            multiple>
+                                                            @foreach ($features as $feature)
+                                                                <option value="{{ $feature }}"
+                                                                    {{ $features ? 'selected' : '' }}>{{ $feature }}
+                                                                </option>
+                                                            @endforeach
+                                                            <option value="feature">Feature</option>
+                                                            <option value="new-arrival">New Arrival</option>
+                                                            <option value="trending">Trending</option>
+                                                            <option value="best-rate">Best Rate</option>
+                                                            <option value="weekend-deals">Weekend Deals</option>
+                                                            <option value="top-seller">Top Seller</option>
+                                                            <option value="top-offers">Top Offers</option>
+                                                        </select>
+                                                        <span class="feature_error text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="mb-3">
                                                     <label class="form-label">Tags</label>
                                                     <input type="text" class="form-control" data-role="tagsinput"
                                                         placeholder="jQuery,Net" name="tag"
@@ -221,6 +249,24 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
+                                                <label for="image" class="form-label">Image Gallery </label>
+                                                <input type="file" id="imageGallery" class="form-control "
+                                                    name="imageGallery[]" multiple>
+                                                <div class="my-1"><i><b>Note:</b> Please provide 600 X 600 size
+                                                        image</i></div>
+
+                                                <div class="my-3">
+                                                    <div id="preview_img">
+                                                        @foreach ($product->gallary as $gallery)
+                                                            <img class="img-fluid"
+                                                                style="height70px; width: 70px; object-fit: contain;"
+                                                                src="{{ asset('/uploads/products/gallery/' . $gallery->image) }}"
+                                                                alt="Product image">
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
                                                 <input type="file" id="imageGallery" class="form-control  "
                                                     name="imageGallery[]" multiple>
@@ -235,10 +281,11 @@
                                                         src="{{ asset('uploads/productempty.jpg') }}"
                                                         alt="category image">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <button class="btn btn-primary update_product">Update Product</button>
+                                                    <button type="submit" class="btn btn-primary update_product">Update
+                                                        Product</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -247,8 +294,8 @@
                             </div>
                         </form>
 
-                        <div class="row variant_section ">
-                            {{-- update variants section  --}}
+                        {{-- update variants section  --}}
+                        {{-- <div class="row variant_section ">
                             <form method="POST" id="productVariant">
                                 @csrf
                                 <div class="col-12">
@@ -326,11 +373,11 @@
                                                     <option value="XL">XL</option>
                                                 </select>
                                             </div>
-                                            {{-- <div class="col-lg-3 col-md-6">
+                                            <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Barcode Generator</label> <br>
                                                 <input type="text" class="form-control barcode" id="inputPrice"
                                                     placeholder="Barcode" name="barcode">
-                                            </div> --}}
+                                            </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <label class="form-label">Manufacture Date</label> <br>
                                                 <input type="date" class="form-control manufacture_date"
@@ -355,7 +402,7 @@
                                 </div>
                             </form>
 
-                            {{-- variant table  --}}
+                            variant table 
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -424,7 +471,7 @@
                                     <i class="fas fa-plus"></i>
                                     Add New Product</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
@@ -440,141 +487,141 @@
 
 
     <script>
-        // product Update Ajax Crud 
-        const updateProduct = document.querySelector('.update_product');
-        updateProduct.addEventListener('click', function(e) {
-            e.preventDefault();
-            // alert('ok');
-            let id = "{{ $product->id }}"
-            // alert(id);
-            let allData = new FormData(jQuery("#productForm")[0]);
-            $.ajax({
-                url: "/product/update/" + id,
-                type: "POST",
-                data: allData,
-                contentType: false,
-                processData: false,
-                success: function(res) {
-                    if (res.status == 200) {
-                        $('.update_product').addClass('disabled');
-                        $('.product_id').val(res.productId);
-                        toastr.success(res.message);
-                    } else {
-                        $('.category_error').text(res.error.category_id);
-                        $('.subcategory_error').text(res.error.subcategory_id);
-                        $('.brand_error').text(res.error.brand_id);
-                        $('.feature_error').text(res.error.product_feature);
-                        $('.product_name_error').text(res.error.product_name);
-                        $('.short_desc').text(res.error.short_desc);
-                        $('.long_desc').text(res.error.long_desc);
-                        $('.product_image').text(res.error.product_image);
-                        $('.sku_error').text(res.error.sku);
-                    }
-                },
-            });
-        });
+        // // product Update Ajax Crud 
+        // const updateProduct = document.querySelector('.update_product');
+        // updateProduct.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     // alert('ok');
+        //     let id = "{{ $product->id }}"
+        //     // alert(id);
+        //     let allData = new FormData(jQuery("#productForm")[0]);
+        //     $.ajax({
+        //         url: "/product/update/" + id,
+        //         type: "POST",
+        //         data: allData,
+        //         contentType: false,
+        //         processData: false,
+        //         success: function(res) {
+        //             if (res.status == 200) {
+        //                 $('.update_product').addClass('disabled');
+        //                 $('.product_id').val(res.productId);
+        //                 toastr.success(res.message);
+        //             } else {
+        //                 $('.category_error').text(res.error.category_id);
+        //                 $('.subcategory_error').text(res.error.subcategory_id);
+        //                 $('.brand_error').text(res.error.brand_id);
+        //                 $('.feature_error').text(res.error.product_feature);
+        //                 $('.product_name_error').text(res.error.product_name);
+        //                 $('.short_desc').text(res.error.short_desc);
+        //                 $('.long_desc').text(res.error.long_desc);
+        //                 $('.product_image').text(res.error.product_image);
+        //                 $('.sku_error').text(res.error.sku);
+        //             }
+        //         },
+        //     });
+        // });
 
 
 
-        // !.. add variant ajax Crud
-        const add_varient = document.querySelector('.add_varient');
-        add_varient.addEventListener('click', function(e) {
-            e.preventDefault();
-            document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "flex", "important");
-            let regular_price = parseFloat(document.querySelector('.regular_price').value);
-            let discount = parseFloat(document.querySelector('.discount').value);
-            let discount_amount = parseFloat(document.querySelector('.discount_amount')
-                .value);
-            let stock = parseFloat(document.querySelector('#stock').value);
+        // // !.. add variant ajax Crud
+        // const add_varient = document.querySelector('.add_varient');
+        // add_varient.addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     document
+        //         .querySelector(".pageLoader")
+        //         .style.setProperty("display", "flex", "important");
+        //     let regular_price = parseFloat(document.querySelector('.regular_price').value);
+        //     let discount = parseFloat(document.querySelector('.discount').value);
+        //     let discount_amount = parseFloat(document.querySelector('.discount_amount')
+        //         .value);
+        //     let stock = parseFloat(document.querySelector('#stock').value);
 
-            let varientData = new FormData(jQuery("#productVariant")[0]);
-            if (regular_price > 0 && discount >= 0 && discount_amount > 0 && stock > 0) {
-                $.ajax({
-                    url: '/product/variant/store',
-                    type: "POST",
-                    data: varientData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        if (response.status == 200) {
-                            toastr.success(response.message);
-                            document.querySelector('.discount_amount')
-                                .value = '';
-                            document.querySelector('.regular_price').value = '';
-                            document.querySelector('.discount').value = '';
-                            document.querySelector('#stock').value = '';
-                            document.querySelector('.unit').value = '';
-                            document.querySelector('.weight').value = '';
-                            document.querySelector('.color').value = '';
-                            document.querySelector('.size').value = '';
-                            show();
-                            document
-                                .querySelector(".pageLoader")
-                                .style.setProperty("display", "none", "important");
-                        } else {
-                            toastr.error('Something went wrong');
-                            document
-                                .querySelector(".pageLoader")
-                                .style.setProperty("display", "none", "important");
-                        }
-                    }
-                })
+        //     let varientData = new FormData(jQuery("#productVariant")[0]);
+        //     if (regular_price > 0 && discount >= 0 && discount_amount > 0 && stock > 0) {
+        //         $.ajax({
+        //             url: '/product/variant/store',
+        //             type: "POST",
+        //             data: varientData,
+        //             contentType: false,
+        //             processData: false,
+        //             success: function(response) {
+        //                 if (response.status == 200) {
+        //                     toastr.success(response.message);
+        //                     document.querySelector('.discount_amount')
+        //                         .value = '';
+        //                     document.querySelector('.regular_price').value = '';
+        //                     document.querySelector('.discount').value = '';
+        //                     document.querySelector('#stock').value = '';
+        //                     document.querySelector('.unit').value = '';
+        //                     document.querySelector('.weight').value = '';
+        //                     document.querySelector('.color').value = '';
+        //                     document.querySelector('.size').value = '';
+        //                     show();
+        //                     document
+        //                         .querySelector(".pageLoader")
+        //                         .style.setProperty("display", "none", "important");
+        //                 } else {
+        //                     toastr.error('Something went wrong');
+        //                     document
+        //                         .querySelector(".pageLoader")
+        //                         .style.setProperty("display", "none", "important");
+        //                 }
+        //             }
+        //         })
 
-                document
-                    .querySelector(".pageLoader")
-                    .style.setProperty("display", "none", "important");
-            } else {
-                toastr.error('please provide variants');
-                document
-                    .querySelector(".pageLoader")
-                    .style.setProperty("display", "none", "important");
-            }
+        //         document
+        //             .querySelector(".pageLoader")
+        //             .style.setProperty("display", "none", "important");
+        //     } else {
+        //         toastr.error('please provide variants');
+        //         document
+        //             .querySelector(".pageLoader")
+        //             .style.setProperty("display", "none", "important");
+        //     }
 
-        })
+        // })
 
 
-        // show variantData on Table
-        function show() {
-            const productId = document.querySelector('.product_id').value;
-            $.ajax({
-                url: '/product/variant/show/' + productId,
-                type: "GET",
-                dataType: 'JSON',
-                success: function(res) {
-                    if (res.status == 200) {
-                        // console.log(res);
-                        let varient_container = document.querySelector('.varient_container');
-                        varient_container.innerHTML = "";
-                        const allData = res.variantData;
-                        allData.forEach(function(data) {
-                            const tr = document.createElement('tr');
-                            tr.innerHTML += `
-                                <td>${data.regular_price}</td>
-                                <td>${data.discount}</td>
-                                <td>${data.discount_amount}</td>
-                                <td>${data.stock_quantity}</td>
-                                <td>${data.unit}</td>
-                                <td>${data.weight}</td>
-                                <td>${data.color}</td>
-                                <td>${data.size}</td>
-                                <td>${data.manufacture_date}</td>
-                                <td>${data.expire_date}</td>
-                                <td>
-                                <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
-                                    Edit
-                                </button>
-                                <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
-                                            </td>
-                                    `;
-                            varient_container.appendChild(tr);
-                        })
-                    } else {
-                        toastr.warning(res.error);
-                    }
-                }
-            })
-        }
+        // // show variantData on Table
+        // function show() {
+        //     const productId = document.querySelector('.product_id').value;
+        //     $.ajax({
+        //         url: '/product/variant/show/' + productId,
+        //         type: "GET",
+        //         dataType: 'JSON',
+        //         success: function(res) {
+        //             if (res.status == 200) {
+        //                 // console.log(res);
+        //                 let varient_container = document.querySelector('.varient_container');
+        //                 varient_container.innerHTML = "";
+        //                 const allData = res.variantData;
+        //                 allData.forEach(function(data) {
+        //                     const tr = document.createElement('tr');
+        //                     tr.innerHTML += `
+    //                         <td>${data.regular_price}</td>
+    //                         <td>${data.discount}</td>
+    //                         <td>${data.discount_amount}</td>
+    //                         <td>${data.stock_quantity}</td>
+    //                         <td>${data.unit}</td>
+    //                         <td>${data.weight}</td>
+    //                         <td>${data.color}</td>
+    //                         <td>${data.size}</td>
+    //                         <td>${data.manufacture_date}</td>
+    //                         <td>${data.expire_date}</td>
+    //                         <td>
+    //                         <button class="btn btn-sm btn-info edit_variant me-2" value="${data.id}">
+    //                             Edit
+    //                         </button>
+    //                         <button value="${data.id}" class="btn-sm btn-danger btn delete_variant">Delete</button>
+    //                                     </td>
+    //                             `;
+        //                     varient_container.appendChild(tr);
+        //                 })
+        //             } else {
+        //                 toastr.warning(res.error);
+        //             }
+        //         }
+        //     })
+        // }
     </script>
 @endsection

@@ -173,8 +173,9 @@
     <script src="{{ asset('backend') }}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
-    {{-- image onload event  --}}
+
     <script>
+        //  image onload event 
         $(document).ready(function() {
             $('#image').change(function() {
                 const file = this.files[0];
@@ -188,6 +189,48 @@
                 }
             });
         });
+        $(document).ready(function() {
+            $('#image2').change(function() {
+                const file = this.files[0];
+
+                if (file) {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        $('#showImage2').attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // multiImage 
+        $(document).ready(function() {
+            $('#imageGallery').change(function() {
+                const files = this.files;
+
+                if (files.length > 0) {
+                    // Clear previous previews
+                    $('#preview_img').empty();
+
+                    for (let i = 0; i < files.length; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function(event) {
+                            // Create an image element for each preview
+                            let imgElement = $('<img>').attr({
+                                'src': event.target.result,
+                                'class': 'img-fluid me-1',
+                                'style': 'height:70px; width: 70px; object-fit: contain;',
+                                'alt': 'gallery image'
+                            });
+                            $('#preview_img').append(imgElement);
+                        }
+                        reader.readAsDataURL(files[i]);
+                    }
+                }
+            });
+        });
+
+
 
         // datepicker
         $(".datepicker").flatpickr();
@@ -469,6 +512,8 @@
 
 
 
+
+
         // price and discount calculation
         const regular_price = document.querySelector('.regular_price');
         const discount_amount = document.querySelector('.discount_amount');
@@ -517,6 +562,34 @@
             let sellingPrice = regurlarPrice - amount;
             document.querySelector('.discount_amount').value = sellingPrice;
         });
+
+
+
+        // purchase calculation function 
+        function calculation() {
+            let unitPrice = parseFloat(document.querySelector('#unit_price').value) || 0;
+            let quantity = parseFloat(document.querySelector('#quantity').value) || 0;
+            let vehicleCost = parseFloat(document.querySelector('#vehicle_cost').value) || 0;
+            let otherCost = parseFloat(document.querySelector('#other_cost').value) || 0;
+            let payableAmount = parseFloat(document.querySelector('#payable_amount').value) || 0;
+
+            if (unitPrice < 0 || quantity < 0 || vehicleCost < 0 || otherCost < 0 || payableAmount < 0) {
+                toastr.warning('Please provide valid input');
+                return;
+            }
+
+            let total = parseFloat(unitPrice * quantity).toFixed(2);
+            let grandTotal = parseFloat(total) + vehicleCost + otherCost;
+            let due = parseFloat(grandTotal - payableAmount).toFixed(2);
+
+            document.querySelector('#total_price').value = total;
+            document.querySelector('#grand_total').value = grandTotal.toFixed(2);
+            document.querySelector('#due').value = due.toFixed(2);
+
+            if (payableAmount > grandTotal) {
+                toastr.warning('Payable Amount cannot be greater than Grand Total');
+            }
+        }
     </script>
 
 

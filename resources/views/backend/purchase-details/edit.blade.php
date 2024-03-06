@@ -106,7 +106,8 @@
                                             <input type="number"
                                                 class="form-control  @error('quantity') is-invalid  @enderror"
                                                 id="quantity" placeholder="00.00" name="quantity"
-                                                value="{{ $data->quantity }}">
+                                                value="{{ $data->quantity }}" onkeyup="calculation();"
+                                                onchange="calculation();" onblur="calculation();">
                                             @error('quantity')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -116,7 +117,8 @@
                                             <input type="number"
                                                 class="form-control @error('unit_price') is-invalid  @enderror"
                                                 id="unit_price" placeholder="00.00" name="unit_price"
-                                                value="{{ $data->unit_price }}">
+                                                value="{{ $data->unit_price }}" onkeyup="calculation();"
+                                                onchange="calculation();" onblur="calculation();">
                                             @error('unit_price')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -139,7 +141,8 @@
                                             <input type="number"
                                                 class="form-control @error('vehicle_cost') is-invalid  @enderror"
                                                 id="vehicle_cost" placeholder="00.00" name="vehicle_cost"
-                                                value="{{ $data->total_price }}">
+                                                value="{{ $data->total_price }}" onkeyup="calculation();"
+                                                onchange="calculation();" onblur="calculation();">
                                             @error('vehicle_cost')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -149,7 +152,8 @@
                                             <input type="number"
                                                 class="form-control @error('other_cost') is-invalid  @enderror"
                                                 id="other_cost" placeholder="00.00" name="other_cost"
-                                                value="{{ $data->other_cost }}">
+                                                value="{{ $data->other_cost }}" onkeyup="calculation();"
+                                                onchange="calculation();" onblur="calculation();">
                                             @error('other_cost')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -172,7 +176,8 @@
                                             <input type="number"
                                                 class="form-control @error('payable_amount') is-invalid  @enderror"
                                                 id="payable_amount" placeholder="00.00" name="payable_amount"
-                                                value="{{ $data->payable_amount }}">
+                                                value="{{ $data->payable_amount }}" onkeyup="calculation();"
+                                                onchange="calculation();" onblur="calculation();">
                                             @error('payable_amount')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -311,79 +316,5 @@
     </div>
 
 
-    <script>
-        let unitPrice = document.querySelector('#unit_price');
-        unitPrice.addEventListener('keyup', function() {
-            // alert(this.value);
-            let price = parseFloat(this.value);
-            let stock = parseInt(document.querySelector('#quantity').value);
-            if (stock === 0 || isNaN(stock)) {
-                toastr.warning('Please add Quantity');
-                this.value = "";
-                document.querySelector('#quantity').focus();
-            } else {
-                let totalPrice = parseFloat(stock * price).toFixed(2);
-                document.querySelector('#total_price').value = totalPrice;
-            }
-        })
-        let otherCost = document.querySelector('#other_cost');
-        otherCost.addEventListener('keyup', function() {
-            // alert(this.value);
-            let other = parseFloat(this.value);
-            // console.log(other);
-            let vehicleCost = parseInt(document.querySelector('#vehicle_cost').value);
-            // console.log(vehicleCost);
-            let totalPrice = parseFloat(document.querySelector('#total_price').value);
-            // console.log(totalPrice);
-            if (totalPrice === 0 || isNaN(totalPrice)) {
-                toastr.warning('Please add Total Price');
-                this.value = "";
-                document.querySelector('#unit_price').focus();
-            } else if (vehicleCost === 0 || isNaN(vehicleCost)) {
-                toastr.warning('Please add vehicle cost');
-                this.value = "";
-                document.querySelector('#vehicle_cost').focus();
-            } else {
-                let grandTotal = other + vehicleCost + totalPrice;
-                // console.log(grandTotal);
-                document.querySelector('#grand_total').value = grandTotal.toFixed(2);
-            }
-        })
-        let vehicleCost = document.querySelector('#vehicle_cost');
-        vehicleCost.addEventListener('keyup', function() {
-            // alert(this.value);
-            let other = 0;
-            // console.log(other);
-            let vehicleCost = parseFloat(this.value);
-            // console.log(vehicleCost);
-            let totalPrice = parseFloat(document.querySelector('#total_price').value);
-            // console.log(totalPrice);
-            if (totalPrice === 0 || isNaN(totalPrice)) {
-                toastr.warning('Please add Total Price');
-                this.value = "";
-                document.querySelector('#unit_price').focus();
-            } else {
-                let grandTotal = other + vehicleCost + totalPrice;
-                // console.log(grandTotal);
-                document.querySelector('#grand_total').value = grandTotal.toFixed(2);
-            }
-        })
-        let payableAmount = document.querySelector('#payable_amount');
-        payableAmount.addEventListener('keyup', function() {
-            // alert(this.value);
-            let pay = parseFloat(this.value);
-            let grandTotal = parseFloat(document.querySelector('#grand_total').value);
-            if (grandTotal === 0 || isNaN(grandTotal)) {
-                toastr.warning('Please add Grand Total Price');
-                this.value = "";
-                document.querySelector('#other_cost').focus();
-            } else if (pay > grandTotal) {
-                toastr.warning("Grant total price is greater than payable amount");
-                this.value = "";
-            } else {
-                let due = grandTotal - pay;
-                document.querySelector('#due').value = due.toFixed(2);
-            }
-        })
-    </script>
+
 @endsection

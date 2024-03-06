@@ -147,17 +147,18 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::post('/product/store', 'store')->name('product.store');
         Route::post('/product/update/{id}', 'update')->name('product.update');
-        Route::post('/product/variant/store', 'variantStore')->name('variant.store');
-        Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
-        Route::get('/product/variant/edit/{id}', 'editVariant')->name('variant.edit');
-        Route::post('/product/variant/update/{id}', 'updateVariant')->name('variant.update');
-        Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
         Route::get('/product/view', 'view')->name('product.view');
         Route::get('/product/view/{id}', 'viewDetails')->name('product.view.details');
         Route::get('/product/edit/{id}', 'edit')->name('product.edit');
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
         Route::post('/product/status/{id}', 'productStatus')->name('product.status');
         Route::get('/find/variant/{id}', 'findVariant')->name('find.variant');
+        // Route::post('/product/variant/store', 'variantStore')->name('variant.store');
+        // Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
+        // Route::get('/product/variant/edit/{id}', 'editVariant')->name('variant.edit');
+        // Route::post('/product/variant/update/{id}', 'updateVariant')->name('variant.update');
+        // Route::get('/product/variant/delete/{id}', 'deleteVariant')->name('variant.delete');
+
     });
     //All Routes for Product End
 
@@ -283,7 +284,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/purchase', 'index')->name('purchase');
         Route::post('/purchase/add', 'store')->name('purchase.store');
         Route::get('/purchase/view', 'view')->name('purchase.view');
-        Route::get('/purchase/view/details', 'viewDetails')->name('purchase.view.details');
+        Route::get('/purchase/view/details/{id}', 'viewDetails')->name('purchase.view.details');
         Route::get('/purchase/edit/{id}', 'edit')->name('purchase.edit');
         Route::post('/purchase/update/{id}', 'update')->name('purchase.update');
         Route::get('/purchase/delete/{id}', 'delete')->name('purchase.delete');
