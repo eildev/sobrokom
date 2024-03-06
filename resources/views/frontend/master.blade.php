@@ -240,7 +240,7 @@
             </div>
         </div>
         <div class="mySlidBar"
-            style="width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white">
+            style="display:none;width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white;">
             <div class="my_menu">
                 <div class="my_menu_inner">
                     <div class="my_menu_list">
@@ -611,9 +611,9 @@
     <style>
         .mySlidBarActive {
             width: 0px !important;
-            display: none;
+            display: block !important;
             padding: 0px !important;
-            transition: 0.2s ease-in-out;
+            /* transition: 0.2s ease-in-out; */
         }
 
         .first_liActive {
@@ -671,8 +671,14 @@
         .container {
             margin-left: 215px;
         }
+        .mySlidBar{
+                display: block !important;
+            }
 
         @media (max-width: 1080px) {
+            .mySlidBar{
+                display: block !important;
+            }
             .container {
                 margin-left: 60px;
             }
@@ -726,7 +732,6 @@
             let width = document.body.offsetWidth;
             if (width < 767) {
                 const sidebar = document.querySelector('.mySlidBar').classList.add('mySlidBarActive');
-                console.log(sidebar);
                 $('.container').css({
                     'marginLeft': '65px',
                     'marginRight': '0'

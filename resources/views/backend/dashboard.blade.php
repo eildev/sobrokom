@@ -130,10 +130,10 @@
         <div class="row">
             <div class="col-12 mb-3 d-flex">
                 <button class="btn btn-sm btn-info me-1 toDayHistory" onclick="historyFunction(this)" value="today">Today</button>
-                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Weekly">Current Weekly</button>
-                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Monthly">Current Monthly</button>
-                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="Yearly">Current Yearly</button>
-                <input type="month" class="bg-info border-0 rounded">
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="currentWeekly">Current Weekly</button>
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="currentMonthly">Current Monthly</button>
+                <button class="btn btn-sm btn-info me-1" onclick="historyFunction(this)" value="currentYearly">Current Yearly</button>
+                <input type="month" class="bg-info border-0 rounded ps-2 monthandyear">
                 <div class="ms-1">
                     <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Year</button>
                     <ul class="dropdown-menu" style="margin: 0px;">
@@ -151,18 +151,18 @@
                     <div class="card radius-10 bg-gradient-ohhappiness">
                         <div class="card-body">
                             <div class="text-center text-white">
-                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                                <label style="text-decoration: underline">Date: <span class="order_date"></span></label>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Total Order </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                    <p class="mb-0 text-white total_order"> 0</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Quantity </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
+                                    <p class="mb-0 text-white order_quantity"> 0 </p>
                                 </div>
                             </div>
                             <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -171,7 +171,7 @@
                             </div>
                             <div class="d-flex align-items-center text-white">
                                 <h6 class="mb-0">Amount</h6>
-                                <p class="mb-0 ms-auto">151521212 TK</p>
+                                <p class="mb-0 ms-auto order_amount">0 </p>
                             </div>
                         </div>
                     </div>
@@ -180,18 +180,18 @@
                     <div class="card radius-10 bg-gradient-ohhappiness">
                         <div class="card-body">
                             <div class="text-center text-white">
-                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                                <label style="text-decoration: underline">Date: <span class="purchase_date"></span></label>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Total Purchase </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                    <p class="mb-0 text-white purchase_quantity">0</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Quantity </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
+                                    <p class="mb-0 text-white total_purchase">0</p>
                                 </div>
                             </div>
                             <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -200,7 +200,7 @@
                             </div>
                             <div class="d-flex align-items-center text-white">
                                 <h6 class="mb-0">Amount</h6>
-                                <p class="mb-0 ms-auto">151521212 TK</p>
+                                <p class="mb-0 ms-auto purchase_amount">0</p>
                             </div>
                         </div>
                     </div>
@@ -209,18 +209,18 @@
                     <div class="card radius-10 bg-gradient-ohhappiness">
                         <div class="card-body">
                             <div class="text-center text-white">
-                                <label style="text-decoration: underline">Date: 02-02-2024</label>
+                                <label style="text-decoration: underline ">Date: <span class="refund_date"></span></label>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Total Refund </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }}</p>
+                                    <p class="mb-0 text-white total_refund"> 0</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-white">Total Quantity </p>
                                 <div class="ms-auto">
-                                    <p class="mb-0 text-white"> {{ $visitors }} </p>
+                                    <p class="mb-0 text-white refund_quantity"> 0 </p>
                                 </div>
                             </div>
                             <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -229,7 +229,7 @@
                             </div>
                             <div class="d-flex align-items-center text-white">
                                 <h6 class="mb-0">Amount</h6>
-                                <p class="mb-0 ms-auto">151521212 TK</p>
+                                <p class="mb-0 ms-auto refund_amount"></p>
                             </div>
                         </div>
                     </div>
@@ -352,16 +352,64 @@
         <!--end row-->
     </div>
     <script>
-        const toDayHistory = document.querySelector('.toDayHistory');
-        // toDayHistory.addEventListener('click', () => {
-        //     alert()
-        // });
+        const monthandyear = document.querySelector('.monthandyear');
+        monthandyear.addEventListener('change', function(e){
+            alert(this.value)
+        });
+
         function historyFunction(resultValue){
             $.ajax({
                 url:"/current-history/"+resultValue.value,
                 type:"GET",
                 success:function(result){
-                    console.log(result);
+
+                    let order_date ='';
+                    let total_order = 0;
+                    let order_quantity = 0;
+                    let order_amount = 0;
+                    $.each(result.orderData, function(key, value){
+                        order_quantity += parseFloat(value.total_quantity);
+                        order_amount += parseFloat(value.grand_total);
+                        total_order += parseFloat(value.count);
+                        order_date = value.order_date;
+                    });
+                    let refund_date ='';
+                    let total_refund = 0;
+                    let refund_quantity = 0;
+                    let refund_amount = 0;
+                    $.each(result.refundData, function(key, value){
+                        refund_quantity += parseFloat(value.total_quantity);
+                        refund_amount += parseFloat(value.grand_total);
+                        total_refund += parseFloat(value.count);
+                        refund_date = value.order_date;
+                    });
+
+                    let purchase_date ='';
+                    let total_purchase = 0;
+                    let purchase_quantity = 0;
+                    let purchase_amount = 0;
+                    $.each(result.purchaseData, function(key, value){
+                        purchase_quantity += parseFloat(value.total_quantity);
+                        purchase_amount += parseFloat(value.grand_total);
+                        total_purchase += parseFloat(value.count);
+                        purchase_date = value.purchase_date;
+                    });
+
+
+                    $('.order_date').text(order_date);
+                    $('.total_order').text(total_order);
+                    $('.order_quantity').text(order_quantity);
+                    $('.order_amount').text(order_amount);
+
+                    $('.purchase_date').text(purchase_date);
+                    $('.purchase_quantity').text(purchase_quantity);
+                    $('.total_purchase').text(total_purchase);
+                    $('.purchase_amount').text(purchase_amount);
+
+                    $('.refund_date').text(refund_date);
+                    $('.refund_quantity').text(refund_quantity);
+                    $('.total_refund').text(total_refund);
+                    $('.refund_amount').text(refund_amount);
                 }
             });
         }
