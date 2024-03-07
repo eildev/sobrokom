@@ -16,6 +16,7 @@
                                 <a target="_blank" href="https://www.facebook.com/profile.php?id=100094627520182"><i
                                         class="fab fa-facebook-f"></i></a>
                                 <a href="https://www.instagram.com/sobrokom.store/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="https://wa.me/12345678901" target="_blank"><i class="fab fa-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>

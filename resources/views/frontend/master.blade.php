@@ -71,13 +71,13 @@
     <style>
         .chat {
             font-size: 20px;
-            display: none !important;
+            /* display: none !important; */
             justify-content: center;
             align-items: center;
             position: fixed;
             bottom: 24px;
-            left: 20px;
-            z-index: 99999;
+            left: 30px;
+            z-index: 99999999;
             border-radius: 50%;
             height: 50px;
             width: 50px;
@@ -85,7 +85,9 @@
             background: #2D2A6E;
             border-color: #9e54a1 !important;
         }
-
+        .chat i{
+            padding-top: 8px
+        }
         .chat:hover {
             scale: 1.045;
             color: #2D2A6E !important;
@@ -682,6 +684,12 @@
             .container {
                 margin-left: 60px;
             }
+            .top_search{
+                margin-left:50px !important;
+            }
+            .chat{
+                display: block !important;
+            }
         }
 
         @media (max-width: 767px),
@@ -721,7 +729,9 @@
             .my-scroll-top {
                 display: none !important;
             }
-
+            .chat{
+                display: none !important;
+            }
             .container {
                 margin-top: 40px !important;
             }

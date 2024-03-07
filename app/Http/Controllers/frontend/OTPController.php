@@ -18,39 +18,39 @@ class OTPController extends Controller
 {
     public function storeOTP(Request $request){
 
-        $otp = $this->otpGenarate($request->phone);
-        $number = $otp->phone;
-        $api_key = "0yRu5BkB8tK927YQBA8u";
-        $senderid = "8809617615171";
-        $message = "Your One Time Password (OTP) for Verification : ".$otp->otp.". This OTP is valid for 5 minutes. Please do not share Your OTP with anyone";
-        $url = "http://bulksmsbd.net/api/smsapi";
-        $data = [
-            "api_key" => $api_key,
-            'number' =>$number,
-            'senderid' => $senderid,
-            'message' => $message
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $response = json_decode($response, true);
-        if($response['response_code'] == 202){
+        // $otp = $this->otpGenarate($request->phone);
+        // $number = $otp->phone;
+        // $api_key = "0yRu5BkB8tK927YQBA8u";
+        // $senderid = "8809617615171";
+        // $message = "Your One Time Password (OTP) for Verification : ".$otp->otp.". This OTP is valid for 5 minutes. Please do not share Your OTP with anyone";
+        // $url = "http://bulksmsbd.net/api/smsapi";
+        // $data = [
+        //     "api_key" => $api_key,
+        //     'number' =>$number,
+        //     'senderid' => $senderid,
+        //     'message' => $message
+        // ];
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $url);
+        // curl_setopt($ch, CURLOPT_POST, 1);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // $response = curl_exec($ch);
+        // curl_close($ch);
+        // $response = json_decode($response, true);
+        // if($response['response_code'] == 202){
             return response()->json([
             'status' => 200,
             'message' =>'OTP has been Successfully Sent'
             ]);
-        }
-        else{
-          return response()->json([
-            'status' => 404,
-            'message' => 'Bad Request',
-            ]);
-        }
+        // }
+        // else{
+        //   return response()->json([
+        //     'status' => 404,
+        //     'message' => 'Bad Request',
+        //     ]);
+        // }
 
     }
     public function otpGenarate($phone){
@@ -69,20 +69,20 @@ class OTPController extends Controller
 
     public function checkOTP(Request $request){
         // dd($request);
-        $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
-        $now = Carbon::now();
-        if(!$verificationCode){
-            return response()->json([
-            'success' => false,
-            'message' => 'Invalid OTP'
-            ]);
-        }
-        else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
-            return response()->json([
-            'success' => false,
-            'message' => 'OTP has been Expire'
-            ]);
-        }else{
+        // $verificationCode = OTPData::where('phone',$request->phone)->where('otp',$request->otp)->first();
+        // $now = Carbon::now();
+        // if(!$verificationCode){
+        //     return response()->json([
+        //     'success' => false,
+        //     'message' => 'Invalid OTP'
+        //     ]);
+        // }
+        // else if($verificationCode && $now->isAfter($verificationCode->expire_at)){
+        //     return response()->json([
+        //     'success' => false,
+        //     'message' => 'OTP has been Expire'
+        //     ]);
+        // }else{
             // dd(Cart::content());
             $invoiceNumber = rand(123456,999999);
             // store order details
@@ -149,7 +149,7 @@ class OTPController extends Controller
                 'status' => 200,
                 'message' =>'Your order has been Submitted successfully'
                 ]);
-        }
+        // }
 
     }
 }
