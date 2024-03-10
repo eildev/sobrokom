@@ -106,9 +106,9 @@
 
                                 <style>
                                     /* input::-webkit-inner-spin-button,
-                                                            input::-webkit-outer-spin-button {
-                                                                -webkit-appearance: none !important;
-                                                            } */
+                                                                    input::-webkit-outer-spin-button {
+                                                                        -webkit-appearance: none !important;
+                                                                    } */
                                 </style>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
@@ -224,14 +224,14 @@
                                                         <input type="radio" class="shipping_checked" name="shipping"
                                                             id="in_side_shipping">
                                                         <label for="in_side_shipping">
-                                                            In Side Dhaka Up to 2 kg: <span class="amount">৳<span
+                                                            In Side Dhaka: <span class="amount">৳<span
                                                                     class="in_side_shipping_amount">80</span></span>
                                                         </label>
                                                     </li>
                                                     <li>
                                                         <input type="radio" class="shipping_checked" name="shipping"
                                                             id="out_side_shipping">
-                                                        <label for="out_side_shipping">Out Side Of Dhaka Up to 2 kg: <span
+                                                        <label for="out_side_shipping">Out Side Of Dhaka: <span
                                                                 class="amount">৳
                                                                 <span class="out_side_shipping_amount">140</span>.00</>
                                                             </span></label>
@@ -620,7 +620,7 @@
                     shipping_amount,
                     "grand_total": orderGrandTotal,
                     payment_method,
-                    payment_id,
+                    payment_id
                 },
                 success: function(res) {
                     // console.log(res);

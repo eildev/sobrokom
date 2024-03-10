@@ -85,9 +85,11 @@
             background: #2D2A6E;
             border-color: #9e54a1 !important;
         }
-        .chat i{
+
+        .chat i {
             padding-top: 8px
         }
+
         .chat:hover {
             scale: 1.045;
             color: #2D2A6E !important;
@@ -381,44 +383,46 @@
                 });
             })
         });
+
+        // add to cart 
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
-                element.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    let product_id = this.elements.product_id.value;
-                    let variant_id = this.elements.variant_id.value;
-                    let selling_price = this.elements.selling_price.value;
-                    let weight = this.elements.weight.value;
-                    let unit = this.elements.unit.value;
-                    // console.log(product_id, variant_id,selling_price);
-                    $.ajax({
-                        url: '/product/add_to_cart',
-                        type: 'POST',
-                        data: {
-                            'product_id': product_id,
-                            'variant_id': variant_id,
-                            'selling_price': selling_price,
-                            'pr_quantity': '1',
-                            'weight': weight,
-                            'unit': unit
-                        },
-                        success: function(response) {
-                            if (response.status == 200) {
-                                toastr.success(response.message);
-                                showCart();
-                            } else {
-
-                            }
-                        }
-                    });
-
+            element.addEventListener('submit', function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
                 });
-            })
+                let product_id = this.elements.product_id.value;
+                let variant_id = this.elements.variant_id.value;
+                let selling_price = this.elements.selling_price.value;
+                let weight = this.elements.weight.value;
+                let unit = this.elements.unit.value;
+                // console.log(product_id, variant_id,selling_price);
+                $.ajax({
+                    url: '/product/add_to_cart',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                        'variant_id': variant_id,
+                        'selling_price': selling_price,
+                        'pr_quantity': '1',
+                        'weight': weight,
+                        'unit': unit
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            showCart();
+                        } else {
+
+                        }
+                    }
+                });
+
+            });
+        })
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -673,21 +677,25 @@
         .container {
             margin-left: 215px;
         }
-        .mySlidBar{
+
+        .mySlidBar {
+            display: block !important;
+        }
+
+        @media (max-width: 1080px) {
+            .mySlidBar {
                 display: block !important;
             }
 
-        @media (max-width: 1080px) {
-            .mySlidBar{
-                display: block !important;
-            }
             .container {
                 margin-left: 60px;
             }
-            .top_search{
-                margin-left:50px !important;
+
+            .top_search {
+                margin-left: 50px !important;
             }
-            .chat{
+
+            .chat {
                 display: block !important;
             }
         }
@@ -729,9 +737,11 @@
             .my-scroll-top {
                 display: none !important;
             }
-            .chat{
+
+            .chat {
                 display: none !important;
             }
+
             .container {
                 margin-top: 40px !important;
             }

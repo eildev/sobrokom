@@ -42,15 +42,10 @@ class OTPController extends Controller
         // curl_close($ch);
         // $response = json_decode($response, true);
         // if($response['response_code'] == 202){
-            return response()->json([
-                'status' => 200,
-                'message' => 'OTP has been Successfully Sent'
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => 'Bad Request',
-            ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'OTP has been Successfully Sent'
+        ]);
         // }
         // else{
         //   return response()->json([
@@ -92,38 +87,37 @@ class OTPController extends Controller
         //     'message' => 'OTP has been Expire'
         //     ]);
         // }else{
-            // dd(Cart::content());
-            $invoiceNumber = rand(123456,999999);
-            // store order details
-                $order = new Order;
-                $identifer = '';
-                if(!empty(Auth::user()->id)){
-                    $identifer = Auth::user()->id;
-                }
-                else{
-                    $identifer = $request->phone;
-                }
-                $order->user_identity = $identifer;
-                $order->invoice_number = $invoiceNumber;
-                $order->product_quantity = Cart::count();
-                $order->product_total = Cart::total();
-                $order->coupon_id = $request->coupon_id;
-                $order->discount = $request->discount;
-                $order->sub_total = $request->sub_total;
-                $order->shipping_method = 'In Dhaka';
-                $order->shipping_amount = $request->shipping_amount;
-                $order->grand_total = $request->sub_total;
-                $order->payment_method = 'Cash on Delivery';
-                $order->save();
-            // store billing details
-                $validator = Validator::make($request->all(), [
-                    'phone' => 'required|max:11|min:11',
-                    'first_name' => 'required|max:15',
-                    'address_1' => 'required|max:5',
-                    'city' => 'required||max:100',
-                    'division' => 'required|max:5',
-                    'post_code' => 'required'
-                ]);
+        // dd(Cart::content());
+        $invoiceNumber = rand(123456, 999999);
+        // store order details
+        $order = new Order;
+        $identifer = '';
+        if (!empty(Auth::user()->id)) {
+            $identifer = Auth::user()->id;
+        } else {
+            $identifer = $request->phone;
+        }
+        $order->user_identity = $identifer;
+        $order->invoice_number = $invoiceNumber;
+        $order->product_quantity = Cart::count();
+        $order->product_total = Cart::total();
+        $order->coupon_id = $request->coupon_id;
+        $order->discount = $request->discount;
+        $order->sub_total = $request->sub_total;
+        $order->shipping_method = 'In Dhaka';
+        $order->shipping_amount = $request->shipping_amount;
+        $order->grand_total = $request->sub_total;
+        $order->payment_method = 'Cash on Delivery';
+        $order->save();
+        // store billing details
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|max:11|min:11',
+            'first_name' => 'required|max:15',
+            'address_1' => 'required|max:5',
+            'city' => 'required||max:100',
+            'division' => 'required|max:5',
+            'post_code' => 'required'
+        ]);
 
         $order_billing_details = new OrderBillingDetails;
         $order_billing_details->phone = $request->phone;
@@ -141,23 +135,24 @@ class OTPController extends Controller
         $order_billing_details->save();
 
 
-            // Product oRDER Details
-                $products = Cart::content();
-                foreach($products as $product) {
-                    $OrderDetails = new OrderDetails;
-                    $OrderDetails->order_id = $order->id;
-                    $OrderDetails->product_id = $product->id;
-                    $OrderDetails->weight = $product->weight;
-                    $OrderDetails->product_price = $product->price;
-                    $OrderDetails->total_price = $product->price;
-                    $OrderDetails->product_quantity = $product->qty;
-                    $OrderDetails->save();
-                }
-                Cart::destroy();
-                return response()->json([
-                'status' => 200,
-                'message' =>'Your order has been Submitted successfully'
-                ]);
+        // Product oRDER Details
+        $products = Cart::content();
+        foreach ($products as $product) {
+            $OrderDetails = new OrderDetails;
+            $OrderDetails->order_id = $order->id;
+            $OrderDetails->product_id = $product->id;
+            $OrderDetails->variant_id = $product->options->variant_id;
+            $OrderDetails->weight = $product->weight;
+            $OrderDetails->product_price = $product->price;
+            $OrderDetails->total_price = $product->price * $product->qty;
+            $OrderDetails->product_quantity = $product->qty;
+            $OrderDetails->save();
+        }
+        Cart::destroy();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Your order has been Submitted successfully'
+        ]);
         // }
 
     }

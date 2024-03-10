@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id')->unsigned();
             $table->string('product_id');
+            $table->string('variant_id');
             $table->string('product_quantity');
             $table->float('total_price');
             $table->string('weight');
