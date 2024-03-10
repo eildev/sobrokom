@@ -106,9 +106,9 @@
 
                                 <style>
                                     /* input::-webkit-inner-spin-button,
-                                                        input::-webkit-outer-spin-button {
-                                                            -webkit-appearance: none !important;
-                                                        } */
+                                                            input::-webkit-outer-spin-button {
+                                                                -webkit-appearance: none !important;
+                                                            } */
                                 </style>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
@@ -537,7 +537,8 @@
                             if (res.status == 200) {
                                 document.querySelector(".pageLoader").style.setProperty("display",
                                     "none", "important");
-                                $('#otpCheck').modal('show');
+                                // $('#otpCheck').modal('show');
+                                SubmitOrder();
                             }
                         }
                     })
@@ -550,8 +551,7 @@
 
 
         // otp send order place Data
-        document.querySelector('.otp_send').addEventListener('click', function(e) {
-            e.preventDefault();
+        function SubmitOrder() {
             let user_phone = document.querySelector('.user_phone').value;
             let otp_code = document.querySelector('.otp_code').value;
             $.ajaxSetup({
@@ -632,10 +632,94 @@
                         toastr.success(res.message);
                     }
                 }
-            })
+            });
+        }
+        // document.querySelector('.otp_send').addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     let user_phone = document.querySelector('.user_phone').value;
+        //     let otp_code = document.querySelector('.otp_code').value;
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+
+        //     // get order billing details
+        //     const first_name = $('.first_name').val();
+        //     const last_name = $('.last_name').val();
+        //     const email = $('.email').val();
+        //     const phone = $('.phone').val();
+        //     const address_1 = $('.address_1').val();
+        //     const address_2 = $('.address_2').val();
+        //     const city = $('.city').val();
+        //     const division = $('.division').val();
+        //     const post_code = $('.post_code').val();
+        //     const country = $('.country').val();
+        //     const order_notes = $('.order_notes').text();
+
+        //     // get order details
+        //     const product_quantity = "{{ Cart::count() }}";
+        //     const coupon_id = document.querySelector('.coupon_id').value;
+        //     const cartTotal = parseFloat('{{ Cart::total() }}');
+        //     let couponDiscount = parseInt(document.querySelector(".coupon_discount_amount").value);
+        //     const orderTotal = parseFloat(document.querySelector(".sub_total_with_shiping_amaount").textContent)
+        //         .toFixed(2);
+        //     // console.log(orderTotal);
+        //     // console.log(document.querySelector(".sub_total_with_shiping_amaount").textContent);
+        //     const shipping_method = $('.shipping_method').text();
+        //     const shipping_amount = orderTotal - cartTotal;
+        //     let orderGrandTotal = 0;
+        //     const grand_total = parseFloat(document.querySelector(".grand_total_amount").textContent).toFixed(2);
+        //     if (grand_total > 0) {
+        //         orderGrandTotal = grand_total;
+        //     } else {
+        //         orderGrandTotal = orderTotal;
+        //     }
+        //     const payment_method = "Cash On Delivery";
+        //     const payment_id = "";
+        //     $.ajax({
+        //         url: '/otp/check',
+        //         type: 'post',
+        //         data: {
+        //             'phone': user_phone,
+        //             'otp': otp_code,
+
+        //             first_name,
+        //             last_name,
+        //             email,
+        //             phone,
+        //             address_1,
+        //             address_2,
+        //             city,
+        //             division,
+        //             post_code,
+        //             country,
+        //             order_notes,
+
+        //             "product_quantity": product_quantity,
+        //             coupon_id,
+        //             discount: couponDiscount,
+        //             "sub_total": orderTotal,
+        //             shipping_method,
+        //             shipping_amount,
+        //             "grand_total": orderGrandTotal,
+        //             payment_method,
+        //             payment_id,
+        //         },
+        //         success: function(res) {
+        //             // console.log(res);
+        //             if (res.status == 200) {
+        //                 $('#otpCheck').modal('hide');
+        //                 toastr.success(res.message);
+        //                 window.location.href = "/";
+        //             } else {
+        //                 toastr.success(res.message);
+        //             }
+        //         }
+        //     })
 
 
-        });
+        // });
 
         // total weight calculate
         function totalWeight() {

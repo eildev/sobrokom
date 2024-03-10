@@ -71,13 +71,13 @@
     <style>
         .chat {
             font-size: 20px;
-            display: none !important;
+            /* display: none !important; */
             justify-content: center;
             align-items: center;
             position: fixed;
             bottom: 24px;
-            left: 20px;
-            z-index: 99999;
+            left: 30px;
+            z-index: 99999999;
             border-radius: 50%;
             height: 50px;
             width: 50px;
@@ -85,7 +85,9 @@
             background: #2D2A6E;
             border-color: #9e54a1 !important;
         }
-
+        .chat i{
+            padding-top: 8px
+        }
         .chat:hover {
             scale: 1.045;
             color: #2D2A6E !important;
@@ -240,7 +242,7 @@
             </div>
         </div>
         <div class="mySlidBar"
-            style="width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white">
+            style="display:none;width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white;">
             <div class="my_menu">
                 <div class="my_menu_inner">
                     <div class="my_menu_list">
@@ -611,9 +613,9 @@
     <style>
         .mySlidBarActive {
             width: 0px !important;
-            display: none;
+            display: block !important;
             padding: 0px !important;
-            transition: 0.2s ease-in-out;
+            /* transition: 0.2s ease-in-out; */
         }
 
         .first_liActive {
@@ -671,10 +673,22 @@
         .container {
             margin-left: 215px;
         }
+        .mySlidBar{
+                display: block !important;
+            }
 
         @media (max-width: 1080px) {
+            .mySlidBar{
+                display: block !important;
+            }
             .container {
                 margin-left: 60px;
+            }
+            .top_search{
+                margin-left:50px !important;
+            }
+            .chat{
+                display: block !important;
             }
         }
 
@@ -715,7 +729,9 @@
             .my-scroll-top {
                 display: none !important;
             }
-
+            .chat{
+                display: none !important;
+            }
             .container {
                 margin-top: 40px !important;
             }
@@ -726,7 +742,6 @@
             let width = document.body.offsetWidth;
             if (width < 767) {
                 const sidebar = document.querySelector('.mySlidBar').classList.add('mySlidBarActive');
-                console.log(sidebar);
                 $('.container').css({
                     'marginLeft': '65px',
                     'marginRight': '0'
