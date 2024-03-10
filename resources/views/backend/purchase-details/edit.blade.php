@@ -113,7 +113,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="inputCompareatprice" class="form-label">Unit Price</label>
+                                            <label for="inputCompareatprice" class="form-label">Product Price</label>
                                             <input type="number"
                                                 class="form-control @error('unit_price') is-invalid  @enderror"
                                                 id="unit_price" placeholder="00.00" name="unit_price"

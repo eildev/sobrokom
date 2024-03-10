@@ -126,6 +126,17 @@ class ProductController extends Controller
         return redirect()->back()->with('message', 'status changed successfully');
     }
 
+
+    // product status changed
+    public function findSku()
+    {
+        // dd($request);
+        $sku = Product::whereMax('sku');
+        return response()->json([
+            'sku' => $sku
+        ]);
+    }
+
     // product update function 
     public function update(Request $request, $id)
     {

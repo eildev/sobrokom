@@ -155,7 +155,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class=""
-                                                    style="height:'150'; width: 200px; object-fit: contain;"
+                                                    style="height:'150'; width: 150px; object-fit: contain;"
                                                     src="{{ asset('uploads/productempty.jpg') }}" alt="Product Image">
                                             </div>
 
@@ -386,25 +386,25 @@
 
     <script>
         // sku Generator
-        function generateProductSKU(length) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let sku = '';
+        // function generateProductSKU(length) {
+        //     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        //     let sku = '';
 
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * characters.length);
-                sku += characters.charAt(randomIndex);
-            }
-            return sku;
-        }
-        document.querySelector(".product_name").addEventListener('blur', function() {
-            const skuGenerate = document.querySelector(".sku_generate");
-            const productNameValue = this.value;
-            // console.log(productNameValue);
+        //     for (let i = 0; i < length; i++) {
+        //         const randomIndex = Math.floor(Math.random() * characters.length);
+        //         sku += characters.charAt(randomIndex);
+        //     }
+        //     return sku;
+        // }
+        // document.querySelector(".product_name").addEventListener('blur', function() {
+        //     const skuGenerate = document.querySelector(".sku_generate");
+        //     const productNameValue = this.value;
+        //     // console.log(productNameValue);
 
-            if (productNameValue.trim() !== '') {
-                skuGenerate.value = generateProductSKU(10);
-            }
-        })
+        //     if (productNameValue.trim() !== '') {
+        //         skuGenerate.value = generateProductSKU(6);
+        //     }
+        // })
         // !.. add product ajax Crud
         // const add_product = document.querySelector('.add_product');
         // add_product.addEventListener('click', function(e) {
