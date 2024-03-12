@@ -50,6 +50,9 @@
                                             <td>
                                                 <a href="{{ route('admin.refunded.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Approve</a>
                                             </td>
+                                            <td>
+                                                <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else

@@ -5,7 +5,7 @@
             <div class="card border-top border-0 border-3 border-info col-md-12">
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 text-info">Confirmed Order list</h5>
+                        <h5 class="mb-0 text-info">Denied Orders</h5>
                     </div>
                     <hr>
                     <div class="table-responsive">
@@ -28,8 +28,8 @@
                                 @php
                                     $serialNumber = 1;
                                 @endphp
-                                @if ($approved_orders->count() > 0)
-                                    @foreach ($approved_orders as $order)
+                                @if ($denied_orders->count() > 0)
+                                    @foreach ($denied_orders as $order)
                                     @php
                                     $originalDateString = $order->created_at;
                                     $dateTime = new DateTime($originalDateString);
@@ -48,9 +48,7 @@
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.process.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Process</a>
                                                 <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
-                                                <a href="#" class="btn btn-sm btn-danger" id="delete">Cancel</a>
                                             </td>
                                         </tr>
                                     @endforeach

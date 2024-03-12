@@ -271,6 +271,9 @@
                 <li>
                     <a href="{{ route('order.canceled') }}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>
                 </li>
+                <li>
+                    <a href="{{ route('order.denied') }}"><i class="bx bx-right-arrow-alt"></i>Denied Orders</a>
+                </li>
             </ul>
         </li>
         <li>

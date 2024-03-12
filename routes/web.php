@@ -176,6 +176,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/new-order', 'index')->name('new.order');
 
         Route::get('/admin-approve-order/{invoiceNumber}', 'adminApprove')->name('admin.approve.order');
+        Route::get('/admin-denied-order/{invoiceNumber}', 'adminDenied')->name('admin.denied.order');
+        Route::get('/order/denied', 'deniedOrders')->name('order.denied');
 
 
         Route::get('/order/confirmed', 'approvedOrders')->name('order.confirmed');

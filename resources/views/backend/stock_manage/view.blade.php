@@ -33,6 +33,7 @@
                                 @endphp
                                 @if ($products->count() > 0)
                                     @foreach ($products as $product)
+                                        {{-- @dd($product->varient[0]->discount_amount); --}}
                                         {{-- @dd($product->brand->BrandName); --}}
 
                                         <tr>
@@ -45,13 +46,13 @@
                                             <td>{{ $product->category->categoryName }}</td>
                                             <td>{{ $product->brand->BrandName }}</td>
                                             <td>
-                                                {{ $product->varient[0]->discount_amount}}
+                                                {{ $product->varient[0]->discount_amount ?? ''}}
                                             </td>
                                             <td>
-                                                {{ $product->varient[0]->stock_quantity}}
+                                                {{ $product->varient[0]->stock_quantity ?? ''}}
                                             </td>
                                             <td>
-                                                {{ $product->varient[0]->unit}}
+                                                {{ $product->varient[0]->unit ?? ''}}
                                             </td>
 
                                             <td>
