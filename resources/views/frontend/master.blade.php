@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,13 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keyword"
         content="onlineshopping,e-commerce,groceryfoods,electronics,homedecor,gadgets,trendyapparel,affordableprices,qualityproducts,techaccessories,lifestyle,exclusivedeals,fastshipping,bestprices,homeessentials,stylishgoods,modernliving,smarthome,latesttrends,beautyproducts,uniquefinds,digitalmarketplace,convenientshopping,securetransactions,customersatisfaction">
-    <!-- Ajax Header -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/assets/img/logo/favicon.svg">
-
-    <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/animate.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/swiper-bundle.css">
@@ -30,95 +24,71 @@
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/main.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/all.css">
     <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/invoice.css">
-
-    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('frontend') }}/assets/css/homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
-
-    {{-- main jquery file --}}
     <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
-
-    <!-- tinymce js here -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin" defer></script>-->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document
-                .querySelector(".pageLoader")
-                .style.setProperty("display", "none", "important");
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     document
+        //         .querySelector(".pageLoader")
+        //         .style.setProperty("display", "none", "important");
+        // });
+        // window.onbeforeunload = function(e) {
+            
+        //   // Delete specific local storage variables
+        // //   localStorage.removeItem('firstActiveLi');
+        // //   localStorage.removeItem('secondActiveLi');
+        // //   localStorage.removeItem('thirdActiveLi');
+        
+        //   // Note: There's no need to return anything for this use case
+        //   var message = 'Are you sure you want to leave this page?';
+        //   e.returnValue = message;
+          
+        //   // Return the message for compatibility with older browsers
+        //   return message;
+        // };
+        let isNavigatingWithinSite = false;
+
+        // Listen for clicks on links that navigate within your site
+        document.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A' && e.target.href && new URL(e.target.href).hostname === window.location.hostname) {
+            isNavigatingWithinSite = true;
+          }
         });
+        
+        // Listen for form submissions that might indicate a navigation or reload
+        document.addEventListener('submit', () => {
+          isNavigatingWithinSite = true;
+        });
+        
+        window.onbeforeunload = function() {
+          // Check if we think the user is navigating within the site
+          if (!isNavigatingWithinSite) {
+            // Seems like the user might be leaving the site, so we remove the items
+            localStorage.removeItem('firstActiveLi');
+            localStorage.removeItem('secondActiveLi');
+            localStorage.removeItem('thirdActiveLi');
+          }
+          
+          // Reset the flag
+          setTimeout(() => {
+            isNavigatingWithinSite = false;
+          }, 0);
+        };
     </script>
+    
 </head>
-
 <body style="background: var(--tp-grey-1);">
-    <style>
-        .pageLoader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-            //display:none;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, .7);
-            z-index: 9999999999999999999999;
-        }
-    </style>
-    <div class="pageLoader">
-        <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">
-    </div>
-    <style>
-        .chat {
-            font-size: 20px;
-            /* display: none !important; */
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            bottom: 24px;
-            left: 30px;
-            z-index: 99999999;
-            border-radius: 50%;
-            height: 50px;
-            width: 50px;
-            box-shadow: 1px 1px 5px gray;
-            background: #2D2A6E;
-            border-color: #9e54a1 !important;
-        }
-        .chat i{
-            padding-top: 8px
-        }
-        .chat:hover {
-            scale: 1.045;
-            color: #2D2A6E !important;
-            background: white;
-        }
-
-        .chat::after {
-            position: absolute;
-            z-index: -1;
-            content: '';
-            top: 100%;
-            left: 5%;
-            height: 10px;
-            width: 90%;
-            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
-        }
-
-        .top_search_list li {
-            cursor: pointer;
-            padding: 5px 0;
-        }
-    </style>
-
+    <!--<div class="pageLoader">-->
+    <!--    <img src="{{ asset('uploads/pageloader.gif') }}" style="width:112px;">-->
+    <!--</div>-->
     <a target="_blank" class="chat btn btn-info text-white" href="https://www.m.me/105731512599106"><i
             class="fab fa-facebook-messenger"></i></a>
-
     @php
         $cartData = Cart::content();
         // @dd(Cart::total());
     @endphp
-
     @if ($cartData->count() > 0)
         @foreach ($cartData as $cart)
             {{-- @dd($cart->options->image); --}}
@@ -126,93 +96,14 @@
             {{-- <p>{{$cart->name}}</p> --}}
         @endforeach
     @endif
-    <!-- Scroll-top -->
     <button class="scroll-top scroll-to-target my-scroll-top d-flex justify-content-center align-content-center"
         data-target="html">
         <i class="icon-chevrons-up" style="margin-top: 15px"></i>
     </button>
-    <!-- Scroll-top-end-->
-
-    <!-- header-area-start -->
     <header>
         @include('frontend.body.topheader')
         @include('frontend.body.mainnav')
     </header>
-    <style>
-        .my_menu {
-            font-weight: 100;
-            font-size: 14px;
-        }
-
-        /* .first_li{
-            display: flex;
-            justify-content: space-between
-        } */
-        .first_li>ul {
-            margin-left: 13px;
-            color: white;
-            font-weight: 100;
-            font-size: 14px;
-            display: none;
-        }
-
-        .second_li>ul {
-            margin-left: 13px;
-            color: white;
-            font-weight: 100;
-            font-size: 14px;
-            display: none;
-        }
-
-        .my_menu li,
-        .my_menu i {
-            line-height: 30px
-        }
-
-        hr {
-            margin: 0
-        }
-
-        .mobile-bottom-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            right: 0;
-            background: #2D2C6E;
-            color: #2D2C6E;
-            z-index: 999;
-            border-top: 1px solid white;
-        }
-
-        .bottom-chat,
-        .mycard {
-            padding: 7px 10px;
-            background: white;
-            text-align: center
-        }
-
-        .mycard {
-            width: 80px;
-            height: 100% !important;
-            padding: 14px 10px;
-        }
-
-        .cardI {
-            font-size: 40px
-        }
-
-        .bottom-chat a {
-            color: #2D2C6E !important;
-            background: white !important;
-            border: none;
-            display: flex;
-            justify-content: center;
-            padding: 7px 10px;
-        }
-    </style>
-    <!-- header-area-end -->
-
     <main>
         <div class="mobile-bottom-menu d-none justify-content-between align-items-center">
             <div class="bottom-chat brl" style="width: 80px">
@@ -234,30 +125,82 @@
                 <div class="header__info-cart tp-cart-toggle">
                     <button>
                         <i class="cardI">
+                            
                             <img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt="">
+                            <span class="cart_quantity">0</span>
                         </i>
                         {{-- <span class="cart_quantity d-inline"></span> --}}
                     </button>
                 </div>
             </div>
         </div>
-        <div class="mySlidBar"
-            style="display:none;width: 220px; background:#2D2C6E; overflow-y:scroll;position:fixed; z-index:99999;height:100%;top:65px;padding:15px;color:white;">
+        <style>
+         ::-webkit-scrollbar {
+            width: 10px !important;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--tp-heading-secondary)
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2D2C6E;
+        }
+        .mySlidBar{
+            display:none;
+            width: 220px; 
+            background: #2D2C6E; 
+            overflow-y: scroll;
+            position: fixed; 
+            z-index: 99999;
+            height: 100%;
+            top: 50px;
+            padding: 15px;
+            transition: width 0.2s ease-in-out; /* Ensure smooth opening/closing */
+            color:white;
+        }
+        @media (max-width: 767px),
+        only screen and (min-width: 476px) and (max-width: 867px) {
+            .item_remove{
+                margin-left: -22px !important;
+            }
+            .ppp{
+                /*background: red !important;*/
+                padding-top: 50px !important;
+            }
+            .category-span{
+                font-size: 11.5px !important;
+            }
+            .subcategory-breadcrum{
+                margin-top:90px;
+            }
+            .breadcrumb__checkout{
+                margin-top:100px;
+            }
+            .my__breadcrumb{
+                 margin-top:100px !important;
+            }
+        }
+        </style>
+        <div class="mySlidBar">
             <div class="my_menu">
                 <div class="my_menu_inner">
                     <div class="my_menu_list">
                         <ul class="list-unstyled">
-                            <li class="first_li"><a href="#weekly_offers">Weekly Offers</a>
-                            <li>
-                                <hr>
-                            <li class="first_li"><a href="#New_Arrivals">New Arrivals</a>
-                            <li>
-                                <hr>
-                            <li class="first_li"><a href="#top_trending">Top Trending</a>
-                            <li>
+                            <!--<li class="first_li"><a href="#weekly_offers">Weekly Offers</a>-->
+                            <!--<li>-->
+                            <!--    <hr>-->
+                            <!--<li class="first_li"><a href="#New_Arrivals">New Arrivals</a>-->
+                            <!--<li>-->
+                            <!--    <hr>-->
+                            <!--<li class="first_li"><a href="#top_trending">Top Trending</a>-->
+                            <!--<li>-->
                                 <hr>
                                 @php
-                                    $categoris = App\Models\Category::all();
+                                    $categoris = App\Models\Category::orderBy('order_by', 'ASC')->get();;
                                 @endphp
                                 @if ($categoris->count() > 0)
                                     @foreach ($categoris as $category)
@@ -271,7 +214,6 @@
                                         @foreach ($subcategories as $subcategory)
                                             <li class="second_li" id="second_li_{{ $subcategory->id }}"><a
                                                     href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
-
                                                 @php
                                                     $subSubcategories = App\Models\SubSubcategory::where(
                                                         'subcategoryId',
@@ -290,7 +232,6 @@
                                                         @endforeach
                                                     </ul>
                                                 @endif
-
                                             </li>
                                         @endforeach
                                     @endif
@@ -310,32 +251,84 @@
         </div>
         @yield('maincontent')
     </main>
-    <!-- footer-area-start -->
+    <style>
+        .item_remove{
+            font-size:22px;
+            margin-left: -11px;
+        }
+        
+    </style>
     @include('frontend.body.footer')
-    <!-- footer-area-end -->
-    <!-- JS here -->
-    <script src="{{ asset('frontend') }}/assets/js/jquery.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/waypoints.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/swiper-bundle.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/nice-select.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/slick.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/magnific-popup.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/counterup.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/wow.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/isotope-pkgd.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/imagesloaded-pkgd.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/countdown.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/ajax-form.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/meanmenu.js"></script>
-    <script src="{{ asset('frontend') }}/assets/js/main.js"></script>
-    <script src="{{ asset('js') }}/share.js"></script>
-
+    <script src="{{ asset('frontend') }}/assets/js/jquery.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/waypoints.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/swiper-bundle.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/nice-select.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/slick.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/magnific-popup.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/counterup.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/wow.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/isotope-pkgd.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/imagesloaded-pkgd.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/countdown.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/ajax-form.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/meanmenu.js" defer></script>
+    <script src="{{ asset('frontend') }}/assets/js/main.js" defer></script>
+    <script src="{{ asset('js') }}/share.js" defer></script>
     <!-- Toastr -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- <script defer src="{{ asset('frontend') }}/assets/js/myjsforfrontendmaster.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    {{-- <script defer src="{{ asset('frontend') }}/assets/js/myjsforfrontendmaster.js" ></script> --}}
+     <style>
+        .swiper-wrapper .slick-slide {
+            margin: 5px !important;
+            text-align: center;
+        }
+    </style>
     <script>
+        $(document).ready(function(){
+            $('.category-swiper-wrapper').slick({
+                slidesToShow: 7,  // Default number of slides to show
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                dots: false,
+                arrows: false,
+                responsive: [
+                    {
+                        breakpoint: 768, // Mobile devices and tablets
+                        settings: {
+                            slidesToShow: 3, // Show 2 items on smaller screens
+                            slidesToScroll: 2,
+                            dots: false,
+                            arrows: false  // Hide arrows for mobile
+                        }
+                    }
+                ]
+            });
+            
+            $('.swiper-wrapper').slick({
+                slidesToShow: 4,  // Default number of slides to show
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                dots: false,
+                arrows: false,
+                responsive: [
+                    {
+                        breakpoint: 768, // Mobile devices and tablets
+                        settings: {
+                            slidesToShow: 2, // Show 2 items on smaller screens
+                            slidesToScroll: 2,
+                            dots: false,
+                            arrows: false  // Hide arrows for mobile
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+    <script defer>
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}");
         @endif
@@ -453,10 +446,6 @@
                         '</li>'
                     );
                 }
-
-
-
-
                 if (Object.keys(cartData).length > 3) {
                     var remainingItems = Object.keys(cartData).length - itemsToDisplay;
                     $('.cart_container').append('<li>and ' + remainingItems + ' more item(s)</li>');
@@ -490,13 +479,6 @@
                         });
                         document.querySelector(".heilight-price").textContent = "৳" + totalPrice;
                         updateCartDisplay(res.cartData);
-                        // if (res.cartData.length > 0) {
-                        //     const view_checkout = document.querySelector('.view_checkout');
-                        //     view_checkout.style.display = 'block';
-                        // } else {
-                        //     const view_checkout = document.querySelector('.view_checkout');
-                        //     view_checkout.style.display = 'none';
-                        // }
                     }
                 }
             });
@@ -573,183 +555,16 @@
             }
         });
 
-        // function searchSuggetion(inputField) {
-        //     inputField.addEventListener('keyup', function(e) {
-        //         let search_value = this.value;
-        //         if (search_value) {
-        //             $.ajax({
-        //                 url: '/product/global/search/' + search_value,
-        //                 type: "GET",
-        //                 success: function(res) {
-        //                     if (res.products) {
-        //                         $('.top_search_list').css('display', 'block');
-        //                         let data = "";
-        //                         $.each(res.products, function(key, val) {
-        //                             data += '<li>' + val.product_name + '</li>';
-        //                         });
-        //                         $('.top_search_list').html(data);
-        //                     }
-        //                 }
-        //             })
-
-
-        //         } else {
-        //             $('.top_search_list').css('display', 'none');
-        //         }
-        //     });
-
-        //     $(document).on('click', '.top_search_list li', function() {
-        //         // $('.top_search').val($(this).text());
-        //         inputField.value = this.value;
-        //         $('.top_search_list').css('display', 'none');
-        //     });
-        // }
-
         $(document).on('click', '.top_search_list li', function() {
             $('.top_search').val($(this).text());
             $('.top_search_list').css('display', 'none');
         });
     </script>
-    <style>
-        .mySlidBarActive {
-            width: 0px !important;
-            display: block !important;
-            padding: 0px !important;
-            /* transition: 0.2s ease-in-out; */
-        }
-
-        .first_liActive {
-            font-weight: 500 !important;
-            color: var(--tp-heading-secondary);
-        }
-
-        .my_menu i {
-            float: right;
-        }
-
-        li {
-            cursor: pointer;
-        }
-
-        .second_liActive {
-            font-weight: 500 !important;
-            color: var(--tp-heading-secondary);
-        }
-
-        .third_liActive {
-            font-weight: 500 !important;
-            color: var(--tp-heading-secondary);
-        }
-
-        .rotate90 {
-            transform: rotate(90deg);
-            /* transition: transform 0.3s ease; */
-        }
-
-        /* width */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            background: #FFF;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: var(--tp-heading-secondary)
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2D2C6E;
-        }
-
-        .container {
-            margin-top: 20px !important;
-        }
-
-        .container {
-            margin-left: 215px;
-        }
-        .mySlidBar{
-                display: block !important;
-            }
-
-        @media (max-width: 1080px) {
-            .mySlidBar{
-                display: block !important;
-            }
-            .container {
-                margin-left: 60px;
-            }
-            .top_search{
-                margin-left:50px !important;
-            }
-            .chat{
-                display: block !important;
-            }
-        }
-
-        @media (max-width: 767px),
-        only screen and (min-width: 576px) and (max-width: 767px) {
-            .tpslider__content {
-                margin-top: 50px !important;
-            }
-
-            .tp-btn {
-                padding: 8px 30px;
-            }
-
-            .mytop-logo {
-                padding-right: 20px !important;
-            }
-
-            .accounts-nav {
-                display: none !important;
-            }
-
-            .top-serch-container {
-                margin-top: 10px
-            }
-
-            .mySlidBar {
-                margin-top: 48px !important;
-            }
-
-            .container {
-                margin: 0 !important;
-            }
-
-            .mobile-bottom-menu {
-                display: flex !important;
-            }
-
-            .my-scroll-top {
-                display: none !important;
-            }
-            .chat{
-                display: none !important;
-            }
-            .container {
-                margin-top: 40px !important;
-            }
-        }
-    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let width = document.body.offsetWidth;
-            if (width < 767) {
-                const sidebar = document.querySelector('.mySlidBar').classList.add('mySlidBarActive');
-                $('.container').css({
-                    'marginLeft': '65px',
-                    'marginRight': '0'
-                })
-            }
+            
             const firstLis = document.querySelectorAll('.first_li');
             const secondLis = document.querySelectorAll('.second_li');
-
             firstLis.forEach((li) => {
                 if (li.querySelector('ul')) { // Check if the li contains a ul
                     const icon = document.createElement('i'); // Create the i element
@@ -757,7 +572,6 @@
                     li.insertBefore(icon, li.childNodes[1]); // Insert the icon before the first child of li
                 }
             });
-
             secondLis.forEach((li) => {
                 if (li.querySelector('ul')) { // Check if the li contains a ul
                     const icon = document.createElement('i'); // Create the i element
@@ -765,39 +579,17 @@
                     li.insertBefore(icon, li.childNodes[1]); // Insert the icon before the first child of li
                 }
             });
-
             // Toggle sidebar
             const myToggle = document.querySelector('.myToggle');
             myToggle.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
-                let width = document.body.offsetWidth;
-                if (width > 1080) {
-                    if (document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')) {
-                        $('.container').css({
-                            'marginLeft': '130px',
-                            'marginRight': '0'
-                        })
-                    } else {
-                        $('.container').css({
-                            'marginLeft': '215px'
-                        })
-                    }
+                // document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
+                if(document.querySelector('.mySlidBar').style.display !='block'){
+                    document.querySelector('.mySlidBar').style.display='block';
+                }else{
+                    document.querySelector('.mySlidBar').style.display='none';
                 }
-                // if(width > 767){
-                //     if(document.querySelector('.mySlidBar').classList.contains('mySlidBarActive')){
-                //         $('.container').css({'marginLeft':'50px','marginRight':'0'})
-                //     }else{
-                //         $('.container').css({'marginLeft':'130px'})
-                //     }
-                // }
-                // let width = document.body.offsetWidth;
-                // if(width < 767){
-                //     $('.container').css({'marginLeft':'40px','marginRight':'0'})
-                // }
-                // if(width < 1081){
-                //     $('.container').css({'marginLeft':'20','width':'100%'})
-                // }
+                
             });
             // Function to handle click on list items
             function handleLiClick(items, storageKey) {
@@ -828,16 +620,12 @@
                     })
                 });
             }
-
             const first_lis = document.querySelectorAll('.first_li');
             handleLiClick(first_lis, 'firstActiveLi');
-
             const second_lis = document.querySelectorAll('.second_li');
             handleLiClick(second_lis, 'secondActiveLi');
-
             const third_lis = document.querySelectorAll('.third_li');
             handleLiClick(third_lis, 'thirdActiveLi');
-
             // Restore active state from localStorage
             function restoreActiveState(items, storageKey) {
                 const activeLiId = localStorage.getItem(storageKey);
@@ -856,85 +644,21 @@
                     }
                 }
             }
-
             restoreActiveState(first_lis, 'firstActiveLi');
             restoreActiveState(second_lis, 'secondActiveLi');
             restoreActiveState(second_lis, 'thirdActiveLi');
 
         });
-        // const myToggle = document.querySelector('.myToggle');
-        // myToggle.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     document.querySelector('.mySlidBar').classList.toggle('mySlidBarActive');
-        // });
-
-        // const first_lis = document.querySelectorAll('.first_li');
-        // first_lis.forEach((item) => {
-        //     item.addEventListener('click', function(e){
-        //         // e.preventDefault();
-        //         // alert("OK")
-        //         document.querySelectorAll('.first_li').forEach((el)=>{
-        //             el.classList.remove('first_liActive');
-        //             const insideI = el.querySelector('i');
-        //             if(insideI){
-        //                 insideI.classList.remove('rotate90');
-        //             }
-        //             if (el.querySelector('ul')) { // Check if the li contains a ul
-        //                 el.querySelector('ul').style.display ="none";
-        //         }
-        //         });
-        //         item.classList.add('first_liActive');
-        //         const insideI = item.querySelector('i');
-        //         if(insideI){
-        //             insideI.classList.add('rotate90');
-        //         }
-        //         // console.log(item)
-        //         if (item.querySelector('ul')) { // Check if the li contains a ul
-        //             item.querySelector('ul').style.display ="block";
-        //         }
-        //     })
-        // });
-
-        // const second_lis = document.querySelectorAll('.second_li');
-        // second_lis.forEach((item) => {
-        //     item.addEventListener('click', function(e){
-        //         // alert("OK")
-        //         document.querySelectorAll('.second_li').forEach((el)=>{
-        //             el.classList.remove('second_liActive');
-        //             const insideI = el.querySelector('i');
-        //             if(insideI){
-        //                 insideI.classList.remove('rotate90');
-        //             }
-        //             if (el.querySelector('ul')) { // Check if the li contains a ul
-        //                 el.querySelector('ul').style.display ="none";
-        //         }
-        //         });
-        //         item.classList.add('second_liActive');
-        //         const insideI = item.querySelector('i');
-        //         if(insideI){
-        //             insideI.classList.add('rotate90');
-        //         }
-        //         // console.log(item)
-        //         if (item.querySelector('ul')) { // Check if the li contains a ul
-        //             item.querySelector('ul').style.display ="block";
-        //         }
-        //     })
-        // });
-    </script>
-
-    <script>
         //add Tracker
         $(document).ready(function() {
             fetch('https://ipinfo.io/json')
                 .then(response => response.json())
                 .then(data => {
-
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-
                     $.ajax({
                         url: '{{ route('user.count') }}',
                         type: 'post',
@@ -950,7 +674,6 @@
                 })
         })
     </script>
-
     {{-- ALl Code For Order Tracking Information --}}
     @if (!empty($order))
         <script>
@@ -1107,7 +830,5 @@
             }
         </script>
     @endif
-
 </body>
-
 </html>

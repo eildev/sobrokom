@@ -16,17 +16,59 @@ class ProductDetailsController extends Controller
         $product = Product::where('slug', $slug)->first();
         return view('frontend/e-com/product_details', compact('product'));
     }
+    public function browsSubcategory($subcategoryslug){
+        $category = Category::where('slug', $subcategoryslug)->first();
+        $subcategories = Subcategory::where('categoryId', $category->id)
+        ->has('products')
+            ->get();
+        return view('frontend.brows-sub-category', compact('subcategories','category'));
+    }
     public function categoryWiseProduct($categoryslug){
         $category = Category::where('slug', $categoryslug)->first();
         return view('frontend/e-com/category-wise-product', compact('category'));
     }
     public function SearchbyProduct(Request $request){
-        $searchTag = $request->search;
-        $products = Product::where('product_name', 'like', '%'.$searchTag.'%')
-                            ->orWhere('short_desc', 'like', '%'.$searchTag.'%')
-                            ->orWhere('tags', 'like', '%'.$searchTag.'%')
-                            ->paginate(12);
-        return view('frontend/e-com/product-search', compact('products','searchTag'));
+        // $searchTag = $request->search;
+        // $products = Product::where('product_name', 'like', '%'.$searchTag.'%')
+        //                     ->orWhere('short_desc', 'like', '%'.$searchTag.'%')
+        //                     ->orWhere('tags', 'like', '%'.$searchTag.'%')
+                            
+        //                     ->paginate(12);
+        // return view('frontend/e-com/product-search', compact('products','searchTag'));
+         $searchTerm = $request->search;
+         $searchTag = $request->search;
+
+        // Search by product name
+        $products = Product::where('product_name', 'LIKE', '%' . $searchTerm . '%')->orWhere('tags', 'LIKE', '%' . $searchTerm . '%')->with('category', 'subcategory')->paginate(12);
+
+        if ($products->isNotEmpty()) {
+            return view('frontend/e-com/product-search', compact('products','searchTag'));
+        }
+
+        // Search by category name
+        $categories = Category::where('categoryName', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        if ($categories->isNotEmpty()) {
+            $categoryIds = $categories->pluck('id');
+            $products = Product::whereIn('category_id', $categoryIds)->with('category', 'subcategory')->paginate(12);;
+
+            if ($products->isNotEmpty()) {
+               return view('frontend/e-com/product-search', compact('products','searchTag'));
+            }
+        }
+
+        // Search by subcategory name
+        $subcategories = Subcategory::where('subcategoryName', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        if ($subcategories->isNotEmpty()) {
+            $subcategoryIds = $subcategories->pluck('id');
+            $products = Product::whereIn('subcategory_id', $subcategoryIds)->with('category', 'subcategory')->paginate(12);;
+
+            if ($products->isNotEmpty()) {
+                return view('frontend/e-com/product-search', compact('products','searchTag'));
+            }
+        }
+         return view('frontend/e-com/product-search', compact('products','searchTag'));
     }
     public function filterbyBrand(Request $request){
 
@@ -47,6 +89,7 @@ class ProductDetailsController extends Controller
         return view('frontend/e-com/product-search', compact('products','searchTag','categoryId'));
     }
     public function subcategoryWiseProduct($subcategoryslug){
+        
         $subcategory = Subcategory::where('slug', $subcategoryslug)->first();
         return view('frontend/e-com/subcategory-wise-product', compact('subcategory'));
     }

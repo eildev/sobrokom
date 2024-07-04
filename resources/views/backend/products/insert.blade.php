@@ -36,7 +36,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Category</label>
                                                     <div class="col-12">
-                                                        <select class="form-select category_id" name="category_id">
+                                                        <select class="form-select category_select @error('category_id') is-invalid  @enderror" name="category_id">
                                                             <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}">
@@ -44,8 +44,9 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <span class="category_error text-danger"></span>
-
+                                                        @error('category_id')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,11 +54,12 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
-                                                        <select class="form-select subcategory_id" name="subcategory_id">
+                                                        <select class="form-select subcategory_select @error('subcategory_id') is-invalid  @enderror" name="subcategory_id">
                                                             <option value="">Select Subcategory</option>
                                                         </select>
-                                                        <span class="subcategory_error text-danger"></span>
-
+                                                        @error('category_id')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,7 +90,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Brand</label>
                                                     <div class="col-12">
-                                                        <select class="form-select " name="brand_id">
+                                                        <select class="form-select @error('brand_id') is-invalid  @enderror" name="brand_id">
                                                             <option value="">Select Brand</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}">
@@ -96,7 +98,9 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <span class="brand_error text-danger"></span>
+                                                        @error('brand_id')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,9 +113,11 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <input type="text" name="product_name"
-                                                            class="form-control product_name" id="inputEnterYourName"
+                                                            class="form-control product_sku @error('product_name') is-invalid  @enderror" id="inputEnterYourName"
                                                             placeholder="Enter Product Name">
-                                                        <span class="product_name_error text-danger"></span>
+                                                         @error('product_name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,8 +130,10 @@
                                                         <label for="" class="form-label">Short Description</label>
                                                     </div>
                                                     <div class="col-12">
-                                                        <textarea class="form-control " name="short_desc" placeholder="" style="resize: none; height: 70px;"></textarea>
-                                                        <span class="short_desc text-danger"></span>
+                                                        <textarea class="form-control @error('short_desc') is-invalid  @enderror" name="short_desc" placeholder="" style="resize: none; height: 70px;"></textarea>
+                                                         @error('short_desc')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,11 +155,13 @@
                                         <div class="row mb-3 d-flex align-items-center">
                                             <div class="col-md-6">
                                                 <label for="image" class="form-label">Product Thumbnail</label>
-                                                <input type="file" id="image" class="form-control  "
+                                                <input type="file" id="image" class="form-control  @error('product_image') is-invalid  @enderror"
                                                     name="product_image">
                                                 <div class="my-1"><i><b>Note:</b> Please provide 600 X 600 size
                                                         image</i></div>
-                                                <span class="product_image text-danger"></span>
+                                                 @error('product_image')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-6">
                                                 <img id="showImage" class=""
@@ -168,16 +178,18 @@
                                             <div class="col-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">SKU</label>
-                                                    <input type="text" class="form-control sku_generate"
+                                                    <input type="text" class="form-control sku_generate @error('sku') is-invalid  @enderror"
                                                         placeholder="ASD1202" name="sku">
-                                                    <span class="sku_error text-danger"></span>
+                                                    @error('sku')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="mb-3">
                                                     <label class="form-label col-12">Select Feature</label>
                                                     <div class="col-12">
-                                                        <select class="form-select" id="multiple-select-field"
+                                                        <select class="form-select @error('product_feature') is-invalid  @enderror" id="multiple-select-field"
                                                             name="product_feature[]" data-placeholder="Choose anything"
                                                             multiple>
                                                             <option value="feature">Feature</option>
@@ -188,7 +200,9 @@
                                                             <option value="top-seller">Top Seller</option>
                                                             <option value="top-offers">Top Offers</option>
                                                         </select>
-                                                        <span class="feature_error text-danger"></span>
+                                                         @error('product_feature')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -196,15 +210,18 @@
                                             <div class="col-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Tags</label>
-                                                    <input type="text" class="form-control" data-role="tagsinput"
+                                                    <input type="text" class="form-control @error('tag') is-invalid  @enderror" data-role="tagsinput"
                                                         placeholder="jQuery,Net" name="tag">
+                                                     @error('tag')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <label for="image" class="form-label">Image Gallery </label>
                                                 <input type="file" id="imageGallery" class="form-control "
                                                     name="imageGallery[]" multiple>
-                                                <div class="my-1"><i><b>Note:</b> Please provide 600 X 600 size
+                                                <div class="my-1"><i><b>Note:</b>Please provide 600 X 600 size
                                                         image</i></div>
 
                                                 <div class="my-3">
@@ -396,7 +413,7 @@
             }
             return sku;
         }
-        document.querySelector(".product_name").addEventListener('blur', function() {
+        document.querySelector(".product_sku").addEventListener('blur', function() {
             const skuGenerate = document.querySelector(".sku_generate");
             const productNameValue = this.value;
             // console.log(productNameValue);

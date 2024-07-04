@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('maincontent')
     <!-- breadcrumb-area-start -->
-    <div class="breadcrumb__area pt-5 pb-5">
-        <div class="container">
+    <div class="breadcrumb__area breadcrumb__checkout">
+        <div class="container" style="margin-top:80px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -52,9 +52,9 @@
                                     </div>
                                 @endif
                             </div>
-                            <hr>
+                            <hr style="margin-top:15px">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-3">
                                     <div class="checkout-form-list">
                                         <label>Name <span class="required">*</span></label>
                                         <input onkeyup="checker(this)" onblur="checker(this)"  type="text" required placeholder="Enter Your Name" class="first_name"
@@ -215,7 +215,7 @@
                                             <td><span class="total_weight"></span>KG</td>
                                         </tr>
                                         <tr class="shipping">
-                                            <th>Shipping</th>
+                                            <th>Please Select Shipping Area <span class="required text-danger">*</span></th>
                                             <td colspan="2">
                                                 <ul>
                                                     <li>
@@ -229,9 +229,17 @@
                                                     <li>
                                                         <input type="radio" class="shipping_checked" name="shipping"
                                                             id="out_side_shipping">
-                                                        <label for="out_side_shipping">Out Side Of Dhaka: <span
+                                                        <label for="out_side_shipping">Express Delivery: <span
                                                                 class="amount">৳
-                                                                <span class="out_side_shipping_amount">140</span>.00</>
+                                                                <span class="out_side_shipping_amount">100</span>.00</>
+                                                            </span></label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" class="shipping_checked" name="shipping"
+                                                            id="out_side_shipping__ss">
+                                                        <label for="out_side_shipping__ss">Out Side Of Dhaka: <span
+                                                                class="amount">৳
+                                                                <span class="out_side_shipping_amount__ss">140</span>.00</>
                                                             </span></label>
                                                     </li>
                                                 </ul>
@@ -257,9 +265,9 @@
                                     <button class="tp-btn tp-color-btn rounded-3 py-2 apply_coupon">Apply</button>
                                 </div>
                                 <div class="accordion" id="checkoutAccordion">
-                                    <div class="accordion-item">
+                                    <div class="accordion-item" style="background: transparent;">
                                         <h2 class="accordion-header" id="checkoutOne">
-                                            <button class="accordion-button shipping_method" type="button"
+                                            <button class="accordion-button shipping_method" style="background: transparent;border-bottom: 1px solid;" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true"
                                                 aria-controls="bankOne">
                                                 Cash On Delivery
@@ -444,7 +452,7 @@
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-            document.querySelector(".pageLoader").style.setProperty("display", "flex", "important");
+            
             const first_name = $('.first_name').val();
             const phone = $('.phone').val();
             const address_1 = $('.address_1').val();
@@ -523,6 +531,7 @@
                 });
                 const shipingMethodChecked = document.querySelectorAll(".shipping_checked:checked");
                 if (shipingMethodChecked.length > 0) {
+                    // document.querySelector(".pageLoader").style.setProperty("display", "flex", "important");
                     $.ajax({
                         url: '/otp/store',
                         type: 'post',
@@ -532,14 +541,15 @@
                         success: function(res) {
                             // console.log(res);
                             if (res.status == 200) {
-                                document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
+                                // document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
                                 // $('#otpCheck').modal('show');
                                 SubmitOrder();
+                                // document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
                             }
                         }
                     })
                 } else {
-                    document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
+                    // document.querySelector(".pageLoader").style.setProperty("display", "none", "important");
                     toastr.warning("Please select shipping method");
                 }
             }

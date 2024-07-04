@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\userController;
 use App\Http\Controllers\AllMail;
 use App\Http\Controllers\Backend\PurchaseDetailsController;
 use App\Http\Controllers\Backend\historyController;
+use App\Http\Controllers\Backend\MarketingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,11 @@ Route::middleware('auth', 'role:admin')->group(function () {
     });
     Route::controller(historyController::class)->group(function () {
         Route::get('/current-history/{value}', 'CurrentHistory');
+    });
+    // Marketing for SMS Marketing Routes
+    Route::controller(MarketingController::class)->group(function () {
+        Route::get('/sms/page', 'index')->name('sms.page');
+        Route::post('/sms/send', 'sendSMS')->name('sms.send');
     });
     Route::controller(userController::class)->group(function () {
         Route::get('/all-user', 'allUser')->name('all.users');
@@ -175,6 +181,8 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/new-order', 'index')->name('new.order');
 
         Route::get('/admin-approve-order/{invoiceNumber}', 'adminApprove')->name('admin.approve.order');
+        Route::get('/admin-denied-order/{invoiceNumber}', 'adminDenied')->name('admin.denied.order');
+        Route::get('/order/denied', 'deniedOrders')->name('order.denied');
 
 
         Route::get('/order/confirmed', 'approvedOrders')->name('order.confirmed');

@@ -38,6 +38,7 @@ class ProductController extends Controller
             'short_desc' => 'required|max:255',
             'product_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'sku' => 'required',
+            'tag' => 'required',
         ]);
         $product = new Product;
         if ($request->product_image) {
@@ -62,7 +63,7 @@ class ProductController extends Controller
                 $imagesGallery = $request->imageGallery;
                 foreach ($imagesGallery as $image) {
                     $galleryImage = rand() . '.' . $image->extension();
-                    $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                    $image->move(public_path('uploads/products/gallery/'), $galleryImage);
                     $productGallery = new ProductGallery;
                     $productGallery->product_id = $product->id;
                     $productGallery->image = $galleryImage;
@@ -80,7 +81,7 @@ class ProductController extends Controller
     // show all products function 
     public function view()
     {
-        $products = Product::all();
+        $products = Product::orderByDesc('id')->get();
         return view('backend.products.view', compact('products'));
     }
 
@@ -134,7 +135,10 @@ class ProductController extends Controller
             $productImage = rand() . '.' . $request->product_image->extension();
             $request->product_image->move(public_path('uploads/products/'), $productImage);
             $product = Product::findOrFail($id);
-            unlink(public_path('uploads/products/') . $product->product_image);
+            $path = public_path('uploads/products/') . $product->product_image;
+            if (file_exists($path)) {
+                @unlink($path);
+            }
             $product->category_id = $request->category_id;
             $product->subcategory_id = $request->subcategory_id;
             $product->sub_subcategory_id = $request->sub_subcategory_id;
@@ -153,10 +157,15 @@ class ProductController extends Controller
                 $imagesGallery = $request->imageGallery;
                 foreach ($imagesGallery as $image) {
                     $galleryImage = rand() . '.' . $image->extension();
-                    $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                    $image->move(public_path('uploads/products/gallery/'), $galleryImage);
+                    $productGallery = ProductGallery::where('product_id', $product->id)->first();
+                    $path = public_path('uploads/products/gallery/').$productGallery->image;
+                    if (file_exists($path)) {
+                        @unlink($path);
+                    }
+                    $productGallery->delete();
                     $productGallery = new ProductGallery;
-                    unlink(public_path('uploads/products/gallery') . $productGallery->image);
-                    $productGallery->product_id = $product->id;
+                    $productGallery->product_id = $id;
                     $productGallery->image = $galleryImage;
                     $productGallery->save();
                 }
@@ -181,10 +190,15 @@ class ProductController extends Controller
                 $imagesGallery = $request->imageGallery;
                 foreach ($imagesGallery as $image) {
                     $galleryImage = rand() . '.' . $image->extension();
-                    $image->move(public_path('uploads/products/gallery'), $galleryImage);
+                    $image->move(public_path('uploads/products/gallery/'), $galleryImage);
+                    $productGallery = ProductGallery::where('product_id', $product->id)->first();
+                    $path = public_path('uploads/products/gallery/').$productGallery->image;
+                    if (file_exists($path)) {
+                        @unlink($path);
+                    }
+                    $productGallery->delete();
                     $productGallery = new ProductGallery;
-                    unlink(public_path('uploads/products/gallery') . $productGallery->image);
-                    $productGallery->product_id = $product->id;
+                    $productGallery->product_id = $id;
                     $productGallery->image = $galleryImage;
                     $productGallery->save();
                 }

@@ -113,7 +113,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="inputCompareatprice" class="form-label">Unit Price</label>
+                                            <label for="inputCompareatprice" class="form-label">Product Price</label>
                                             <input type="number"
                                                 class="form-control @error('unit_price') is-invalid  @enderror"
                                                 id="unit_price" placeholder="00.00" name="unit_price"
@@ -224,18 +224,11 @@
                                             <span class="regular_price_error text-danger"></span>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="inputPrice" class="form-label">Discount Price</label>
-                                            <input type="number" class="form-control discount_amount" id="inputPrice"
-                                                placeholder="00.00" name="discount_amount"
-                                                value="{{ $data->variant->discount_amount }}">
-                                            <span class="discount_amount_error text-danger"></span>
-                                        </div>
-                                        <div class="col-md-6">
                                             <label class="form-label col-12">Discount</label>
                                             <select class="form-select discount" name="discount"
-                                                value="{{ $data->variant->discount_amount }}">
-                                                <option value="{{ $data->variant->discount_amount }}">
-                                                    {{ $data->variant->discount_amount }}</option>
+                                                value="{{ $data->variant->discount }}">
+                                                <option value="{{ $data->variant->discount }}">
+                                                    {{ $data->variant->discount }}</option>
                                                 <option value="0">0</option>
                                                 <option value="10">10%</option>
                                                 <option value="20">20%</option>
@@ -245,6 +238,14 @@
                                             </select>
                                             <span class="discount_error text-danger"></span>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="inputPrice" class="form-label">Sale Price</label>
+                                            <input type="number" class="form-control discount_amount" id="inputPrice"
+                                                placeholder="00.00" name="discount_amount"
+                                                value="{{ $data->variant->discount_amount }}">
+                                            <span class="discount_amount_error text-danger"></span>
+                                        </div>
+                                        
                                         <div class="col-md-6">
                                             <label class="form-label col-12">Unit</label>
                                             <select class="form-select unit" name="unit">

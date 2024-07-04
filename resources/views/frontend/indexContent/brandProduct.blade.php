@@ -29,7 +29,7 @@
                     <div class="tpbrandproduct__main text-center">
                         <div class="tpbrandproduct__main-thumb mb-20">
                             <img src="{{ !empty($brands->image) ? asset('uploads/brands/' . $brands->image) : '' }} "
-                                alt="Brand Image">
+                                alt="{{$brands->slug}}">
                         </div>
                         <div class="tpbrandproduct__main-contetn">
                             <h4 class="tpbrandproduct__title">{{ $brands->BrandName ?? '' }}</h4>
@@ -58,7 +58,7 @@
                                         <div class="tpbrandproduct__item d-flex mb-20">
                                             <div class="tpbrandproduct__img p-relative">
                                                 <img src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                    alt="Product Image">
+                                                    alt="{{$product->slug}}" >
                                                 <div class="tpproduct__info bage tpbrandproduct__bage">
                                                     @if (!empty($product->varient[0]))
                                                         @if ($product->varient[0]->discount > 0)

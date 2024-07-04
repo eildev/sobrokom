@@ -1,45 +1,27 @@
 <!-- cart-area-start -->
-<section class="cart-area pt-30">
+<section class="cart-area">
     <div class="container">
-        <div class="swiper-container product-details-active" style="margin-left: 25px;">
-            <div class="swiper-wrapper">
+        <div class="swiper-container product-details-active">
+            <!--<h4></h4>-->
+             <div class="row">
+                 <h4 class="tpsection__title text-start brand-product-title pt-2 text-center" id="weekly_offers">Our Popular Categories</h4>
+             </div>
+            <div class="row"  style="justify-content: center;">
+                
                 @php
                     $Categories = App\Models\Category::where('status', 1)
-                        ->take(6)
+                        ->take(9)
                         ->orderBy('id', 'ASC')
                         ->get();
                 @endphp
-
-
                 @if ($Categories->count() > 0)
                     @foreach ($Categories as $Category)
-                        {{-- @dd($Category); --}}
-                        <div class="swiper-slide">
+                        <div class="col-lg-2 col-md-3 col-4">
                             <div class="tpcartitem">
-                                <div class="tpcartitem__thumb mb-15">
-                                    <a href="{{ route('category.wise.product',$Category->slug) }}"><img src="{{ asset('uploads/category/' . $Category->image) }}"
-                                            alt="" class="img-fluid"></a>
-                                </div>
-                                <div class="tpcartitem__content">
-                                    <h3 class="tpcartitem__title mb-15"><a
-                                            href="{{ route('category.wise.product',$Category->slug) }}">{{ $Category->categoryName }}</a>
-                                    </h3>
-                                    <ul>
-                                        @php
-                                            $subcategories = App\Models\Subcategory::where('status', 1)
-                                                ->where('categoryId', $Category->id)
-                                                ->take(4)
-                                                ->orderBy('id', 'ASC')
-                                                ->get();
-                                        @endphp
-                                        @foreach ($subcategories as $subcategory)
-                                            <li><a href="{{ route('subcategory.wise.product',$subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <span class="tpcartitem__all"><a href="{{ route('category.wise.product',$Category->slug) }}">See All <i
-                                                class="icon-chevron-right"></i></a>
-                                    </span>
+                                <div class="tpcartitem__thumb text-center">
+                                    <a href="{{ route('browssubcategory',$Category->slug) }}"><img src="{{ asset('uploads/category/' . $Category->image) }}"
+                                            alt="{{$Category->slug}}" class="img-fluid"></a>
+                                    <span class="category-span">{{ $Category->categoryName }}</span>
                                 </div>
                             </div>
                         </div>

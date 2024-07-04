@@ -99,11 +99,11 @@
                                     </div>
                                     <div class="row py-1">
                                         <div class="col-4"> Primary Address </div>
-                                        <div class="col-6">: {{ $address_1 ?? 'Data Not Found' }} </div>
+                                        <div class="col-6"><span style="text-wrap: wrap;">: {{ $address_1 ?? 'Data Not Found' }}</span> </div>
                                     </div>
                                     <div class="row py-1">
                                         <div class="col-4"> Secondary Address </div>
-                                        <div class="col-6">: {{ $address_2 ?? 'Data Not Found' }} </div>
+                                        <div class="col-6"><span style="text-wrap: wrap;">: {{ $address_2 ?? 'Data Not Found' }} </span></div>
                                     </div>
                                     <div class="row py-1">
                                         <div class="col-4"> City </div>

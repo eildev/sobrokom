@@ -2,7 +2,7 @@
 @section('maincontent')
     <!-- breadcrumb-area-start -->
     <div class="breadcrumb__area grey-bg pt-5 pb-5">
-        <div class="container">
+        <div class="container" style="margin-top:80px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -25,7 +25,10 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="tpshop__details">
                         <div class="tpshop__category">
-
+                                    @php
+                                        $categories = App\Models\Category::all();
+                                        $allProducts = App\Models\Product::whereHas('varient')->where('category_id', $category->id)->paginate(12);
+                                    @endphp
                             <div class="swiper-container inner-category-two">
                                 <div class="category__item mb-30">
                                     <div class="category__thumb fix mb-15">
@@ -39,40 +42,18 @@
                                         </h5>
                                     </div>
                                 </div>
-                                <div class="swiper-wrapper">
-                                    @php
-                                        $categories = App\Models\Category::all();
-                                        $allProducts = App\Models\Product::whereHas('varient')->where('category_id', $category->id)->paginate(12);
-                                    @endphp
-                                    @foreach ($categories as $category)
-                                        <div class="swiper-slide">
-                                            <div class="category__item mb-30">
-                                                <div class="category__thumb fix mb-15">
-                                                    <a href="{{ route('category.wise.product', $category->slug) }}"><img
-                                                            src="{{ asset('uploads/category/' . $category->image) }}"
-                                                            alt="category-thumb"></a>
-                                                </div>
-                                                <div class="category__content">
-                                                    <h5 class="category__title"><a
-                                                            href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
                             </div>
                         </div>
                         <div class="product__filter-content mb-30">
                             <div class="row align-items-center">
                                 <div class="col-sm-4">
-                                    <div class="product__item-count">
+                                    <div class="product__item-count text-center">
                                         <span>Showing 1 - 18 of 40 Products</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div
-                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
+                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center" style="justify-content: center !important;">
                                         <nav>
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                                 <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab"
@@ -207,7 +188,7 @@
                                 </div>
                                 @if ($categories->count() > 0)
                                     <div class="col-sm-4">
-                                        <div class="product__navtabs d-flex justify-content-end align-items-center">
+                                        <div class="product__navtabs d-flex justify-content-end align-items-center" style="justify-content: center !important;">
                                             <div class="tp-shop-selector">
 
                                                 <style>
@@ -665,6 +646,35 @@
                                 </ul>
                             </div>
                         @endif
+                        
+                        <div class="tpshop__category py-5">
+
+                            <div class="swiper-container inner-category-two">
+                                
+                                <div class="swiper-wrapper">
+                                    @php
+                                        $categories = App\Models\Category::all();
+                                        $allProducts = App\Models\Product::whereHas('varient')->where('category_id', $category->id)->paginate(12);
+                                    @endphp
+                                    @foreach ($categories as $category)
+                                        <div class="swiper-slide">
+                                            <div class="category__item mb-30">
+                                                <div class="category__thumb fix mb-15">
+                                                    <a href="{{ route('category.wise.product', $category->slug) }}"><img
+                                                            src="{{ asset('uploads/category/' . $category->image) }}"
+                                                            alt="category-thumb"></a>
+                                                </div>
+                                                <div class="category__content">
+                                                    <h5 class="category__title"><a
+                                                            href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

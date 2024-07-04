@@ -2,7 +2,7 @@
 @section('maincontent')
     <!-- breadcrumb-area-start -->
     <div class="breadcrumb__area grey-bg pt-5 pb-5">
-        <div class="container">
+        <div class="container" style="margin-top:80px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -109,7 +109,7 @@
                                                 <h5 class="product__details-price mb-1">
                                                     ৳{{ $product->varient[0]->discount_amount }}
                                                     <span class="text-secondary" style="font-size: 14px">
-                                                        /
+                                                        / {{ $product->varient[0]->weight ?? '' }}
                                                         {{ $product->varient[0]->unit ?? '' }}
                                                     </span>
 
@@ -303,7 +303,7 @@
 
                                     <div class="tpdescription__content">
                                         @if (!empty($product->long_desc))
-                                            <p> {{ $product->long_desc }}</p>
+                                            <p> {!! $product->long_desc !!}</p>
                                         @else
                                             <div class="product__details-stock mb-25">
                                                 <ul>

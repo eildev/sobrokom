@@ -66,6 +66,7 @@ Route::controller(ProductDetailsController::class)->group(function () {
     Route::get('/product/global/search/{value}', 'globalSearch');
     Route::post('/product/filter/feature/category/brand', 'productFilterByFeatureCategoryBrand');
     Route::get('/product/filter/feature/category/brand/findVariant/{id}', 'productFilterByFeatureCategoryBrandFindVariant');
+    Route::get('/sub-category/{subcategoryslug}', 'browsSubcategory')->name('browssubcategory');
 });
 
 // Invoice Genarate Product

@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('maincontent')
     <!-- breadcrumb-area-start -->
-    <div class="breadcrumb__area pt-5 pb-5">
-        <div class="container">
+    <div class="breadcrumb__area my__breadcrumb"  style="margin-top:80px">
+        <div class="container ">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -26,7 +26,7 @@
                     <div class="tpcontact-inner text-center mt-20">
                         <div class="tpcontact-inner-text">
                             <h5 class="tpcontact-inner-sub-title" style="font-size:16px">Connect With Us</h5>
-                            <p>Follow us on <a style="color:#9e54a1"
+                            <p style="text-align:justify;">Follow us on <a style="color:#9e54a1"
                                     href="https://www.facebook.com/profile.php?id=100094627520182">Facebook</a> to stay
                                 updated on company news, culture, and job opportunities.
                                 Join us at sobrokom.store and be a part of a dynamic team that is redefining online
@@ -44,7 +44,7 @@
     <section class="map-area tpmap__box">
         <div class="container">
             <div class="row gx-0">
-                <div class="col-lg-8 col-md-8 offset-2 order-1 order-md-2">
+                <div class="col-lg-8 col-md-8 m-auto order-md-2">
                     <div class="tpform__wrapper pb-80">
                         <div class="tpform__box">
                             <form>

@@ -25,7 +25,8 @@ class CartController extends Controller
             'weight' => $request->weight,
             'options' => [
                 'image' => $product->product_image,
-                'unit' => $request->unit
+                'unit' => $request->unit,
+                'variant_id' => $request->variant_id
             ]
         ]);
         return response()->json([

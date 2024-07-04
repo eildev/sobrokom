@@ -1,14 +1,15 @@
 @extends('frontend.master')
 @section('maincontent')
     <!-- breadcrumb-area-start -->
-    <div class="breadcrumb__area grey-bg pt-5 pb-5">
-        <div class="container">
+    <div class="breadcrumb__area grey-bg subcategory-breadcrum">
+        <div class="container" style="margin-top:60px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
                         <div class="tp-breadcrumb__list">
                             <span class="tp-breadcrumb__active"><a href="{{ route('home') }}">Home</a></span>
                             <span class="dvdr">/</span>
+                            <span class="dvdr"><a href="{{ route('browssubcategory',$subcategory->category->slug) }}">{{ $subcategory->category->categoryName }}</a> /</span>
                             <span>{{ $subcategory->subcategoryName }}</span>
                         </div>
                     </div>
@@ -29,43 +30,19 @@
                             $allProducts = App\Models\Product::whereHas('varient')
                                 ->where('subcategory_id', $subcategory->id)
                                 ->orderBy('id', 'DESC')
-                                ->paginate(12);
+                                ->get();
                         @endphp
 
-                        {{-- <div class="tpshop__category">
-                            <div class="swiper-container inner-category-two">
-                                <div class="swiper-wrapper">
-                                    @php
-                                        $subcategories = App\Models\Subcategory::all();
-                                        $allProducts = App\Models\Product::whereHas('varient')
-                                            ->where('subcategory_id', $subcategory->id)
-                                            ->orderBy('id', 'DESC')
-                                            ->paginate(12);
-                                    @endphp
-                                    @foreach ($subcategories as $subcategory)
-                                        <div class="swiper-slide">
-                                            <div class="category__item mb-30">
-                                                <div class="category__content">
-                                                    <h5 class="category__title"><a
-                                                            href="{{ route('subcategory.wise.product', $subcategory->slug) }}">{{ $subcategory->subcategoryName }}</a>
-                                                    </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="product__filter-content mb-30">
-                            <div class="row align-items-center">
-                                <div class="col-sm-4">
+                            <div class="row align-items-center ">
+                                <div class="col-sm-4" style="text-align:center">
                                     <div class="product__item-count">
-                                        <span>Showing 1 - 18 of 40 Products</span>
+                                        <span>Showing {{ $allProducts->count() }} Products</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div
-                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
+                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center" style="justify-content: center !important;">
                                         <nav>
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                                 <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab"
@@ -199,7 +176,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="product__navtabs d-flex justify-content-end align-items-center">
+                                    <div class="product__navtabs d-flex justify-content-end align-items-center" style="justify-content: center !important;">
                                         <div class="tp-shop-selector">
                                             <style>
                                                 /* width */
@@ -250,7 +227,7 @@
                                     <div
                                         class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
                                         @foreach ($allProducts as $product)
-                                            <div class="col">
+                                            <div class="col-lg-3 col-md-4 col-6">
                                                 <div class="tpproduct p-relative mb-20">
                                                     <div class="tpproduct__thumb p-relative text-center">
                                                         <a href="{{ route('product.details', $product->slug) }}"><img
@@ -333,9 +310,9 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    <div class="tpproduct__hover-text">
+                                                    <div class="">
                                                         <div
-                                                            class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                            class="d-flex justify-content-center mb-10">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
                                                                 <input type="hidden" value="{{ $product->id ?? 0 }}"
@@ -374,7 +351,7 @@
                                     <div
                                         class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
                                         @foreach ($allProducts as $product)
-                                            <div class="col">
+                                            <div class="col-lg-3 col-md-4 col-6 p-1">
                                                 <div class="tpproduct p-relative mb-20">
                                                     <div class="tpproduct__thumb p-relative text-center">
                                                         <a href="{{ route('product.details', $product->slug) }}"><img
@@ -457,9 +434,9 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    <div class="tpproduct__hover-text">
+                                                    <div class="">
                                                         <div
-                                                            class="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                                            class=" d-flex justify-content-center mb-10">
                                                             <form method="POST" id="add_to_cart_form">
                                                                 @csrf
                                                                 <input type="hidden" value="{{ $product->id ?? 0 }}"
@@ -476,7 +453,7 @@
                                                                 <input type="hidden"
                                                                     value="{{ $product->varient[0]->unit ?? 0 }}"
                                                                     name="unit">
-                                                                <button class="tp-btn-2">Add to
+                                                                <button class="btn btn-info" style="background: var(--tp-heading-secondary) !important; border: 1px solid var(--tp-heading-secondary);color:white">Add to
                                                                     cart</button>
                                                             </form>
                                                         </div>
@@ -608,49 +585,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        @if ($allProducts->count() > 11)
-                            <div class="basic-pagination text-center mt-35 d-flex justify-content-center">
-                                <ul class="pagination">
-                                    {{-- Previous Page Link --}}
-                                    @if ($allProducts->onFirstPage())
-                                        <li class="page-item disabled" aria-disabled="true"
-                                            aria-label="@lang('pagination.previous')">
-                                            <span class="page-link pt-0" aria-hidden="true">&lsaquo;</span>
-                                        </li>
-                                    @else
-                                        <li class="page-item">
-                                            <a class="page-link pt-0" href="{{ $allProducts->previousPageUrl() }}"
-                                                rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                                        </li>
-                                    @endif
-
-                                    {{-- Pagination Elements --}}
-                                    @foreach ($allProducts->getUrlRange(1, $allProducts->lastPage()) as $page => $url)
-                                        @if ($page == $allProducts->currentPage())
-                                            <li class="page-item active" aria-current="page"><span
-                                                    class="page-link pt-0">{{ $page }}</span></li>
-                                        @else
-                                            <li class="page-item"><a class="page-link pt-0"
-                                                    href="{{ $url }}">{{ $page }}</a></li>
-                                        @endif
-                                    @endforeach
-
-                                    {{-- Next Page Link --}}
-                                    @if ($allProducts->hasMorePages())
-                                        <li class="page-item">
-                                            <a class="page-link pt-0" href="{{ $allProducts->nextPageUrl() }}"
-                                                rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
-                                        </li>
-                                    @else
-                                        <li class="page-item disabled" aria-disabled="true"
-                                            aria-label="@lang('pagination.next')">
-                                            <span class="page-link pt-0" aria-hidden="true">&rsaquo;</span>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>

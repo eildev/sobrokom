@@ -34,8 +34,13 @@ class SubcategoryController extends Controller
         $subcategory->subcategoryName = $request->subcategoryName;
         $subcategory->categoryId = $request->categoryId;
         $subcategory->slug = Str::slug($request->subcategoryName);
+        if ($request->image) {
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/subcategory/'), $imageName);
+            $subcategory->image = $imageName;
+        }
         $subcategory->save();
-        return back()->with('success', 'Subcategory Successfully Saved');
+        return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Saved');
     }
 
     // subcategory View function
@@ -63,6 +68,18 @@ class SubcategoryController extends Controller
         $subcategory->subcategoryName = $request->subcategoryName;
         $subcategory->categoryId = $request->categoryId;
         $subcategory->slug = Str::slug($request->subcategoryName);
+        
+        $previousImagePath = public_path('uploads/subcategory/') . $subcategory->image;
+         if ($subcategory->image) {
+              if (file_exists($previousImagePath)) {
+                unlink($previousImagePath);
+            }
+            }
+        if ($request->image) {
+            $imageName = rand() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/subcategory/'), $imageName);
+            $subcategory->image = $imageName;
+        }
         $subcategory->update();
         return redirect()->route('subcategory.view')->with('success', 'Subcategory Successfully Updated');
     }

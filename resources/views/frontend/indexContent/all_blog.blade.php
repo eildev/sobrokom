@@ -1,7 +1,7 @@
 @extends('frontend.master')
 @section('maincontent')
          <!-- blog-area-start -->
-         <section class="blog-area pt-30">
+         <section class="blog-area pt-30" style="margin-top:80px">
             <div class="container-fluid">
                <div class="swiper-container blog-active-3">
                   <div class="swiper-wrapper">
@@ -45,7 +45,7 @@
                                     <div class="tpblog__thumb fix">
                                        <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{asset('uploads/blog/blog_post/'.$blog->image)}}"  width="392px" height="251px" alt="blog-image"></a>
                                     </div>
-                                    <div class="tpblog__wrapper">
+                                    <div class="tpblog__wrapper p-3">
                                        <div class="tpblog__entry-wap">
                                           <span class="cat-links"><a href="#">{{$blog['category']['cat_name']}}</a></span>
                                           <span class="author-by"><a href="#">Admin</a></span>
@@ -94,18 +94,18 @@
                   </div>
                   <div class="col-xl-2 col-lg-3">
                      <div class="tpblog__right-item blog-left-sidebar pb-50">
-                        <div class="sidebar__widget mb-30">
-                           <div class="sidebar__widget-content">
-                              <div class="sidebar__search">
-                                 <form action="#">
-                                    <div class="sidebar__search p-relative">
-                                       <input type="text" placeholder="Search">
-                                       <button type="submit"><i class="far fa-search"></i></button>
-                                    </div>
-                                 </form>
-                              </div>
-                           </div>
-                        </div>
+                        <!--<div class="sidebar__widget mb-30">-->
+                        <!--   <div class="sidebar__widget-content">-->
+                        <!--      <div class="sidebar__search">-->
+                        <!--         <form action="#">-->
+                        <!--            <div class="sidebar__search p-relative">-->
+                        <!--               <input type="text" placeholder="Search">-->
+                        <!--               <button type="submit"><i class="far fa-search"></i></button>-->
+                        <!--            </div>-->
+                        <!--         </form>-->
+                        <!--      </div>-->
+                        <!--   </div>-->
+                        <!--</div>-->
                         <div class="sidebar__widget mb-40">
                            <h3 class="sidebar__widget-title mb-15">Blog Categories</h3>
                            <div class="sidebar__widget-content">

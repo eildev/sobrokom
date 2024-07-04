@@ -13,6 +13,7 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use Cart;
 use App\Mail\OrderMail;
+use App\Mail\OrderNotice;
 use Illuminate\Support\Facades\Mail;
 class OTPController extends Controller
 {
@@ -134,16 +135,24 @@ class OTPController extends Controller
 
             // Product oRDER Details
                 $products = Cart::content();
-                foreach($products as $product) {
+                foreach ($products as $product) {
                     $OrderDetails = new OrderDetails;
                     $OrderDetails->order_id = $order->id;
                     $OrderDetails->product_id = $product->id;
+                    $OrderDetails->variant_id = $product->options->variant_id;
                     $OrderDetails->weight = $product->weight;
                     $OrderDetails->product_price = $product->price;
-                    $OrderDetails->total_price = $product->price;
+                    $OrderDetails->total_price = $product->price * $product->qty;
                     $OrderDetails->product_quantity = $product->qty;
                     $OrderDetails->save();
                 }
+                $data = [
+                    'name' => $request->first_name,
+                    'phone' => $request->phone,
+                    'invoiceNumber' => $invoiceNumber
+                ];
+                Mail::to('sobrokom.store@gmail.com')->send(new OrderNotice($data));
+                
                 Cart::destroy();
                 return response()->json([
                 'status' => 200,

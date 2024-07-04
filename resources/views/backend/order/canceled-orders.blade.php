@@ -21,6 +21,7 @@
                                     <th>Pay to</th>
                                     <th>Address</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,9 @@
                                             <td>{{ $order->orderBillingDetails->address_1 ?? '' }}</td>
                                             <td>
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
                                             </td>
                                         </tr>
                                     @endforeach

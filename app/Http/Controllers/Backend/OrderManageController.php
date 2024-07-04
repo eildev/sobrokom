@@ -80,6 +80,10 @@ class OrderManageController extends Controller
         $canceled_orders = Order::where("status", 'canceled')->latest()->get();
         return view('backend.order.canceled-orders', compact('canceled_orders'));
     }
+    public function deniedOrders(){
+        $denied_orders = Order::where("status", 'denied')->latest()->get();
+        return view('backend.order.denied-orders', compact('denied_orders'));
+    }
     public function orderProcessing($invoice){
         // dd($invoice);
         $processing_Orders = Order::where("invoice_number",$invoice)->latest()->first();
@@ -103,21 +107,26 @@ class OrderManageController extends Controller
         $completed_Orders->status = "completed";
         $completed_Orders->update();
 
-        // $orderId = $completed_Orders->id;
-        // // dd($orderId);
-        // $orders = OrderDetails::where("order_id", $orderId)->get();
+        $orderId = $completed_Orders->id;
+        // dd($orderId);
+        $orders = OrderDetails::where("order_id", $orderId)->get();
 
-        // foreach($orders as $order){
+        foreach($orders as $order){
+            // dd($order);
+            $variant_id = $order->variant_id;
+            // $product_id = $order->product_id;
+            $product_quantity = $order->product_quantity;
+            // dd($product_id);
 
-        //     $product_id = $order->product_id;
-        //     $product_quantity = $order->product_quantity;
-        //     // dd($product_id);
+            $variant = Variant::findOrFail($variant_id);
+            // dd($variant);
+            // dd($variant->stock_quantity);
+            $updated_stock = (int)$variant->stock_quantity - (int)$product_quantity;
+            $variant->stock_quantity = $updated_stock;
 
-        //     $variant = Variant::where("product_id", $product_id)->get();
-        //     dd($variant->stock_quantity);
-        //     $updated_stock = $variant->stock_quantity - $product_quantity;
-        //     dd($updated_stock);
-        // }
+            // dd($variant->stock_quantity);
+            $variant->update();
+        }
         return back()->with('success','Order Status Updated Sucessfully');
     }
     public function orderRefund($invoice){
@@ -136,6 +145,12 @@ class OrderManageController extends Controller
         $canceled_order = Order::where("invoice_number",$invoice)->latest()->first();
         $canceled_order->status = "canceled";
         $canceled_order->update();
+        return back()->with('success','Order Status Updated Sucessfully');
+    }
+    public function adminDenied($invoice){
+        $denied_order = Order::where("invoice_number",$invoice)->latest()->first();
+        $denied_order->status = "denied";
+        $denied_order->update();
         return back()->with('success','Order Status Updated Sucessfully');
     }
     public function adminApprove($invoice){
@@ -170,7 +185,11 @@ class OrderManageController extends Controller
             'invoiceNumber' => $invoice,
             'trackingURL'=> $url
         ];
-        Mail::to($email->email)->send(new OrderMail($data));
+        if(!empty($email)){
+            Mail::to($email->email)->send(new OrderMail($data));
+        }
+        
+        
         $response = json_decode($response, true);
         if($response['response_code'] == 202){
             return back()->with('success','Order Successfully Approved');

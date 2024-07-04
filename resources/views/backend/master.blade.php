@@ -75,6 +75,22 @@
     </div>
     <!--wrapper-->
     <div class="wrapper">
+        @php
+            $products = App\Models\Product::whereHas('varient')->count();
+            $users = App\Models\User::where('role', 'user')->count();
+            $total_orders = App\Models\Order::all()->count();
+            $new_orders = App\Models\Order::where('status', 'pending')->count();
+            $approve_orders = App\Models\Order::where('status', 'approve')->count();
+            $processing_orders = App\Models\Order::where('status', 'processing')->count();
+            $delivering_orders = App\Models\Order::where('status', 'delivering')->count();
+            $completed_order = App\Models\Order::where('status', 'completed')->count();
+            $refunding_order = App\Models\Order::where('status', 'refunding')->count();
+            $refunded_order = App\Models\Order::where('status', 'refunded')->count();
+            $canceled_order = App\Models\Order::where('status', 'canceled')->count();
+            $visitors = App\Models\UserTracker::all()->count();
+            $subscribers = App\Models\Subscribe::all()->count();
+            $purchases = App\Models\PurchaseDetails::all();
+        @endphp
         <!--sidebar wrapper -->
         @include('backend.body.sidebar')
         <!--end sidebar wrapper -->
@@ -119,9 +135,11 @@
     {{-- Jquery data table  --}}
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    
 
     <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.min.js"></script>
     <script src="{{ asset('backend') }}/assets/plugins/select2/js/select2.custom.js"></script>
+     <script src="{{ asset('backend') }}/assets/js/validation2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
@@ -304,7 +322,7 @@
         // subcategory select function
         $(document).ready(function() {
             $('#product_descriptions').summernote();
-            $('.category_id').on('change', function() {
+            $('.category_select').on('change', function() {
 
                 let category_id = $(this).val();
                 if (category_id) {
@@ -327,7 +345,7 @@
                 }
             })
 
-            $('.subcategory_id').on('change', function() {
+            $('.subcategory_select').on('change', function() {
                 // alert('ok');
                 let subcategory_id = $(this).val();
                 if (subcategory_id) {
@@ -385,6 +403,7 @@
                                 $('select[name="unit"]').append(
                                     `<option selected  value="${data.unit ?? ""}" >${data.unit ?? ""}</option>`
                                 );
+                                $('.stock').val(data.stock_quantity);
                                 $('.weight').val(data.weight);
                                 $('select[name="color"]').append(
                                     `<option selected  value="${data.color ?? ""}" >${data.color ?? ""}</option>`
@@ -399,6 +418,7 @@
                                 $('.discount_amount').val("");
                                 $('.discount').val("");
                                 $('.unit').val("");
+                                $('.stock').val("");
                                 $('.weight').val("");
                                 $('.color').val("");
                                 $('.size').val("");
@@ -584,7 +604,7 @@
 
             document.querySelector('#total_price').value = total;
             document.querySelector('#grand_total').value = grandTotal.toFixed(2);
-            document.querySelector('#due').value = due.toFixed(2);
+            document.querySelector('#due').value = due;
 
             if (payableAmount > grandTotal) {
                 toastr.warning('Payable Amount cannot be greater than Grand Total');

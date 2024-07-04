@@ -32,7 +32,7 @@
                         <div class="tab-content" id="nav-tabContent-tp">
                             {{-- New arrival products  --}}
                             @php
-                                $arrival_product = App\Models\Product::whereHas('varient')->where('status', 1)->take(10)->orderByRaw('RAND()')->get();
+                                $arrival_product = App\Models\Product::whereHas('varient')->where('status', 1)->take(10)->orderBy('id', 'DESC')->get();
                             @endphp
                             @if ($arrival_product->count() > 0)
                                 <div class="tab-pane fade show active" id="nav-arrivals" role="tabpanel"
@@ -42,18 +42,17 @@
                                             class="swiper-container tpproduct-active-2 tpslider-bottom p-relative tpproduct-priority">
                                             <div class="swiper-wrapper">
                                                 @foreach ($arrival_product as $product)
-                                                    {{-- @dd($products); --}}
                                                     <div class="swiper-slide">
                                                         <div class="tpproduct p-relative">
                                                             <div class="tpproduct__thumb p-relative text-center">
                                                                 <a
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <div class="tpproduct__info bage">
                                                                     @if (!empty($product->varient[0]))
                                                                         @if ($product->varient[0]->discount > 0)
@@ -178,7 +177,7 @@
                                     ->where('status', 1)
                                     ->where('product_feature', 'like', '%' . 'feature' . '%')
                                     ->take(10)
-                                    ->orderByRaw('RAND()')
+                                    ->orderBy('id', 'DESC')
                                     ->get();
                             @endphp
                             @if ($featured_product->count() > 0)
@@ -197,11 +196,11 @@
                                                                 <a
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <div class="tpproduct__info bage">
                                                                     @if (!empty($product->varient[0]))
                                                                         @if ($product->varient[0]->discount > 0)
@@ -330,7 +329,7 @@
                                     ->where('status', 1)
                                     ->where('product_feature', 'like', '%' . 'best-rate' . '%')
                                     ->take(10)
-                                    ->orderByRaw('RAND()')
+                                    ->orderBy('id', 'DESC')
                                     ->get();
                             @endphp
                             @if ($best_selling->count() > 0)
@@ -347,11 +346,11 @@
                                                                 <a
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <div class="tpproduct__info bage">
                                                                     @if (!empty($product->varient[0]))
                                                                         @if ($product->varient[0]->discount > 0)

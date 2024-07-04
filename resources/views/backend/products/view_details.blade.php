@@ -119,66 +119,6 @@
                     </div>
                 </div>
                 <hr>
-
-                <div class="row align-items-center my-5">
-                    <div class="col-12">
-                        <div class="card px-2 py-5 rounded-md">
-                            <div class="card-title">
-                                <h5 class="mb-0 text-info text-center">Manage Variants</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <td>SI</td>
-                                                <th>Regular Price</th>
-                                                <th>Discount</th>
-                                                <th>Discount Price</th>
-                                                <th>Stock Quantity</th>
-                                                <th>Color</th>
-                                                <th>Size</th>
-                                                <th>Unit</th>
-                                                <th>Barcode</th>
-                                                <th>Manufacture Date</th>
-                                                <th>Expire Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $variants = $product->varient;
-                                                $serialNumber = 1;
-                                            @endphp
-                                            @foreach ($variants as $variant)
-                                                <tr>
-                                                    <td>{{ $serialNumber++ }}</td>
-                                                    <td>{{ $variant->regular_price }}</td>
-                                                    <td>{{ $variant->discount }}</td>
-                                                    <td>{{ $variant->discount_amount }}</td>
-                                                    <td>{{ $variant->stock_quantity }}</td>
-                                                    <td>{{ $variant->color }}</td>
-                                                    <td>{{ $variant->size }}</td>
-                                                    <td>{{ $variant->unit }}</td>
-                                                    <td>{{ $variant->barcode }}</td>
-                                                    <td>{{ $variant->manufacture_date }}</td>
-                                                    <td>{{ $variant->expire_date }}</td>
-                                                    <td>
-                                                        <a href="{{ route('variant.delete', $variant->id) }}"
-                                                            id="delete" class="btn-sm btn-danger">
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
             </div>
         </div>
         <!--end row-->

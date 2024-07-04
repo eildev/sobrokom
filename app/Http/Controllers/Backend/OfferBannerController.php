@@ -23,7 +23,7 @@ class OfferBannerController extends Controller
             'title' => 'required|max:100',
             'short_description' => 'required|max:100',
             'link' => 'required|max:200',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->image) {
@@ -66,7 +66,7 @@ class OfferBannerController extends Controller
                 'title' => 'required|max:50',
                 'short_description' => 'required|max:100',
                 'link' => 'required|max:200',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/offer_banner/'), $imageName);

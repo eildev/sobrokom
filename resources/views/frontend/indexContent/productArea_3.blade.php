@@ -3,12 +3,12 @@
     <div class="container">
         <div class="sections__wrapper white-bg pl-50 pr-50">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <div class="tpsection mb-10">
                         <h4 class="tpsection__title brand-product-title" id="top_trending">Top Trending Products</h4>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 text-center">
+                <div class="col-lg-8 col-md-8 text-center">
                     <div class="tpnavtab__area tp-navtab-style-2">
                         <nav>
                             <div class="nav nav-tabs" role="tablist">
@@ -16,7 +16,7 @@
                                     data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all"
                                     aria-selected="true">All</button>
                                 @php
-                                    $cats = App\Models\Category::where('status', 1)->take(4)->orderBy('id', 'ASC')->get();
+                                    $cats = App\Models\Category::where('status', 1)->take(4)->orderBy('id', 'DESC')->get();
                                 @endphp
                                 @foreach ($cats as $cat)
                                     <button class="nav-link" id="nav-meat-tab" data-bs-toggle="tab"
@@ -34,7 +34,7 @@
                         <div class="tab-content" id="nav-tabContent">
                             <!-- All Product here without Condition -->
                             @php
-                                $all_product = App\Models\Product::whereHas('varient')->where('status', 1)->take(10)->orderByRaw('RAND()')->get();
+                                $all_product = App\Models\Product::whereHas('varient')->where('status', 1)->take(10)->orderBy('id', 'DESC')->get();
                                 // @dd($all_product);
                             @endphp
                             @if ($all_product->count() > 0)
@@ -53,11 +53,11 @@
                                                                 <a
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <div class="tpproduct__info bage">
                                                                     @if (!empty($product->varient[0]))
                                                                         @if ($product->varient[0]->discount > 0)
@@ -192,7 +192,7 @@
                                         ->where('status', 1)
                                         ->where('category_id', $cat->id)
                                         ->take(10)
-                                        ->orderByRaw('RAND()')
+                                        ->orderBy('id', 'DESC')
                                         ->get();
                                     // dd($all_product);
                                 @endphp
@@ -212,11 +212,11 @@
                                                                 <a
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <a class="tpproduct__thumb-img"
                                                                     href="{{ route('product.details', $product->slug) }}"><img
                                                                         src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                        alt=""></a>
+                                                                        alt="{{$product->slug}}" ></a>
                                                                 <div class="tpproduct__info bage">
                                                                     @if (!empty($product->varient[0]))
                                                                         @if ($product->varient[0]->discount > 0)

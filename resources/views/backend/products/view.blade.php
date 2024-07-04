@@ -65,6 +65,7 @@
                                     @foreach ($products as $product)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
+                                        
                                             <td>
                                                 <img src="{{ asset('/uploads/products/' . $product->product_image) }}"
                                                     style="height: 50px; object-fit: cover;" class="img-fluid"

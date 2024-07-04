@@ -46,6 +46,9 @@
                                             <td>
                                                 <span class="text-warning text-capitalize">{{ $order->status }}</span>
                                             </td>
+                                            <td>
+                                                <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else

@@ -921,6 +921,11 @@ only screen and (min-width: 576px) and (max-width: 767px) {
     font-size: 28px;
   }
 }
+@media (max-width: 3840px) {
+  .container {
+    width:100%;
+  }
+}
 
 .section__content p {
   color: var(--tp-common-white);
@@ -8833,6 +8838,7 @@ only screen and (min-width: 992px) and (max-width: 1199px),
   font-weight: 400;
   font-size: 16px;
   color: var(--tp-text-body);
+  padding: 10px 20px;
 }
 
 .tpfaq__item .accordion-body {

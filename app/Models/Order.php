@@ -13,10 +13,13 @@ class Order extends Model
     public function orderBillingDetails(){
         return $this->belongsTo(OrderBillingDetails::class, 'id', 'order_id');
     }
-    public function orderDetails(){
-        return $this->hasMany(OrderDetails::class, 'order_id', 'id');
+    // public function orderDetails(){
+    //     return $this->hasMany(OrderDetails::class, 'order_id', 'id');
+    // }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetails::class);
     }
-
 
 
 }

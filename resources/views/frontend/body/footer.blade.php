@@ -7,7 +7,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="tpfooter__widget footer-col-1 mb-50">
                             <h4 class="tpfooter__widget-title">Let Us Help You</h4>
-                            <p>For any questions fill free to contact with us at
+                            <p>If you have any questions, feel free to <a href="{{ route('contactus') }}">let us know.</a>
                                 <a href="mailto:www.sobrokom.store@gmail.com">sobrokom.store@gmail.com</a> <br>
                                 <a href="mailto:info@sobrokom.store">info@sobrokom.store</a>
                             </p>
@@ -17,39 +17,11 @@
                                         class="fab fa-facebook-f"></i></a>
                                 <a href="https://www.instagram.com/sobrokom.store/" target="_blank"><i class="fab fa-instagram"></i></a>
                                 <a href="https://wa.me/12345678901" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://www.linkedin.com/company/sobrokom-store" target="_blank"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6">
-                        <div class="tpfooter__widget footer-col-2 mb-50">
-                            <h4 class="tpfooter__widget-title">HOT CATEGORIES</h4>
-                            <div class="tpfooter__widget-links">
-                                @php
-                                    $categories = App\Models\Category::where('status', '1')->get();
-                                @endphp
-                                @if ($categories->count() > 0)
-                                    <ul>
-
-                                        @foreach ($categories as $category)
-                                            <li><a
-                                                    href="{{ route('category.wise.product', $category->slug) }}">{{ $category->categoryName }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <ul>
-                                        <li><a href="#">Fruits & Vegetables</a></li>
-                                        <li><a href="#">Dairy Products</a></li>
-                                        <li><a href="#">Package Foods</a></li>
-                                        <li><a href="#">Beverage</a></li>
-                                        <li><a href="#">Health & Wellness</a></li>
-                                    </ul>
-                                @endif
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-5">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5">
                         <div class="tpfooter__widget footer-col-3 mb-50">
                             <h4 class="tpfooter__widget-title">Customer Care</h4>
                             <div class="tpfooter__widget-links">
@@ -109,7 +81,7 @@
                     </div>
                     <div class="col-lg-6 col-md-5 col-sm-12">
                         <div class="tpfooter__copyright text-md-end">
-                            <span class="tpfooter__copyright-text">Design and Developed by © <a target="_blank"
+                            <span class="tpfooter__copyright-text">Design and Developed by @<a target="_blank"
                                     href="https://eclipseintellitech.com/">Eclipse
                                     Intellitech Ltd.</a></span>
 
@@ -120,4 +92,44 @@
         </div>
     </div>
 </footer>
+
+
+<script>
+    const btn = document.querySelector('.subscribe');
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Check if the "Accept Terms & Conditions" checkbox is checked
+        let acceptTermsCheckbox = document.querySelector('.accept_terms');
+        if (!acceptTermsCheckbox.checked) {
+            toastr.warning('Please accept our terms and conditions to subscribe.');
+            return;
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        let email = document.querySelector('#subscriber_mail').value;
+        $.ajax({
+            url: '/subscribe/store',
+            type: 'POST',
+            data: {
+                'email': email,
+            },
+            success: function(success_response) {
+                if (success_response.status == 200) {
+                    toastr.success(success_response.message);
+                    document.querySelector('#subscriber_mail').value = '';
+                } else {
+                    toastr.warning(success_response.error.email);
+                }
+                // console.log(majid.message);
+
+            }
+        });
+    });
+</script>
 <!-- footer-area-end -->

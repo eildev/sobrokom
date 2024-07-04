@@ -2,7 +2,7 @@
 @section('maincontent')
 
      <!-- breadcrumb-area-start -->
-     <div class="breadcrumb__area pt-5 pb-5">
+     <div class="breadcrumb__area my__breadcrumb" style="margin-top:80px">
             <div class="container">
                <div class="row">
                   <div class="col-lg-12">

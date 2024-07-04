@@ -2,7 +2,7 @@
 @section('maincontent')
     <!-- breadcrumb-area-start -->
     <div class="breadcrumb__area grey-bg pt-5 pb-5">
-        <div class="container">
+        <div class="container" style="margin-top:80px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -61,14 +61,14 @@
                         </div> --}}
                         <div class="product__filter-content mb-30">
                             <div class="row align-items-center">
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 text-center text-md-start">
                                     <div class="product__item-count">
                                         <span>Showing 1 - 18 of 40 Products</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div
-                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center">
+                                        class="tpproductnav tpnavbar product-filter-nav d-flex align-items-center justify-content-center" style="justify-content: center !important;">
                                         <nav>
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                                 <button class="nav-link" id="nav-all-tab" data-bs-toggle="tab"
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="product__navtabs d-flex justify-content-end align-items-center">
+                                    <div class="product__navtabs d-flex justify-content-end align-items-center" style="justify-content: center !important;">
                                         <div class="tp-shop-selector">
                                             <style>
                                                 /* width */

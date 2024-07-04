@@ -49,7 +49,7 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.process.order',$order->invoice_number) }}" class="btn btn-sm btn-info">Process</a>
-                                                <a href="#" class="btn btn-sm btn-success" id="delete">View</a>
+                                                <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-success">View</a>
                                                 <a href="#" class="btn btn-sm btn-danger" id="delete">Cancel</a>
                                             </td>
                                         </tr>

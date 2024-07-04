@@ -38,4 +38,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
+    
+    protected function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->middleware('cachecontrol') // Add your middleware here
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
 }

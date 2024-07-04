@@ -26,5 +26,14 @@ class Product extends Model
     function varient(){
         return $this->hasMany(Variant::class,'product_id', 'id');
     }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+    
+    public function variants()
+    {
+        return $this->hasMany(Variant::class);
+    }
 
 }

@@ -13,17 +13,15 @@
                     </div>
                     <hr>
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="order_table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>SI</th>
-                                    <th>Company Name</th>
                                     <th>Product Name</th>
+                                    <th>Company Name</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Grand Total</th>
-                                    <th>Payable Amount</th>
-                                    <th>Total Due</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -35,15 +33,14 @@
                                     @foreach ($allData as $item)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ Illuminate\Support\Str::limit($item->company->company_name ?? '', 15) }}
+                                            <td>
+                                                <p>{{ Illuminate\Support\Str::limit($item->product->product_name ?? '', 30) }}</p>
                                             </td>
-                                            <td>{{ Illuminate\Support\Str::limit($item->product->product_name ?? '', 15) }}
+                                            <td>{{ Illuminate\Support\Str::limit($item->company->company_name ?? '', 15) }}
                                             </td>
                                             <td>{{ $item->quantity ?? '' }}</td>
                                             <td>{{ $item->unit_price ?? '' }}</td>
                                             <td>{{ $item->grand_total ?? '' }}</td>
-                                            <td>{{ $item->payable_amount ?? '' }}</td>
-                                            <td>{{ $item->due ?? '' }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn btn-sm btn-info dropdown-toggle" type="button"

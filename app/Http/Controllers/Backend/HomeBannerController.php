@@ -23,7 +23,7 @@ class HomeBannerController extends Controller
             'short_description' => 'required|max:100',
             'long_description' => 'required|max:200',
             'link' => 'required|max:200',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->image) {
@@ -76,7 +76,7 @@ class HomeBannerController extends Controller
                 'short_description' => 'required|max:100',
                 'long_description' => 'required|max:200',
                 'link' => 'required|max:200',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/banner/'), $imageName);

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card border-top border-0 border-3 border-info">
-                    <form action="{{ Route('subcategory.store') }}" method="POST">
+                    <form action="{{ Route('subcategory.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="border p-4 rounded">
@@ -47,13 +47,30 @@
                                         @enderror
                                     </div>
                                 </div>
-
+                                <div class="row mb-3">
+                                    <label for="image" class="col-sm-3 col-form-label">Sub-Category Thumbnail </label>
+                                    <div class="col-sm-9">
+                                        <input type="file" id="image"
+                                            class="form-control" name="image">
+                                        <div class="my-1">
+                                            <i>
+                                                <b>Note:</b> Please provide 300 X 180 size
+                                                image
+                                            </i>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <img id="showImage" class="" height="150" width="200"
+                                                src="{{ asset('uploads/productempty.jpg') }}" alt="Sub category image">
+                                        </div>
+                                    </div> </br>
+                                
+                                </div>
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
                                         <button type="submit" class="btn btn-info px-5">Add Subategory</button>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </form>

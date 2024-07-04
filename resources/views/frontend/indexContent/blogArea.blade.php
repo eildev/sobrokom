@@ -18,12 +18,12 @@ $home_blog = App\Models\BlogPost::latest()->limit(6)->get()
             </div>
         </div>
         <div class="swiper-container tpblog-active">
-            <div class="swiper-wrapper">
+            <div class="row">
                 @foreach ($home_blog as $blog )
-                <div class="swiper-slide">
+                <div class="col-lg-3 col-md-4 col-6 p-1">
                     <div class="tpblog__item">
                         <div class="tpblog__thumb fix">
-                            <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{ asset('uploads/blog/blog_post/'.$blog->image)}}" style="height:157px; width:245px"
+                            <a href="{{route('blog.post.details',$blog->id)}}"><img src="{{ asset('uploads/blog/blog_post/'.$blog->image)}}" style="height:157px;"
                                     alt=""></a>
                         </div>
                         <div class="tpblog__wrapper">

@@ -1,12 +1,14 @@
 <!--sidebar wrapper -->
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
-        <div>
-            <img src="{{ asset('backend') }}/assets/images/logo.svg" class="logo-icon" alt="logo icon">
-        </div>
-        <div>
-            <h4 class="logo-text">Sobrokom</h4>
-        </div>
+        <a href="{{ route('admin.dashboard') }}" class="d-flex">
+            <div>
+                <img src="{{ asset('backend') }}/assets/images/logo.svg" class="logo-icon" alt="logo icon">
+            </div>
+            <div>
+                <h4 class="logo-text">Sobrokom</h4>
+            </div>
+        </a>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
@@ -68,7 +70,7 @@
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
-                            <i class='bx bx-message-rounded-dots'></i>
+                            <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="menu-title">Purchase</div>
                     </a>
@@ -157,7 +159,64 @@
             </ul>
         </li>
 
+         <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-message-rounded-dots'></i>
+                </div>
+                <div class="menu-title">Company Details</div>
+            </a>
+            <ul>
 
+                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
+                </li>
+                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Company</a>
+                </li>
+            </ul>
+        </li>
+        {{-- Order Related menu --}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="menu-title">Order <span class="
+                    badge bg-primary">{{ $new_orders ?? '' }}</span></div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('new.order') }}"><i class="bx bx-right-arrow-alt"></i>New Order</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.confirmed') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.processed') }}"><i class="bx bx-right-arrow-alt"></i>Processed Order</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.delivering') }}"><i class="bx bx-right-arrow-alt"></i>Delivering
+                        Order</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.completed') }}"><i class="bx bx-right-arrow-alt"></i>Completed Order</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.refunding') }}"><i class="bx bx-right-arrow-alt"></i>Refunding
+                        Orders</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.refunded') }}"><i class="bx bx-right-arrow-alt"></i>Refunded Orders</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.canceled') }}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>
+                </li>
+                <li>
+                    <a href="{{ route('order.denied') }}"><i class="bx bx-right-arrow-alt"></i>Denied Orders</a>
+                </li>
+            </ul>
+        </li>
+        @if(Auth::user()->email != 'asad@sobrokom.store')
         {{-- popup menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -175,10 +234,6 @@
                 </li>
             </ul>
         </li>
-
-
-
-
         {{-- Home Banner menu  --}}
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -215,7 +270,8 @@
                 <div class="parent-icon">
                     <i class="fas fa-bell"></i>
                 </div>
-                <div class="menu-title">Subscriber</div>
+                <div class="menu-title">Subscriber <span class="
+                    badge bg-primary">{{ $subscribers  ?? '' }}</span></div>
             </a>
             <ul>
                 <li> <a href="{{ route('subscribe.view') }}"><i class="bx bx-right-arrow-alt"></i>Subscriber list</a>
@@ -236,43 +292,6 @@
                 </li>
             </ul>
         </li>
-        {{-- Order Related menu --}}
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="menu-title">Order</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('new.order') }}"><i class="bx bx-right-arrow-alt"></i>New Order</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.confirmed') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.processed') }}"><i class="bx bx-right-arrow-alt"></i>Processed Order</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.delivering') }}"><i class="bx bx-right-arrow-alt"></i>Delivering
-                        Order</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.completed') }}"><i class="bx bx-right-arrow-alt"></i>Completed Order</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.refunding') }}"><i class="bx bx-right-arrow-alt"></i>Refunding
-                        Orders</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.refunded') }}"><i class="bx bx-right-arrow-alt"></i>Refunded Orders</a>
-                </li>
-                <li>
-                    <a href="{{ route('order.canceled') }}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
@@ -286,7 +305,6 @@
                 </li>
             </ul>
         </li>
-
         {{-- //Manege Blog Start --}}
         <li>
             <a class="has-arrow" href="javascript:;">
@@ -358,7 +376,6 @@
                 </li>
             </ul>
         </li>
-
         {{-- //Blog Manage End --}}
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -380,7 +397,8 @@
                 <div class="parent-icon">
                     <i class="fas fa-bell"></i>
                 </div>
-                <div class="menu-title">User Tracker</div>
+                <div class="menu-title">User Tracker <span class="
+                    badge bg-primary">{{ $visitors ?? '' }}</span></div>
             </a>
             <ul>
                 <li>
@@ -390,37 +408,33 @@
 
             </ul>
         </li>
+        {{-- All Users Information --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon">
-                    <i class='bx bx-message-rounded-dots'></i>
+                    <i class='bx bx-user'></i>
                 </div>
-                <div class="menu-title">Company Details</div>
+                <div class="menu-title">Users</div>
             </a>
             <ul>
-
-                <li> <a href="{{ route('company-details') }}"><i class="bx bx-right-arrow-alt"></i>Add Company</a>
-                </li>
-                <li> <a href="{{ route('company-details.view') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                        Company</a>
+                <li> <a href="{{ route('all.users') }}"><i class="bx bx-right-arrow-alt"></i>Manage
+                        Users</a>
                 </li>
             </ul>
         </li>
-
-    {{-- All Users Information --}}
-    <li>
-        <a href="javascript:;" class="has-arrow">
-            <div class="parent-icon">
-                <i class='bx bx-user'></i>
-            </div>
-            <div class="menu-title">Users</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('all.users') }}"><i class="bx bx-right-arrow-alt"></i>Manage
-                    Users</a>
-            </li>
-        </ul>
-    </li>
+        @endif
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="menu-title">Marketing</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('sms.page') }}"><i class="bx bx-right-arrow-alt"></i>SMS Marketing</a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <!--end navigation-->

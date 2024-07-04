@@ -3,7 +3,7 @@
         ->where('status', 1)
         ->where('product_feature', 'like', '%' . 'weekend-deals' . '%')
         ->take(10)
-        ->orderBy('id', 'ASC')
+        ->orderBy('id', 'DESC')
         ->get();
     // @dd($flash_selling_product);
 @endphp
@@ -15,15 +15,15 @@
                 <div class="row align-items-center">
                     <div class="col-md-6 text-center">
                         <div class="tpsection mb-15">
-                            <h4 class="tpsection__title text-start brand-product-title" id="weekly_offers">Weekly Best
+                            <h4 class="tpsection__title text-start brand-product-title pt-2" id="weekly_offers">Weekly Best
                                 Offers</h4>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="tpproduct__all-item">
-                            <a href="{{ route('all.feature.product') }}">View All <i class="icon-chevron-right"></i></a>
-                        </div>
-                    </div>
+                    <!--<div class="col-md-6">-->
+                    <!--    <div class="tpproduct__all-item">-->
+                    <!--        <a href="{{ route('all.feature.product') }}">View All <i class="icon-chevron-right"></i></a>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                 </div>
 
                 <div class="row">
@@ -31,18 +31,18 @@
                         <div class="tpnavtab__area pb-40">
                             <div class="tpproduct__arrow p-relative">
                                 <div class="swiper-container tpproduct-active-2 tpslider-bottom p-relative">
-                                    <div class="swiper-wrapper">
+                                    <div class="swiper-wrapper myswiper-wrapper">
                                         @foreach ($flash_selling_product as $product)
                                             <div class="swiper-slide">
                                                 <div class="tpproduct p-relative tpprogress__hover">
                                                     <div class="tpproduct__thumb p-relative text-center">
                                                         <a href="{{ route('product.details', $product->slug) }}"><img
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                alt=""></a>
+                                                                alt="{{$product->slug}}" ></a>
                                                         <a class="tpproduct__thumb-img"
                                                             href="{{ route('product.details', $product->slug) }}"><img
                                                                 src="{{ asset('uploads/products/' . $product->product_image) }}"
-                                                                alt=""></a>
+                                                                alt="{{$product->slug}}" ></a>
                                                         <div class="tpproduct__info bage">
                                                             @if (!empty($product->varient[0]))
                                                                 @if ($product->varient[0]->discount > 0)

@@ -20,7 +20,7 @@ class BlogPostController extends Controller
             'category' => 'required',
             'description' => 'required',
             'tags' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
         ]);
 
         if ($request->image) {
@@ -54,7 +54,7 @@ class BlogPostController extends Controller
                 'category' => 'required',
                 'description' => 'required',
                 'tags' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp',
             ]);
             $imageName = rand() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/blog/blog_post/'), $imageName);

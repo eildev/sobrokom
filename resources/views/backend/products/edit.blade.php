@@ -28,7 +28,7 @@
                                                         @php
                                                             $categories = App\Models\Category::all();
                                                         @endphp
-                                                        <select class="form-select category_id" name="category_id">
+                                                        <select class="form-select category_select" name="category_id">
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}"
                                                                     {{ $category->id == $product->category_id ? 'selected' : '' }}>
@@ -48,7 +48,7 @@
                                                 <div class="row">
                                                     <label class="form-label col-12">Select Subcategory</label>
                                                     <div class="col-12">
-                                                        <select class="form-select subcategory_id" name="subcategory_id">
+                                                        <select class="form-select subcategory_select" name="subcategory_id">
                                                             @foreach ($subcategories as $subcategory)
                                                                 <option value="{{ $subcategory->id }}"
                                                                     {{ $subcategory->id == $product->subcategory_id ? 'selected' : '' }}>
@@ -71,11 +71,13 @@
                                                     <label class="form-label col-12">Select Sub-Subcategory</label>
                                                     <div class="col-12">
                                                         <select class="form-select" name="sub_subcategory_id">
+                                                          <option value="">NaN</option>
                                                             @if ($product->sub_subcategory_id)
                                                                 @foreach ($sub_subcategories as $sub_subcategory)
                                                                     <option value="{{ $sub_subcategory->id ?? '' }}"
                                                                         {{ $sub_subcategory->id == $product->sub_subcategory_id ? 'selected' : '' }}>
                                                                         {{ $sub_subcategory->subSubcategoryName }}</option>
+                                                                        
                                                                 @endforeach
                                                             @else
                                                                 <option value="">Select Sub-Subcategory</option>

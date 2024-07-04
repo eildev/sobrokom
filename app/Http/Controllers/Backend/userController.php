@@ -9,7 +9,7 @@ class userController extends Controller
 {
     public function allUser(){
         $allusers = User::where('role', 'user')->get();
-        return view('backend.All-Users.all-users',compact('allusers'));
+        return view('backend.all-users.all-users',compact('allusers'));
     }
     public function DisableUser($user_id){
         $user_status = User::where('role', 'user')->where('id', $user_id)->latest()->first();

@@ -2,7 +2,7 @@
 @section('admin')
     <div class="page-content">
         <div class="row">
-            <div class="card border-top border-0 border-3 border-info col-md-8 offset-md-2">
+            <div class="card border-top border-0 border-3 border-info col-md-12 ">
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between align-items-center">
                         <h5 class="mb-0 text-info">Manage Subcategory</h5>
@@ -17,9 +17,10 @@
                             <thead>
                                 <tr>
                                     <th>SI</th>
-                                    <th>Category Name</th>
                                     <th>Subategory Name</th>
+                                    <th>Category Name</th>
                                     <th>Slug</th>
+                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -32,9 +33,14 @@
                                     @foreach ($subcategories as $subcategory)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ $subcategory->category->categoryName }}</td>
                                             <td>{{ $subcategory->subcategoryName }}</td>
+                                            <td>{{ $subcategory->category->categoryName }}</td>
                                             <td>{{ $subcategory->slug }}</td>
+                                            <td>@if($subcategory->image)
+                                                    <img src="{{ asset('uploads/subcategory/'.$subcategory->image) }}" height="60px" width="60px" alt="Subcategory Image">
+                                                @else
+                                                    <p>No Image</p>
+                                                @endif</td>
                                             <td>
                                                 <a href="#" class="btn btn-sm btn-success subcat_active">Active</a>
                                                 <a href="#" class="btn btn-sm btn-success subcat_inactive"

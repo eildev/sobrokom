@@ -1,8 +1,13 @@
 @extends('frontend.master')
 @section('maincontent')
+@if($products->isEmpty())
+    <script type="text/javascript">
+        window.location.href = "{{ route('home') }}";
+    </script>
+@endif
     <!-- breadcrumb-area-start -->
     <div class="breadcrumb__area pt-5 pb-5">
-        <div class="container">
+        <div class="container" style="margin-top:80px">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="tp-breadcrumb__content">
@@ -95,8 +100,10 @@
                                     </li>
 
                                 </ul>
+                                @if($products->count() > 0 )
                                 <a href="{{ route('checkout') }}" class="tp-btn tp-color-btn banner-animation">Proceed to
                                     Checkout</a>
+                                @endif
                             </div>
                         </div>
                     </div>

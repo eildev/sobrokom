@@ -17,8 +17,8 @@
                             <thead>
                                 <tr>
                                     <th>SI</th>
-                                    <th>Subategory Name</th>
                                     <th>Sub-subcategory Name</th>
+                                    <th>Subategory Name</th>
                                     <th>Slug</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -32,8 +32,8 @@
                                     @foreach ($sub_subcategories as $sub_subcategory)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
-                                            <td>{{ $sub_subcategory->subcategory->subcategoryName }}</td>
                                             <td>{{ $sub_subcategory->subSubcategoryName }}</td>
+                                            <td>{{ $sub_subcategory->subcategory->subcategoryName }}</td>
                                             <td>{{ $sub_subcategory->slug }}</td>
                                             <td>
                                                 <a href="#"
