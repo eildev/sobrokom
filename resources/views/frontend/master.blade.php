@@ -35,16 +35,16 @@
         //         .style.setProperty("display", "none", "important");
         // });
         // window.onbeforeunload = function(e) {
-            
+
         //   // Delete specific local storage variables
         // //   localStorage.removeItem('firstActiveLi');
         // //   localStorage.removeItem('secondActiveLi');
         // //   localStorage.removeItem('thirdActiveLi');
-        
+
         //   // Note: There's no need to return anything for this use case
         //   var message = 'Are you sure you want to leave this page?';
         //   e.returnValue = message;
-          
+
         //   // Return the message for compatibility with older browsers
         //   return message;
         // };
@@ -56,12 +56,12 @@
             isNavigatingWithinSite = true;
           }
         });
-        
+
         // Listen for form submissions that might indicate a navigation or reload
         document.addEventListener('submit', () => {
           isNavigatingWithinSite = true;
         });
-        
+
         window.onbeforeunload = function() {
           // Check if we think the user is navigating within the site
           if (!isNavigatingWithinSite) {
@@ -70,14 +70,14 @@
             localStorage.removeItem('secondActiveLi');
             localStorage.removeItem('thirdActiveLi');
           }
-          
+
           // Reset the flag
           setTimeout(() => {
             isNavigatingWithinSite = false;
           }, 0);
         };
     </script>
-    
+
 </head>
 <body style="background: var(--tp-grey-1);">
     <!--<div class="pageLoader">-->
@@ -125,7 +125,7 @@
                 <div class="header__info-cart tp-cart-toggle">
                     <button>
                         <i class="cardI">
-                            
+
                             <img src="{{ asset('frontend') }}/assets/img/icon/cart-1.svg" alt="">
                             <span class="cart_quantity">0</span>
                         </i>
@@ -151,10 +151,10 @@
         }
         .mySlidBar{
             display:none;
-            width: 220px; 
-            background: #2D2C6E; 
+            width: 220px;
+            background: #2D2C6E;
             overflow-y: scroll;
-            position: fixed; 
+            position: fixed;
             z-index: 99999;
             height: 100%;
             top: 50px;
@@ -256,7 +256,7 @@
             font-size:22px;
             margin-left: -11px;
         }
-        
+
     </style>
     @include('frontend.body.footer')
     <script src="{{ asset('frontend') }}/assets/js/jquery.js" defer></script>
@@ -306,7 +306,7 @@
                     }
                 ]
             });
-            
+
             $('.swiper-wrapper').slick({
                 slidesToShow: 4,  // Default number of slides to show
                 slidesToScroll: 1,
@@ -374,44 +374,46 @@
                 });
             })
         });
+
+        // add to cart
         const addForm = document.querySelectorAll('#add_to_cart_form');
         addForm.forEach(element => {
-                element.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    let product_id = this.elements.product_id.value;
-                    let variant_id = this.elements.variant_id.value;
-                    let selling_price = this.elements.selling_price.value;
-                    let weight = this.elements.weight.value;
-                    let unit = this.elements.unit.value;
-                    // console.log(product_id, variant_id,selling_price);
-                    $.ajax({
-                        url: '/product/add_to_cart',
-                        type: 'POST',
-                        data: {
-                            'product_id': product_id,
-                            'variant_id': variant_id,
-                            'selling_price': selling_price,
-                            'pr_quantity': '1',
-                            'weight': weight,
-                            'unit': unit
-                        },
-                        success: function(response) {
-                            if (response.status == 200) {
-                                toastr.success(response.message);
-                                showCart();
-                            } else {
-
-                            }
-                        }
-                    });
-
+            element.addEventListener('submit', function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
                 });
-            })
+                let product_id = this.elements.product_id.value;
+                let variant_id = this.elements.variant_id.value;
+                let selling_price = this.elements.selling_price.value;
+                let weight = this.elements.weight.value;
+                let unit = this.elements.unit.value;
+                // console.log(product_id, variant_id,selling_price);
+                $.ajax({
+                    url: '/product/add_to_cart',
+                    type: 'POST',
+                    data: {
+                        'product_id': product_id,
+                        'variant_id': variant_id,
+                        'selling_price': selling_price,
+                        'pr_quantity': '1',
+                        'weight': weight,
+                        'unit': unit
+                    },
+                    success: function(response) {
+                        if (response.status == 200) {
+                            toastr.success(response.message);
+                            showCart();
+                        } else {
+
+                        }
+                    }
+                });
+
+            });
+        })
         // Function to update the cart display
         function updateCartDisplay(cartData) {
             $('.cart_container').empty();
@@ -562,7 +564,7 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             const firstLis = document.querySelectorAll('.first_li');
             const secondLis = document.querySelectorAll('.second_li');
             firstLis.forEach((li) => {
@@ -589,7 +591,7 @@
                 }else{
                     document.querySelector('.mySlidBar').style.display='none';
                 }
-                
+
             });
             // Function to handle click on list items
             function handleLiClick(items, storageKey) {

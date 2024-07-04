@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
 
-    public function addToCart(Request $request){
+    public function addToCart(Request $request)
+    {
         // @dd($request->all());
         $product = Product::findOrFail($request->product_id);
         Cart::add([
@@ -34,7 +35,6 @@ class CartController extends Controller
             'message' => 'Product added successfully',
             'cartData' => Cart::content()
         ]);
-
     }
 
 
@@ -98,6 +98,4 @@ class CartController extends Controller
         // }
         return view('frontend.e-com.checkout');
     }
-
-
 }

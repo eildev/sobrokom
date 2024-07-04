@@ -159,6 +159,7 @@ Route::middleware('auth', 'role:admin')->group(function () {
         Route::get('/product/delete/{id}', 'delete')->name('product.delete');
         Route::post('/product/status/{id}', 'productStatus')->name('product.status');
         Route::get('/find/variant/{id}', 'findVariant')->name('find.variant');
+        Route::get('/find/sku', 'findSku')->name('find.sku');
         // Route::post('/product/variant/store', 'variantStore')->name('variant.store');
         // Route::get('/product/variant/show/{id}', 'variantShow')->name('variant.show');
         // Route::get('/product/variant/edit/{id}', 'editVariant')->name('variant.edit');

@@ -57,8 +57,9 @@
                                 <div class="col-md-12 mt-3">
                                     <div class="checkout-form-list">
                                         <label>Name <span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" required placeholder="Enter Your Name" class="first_name"
-                                            value="" name="first_name">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text" required
+                                            placeholder="Enter Your Name" class="first_name" value=""
+                                            name="first_name">
                                         <span class="first_name_error text-danger"></span>
                                     </div>
                                 </div>
@@ -72,47 +73,48 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="01**********" value=""
-                                            class="phone user_phone" name="phone">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text"
+                                            placeholder="01**********" value="" class="phone user_phone"
+                                            name="phone">
                                         <span class="phone_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Address<span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Address" value="" class="address_1"
-                                            name="address_1">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text"
+                                            placeholder="Address" value="" class="address_1" name="address_1">
                                         <span class="address_1_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>City/Town<span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="City/Town" value="" class="city"
-                                            name="city">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text"
+                                            placeholder="City/Town" value="" class="city" name="city">
                                         <span class="city_error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Division <span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)"  type="text" placeholder="Division" value="" class="division"
-                                            name="division">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text"
+                                            placeholder="Division" value="" class="division" name="division">
                                         <span class="division_error text-danger"></span>
                                     </div>
                                 </div>
 
                                 <style>
                                     /* input::-webkit-inner-spin-button,
-                                                    input::-webkit-outer-spin-button {
-                                                        -webkit-appearance: none !important;
-                                                    } */
+                                                                    input::-webkit-outer-spin-button {
+                                                                        -webkit-appearance: none !important;
+                                                                    } */
                                 </style>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text" placeholder="Postcode / Zip" value="" class="post_code"
-                                            name="post_code">
+                                        <input onkeyup="checker(this)" onblur="checker(this)" type="text"
+                                            placeholder="Postcode / Zip" value="" class="post_code" name="post_code">
                                         <span class="post_code_error text-danger"></span>
                                     </div>
                                 </div>
@@ -439,12 +441,13 @@
                 }
             })
         });
+
         function checker(element) {
-            if(element.value =="") {
-                element.style.border="1px solid red";
+            if (element.value == "") {
+                element.style.border = "1px solid red";
                 element.focus();
-            }else{
-                element.style.border="1px solid green";
+            } else {
+                element.style.border = "1px solid green";
             }
         }
 
@@ -452,7 +455,7 @@
         const place_order = document.querySelector('.place_order');
         place_order.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             const first_name = $('.first_name').val();
             const phone = $('.phone').val();
             const address_1 = $('.address_1').val();
@@ -501,25 +504,25 @@
             if (address_1 === "") {
                 $('.address_1').addClass('error').focus();
                 $('.address_1_error').text('Address is Required');
-                 toastr.error('Address is Required');
+                toastr.error('Address is Required');
                 return;
             }
             if (city === "") {
                 $('.city').addClass('error').focus();
                 $('.city_error').text('City is Required');
-                 toastr.error('City is Required');
+                toastr.error('City is Required');
                 return;
             }
             if (division === "") {
                 $('.division').addClass('error').focus();
                 $('.division_error').text('Division Name is Required');
-                 toastr.error('Division Name is Required');
+                toastr.error('Division Name is Required');
                 return;
             }
             if (post_code === "") {
                 $('.post_code').addClass('error').focus();
                 $('.post_code_error').text('Post code is Required');
-                 toastr.error('Post code is Required');
+                toastr.error('Post code is Required');
                 return;
             } else {
 
@@ -557,7 +560,7 @@
 
 
         // otp send order place Data
-        function SubmitOrder(){
+        function SubmitOrder() {
             let user_phone = document.querySelector('.user_phone').value;
             let otp_code = document.querySelector('.otp_code').value;
             $.ajaxSetup({
@@ -626,7 +629,7 @@
                     shipping_amount,
                     "grand_total": orderGrandTotal,
                     payment_method,
-                    payment_id,
+                    payment_id
                 },
                 success: function(res) {
                     // console.log(res);
